@@ -1,4 +1,4 @@
-package com.rockwellcollins.atc.darpacase.requirements.fromTA6;
+package agreeToJson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,73 +23,72 @@ import org.osate.aadl2.PropertyAssociation;
 import org.osate.aadl2.PropertySet;
 import org.osate.aadl2.util.Aadl2Switch;
 
-import com.rockwellcollins.atc.darpacase.requirements.builders.ArrayBuilder;
-import com.rockwellcollins.atc.darpacase.requirements.builders.ObjectBuilder;
-import com.rockwellcollins.atc.darpacase.requirements.json.ObjectValue;
-import com.rockwellcollins.atc.darpacase.requirements.json.Pair;
-import com.rockwellcollins.atc.darpacase.requirements.json.StringValue;
-import com.rockwellcollins.atc.darpacase.requirements.json.Value;
+import agreeToJson.json.ArrayValue;
+import agreeToJson.json.ObjectValue;
+import agreeToJson.json.Pair;
+import agreeToJson.json.StringValue;
+import agreeToJson.json.Value;
 
 public class Translate extends Aadl2Switch<Value> {
 
 	@Override
 	public ObjectValue caseAadlPackage(AadlPackage pkg) {
-		ObjectBuilder pkgBuilder = new ObjectBuilder();
-		pkgBuilder.addPair(Pair.build("package", pkg.getName()));
+		ArrayList<Pair> pkgBuilder = new ArrayList<Pair>();
+		pkgBuilder.add(Pair.build("package", pkg.getName()));
 
-		ArrayBuilder components = new ArrayBuilder();
+		ArrayList<Value> components = new ArrayList<Value>();
 		for (Classifier classifier : EcoreUtil2.getAllContentsOfType(pkg, Classifier.class)) {
-			components.addValue(doSwitch(classifier));
+			components.add(doSwitch(classifier));
 		}
 
-		pkgBuilder.addPair(Pair.build("components", components.build()));
-		return pkgBuilder.build();
+		pkgBuilder.add(Pair.build("components", ArrayValue.build(components)));
+		return ObjectValue.build(pkgBuilder);
 	}
 
 	@Override
 	public Value caseComponentType(ComponentType ty) {
-		ObjectBuilder builder = new ObjectBuilder();
-		builder.addPair(Pair.build("name", ty.getName()));
-		builder.addPair(Pair.build("type", getType(ty)));
+		ArrayList<Pair> pairList = new ArrayList<Pair>();
+		pairList.add(Pair.build("name", ty.getName()));
+		pairList.add(Pair.build("type", getType(ty)));
 
-		ArrayBuilder features = new ArrayBuilder();
+		ArrayList<Value> features = new ArrayList<Value>();
 		for (Feature feature : ty.getOwnedFeatures()) {
-			features.addValue(doSwitch(feature));
+			features.add(doSwitch(feature));
 		}
-		builder.addPair(Pair.build("features", features.build()));
+		pairList.add(Pair.build("features", ArrayValue.build(features)));
 
-		ArrayBuilder properties = new ArrayBuilder();
+		ArrayList<Value> properties = new ArrayList<Value>();
 		for (PropertyAssociation pa : ty.getOwnedPropertyAssociations()) {
 			Property p = pa.getProperty();
 			PropertySet set = EcoreUtil2.getContainerOfType(p, PropertySet.class);
 			if (set.getName().equals("CASETA1")) {
-				properties.addValue(doSwitch(pa));
+				properties.add(doSwitch(pa));
 			}
 		}
-		builder.addPair(Pair.build("properties", properties.build()));
-		return builder.build();
+		pairList.add(Pair.build("properties", ArrayValue.build(properties)));
+		return ObjectValue.build(pairList);
 	}
 
 	@Override
 	public Value caseComponentImplementation(ComponentImplementation ci) {
-		ObjectBuilder builder = new ObjectBuilder();
-		builder.addPair(Pair.build(ci.getTypeName(), ci.getName()));
+		ArrayList<Pair> pairList = new ArrayList<Pair>();
+		pairList.add(Pair.build(ci.getTypeName(), ci.getName()));
 
-		ArrayBuilder connections = new ArrayBuilder();
+		ArrayList<Value> connections = new ArrayList<Value>();
 		for (Connection c : ci.getAllConnections()) {
-			connections.addValue(doSwitch(c));
+			connections.add(doSwitch(c));
 		}
-		builder.addPair(Pair.build("connections", connections.build()));
-		return builder.build();
+		pairList.add(Pair.build("connections", ArrayValue.build(connections)));
+		return ObjectValue.build(pairList);
 	}
 
 	@Override
 	public Value caseConnection(Connection c) {
-		ObjectBuilder builder = new ObjectBuilder();
-		builder.addPair(Pair.build("name", c.getName()));
-		builder.addPair(Pair.build("source", getName(c.getSource())));
-		builder.addPair(Pair.build("destination", getName(c.getDestination())));
-		return builder.build();
+		ArrayList<Pair> pairList = new ArrayList<Pair>();
+		pairList.add(Pair.build("name", c.getName()));
+		pairList.add(Pair.build("source", getName(c.getSource())));
+		pairList.add(Pair.build("destination", getName(c.getDestination())));
+		return ObjectValue.build(pairList);
 	}
 
 	/* Begin: Features */
@@ -111,22 +110,22 @@ public class Translate extends Aadl2Switch<Value> {
 
 	@Override
 	public Value caseBusAccess(BusAccess access) {
-		ObjectBuilder portJson = new ObjectBuilder();
-		ObjectBuilder builder = new ObjectBuilder();
-		builder.addPair(Pair.build("name", access.getName()));
-		builder.addPair(Pair.build("type", "bus"));
-		portJson.addPair(Pair.build("access", builder.build()));
-		return portJson.build();
+		ArrayList<Pair> portJson = new ArrayList<Pair>();
+		ArrayList<Pair> pairList = new ArrayList<Pair>();
+		pairList.add(Pair.build("name", access.getName()));
+		pairList.add(Pair.build("type", "bus"));
+		portJson.add(Pair.build("access", ObjectValue.build(pairList)));
+		return ObjectValue.build(portJson);
 	}
 
 	private Value buildPort(String name, String type, boolean in, boolean out) {
-		ObjectBuilder portJson = new ObjectBuilder();
-		ObjectBuilder builder = new ObjectBuilder();
-		builder.addPair(Pair.build("name", name));
-		builder.addPair(Pair.build("type", type));
-		builder.addPair(Pair.build("flow", getInOutString(in, out)));
-		portJson.addPair(Pair.build("port", builder.build()));
-		return portJson.build();
+		ArrayList<Pair> portJson = new ArrayList<Pair>();
+		ArrayList<Pair> pairList = new ArrayList<Pair>();
+		pairList.add(Pair.build("name", name));
+		pairList.add(Pair.build("type", type));
+		pairList.add(Pair.build("flow", getInOutString(in, out)));
+		portJson.add(Pair.build("port", ObjectValue.build(pairList)));
+		return ObjectValue.build(portJson);
 	}
 
 	private String getInOutString(boolean in, boolean out) {
@@ -152,7 +151,7 @@ public class Translate extends Aadl2Switch<Value> {
 	// this is *ONLY* going to support boolean properties for now.
 	@Override
 	public Value casePropertyAssociation(PropertyAssociation pa) {
-		ObjectBuilder property = new ObjectBuilder();
+		ArrayList<Pair> property = new ArrayList<Pair>();
 		Property p = pa.getProperty();
 
 		List<ModalPropertyValue> values = new ArrayList<>(pa.getOwnedValues());
@@ -161,11 +160,11 @@ public class Translate extends Aadl2Switch<Value> {
 		if (x.getOwnedValue() instanceof BooleanLiteral) {
 			BooleanLiteral bv = (BooleanLiteral) x.getOwnedValue();
 			if (bv.getValue()) {
-				property.addPair(Pair.build("property", p.getName()));
+				property.add(Pair.build("property", p.getName()));
 			}
 		}
 
-		return property.build();
+		return ObjectValue.build(property);
 	}
 
 	private static String getName(ConnectedElement ce) {

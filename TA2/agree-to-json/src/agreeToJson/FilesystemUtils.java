@@ -1,4 +1,4 @@
-package com.rockwellcollins.atc.darpacase.requirements.fromTA6;
+package agreeToJson;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;

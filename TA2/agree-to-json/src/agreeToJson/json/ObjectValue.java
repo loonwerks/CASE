@@ -1,4 +1,4 @@
-package com.rockwellcollins.atc.darpacase.requirements.json;
+package agreeToJson.json;
 
 import java.util.Iterator;
 import java.util.List;

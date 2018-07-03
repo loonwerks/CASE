@@ -1,4 +1,4 @@
-package com.rockwellcollins.atc.darpacase.requirements.json;
+package agreeToJson.json;
 
 public class StringValue extends Value {
 

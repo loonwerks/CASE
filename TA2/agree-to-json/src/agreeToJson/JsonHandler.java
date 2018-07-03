@@ -1,4 +1,4 @@
-package com.rockwellcollins.atc.darpacase.requirements.fromTA6;
+package agreeToJson;
 
 import java.io.IOException;
 
@@ -23,7 +23,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.rockwellcollins.atc.darpacase.requirements.json.Value;
+
+import agreeToJson.json.Value;
 
 public class JsonHandler extends AbstractHandler {
 
