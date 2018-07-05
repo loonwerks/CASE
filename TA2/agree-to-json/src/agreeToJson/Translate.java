@@ -68,6 +68,7 @@ public class Translate extends Aadl2Switch<Value> {
 		pairList.add(Pair.build("name", ty.getName()));
 		pairList.add(Pair.build("type", getType(ty)));
 
+
 		ArrayList<Value> features = new ArrayList<Value>();
 		for (Feature feature : ty.getOwnedFeatures()) {
 			features.add(doSwitch(feature));
