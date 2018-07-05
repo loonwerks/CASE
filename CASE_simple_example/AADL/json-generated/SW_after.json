@@ -1,0 +1,10 @@
+{
+  "package": "SW_after",
+  "components": [
+    "com.rockwellcollins.atc.agree.agree.impl.AgreeContractSubclauseImpl@5209c486 (name: agree)",
+    "com.rockwellcollins.atc.agree.agree.impl.AgreeContractSubclauseImpl@4c48564d (name: agree)",
+    "com.rockwellcollins.atc.agree.agree.impl.AgreeContractSubclauseImpl@7316742f (name: agree)",
+    "com.rockwellcollins.atc.agree.agree.impl.AgreeContractSubclauseImpl@6c73d88c (name: agree)",
+    "com.rockwellcollins.atc.agree.agree.impl.AgreeContractSubclauseImpl@7316742f (name: agree)"
+  ]
+}

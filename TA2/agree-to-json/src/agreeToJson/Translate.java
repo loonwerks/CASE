@@ -3,9 +3,11 @@ package agreeToJson;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.osate.aadl2.AadlPackage;
+import org.osate.aadl2.AnnexSubclause;
 import org.osate.aadl2.BooleanLiteral;
 import org.osate.aadl2.BusAccess;
 import org.osate.aadl2.Classifier;
@@ -22,6 +24,9 @@ import org.osate.aadl2.Property;
 import org.osate.aadl2.PropertyAssociation;
 import org.osate.aadl2.PropertySet;
 import org.osate.aadl2.util.Aadl2Switch;
+import org.osate.annexsupport.AnnexUtil;
+
+import com.rockwellcollins.atc.agree.agree.AgreePackage;
 
 import agreeToJson.json.ArrayValue;
 import agreeToJson.json.ObjectValue;
@@ -33,12 +38,24 @@ public class Translate extends Aadl2Switch<Value> {
 
 	@Override
 	public ObjectValue caseAadlPackage(AadlPackage pkg) {
+
+		AgreeTranslate at = new AgreeTranslate();
+
 		ArrayList<Pair> pkgBuilder = new ArrayList<Pair>();
 		pkgBuilder.add(Pair.build("package", pkg.getName()));
 
 		ArrayList<Value> components = new ArrayList<Value>();
 		for (Classifier classifier : EcoreUtil2.getAllContentsOfType(pkg, Classifier.class)) {
-			components.add(doSwitch(classifier));
+
+			EList<AnnexSubclause> annexSubClauses = AnnexUtil.getAllAnnexSubclauses(classifier,
+					AgreePackage.eINSTANCE.getAgreeContractSubclause());
+
+			for (AnnexSubclause anx : annexSubClauses) {
+
+				components.add(at.doSwitch(anx));
+
+			}
+
 		}
 
 		pkgBuilder.add(Pair.build("components", ArrayValue.build(components)));

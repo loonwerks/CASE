@@ -53,7 +53,7 @@ public class JsonHandler extends AbstractHandler {
 			return null;
 		}
 
-		// create the IR
+
 		Translate translate = new Translate();
 		Value v = translate.doSwitch(pkg);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
