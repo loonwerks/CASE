@@ -53,12 +53,11 @@ public class JsonHandler extends AbstractHandler {
 			return null;
 		}
 
-
-		AgreeTranslate translate = new AgreeTranslate();
-		Value v = translate.genAadlPackage(pkg);
+		AadlTranslate aadlTranslate = new AadlTranslate();
+		Value jsonValue = aadlTranslate.doSwitch(pkg);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		JsonParser jp = new JsonParser();
-		JsonElement je = jp.parse(v.toString());
+		JsonElement je = jp.parse(jsonValue.toString());
 
 		try {
 			printJson(xtextEditor, gson.toJson(je));

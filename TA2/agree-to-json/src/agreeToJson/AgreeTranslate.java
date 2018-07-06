@@ -3,11 +3,9 @@ package agreeToJson;
 import java.util.ArrayList;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.EcoreUtil2;
-import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.AnnexSubclause;
-import org.osate.aadl2.Classifier;
 import org.osate.aadl2.Comment;
+import org.osate.aadl2.ComponentClassifier;
 import org.osate.aadl2.NamedElement;
 import org.osate.annexsupport.AnnexUtil;
 
@@ -182,30 +180,22 @@ public class AgreeTranslate {
 		return ObjectValue.build(pairList);
 	}
 
-	public ObjectValue genAadlPackage(AadlPackage pkg) {
-
-		ArrayList<Pair> pkgBuilder = new ArrayList<Pair>();
-		pkgBuilder.add(Pair.build("package", pkg.getName()));
-
+	public Value genComponentClassifier(ComponentClassifier cc) {
 
 		ArrayList<Value> components = new ArrayList<Value>();
 
-		for (Classifier classifier : EcoreUtil2.getAllContentsOfType(pkg, Classifier.class)) {
+		EList<AnnexSubclause> annexSubClauses = AnnexUtil.getAllAnnexSubclauses(cc,
+				AgreePackage.eINSTANCE.getAgreeContractSubclause());
 
-			EList<AnnexSubclause> annexSubClauses = AnnexUtil.getAllAnnexSubclauses(classifier,
-					AgreePackage.eINSTANCE.getAgreeContractSubclause());
-
-			for (AnnexSubclause anx : annexSubClauses) {
-				if (anx instanceof AgreeContractSubclause) {
-					AgreeContractImpl contr = (AgreeContractImpl) ((AgreeContractSubclause) anx).getContract();
-					components.add(genContract(contr));
-				}
+		for (AnnexSubclause anx : annexSubClauses) {
+			if (anx instanceof AgreeContractSubclause) {
+				AgreeContractImpl contr = (AgreeContractImpl) ((AgreeContractSubclause) anx).getContract();
+				components.add(genContract(contr));
 			}
 		}
 
 
-		pkgBuilder.add(Pair.build("components", ArrayValue.build(components)));
-		return ObjectValue.build(pkgBuilder);
+		return ArrayValue.build(components);
 	}
 
 }
