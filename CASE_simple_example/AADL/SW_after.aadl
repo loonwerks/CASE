@@ -1,16 +1,33 @@
 package SW_after
 public
 	with Base_Types;
+	with Data_Model;
+	
+	
+
+	
+	data color
+		properties
+			Data_Model::Data_Representation => Enum;
+			Data_Model::Enumerators => ("Red", "Green", "Blue");
+	end color;
+	
+	data coord
+	end coord;
+	data implementation coord.impl
+		subcomponents
+			lat: data Base_Types::Integer;
+			lon: data Base_Types::Integer;
+			alt: data Base_Types::Integer;
+	end coord.impl;
 	
 	
 	data wp_message
 	end wp_message;
-	
 	data implementation wp_message.impl
 		subcomponents
-			alt: data Base_Types::Integer;
-			lat: data Base_Types::Integer;
-			lon: data Base_Types::Integer;
+			color: data color;
+			coord: data coord.impl;
 	end wp_message.impl;
 	
 	
@@ -31,7 +48,7 @@ public
 	thread implementation Filter.impl
 		annex agree {**
 			--match val=recv_map.alt regexp=[0-9]+	
-			assert "filter assertion" : recv_map_out.alt >= 0;
+			assert "filter assertion" : recv_map_out.coord.alt >= 50 and recv_map_out.color = enum (color, Red);
 		**};
 	end Filter.impl;
 	
@@ -43,7 +60,8 @@ public
 			
 						
 		annex agree {**
-			assume "recv_map valid 1" : recv_map.alt >= 0;
+			assume "recv_map valid 1" : recv_map.coord.alt >= 50 and 
+					(recv_map.color = enum (color, Red) or recv_map.color = enum (color, Green));
 		**};
 	end FlightPlanner;
 

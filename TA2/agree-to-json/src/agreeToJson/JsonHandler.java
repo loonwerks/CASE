@@ -54,8 +54,8 @@ public class JsonHandler extends AbstractHandler {
 		}
 
 
-		Translate translate = new Translate();
-		Value v = translate.doSwitch(pkg);
+		AgreeTranslate translate = new AgreeTranslate();
+		Value v = translate.genAadlPackage(pkg);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		JsonParser jp = new JsonParser();
 		JsonElement je = jp.parse(v.toString());

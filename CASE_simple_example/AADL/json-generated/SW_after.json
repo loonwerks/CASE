@@ -2,29 +2,168 @@
   "package": "SW_after",
   "components": [
     {
-      "name": "agree",
-      "comments": "0",
-      "pas": []
+      "statements": [
+        {
+          "kind": "assert",
+          "label": "filter assertion",
+          "expr": {
+            "kind": "binary",
+            "left": {
+              "kind": "binary",
+              "left": {
+                "kind": "nestedDotId",
+                "name": "recv_map_out.coord.alt"
+              },
+              "op": "\u003e\u003d",
+              "right": {
+                "kind": "intLit",
+                "value": "50"
+              }
+            },
+            "op": "and",
+            "right": {
+              "kind": "binary",
+              "left": {
+                "kind": "nestedDotId",
+                "name": "recv_map_out.color"
+              },
+              "op": "\u003d",
+              "right": {
+                "kind": "aadlEnum",
+                "type": {
+                  "kind": "nestedDotId",
+                  "name": "color"
+                },
+                "value": "Red"
+              }
+            }
+          }
+        }
+      ],
+      "comments": []
     },
     {
-      "name": "agree",
-      "comments": "0",
-      "pas": []
+      "statements": [
+        {
+          "kind": "assume",
+          "label": "recv_map valid 1",
+          "expr": {
+            "kind": "binary",
+            "left": {
+              "kind": "binary",
+              "left": {
+                "kind": "nestedDotId",
+                "name": "recv_map.coord.alt"
+              },
+              "op": "\u003e\u003d",
+              "right": {
+                "kind": "intLit",
+                "value": "50"
+              }
+            },
+            "op": "and",
+            "right": {
+              "kind": "binary",
+              "left": {
+                "kind": "binary",
+                "left": {
+                  "kind": "nestedDotId",
+                  "name": "recv_map.color"
+                },
+                "op": "\u003d",
+                "right": {
+                  "kind": "aadlEnum",
+                  "type": {
+                    "kind": "nestedDotId",
+                    "name": "color"
+                  },
+                  "value": "Red"
+                }
+              },
+              "op": "or",
+              "right": {
+                "kind": "binary",
+                "left": {
+                  "kind": "nestedDotId",
+                  "name": "recv_map.color"
+                },
+                "op": "\u003d",
+                "right": {
+                  "kind": "aadlEnum",
+                  "type": {
+                    "kind": "nestedDotId",
+                    "name": "color"
+                  },
+                  "value": "Green"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "comments": []
     },
     {
-      "name": "agree",
-      "comments": "0",
-      "pas": []
+      "statements": [
+        {
+          "kind": "eq",
+          "expr": "null"
+        },
+        {
+          "kind": "gurantee",
+          "label": "fpv",
+          "expr": {
+            "kind": "binary",
+            "left": {
+              "kind": "nestedDotId",
+              "name": "fpv"
+            },
+            "op": "\u003e\u003d",
+            "right": {
+              "kind": "intLit",
+              "value": "0"
+            }
+          }
+        }
+      ],
+      "comments": []
     },
     {
-      "name": "agree",
-      "comments": "0",
-      "pas": []
+      "statements": [
+        {
+          "kind": "assign",
+          "expr": {
+            "kind": "nestedDotId",
+            "name": "FPLN.recv_map"
+          }
+        }
+      ],
+      "comments": []
     },
     {
-      "name": "agree",
-      "comments": "0",
-      "pas": []
+      "statements": [
+        {
+          "kind": "eq",
+          "expr": "null"
+        },
+        {
+          "kind": "gurantee",
+          "label": "fpv",
+          "expr": {
+            "kind": "binary",
+            "left": {
+              "kind": "nestedDotId",
+              "name": "fpv"
+            },
+            "op": "\u003e\u003d",
+            "right": {
+              "kind": "intLit",
+              "value": "0"
+            }
+          }
+        }
+      ],
+      "comments": []
     }
   ]
 }
