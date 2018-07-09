@@ -6,7 +6,6 @@ import org.eclipse.emf.common.util.EList;
 import org.osate.aadl2.AnnexSubclause;
 import org.osate.aadl2.Comment;
 import org.osate.aadl2.ComponentClassifier;
-import org.osate.aadl2.NamedElement;
 import org.osate.annexsupport.AnnexUtil;
 
 import com.rockwellcollins.atc.agree.agree.AgreeContractSubclause;
@@ -33,10 +32,6 @@ import agreeToJson.json.StringValue;
 import agreeToJson.json.Value;
 
 public class AgreeTranslate {
-
-	private Value genNamedElement(NamedElement ne) {
-		return StringValue.build(ne == null ? "null" : ne.getName());
-	}
 
 	private Value genBinaryExprImpl(BinaryExprImpl expr) {
 		ArrayList<Pair> pairList = new ArrayList<Pair>();

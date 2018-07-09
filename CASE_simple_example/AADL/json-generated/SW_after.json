@@ -107,7 +107,7 @@
                     "kind": "nestedDotId",
                     "name": "recv_map_out.coord.alt"
                   },
-                  "op": "\u003e\u003d",
+                  "op": ">=",
                   "right": {
                     "kind": "intLit",
                     "value": "50"
@@ -120,7 +120,7 @@
                     "kind": "nestedDotId",
                     "name": "recv_map_out.color"
                   },
-                  "op": "\u003d",
+                  "op": "=",
                   "right": {
                     "kind": "aadlEnum",
                     "type": {
@@ -178,7 +178,7 @@
                     "kind": "nestedDotId",
                     "name": "recv_map.coord.alt"
                   },
-                  "op": "\u003e\u003d",
+                  "op": ">=",
                   "right": {
                     "kind": "intLit",
                     "value": "50"
@@ -193,7 +193,7 @@
                       "kind": "nestedDotId",
                       "name": "recv_map.color"
                     },
-                    "op": "\u003d",
+                    "op": "=",
                     "right": {
                       "kind": "aadlEnum",
                       "type": {
@@ -210,7 +210,7 @@
                       "kind": "nestedDotId",
                       "name": "recv_map.color"
                     },
-                    "op": "\u003d",
+                    "op": "=",
                     "right": {
                       "kind": "aadlEnum",
                       "type": {
@@ -343,7 +343,7 @@
                   "kind": "nestedDotId",
                   "name": "fpv"
                 },
-                "op": "\u003e\u003d",
+                "op": ">=",
                 "right": {
                   "kind": "intLit",
                   "value": "0"
@@ -442,7 +442,7 @@
                   "kind": "nestedDotId",
                   "name": "fpv"
                 },
-                "op": "\u003e\u003d",
+                "op": ">=",
                 "right": {
                   "kind": "intLit",
                   "value": "0"

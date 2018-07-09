@@ -26,42 +26,47 @@ public
 	end wp_message;
 	data implementation wp_message.impl
 		subcomponents
-			color: data color;
-			coord: data coord.impl;
+			clr: data color;
+			crd: data coord.impl;
+			xyz: data Base_Types::Integer;
 	end wp_message.impl;
 	
 	
 	thread RadioDriver
 		features
-			recv_map_in: in event data port;
-			send_status_out: out event data port;
-			send_status_in: in event data port;
-			recv_map_out: out event data port wp_message.impl;
+			recv_map_in: in data port;
+			send_status_out: out data port;
+			send_status_in: in data port;
+			recv_map_out: out data port wp_message.impl;
 	end RadioDriver;
 	
 	thread Filter
 		features
-			recv_map_in: in event data port wp_message.impl;
-			recv_map_out: out event data port wp_message.impl;
+			xyz_map_in: in data port wp_message.impl;
+			xyz_map_out: out data port wp_message.impl;
+			annex agree {**
+				--match val=recv_map.alt regexp=[0-9]+	
+				--assert "filter assertion" : recv_map_out.coord.alt >= 50 and recv_map_out.color = enum (color, Red);
+			**};
 	end Filter; 
 	
 	thread implementation Filter.impl
 		annex agree {**
 			--match val=recv_map.alt regexp=[0-9]+	
-			assert "filter assertion" : recv_map_out.coord.alt >= 50 and recv_map_out.color = enum (color, Red);
+			--assert "filter assertion" : recv_map_out.coord.alt >= 50 and recv_map_out.color = enum (color, Red);
 		**};
 	end Filter.impl;
 	
 	thread FlightPlanner
 		features
-			recv_map: in event data port wp_message.impl;
+			recv_map: in data port wp_message.impl;
 			flight_plan: out data port;
-			position_status: in event data port;
+			position_status: in data port;
 			
 						
 		annex agree {**
-			assume "recv_map valid 1" : recv_map.coord.alt >= 50 and 
-					(recv_map.color = enum (color, Red) or recv_map.color = enum (color, Green));
+				property adsf = recv_map.crd.alt >= 50 and (recv_map.clr = enum(color, Red) or recv_map.clr = enum (color, Green));
+			assume "recv_map valid 1" : recv_map.crd.alt >= 50 and (recv_map.clr = enum (color, Red) or recv_map.clr = enum (color, Green));
 		**};
 	end FlightPlanner;
 
@@ -69,29 +74,27 @@ public
 	thread WaypointManager
 		features
 			flight_plan: in data port;
-			waypoint: out event data port;
-			position_status: in event data port;
+			waypoint: out data port;
+			position_status: in data port;
 
 	end WaypointManager;
 	
 	thread UARTDriver
 		features
-			position_status_in: in event data port;
-			waypoint_out: out event data port;
-			position_status_out: out event data port;
-			waypoint_in: in event data port;
+			position_status_in: in data port;
+			waypoint_out: out data port;
+			position_status_out: out data port;
+			waypoint_in: in data port;
 	end UARTDriver;
 
 	process MC_SW
 		features
-			recv_map: in event data port;
-			send_status: out event data port;
-			waypoint: out event data port;
-			position_status: in event data port;
+			recv_map: in data port;
+			send_status: out data port;
+			waypoint: out data port;
+			position_status: in data port;
 			
 		annex agree{**
-			eq fpv : int;
-			guarantee "fpv" : fpv >= 0;
 		**};
 	end MC_SW;
 
@@ -99,15 +102,15 @@ public
 	process implementation MC_SW.impl
 		subcomponents
 			RADIO: thread RadioDriver;
-			FLTR: thread Filter.impl;
+			FLTR: thread Filter;
 			FPLN: thread FlightPlanner;
 			WPM: thread WaypointManager;
 			UART: thread UARTDriver;
 		connections
 			c1: port recv_map -> RADIO.recv_map_in;
 			c2: port RADIO.send_status_out -> send_status;
-			c3A: port RADIO.recv_map_out ->FLTR.recv_map_in; 
-			c3B: port FLTR.recv_map_out -> FPLN.recv_map;
+			c3A: port RADIO.recv_map_out ->FLTR.xyz_map_in; 
+			c3B: port FLTR.xyz_map_out -> FPLN.recv_map;
 			c4: port FPLN.flight_plan -> WPM.flight_plan;
 			c5: port WPM.waypoint -> UART.waypoint_in;
 			c6: port UART.position_status_out -> WPM.position_status;
@@ -117,7 +120,9 @@ public
 			c10: port position_status -> UART.position_status_in;
 			
 		annex agree{**
-			assign fpv = FPLN.recv_map;
+			assert "something's wrong'" : FPLN.recv_map > 0;
+			--assign ghi = FLTR.xyz_map_out;
+			--assert "filter assertion" : FLTR.recv_map_out.coord.alt >= 50 and FLTR.recv_map_out.color = enum (color, Red);
 		**};
 
 	end MC_SW.impl;	

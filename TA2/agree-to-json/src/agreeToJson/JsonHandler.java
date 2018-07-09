@@ -55,7 +55,7 @@ public class JsonHandler extends AbstractHandler {
 
 		AadlTranslate aadlTranslate = new AadlTranslate();
 		Value jsonValue = aadlTranslate.doSwitch(pkg);
-		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		Gson gson = new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create();
 		JsonParser jp = new JsonParser();
 		JsonElement je = jp.parse(jsonValue.toString());
 
