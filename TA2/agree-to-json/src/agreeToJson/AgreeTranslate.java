@@ -20,10 +20,14 @@ import com.rockwellcollins.atc.agree.agree.impl.AssertStatementImpl;
 import com.rockwellcollins.atc.agree.agree.impl.AssignStatementImpl;
 import com.rockwellcollins.atc.agree.agree.impl.AssumeStatementImpl;
 import com.rockwellcollins.atc.agree.agree.impl.BinaryExprImpl;
+import com.rockwellcollins.atc.agree.agree.impl.BoolLitExprImpl;
 import com.rockwellcollins.atc.agree.agree.impl.EqStatementImpl;
 import com.rockwellcollins.atc.agree.agree.impl.GuaranteeStatementImpl;
 import com.rockwellcollins.atc.agree.agree.impl.IntLitExprImpl;
 import com.rockwellcollins.atc.agree.agree.impl.NestedDotIDImpl;
+import com.rockwellcollins.atc.agree.agree.impl.PropertyStatementImpl;
+import com.rockwellcollins.atc.agree.agree.impl.RealLitExprImpl;
+import com.rockwellcollins.atc.agree.agree.impl.UnaryExprImpl;
 
 import agreeToJson.json.ArrayValue;
 import agreeToJson.json.ObjectValue;
@@ -42,10 +46,32 @@ public class AgreeTranslate {
 		return ObjectValue.build(pairList);
 	}
 
+	private Value genUnaryExprImpl(UnaryExprImpl expr) {
+		ArrayList<Pair> pairList = new ArrayList<Pair>();
+		pairList.add(Pair.build("kind", "unary"));
+		pairList.add(Pair.build("operand", genExpr(expr.getExpr())));
+		pairList.add(Pair.build("op", (expr.getOp())));
+		return ObjectValue.build(pairList);
+	}
+
 	private Value genIntLitExprImpl(IntLitExprImpl expr) {
 		ArrayList<Pair> pairList = new ArrayList<Pair>();
 		pairList.add(Pair.build("kind", "intLit"));
 		pairList.add(Pair.build("value", StringValue.build(expr.getVal())));
+		return ObjectValue.build(pairList);
+	}
+
+	private Value genRealLitExprImpl(RealLitExprImpl expr) {
+		ArrayList<Pair> pairList = new ArrayList<Pair>();
+		pairList.add(Pair.build("kind", "realLit"));
+		pairList.add(Pair.build("value", StringValue.build(expr.getVal())));
+		return ObjectValue.build(pairList);
+	}
+
+	private Value genBoolLitExprImpl(BoolLitExprImpl expr) {
+		ArrayList<Pair> pairList = new ArrayList<Pair>();
+		pairList.add(Pair.build("kind", "boolLit"));
+		pairList.add(Pair.build("value", StringValue.build(expr.getVal().getValue() + "")));
 		return ObjectValue.build(pairList);
 	}
 
@@ -76,8 +102,14 @@ public class AgreeTranslate {
 
 		if (expr instanceof IntLitExprImpl) {
 			return genIntLitExprImpl((IntLitExprImpl) expr);
+		} else if (expr instanceof RealLitExprImpl) {
+			return genRealLitExprImpl((RealLitExprImpl) expr);
+		} else if (expr instanceof BoolLitExprImpl) {
+			return genBoolLitExprImpl((BoolLitExprImpl) expr);
 		} else if (expr instanceof BinaryExprImpl) {
 			return genBinaryExprImpl((BinaryExprImpl) expr);
+		} else if (expr instanceof UnaryExprImpl) {
+			return genUnaryExprImpl((UnaryExprImpl) expr);
 		} else if (expr instanceof NestedDotIDImpl) {
 			return genNestedDotIDImpl((NestedDotIDImpl) expr);
 		} else if (expr instanceof AADLEnumeratorImpl) {
@@ -86,6 +118,7 @@ public class AgreeTranslate {
 			return StringValue.build(expr == null ? "null" : expr.toString());
 		}
 	}
+
 
 	private Value genAADLEnumeratorImpl(AADLEnumeratorImpl expr) {
 		ArrayList<Pair> pairList = new ArrayList<Pair>();
@@ -121,7 +154,7 @@ public class AgreeTranslate {
 
 	private Value genGuaranteeStatementImpl(GuaranteeStatementImpl stmt) {
 		ArrayList<Pair> pairList = new ArrayList<Pair>();
-		pairList.add(Pair.build("kind", "gurantee"));
+		pairList.add(Pair.build("kind", "guarantee"));
 		pairList.add(Pair.build("label", stmt.getStr()));
 		pairList.add(Pair.build("expr", genExpr(stmt.getExpr())));
 		return ObjectValue.build(pairList);
@@ -130,6 +163,14 @@ public class AgreeTranslate {
 	private Value genAssignStatementImpl(AssignStatementImpl stmt) {
 		ArrayList<Pair> pairList = new ArrayList<Pair>();
 		pairList.add(Pair.build("kind", "assign"));
+		pairList.add(Pair.build("expr", genExpr(stmt.getExpr())));
+		return ObjectValue.build(pairList);
+	}
+
+	private Value genPropertyStatementImpl(PropertyStatementImpl stmt) {
+		ArrayList<Pair> pairList = new ArrayList<Pair>();
+		pairList.add(Pair.build("kind", "property"));
+		pairList.add(Pair.build("name", stmt.getName()));
 		pairList.add(Pair.build("expr", genExpr(stmt.getExpr())));
 		return ObjectValue.build(pairList);
 	}
@@ -146,6 +187,9 @@ public class AgreeTranslate {
 			return genGuaranteeStatementImpl((GuaranteeStatementImpl) stmt);
 		} else if (stmt instanceof AssignStatementImpl) {
 			return genAssignStatementImpl((AssignStatementImpl) stmt);
+		} else if (stmt instanceof PropertyStatementImpl) {
+			return genPropertyStatementImpl((PropertyStatementImpl) stmt);
+
 		} else {
 			return StringValue.build(stmt.toString());
 		}
