@@ -47,6 +47,8 @@ public class AadlTranslate extends Aadl2Switch<Value> {
 			components.add(doSwitch(classifier));
 		}
 
+		pkgBuilder.add(Pair.build("agree", agreeTranslate.genAadlPackage(pkg)));
+
 		pkgBuilder.add(Pair.build("components", ArrayValue.build(components)));
 		return ObjectValue.build(pkgBuilder);
 	}
