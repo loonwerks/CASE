@@ -10,6 +10,23 @@
     },
     {
       "Waypoint": "Waypoint.Impl",
+      "subcomponents": [
+        {
+          "name": "lat",
+          "category": "data",
+          "classifier": "Base_Types::Float"
+        },
+        {
+          "name": "long",
+          "category": "data",
+          "classifier": "Base_Types::Float"
+        },
+        {
+          "name": "alt",
+          "category": "data",
+          "classifier": "Base_Types::Integer"
+        }
+      ],
       "connections": [],
       "agree": []
     },
@@ -22,6 +39,28 @@
     },
     {
       "Map": "Map.Impl",
+      "subcomponents": [
+        {
+          "name": "wp1",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp2",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp3",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp4",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        }
+      ],
       "connections": [],
       "agree": []
     },
@@ -29,7 +68,20 @@
       "name": "FlightPattern",
       "type": "data",
       "features": [],
-      "properties": [],
+      "properties": [
+        {
+          "name": "Data_Representation",
+          "value": "Enum"
+        },
+        {
+          "name": "Enumerators",
+          "value": [
+            "Zigzag",
+            "StraightLine",
+            "Perimeter"
+          ]
+        }
+      ],
       "agree": []
     },
     {
@@ -41,6 +93,23 @@
     },
     {
       "Command": "Command.Impl",
+      "subcomponents": [
+        {
+          "name": "Map",
+          "category": "data",
+          "classifier": "SW::Map.Impl"
+        },
+        {
+          "name": "Pattern",
+          "category": "data",
+          "classifier": "SW::FlightPattern"
+        },
+        {
+          "name": "HMAC",
+          "category": "data",
+          "classifier": "Base_Types::Boolean"
+        }
+      ],
       "connections": [],
       "agree": []
     },
@@ -53,6 +122,58 @@
     },
     {
       "Mission": "Mission.Impl",
+      "subcomponents": [
+        {
+          "name": "wp1",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp2",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp3",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp4",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp5",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp6",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp7",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp8",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp9",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp10",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        }
+      ],
       "connections": [],
       "agree": []
     },
@@ -65,6 +186,33 @@
     },
     {
       "MissionWindow": "MissionWindow.Impl",
+      "subcomponents": [
+        {
+          "name": "wp1",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp2",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp3",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "wp4",
+          "category": "data",
+          "classifier": "SW::Waypoint.Impl"
+        },
+        {
+          "name": "crc",
+          "category": "data",
+          "classifier": "Base_Types::Boolean"
+        }
+      ],
       "connections": [],
       "agree": []
     },
@@ -1630,8 +1778,7 @@
                 }
               }
             }
-          ],
-          "comments": []
+          ]
         }
       ]
     },
@@ -1688,8 +1835,7 @@
                 }
               }
             }
-          ],
-          "comments": []
+          ]
         }
       ]
     },
@@ -3179,8 +3325,7 @@
                 }
               }
             }
-          ],
-          "comments": []
+          ]
         }
       ]
     },
@@ -3653,8 +3798,7 @@
                 }
               }
             }
-          ],
-          "comments": []
+          ]
         }
       ]
     },
@@ -3727,13 +3871,34 @@
                 }
               }
             }
-          ],
-          "comments": []
+          ]
         }
       ]
     },
     {
       "MC_SW": "MC_SW.Impl",
+      "subcomponents": [
+        {
+          "name": "RADIO",
+          "category": "thread",
+          "classifier": "SW::RadioDriver"
+        },
+        {
+          "name": "FPLN",
+          "category": "thread",
+          "classifier": "SW::FlightPlanner"
+        },
+        {
+          "name": "WPM",
+          "category": "thread",
+          "classifier": "SW::WaypointManager"
+        },
+        {
+          "name": "UART",
+          "category": "thread",
+          "classifier": "SW::UARTDriver"
+        }
+      ],
       "connections": [
         {
           "name": "c1",
@@ -3821,8 +3986,7 @@
                 }
               }
             }
-          ],
-          "comments": []
+          ]
         }
       ]
     }

@@ -115,7 +115,7 @@ public class AgreeTranslate {
 		} else if (expr instanceof AADLEnumeratorImpl) {
 			return genAADLEnumeratorImpl((AADLEnumeratorImpl) expr);
 		} else {
-			return StringValue.build(expr == null ? "null" : expr.toString());
+			return StringValue.build("new_case/genExpr/" + (expr == null ? "null" : expr.toString()));
 		}
 	}
 
@@ -191,7 +191,7 @@ public class AgreeTranslate {
 			return genPropertyStatementImpl((PropertyStatementImpl) stmt);
 
 		} else {
-			return StringValue.build(stmt.toString());
+			return StringValue.build("new_case/genSpecStatement/" + stmt.toString());
 		}
 
 	}
@@ -213,7 +213,6 @@ public class AgreeTranslate {
 			for (Comment com : contr.getOwnedComments()) {
 				comJsonList.add(StringValue.build(com.getBody()));
 			}
-			pairList.add(Pair.build("comments", ArrayValue.build(comJsonList)));
 		}
 
 		return ObjectValue.build(pairList);

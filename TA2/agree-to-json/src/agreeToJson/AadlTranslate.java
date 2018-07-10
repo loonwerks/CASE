@@ -1,12 +1,10 @@
 package agreeToJson;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.EcoreUtil2;
 import org.osate.aadl2.AadlPackage;
-import org.osate.aadl2.BooleanLiteral;
 import org.osate.aadl2.BusAccess;
 import org.osate.aadl2.Classifier;
 import org.osate.aadl2.ComponentImplementation;
@@ -20,7 +18,13 @@ import org.osate.aadl2.Feature;
 import org.osate.aadl2.ModalPropertyValue;
 import org.osate.aadl2.Property;
 import org.osate.aadl2.PropertyAssociation;
-import org.osate.aadl2.PropertySet;
+import org.osate.aadl2.PropertyExpression;
+import org.osate.aadl2.Subcomponent;
+import org.osate.aadl2.impl.EnumerationLiteralImpl;
+import org.osate.aadl2.impl.ListValueImpl;
+import org.osate.aadl2.impl.NamedValueImpl;
+import org.osate.aadl2.impl.PropertyImpl;
+import org.osate.aadl2.impl.StringLiteralImpl;
 import org.osate.aadl2.util.Aadl2Switch;
 
 import agreeToJson.json.ArrayValue;
@@ -62,10 +66,9 @@ public class AadlTranslate extends Aadl2Switch<Value> {
 		ArrayList<Value> properties = new ArrayList<Value>();
 		for (PropertyAssociation pa : ty.getOwnedPropertyAssociations()) {
 			Property p = pa.getProperty();
-			PropertySet set = EcoreUtil2.getContainerOfType(p, PropertySet.class);
-			if (set.getName().equals("CASETA1")) {
-				properties.add(doSwitch(pa));
-			}
+			PropertyImpl pi = ((PropertyImpl) p);
+			properties.add(doSwitch(pa));
+
 		}
 		pairList.add(Pair.build("properties", ArrayValue.build(properties)));
 		pairList.add(Pair.build("agree", agreeTranslate.genComponentClassifier(ty)));
@@ -77,10 +80,16 @@ public class AadlTranslate extends Aadl2Switch<Value> {
 		ArrayList<Pair> pairList = new ArrayList<Pair>();
 		pairList.add(Pair.build(ci.getTypeName(), ci.getName()));
 
+		ArrayList<Value> subcomponents = new ArrayList<Value>();
+		for (Subcomponent sc : ci.getAllSubcomponents()) {
+			subcomponents.add(doSwitch(sc));
+		}
+
 		ArrayList<Value> connections = new ArrayList<Value>();
 		for (Connection c : ci.getAllConnections()) {
 			connections.add(doSwitch(c));
 		}
+		pairList.add(Pair.build("subcomponents", ArrayValue.build(subcomponents)));
 		pairList.add(Pair.build("connections", ArrayValue.build(connections)));
 		pairList.add(Pair.build("agree", agreeTranslate.genComponentClassifier(ci)));
 		return ObjectValue.build(pairList);
@@ -92,6 +101,20 @@ public class AadlTranslate extends Aadl2Switch<Value> {
 		pairList.add(Pair.build("name", c.getName()));
 		pairList.add(Pair.build("source", getName(c.getSource())));
 		pairList.add(Pair.build("destination", getName(c.getDestination())));
+		return ObjectValue.build(pairList);
+	}
+
+	// DataTypeImpl
+	// DataImplementationImpl
+
+
+	/* Begin: Subcomponents */
+	@Override
+	public Value caseSubcomponent(Subcomponent sc) {
+		ArrayList<Pair> pairList = new ArrayList<Pair>();
+		pairList.add(Pair.build("name", sc.getName()));
+		pairList.add(Pair.build("category", sc.getCategory().getName()));
+		pairList.add(Pair.build("classifier", sc.getClassifier().getQualifiedName()));
 		return ObjectValue.build(pairList);
 	}
 
@@ -152,23 +175,64 @@ public class AadlTranslate extends Aadl2Switch<Value> {
 
 	/* Begin Properties */
 
-	// this is *ONLY* going to support boolean properties for now.
-	@Override
-	public Value casePropertyAssociation(PropertyAssociation pa) {
-		ArrayList<Pair> property = new ArrayList<Pair>();
-		Property p = pa.getProperty();
+	private Value getEnumerationLiteralImpl(EnumerationLiteralImpl enumLit) {
+		return StringValue.build(enumLit.getName().toString());
+	}
 
-		List<ModalPropertyValue> values = new ArrayList<>(pa.getOwnedValues());
-		//expect just one, because it's boolean
-		ModalPropertyValue x = values.get(0);
-		if (x.getOwnedValue() instanceof BooleanLiteral) {
-			BooleanLiteral bv = (BooleanLiteral) x.getOwnedValue();
-			if (bv.getValue()) {
-				property.add(Pair.build("property", p.getName()));
-			}
+	private Value getListValueImpl(ListValueImpl lv) {
+		ArrayList<Value> vsJson = new ArrayList<Value>();
+
+		// vsJson.add(StringValue.build(lv.getOwnedListElements().size() + ""));
+		for (PropertyExpression pe : lv.getOwnedListElements()) {
+			vsJson.add(genPropertyExpression(pe));
 		}
 
-		return ObjectValue.build(property);
+		// ArrayValue x = ArrayValue.build(vsJson);
+		// System.out.println("x: " + (x == null ? "null" : x.toString()));
+		return ArrayValue.build(vsJson);
+	}
+
+	private Value genNamedValueImpl(NamedValueImpl v) {
+		if (v.getNamedValue() instanceof EnumerationLiteralImpl) {
+			return getEnumerationLiteralImpl((EnumerationLiteralImpl) v.getNamedValue());
+		}
+
+		return StringValue.build("new_case/genNamedValueImpl/" + v.getNamedValue());
+	}
+
+	private Value getStringLiteralImpl(StringLiteralImpl v) {
+		return StringValue.build(v.getValue());
+	}
+
+
+	private Value genPropertyExpression(PropertyExpression v) {
+		if (v instanceof NamedValueImpl) {
+			return genNamedValueImpl((NamedValueImpl) v);
+		} else if (v instanceof ListValueImpl) {
+			return getListValueImpl((ListValueImpl) v);
+		} else if (v instanceof StringLiteralImpl) {
+			return getStringLiteralImpl((StringLiteralImpl) v);
+		}
+		return StringValue.build("new_case/genPropertyExpression/" + v.toString());
+	}
+
+
+	@Override
+	public Value caseModalPropertyValue(ModalPropertyValue v) {
+		return genPropertyExpression(v.getOwnedValue());
+	}
+
+
+	@Override
+	public Value casePropertyAssociation(PropertyAssociation pa) {
+		ArrayList<Pair> pairList = new ArrayList<Pair>();
+		pairList.add(Pair.build("name", pa.getProperty().getName()));
+
+		// Seems like the list always has exactly one element
+		ModalPropertyValue v = pa.getOwnedValues().get(0);
+
+		pairList.add(Pair.build("value", doSwitch(v)));
+		return ObjectValue.build(pairList);
 	}
 
 	private static String getName(ConnectedElement ce) {
