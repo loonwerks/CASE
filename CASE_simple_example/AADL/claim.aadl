@@ -48,7 +48,8 @@ package claim
     -- property for each component that contains AGREE contracts when those checks pass
     system_prop_checked(c : component, prop : string) <=
     	** "AGREE property passed: [ " prop " ]" **
-    	has_property(c, CASE::AGREE_PROPERTIES_PASSED) and length(intersect(property(c, CASE::AGREE_PROPERTIES_PASSED), {prop})) = 1
+        has_property(c, CASE::AGREE_PROPERTIES_PASSED) and
+        member(prop, property(c, CASE::AGREE_PROPERTIES_PASSED))
 
 	-- Checks if the specified component is a filter
 	is_filter(c : component) : bool =
