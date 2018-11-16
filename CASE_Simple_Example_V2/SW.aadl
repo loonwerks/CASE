@@ -266,6 +266,7 @@ public
 			c16: port CM.gimbal_command -> WIFI.gimbal_command_in;
 			c17: port WIFI.gimbal_command_out -> gimbal_command;
 	end MC_SW.Impl;
+	
 
 	annex agree {**
 			

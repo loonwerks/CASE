@@ -13,11 +13,15 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.osate.aadl2.Aadl2Package;
+import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.AnnexSubclause;
+import org.osate.aadl2.ComponentImplementation;
+import org.osate.aadl2.ComponentType;
 import org.osate.aadl2.ConnectedElement;
 import org.osate.aadl2.Context;
 import org.osate.aadl2.DataPort;
 import org.osate.aadl2.DataSubcomponentType;
+import org.osate.aadl2.DefaultAnnexSubclause;
 import org.osate.aadl2.EventDataPort;
 import org.osate.aadl2.EventPort;
 import org.osate.aadl2.ModelUnit;
@@ -25,26 +29,23 @@ import org.osate.aadl2.PackageSection;
 import org.osate.aadl2.Port;
 import org.osate.aadl2.PortConnection;
 import org.osate.aadl2.PrivatePackageSection;
+import org.osate.aadl2.ProcessImplementation;
+import org.osate.aadl2.PropertySet;
 import org.osate.aadl2.PublicPackageSection;
+import org.osate.aadl2.Subcomponent;
 import org.osate.aadl2.ThreadSubcomponent;
 import org.osate.aadl2.ThreadType;
-import org.osate.aadl2.impl.AadlPackageImpl;
-import org.osate.aadl2.impl.DefaultAnnexSubclauseImpl;
-import org.osate.aadl2.impl.PortImpl;
-import org.osate.aadl2.impl.ProcessImplementationImpl;
-import org.osate.aadl2.impl.PropertySetImpl;
-import org.osate.aadl2.impl.SubcomponentImpl;
 import org.osate.ui.dialogs.Dialog;
 
 import com.rockwellcollins.atc.agree.agree.AgreeContract;
-import com.rockwellcollins.atc.agree.agree.impl.AgreeContractSubclauseImpl;
+import com.rockwellcollins.atc.agree.agree.AgreeContractSubclause;
 import com.rockwellcollins.atc.agree.unparsing.AgreeAnnexUnparser;
 import com.rockwellcollins.atc.darpacase.architecture.CaseClaimsManager;
 import com.rockwellcollins.atc.darpacase.architecture.dialogs.AddFilterDialog;
 import com.rockwellcollins.atc.resolute.resolute.Expr;
+import com.rockwellcollins.atc.resolute.resolute.FnCallExpr;
 import com.rockwellcollins.atc.resolute.resolute.ProveStatement;
-import com.rockwellcollins.atc.resolute.resolute.impl.FnCallExprImpl;
-import com.rockwellcollins.atc.resolute.resolute.impl.ResoluteSubclauseImpl;
+import com.rockwellcollins.atc.resolute.resolute.ResoluteSubclause;
 
 public class AddFilter extends AadlHandler {
 
@@ -54,8 +55,9 @@ public class AddFilter extends AadlHandler {
 	static final String FILTER_IMPL_BASE_NAME = "FLT";
 	static final String CONNECTION_IMPL_BASE_NAME = "c";
 
+	private String filterComponentType;
 	private String filterImplementationLanguage;
-	private String filterRegularExpression;
+//	private String filterRegularExpression;
 	private String filterTypeName;
 	private String filterImplName;
 	private String filterResoluteClause;
@@ -75,12 +77,14 @@ public class AddFilter extends AadlHandler {
 
 		// Open wizard to enter filter info
 		AddFilterDialog wizard = new AddFilterDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell());
+		wizard.setFilterComponentTypeInfo(getDestinationType(uri), getParentType(uri));
 		wizard.setGuaranteeList(getSourceName(uri), getSourceGuarantees(uri));
 		wizard.setResoluteClauses(getResoluteClauses(uri));
 		wizard.create();
 		if (wizard.open() == Window.OK) {
+			filterComponentType = wizard.getFilterComponentType();
 			filterImplementationLanguage = wizard.getFilterImplementationLanguage();
-			filterRegularExpression = wizard.getFilterRegularExpression();
+//			filterRegularExpression = wizard.getFilterRegularExpression();
 			filterTypeName = wizard.getFilterTypeName();
 			filterImplName = wizard.getFilterImplName();
 			if (filterTypeName == "") {
@@ -122,7 +126,7 @@ public class AddFilter extends AadlHandler {
 
 				// Retrieve the model object to modify
 				final PortConnection selectedConnection = (PortConnection) resource.getEObject(uri.fragment());
-				final AadlPackageImpl aadlPkg = (AadlPackageImpl) resource.getContents().get(0);
+				final AadlPackage aadlPkg = (AadlPackage) resource.getContents().get(0);
 				PackageSection pkgSection = null;
 				// Figure out if the selected connection is in the public or private section
 				EObject eObj = selectedConnection.eContainer();
@@ -147,11 +151,11 @@ public class AddFilter extends AadlHandler {
 				// CASE Property file
 				// First check if CASE Property file has already been imported in the model
 				final EList<ModelUnit> importedUnits = pkgSection.getImportedUnits();
-				PropertySetImpl casePropSet = null;
+				PropertySet casePropSet = null;
 				for (ModelUnit modelUnit : importedUnits) {
-					if (modelUnit instanceof PropertySetImpl) {
+					if (modelUnit instanceof PropertySet) {
 						if (modelUnit.getName().equals(CASE_PROPSET_NAME)) {
-							casePropSet = (PropertySetImpl) modelUnit;
+							casePropSet = (PropertySet) modelUnit;
 							break;
 						}
 					}
@@ -168,19 +172,40 @@ public class AddFilter extends AadlHandler {
 				}
 
 				// Create Filter thread type
+//				EClass componentClass;
+//				switch (filterComponentType.toLowerCase()) {
+//				case "system":
+//					componentClass = Aadl2Package.eINSTANCE.getSystemType();
+//					break;
+//				case "process":
+//					componentClass = Aadl2Package.eINSTANCE.getProcessorType();
+//					break;
+//				case "thread":
+//					componentClass = Aadl2Package.eINSTANCE.getThreadType();
+//					break;
+//				case "device":
+//					componentClass = Aadl2Package.eINSTANCE.getDeviceType();
+//					break;
+//				case "abstract":
+//				default:
+//					componentClass = Aadl2Package.eINSTANCE.getAbstractType();
+//				}
+//				final ComponentType componentType = (ComponentType) pkgSection.createOwnedClassifier(componentClass);
 				final ThreadType filterThreadType = (ThreadType) pkgSection
 						.createOwnedClassifier(Aadl2Package.eINSTANCE.getThreadType());
 				// Give it a unique name
+//				componentType.setName(getUniqueName(filterTypeName, true, pkgSection.getOwnedClassifiers()));
 				filterThreadType.setName(getUniqueName(filterTypeName, true, pkgSection.getOwnedClassifiers()));
 
 				// Create filter ports
-				final PortImpl portImpl = (PortImpl) selectedConnection.getDestination().getConnectionEnd();
+				final Port port = (Port) selectedConnection.getDestination().getConnectionEnd();
 				Port portIn = null;
 				Port portOut = null;
 				DataSubcomponentType dataFeatureClassifier = null;
-				if (portImpl instanceof EventDataPort) {
+				if (port instanceof EventDataPort) {
+//					portIn = componentType.createOwnedEventDataPort();
 					portIn = filterThreadType.createOwnedEventDataPort();
-					dataFeatureClassifier = ((EventDataPort) portImpl).getDataFeatureClassifier();
+					dataFeatureClassifier = ((EventDataPort) port).getDataFeatureClassifier();
 //					((EventDataPort) portIn)
 //							.setDataFeatureClassifier(((EventDataPort) portImpl).getDataFeatureClassifier());
 					((EventDataPort) portIn).setDataFeatureClassifier(dataFeatureClassifier);
@@ -188,14 +213,15 @@ public class AddFilter extends AadlHandler {
 //					((EventDataPort) portOut)
 //							.setDataFeatureClassifier(((EventDataPort) portImpl).getDataFeatureClassifier());
 					((EventDataPort) portOut).setDataFeatureClassifier(dataFeatureClassifier);
-				} else if (portImpl instanceof DataPort) {
+				} else if (port instanceof DataPort) {
 					portIn = filterThreadType.createOwnedDataPort();
+					dataFeatureClassifier = ((EventDataPort) port).getDataFeatureClassifier();
 //					((DataPort) portIn).setDataFeatureClassifier(((DataPort) portImpl).getDataFeatureClassifier());
 					((DataPort) portIn).setDataFeatureClassifier(dataFeatureClassifier);
 					portOut = filterThreadType.createOwnedDataPort();
 //					((DataPort) portOut).setDataFeatureClassifier(((DataPort) portImpl).getDataFeatureClassifier());
 					((DataPort) portOut).setDataFeatureClassifier(dataFeatureClassifier);
-				} else if (portImpl instanceof EventPort) {
+				} else if (port instanceof EventPort) {
 //					portIn = filterThreadType.createOwnedEventPort();
 //					portOut = filterThreadType.createOwnedEventPort();
 					Dialog.showError("Incompatible port type",
@@ -223,19 +249,20 @@ public class AddFilter extends AadlHandler {
 //					return;
 				}
 				// CASE::COMP_SPEC property
-				if (!addPropertyAssociation("COMP_SPEC", filterRegularExpression, filterThreadType, casePropSet)) {
+//				if (!addPropertyAssociation("COMP_SPEC", filterRegularExpression, filterThreadType, casePropSet)) {
+//				if (!addPropertyAssociation("COMP_SPEC", filterAgreeSpecIDs, filterThreadType, casePropSet)) {
 //					return;
-				}
+//				}
 
 				// Move filter to proper location
 				// (just before component it connects to on communication pathway)
 				final Context context = selectedConnection.getDestination().getContext();
-				String destName = ((SubcomponentImpl) context).getSubcomponentType().getName();
+				String destName = ((Subcomponent) context).getSubcomponentType().getName();
 				pkgSection.getOwnedClassifiers().move(getIndex(destName, pkgSection.getOwnedClassifiers()),
 						pkgSection.getOwnedClassifiers().size() - 1);
 
 				// Insert filter feature in process component implementation
-				final ProcessImplementationImpl procImpl = (ProcessImplementationImpl) selectedConnection
+				final ProcessImplementation procImpl = (ProcessImplementation) selectedConnection
 						.getContainingComponentImpl();
 				final ThreadSubcomponent filterThreadSubComp = procImpl.createOwnedThreadSubcomponent();
 
@@ -276,7 +303,7 @@ public class AddFilter extends AadlHandler {
 					for (AnnexSubclause annexSubclause : annexSubclauses) {
 						// get the resolute clause
 						if (annexSubclause.getName().equalsIgnoreCase("resolute")) {
-							DefaultAnnexSubclauseImpl annexSubclauseImpl = (DefaultAnnexSubclauseImpl) annexSubclause;
+							DefaultAnnexSubclause annexSubclauseImpl = (DefaultAnnexSubclause) annexSubclause;
 							String sourceText = annexSubclauseImpl.getSourceText();
 							if (sourceText.contains(filterResoluteClause + "()")) {
 								// Add arguments
@@ -315,7 +342,7 @@ public class AddFilter extends AadlHandler {
 					// replace source out port name with filter out port name
 					agreeClauses = agreeClauses.replace(selectedConnection.getSource().getConnectionEnd().getName(),
 							FILTER_PORT_OUT_NAME);
-					DefaultAnnexSubclauseImpl annexSubclauseImpl = (DefaultAnnexSubclauseImpl) filterThreadType
+					DefaultAnnexSubclause annexSubclauseImpl = filterThreadType
 							.createOwnedAnnexSubclause();
 					annexSubclauseImpl.setName("agree");
 					annexSubclauseImpl.setSourceText(agreeClauses);
@@ -336,6 +363,27 @@ public class AddFilter extends AadlHandler {
 		});
 	}
 
+	private String getDestinationType(URI uri) {
+		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor();
+
+		return xtextEditor.getDocument().readOnly(resource -> {
+			final PortConnection selectedConnection = (PortConnection) resource.getEObject(uri.fragment());
+			ComponentType ctype = (ComponentType) selectedConnection.getDestination().getConnectionEnd()
+					.getContainingClassifier();
+			return ctype.getCategory().toString();
+		});
+	}
+
+	private String getParentType(URI uri) {
+		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor();
+
+		return xtextEditor.getDocument().readOnly(resource -> {
+			final PortConnection selectedConnection = (PortConnection) resource.getEObject(uri.fragment());
+			ComponentImplementation componentImpl = selectedConnection.getContainingComponentImpl();
+			return componentImpl.getCategory().toString();
+		});
+	}
+
 	private List<String> getSourceGuarantees(URI uri) {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor();
 
@@ -347,9 +395,9 @@ public class AddFilter extends AadlHandler {
 			for (AnnexSubclause annexSubclause : annexSubclauses) {
 				// See if there's an agree annex
 				if (annexSubclause.getName().equalsIgnoreCase("agree")) {
-					DefaultAnnexSubclauseImpl annexSubclauseImpl = (DefaultAnnexSubclauseImpl) annexSubclause;
+					DefaultAnnexSubclause annexSubclauseImpl = (DefaultAnnexSubclause) annexSubclause;
 					// See if the agree annex contains guarantee statements
-					AgreeContractSubclauseImpl agreeContract = (AgreeContractSubclauseImpl) annexSubclauseImpl
+					AgreeContractSubclause agreeContract = (AgreeContractSubclause) annexSubclauseImpl
 							.getParsedAnnexSubclause();
 					AgreeAnnexUnparser unparser = new AgreeAnnexUnparser();
 					String specs = unparser.unparseContract((AgreeContract) agreeContract.getContract(), "");
@@ -378,14 +426,14 @@ public class AddFilter extends AadlHandler {
 			for (AnnexSubclause annexSubclause : annexSubclauses) {
 				// See if there's a resolute annex
 				if (annexSubclause.getName().equalsIgnoreCase("resolute")) {
-					DefaultAnnexSubclauseImpl annexSubclauseImpl = (DefaultAnnexSubclauseImpl) annexSubclause;
+					DefaultAnnexSubclause annexSubclauseImpl = (DefaultAnnexSubclause) annexSubclause;
 					// See if there are any 'prove' clauses
-					ResoluteSubclauseImpl resoluteClause = (ResoluteSubclauseImpl) annexSubclauseImpl.getParsedAnnexSubclause();
+					ResoluteSubclause resoluteClause = (ResoluteSubclause) annexSubclauseImpl.getParsedAnnexSubclause();
 					EList<ProveStatement> proves = resoluteClause.getProves();
 					for (ProveStatement prove : proves) {
 						Expr expr = prove.getExpr();
-						if (expr instanceof FnCallExprImpl) {
-							FnCallExprImpl fnCall = (FnCallExprImpl) expr;
+						if (expr instanceof FnCallExpr) {
+							FnCallExpr fnCall = (FnCallExpr) expr;
 							resoluteClauses.add(fnCall.getFn().getName());
 						}
 					}
