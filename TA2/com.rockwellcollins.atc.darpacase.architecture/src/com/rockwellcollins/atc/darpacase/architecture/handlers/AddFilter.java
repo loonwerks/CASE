@@ -49,19 +49,19 @@ import com.rockwellcollins.atc.resolute.resolute.ResoluteSubclause;
 
 public class AddFilter extends AadlHandler {
 
-	static final String FILTER_COMP_BASE_NAME = "Filter";
+	static final String FILTER_COMP_TYPE_NAME = "CASE_Filter";
 	static final String FILTER_PORT_IN_NAME = "filter_in";
 	static final String FILTER_PORT_OUT_NAME = "filter_out";
-	static final String FILTER_IMPL_BASE_NAME = "FLT";
-	static final String CONNECTION_IMPL_BASE_NAME = "c";
+	static final String FILTER_IMPL_NAME = "FLT";
+	static final String CONNECTION_IMPL_NAME = "c";
 
 	private String filterComponentType;
+	private String filterImplementationName;
 	private String filterImplementationLanguage;
 //	private String filterRegularExpression;
-	private String filterTypeName;
-	private String filterImplName;
+//	private String filterTypeName;
 	private String filterResoluteClause;
-	private String filterAgreeProperties;
+	private String filterAgreeProperty;
 	private List<String> propagatedGuarantees;
 
 	@Override
@@ -85,16 +85,16 @@ public class AddFilter extends AadlHandler {
 			filterComponentType = wizard.getFilterComponentType();
 			filterImplementationLanguage = wizard.getFilterImplementationLanguage();
 //			filterRegularExpression = wizard.getFilterRegularExpression();
-			filterTypeName = wizard.getFilterTypeName();
-			filterImplName = wizard.getFilterImplName();
-			if (filterTypeName == "") {
-				filterTypeName = FILTER_COMP_BASE_NAME;
-			}
-			if (filterImplName == "") {
-				filterImplName = FILTER_IMPL_BASE_NAME;
+//			filterTypeName = wizard.getFilterTypeName();
+			filterImplementationName = wizard.getFilterImplementationName();
+//			if (filterTypeName == "") {
+//				filterTypeName = FILTER_COMP_BASE_NAME;
+//			}
+			if (filterImplementationName == "") {
+				filterImplementationName = FILTER_IMPL_NAME;
 			}
 			filterResoluteClause = wizard.getResoluteClause();
-			filterAgreeProperties = wizard.getAgreeProperties();
+			filterAgreeProperty = wizard.getAgreeProperty();
 			propagatedGuarantees = wizard.getGuaranteeList();
 		}
 		else {
@@ -195,7 +195,7 @@ public class AddFilter extends AadlHandler {
 						.createOwnedClassifier(Aadl2Package.eINSTANCE.getThreadType());
 				// Give it a unique name
 //				componentType.setName(getUniqueName(filterTypeName, true, pkgSection.getOwnedClassifiers()));
-				filterThreadType.setName(getUniqueName(filterTypeName, true, pkgSection.getOwnedClassifiers()));
+				filterThreadType.setName(getUniqueName(FILTER_COMP_TYPE_NAME, true, pkgSection.getOwnedClassifiers()));
 
 				// Create filter ports
 				final Port port = (Port) selectedConnection.getDestination().getConnectionEnd();
@@ -249,6 +249,16 @@ public class AddFilter extends AadlHandler {
 //					return;
 				}
 				// CASE::COMP_SPEC property
+				// Parse the ID from the Filter AGREE property
+				String filterPropId = filterAgreeProperty
+						.substring(filterAgreeProperty.toLowerCase().indexOf("guarantee ") + "guarantee ".length(),
+								filterAgreeProperty.indexOf("\""))
+						.trim();
+				if (filterPropId.length() > 0) {
+					if (!addPropertyAssociation("COMP_SPEC", filterPropId, filterThreadType, casePropSet)) {
+//						return;
+					}
+				}
 //				if (!addPropertyAssociation("COMP_SPEC", filterRegularExpression, filterThreadType, casePropSet)) {
 //				if (!addPropertyAssociation("COMP_SPEC", filterAgreeSpecIDs, filterThreadType, casePropSet)) {
 //					return;
@@ -268,7 +278,7 @@ public class AddFilter extends AadlHandler {
 
 				// Give it a unique name
 				filterThreadSubComp
-						.setName(getUniqueName(filterImplName, true, procImpl.getOwnedSubcomponents()));
+						.setName(getUniqueName(filterImplementationName, true, procImpl.getOwnedSubcomponents()));
 				filterThreadSubComp.setThreadSubcomponentType(filterThreadType);
 
 				// Put it in the right place
@@ -280,7 +290,7 @@ public class AddFilter extends AadlHandler {
 				final PortConnection portConnOut = procImpl.createOwnedPortConnection();
 				// Give it a unique name
 				portConnOut
-						.setName(getUniqueName(CONNECTION_IMPL_BASE_NAME, false, procImpl.getOwnedPortConnections()));
+						.setName(getUniqueName(CONNECTION_IMPL_NAME, false, procImpl.getOwnedPortConnections()));
 				portConnOut.setBidirectional(false);
 				final ConnectedElement filterOutSrc = portConnOut.createSource();
 				filterOutSrc.setContext(filterThreadSubComp);
@@ -326,13 +336,14 @@ public class AddFilter extends AadlHandler {
 				selectedConnection.getDestination().setConnectionEnd(portIn);
 
 				// Propagate Agree Guarantees from source component, if there are any
-				if (filterAgreeProperties.length() > 0 || propagatedGuarantees.size() > 0) {
+				if (filterAgreeProperty.length() > 0 || propagatedGuarantees.size() > 0) {
 					String agreeClauses = "{**" + System.lineSeparator();
 
-					if (!filterAgreeProperties.isEmpty()) {
-						for (String clause : filterAgreeProperties.split(System.lineSeparator())) {
-							agreeClauses = agreeClauses + "\t\t\t" + clause + System.lineSeparator();
-						}
+					if (!filterAgreeProperty.isEmpty()) {
+						agreeClauses = agreeClauses + "\t\t\t" + filterAgreeProperty + System.lineSeparator();
+//						for (String clause : filterAgreeProperty.split(System.lineSeparator())) {
+//							agreeClauses = agreeClauses + "\t\t\t" + clause + System.lineSeparator();
+//						}
 					}
 
 					for (String guarantee : propagatedGuarantees) {
@@ -403,7 +414,7 @@ public class AddFilter extends AadlHandler {
 					String specs = unparser.unparseContract((AgreeContract) agreeContract.getContract(), "");
 					for (String line : specs.split(System.lineSeparator())) {
 						if (line.trim().toLowerCase().startsWith("guarantee")) {
-							guarantees.add(line);
+							guarantees.add(line.trim());
 						}
 					}
 					break;
