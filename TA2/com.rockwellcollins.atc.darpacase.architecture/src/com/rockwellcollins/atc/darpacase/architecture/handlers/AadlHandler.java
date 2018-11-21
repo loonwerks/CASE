@@ -125,7 +125,7 @@ public abstract class AadlHandler extends AbstractHandler {
 			final EObject eObj = r.getContents().get(0);
 			if (eObj instanceof PropertySetImpl) {
 				PropertySetImpl propSetImpl = (PropertySetImpl) eObj;
-				if (propSetImpl.getName().equals(propSetName)) {
+				if (propSetImpl.getName().equalsIgnoreCase(propSetName)) {
 					propSet = propSetImpl;
 					break;
 				}
@@ -141,7 +141,7 @@ public abstract class AadlHandler extends AbstractHandler {
 			final List<URI> contributedAadl = PluginSupportUtil.getContributedAadl();
 			URI uri = null;
 			for (URI u : contributedAadl) {
-				if (u.lastSegment().equals(propSetFile)) {
+				if (u.lastSegment().equalsIgnoreCase(propSetFile)) {
 					uri = u;
 					break;
 				}
@@ -179,7 +179,7 @@ public abstract class AadlHandler extends AbstractHandler {
 		// If so, we don't need to create a new property association, just overwrite the existing one
 		EList<PropertyAssociation> propAssociations = componentType.getOwnedPropertyAssociations();
 		for (PropertyAssociation propAssoc : propAssociations) {
-			if (propAssoc.getProperty().getName().equals(propName)) {
+			if (propAssoc.getProperty().getName().equalsIgnoreCase(propName)) {
 				propAssocImpl = propAssoc;
 				break;
 			}
@@ -192,7 +192,7 @@ public abstract class AadlHandler extends AbstractHandler {
 
 			// Find the property in the specified property set
 			for (Property p : propSet.getOwnedProperties()) {
-				if (p.getName().equals(propName)) {
+				if (p.getName().equalsIgnoreCase(propName)) {
 					prop = p;
 					break;
 				}
@@ -252,6 +252,7 @@ public abstract class AadlHandler extends AbstractHandler {
 
 	/**
 	 * Returns the index of a component with the specified name in the specified element list.
+	 * TODO: What if the name isn't in the list?
 	 * @param compName - Component name
 	 * @param elements - Collection of elements
 	 * @return An identifier that is unique in the specified list

@@ -6,6 +6,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.window.Window;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.resource.XtextResource;
@@ -18,7 +19,7 @@ import org.osate.aadl2.AnnexSubclause;
 import org.osate.aadl2.ComponentImplementation;
 import org.osate.aadl2.ComponentType;
 import org.osate.aadl2.ConnectedElement;
-import org.osate.aadl2.Context;
+import org.osate.aadl2.Connection;
 import org.osate.aadl2.DataPort;
 import org.osate.aadl2.DataSubcomponentType;
 import org.osate.aadl2.DefaultAnnexSubclause;
@@ -32,7 +33,9 @@ import org.osate.aadl2.PrivatePackageSection;
 import org.osate.aadl2.ProcessImplementation;
 import org.osate.aadl2.PropertySet;
 import org.osate.aadl2.PublicPackageSection;
+import org.osate.aadl2.Realization;
 import org.osate.aadl2.Subcomponent;
+import org.osate.aadl2.ThreadImplementation;
 import org.osate.aadl2.ThreadSubcomponent;
 import org.osate.aadl2.ThreadType;
 import org.osate.ui.dialogs.Dialog;
@@ -79,7 +82,14 @@ public class AddFilter extends AadlHandler {
 		AddFilterDialog wizard = new AddFilterDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell());
 		wizard.setFilterComponentTypeInfo(getDestinationType(uri), getParentType(uri));
 		wizard.setGuaranteeList(getSourceName(uri), getSourceGuarantees(uri));
-		wizard.setResoluteClauses(getResoluteClauses(uri));
+		List<String> resoluteClauses = getResoluteClauses(uri);
+		if (resoluteClauses == null) {
+			Dialog.showError("Undefined Resolute proves",
+					"Undefined Resolute prove() statements exist in the model.  Make sure all prove() statements have corresponding definitions before continuing.");
+			return;
+		} else {
+			wizard.setResoluteClauses(resoluteClauses);
+		}
 		wizard.create();
 		if (wizard.open() == Window.OK) {
 			filterComponentType = wizard.getFilterComponentType();
@@ -125,7 +135,7 @@ public class AddFilter extends AadlHandler {
 			public void process(final XtextResource resource) throws Exception {
 
 				// Retrieve the model object to modify
-				final PortConnection selectedConnection = (PortConnection) resource.getEObject(uri.fragment());
+				PortConnection selectedConnection = (PortConnection) resource.getEObject(uri.fragment());
 				final AadlPackage aadlPkg = (AadlPackage) resource.getContents().get(0);
 				PackageSection pkgSection = null;
 				// Figure out if the selected connection is in the public or private section
@@ -264,33 +274,64 @@ public class AddFilter extends AadlHandler {
 //					return;
 //				}
 
+
 				// Move filter to proper location
 				// (just before component it connects to on communication pathway)
-				final Context context = selectedConnection.getDestination().getContext();
-				String destName = ((Subcomponent) context).getSubcomponentType().getName();
+				final Subcomponent subcomponent = (Subcomponent) selectedConnection.getDestination().getContext();
+				String destName = "";
+				if (subcomponent.getSubcomponentType() instanceof ComponentImplementation) {
+					// Get the component type name
+					destName = subcomponent.getComponentImplementation().getType().getName();
+				} else {
+					destName = subcomponent.getName();
+				}
+
 				pkgSection.getOwnedClassifiers().move(getIndex(destName, pkgSection.getOwnedClassifiers()),
 						pkgSection.getOwnedClassifiers().size() - 1);
 
-				// Insert filter feature in process component implementation
+				// Create Filter implementation
+				final ThreadImplementation filterThreadImpl = (ThreadImplementation) pkgSection
+						.createOwnedClassifier(Aadl2Package.eINSTANCE.getThreadImplementation());
+				filterThreadImpl.setName(filterThreadType.getName() + ".Impl");
+				Realization r = filterThreadImpl.createOwnedRealization();
+				r.setImplemented(filterThreadType);
+
+				// Add it to proper place
+				pkgSection.getOwnedClassifiers().move(getIndex(destName, pkgSection.getOwnedClassifiers()),
+						pkgSection.getOwnedClassifiers().size() - 1);
+
+				// Make a copy of the process component implementation
 				final ProcessImplementation procImpl = (ProcessImplementation) selectedConnection
 						.getContainingComponentImpl();
-				final ThreadSubcomponent filterThreadSubComp = procImpl.createOwnedThreadSubcomponent();
+				ProcessImplementation newImpl = EcoreUtil.copy(procImpl);
+				newImpl.setName(getUniqueName(newImpl.getName(), true, pkgSection.getOwnedClassifiers()));
+
+				// Change selectedConnection to refer to the connection on the new implementation
+				for (Connection c : newImpl.getAllConnections()) {
+					if (c.getName().equalsIgnoreCase(selectedConnection.getName())) {
+						selectedConnection = (PortConnection) c;
+						break;
+					}
+				}
+
+				// Insert filter feature in process component implementation
+				final ThreadSubcomponent filterThreadSubComp = newImpl.createOwnedThreadSubcomponent();
 
 				// Give it a unique name
 				filterThreadSubComp
-						.setName(getUniqueName(filterImplementationName, true, procImpl.getOwnedSubcomponents()));
-				filterThreadSubComp.setThreadSubcomponentType(filterThreadType);
+						.setName(getUniqueName(filterImplementationName, true, newImpl.getOwnedSubcomponents()));
+				filterThreadSubComp.setThreadSubcomponentType(filterThreadImpl);
 
 				// Put it in the right place
 				destName = selectedConnection.getDestination().getContext().getName();
-				procImpl.getOwnedThreadSubcomponents().move(getIndex(destName, procImpl.getOwnedThreadSubcomponents()),
-						procImpl.getOwnedThreadSubcomponents().size() - 1);
+				newImpl.getOwnedThreadSubcomponents().move(getIndex(destName, newImpl.getOwnedThreadSubcomponents()),
+						newImpl.getOwnedThreadSubcomponents().size() - 1);
 
 				// Create connection from filter to connection destination
-				final PortConnection portConnOut = procImpl.createOwnedPortConnection();
+				final PortConnection portConnOut = newImpl.createOwnedPortConnection();
 				// Give it a unique name
 				portConnOut
-						.setName(getUniqueName(CONNECTION_IMPL_NAME, false, procImpl.getOwnedPortConnections()));
+						.setName(getUniqueName(CONNECTION_IMPL_NAME, false, newImpl.getOwnedPortConnections()));
 				portConnOut.setBidirectional(false);
 				final ConnectedElement filterOutSrc = portConnOut.createSource();
 				filterOutSrc.setContext(filterThreadSubComp);
@@ -301,8 +342,14 @@ public class AddFilter extends AadlHandler {
 
 				// Put portConnOut in right place (after portConnIn)
 				destName = selectedConnection.getName();
-				procImpl.getOwnedPortConnections().move(getIndex(destName, procImpl.getOwnedPortConnections()) + 1,
-						procImpl.getOwnedPortConnections().size() - 1);
+				newImpl.getOwnedPortConnections().move(getIndex(destName, newImpl.getOwnedPortConnections()) + 1,
+						newImpl.getOwnedPortConnections().size() - 1);
+
+				// Add new implementation to package and place immediately below original implementation
+				pkgSection.getOwnedClassifiers().add(newImpl);
+				pkgSection.getOwnedClassifiers().move(
+						getIndex(procImpl.getName(), pkgSection.getOwnedClassifiers()),
+						pkgSection.getOwnedClassifiers().size() - 1);
 
 				// Add add_filter claims to resolute prove statement, if applicable
 				if (!filterResoluteClause.isEmpty()) {
@@ -311,14 +358,19 @@ public class AddFilter extends AadlHandler {
 							.getContainingClassifier();
 					EList<AnnexSubclause> annexSubclauses = clauseThread.getOwnedAnnexSubclauses();
 					for (AnnexSubclause annexSubclause : annexSubclauses) {
-						// get the resolute clause
+						// Get the Resolute clause
 						if (annexSubclause.getName().equalsIgnoreCase("resolute")) {
 							DefaultAnnexSubclause annexSubclauseImpl = (DefaultAnnexSubclause) annexSubclause;
 							String sourceText = annexSubclauseImpl.getSourceText();
-							if (sourceText.contains(filterResoluteClause + "()")) {
+							if (sourceText.contains(filterResoluteClause + "(")) {
 								// Add arguments
-								sourceText = sourceText.replace(filterResoluteClause + "()",
-										filterResoluteClause + "(this, " + dataFeatureClassifier.getName() + ")");
+								int startIdx = sourceText.indexOf(filterResoluteClause + "(")
+										+ filterResoluteClause.length() + 1;
+								String args = sourceText.substring(startIdx,
+										sourceText.indexOf(")", startIdx));
+								sourceText = sourceText.replace(filterResoluteClause + "(" + args + ")",
+										filterResoluteClause + "(" + args + ", " + dataFeatureClassifier.getName()
+												+ ")");
 								annexSubclauseImpl.setSourceText(sourceText);
 							}
 							break;
@@ -347,7 +399,7 @@ public class AddFilter extends AadlHandler {
 					}
 
 					for (String guarantee : propagatedGuarantees) {
-						agreeClauses = agreeClauses + guarantee + System.lineSeparator();
+						agreeClauses = agreeClauses + "\t\t\t" + guarantee + System.lineSeparator();
 					}
 					agreeClauses = agreeClauses + "\t\t**}";
 					// replace source out port name with filter out port name
@@ -445,7 +497,11 @@ public class AddFilter extends AadlHandler {
 						Expr expr = prove.getExpr();
 						if (expr instanceof FnCallExpr) {
 							FnCallExpr fnCall = (FnCallExpr) expr;
-							resoluteClauses.add(fnCall.getFn().getName());
+							if (fnCall.getFn().getName() != null) {
+								resoluteClauses.add(fnCall.getFn().getName());
+							} else {
+								return null;
+							}
 						}
 					}
 					break;

@@ -284,7 +284,7 @@ public class AddFilterDialog extends TitleAreaDialog {
 	 * @param container
 	 */
 	private void saveInput() {
-		strFilterComponentType = cboFilterComponentType.getText();
+//		strFilterComponentType = cboFilterComponentType.getText();
 //		strFilterTypeName = txtFilterTypeName.getText();
 		strFilterImplementationLanguage = txtFilterImplementationLanguage.getText();
 //		strFilterRegularExpression = txtFilterRegularExpression.getText();
