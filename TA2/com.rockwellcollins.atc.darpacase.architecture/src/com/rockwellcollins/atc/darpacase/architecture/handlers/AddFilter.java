@@ -17,7 +17,6 @@ import org.osate.aadl2.Aadl2Package;
 import org.osate.aadl2.AadlPackage;
 import org.osate.aadl2.AnnexSubclause;
 import org.osate.aadl2.ComponentImplementation;
-import org.osate.aadl2.ComponentType;
 import org.osate.aadl2.ConnectedElement;
 import org.osate.aadl2.Connection;
 import org.osate.aadl2.DataPort;
@@ -58,11 +57,9 @@ public class AddFilter extends AadlHandler {
 	static final String FILTER_IMPL_NAME = "FLT";
 	static final String CONNECTION_IMPL_NAME = "c";
 
-	private String filterComponentType;
+//	private String filterComponentType;
 	private String filterImplementationName;
 	private String filterImplementationLanguage;
-//	private String filterRegularExpression;
-//	private String filterTypeName;
 	private String filterResoluteClause;
 	private String filterAgreeProperty;
 	private List<String> propagatedGuarantees;
@@ -80,7 +77,7 @@ public class AddFilter extends AadlHandler {
 
 		// Open wizard to enter filter info
 		AddFilterDialog wizard = new AddFilterDialog(PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell());
-		wizard.setFilterComponentTypeInfo(getDestinationType(uri), getParentType(uri));
+//		wizard.setFilterComponentTypeInfo(getDestinationType(uri), getParentType(uri));
 		wizard.setGuaranteeList(getSourceName(uri), getSourceGuarantees(uri));
 		List<String> resoluteClauses = getResoluteClauses(uri);
 		if (resoluteClauses == null) {
@@ -92,14 +89,9 @@ public class AddFilter extends AadlHandler {
 		}
 		wizard.create();
 		if (wizard.open() == Window.OK) {
-			filterComponentType = wizard.getFilterComponentType();
+//			filterComponentType = wizard.getFilterComponentType();
 			filterImplementationLanguage = wizard.getFilterImplementationLanguage();
-//			filterRegularExpression = wizard.getFilterRegularExpression();
-//			filterTypeName = wizard.getFilterTypeName();
 			filterImplementationName = wizard.getFilterImplementationName();
-//			if (filterTypeName == "") {
-//				filterTypeName = FILTER_COMP_BASE_NAME;
-//			}
 			if (filterImplementationName == "") {
 				filterImplementationName = FILTER_IMPL_NAME;
 			}
@@ -269,7 +261,6 @@ public class AddFilter extends AadlHandler {
 //						return;
 					}
 				}
-//				if (!addPropertyAssociation("COMP_SPEC", filterRegularExpression, filterThreadType, casePropSet)) {
 //				if (!addPropertyAssociation("COMP_SPEC", filterAgreeSpecIDs, filterThreadType, casePropSet)) {
 //					return;
 //				}
@@ -426,26 +417,26 @@ public class AddFilter extends AadlHandler {
 		});
 	}
 
-	private String getDestinationType(URI uri) {
-		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor();
-
-		return xtextEditor.getDocument().readOnly(resource -> {
-			final PortConnection selectedConnection = (PortConnection) resource.getEObject(uri.fragment());
-			ComponentType ctype = (ComponentType) selectedConnection.getDestination().getConnectionEnd()
-					.getContainingClassifier();
-			return ctype.getCategory().toString();
-		});
-	}
-
-	private String getParentType(URI uri) {
-		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor();
-
-		return xtextEditor.getDocument().readOnly(resource -> {
-			final PortConnection selectedConnection = (PortConnection) resource.getEObject(uri.fragment());
-			ComponentImplementation componentImpl = selectedConnection.getContainingComponentImpl();
-			return componentImpl.getCategory().toString();
-		});
-	}
+//	private String getDestinationType(URI uri) {
+//		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor();
+//
+//		return xtextEditor.getDocument().readOnly(resource -> {
+//			final PortConnection selectedConnection = (PortConnection) resource.getEObject(uri.fragment());
+//			ComponentType ctype = (ComponentType) selectedConnection.getDestination().getConnectionEnd()
+//					.getContainingClassifier();
+//			return ctype.getCategory().toString();
+//		});
+//	}
+//
+//	private String getParentType(URI uri) {
+//		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor();
+//
+//		return xtextEditor.getDocument().readOnly(resource -> {
+//			final PortConnection selectedConnection = (PortConnection) resource.getEObject(uri.fragment());
+//			ComponentImplementation componentImpl = selectedConnection.getContainingComponentImpl();
+//			return componentImpl.getCategory().toString();
+//		});
+//	}
 
 	private List<String> getSourceGuarantees(URI uri) {
 		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor();

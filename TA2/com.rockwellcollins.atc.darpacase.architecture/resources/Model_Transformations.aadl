@@ -1,7 +1,7 @@
 package Model_Transformations
 public
 	
-	with CASE;
+	with CASE_Properties;
 	
 	annex Resolute {**
 		

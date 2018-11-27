@@ -42,8 +42,8 @@ public abstract class AadlHandler extends AbstractHandler {
 
 	abstract protected void runCommand(URI uri);
 
-	static final String CASE_PROPSET_NAME = "CASE_Prop";
-	static final String CASE_PROPSET_FILE = "CASE_Prop.aadl";
+	static final String CASE_PROPSET_NAME = "CASE_Properties";
+	static final String CASE_PROPSET_FILE = "CASE_Properties.aadl";
 	protected ExecutionEvent executionEvent;
 
 	@Override

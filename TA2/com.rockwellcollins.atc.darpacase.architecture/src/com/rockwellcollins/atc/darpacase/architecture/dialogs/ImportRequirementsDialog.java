@@ -98,6 +98,9 @@ public class ImportRequirementsDialog extends TitleAreaDialog {
 		// Add requirements
 		addRequirement("well_formed", "The FlightPlanner shall receive a well-formed command from the GroundStation",
 				"FlightPlanner", container);
+		addRequirement("remote_attestation",
+				"The FlightPlanner shall only receive messages from a trusted GroundStation", "FlightPlanner",
+				container);
 		addRequirement("not_hackable", "The WaypointManager shall never be hackable by anyone ever", "WaypointManager",
 				container);
 

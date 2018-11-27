@@ -115,15 +115,18 @@ public class CaseClaimsManager {
 			Dialog.showError("CASE Claims file", "Error writing the CASE Claims file.");
 		}
 
-		String funSig = reqName + "(c : component, property_id : string, msg_type : data) <=";
-		String funDef = "agree_prop_checked(c, property_id) and add_filter(c, msg_type)" + System.lineSeparator();
-		if (annex.contains(reqName + "(c : component, property_id : string)")) {
-			annex = annex.replace(reqName + "(c : component, property_id : string) <=", funSig);
-			// TODO: need to specify where to replace. Could be more than 1 occurrence of agree_prop_checked
-			annex = annex.replace("agree_prop_checked(c, property_id)" + System.lineSeparator(), funDef);
+		int startIdx = annex.indexOf("**", annex.indexOf(reqName + "("));
+		String descriptor = "\t\t\t" + annex.substring(startIdx, annex.indexOf("**", startIdx + 2) + 2)
+				+ System.lineSeparator();
+		String basic = reqName + "(c : component, property_id : string) <=" + System.lineSeparator()
+				+ descriptor + "\t\t\tagree_prop_checked(c, property_id)";
+		String funSig = reqName + "(c : component, property_id : string, msg_type : data) <=" + System.lineSeparator();
+		String funDef = "\t\t\tagree_prop_checked(c, property_id) and add_filter(c, msg_type)";
+		if (annex.contains(basic)) {
+			annex = annex.replace(basic, funSig + descriptor + funDef);
 		} else {
 			annex = annex.replace("\t**};",
-					"\t\t" + funSig + System.lineSeparator() + "\t\t" + funDef + System.lineSeparator() + "\t**};");
+					"\t\t" + funSig + funDef + System.lineSeparator() + "\t**};");
 		}
 
 		// Write back to file

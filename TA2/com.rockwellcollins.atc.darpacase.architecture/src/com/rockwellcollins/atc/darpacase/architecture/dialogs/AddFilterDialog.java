@@ -21,24 +21,20 @@ import org.eclipse.swt.widgets.Text;
  */
 public class AddFilterDialog extends TitleAreaDialog {
 
-	private Combo cboFilterComponentType;
-//	private Text txtFilterTypeName;
+//	private Combo cboFilterComponentType;
 	private Text txtFilterImplementationName;
 	private Text txtFilterImplementationLanguage;
-//	private Text txtFilterRegularExpression;
 	private Combo cboFilterResoluteClause;
 	private Text txtAgreeProperty;
 	private List<Button> btnPropagateGuarantees = new ArrayList<>();
-	private String strFilterComponentType = "";
-	private String strFilterTypeName = "";
+//	private String strFilterComponentType = "";
 	private String strFilterImplementationLanguage = "";
-//	private String strFilterRegularExpression = "";
 	private String strFilterImplementationName = "";
 	private String strFilterResoluteClause = "";
 	private String strAgreeProperty = "";
 	private String strSourceName = "";
-	private String strRecommendedType = "";
-	private String strParentType = "";
+//	private String strRecommendedType = "";
+//	private String strParentType = "";
 	private List<String> strSourceGuarantees = new ArrayList<>();
 	private List<String> strPropagateGuarantees = new ArrayList<>();
 	private List<String> strResoluteClauses = new ArrayList<>();
@@ -68,10 +64,8 @@ public class AddFilterDialog extends TitleAreaDialog {
 
 		// Add filter information fields
 //		createFilterComponentTypeField(container);
-//		createFilterTypeNameField(container);
 		createFilterImplementationNameField(container);
 		createImplementationLanguageField(container);
-//		createRegExField(container);
 		createResoluteField(container);
 		createGuaranteeSelectionField(container);
 		createAgreeField(container);
@@ -79,75 +73,60 @@ public class AddFilterDialog extends TitleAreaDialog {
 		return area;
 	}
 
-	/**
-	 * Creates the input drop-down field for specifying the filter component type
-	 * @param container
-	 */
-	private void createFilterComponentTypeField(Composite container) {
-		Label lblFilterComponentType = new Label(container, SWT.NONE);
-		lblFilterComponentType.setText("Filter Component Type");
-
-		GridData dataInfoField = new GridData();
-		dataInfoField.grabExcessHorizontalSpace = true;
-		dataInfoField.horizontalAlignment = GridData.FILL;
-		cboFilterComponentType = new Combo(container, SWT.BORDER | SWT.READ_ONLY);
-		cboFilterComponentType.setLayoutData(dataInfoField);
-
-		if (strParentType.isEmpty()) {
-			cboFilterComponentType.add("abstract");
-			cboFilterComponentType.setText("abstract");
-		}
-		else {
-
-			switch (strParentType) {
-			case "system":
-				cboFilterComponentType.add("system");
-				cboFilterComponentType.add("process");
-				cboFilterComponentType.add("device");
-				cboFilterComponentType.add("abstract");
-				break;
-			case "process":
-				cboFilterComponentType.add("thread");
-				cboFilterComponentType.add("abstract");
-				break;
-			case "thread":
-				cboFilterComponentType.add("abstract");
-				break;
-			case "device":
-				cboFilterComponentType.add("abstract");
-				break;
-			case "abstract":
-				cboFilterComponentType.add("system");
-				cboFilterComponentType.add("process");
-				cboFilterComponentType.add("thread");
-				cboFilterComponentType.add("device");
-				cboFilterComponentType.add("abstract");
-			}
-
-			// Set default value
-			if (!strRecommendedType.isEmpty()) {
-				cboFilterComponentType.setText(strRecommendedType);
-			}
-
-		}
-
-	}
-
 //	/**
-//	 * Creates the input text field for specifying the filter type name
+//	 * Creates the input drop-down field for specifying the filter component type
 //	 * @param container
 //	 */
-//	private void createFilterTypeNameField(Composite container) {
-//		Label lblFilterTypeNameField = new Label(container, SWT.NONE);
-//		lblFilterTypeNameField.setText("Filter Type Name");
+//	private void createFilterComponentTypeField(Composite container) {
+//		Label lblFilterComponentType = new Label(container, SWT.NONE);
+//		lblFilterComponentType.setText("Filter Component Type");
 //
 //		GridData dataInfoField = new GridData();
 //		dataInfoField.grabExcessHorizontalSpace = true;
-//		dataInfoField.horizontalAlignment = SWT.FILL;
-//		txtFilterTypeName = new Text(container, SWT.BORDER);
-//		txtFilterTypeName.setLayoutData(dataInfoField);
-//		txtFilterTypeName.setText("Filter");
+//		dataInfoField.horizontalAlignment = GridData.FILL;
+//		cboFilterComponentType = new Combo(container, SWT.BORDER | SWT.READ_ONLY);
+//		cboFilterComponentType.setLayoutData(dataInfoField);
+//
+//		if (strParentType.isEmpty()) {
+//			cboFilterComponentType.add("abstract");
+//			cboFilterComponentType.setText("abstract");
+//		}
+//		else {
+//
+//			switch (strParentType) {
+//			case "system":
+//				cboFilterComponentType.add("system");
+//				cboFilterComponentType.add("process");
+//				cboFilterComponentType.add("device");
+//				cboFilterComponentType.add("abstract");
+//				break;
+//			case "process":
+//				cboFilterComponentType.add("thread");
+//				cboFilterComponentType.add("abstract");
+//				break;
+//			case "thread":
+//				cboFilterComponentType.add("abstract");
+//				break;
+//			case "device":
+//				cboFilterComponentType.add("abstract");
+//				break;
+//			case "abstract":
+//				cboFilterComponentType.add("system");
+//				cboFilterComponentType.add("process");
+//				cboFilterComponentType.add("thread");
+//				cboFilterComponentType.add("device");
+//				cboFilterComponentType.add("abstract");
+//			}
+//
+//			// Set default value
+//			if (!strRecommendedType.isEmpty()) {
+//				cboFilterComponentType.setText(strRecommendedType);
+//			}
+//
+//		}
+//
 //	}
+
 
 	/**
 	 * Creates the input text field for specifying the filter implementation name
@@ -180,20 +159,6 @@ public class AddFilterDialog extends TitleAreaDialog {
 		txtFilterImplementationLanguage.setLayoutData(dataInfoField);
 	}
 
-	/**
-	 * Creates the input text field for specifying the filter regular expression
-	 * @param container
-	 */
-//	private void createRegExField(Composite container) {
-//		Label lblRegExField = new Label(container, SWT.NONE);
-//		lblRegExField.setText("Filter Regular Expression");
-//
-//		GridData dataInfoField = new GridData();
-//		dataInfoField.grabExcessHorizontalSpace = true;
-//		dataInfoField.horizontalAlignment = GridData.FILL;
-//		txtFilterRegularExpression = new Text(container, SWT.BORDER);
-//		txtFilterRegularExpression.setLayoutData(dataInfoField);
-//	}
 
 	/**
 	 * Creates the input field for selecting the resolute clause that drives
@@ -285,9 +250,7 @@ public class AddFilterDialog extends TitleAreaDialog {
 	 */
 	private void saveInput() {
 //		strFilterComponentType = cboFilterComponentType.getText();
-//		strFilterTypeName = txtFilterTypeName.getText();
 		strFilterImplementationLanguage = txtFilterImplementationLanguage.getText();
-//		strFilterRegularExpression = txtFilterRegularExpression.getText();
 		strFilterImplementationName = txtFilterImplementationName.getText();
 		strFilterResoluteClause = cboFilterResoluteClause.getText();
 		strAgreeProperty = txtAgreeProperty.getText();
@@ -311,18 +274,6 @@ public class AddFilterDialog extends TitleAreaDialog {
 				}
 				guarantee = "guarantee " + id + " " + desc + " : " + expr + ";";
 				strPropagateGuarantees.add(guarantee);
-//				AgreeAnnexParser parser = new AgreeAnnexParser();
-//				GuaranteeStatement guarantee = (GuaranteeStatement) parser
-//						.parseNamedSpecStatement(strSourceGuarantees.get(i));
-//				if (guarantee != null) {
-//					if (guarantee.getName() != null && !guarantee.getName().isEmpty()) {
-//						guarantee.setName(guarantee.getName() + "_Filter");
-//					}
-//					AgreeAnnexUnparser unparser = new AgreeAnnexUnparser();
-//					String g = unparser.unparseNamedSpecStatement(guarantee, "");
-//					strPropagateGuarantees.add(g);
-////					strPropagateGuarantees.add(strSourceGuarantees.get(i));
-//				}
 			}
 		}
 	}
@@ -333,17 +284,13 @@ public class AddFilterDialog extends TitleAreaDialog {
 		super.okPressed();
 	}
 
-	public void setFilterComponentTypeInfo(String recommendedType, String parentType) {
-		strRecommendedType = recommendedType;
-		strParentType = parentType;
-	}
+//	public void setFilterComponentTypeInfo(String recommendedType, String parentType) {
+//		strRecommendedType = recommendedType;
+//		strParentType = parentType;
+//	}
 
-	public String getFilterComponentType() {
-		return strFilterComponentType;
-	}
-
-//	public String getFilterTypeName() {
-//		return strFilterTypeName;
+//	public String getFilterComponentType() {
+//		return strFilterComponentType;
 //	}
 
 	public String getFilterImplementationName() {
@@ -353,10 +300,6 @@ public class AddFilterDialog extends TitleAreaDialog {
 	public String getFilterImplementationLanguage() {
 		return strFilterImplementationLanguage;
 	}
-
-//	public String getFilterRegularExpression() {
-//		return strFilterRegularExpression;
-//	}
 
 	public String getAgreeProperty() {
 		return strAgreeProperty;
