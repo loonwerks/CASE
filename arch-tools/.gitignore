@@ -1,0 +1,6 @@
+target
+*Theory.sig
+*Theory.sml
+*.ui
+*.uo
+*.dat
