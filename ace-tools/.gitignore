@@ -4,3 +4,4 @@ target
 *.ui
 *.uo
 *.dat
+*-e
