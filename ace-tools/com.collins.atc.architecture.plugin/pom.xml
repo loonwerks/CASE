@@ -4,9 +4,9 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>ace</groupId>
-    <artifactId>com.collins.atc.platform</artifactId>
+    <artifactId>com.collins.atc.ace.parent</artifactId>
     <version>0.0.0</version>
-    <relativePath>../com.collins.atc.platform/pom.xml</relativePath>
+    <relativePath>../com.collins.atc.ace.parent/pom.xml</relativePath>
   </parent>
   <groupId>ace</groupId>
   <artifactId>com.collins.atc.architecture.plugin</artifactId>

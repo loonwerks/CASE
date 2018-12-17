@@ -123,7 +123,6 @@ public class AadlTranslate extends Aadl2Switch<Value> {
 		return ObjectValue.build(pairList);
 	}
 
-
 	/* Begin: Subcomponents */
 	@Override
 	public Value caseSubcomponent(Subcomponent sc) {
@@ -219,7 +218,6 @@ public class AadlTranslate extends Aadl2Switch<Value> {
 		return StringValue.build(Long.toString((v.getValue())));
 	}
 
-
 	private Value genPropertyExpression(PropertyExpression v) {
 		if (v instanceof NamedValueImpl) {
 			return genNamedValueImpl((NamedValueImpl) v);
@@ -232,7 +230,6 @@ public class AadlTranslate extends Aadl2Switch<Value> {
 		}
 		return StringValue.build("new_case/genPropertyExpression/" + v.toString());
 	}
-
 
 	@Override
 	public Value caseModalPropertyValue(ModalPropertyValue v) {
@@ -266,7 +263,6 @@ public class AadlTranslate extends Aadl2Switch<Value> {
 		pairList.add(Pair.build("kind", "string"));
 		return ObjectValue.build(pairList);
 	}
-
 
 	@Override
 	public Value casePropertyAssociation(PropertyAssociation pa) {
