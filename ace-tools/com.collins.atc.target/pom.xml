@@ -11,7 +11,7 @@
 		<relativePath>../com.collins.atc.ace.parent/pom.xml</relativePath>
 	</parent>
 	<groupId>ace</groupId>
-	<artifactId>com.collins.atc.ace.target</artifactId>
+	<artifactId>com.collins.atc.ace.platform</artifactId>
 	<name>Target Definition</name>
 	<version>0.0.0</version>
 	<packaging>eclipse-target-definition</packaging>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="aceIDE" uid="aceIDE" id="org.osate.branding.osate2" application="org.eclipse.ui.ide.workbench" version="2.4.0.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="com.collins.atc.ace.ide" uid="com.collins.atc.ace.ide" id="org.osate.branding.osate2" application="org.eclipse.ui.ide.workbench" version="0.0.0" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="icons/osateAbout_hc90.jpg"/>
@@ -34,6 +34,7 @@
    <vm>
    </vm>
 
+
    <plugins>
    </plugins>
 
@@ -65,6 +66,7 @@
       <feature id="org.osate.alisa.workbench.sdk" version="1.0.0.qualifier"/>
       <feature id="org.osate.ocarina.feature" version="0.0.1.qualifier"/>
       <feature id="com.collins.atc.cyres.feature"/>
+      <feature id="com.rockwellcollins.atc.agree.feature" version="2.4.0.qualifier"/>
    </features>
 
    <configurations>

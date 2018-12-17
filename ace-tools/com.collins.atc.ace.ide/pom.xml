@@ -11,14 +11,14 @@
 		<relativePath>../com.collins.atc.ace.parent/pom.xml</relativePath>
 	</parent>
 
-	<artifactId>com.collins.atc.ide</artifactId>
+	<groupId>ace</groupId>
+	<artifactId>com.collins.atc.ace.ide</artifactId>
 	<version>0.0.0</version>
 	<packaging>eclipse-repository</packaging>
-	<name>aceIDE Product</name>
 
 
 	<properties>
-		<product.id>osate2</product.id>
+		<product.id>com.collins.atc.ace.ide</product.id>
 	</properties>
 
 	<build>
@@ -67,7 +67,7 @@
 					</formats>
 					<products>
 						<product>
-							<id>osate2</id>
+							<id>${product.id}</id>
 							<archiveFileName>${product.id}-${unqualifiedVersion}-${buildQualifier}</archiveFileName>
 							<rootFolders>
 								<rootFolder>${product.id}</rootFolder>
@@ -80,5 +80,4 @@
 		</plugins>
 	</build>
 
-	<groupId>ace</groupId>
 </project>

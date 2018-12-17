@@ -42,26 +42,17 @@
    <feature id="org.osate.alisa.workbench.sdk.source">
       <category name="alisa.source"/>
    </feature>
-   <feature id="com.collins.atc.agree.feature">
-      <category name="fmworkbench"/>
-   </feature>
-   <feature id="com.collins.atc.resolute.feature">
-      <category name="fmworkbench"/>
-   </feature>
-   <feature id="com.collins.atc.z3.feature">
-      <category name="fmworkbench"/>
-   </feature>
-   <feature id="com.collins.atc.agree.feature.source">
-      <category name="fmworkbench.source"/>
-   </feature>
-   <feature id="com.collins.atc.resolute.feature.source">
-      <category name="fmworkbench.source"/>
-   </feature>
-   <feature id="com.collins.atc.z3.feature.source">
-      <category name="fmworkbench.source"/>
-   </feature>
    <feature url="features/com.collins.atc.cyres.feature_0.0.0.jar" id="com.collins.atc.cyres.feature" version="0.0.0">
       <category name="darpacase"/>
+   </feature>
+   <feature url="features/com.rockwellcollins.atc.resolute.feature_1.0.0.qualifier.jar" id="com.rockwellcollins.atc.resolute.feature" version="1.0.0.qualifier">
+      <category name="fmworkbench"/>
+   </feature>
+   <feature url="features/com.rockwellcollins.atc.agree.feature_2.4.0.qualifier.jar" id="com.rockwellcollins.atc.agree.feature" version="2.4.0.qualifier">
+      <category name="fmworkbench"/>
+   </feature>
+   <feature url="features/com.rockwellcollins.atc.z3.feature_4.7.1.qualifier.jar" id="com.rockwellcollins.atc.z3.feature" version="4.7.1.qualifier">
+      <category name="fmworkbench"/>
    </feature>
    <category-def name="osate2" label="OSATE2 for AADL2">
       <description>
@@ -76,8 +67,5 @@
       <category name="alisa"/>
    </category-def>
    <category-def name="fmworkbench" label="Resolute/AGREE (by Rockwell Collins)"/>
-   <category-def name="fmworkbench.source" label="Resolute/Agree Source Code">
-      <category name="fmworkbench"/>
-   </category-def>
    <category-def name="darpacase" label="darpacase"/>
 </site>

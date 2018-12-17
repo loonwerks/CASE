@@ -62,7 +62,7 @@
 				<plugins>
 					<plugin>
 						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-production-configuration</artifactId>
+						<artifactId>target-platform-configuration</artifactId>
 						<version>${tycho.version}</version>
 						<configuration>
 							<environments>
@@ -102,7 +102,7 @@
 				<plugins>
 					<plugin>
 						<groupId>org.eclipse.tycho</groupId>
-						<artifactId>target-production-configuration</artifactId>
+						<artifactId>target-platform-configuration</artifactId>
 						<version>${tycho.version}</version>
 					</plugin>
 				</plugins>
@@ -312,7 +312,7 @@
 				<!-- workaround for dependency issue, see https://github.com/eclipse/xtext/issues/1231 -->
 				<dependencies>
 					<dependency>
-						<groupId>org.eclipse.com.collins.atc.ace.parent</groupId>
+						<groupId>org.eclipse.platform</groupId>
 						<artifactId>org.eclipse.equinox.common</artifactId>
 						<version>3.10.0</version>
 					</dependency>
@@ -328,16 +328,16 @@
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.tycho</groupId>
-				<artifactId>target-production-configuration</artifactId>
+				<artifactId>target-platform-configuration</artifactId>
 				<version>${tycho.version}</version>
 				<configuration>
 					<resolveWithExecutionEnvironmentConstraints>false</resolveWithExecutionEnvironmentConstraints>
 					<resolver>p2</resolver>
 					<target>
 						<artifact>
-							<groupId>ace</groupId>
-							<artifactId>com.collins.atc.ace.target</artifactId>
-							<version>0.0.0</version>
+							<groupId>org.osate</groupId>
+							<artifactId>osate2-platform</artifactId>
+							<version>${osate.version}</version>
 						</artifact>
 					</target>
 					<ignoreTychoRepositories>true</ignoreTychoRepositories>
