@@ -16,7 +16,7 @@
 	</parent>
 
 	<modules>
-		<module>../com.collins.atc.agreeJson.plugin</module>
+		<module>../com.collins.atc.agree.json.plugin</module>
 		<module>../com.collins.atc.util.plugin</module>
 		<module>../com.collins.atc.splat.plugin</module>
 		<module>../com.collins.atc.architecture.plugin</module>

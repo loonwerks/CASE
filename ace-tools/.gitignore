@@ -6,3 +6,4 @@ target
 *.dat
 *-e
 bin
+*.sw?

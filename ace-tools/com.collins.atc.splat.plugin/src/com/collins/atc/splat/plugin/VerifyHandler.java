@@ -1,6 +1,5 @@
 package com.collins.atc.splat.plugin;
 
-import com.collins.atc.agreeJson.plugin.AgreeJson;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -29,6 +28,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.osgi.framework.Bundle;
+
+import com.collins.atc.agree.json.plugin.AgreeJson;
 
 
 public class VerifyHandler extends AbstractHandler {

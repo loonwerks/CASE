@@ -1,21 +1,22 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: com.collins.atc.agreeJson.plugin
-Bundle-SymbolicName: com.collins.atc.agreeJson.plugin;singleton:=true
+Bundle-Name: com.collins.atc.agree.command
+Bundle-SymbolicName: com.collins.atc.agree.command;singleton:=true
 Bundle-Version: 0.0.0
-Automatic-Module-Name: com.collins.atc.plugin.agreeJson
+Automatic-Module-Name: com.collins.atc.agree.command
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.jface,
  org.osate.aadl2,
  org.eclipse.xtext.ui,
  org.eclipse.emf.common,
- org.eclipse.ui.console
+ org.eclipse.ui.console,
+ com.google.inject
 Import-Package: com.collins.atc.util.plugin,
+ com.rockwellcollins.atc.agree,
  com.rockwellcollins.atc.agree.agree,
  org.eclipse.ui,
  org.eclipse.ui.console,
  org.osate.aadl2.instantiation,
  org.osate.annexsupport
-Bundle-ClassPath: jlib/gson-2.8.5.jar,
- .
-Export-Package: com.collins.atc.agreeJson.plugin
+Bundle-ClassPath: .
+Export-Package: com.collins.atc.agree.command

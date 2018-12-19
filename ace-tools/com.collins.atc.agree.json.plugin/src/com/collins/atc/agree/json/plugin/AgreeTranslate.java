@@ -1,4 +1,4 @@
-package com.collins.atc.agreeJson.plugin;
+package com.collins.atc.agree.json.plugin;
 
 import java.util.ArrayList;
 import java.util.List;
