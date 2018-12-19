@@ -5,12 +5,12 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>ace</groupId>
+		<groupId>com.collins.atc</groupId>
 		<artifactId>com.collins.atc.ace.parent</artifactId>
 		<version>0.0.0</version>
 		<relativePath>../com.collins.atc.ace.parent/pom.xml</relativePath>
 	</parent>
-	<groupId>ace</groupId>
+	<groupId>com.collins.atc</groupId>
 	<artifactId>com.collins.atc.cyres.repository</artifactId>
 	<version>0.0.0</version>
 	<packaging>eclipse-repository</packaging>
