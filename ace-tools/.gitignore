@@ -7,3 +7,4 @@ target
 *-e
 bin
 *.sw?
+*.class

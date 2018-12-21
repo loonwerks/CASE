@@ -3,6 +3,8 @@ package com.collins.atc.agree.command;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.apache.commons.cli.CommandLine;
@@ -12,6 +14,14 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.validation.Issue;
+
+import com.google.inject.Injector;
 
 public class AgreeCommand {
 
@@ -49,6 +59,12 @@ public class AgreeCommand {
 			System.exit(1);
 		}
 
+
+		Injector injector = new AgreeCommandSetup().createInjectorAndDoEMFRegistration();
+		XtextResourceSet resourceSet = injector.getInstance(XtextResourceSet.class);
+		resourceSet.addLoadOption(XtextResource.OPTION_RESOLVE_ALL, Boolean.TRUE);
+
+
 		if (cli.hasOption(basisFlag)) {
 
 			File basisFile = new File(cli.getArgList().get(0));
@@ -64,6 +80,8 @@ public class AgreeCommand {
 					aadlPath = basisFile.getParentFile().getAbsolutePath() + File.separator + aadlFile.getPath();
 				}
 
+				Resource resource = resourceSet.getResource(URI.createFileURI(aadlPath), true);
+				validate(resource);
 				System.out.println("* aadl path (basis): " + aadlPath);
 
             });
@@ -73,10 +91,34 @@ public class AgreeCommand {
 
 			File aadlFile = new File(cli.getArgList().get(0));
 			String aadlPath = aadlFile.getAbsolutePath();
+
+			Resource resource = resourceSet.getResource(URI.createFileURI(aadlPath), true);
+			validate(resource);
 			System.out.println("* aadl path: " + aadlPath);
+
 
 		}
 
+
+
 	}
+
+	private static List<Issue> issues = new ArrayList<Issue>();
+	private static List<String> visited = new ArrayList<String>();
+
+	private static void validate(Resource resource) {
+
+		if (visited.contains(resource.getURI().toString())) {
+			return;
+		}
+
+		List<EObject> contents = resource.getContents();
+		for (EObject o : contents) {
+			System.out.println("ooga " + o);
+		}
+
+	}
+
+
 
 }

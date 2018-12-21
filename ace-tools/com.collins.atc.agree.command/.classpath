@@ -11,7 +11,11 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" path="/com.rockwellcollins.atc.agree"/>
 	<classpathentry kind="src" path="/org.osate.xtext.aadl2"/>
 	<classpathentry kind="lib" path="/home/collins/.p2/pool/plugins/com.google.inject_3.0.0.v201312141243.jar" sourcepath="/home/collins/.p2/pool/plugins/com.google.inject.source_3.0.0.v201312141243.jar">
