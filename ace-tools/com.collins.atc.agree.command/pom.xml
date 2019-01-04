@@ -4,133 +4,45 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   
-  	<parent>
-		<groupId>com.collins.atc</groupId>
-		<artifactId>com.collins.atc.agree.command.aggregator</artifactId>
-		<version>0.0.0</version>
-		<relativePath>../com.collins.atc.agree.command.aggregator/pom.xml</relativePath>
-	</parent>
   
-		<groupId>com.collins.atc</groupId>
-  <artifactId>com.collins.atc.agree.command</artifactId>
-  <name>agree.command</name>
-  <packaging>jar</packaging>
-  	<version>0.0.0</version>
-  
+  <groupId>com.collins.atc.agree.command</groupId>
+  <artifactId>root</artifactId>
+  <version>0.0.0</version>
+  <packaging>pom</packaging>
+  <name>root</name>
+    
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <xtext.version>2.12.0</xtext.version>
-  </properties>
-  
-  <!--  
-  <repositories>
-    <repository>
-        <id>com.rockwellcollins.atc.agree</id>
-        <name>agree</name>
-        <url>file:../../../smaccm/fm-workbench/releng/fm-workbench.build/modules</url>
-    </repository>
-    <repository>
-        <id>org.osate.aadl</id>
-        <name>aadl</name>
-        <url>file:../../../osate2/core/osate2-core.releng/modules</url>
-    </repository>
-</repositories>
-  -->
-  
-
-  <dependencies>
-  
-  <!-- https://mvnrepository.com/artifact/antlr/antlr -->
-	<dependency>
-	    <groupId>antlr</groupId>
-	    <artifactId>antlr</artifactId>
-	    <version>2.7.7</version>
-	</dependency>
-  
-  
-  <!-- https://mvnrepository.com/artifact/org.eclipse.emf/ecore -->
-	<dependency>
-	    <groupId>org.eclipse.emf</groupId>
-	    <artifactId>ecore</artifactId>
-	    <version>2.3.0-v200706262000</version>
-	</dependency>
+	<modules>
+		<module>../../../osate2/core/osate2-core.releng/modules</module>
+		<module>../../../osate2/ge/osate-ge.releng/modules</module>
+		<module>../../../osate2/emv2/emv2.releng/modules</module>
+		<module>../../../osate2/analyses/osate2-plugins.releng/modules</module>
+		<module>../../../smaccm/fm-workbench/releng/fm-workbench.build/modules</module>
+		<module>main</module>	
+	</modules>
 	
-	<!-- https://mvnrepository.com/artifact/org.eclipse.xtext/org.eclipse.xtext -->
-	<dependency>
-	    <groupId>org.eclipse.xtext</groupId>
-	    <artifactId>org.eclipse.xtext</artifactId>
-	    <version>2.16.0</version>
-	</dependency>
+	
+	<!--
+	<profiles>
+		<profile>
+			<id>pr-build</id>
+			<activation>
+				<property>
+					<name>pr.build</name>
+					<value>!true</value>
+				</property>
+			</activation>
+			<modules>
+				<module>../../../smaccm/fm-workbench/releng/fm-workbench.build/modules</module>
 
-    
+			</modules>
+		</profile>
+	</profiles>
+	-->
+	<build>
 
-    <dependency>      
-	  <groupId>org.osate</groupId>
-	  <artifactId>org.osate.xtext.aadl2</artifactId>
-	  <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    
-    <dependency>
-      <groupId>org.osate</groupId>
-	  <artifactId>org.osate.xtext.aadl2.properties</artifactId>
-	  <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    
-    <dependency>      
-      <groupId>org.osate</groupId>
-      <artifactId>org.osate.aadl2</artifactId>
-      <version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    
-    <dependency>      
-  		<groupId>org.osate</groupId>
-  		<artifactId>org.osate.aadl2.modelsupport</artifactId>
-  		<version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    
-   <dependency>      
-  		<groupId>org.osate</groupId>
-  		<artifactId>org.osate.annexsupport</artifactId>
-  		<version>1.0.0-SNAPSHOT</version>
-    </dependency>
-    
-    
-    <dependency>
-      	<groupId>org.osate</groupId>
-  		<artifactId>com.rockwellcollins.atc.agree</artifactId>
-  		<version>2.4.0-SNAPSHOT</version>
-    </dependency>
-    
-    <dependency>
-      	<groupId>org.osate</groupId>
- 		<artifactId>com.rockwellcollins.atc.agree.ui</artifactId>
-  		<version>2.4.0-SNAPSHOT</version>
-    </dependency>
-    
+	
+	</build>
 
-    <dependency>  
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
-    </dependency>
-    
-    
-    
-    <!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
-    <dependency>
-      <groupId>commons-cli</groupId>
-      <artifactId>commons-cli</artifactId>
-      <version>1.4</version>
-    </dependency>
-    
-  </dependencies>
-
-  <build>
-	  <sourceDirectory>src</sourceDirectory>	
-  </build>
 
 </project>
