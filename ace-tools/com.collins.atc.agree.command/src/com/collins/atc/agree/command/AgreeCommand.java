@@ -66,8 +66,8 @@ public class AgreeCommand {
 
 
 		if (cli.hasOption(basisFlag)) {
-
-			File basisFile = new File(cli.getArgList().get(0));
+			String fileArg = cli.getArgs()[0];
+			File basisFile = new File(fileArg);
 			String path = basisFile.getAbsolutePath();
 			Stream<String> stream = Files.lines(Paths.get(path));
             stream.forEach((line) -> {
@@ -88,8 +88,8 @@ public class AgreeCommand {
 
 
 		} else {
-
-			File aadlFile = new File(cli.getArgList().get(0));
+			String fileArg = cli.getArgs()[0];
+			File aadlFile = new File(fileArg);
 			String aadlPath = aadlFile.getAbsolutePath();
 
 			Resource resource = resourceSet.getResource(URI.createFileURI(aadlPath), true);
