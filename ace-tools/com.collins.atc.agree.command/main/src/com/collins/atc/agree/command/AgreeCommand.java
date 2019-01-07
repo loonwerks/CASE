@@ -36,7 +36,7 @@ public class AgreeCommand {
 		Option basisOption = new Option("b", basisFlag, false, "basis file");
 		options.addOption(basisOption);
 
-		Option componentOption = new Option("c", basisFlag, false, "component file");
+		Option componentOption = new Option("c", componentFlag, false, "component file");
 		options.addOption(componentOption);
 
 		CommandLineParser parser = new DefaultParser();

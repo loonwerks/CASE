@@ -10,7 +10,13 @@
   <version>0.0.0</version>
   <packaging>pom</packaging>
   <name>root</name>
-    
+
+  <repositories>
+    <repository>
+        <id>jlib</id>
+        <url>file://${basedir}/jlib</url>
+    </repository>
+  </repositories>
 
 	<modules>
 		<module>../../../osate2/core/osate2-core.releng/modules</module>
@@ -21,24 +27,6 @@
 		<module>main</module>	
 	</modules>
 	
-	
-	<!--
-	<profiles>
-		<profile>
-			<id>pr-build</id>
-			<activation>
-				<property>
-					<name>pr.build</name>
-					<value>!true</value>
-				</property>
-			</activation>
-			<modules>
-				<module>../../../smaccm/fm-workbench/releng/fm-workbench.build/modules</module>
-
-			</modules>
-		</profile>
-	</profiles>
-	-->
 	<build>
 
 	
