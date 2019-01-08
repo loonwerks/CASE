@@ -17,5 +17,6 @@ Import-Package: com.collins.atc.ace.cyres.util.plugin,
  org.osate.aadl2.instantiation,
  org.osate.annexsupport
 Bundle-ClassPath: jlib/gson-2.8.5.jar,
+ jlib/com.collins.atc.json-0.0.0.jar,
  .
 Export-Package: com.collins.atc.ace.cyres.agree.json.plugin
