@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: com.collins.atc.ace.toolcheck.plugin
-Bundle-SymbolicName: com.collins.atc.ace.toolcheck.plugin;singleton:=true
+Bundle-Name: com.collins.atc.ace.cyres.toolcheck.plugin
+Bundle-SymbolicName: com.collins.atc.ace.cyres.toolcheck.plugin;singleton:=true
 Bundle-Version: 0.0.0
-Bundle-Activator: com.collins.atc.ace.toolcheck.plugin.Activator
+Bundle-Activator: com.collins.atc.ace.cyres.toolcheck.plugin.Activator
 Require-Bundle: org.osate.aadl2;bundle-version="1.0.0",
  org.eclipse.ui,
  org.eclipse.core.runtime,

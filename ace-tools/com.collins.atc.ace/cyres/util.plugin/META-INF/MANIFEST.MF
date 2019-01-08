@@ -1,9 +1,9 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: com.collins.atc.ace.util.plugin
-Bundle-SymbolicName: com.collins.atc.ace.util.plugin;singleton:=true
+Bundle-Name: com.collins.atc.ace.cyres.util.plugin
+Bundle-SymbolicName: com.collins.atc.ace.cyres.util.plugin;singleton:=true
 Bundle-Version: 0.0.0
-Automatic-Module-Name: com.collins.atc.plugin.util
+Automatic-Module-Name: com.collins.atc.ace.cyres.plugin.util
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.jface,
  org.osate.aadl2,
@@ -16,4 +16,4 @@ Import-Package: org.eclipse.debug.ui.console,
  org.osate.aadl2.instantiation,
  org.osate.annexsupport
 Bundle-ClassPath: .
-Export-Package: com.collins.atc.ace.util.plugin
+Export-Package: com.collins.atc.ace.cyres.util.plugin
