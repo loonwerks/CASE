@@ -1,14 +1,10 @@
 package testdpmon
 public
-	
-	data Thing_t
-	end Thing_t;
-	data implementation Thing_t.impl
-	end Thing_t.impl;
+	with Base_Types;
 	
 	thread source_t
 		features
-			enq: out event data port Thing_t.impl;
+			enq: out event data port Base_Types::Integer_8;
 	end source_t;
 	
 	thread implementation source_t.impl
@@ -16,7 +12,7 @@ public
 	
 	thread destination_t
 		features
-			deq: in event data port Thing_t.impl;
+			deq: in event data port Base_Types::Integer_8;
 	end destination_t;
 	
 	thread implementation destination_t.impl
