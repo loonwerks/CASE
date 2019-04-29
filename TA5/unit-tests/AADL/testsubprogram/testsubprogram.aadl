@@ -1,20 +1,19 @@
 package testsubprogram
 public
-	subprogram service_it
+	subprogram group service_it
 	end service_it;
 	
 	thread source_t
+		features
+			call_server: requires subprogram group access service_it;
 	end source_t;
 
 	thread implementation source_t.impl
-		calls {
-			call_server: subprogram service_it;
-		};
 	end source_t.impl;
 	
 	thread destination_t
 		features
-			service: server subprogram service_it;
+			service: provides subprogram group access service_it;
 	end destination_t;
 
 	thread implementation destination_t.impl
@@ -24,7 +23,7 @@ public
 	end proc;
 
 	processor implementation proc.impl
-	end processor implementation proc.impl
+	end proc.impl;
 
 	process top_process
 	end top_process;
@@ -33,9 +32,6 @@ public
 		subcomponents
 			source_inst: thread source_t.impl;
 			destination_inst: thread destination_t.impl;
-		properties
-			Actual_Subprogram_Call => 
-				(reference (destination_inst.service)) applies to source_inst.call_server;
 	end top_process.impl;
 	
 	
@@ -44,7 +40,7 @@ public
 	
 	system implementation top.impl
 		subcomponents
-			proc : processor proc.impl
+			proc : processor proc.impl;
 			testsubprogram: process top_process.impl;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to testsubprogram; 
