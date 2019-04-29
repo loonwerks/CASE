@@ -1,17 +1,11 @@
 package testevent
 public
 	with TB_SYS;
-	
-  data DT
-    
-  end DT;
-
-	data implementation DT.Impl
-	end DT.Impl;
-	
+	with Base_Types;
+		
 	thread emitter
 		features
-			e: out event data port DT.impl;
+			e: out event data port Base_Types::Integer_8;
 	end emitter;
 	
 	thread implementation emitter.impl
@@ -22,7 +16,7 @@ public
 	
 	thread consumer
 		features
-			s: in event data port DT.impl {
+			s: in event data port Base_Types::Integer_8 {
 				TB_SYS::Compute_Entrypoint_Source_Text => ("testevent_consumer_s_event_handler");				
 			};
 	   properties
