@@ -1,0 +1,8 @@
+import "../../interfaces/tb_Monitor_int8_t_1.idl4";
+
+component emitter_t_impl {
+  include <tb_proc_types.h>;
+  control;
+  uses tb_Monitor_int8_t_1 tb_enq0;
+  has semaphore tb_dispatch_sem;
+}
