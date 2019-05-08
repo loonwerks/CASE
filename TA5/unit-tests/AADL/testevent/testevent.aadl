@@ -1,41 +1,41 @@
 package testevent
 public
-	with TB_SYS;
-	with Base_Types;
+	with SB_SYS;
 		
 	thread emitter
 		features
-			e: out event data port Base_Types::Integer_8;
+			e: out event port;
+	   properties
+            Initialize_Entrypoint_Source_Text => "testevent_emitter_component_init";
+            Source_Text => ("behavior_code/components/Emitter/src/emitter.c");
+            SB_SYS::Compute_Entrypoint_Source_Text => ("run_emitter");
 	end emitter;
 	
 	thread implementation emitter.impl
 	end emitter.impl;
-	
-	
-	
-	
+
 	thread consumer
 		features
-			s: in event data port Base_Types::Integer_8 {
-				TB_SYS::Compute_Entrypoint_Source_Text => ("testevent_consumer_s_event_handler");				
+			s: in event port {
+				SB_SYS::Compute_Entrypoint_Source_Text => ("testevent_consumer_s_event_handler");				
 			};
 	   properties
             Initialize_Entrypoint_Source_Text => "testevent_consumer_component_init";
-            Source_Text => ("aux/src/Consumer_main.c");
+            Source_Text => ("behavior_code/components/Consumer/src/consumer.c");
     end consumer;
 	
 	thread implementation consumer.impl
 	end consumer.impl;
-	
-	
-	
-	
+
 	processor proc
 	end proc;
+
 	processor implementation proc.impl
 	end proc.impl;
+
 	process top_process
 	end top_process;
+
 	process implementation top_process.impl
 		subcomponents
 			src: thread emitter.impl;
@@ -43,9 +43,7 @@ public
 		connections
 			conn1: port src.e -> snk.s;		
 	end top_process.impl;
-	
-	
-	
+
 	system top
 	end top;
 	
@@ -56,6 +54,5 @@ public
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to testevent; 
 	end top.impl;
-	
 	
 end testevent;
