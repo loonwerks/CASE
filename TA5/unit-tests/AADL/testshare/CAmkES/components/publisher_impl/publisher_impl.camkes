@@ -1,0 +1,8 @@
+import "../../interfaces/tb_testshare__Thing_t_shared_var.idl4";
+
+component publisher_impl {
+  include <tb_proc_types.h>;
+
+  dataport testshare__Thing_t b1;
+  has semaphore tb_dispatch_sem;
+}
