@@ -1,0 +1,6 @@
+component emitter_impl {
+  include <tb_proc_types.h>;
+
+  emits Notification e;
+  has semaphore tb_dispatch_sem;
+}
