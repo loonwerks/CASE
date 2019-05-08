@@ -1,10 +1,15 @@
 package testdpmon
 public
-	with Base_Types;	
+	with SB_SYS;
+	with Base_Types;
 
 	thread source_t
 		features
 			enq: out data port Base_Types::Integer_8;
+	   properties
+            Source_Text => ("behavior_code/components/source/src/source.c");
+            Initialize_Entrypoint_Source_Text => "testdpmon_source_component_init";
+            SB_SYS::Compute_Entrypoint_Source_Text => ("run_sender");
 	end source_t;
 	
 	thread implementation source_t.impl
@@ -13,20 +18,24 @@ public
 	thread destination_t
 		features
 			deq: in data port Base_Types::Integer_8;
+	   properties
+            Initialize_Entrypoint_Source_Text => "testdpmon_destination_component_init";
+            Source_Text => ("behavior_code/components/destination/src/destination.c");
+            SB_SYS::Compute_Entrypoint_Source_Text => ("run_receiver");
 	end destination_t;
 	
 	thread implementation destination_t.impl
 	end destination_t.impl;
-	
-	
-	
-	
+
 	processor proc
 	end proc;
+
 	processor implementation proc.impl
 	end proc.impl;
+
 	process top_process
 	end top_process;
+
 	process implementation top_process.impl
 		subcomponents
 			src: thread source_t.impl;
@@ -34,9 +43,7 @@ public
 		connections
  			conn1: port src.enq -> dest.deq;
 	end top_process.impl;
-	
-	
-	
+
 	system top
 	end top;
 	
@@ -47,6 +54,5 @@ public
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to testdpmon; 
 	end top.impl;
-	
 	
 end testdpmon;
