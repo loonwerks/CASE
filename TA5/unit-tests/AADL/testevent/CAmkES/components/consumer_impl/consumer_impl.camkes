@@ -1,0 +1,6 @@
+component consumer_impl {
+  include <tb_proc_types.h>;
+
+  consumes Notification s;
+  has semaphore tb_dispatch_sem;
+}
