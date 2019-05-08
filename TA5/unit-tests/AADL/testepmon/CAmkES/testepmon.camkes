@@ -1,0 +1,21 @@
+import <std_connector.camkes>;
+
+import "components/emitter_t_impl/emitter_t_impl.camkes";
+import "components/consumer_t_impl/consumer_t_impl.camkes";
+import "components/tb_Monitors/tb_dest_deq_Monitor/tb_dest_deq_Monitor.camkes";
+
+assembly {
+  composition {
+    component emitter_t_impl src;
+    component consumer_t_impl dest;
+    component tb_dest_deq_Monitor tb_dest_deq_monitor;
+
+    connection seL4RPCCall conn1(from src.tb_enq0, to tb_dest_deq_monitor.mon);
+    connection seL4RPCCall conn2(from dest.tb_deq, to tb_dest_deq_monitor.mon);
+    connection seL4Notification conn3(from tb_dest_deq_monitor.monsig, to dest.tb_deq_notification);
+  }
+
+  configuration {
+
+  }
+}
