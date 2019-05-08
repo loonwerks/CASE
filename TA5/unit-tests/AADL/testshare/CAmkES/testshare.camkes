@@ -1,0 +1,16 @@
+import <std_connector.camkes>;
+
+import "components/publisher_impl/publisher_impl.camkes";
+import "components/subscriber_impl/subscriber_impl.camkes";
+
+assembly {
+  composition {
+    component publisher_impl publisher_inst;
+    component subscriber_impl subscriber_inst;
+
+  }
+
+  configuration {
+
+  }
+}
