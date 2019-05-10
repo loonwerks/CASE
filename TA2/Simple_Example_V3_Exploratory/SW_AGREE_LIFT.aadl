@@ -1,0 +1,132 @@
+package SW_AGREE_LIFT
+public
+    
+    with SW;
+    with SW_EXTEND;
+    with CASE_Model_Transformations;
+    
+    -- DEPENDS ON SW_EXTEND NOT USING THE EXTENDED TYPE IMPLEMENTATIONS
+    
+    process UARTDriverProc
+        features
+            status: out event data port SW::Coordinate.Impl;
+            mission_window: in event data port SW::MissionWindow;
+            recv_data: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+            send_data: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+--        annex agree {**
+--            assume Req0010_UARTDriver "Well-formed mission window" : SW::good_mission_window(mission_window);
+--            guarantee Req0020_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data.crc;
+--        **};    
+    end UARTDriverProc;
+
+    process implementation UARTDriverProc.Impl
+        subcomponents
+            UART: thread SW::UARTDriver.Impl;
+        connections
+             c1 : port UART.status -> status;
+             c2 : port mission_window -> UART.mission_window;
+             c3 : port recv_data -> UART.recv_data;
+             c4 : port UART.send_data -> send_data;
+    end UARTDriverProc.Impl;
+    
+    process SWSubSystem
+        features
+            radio_recv: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+            radio_send: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+            wifi_recv: in event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
+            wifi_send: out event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
+            wpm_mission_window: out event data port SW::MissionWindow;
+            uart_status: in event data port SW::Coordinate.Impl;
+        annex agree {**
+             guarantee Req0020_WaypointManager "The Waypoint Manager shall output a well-formed mission window" : SW::good_mission_window(wpm_mission_window);
+        **};
+    end SWSubSystem;
+    
+    -- If used, then be sure the SW_CYBER::RadioDriver is not the extended version
+    process implementation SWSubSystem.CyberImpl
+        subcomponents
+    	   RADIO: thread SW_EXTEND::RadioDriver.Impl;
+           AM: thread SW_EXTEND::CASE_AttestationManager.Impl;
+           FLT: thread SW_EXTEND::CASE_Filter.Impl;
+           FPLN: thread SW::FlightPlanner.Impl;
+           WPM: thread SW::WaypointManager.Impl;
+           CM: thread SW::CameraManager.Impl;
+           WIFI: thread SW::WifiDriver.Impl;
+           NFDB: thread SW::NoFlyZoneDatabase.Impl;
+    	connections
+    		c1: port radio_recv -> RADIO.recv_data;
+            c2: port RADIO.send_data -> radio_send;
+            c3: port RADIO.mission_command -> AM.am_mission_command_in;
+            c4: port AM.am_mission_command_out -> FLT.filter_in;
+            c21: port FLT.filter_out -> FPLN.recv_map;
+            c19: port AM.am_request -> RADIO.am_request;
+            c20: port RADIO.am_response -> AM.am_response;
+            c5: port FPLN.flight_plan -> WPM.flight_plan;
+            c6: port FPLN.request_nofly_zones -> NFDB.map;
+            c7: port NFDB.zones -> FPLN.nofly_zones;
+            c8: port WPM.mission_window -> wpm_mission_window;
+            c9: port uart_status -> WPM.position_status;
+            c10: port uart_status -> FPLN.position_status;
+            c11: port uart_status -> RADIO.status;
+            c12: port FPLN.flight_plan -> CM.flight_plan;
+            c13: port uart_status -> CM.position_status;
+            c14: port CM.gimbal_command -> WIFI.gimbal_command;
+            c15: port WIFI.send_data -> wifi_send;
+            c16: port wifi_recv -> WIFI.recv_data;
+    end SWSubSystem.CyberImpl;
+    
+    process implementation SWSubSystem.impl
+        subcomponents
+           RADIO: thread SW::RadioDriver.Impl;
+           FPLN: thread SW::FlightPlanner.Impl;
+           WPM: thread SW::WaypointManager.Impl;
+           CM: thread SW::CameraManager.Impl;
+           WIFI: thread SW::WifiDriver.Impl;
+           NFDB: thread SW::NoFlyZoneDatabase.Impl;
+        connections
+            c1: port radio_recv -> RADIO.recv_data;
+            c2: port RADIO.send_data -> radio_send;
+            c3: port RADIO.mission_command -> FPLN.recv_map;
+            c5: port FPLN.flight_plan -> WPM.flight_plan;
+            c6: port FPLN.request_nofly_zones -> NFDB.map;
+            c7: port NFDB.zones -> FPLN.nofly_zones;
+            c8: port WPM.mission_window -> wpm_mission_window;
+            c9: port uart_status -> WPM.position_status;
+            c10: port uart_status -> FPLN.position_status;
+            c11: port uart_status -> RADIO.status;
+            c12: port FPLN.flight_plan -> CM.flight_plan;
+            c13: port uart_status -> CM.position_status;
+            c14: port CM.gimbal_command -> WIFI.gimbal_command;
+            c15: port WIFI.send_data -> wifi_send;
+            c16: port wifi_recv -> WIFI.recv_data;
+    end SWSubSystem.impl;
+    
+    system SW_AGREE_LIFT
+        features
+            radio_recv: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+            radio_send: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+            uart_recv: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+            uart_send: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+            wifi_recv: in event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
+            wifi_send: out event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
+        annex agree {**
+            guarantee Req0010_SW "The Mission Computer shall output a valid mission window to the Flight Controller" : uart_send.crc;
+        **};
+    end SW_AGREE_LIFT;
+        
+    system implementation SW_AGREE_LIFT.Impl
+    	subcomponents
+    		UART: process UARTDriverProc.Impl;
+    		SWSUB: process SWSubSystem.CyberImpl;
+    	connections
+    		c1: port radio_recv -> SWSUB.radio_recv;
+    		c2: port SWSUB.radio_send -> radio_send;
+    		c3: port uart_recv -> UART.recv_data;
+    		c4: port UART.send_data -> uart_send;
+    		c5: port wifi_recv -> SWSUB.wifi_recv;
+    		c6: port SWSUB.wifi_send -> wifi_send;
+    		c7: port SWSUB.wpm_mission_window -> UART.mission_window;
+    		c8: port UART.status -> SWSUB.uart_status;
+    end SW_AGREE_LIFT.Impl;
+    
+end SW_AGREE_LIFT;

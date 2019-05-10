@@ -1,0 +1,95 @@
+package SW_FLOW
+public
+    with CASE_Model_Transformations;
+	with SW;
+	            
+    data CM_Msg extends CASE_Model_Transformations::CASE_RF_Msg
+    end CM_Msg;
+
+    data implementation CM_Msg.Impl extends CASE_Model_Transformations::CASE_RF_Msg.Impl
+        subcomponents
+            payload: refined to data;
+    end CM_Msg.Impl;
+
+    thread UARTDriver extends SW::UARTDriver
+        flows
+            status_source : flow source status;        
+    end UARTDriver;
+
+    thread implementation UARTDRiver.Impl extends SW::UARTDriver.Impl
+    end UARTDRiver.Impl;
+    
+	thread RadioDriver extends SW::RadioDriver
+        features
+            gimbal_command: out event data port CM_MSG.Impl;
+		flows
+			recv_data_to_mission_command : flow path recv_data -> mission_command;
+			recv_data_to_gimbal_command : flow path recv_data -> gimbal_command;
+    end RadioDriver;
+
+    thread implementation RadioDriver.Impl extends SW::RadioDriver.Impl
+    end RadioDriver.Impl;
+    
+    thread FlightPlanner extends SW::FlightPlanner
+    	flows
+    		recv_map_to_flight_plan: flow path recv_map -> flight_plan;
+    end FlightPlanner;
+    
+    thread implementation FlightPlanner.Impl extends SW::FlightPlanner.Impl
+    end FlightPlanner.Impl;
+    
+    thread CameraManager extends SW::CameraManager
+        -- The CameraManager determines the gimbal settings for the onboard camera based on the current position of the UAV and the mission.
+        -- The CameraManager then sends out gimbal commands to the camera over the wifi connection
+        features
+            recv_gimbal_command: in event data port CM_MSG.Impl;
+    	flows
+    		position_status_to_gimbal_command: flow path position_status -> gimbal_command;
+            recv_gimbal_command_to_gimbal_command: flow path recv_gimbal_command -> gimbal_command;
+            flight_plan_to_gimbal_command: flow path flight_plan -> gimbal_command;
+        -- Add AGREE Annex that has a state that is set from the gimbal radio command to operate in manual mode versus autonomous mode
+    end CameraManager;
+
+    thread implementation CameraManager.Impl extends SW::CameraManager.Impl
+    end CameraManager.Impl;  
+    
+    thread WifiDriver extends SW::WifiDriver
+    	flows
+    		gimbal_command_sink: flow sink gimbal_command;
+    end WifiDriver;
+    
+    thread implementation WifiDriver.Impl extends SW::WifiDriver.Impl
+    end WifiDriver.Impl;
+    
+    process SW extends SW::SW
+        flows
+            radio_recv_sink: flow sink radio_recv;
+        properties
+            Classifier_Substitution_Rule => Type_Extension;
+    end SW;
+    
+    process implementation SW.Impl extends SW::SW.Impl
+        subcomponents
+            RADIO: refined to thread RadioDriver.Impl;
+            FPLN: refined to thread FlightPlanner.Impl;
+            CM: refined to thread CameraManager.Impl;
+            UART: refined to thread UARTDriver.Impl;
+            WIFI: refined to thread WifiDriver.Impl;
+    	connections
+    		c22 : port RADIO.gimbal_command -> CM.recv_gimbal_command;
+    	flows
+    		radio_recv_sink: flow sink radio_recv -> c1 -> 
+                                       RADIO.recv_data_to_mission_command -> c3 -> 
+                                       FPLN.recv_map_to_flight_plan -> c14 ->
+                                       CM.flight_plan_to_gimbal_command -> c16 ->
+                                       WIFI.gimbal_command_sink;
+            radio_recv_sink: flow sink radio_recv -> c1 -> 
+                                       RADIO.recv_data_to_gimbal_command -> c22 -> 
+                                       CM.recv_gimbal_command_to_gimbal_command -> c16 ->
+                                       WIFI.gimbal_command_sink;
+            uart_status: end to end flow UART.status_source -> c15 -> 
+                                         CM.position_status_to_gimbal_command -> c16 -> 
+                                         WIFI.gimbal_command_sink;
+    end SW.Impl;
+    
+end SW_FLOW;

@@ -1,0 +1,181 @@
+package SW_EXTEND
+public
+
+	with SW;
+	with CASE_Properties;
+	with CASE_Model_Transformations;
+
+    -- AGREE does not pick up the features from the extended base type
+    -- TOGGLE this implementation with that below the verify as much.
+    thread RadioDriver extends SW::RadioDriver
+    	features
+    		am_request: in event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
+            am_response: out event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+    end RadioDriver;
+    
+    thread implementation RadioDriver.Impl extends SW::RadioDriver.Impl
+    end RadioDriver.Impl;
+    
+--    thread RadioDriver
+--        -- The RadioDriver is the software that enables other SW components to communicate to other systems over RF
+--        features
+--            recv_data: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+--            send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+--            mission_command: out event data port SW::RF_Msg.Impl;
+--            status: in event data port SW::Coordinate.Impl;
+--            am_request: in event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
+--            am_response: out event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+--        properties
+--            CASE_Properties::COMP_TYPE => COMM_DRIVER;
+--        annex agree {**
+--            guarantee Req001_SW_CYBER_RadioDriver "Only valid command messages shall be forwarded to message destination components" : SW::VALID_MESSAGE(mission_command);
+--        **};
+--    end RadioDriver;
+--    
+--    thread implementation RadioDriver.Impl
+--    end RadioDriver.Impl;
+    
+    -- AGREE does not pick up the features from the extended base type
+    -- TOGGLE this implementation with that below the verify as much.
+    thread FlightPlanner extends SW::FlightPlanner
+        annex agree {**
+            assume Req004_SW_CYBER_FlightPlanner "The FlightPlanner shall receive a well-formed command from the GroundStation" : SW::WELL_FORMED_MESSAGE(recv_map);
+            assume Req003_SW_CYBER_FlightPlanner "The FlightPlanner shall only accept messages from a trusted GroundStation" : SW::TRUSTED_MESSAGE(recv_map);
+        **};
+    end FlightPlanner;
+    
+    thread implementation FlightPlanner.Impl extends SW::FlightPlanner.Impl
+    end FlightPlanner.Impl;
+    
+--    thread FlightPlanner
+--        -- The FlightPlanner is an abstraction for UxAS.
+--        -- It accepts a command message containing a map and flight pattern, and generates a mission.
+--        -- The FlightPlanner also has access to a No-Fly zone database, which it uses to generate the mission 
+--        -- to avoid specified no-fly zones
+--        features
+--            flight_plan: out data port SW::Mission;
+--            recv_map: in event data port SW::RF_Msg.Impl;
+--            request_nofly_zones: out event data port SW::Map;
+--            nofly_zones: in event data port SW::MapArray;
+--            position_status: in event data port SW::Coordinate.Impl;
+--        annex agree {**
+--            assume Req004_SW_CYBER_FlightPlanner "The FlightPlanner shall receive a well-formed command from the GroundStation" : SW::WELL_FORMED_MESSAGE(recv_map);
+--            assume Req003_SW_CYBER_FlightPlanner "The FlightPlanner shall only accept messages from a trusted GroundStation" : SW::TRUSTED_MESSAGE(recv_map);
+--            assume Req001_SW_CYBER_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : SW::VALID_MESSAGE(recv_map);
+--            guarantee Req002_SW_CYBER_FlightPlanner "The Flight Planner shall generate a valid mission" : SW::good_mission(flight_plan);
+--        **};
+--    end FlightPlanner;
+--
+--    thread implementation FlightPlanner.Impl
+--    end FlightPlanner.Impl;
+    
+	thread CASE_AttestationManager
+		features
+			am_mission_command_in: in event data port SW::RF_Msg.Impl;
+			am_mission_command_out: out event data port SW::RF_Msg.Impl;
+			am_request: out event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
+			am_response: in event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+		properties
+			CASE_Properties::COMP_TYPE => ATTESTATION;
+			CASE_Properties::COMP_IMPL => "CakeML";
+			CASE_Properties::COMP_SPEC => "Req001_AM";
+			CASE_Properties::CACHE_TIMEOUT => 30;
+			CASE_Properties::CACHE_SIZE => 4;
+			CASE_Properties::LOG_SIZE => 100;
+		annex agree {**
+			guarantee Req001_RadioDriver_AttestationManager "Only valid command messages shall be forwarded to message destination components" : SW::VALID_MESSAGE(am_mission_command_out);
+			guarantee Req001_AM "Trusted" : SW::TRUSTED_MESSAGE(am_mission_command_out);
+		**};
+	end CASE_AttestationManager;
+
+	thread implementation CASE_AttestationManager.Impl
+	end CASE_AttestationManager.Impl;
+
+	thread CASE_Filter
+		features
+			filter_in: in event data port SW::RF_Msg.Impl;
+			filter_out: out event data port SW::RF_Msg.Impl;
+		properties
+			CASE_Properties::COMP_TYPE => FILTER;
+			CASE_Properties::COMP_IMPL => "CakeML";
+			CASE_Properties::COMP_SPEC => "Req001_Filter";
+		annex agree {**
+			guarantee Req001_RadioDriver_AttestationManager_Filter "Only valid command messages shall be forwarded to message destination components" : SW::VALID_MESSAGE(filter_out);
+			guarantee Req001_AM_Filter "Trusted" : SW::TRUSTED_MESSAGE(filter_out);
+			guarantee Req001_Filter "Well-formed" : SW::WELL_FORMED_MESSAGE(filter_out);
+		**};
+	end CASE_Filter;
+
+	thread implementation CASE_Filter.Impl
+	end CASE_Filter.Impl;
+
+    process SW extends SW::SW    
+    end SW;
+    
+    -- FAILS AGREE DUE TO Req004_SW_CYBER_FlightPlanner and Req003_SW_CYBER_FlightPlanner
+    process implementation SW.Impl
+        subcomponents
+            RADIO: thread SW::RadioDriver.Impl;
+            FPLN: thread FlightPlanner.Impl;
+            WPM: thread SW::WaypointManager.Impl;
+            CM: thread SW::CameraManager.Impl;
+            UART: thread SW::UARTDriver.Impl;
+            WIFI: thread SW::WifiDriver.Impl;
+            NFDB: thread SW::NoFlyZoneDatabase.Impl;
+        connections
+            c1: port radio_recv -> RADIO.recv_data;
+            c2: port RADIO.send_data -> radio_send;
+            c3: port RADIO.mission_command -> FPLN.recv_map;
+            c5: port FPLN.flight_plan -> WPM.flight_plan;
+            c6: port FPLN.request_nofly_zones -> NFDB.map;
+            c7: port NFDB.zones -> FPLN.nofly_zones;
+            c8: port WPM.mission_window -> UART.mission_window;
+            c9: port UART.status -> WPM.position_status;
+            c10: port UART.status -> FPLN.position_status;
+            c11: port UART.status -> RADIO.status;
+            c12: port UART.send_data -> uart_send;
+            c13: port uart_recv -> UART.recv_data;
+            c14: port FPLN.flight_plan -> CM.flight_plan;
+            c15: port UART.status -> CM.position_status;
+            c16: port CM.gimbal_command -> WIFI.gimbal_command;
+            c17: port WIFI.send_data -> wifi_send;
+            c18: port wifi_recv -> WIFI.recv_data;
+    end SW.Impl;
+    
+    -- PASSES as long as FPLN and RADIO are not the extended type versions
+	process implementation SW.CyberImpl
+		subcomponents
+			RADIO: thread RadioDriver.Impl;
+			AM: thread CASE_AttestationManager.Impl;
+			FLT: thread CASE_Filter.Impl;
+			FPLN: thread FlightPlanner.Impl;
+			WPM: thread SW::WaypointManager.Impl;
+			CM: thread SW::CameraManager.Impl;
+			UART: thread SW::UARTDriver.Impl;
+			WIFI: thread SW::WifiDriver.Impl;
+			NFDB: thread SW::NoFlyZoneDatabase.Impl;
+		connections
+			c1: port radio_recv -> RADIO.recv_data;
+			c2: port RADIO.send_data -> radio_send;
+			c3: port RADIO.mission_command -> AM.am_mission_command_in;
+			c4: port AM.am_mission_command_out -> FLT.filter_in;
+			c21: port FLT.filter_out -> FPLN.recv_map;
+			c19: port AM.am_request -> RADIO.am_request;
+			c20: port RADIO.am_response -> AM.am_response;
+			c5: port FPLN.flight_plan -> WPM.flight_plan;
+			c6: port FPLN.request_nofly_zones -> NFDB.map;
+			c7: port NFDB.zones -> FPLN.nofly_zones;
+			c8: port WPM.mission_window -> UART.mission_window;
+			c9: port UART.status -> WPM.position_status;
+			c10: port UART.status -> FPLN.position_status;
+			c11: port UART.status -> RADIO.status;
+			c12: port UART.send_data -> uart_send;
+			c13: port uart_recv -> UART.recv_data;
+			c14: port FPLN.flight_plan -> CM.flight_plan;
+			c15: port UART.status -> CM.position_status;
+			c16: port CM.gimbal_command -> WIFI.gimbal_command;
+			c17: port WIFI.send_data -> wifi_send;
+			c18: port wifi_recv -> WIFI.recv_data;
+	end SW.CyberImpl;
+	
+end SW_EXTEND;
