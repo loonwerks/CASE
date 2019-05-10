@@ -2,17 +2,17 @@ import <std_connector.camkes>;
 
 import "components/source_t_impl/source_t_impl.camkes";
 import "components/destination_t_impl/destination_t_impl.camkes";
-import "components/tb_Monitors/tb_dest_deq_Monitor/tb_dest_deq_Monitor.camkes";
+import "components/sb_Monitors/sb_dest_deq_Monitor/sb_dest_deq_Monitor.camkes";
 
 assembly {
   composition {
     component source_t_impl src;
     component destination_t_impl dest;
-    component tb_dest_deq_Monitor tb_dest_deq_monitor;
+    component sb_dest_deq_Monitor sb_dest_deq_monitor;
 
-    connection seL4RPCCall conn1(from src.tb_enq0, to tb_dest_deq_monitor.mon);
-    connection seL4RPCCall conn2(from dest.tb_deq, to tb_dest_deq_monitor.mon);
-    connection seL4Notification conn3(from tb_dest_deq_monitor.monsig, to dest.tb_deq_notification);
+    connection seL4RPCCall conn1(from src.sb_enq0, to sb_dest_deq_monitor.mon);
+    connection seL4RPCCall conn2(from dest.sb_deq, to sb_dest_deq_monitor.mon);
+    connection seL4Notification conn3(from sb_dest_deq_monitor.monsig, to dest.sb_deq_notification);
   }
 
   configuration {

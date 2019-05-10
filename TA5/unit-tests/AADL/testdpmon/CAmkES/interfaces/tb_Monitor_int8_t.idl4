@@ -1,5 +1,0 @@
-procedure tb_Monitor_int8_t {
-  include <tb_proc_types.h>;
-  bool read(out int8_t m);
-  bool write(refin int8_t m);
-};

@@ -1,7 +1,0 @@
-import "../../../interfaces/tb_Monitor_int8_t_1.idl4";
-
-component tb_dest_deq_Monitor {
-
-  provides tb_Monitor_int8_t_1 mon;
-  emits QueuedData monsig;
-}

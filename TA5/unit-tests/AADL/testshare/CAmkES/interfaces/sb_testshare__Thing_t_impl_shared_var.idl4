@@ -1,0 +1,5 @@
+procedure sb_testshare__Thing_t_impl_shared_var {
+  include <sb_proc_types.h>;
+  void read_testshare__Thing_t_impl(out testshare__Thing_t_impl arg);
+  void write_testshare__Thing_t_impl(refin testshare__Thing_t_impl arg);
+};

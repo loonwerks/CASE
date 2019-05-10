@@ -2,15 +2,11 @@
 
 #include <stdio.h>
 #include <camkes.h>
-#include <camkes/dataport.h>
-#include <testshare_types.h>
-
-/* Dataport b2 */
-extern testshare__Thing_t *b2;
-/* macro: void b2_acquire() */
-/* macro: void b2_release() */
+#include <sb_subscriber_impl.h>
+#include <sb_proc_types.h>
 
 void testshare_subscriber_component_init(const int64_t *arg) {
+    printf("testshare_subscriber_component_init called\n");
     printf("[subscriber] starting--poll for nonzero thing_t\n");
 }
 

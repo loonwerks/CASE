@@ -1,9 +1,9 @@
-import "../../interfaces/tb_Monitor_int8_t.idl4";
+import "../../interfaces/sb_Monitor_int8_t.idl4";
 
 component destination_t_impl {
-  include <tb_proc_types.h>;
+  include <sb_proc_types.h>;
   control;
-  uses tb_Monitor_int8_t tb_deq;
-  consumes DataportWrite tb_deq_notification;
-  has semaphore tb_dispatch_sem;
+  uses sb_Monitor_int8_t sb_deq;
+  consumes DataportWrite sb_deq_notification;
+  has semaphore sb_dispatch_sem;
 }

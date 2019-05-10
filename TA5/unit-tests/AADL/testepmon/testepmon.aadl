@@ -7,7 +7,7 @@ public
 		features
 			enq: out event data port Base_Types::Integer_8;
     properties
-            Source_Text => ("behavior_code/components/emitter/src/run_emitter.c");
+            Source_Text => ("behavior_code/components/emitter/src/emitter.c");
             Initialize_Entrypoint_Source_Text => "testepmon_emitter_component_init";
             SB_SYS::Compute_Entrypoint_Source_Text => ("run_emitter");
 	end emitter_t;
@@ -21,7 +21,7 @@ public
 				SB_SYS::Compute_Entrypoint_Source_Text => ("testepmon_consumer_s_event_handler");
 			};
        properties
-            Source_Text => ("behavior_code/components/consumer/src/run_consumer.c");
+            Source_Text => ("behavior_code/components/consumer/src/consumer.c");
             Initialize_Entrypoint_Source_Text => "testepmon_consumer_component_init";
 	end consumer_t;
 	

@@ -1,16 +1,22 @@
 package testshare
 public
 	with SB_SYS;
+	with Base_Types;
 	
 	data Thing_t
 	end Thing_t;
 
 	data implementation Thing_t.impl
+		subcomponents
+			lepht: data Base_Types::Integer_8;
+			right: data Base_Types::Integer_8;
+			top: data Base_Types::Integer_8;
+			bottom: data Base_Types::Integer_8;
 	end Thing_t.impl;
 	
 	thread publisher
 		features
-			b1: provides data access Thing_t;
+			b1: requires data access Thing_t.impl;
 	    properties
             Initialize_Entrypoint_Source_Text => "testshare_publisher_component_init";
             Source_Text => ("behavior_code/components/publisher/src/publisher.c");
@@ -22,7 +28,7 @@ public
 	
 	thread subscriber
 		features
-			b2: requires data access Thing_t;
+			b2: requires data access Thing_t.impl;
 	    properties
             Initialize_Entrypoint_Source_Text => "testshare_subscriber_component_init";
             Source_Text => ("behavior_code/components/subscriber/src/subscriber.c");
@@ -45,8 +51,15 @@ public
 		subcomponents
 			publisher_inst: thread publisher.impl;
 			subscriber_inst: thread subscriber.impl;
-		--connections
-			--conn1: data access publisher_inst.b1 -> subscriber_inst.b2;
+			
+			shared: data Thing_t.impl {
+				SB_SYS::CAmkES_Owner_Thread => "testshare::publisher.impl";
+			};
+
+		connections
+			conn2: data access shared -> subscriber_inst.b2;
+			conn1: data access shared -> publisher_inst.b1;
+
 	end top_process.impl;
 
 	system top

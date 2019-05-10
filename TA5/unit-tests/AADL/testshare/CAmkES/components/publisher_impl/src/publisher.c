@@ -2,15 +2,11 @@
 
 #include <stdio.h>
 #include <camkes.h>
-#include <camkes/dataport.h>
-#include <testshare_types.h>
-
-/* Dataport b1 */
-extern testshare__Thing_t *b1;
-/* macro: void b1_acquire() */
-/* macro: void b1_release() */
+#include <sb_proc_types.h>
+#include <sb_publisher_impl.h>
 
 void testshare_publisher_component_init(const int64_t *arg) {
+  printf("testshare_publisher_component_init called\n");
 }
 
 void run_publisher(const int64_t *in_arg)

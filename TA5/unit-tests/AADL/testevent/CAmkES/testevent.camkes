@@ -8,7 +8,7 @@ assembly {
     component emitter_impl src;
     component consumer_impl snk;
 
-    connection seL4Notification conn1(from src.e, to snk.s);
+    connection seL4Notification conn1(from src.sb_e, to snk.sb_s);
   }
 
   configuration {

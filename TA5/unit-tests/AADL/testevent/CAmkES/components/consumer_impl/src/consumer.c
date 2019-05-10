@@ -6,22 +6,14 @@
 
 #include <camkes.h>
 #include <stdio.h>
+#include <sb_consumer_impl.h>
 
 void testevent_consumer_component_init(const int64_t *in_arg) {
-  printf("[Consumer] Registering callback...\n");
-  if ( s_reg_callback(&handler,NULL) ) {
-      printf("[Consumer] Error: Initial callback registration failed");
-  }
+  printf("testevent_consumer_component_init called\n");
 }
 
-void testevent_consumer_s_event_handler(const int8_t *in_arg) {
-  static int fired = 0;
+void testevent_consumer_s_event_handler() {
 
   printf("[Consumer] Callback fired.\n");
-  if (!fired) {
-    fired = 1;
-    if (s_reg_callback(&handler,NULL)) {
-        printf("[Consumer] Error: Callback registration failed");
-    }
-  }
+
 }

@@ -1,4 +1,4 @@
 procedure int8_t_writer {
-  include <tb_proc_types.h>;
+  include <sb_proc_types.h>;
   bool write_int8_t(refin int8_t arg);
 };
