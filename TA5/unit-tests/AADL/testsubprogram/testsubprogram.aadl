@@ -1,24 +1,50 @@
 package testsubprogram
-public
-	subprogram group service_it
-	end service_it;
-	
-	thread source_t
-		features
-			call_server: requires subprogram group access service_it;
-	end source_t;
+public 
+	with Base_Types;
+	with SB_SYS;
 
-	thread implementation source_t.impl
-	end source_t.impl;
-	
-	thread destination_t
+	subprogram add_uint32
 		features
-			service: provides subprogram group access service_it;
-	end destination_t;
+			A: in parameter Base_Types::Unsigned_32;
+			B: in parameter Base_Types::Unsigned_32;
+			result: out parameter Base_Types::Unsigned_32;
+	end add_uint32;
 
-	thread implementation destination_t.impl
-	end destination_t.impl;
-	
+	subprogram subtract_uint32
+		features
+			A: in parameter Base_Types::Unsigned_32;
+			B: in parameter Base_Types::Unsigned_32;
+			result: out parameter Base_Types::Unsigned_32;
+	end subtract_uint32;
+
+	subprogram group operations_interface
+		features
+			add: provides subprogram access add_uint32;
+			subtract: provides subprogram access subtract_uint32;  
+	end operations_interface;
+
+	thread sender
+		features
+			operations: requires subprogram group access operations_interface;
+	end sender;
+
+	thread implementation sender.impl
+		properties 
+			Source_Text => ("behavior_code/components/sender/src/sender.c");
+			Initialize_Entrypoint_Source_Text => "sender_init";
+			SB_SYS::Compute_Entrypoint_Source_Text => ("run_sender");
+	end sender.impl;
+ 
+	thread receiver
+		features
+			operations: provides subprogram group access operations_interface;
+	end receiver;
+
+	thread implementation receiver.impl
+		properties 
+			Source_Text => ("behavior_code/components/receiver/src/receiver.c");
+	end receiver.impl;
+
 	processor proc
 	end proc;
 
@@ -30,11 +56,17 @@ public
 
 	process implementation top_process.impl
 		subcomponents
-			source_inst: thread source_t.impl;
-			destination_inst: thread destination_t.impl;
+			source_inst: thread sender.impl;
+			destination_inst: thread receiver.impl;
+			subgroup: subprogram group operations_interface;
+			sub1: subprogram add_uint32;
+			sub2: subprogram subtract_uint32;
+		connections
+			source_to_destination :
+				subprogram group access
+					source_inst.operations -> destination_inst.operations;
 	end top_process.impl;
-	
-	
+
 	system top
 	end top;
 	
