@@ -1,0 +1,3 @@
+procedure subtract_uint32 {
+  void sub2(in Unsigned_32 A,in Unsigned_32 B,out Unsigned_32 result);
+};

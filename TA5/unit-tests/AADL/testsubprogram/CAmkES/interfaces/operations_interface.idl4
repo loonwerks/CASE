@@ -1,0 +1,4 @@
+procedure operations_interface {
+  void add(in uint32_t A,in uint32_t B,out uint32_t result);
+  void subtract(in uint32_t A,in uint32_t B,out uint32_t result);
+};
