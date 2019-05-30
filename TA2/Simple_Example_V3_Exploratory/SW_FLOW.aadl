@@ -13,7 +13,8 @@ public
 
     thread UARTDriver extends SW::UARTDriver
         flows
-            status_source : flow source status;        
+            status_source : flow source status;  
+            mission_window_sink : flow sink mission_window; 
     end UARTDriver;
 
     thread implementation UARTDRiver.Impl extends SW::UARTDriver.Impl
@@ -25,6 +26,7 @@ public
 		flows
 			recv_data_to_mission_command : flow path recv_data -> mission_command;
 			recv_data_to_gimbal_command : flow path recv_data -> gimbal_command;
+			status_sink: flow sink status;
     end RadioDriver;
 
     thread implementation RadioDriver.Impl extends SW::RadioDriver.Impl
@@ -33,10 +35,20 @@ public
     thread FlightPlanner extends SW::FlightPlanner
     	flows
     		recv_map_to_flight_plan: flow path recv_map -> flight_plan;
+    		position_status_to_flight_plan: flow path position_status -> flight_plan;
     end FlightPlanner;
     
     thread implementation FlightPlanner.Impl extends SW::FlightPlanner.Impl
     end FlightPlanner.Impl;
+    
+    thread WaypointManager extends SW::WaypointManager
+    	flows
+            flight_plan_to_mission_window : flow path flight_plan -> mission_window;	
+            position_status_to_mission_window : flow path position_status -> mission_window;	
+    end WaypointManager;
+    
+    thread implementation WaypointManager.Impl extends SW::WaypointManager.Impl    
+    end WaypointManager.Impl;
     
     thread CameraManager extends SW::CameraManager
         -- The CameraManager determines the gimbal settings for the onboard camera based on the current position of the UAV and the mission.
@@ -72,6 +84,7 @@ public
         subcomponents
             RADIO: refined to thread RadioDriver.Impl;
             FPLN: refined to thread FlightPlanner.Impl;
+            WPM: refined to thread WaypointManager.Impl;
             CM: refined to thread CameraManager.Impl;
             UART: refined to thread UARTDriver.Impl;
             WIFI: refined to thread WifiDriver.Impl;
@@ -87,9 +100,11 @@ public
                                        RADIO.recv_data_to_gimbal_command -> c22 -> 
                                        CM.recv_gimbal_command_to_gimbal_command -> c16 ->
                                        WIFI.gimbal_command_sink;
-            uart_status: end to end flow UART.status_source -> c15 -> 
-                                         CM.position_status_to_gimbal_command -> c16 -> 
-                                         WIFI.gimbal_command_sink;
+            uart_status_CM_WIFI: end to end flow UART.status_source -> c15 -> 
+                                                 CM.position_status_to_gimbal_command -> c16 -> 
+                                                 WIFI.gimbal_command_sink;
+            uart_status_RADIO: end to end flow UART.status_source -> c11 -> RADIO.status_sink;
+            
     end SW.Impl;
     
 end SW_FLOW;
