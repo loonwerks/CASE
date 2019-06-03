@@ -1,0 +1,15 @@
+--------------------------------------------------------------------------------------------------------------
+-- This task provides the capability to position vehicle to provide best reach back communications to others.
+--------------------------------------------------------------------------------------------------------------
+package CommRelayTask_Pkg
+public
+	with TaskServiceBase_Pkg;
+	
+	thread CommRelayTask extends TaskServiceBase_Pkg::TaskServiceBase
+					
+		properties
+            Dispatch_Protocol => Sporadic;
+ 
+	end CommRelayTask;
+	
+end CommRelayTask_Pkg;

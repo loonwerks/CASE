@@ -1,0 +1,26 @@
+package AssignmentTreeBranchBoundService_Pkg
+public
+	with CMASI;
+	with ServiceBase_Pkg;
+	with UXTASK;
+	
+	-----------------------------------------------------------------------------------
+	-- This service calculates assignments of vehicles to tasks based on cost inputs.
+	-----------------------------------------------------------------------------------
+	thread AssignmentTreeBranchBoundService extends ServiceBase_Pkg::ServiceBase
+		features
+			-- Subscribed Messages
+			UniqueAutomationRequest : in data port UXTASK::UniqueAutomationRequest.i;
+			TaskPlanOptions : in data port UXTASK::TaskPlanOptions.i;
+			AssignmentCostMatrix : in data port UXTASK::AssignmentCostMatrix.i;
+			
+			-- Sent Messages
+			ServiceStatus : out data port CMASI::ServiceStatus.i;
+			TaskAssignmentSummary : out data port UXTASK::TaskAssignmentSummary.i;			
+
+        properties
+            Dispatch_Protocol => Sporadic;
+
+	end AssignmentTreeBranchBoundService;
+
+end AssignmentTreeBranchBoundService_Pkg;

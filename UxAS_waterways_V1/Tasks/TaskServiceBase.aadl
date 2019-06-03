@@ -1,0 +1,37 @@
+package TaskServiceBase_Pkg
+public
+	with CMASI;
+	with ROUTE;
+	with UXTASK;
+	with VEHICLES;
+	
+	--------------------------------------------------------------------------------------
+	-- This is the base class for UxAS tasks. It aggregates functionality required to
+	-- implement task options.
+	--------------------------------------------------------------------------------------
+	abstract TaskServiceBase
+		features
+			-- Subscribed Messages
+			EntityState : in data port CMASI::EntityState;
+			EntityConfiguration : in data port CMASI::EntityConfiguration;
+			AirVehicleState : in data port CMASI::AirVehicleState;
+			AirVehicleConfiguration : in data port CMASI::AirVehicleConfiguration;
+			GroundVehicleState : in data port VEHICLES::GroundVehicleState;
+			GroundVehicleConfiguration : in data port VEHICLES::GroundVehicleConfiguration;
+			SurfaceVehicleState : in data port VEHICLES::SurfaceVehicleState;
+			SurfaceVehicleConfiguration : in data port VEHICLES::SurfaceVehicleConfiguration;
+			UniqueAutomationRequest : in data port UXTASK::UniqueAutomationRequest;
+			UniqueAutomationResponse : in data port UXTASK::UniqueAutomationResponse;
+			RoutePlanResponse : in data port ROUTE::RoutePlanResponse;
+			TaskImplementationRequest : in data port UXTASK::TaskImplementationRequest;
+			
+			-- Sent Messages
+			TaskInitialized : out data port UXTASK::TaskInitialized;
+			TaskActive : out data port UXTASK::TaskActive;
+			TaskComplete : out data port UXTASK::TaskComplete;
+			RoutePlanRequest : out data port ROUTE::RoutePlanRequest;
+			TaskPlanOptions : out data port UXTASK::TaskPlanOptions;
+			TaskImplementationResponse : out data port UXTASK::TaskImplementationResponse; 
+	end TaskServiceBase;
+	
+end TaskServiceBase_Pkg;

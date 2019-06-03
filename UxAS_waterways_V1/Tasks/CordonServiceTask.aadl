@@ -1,0 +1,24 @@
+-----------------------------------------------------------------------------------------------------------------------
+-- This task provides the capability to seal-off intersection by strategically placing vehicles in blocking positions
+-----------------------------------------------------------------------------------------------------------------------
+package CordonServiceTask_Pkg
+public
+	with ROUTE;
+	
+	with TaskServiceBase_Pkg;
+	
+	thread CmasiLineSearchTask extends TaskServiceBase_Pkg::TaskServiceBase
+		features
+			-- Subscribed Messages
+			EgressRouteResponse : in data port ROUTE::EgressRouteResponse;
+			RouteResponse : in data port ROUTE::RouteResponse;
+			
+			-- Sent Messages
+			EgressRouteRequest : out data port ROUTE::EgressRouteRequest;
+			
+		properties
+            Dispatch_Protocol => Sporadic;
+ 
+	end CmasiLineSearchTask;
+	
+end CordonServiceTask_Pkg;

@@ -1,0 +1,100 @@
+package Waterways_UxAS
+public
+	with CMASI;
+	
+	-- Included Main Services
+	with AssignmentTreeBranchBoundService_Pkg;
+	with AutomationRequestValidatorService_Pkg;	
+	with AutomationDiagramDataService_Pkg;
+	with PlanBuilderService_Pkg;
+    with RouteAggregatorService_Pkg;
+	with RoutePlannerVisibilityService_Pkg;
+	with TaskManagerService_Pkg;
+	with WaypointPlanManagerService_Pkg;
+	
+	-- Included Logging and Data Services
+	with MessageLoggerDataService_Pkg;
+	with SendMessagesService_Pkg;
+	
+	with UxAS;
+		
+	process Waterways extends UxAS::UxAS
+		features
+			AutomationRequest : in data port CMASI::AutomationRequest.i;
+			AirVehicleConfiguration : in data port CMASI::AirVehicleConfiguration.i;
+			AirVehicleState : in data port CMASI::AirVehicleState.i;
+			LineSearch: in data port CMASI::LineSearch.i;
+			MissionCommand_in : in data port CMASI::MissionCommand.i;
+			MissionCommand_out : out data port CMASI::MissionCommand.i;
+			GimbalStareAction : out data port CMASI::GimbalStareAction.i;
+			AutomationResponse : out data port CMASI::AutomationResponse.i;
+	end Waterways;
+	
+	process implementation Waterways.i 
+		subcomponents
+            AutomationRequestValidatorService: thread AutomationRequestValidatorService_Pkg::AutomationRequestValidatorService;
+			TaskManagerService: thread TaskManagerService_Pkg::TaskManagerService;
+            RouteAggregatorService: thread RouteAggregatorService_Pkg::RouteAggregatorService;
+            RoutePlannerVisibilityService: thread RoutePlannerVisibilityService_Pkg::RoutePlannerVisibilityService;
+            AssignmentTreeBranchBoundService: thread AssignmentTreeBranchBoundService_Pkg::AssignmentTreeBranchBoundService;
+            PlanBuilderService: thread PlanBuilderService_Pkg::PlanBuilderService;
+            WaypointPlanManagerService: thread WaypointPlanManagerService_Pkg::WaypointPlanManagerService;            
+            AutomationDiagramDataService: thread AutomationDiagramDataService_Pkg::AutomationDiagramDataService;
+            
+            SendMessagesService: thread SendMessagesService_Pkg::SendMessagesService;
+            MessageLoggerDataService: thread MessageLoggerDataService_Pkg::MessageLoggerDataService;
+            
+		connections
+			
+			------------------------------------------------------------------------------------------------------------------
+			-- Connections between the ground station (or controller) and the UxAS instances, and connections between UxAS
+			-- services. The connections reflect the message sequence flow defined for this example. The message sequence flow 
+			-- has 4 states: Initialization, Assignment, Implementation, and Execution. The connections are group and labeled 
+			-- based on the state(s) in which the messages occur.
+			------------------------------------------------------------------------------------------------------------------
+			
+			------------------
+			-- Initialization
+			------------------
+			c_init_01 : port AirVehicleConfiguration -> RouteAggregatorService.AirVehicleConfiguration;
+			c_init_02 : port AirVehicleConfiguration -> RoutePlannerVisibilityService.AirVehicleConfiguration;
+			c_init_03 : port AirVehicleConfiguration -> TaskManagerService.AirVehicleConfiguration;
+			c_init_04 : port AirVehicleConfiguration -> AutomationRequestValidatorService.AirVehicleConfiguration;
+			
+			c_init_05 : port AirVehicleState -> WaypointPlanManagerService.AirVehicleState;
+			c_init_06 : port AirVehicleState -> RoutePlannerVisibilityService.AirVehicleState;
+			c_init_07 : port AirVehicleState -> PlanBuilderService.AirVehicleState;
+			c_init_08 : port AirVehicleState -> TaskManagerService.AirVehicleState;
+			c_init_09 : port AirVehicleState -> AutomationRequestValidatorService.AirVehicleState;
+			
+			c_init_10 : port MissionCommand_in -> TaskManagerService.MissionCommand;
+			
+			--------------
+			-- Assignment
+			--------------			
+			c_asn_01 : port AutomationRequest -> AutomationRequestValidatorService.AutomationRequest;
+			c_asn_02 : port AutomationRequestValidatorService.UniqueAutomationRequest -> RouteAggregatorService.UniqueAutomationResquest;			
+			c_asn_03 : port AutomationRequestValidatorService.UniqueAutomationRequest -> AssignmentTreeBranchBoundService.UniqueAutomationRequest;
+			c_asn_04 : port AutomationRequestValidatorService.UniqueAutomationRequest -> PlanBuilderService.UniqueAutomationRequest;						
+			c_asn_05 : port AutomationRequestValidatorService.UniqueAutomationRequest -> AutomationDiagramDataService.UniqueAutomationRequest;
+
+			c_asn_96 : port RouteAggregatorService.RoutePlanRequest -> RoutePlannerVisibilityService.RoutePlanRequest;
+            c_asn_97 : port RoutePlannerVisibilityService.RoutePlanResponse -> RouteAggregatorService.RoutePlanResponse;
+       		c_asn_98 : port RouteAggregatorService.AssignmentCostMatrix -> AssignmentTreeBranchBoundService.AssignmentCostMatrix;
+       		c_asn_99 : port AssignmentTreeBranchBoundService.TaskAssignmentSummary -> PlanBuilderService.TaskAssignmentSummary;
+       		
+        	-------------------
+       		-- Implementation
+       		-------------------
+  			c_impl_01 : port PlanBuilderService.UniqueAutomationResponse -> AutomationRequestValidatorService.UniqueAutomationResponse;
+			c_impl_02 : port PlanBuilderService.UniqueAutomationResponse -> AutomationDiagramDataService.UniqueAutomationResponse;
+        	c_impl_03 : port AutomationRequestValidatorService.AutomationResponse -> AutomationResponse;
+       		
+       		-------------
+       		-- Execution
+       		-------------
+       		c_exec_01 : port WaypointPlanManagerService.MissionCommand_out -> MissionCommand_out;
+				
+	end Waterways.i;
+	
+end Waterways_UxAS;

@@ -1,0 +1,10 @@
+package ServiceBase_Pkg
+public
+	
+	-------------------------------------------------------------
+	-- ServiceBase is the base abstract for all UxAS services.
+	-------------------------------------------------------------
+	thread ServiceBase
+	end ServiceBase;
+	
+end ServiceBase_Pkg;

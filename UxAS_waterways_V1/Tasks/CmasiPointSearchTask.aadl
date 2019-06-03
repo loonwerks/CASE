@@ -1,0 +1,21 @@
+---------------------------------------------------------------------------------------------------------
+-- This task provides the ability to obtain imagery of a point from a specified distance and direction.
+---------------------------------------------------------------------------------------------------------
+package CmasiPointSearchTask_Pkg
+public
+	with CMASI;
+	
+	with TaskServiceBase_Pkg;
+	
+	thread CmasiPointSearchTask extends TaskServiceBase_Pkg::TaskServiceBase
+		features
+
+			-- Sent Messages
+			VehicleActionCommand : out data port CMASI::VehicleActionCommand;
+			
+		properties
+            Dispatch_Protocol => Sporadic;
+ 
+	end CmasiPointSearchTask;
+	
+end CmasiPointSearchTask_Pkg;

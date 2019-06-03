@@ -1,0 +1,21 @@
+------------------------------------------------------------------------------
+-- This task provides the capability to maintain "eyes-on" a  VIP or enemy.
+------------------------------------------------------------------------------
+package OverwatchTask_Pkg
+public
+	with CMASI;
+	
+	with TaskServiceBase_Pkg;
+	
+	thread OverwatchTask extends TaskServiceBase_Pkg::TaskServiceBase
+		features
+				
+			-- Sent Messages
+			VehicleActionCommand : out data port CMASI::VehicleActionCommand;
+				
+		properties
+            Dispatch_Protocol => Sporadic;
+ 
+	end OverwatchTask;
+	
+end OverwatchTask_Pkg;

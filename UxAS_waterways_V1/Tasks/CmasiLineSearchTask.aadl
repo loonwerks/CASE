@@ -1,0 +1,27 @@
+--------------------------------------------------------------------------------------------------------------
+-- This task provides the ability to match desired camera angle, automatically steer camera during execution.
+--------------------------------------------------------------------------------------------------------------
+package CmasiLineSearchTask_Pkg
+public
+	with CMASI;
+	with UXTASK;
+	with UXNATIVE;
+	
+	with TaskServiceBase_Pkg;
+	
+	thread CmasiLineSearchTask extends TaskServiceBase_Pkg::TaskServiceBase
+		features
+			-- Subscribed Messages
+			SensorFootprintResponse : in data port UXTASK::SensorFootprintResponse;
+			
+			-- Sent Messages
+			VehicleActionCommand : out data port CMASI::VehicleActionCommand;
+			SensorFootprintRequest : out data port UXTASK::SensorFootprintRequests;
+			VideoRecord : out data port UXNATIVE::VideoRecord;
+			
+		properties
+            Dispatch_Protocol => Sporadic;
+ 
+	end CmasiLineSearchTask;
+	
+end CmasiLineSearchTask_Pkg;

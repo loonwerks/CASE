@@ -1,0 +1,18 @@
+package AutoPilotAdapterService_Pkg
+public
+	with ServiceBase_Pkg;
+	with ROUTE;
+	
+	thread AutopilotAdapterService extends ServiceBase_Pkg::ServiceBase
+		features
+			--modeled as a list of waypoints for the autopilot to fly 
+			
+			--subscribed messages input as ZeroMQ messages
+			UxAS_Cmds: in data port ROUTE::RoutePlan.i;
+			
+			--sent messages, unique to the AP over serial
+			Autopilot_Cmds: feature group;
+		properties
+			Dispatch_Protocol => Sporadic;
+	end AutopilotAdapterService;
+end AutoPilotAdapterService_Pkg;

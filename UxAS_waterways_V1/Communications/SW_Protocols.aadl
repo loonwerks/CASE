@@ -1,0 +1,21 @@
+package SW_Protocols
+public
+	
+	virtual bus zeroMQ		
+	end zeroMQ;
+	
+	virtual bus implementation zeroMQ.i
+	end zeroMQ.i;
+	
+	virtual bus zyre		
+	end zyre;
+	
+	virtual bus implementation zyre.i
+	end zyre.i;
+	
+	virtual bus serial
+	end serial;
+	
+	virtual bus implementation serial.i
+	end serial.i;
+end SW_Protocols;

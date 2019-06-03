@@ -1,0 +1,33 @@
+package WaypointPlanManagerService_Pkg
+public
+	with CMASI;
+	with UXNATIVE;
+	with ServiceBase_Pkg;
+	
+	---------------------------------------------------------------------------------------------------------------------
+	-- A service that serves plans to a vehicle interface.
+    -- 	1) Receive AutomationResponse/MissionCommand/VehicalActionCommand
+	-- 	2) Find MissionCommand or VehicalActionCommand for configured ID 
+	-- 	3a) Either:
+	-- 		Re/Initialize waypoint manager, send Mission commands based on AirVehicleState
+	-- 	3b) Or:
+	-- 		If VehicalActionCommand commands a change in the vehicle's course, then suspend serving waypoints.
+	-- 		Send VehicalActionCommand command
+	-- 	4) On command, resume serving waypoints
+	---------------------------------------------------------------------------------------------------------------------
+	thread WaypointPlanManagerService extends ServiceBase_Pkg::ServiceBase
+		features
+			-- Subscribed Messages
+			AutomationResponse: in data port CMASI::AutomationResponse.i;
+			AirVehicleState: in data port CMASI::AirVehicleState.i;
+			IncrementWaypoint : in data port UXNATIVE::IncrementWaypoint.i;
+			MissionCommand_in: in data port CMASI::MissionCommand.i;
+			
+			-- Sent Messages
+			MissionCommand_out : out data port CMASI::MissionCommand.i;
+						
+		properties
+			Dispatch_Protocol => Sporadic;
+	end WaypointPlanManagerService;
+	
+end WaypointPlanManagerService_Pkg;

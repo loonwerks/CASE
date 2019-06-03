@@ -1,0 +1,10 @@
+package AssignmentCoordinatorTask_Pkg
+public
+    with TaskServiceBase_Pkg;
+    
+    thread AssignmentCoordinatorTask extends TaskServiceBase_Pkg::TaskServiceBase
+        properties
+            Dispatch_Protocol => Sporadic;
+    end AssignmentCoordinatorTask;
+	
+end AssignmentCoordinatorTask_Pkg;

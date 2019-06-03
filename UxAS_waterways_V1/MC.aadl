@@ -1,0 +1,138 @@
+package MC
+public
+	
+	with COMMS;
+	with UAS_Buses;
+	with CASE_Model_Transformations;
+	with Waterways_UxAS;
+	
+	
+	-- The radio communication hardware
+	device Radio
+		features
+			MCA: requires bus access MC_Bus.Impl;
+			RFA: requires bus access UAS_Buses::RF_Bus.Impl;
+			recv_data_in: in event data port;
+			recv_data_out: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			send_data_in: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			send_data_out: out event data port;
+	end Radio;
+	
+	device implementation Radio.Impl	
+	end Radio.Impl;
+
+
+	-- The serial communication hardware
+	device UART
+		features
+			MCA: requires bus access MC_Bus.Impl;
+			UART: requires bus access UAS_Buses::Serial_Bus.Impl;
+			recv_data_in: in event data port;
+			recv_data_out: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			send_data_in: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			send_data_out: out event data port;
+	end UART;
+	
+	device implementation UART.Impl
+	end UART.Impl;
+
+
+	-- The Mission Computer processor
+	processor MC_Proc
+		features
+			MCA: requires bus access MC_Bus.Impl;			
+	end MC_Proc;
+	
+	processor implementation MC_Proc.Impl
+	end MC_Proc.Impl;
+	
+	
+	-- The Mission Computer RAM
+	memory MC_Mem
+		features
+			MCA: requires bus access MC_Bus.Impl;		
+	end MC_Mem;
+	
+	memory implementation MC_Mem.Impl
+	end MC_Mem.Impl;
+	
+	
+	-- The Mission Computer on-board bus
+	bus MC_Bus
+	end MC_Bus;
+	
+	bus implementation MC_Bus.Impl
+	end MC_Bus.Impl;
+
+
+	-- The MissionComputer onboard the UAV
+	system MissionComputer
+		
+		features
+			radio_recv: in event data port;
+			radio_send: out event data port;
+			fc_uart_recv: in event data port;
+			fc_uart_send: out event data port;
+			gc_uart_recv: in event data port;
+            gc_uart_send: out event data port;
+			FC_UART: requires bus access UAS_Buses::Serial_Bus.Impl;
+			GC_UART: requires bus access UAS_Buses::Serial_Bus.Impl;
+			RFA: requires bus access UAS_Buses::RF_Bus.Impl;
+
+	end MissionComputer;
+	
+	system implementation MissionComputer.Impl
+		
+		subcomponents
+			RADIO_HW: device Radio.Impl;
+			FC_UART_HW: device UART.Impl;
+			GC_UART_HW: device UART.Impl;
+			PROC_HW: processor MC_Proc.Impl;
+			MEM_HW: memory MC_Mem.Impl;
+			BUS_HW: bus MC_Bus.Impl;
+			PROC_UxAS: process Waterways_UxAS::Waterways.i;
+			PROC_COMMS: process COMMS::COMMS.Impl;
+			
+		connections
+			bac1: bus access RADIO_HW.MCA <-> BUS_HW;
+			bac2: bus access FC_UART_HW.MCA <-> BUS_HW;
+			bac3: bus access GC_UART_HW.MCA <-> BUS_HW;
+			bac4: bus access PROC_HW.MCA <-> BUS_HW;
+			bac5: bus access MEM_HW.MCA <-> BUS_HW;
+			bac6: bus access RADIO_HW.RFA <-> RFA;
+			bac7: bus access FC_UART_HW.UART <-> FC_UART;
+			bac8: bus access GC_UART_HW.UART <-> GC_UART;
+			
+			c1: port radio_recv -> RADIO_HW.recv_data_in;
+			c2: port RADIO_HW.recv_data_out -> PROC_COMMS.radio_recv;
+			c3: port PROC_COMMS.radio_send -> RADIO_HW.send_data_in;
+			c4: port RADIO_HW.send_data_out -> radio_send;
+			c5: port fc_uart_recv -> FC_UART_HW.recv_data_in;
+			c6: port FC_UART_HW.recv_data_out -> PROC_COMMS.fc_uart_recv;
+			c7: port PROC_COMMS.fc_uart_send -> FC_UART_HW.send_data_in;
+			c8: port FC_UART_HW.send_data_out -> fc_uart_send;
+			
+			-- GC UART Connections
+			c9: port gc_uart_recv -> GC_UART_HW.recv_data_in;
+            c10: port GC_UART_HW.recv_data_out -> PROC_COMMS.gc_uart_recv;
+            c11: port PROC_COMMS.gc_uart_send -> GC_UART_HW.send_data_in;
+            c12: port GC_UART_HW.send_data_out -> gc_uart_send;
+            
+            c13: port PROC_COMMS.air_vehicle_state -> PROC_UxAS.AirVehicleState;
+            c14: port PROC_UxAS.GimbalStareAction -> PROC_COMMS.gimbal_stare_action;
+            c15: port PROC_UxAS.AutomationResponse -> PROC_COMMS.automation_response;
+            c16: port PROC_UxAS.MissionCommand_out -> PROC_COMMS.mission_command_in;
+            c17: port PROC_COMMS.mission_command_out -> PROC_UxAS.MissionCommand_in;
+            c18: port PROC_COMMS.automation_request -> PROC_UxAS.AutomationRequest;
+            c19: port PROC_COMMS.air_vehicle_configuration -> PROC_UxAS.AirVehicleConfiguration;
+            c20: port PROC_COMMS.line_search -> PROC_UxAS.LineSearch; 
+		
+		properties
+			Actual_Processor_Binding => (reference (PROC_HW)) applies to PROC_COMMS;
+			Actual_Processor_Binding => (reference (PROC_HW)) applies to PROC_UxAS;
+			Actual_Memory_Binding => (reference (MEM_HW)) applies to PROC_COMMS;
+			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7;
+		
+	end MissionComputer.Impl;
+	
+end MC;

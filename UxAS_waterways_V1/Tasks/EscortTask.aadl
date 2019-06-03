@@ -1,0 +1,28 @@
+------------------------------------------------------------------------------
+-- This task provides the capability to maintain "eyes-on" a  VIP or enemy.
+------------------------------------------------------------------------------
+package EscortTask_Pkg
+public
+	with CMASI;
+	with IMPACT;
+	
+	with TaskServiceBase_Pkg;
+	
+	thread EscortTask extends TaskServiceBase_Pkg::TaskServiceBase
+		features
+			-- Subscribed Messages
+			MissionCommand_in : in data port CMASI::MissionCommand;
+			AutomationResponse : in data port CMASI::AutomationResponse;
+			FollowPathCommand : in data port CMASI::FollowPathCommand;
+			LineOfIntereset : in data port IMPACT::LineOfInterest;
+			
+			-- Sent Messages
+			VehicleActionCommand : out data port CMASI::VehicleActionCommand;
+			MissionCommand_out : out data port CMASI::MissionCommand;
+				
+		properties
+            Dispatch_Protocol => Sporadic;
+ 
+	end EscortTask;
+	
+end EscortTask_Pkg;
