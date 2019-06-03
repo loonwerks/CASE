@@ -1,0 +1,14 @@
+-----------------------------------------------------------------------------------------------------------------
+-- This task provides the ability to intercept approaching entities in cooperative formation to impede progress
+-----------------------------------------------------------------------------------------------------------------
+package BlockadeServiceTask_Pkg
+public
+	with TaskServiceBase_Pkg;
+    
+    thread BlockadeTask extends TaskServiceBase_Pkg::TaskServiceBase
+		properties
+            Dispatch_Protocol => Sporadic;
+ 
+    end BlockadeTask;
+	
+end BlockadeServiceTask_Pkg;

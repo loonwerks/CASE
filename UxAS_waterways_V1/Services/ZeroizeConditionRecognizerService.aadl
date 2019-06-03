@@ -1,0 +1,29 @@
+package ZeroizeConditionRecognizer_Pkg
+public
+	with CMASI;
+	with CASE_Messages;
+	with ServiceBase_Pkg;
+	
+	----------------------------------------------------------------------------------------
+	-- This service implements the system zeroize function. It monitors air vehicle state,
+	-- defined keep in/out regions, and operating region to determine conditions for an
+	-- automatic zeroization (if enabled).
+	----------------------------------------------------------------------------------------
+	thread ZeroizeConditionRecognizerService extends ServiceBase_Pkg::ServiceBase
+		features
+			-- Subscribed Messages
+			ZeroizeCondition : in data port CASE_Messages::ZeroizeCondition.i;
+			KeepInZone : in data port CMASI::KeepInZone.i;
+			KeepOutZone : in data port CMASI::KeepOutZone.i;
+			OperatingRegion : in data port CMASI::OperatingRegion.i;
+			AirVehicleState : in data port CMASI::AirVehicleState.i;
+			
+			-- Sent Messages
+			ZeroizeCommand : out data port CASE_Messages::ZeroizeCommand.i;
+						
+		properties
+			Dispatch_Protocol => Sporadic;
+			
+	end ZeroizeConditionRecognizerService;
+	
+end ZeroizeConditionRecognizer_Pkg;

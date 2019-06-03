@@ -1,0 +1,10 @@
+package MessageLoggerDataService_Pkg
+public
+	with ServiceBase_Pkg;
+	
+	thread MessageLoggerDataService extends ServiceBase_Pkg::ServiceBase
+        properties
+            Dispatch_Protocol => Sporadic;
+	end MessageLoggerDataService;
+
+end MessageLoggerDataService_Pkg;

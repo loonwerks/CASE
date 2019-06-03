@@ -1,0 +1,32 @@
+package PlanBuilderService_Pkg
+public
+	with CMASI;
+	with UXTASK;
+	with VEHICLES;
+	with ServiceBase_Pkg;
+	
+	----------------------------------------------------------------------------------------------------------
+	-- A component that constructs plans from assignments. For each assigned task option, in order, request 
+	-- calculation of final waypoint plan. Construct resulting waypoint plans and send automation response.
+	----------------------------------------------------------------------------------------------------------
+	thread PlanBuilderService extends ServiceBase_Pkg::ServiceBase
+		features
+			-- Subscribed Messages 
+			AirVehicleState : in data port CMASI::AirVehicleState.i;
+			GroundVehicleState : in data port VEHICLES::GroundVehicleState.i;
+			SurfaceVehicleState : in data port VEHICLES::SurfaceVehicleState.i;
+			UniqueAutomationRequest : in data port UXTASK::UniqueAutomationRequest.i;
+			TaskAssignmentSummary : in data port UXTASK::TaskAssignmentSummary.i;
+			TaskImplementationRequest : in data port UXTASK::TaskImplementationRequest.i;
+
+			-- Sent Messages
+ 			ServiceStatus : out data port CMASI::ServiceStatus.i;
+			TaskImplementationResponse : out data port UXTASK::TaskImplementationResponse.i;
+			UniqueAutomationResponse : out data port UXTASK::UniqueAutomationResponse.i;	
+					
+		properties			
+            Dispatch_Protocol => Sporadic;
+            
+	end PlanBuilderService;
+	
+end PlanBuilderService_Pkg;

@@ -1,0 +1,14 @@
+package Test_SimulationTimeService_Pkg
+public
+	with CMASI;
+	with ServiceBase_Pkg;
+	
+	thread Test_SimulationTimeService extends ServiceBase_Pkg::ServiceBase
+		features
+			-- Subscribed Messages 
+			AirVehicleState : in data port CMASI::AirVehicleState.i;
+        properties
+            Dispatch_Protocol => Sporadic;
+	end Test_SimulationTimeService;
+
+end Test_SimulationTimeService_Pkg;

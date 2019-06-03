@@ -1,0 +1,51 @@
+---------------------------------------------------------------------------------------------------------------------------
+-- Checks all elements of automation requests to make sure they are present before sending out a UniqueAutomationRequest.
+---------------------------------------------------------------------------------------------------------------------------
+package AutomationRequestValidatorService_Pkg
+
+public
+	with CMASI;
+	with IMPACT;
+	with UXTASK;
+	with VEHICLES;
+
+	with ServiceBase_Pkg;
+
+	----------------------------------------------------------------------------------------------------
+    -- The objective of the Automation Request Validator service is to ensure that a request
+	-- can be fulfilled given the current state of received messages. For example, an
+	-- Automation Request that includes a task that has not yet been defined. In addition
+ 	-- to checking for appropriately formed requests, the Automation Request Validator will
+	-- abandon an attempt to fulfill a request if the system exceeds a pre-defined time threshold.
+    ----------------------------------------------------------------------------------------------------
+	thread AutomationRequestValidatorService extends ServiceBase_Pkg::ServiceBase
+		features
+			-- Subscribed Messages
+			AutomationRequest : in data port CMASI::AutomationRequest.i;
+			ImpactAutomationRequest: in data port IMPACT::ImpactAutomationRequest.i;
+			UniqueAutomationResponse: in data port UXTASK::UniqueAutomationResponse.i;
+			TaskAutomationRequest: in data port UXTASK::TaskAutomationRequest.i;
+			AirVehicleConfiguration: in data port CMASI::AirVehicleConfiguration.i;
+			GroundVehicleConfiguration: in data port VEHICLES::GroundVehicleConfiguration.i;
+			SurfaceVehicleConfiguration: in data port VEHICLES::SurfaceVehicleConfiguration.i;
+			AirVehicleState: in data port CMASI::AirVehicleState.i;
+			GroundVehicleState: in data port VEHICLES::GroundVehicleState.i;
+			SurfaceVehicleState: in data port VEHICLES::SurfaceVehicleState.i;
+			RemoveTasks: in data port CMASI::RemoveTasks.i;
+			TaskInitialized: in data port UXTASK::TaskInitialized.i;
+			OperatingRegion: in data port CMASI::OperatingRegion.i;
+			KeepInZone: in data port CMASI::KeepInZone.i;
+			KeepOutZone: in data port CMASI::KeepOutZone.i;
+			
+			-- Sent Messages 
+			TaskAutomationResponse: out data port UXTASK::TaskAutomationResponse.i;
+			AutomationResponse: out data port CMASI::AutomationResponse.i;
+			ImpactAutomationResponse: out data port IMPACT::ImpactAutomationResponse.i;
+			UniqueAutomationRequest: out data port UXTASK::UniqueAutomationRequest.i;
+			ServiceStatus: out data port CMASI::ServiceStatus.i;
+			
+		properties
+			Dispatch_Protocol => Sporadic;
+	end AutomationRequestValidatorService;
+	
+end AutomationRequestValidatorService_Pkg;

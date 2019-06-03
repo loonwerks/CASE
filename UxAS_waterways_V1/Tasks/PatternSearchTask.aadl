@@ -1,0 +1,26 @@
+package PatternSearchTask
+public
+	with CMASI;
+	with ROUTE;
+	with UXTASK;
+	with UXNATIVE;
+	
+	with TaskServiceBase_Pkg;
+	
+	thread PatternSearchTask extends TaskServiceBase_Pkg::TaskServiceBase
+		features
+			-- Subscribed Messages
+			SensorFootprintResponse : in data port UXTASK::SensorFootprintResponse;
+			RouteResponse : in data port ROUTE::RouteResponse;
+			
+			-- Sent Messages
+			VehicleActionCommand : out data port CMASI::VehicleActionCommand;
+			SensorFootprintRequest : out data port UXTASK::SensorFootprintRequests;
+			VideoRecord : out data port UXNATIVE::VideoRecord;
+			
+		properties
+            Dispatch_Protocol => Sporadic;
+ 
+	end PatternSearchTask;
+	
+end PatternSearchTask;

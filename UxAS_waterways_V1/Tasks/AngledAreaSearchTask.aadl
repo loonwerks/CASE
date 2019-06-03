@@ -1,0 +1,22 @@
+package AngledAreaSearchTask_Pkg
+public
+	with ROUTE;
+	with UXTASK;
+	
+	with TaskServiceBase_Pkg;
+	
+	thread AngledAreaSearchTask extends TaskServiceBase_Pkg::TaskServiceBase
+		features
+			-- Subscribed Messages
+			SensorFootprintResponse : in data port UXTASK::SensorFootprintResponse;
+			RouteResponse : in data port ROUTE::RouteResponse;
+			
+			-- Sent Messages
+			SensorFootprintRequest : out data port UXTASK::SensorFootprintRequests;
+			
+		properties
+            Dispatch_Protocol => Sporadic;
+ 
+	end AngledAreaSearchTask;
+	
+end AngledAreaSearchTask_Pkg;

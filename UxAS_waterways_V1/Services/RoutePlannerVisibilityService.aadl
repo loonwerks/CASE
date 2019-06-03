@@ -1,0 +1,39 @@
+package RoutePlannerVisibilityService_Pkg
+public
+	with CMASI;
+	with ROUTE;
+	with VEHICLES;
+	with ServiceBase_Pkg;
+	
+	---------------------------------------------------------------------------------------------------------
+	-- A component that constructs plans/costs to be used for assignments.
+	--	1) Receive KeepInZones/KeepOutZones/Tasks/RoutePlanRequests
+ 	-- 	2) Build/Maintain Base Visibility Graph (Euclidean) from KeepInZones/KeepOutZones
+	--	3) Construct, and send out, a RoutePlanResponse which includes minimum path lengths from each 
+	--     vehicle to each task and from each task to every other task.
+	-- 	4) Construct, and send out, a response which includes minimum waypoint paths for each plan request.
+ 	---------------------------------------------------------------------------------------------------------
+	thread RoutePlannerVisibilityService extends ServiceBase_Pkg::ServiceBase
+		features
+			-- Subscribed Messages 
+			KeepOutZone : in data port CMASI::KeepOutZone.i;
+			KeepInZone : in data port CMASI::KeepInZone.i;
+			OperatingRegion : in data port CMASI::OperatingRegion.i;
+			AirVehicleConfiguration : in data port CMASI::AirVehicleConfiguration.i;
+			GroundVehicleConfiguration : in data port VEHICLES::GroundVehicleConfiguration.i;
+			SurfaceVehicleConfiguration : in data port VEHICLES::SurfaceVehicleConfiguration.i;
+			RoutePlanRequest : in data port ROUTE::RoutePlanRequest.i;
+			AirVehicleState : in data port CMASI::AirVehicleState.i;
+			GroundVehicleState : in data port VEHICLES::GroundVehicleState.i;
+			SurfaceVehicleState : in data port VEHICLES::SurfaceVehicleState.i;
+			RouteRequest : in data port ROUTE::RouteRequest.i;
+			
+			-- Sent Messages
+			RoutePlanResponse : out data port ROUTE::RoutePlanResponse.i;
+			
+        properties
+            Dispatch_Protocol => Sporadic;
+            
+	end RoutePlannerVisibilityService;
+	
+end RoutePlannerVisibilityService_Pkg;

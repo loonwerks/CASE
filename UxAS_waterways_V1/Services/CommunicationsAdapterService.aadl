@@ -1,0 +1,12 @@
+package CommunicationsAdapterService_Pkg
+public
+	with ServiceBase_Pkg;
+	
+	thread CommAdapterService extends ServiceBase_Pkg::ServiceBase
+		features
+			Ground_Controller_IO: feature group;
+		properties
+			Dispatch_Protocol => Sporadic;
+	end CommAdapterService;
+	
+end CommunicationsAdapterService_Pkg;

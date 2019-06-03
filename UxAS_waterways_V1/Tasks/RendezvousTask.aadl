@@ -1,0 +1,13 @@
+--------------------------------------------------------------------------------------------------------------------
+-- This task will synchronize all involved vehicles at a specified location (or set of locations) at the same time.
+--------------------------------------------------------------------------------------------------------------------
+package RendezvousTask_Pkg
+public
+	with TaskServiceBase_Pkg;
+	
+	 thread RendezvousTask extends TaskServiceBase_Pkg::TaskServiceBase
+        properties
+            Dispatch_Protocol => Sporadic;
+    end RendezvousTask;
+	
+end RendezvousTask_Pkg;

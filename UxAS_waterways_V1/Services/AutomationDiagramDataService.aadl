@@ -1,0 +1,32 @@
+package AutomationDiagramDataService_Pkg
+
+public
+	with CMASI;
+	with IMPACT;
+	with UXTASK;
+	with ServiceBase_Pkg;
+	
+	--------------------------------------------------------------------------------------------------
+	-- A component that constructs sensor footprints, calculates GSDs, determine sensor settings.
+	--------------------------------------------------------------------------------------------------
+	thread AutomationDiagramDataService extends ServiceBase_Pkg::ServiceBase
+		features
+			EntityState : in data port CMASI::EntityState.i;
+			OperatingRegion : in data port CMASI::OperatingRegion.i;
+			KeepInZone : in data port CMASI::KeepInZone.i;
+			KeepOutZone : in data port CMASI::KeepOutZone.i;
+			AreaOfInterest : in data port IMPACT::AreaOfInterest.i;
+			LineOfInterest : in data port IMPACT::LineOfInterest.i;
+			PointOfInterest : in data port IMPACT::PointOfInterest.i;
+			UniqueAutomationRequest : in data port UXTASK::UniqueAutomationRequest.i;
+			UniqueAutomationResponse : in data port UXTASK::UniqueAutomationResponse.i;
+			Task : in data port CMASI::Task.i;
+			SensorFootprint : in data port UXTASK::SensorFootprint.i;
+			SensorFootprintRequests : in data port UXTASK::SensorFootprintRequests.i;
+			
+        properties
+            Dispatch_Protocol => Sporadic;
+            
+	end AutomationDiagramDataService;
+	
+end AutomationDiagramDataService_Pkg;

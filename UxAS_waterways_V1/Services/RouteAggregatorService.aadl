@@ -1,0 +1,37 @@
+package RouteAggregatorService_Pkg
+public
+	with CMASI;
+	with ROUTE;
+	with UXTASK;
+	with VEHICLES;	
+	with ServiceBase_Pkg;
+	
+	------------------------------------------------------------------------
+	-- A component that incrementally queries the route planner to build
+ 	-- matrix of plans between all tasks and entity initial points.
+ 	------------------------------------------------------------------------
+	thread RouteAggregatorService extends ServiceBase_Pkg::ServiceBase
+		features
+			-- Subscribed Messages
+			AirVehicleState : in data port CMASI::AirVehicleState.i;
+			GroundVehicleState : in data port VEHICLES::GroundVehicleState.i;
+			SurfaceVehicleState : in data port VEHICLES::SurfaceVehicleState.i;
+			AirVehicleConfiguration : in data port CMASI::AirVehicleConfiguration.i;
+			GroundVehicleConfiguration : in data port VEHICLES::GroundVehicleConfiguration.i;
+			SurfaceVehicleConfiguration : in data port VEHICLES::SurfaceVehicleConfiguration.i;
+			UniqueAutomationResquest : in data port UXTASK::UniqueAutomationRequest.i;
+			TaskPlanOptions : in data port UXTASK::TaskPlanOptions.i;
+			RouteRequest : in data port ROUTE::RouteRequest.i;
+			RoutePlanResponse : in data port ROUTE::RoutePlanResponse.i;			
+			
+			--Sent Messages
+ 			RoutePlanRequest : out data port ROUTE::RoutePlanRequest.i;
+			RouteResponse : out data port ROUTE::RouteResponse.i;
+			AssignmentCostMatrix : out data port UXTASK::AssignmentCostMatrix.i;
+			ServiceStatus : out data port CMASI::ServiceStatus.i;
+			
+		properties			
+            Dispatch_Protocol => Sporadic;
+	end RouteAggregatorService;
+	
+end RouteAggregatorService_Pkg;

@@ -1,0 +1,133 @@
+package COMMS
+public
+
+	with CASE_Properties;
+	with CASE_Model_Transformations;
+	with CMASI;
+
+
+	thread RadioDriver
+		-- The RadioDriver is the software that enables other SW components to communicate to other systems over RF
+		features
+			recv_data: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			
+			air_vehicle_configuration: out event data port CMASI::AirVehicleConfiguration.i;
+			line_search: out event data port CMASI::LineSearch.i;
+            automation_request: out event data port CMASI::AutomationRequest.i;
+            
+            automation_response: in event data port CMASI::AutomationResponse.i;
+            air_vehicle_state: in event data port CMASI::AirVehicleState.i;
+            mission_command_in: in event data port CMASI::MissionCommand.i;
+            mission_command_out: out event data port CMASI::MissionCommand.i;
+		properties
+			CASE_Properties::COMP_TYPE => COMM_DRIVER;
+--		annex agree {**
+--			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
+--		**};
+	end RadioDriver;
+
+	thread implementation RadioDriver.Impl
+	end RadioDriver.Impl;
+
+	thread FC_UART_Driver
+		-- The UARTDriver is the software that enables other SW components to communicate to other systems over the serial connection
+		features
+			air_vehicle_state: out event data port CMASI::AirVehicleState.i;
+			mission_command: in event data port CMASI::MissionCommand.i;
+			
+			recv_data: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			send_data: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+--		annex agree {**
+--			assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(mission_window);
+--			guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data.crc;
+--		**};
+	end FC_UART_Driver;
+
+	thread implementation FC_UART_Driver.Impl
+	end FC_UART_Driver.Impl;
+
+    thread GC_UART_Driver
+        -- The UARTDriver is the software that enables other SW components to communicate to other systems over the serial connection
+    	features
+    		recv_data: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+            send_data: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+            
+            air_vehicle_state: in event data port CMASI::AirVehicleState.i;
+            gimbal_stare_action: in event data port CMASI::GimbalStareAction.i;
+--        annex agree {**
+--            assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(mission_window);
+--            guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data.crc;
+--        **};
+    end GC_UART_Driver;
+
+    thread implementation GC_UART_Driver.Impl
+    end GC_UART_Driver.Impl;
+
+	process COMMS
+		-- The Mission Computer Software process runs all threads
+		features
+			radio_recv: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			radio_send: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			fc_uart_recv: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			fc_uart_send: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			gc_uart_recv: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+            gc_uart_send: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+            
+            air_vehicle_configuration: out event data port CMASI::AirVehicleConfiguration.i;
+            line_search: out event data port CMASI::LineSearch.i;
+            automation_request: out event data port CMASI::AutomationRequest.i;
+            
+            automation_response: in event data port CMASI::AutomationResponse.i;
+            air_vehicle_state: out event data port CMASI::AirVehicleState.i;
+            mission_command_in: in event data port CMASI::MissionCommand.i;
+            mission_command_out: out event data port CMASI::MissionCommand.i;
+            gimbal_stare_action: in event data port CMASI::GimbalStareAction.i;
+--		annex agree {**
+--			guarantee Req001_SW "The Mission Computer shall output a valid mission window to the Flight Controller" : fc_uart_send.crc;
+--		**};
+	end COMMS;
+
+	process implementation COMMS.Impl
+		subcomponents
+			RADIO: thread RadioDriver.Impl;
+			FC_UART: thread FC_UART_Driver.Impl;
+			GC_UART: thread GC_UART_Driver.Impl;
+		connections
+			c1: port radio_recv -> RADIO.recv_data;
+			c2: port RADIO.send_data -> radio_send;
+			c3: port RADIO.air_vehicle_configuration -> air_vehicle_configuration;
+			c4: port RADIO.automation_request -> automation_request;
+			c5: port RADIO.line_search -> line_search;
+			c6: port RADIO.mission_command_out -> mission_command_out;
+			
+			c7: port FC_UART.send_data -> fc_uart_send;
+			c8: port fc_uart_recv -> FC_UART.recv_data;
+			c9: port FC_UART.air_vehicle_state -> air_vehicle_state;
+			c10: port FC_UART.air_vehicle_state -> RADIO.air_vehicle_state;
+			c11: port FC_UART.air_vehicle_state -> GC_UART.air_vehicle_state;
+			c12: port mission_command_in -> FC_UART.mission_command;
+			c13: port mission_command_in -> RADIO.mission_command_in;
+			c14: port automation_response -> RADIO.automation_response;
+			
+			c15: port gc_uart_recv -> GC_UART.recv_data;
+			c16: port GC_UART.send_data -> gc_uart_send;
+			c17: port gimbal_stare_action -> GC_UART.gimbal_stare_action;
+	end COMMS.Impl;
+
+--	annex agree {**
+--		-- ID of this UAV
+--		const CASE_UAV_ID : int = 42;
+--		fun VALID_MESSAGE(msg : RF_Msg.Impl) : bool = (msg.header.src > 0 and msg.header.dst = CASE_UAV_ID and msg.header.HMAC);
+--		fun TRUSTED_MESSAGE(msg : RF_Msg.Impl) : bool = msg.header.trusted;
+--		fun WELL_FORMED_MESSAGE(msg : RF_Msg.Impl) : bool = good_command(msg.payload);
+--		-- These functions check the well-formedness of message structures
+--		fun good_coordinate(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180 and coord.altitude >= 0 and coord.altitude <= 15000;
+--		fun good_map(map : Map) : bool = forall wp in map, good_coordinate(wp);
+--		fun good_pattern(pattern : FlightPattern) : bool = (pattern = enum(FlightPattern, ZigZag)) or (pattern = enum(FlightPattern, StraightLine)) or (pattern = enum(FlightPattern, Perimeter));
+--		fun good_command(cmd : Command.Impl) : bool = good_map(cmd.map) and good_pattern(cmd.pattern);
+--		fun good_mission(mission : Mission) : bool = forall wp in mission, good_coordinate(wp);
+--		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
+--	**};
+	
+end COMMS;

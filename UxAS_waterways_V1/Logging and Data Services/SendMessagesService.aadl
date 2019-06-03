@@ -1,0 +1,14 @@
+package SendMessagesService_Pkg
+public
+	with UXNATIVE;
+	with ServiceBase_Pkg;
+	
+	thread SendMessagesService extends ServiceBase_Pkg::ServiceBase
+		features
+			-- Subscribed Messages 
+			StartupComplete : in data port UXNATIVE::StartupComplete;
+       properties
+            Dispatch_Protocol => Sporadic;
+	end SendMessagesService;
+	
+end SendMessagesService_Pkg;
