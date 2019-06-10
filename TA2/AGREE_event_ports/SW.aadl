@@ -1,11 +1,8 @@
 package SW
 public
 	with Data_Model;
-
 	with Base_Types;
-
 	with CASE_Properties;
-
 	with CASE_Model_Transformations;
 
 	data Coordinate
@@ -129,10 +126,7 @@ public
 			guarantee Req001_FLT "Only well-formed messages shall be forwarded to message destination": WELL_FORMED_MESSAGE(filter_out);
 		**};
 	end CASE_Filter;
-
-	thread implementation CASE_Filter.Impl
-	end CASE_Filter.Impl;
-
+    
 	thread FlightPlanner
 		-- The FlightPlanner is an abstraction for UxAS.
 		-- It accepts a command message containing a map and flight pattern, and generates a mission.
@@ -221,37 +215,7 @@ public
 			guarantee Req001_SW "The Mission Computer shall output a valid mission window to the Flight Controller" : uart_send.crc;**};
 	end SW;
 
-	process implementation SW.Impl1
-		subcomponents
-			RADIO: thread RadioDriver.Impl;
-			FLT: thread CASE_Filter.Impl;
-			FPLN: thread FlightPlanner.Impl;
-			WPM: thread WaypointManager.Impl;
-			CM: thread CameraManager.Impl;
-			UART: thread UARTDriver.Impl;
-			WIFI: thread WifiDriver.Impl;
-			NFDB: thread NoFlyZoneDatabase.Impl;
-		connections
-			c1: port radio_recv -> RADIO.recv_data;
-			c2: port RADIO.send_data -> radio_send;
-			c3: port RADIO.mission_command -> FLT.filter_in;
-			c4: port FLT.filter_out -> FPLN.recv_map;
-			c5: port FPLN.flight_plan -> WPM.flight_plan;
-			c6: port FPLN.request_nofly_zones -> NFDB.map;
-			c7: port NFDB.zones -> FPLN.nofly_zones;
-			c8: port WPM.mission_window -> UART.mission_window;
-			c9: port UART.status -> WPM.position_status;
-			c10: port UART.status -> FPLN.position_status;
-			c11: port UART.status -> RADIO.status;
-			c12: port UART.send_data -> uart_send;
-			c13: port uart_recv -> UART.recv_data;
-			c14: port FPLN.flight_plan -> CM.flight_plan;
-			c15: port UART.status -> CM.position_status;
-			c16: port CM.gimbal_command -> WIFI.gimbal_command;
-			c17: port WIFI.send_data -> wifi_send;
-			c18: port wifi_recv -> WIFI.recv_data;
-	end SW.Impl1;
-
+    -- Fails AGREE analysis because there is no constraint on RadioDriver.mission_command being well-formed.
 	process implementation SW.Impl
 		subcomponents
 			RADIO: thread RadioDriver.Impl;
