@@ -6,7 +6,7 @@ public
 	-- the tasks and services, and associated messages (data), required for that message. The abstract
 	-- UXAS is a generic representation of the UxAS software. 
 	----------------------------------------------------------------------------------------------------
- 	process UxAS
+ 	thread group UxAS
 	end UxAS;
 	    
 end UxAS;
