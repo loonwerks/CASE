@@ -16,6 +16,7 @@ public
 		annex agree {**
 			guarantee SW_FLT_Req001_CASE_Filter "Only valid command messages shall be forwarded to message destination components" : SW::VALID_MESSAGE(filter_out);
 			guarantee SW_FLT_Req001_FLT "Only well-formed messages shall be forwarded to message destination": SW::WELL_FORMED_MESSAGE(filter_out);
+			guarantee SW_FLT_STUTTER "Stutter in input is not a valid and well-formed message": not(SW::VALID_MESSAGE(filter_out) and SW::WELL_FORMED_MESSAGE(filter_out)) => false; -- What should this be? 
 		**};
 	end CASE_Filter;
 
@@ -35,7 +36,7 @@ public
             guarantee SW_FLT_Req001_SW "The Mission Computer shall output a valid mission window to the Flight Controller" : uart_send.crc;**};
     end SW;
 	
-	-- Passes AGREE analysis but there are no constraints on the event ports: *__EVENTS unconstrained in the LUSTRE model
+	-- Does not pass agree: what is the output value in the absence of valid and well-formed input?
 	process implementation SW.Impl
 		subcomponents
 			RADIO: thread SW::RadioDriver.Impl;
