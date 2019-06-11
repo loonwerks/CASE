@@ -18,7 +18,7 @@ public
 	
 	with UxAS;
 		
-	process Waterways extends UxAS::UxAS
+	thread group Waterways extends UxAS::UxAS
 		features
 			AutomationRequest : in data port CMASI::AutomationRequest.i;
 			AirVehicleConfiguration : in data port CMASI::AirVehicleConfiguration.i;
@@ -30,7 +30,7 @@ public
 			AutomationResponse : out data port CMASI::AutomationResponse.i;
 	end Waterways;
 	
-	process implementation Waterways.i 
+	thread group implementation Waterways.i 
 		subcomponents
             AutomationRequestValidatorService: thread AutomationRequestValidatorService_Pkg::AutomationRequestValidatorService;
 			TaskManagerService: thread TaskManagerService_Pkg::TaskManagerService;
