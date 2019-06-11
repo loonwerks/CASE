@@ -19,7 +19,7 @@ public
             Output : out event data port Base_Types::Boolean;
         annex agree {**
             guarantee output_event_implies_output_true "event(Output) => Output" : event(Output) => Output;
-            guarantee globally_no_output_event "[] not(event(Output))" : event(Output) => false; 
+            guarantee globally_no_output_event "[] not(event(Output))" : not(event(Output)); 
         **};
     end Sys;
     
