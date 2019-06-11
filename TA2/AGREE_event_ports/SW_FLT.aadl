@@ -1,0 +1,71 @@
+package SW_FLT
+public
+	
+	with CASE_Properties;
+	with CASE_Model_Transformations;
+	with SW;
+	
+	thread CASE_Filter
+		features
+			filter_in: in event data port SW::RF_Msg.Impl;
+			filter_out: out event data port SW::RF_Msg.Impl;
+		properties
+			CASE_Properties::COMP_TYPE => FILTER;
+			CASE_Properties::COMP_IMPL => "";
+			CASE_Properties::COMP_SPEC => "T";
+		annex agree {**
+			guarantee SW_FLT_Req001_CASE_Filter "Only valid command messages shall be forwarded to message destination components" : SW::VALID_MESSAGE(filter_out);
+			guarantee SW_FLT_Req001_FLT "Only well-formed messages shall be forwarded to message destination": SW::WELL_FORMED_MESSAGE(filter_out);
+			guarantee SW_FLT_STUTTER "Stutter in input is not a valid and well-formed message": not(SW::VALID_MESSAGE(filter_out) and SW::WELL_FORMED_MESSAGE(filter_out)) => false; -- What should this be? 
+		**};
+	end CASE_Filter;
+
+	thread implementation CASE_Filter.Impl
+	end CASE_Filter.Impl;
+
+    process SW
+        -- The Mission Computer Software process runs all threads
+        features
+            radio_recv: in data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+            radio_send: out data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+            uart_recv: in data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+            uart_send: out data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+            wifi_recv: in data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
+            wifi_send: out data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
+        annex agree {**
+            guarantee SW_FLT_Req001_SW "The Mission Computer shall output a valid mission window to the Flight Controller" : uart_send.crc;**};
+    end SW;
+	
+	-- Does not pass agree: what is the output value in the absence of valid and well-formed input?
+	process implementation SW.Impl
+		subcomponents
+			RADIO: thread SW::RadioDriver.Impl;
+			FLT: thread CASE_Filter.Impl;
+			FPLN: thread SW::FlightPlanner.Impl;
+			WPM: thread SW::WaypointManager.Impl;
+			CM: thread SW::CameraManager.Impl;
+			UART: thread SW::UARTDriver.Impl;
+			WIFI: thread SW::WifiDriver.Impl;
+			NFDB: thread SW::NoFlyZoneDatabase.Impl;
+		connections
+			c1: port radio_recv -> RADIO.recv_data;
+			c2: port RADIO.send_data -> radio_send;
+			c3: port RADIO.mission_command -> FLT.filter_in;
+			c4: port FLT.filter_out -> FPLN.recv_map;
+			c5: port FPLN.flight_plan -> WPM.flight_plan;
+			c6: port FPLN.request_nofly_zones -> NFDB.map;
+			c7: port NFDB.zones -> FPLN.nofly_zones;
+			c8: port WPM.mission_window -> UART.mission_window;
+			c9: port UART.status -> WPM.position_status;
+			c10: port UART.status -> FPLN.position_status;
+			c11: port UART.status -> RADIO.status;
+			c12: port UART.send_data -> uart_send;
+			c13: port uart_recv -> UART.recv_data;
+			c14: port FPLN.flight_plan -> CM.flight_plan;
+			c15: port UART.status -> CM.position_status;
+			c16: port CM.gimbal_command -> WIFI.gimbal_command;
+			c17: port WIFI.send_data -> wifi_send;
+			c18: port wifi_recv -> WIFI.recv_data;
+	end SW.Impl;
+	
+end SW_FLT;

@@ -1,0 +1,53 @@
+package Vacuity
+public
+	with Base_Types;
+	
+	 system Toggles
+        features
+            Output: out event data port Base_Types::Boolean;
+        annex agree {**
+            guarantee toggle_event "event(Output) <=> prev(not(Output), false)": event(Output) <=> prev(not(Output), false);
+            guarantee output_true "event(Output) => Output = event(Output)": event(Output) => Output = event(Output);
+        **};
+    end Toggles;
+    
+    system implementation Toggles.Impl
+    end Toggles.Impl;
+    
+    system Sys
+        features
+            Output : out event data port Base_Types::Boolean;
+        annex agree {**
+            guarantee output_event_implies_output_true "event(Output) => Output" : event(Output) => Output;
+            guarantee globally_no_output_event "[] not(event(Output))" : not(event(Output)); 
+        **};
+    end Sys;
+    
+    system implementation Sys.Toggles
+       subcomponents
+           GEN : system Toggles.Impl;
+        connections
+            c1 : port GEN.Output -> Output;
+    end Sys.Toggles;
+    
+    
+    system NoEvent
+        features
+            Output: out event data port Base_Types::Boolean;
+        annex agree {**
+            guarantee no_event "event(Output) <=> false": event(Output) <=> false;
+            guarantee output_false "event(Output) => Output = event(Output)": event(Output) => Output = event(Output);
+        **};
+    end NoEvent;
+    
+    system implementation NoEvent.Impl
+    end NoEvent.Impl;
+    
+    system implementation Sys.NoEvent
+       subcomponents
+           GEN : system NoEvent.Impl;
+        connections
+            c1 : port GEN.Output -> Output;
+    end Sys.NoEvent;
+    
+end Vacuity;
