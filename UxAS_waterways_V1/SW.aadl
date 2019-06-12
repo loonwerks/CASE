@@ -32,7 +32,6 @@ public
            -- RADIO
            c09: port RADIO.send_data -> radio_send;
            c11: port RADIO.AutomationRequest -> UXAS.AutomationRequest; 	
-           c12: port RADIO.LineSearch -> UXAS.LineSearch;
            c13: port RADIO.AirVehicleConfiguration -> UXAS.AirVehicleConfiguration;
            
            -- UXAS

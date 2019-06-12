@@ -32,7 +32,6 @@ public
 			bac2: bus access FCTL_SBUS <-> FCTL.UART;
 			
 			-- GC UARE bus access
-			bac3: bus access GCTL_SBUS <-> MCMP.GC_UART;
 			bac4: bus access GCTL_SBUS <-> GCTL.UART;
 			
 			-- Radio bus access
@@ -45,14 +44,9 @@ public
 			-- FC UART
 			c3: port MCMP.fc_uart_send -> FCTL.uart_recv;
 			c4: port FCTL.uart_send -> MCMP.fc_uart_recv;
-			
-			-- GC UART	
-			c5: port MCMP.gc_uart_send -> GCTL.uart_recv;
-			c6: port GCTL.uart_send -> MCMP.gc_uart_recv;
-			
+				
 		properties
 			Actual_Connection_Binding => (reference (FCTL_SBUS)) applies to c3, c4;
-			Actual_Connection_Binding => (reference (GCTL_SBUS)) applies to c5, c6;
 			
 	end UAV.Impl;
 	
