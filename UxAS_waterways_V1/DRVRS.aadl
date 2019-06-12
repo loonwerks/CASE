@@ -13,7 +13,6 @@ public
 			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			
 			AirVehicleConfiguration: out event data port CMASI::AirVehicleConfiguration.i;
-			LineSearch: out event data port CMASI::LineSearch.i;
             AutomationRequest: out event data port CMASI::AutomationRequest.i;
             
             AutomationResponse: in event data port CMASI::AutomationResponse.i;
@@ -48,10 +47,8 @@ public
 
     thread GimbalDriver
     	features
-    		recv_data: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-            
-            AirVehicleState: in event data port CMASI::AirVehicleState.i;
-            GimbalStareAction: in event data port CMASI::GimbalStareAction.i;
+    	   AirVehicleState: in event data port CMASI::AirVehicleState.i;
+           GimbalStareAction: in event data port CMASI::GimbalStareAction.i;
 --        annex agree {**
 --            assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(mission_window);
 --            guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data.crc;

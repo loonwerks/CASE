@@ -19,7 +19,6 @@ public
 			AutomationRequest : in event data port CMASI::AutomationRequest.i;
 			AirVehicleConfiguration : in event data port CMASI::AirVehicleConfiguration.i;
 			AirVehicleState : in event data port CMASI::AirVehicleState.i;
-			LineSearch: in event data port CMASI::LineSearch.i;
 			MissionCommand : out event data port CMASI::MissionCommand.i;
 			GimbalStareAction : out event data port CMASI::GimbalStareAction.i;
 			AutomationResponse : out event data port CMASI::AutomationResponse.i;
@@ -61,9 +60,7 @@ public
 			c_init_07 : port AirVehicleState -> PlanBuilderService.AirVehicleState;
 			c_init_08 : port AirVehicleState -> TaskManagerService.AirVehicleState;
 			c_init_09 : port AirVehicleState -> AutomationRequestValidatorService.AirVehicleState;
-			
-			c_init_10 : port LineSearch -> TaskManagerService.LineSearch;
-			
+						
 			--------------
 			-- Assignment
 			--------------			
@@ -71,8 +68,7 @@ public
 			c_asn_02 : port AutomationRequestValidatorService.UniqueAutomationRequest -> RouteAggregatorService.UniqueAutomationResquest;			
 			c_asn_03 : port AutomationRequestValidatorService.UniqueAutomationRequest -> AssignmentTreeBranchBoundService.UniqueAutomationRequest;
 			c_asn_04 : port AutomationRequestValidatorService.UniqueAutomationRequest -> PlanBuilderService.UniqueAutomationRequest;						
-			c_asn_05 : port AutomationRequestValidatorService.UniqueAutomationRequest -> AutomationDiagramDataService.UniqueAutomationRequest;
-
+		
 			c_asn_96 : port RouteAggregatorService.RoutePlanRequest -> RoutePlannerVisibilityService.RoutePlanRequest;
             c_asn_97 : port RoutePlannerVisibilityService.RoutePlanResponse -> RouteAggregatorService.RoutePlanResponse;
        		c_asn_98 : port RouteAggregatorService.AssignmentCostMatrix -> AssignmentTreeBranchBoundService.AssignmentCostMatrix;
@@ -82,13 +78,12 @@ public
        		-- Implementation
        		-------------------
   			c_impl_01 : port PlanBuilderService.UniqueAutomationResponse -> AutomationRequestValidatorService.UniqueAutomationResponse;
-			c_impl_02 : port PlanBuilderService.UniqueAutomationResponse -> AutomationDiagramDataService.UniqueAutomationResponse;
-        	c_impl_03 : port AutomationRequestValidatorService.AutomationResponse -> AutomationResponse;
+			c_impl_03 : port AutomationRequestValidatorService.AutomationResponse -> AutomationResponse;
        		
        		-------------
        		-- Execution
        		-------------
-       		c_exec_01 : port WaypointPlanManagerService.MissionCommand_out -> MissionCommand_out;
+       		c_exec_01 : port WaypointPlanManagerService.MissionCommand_out -> MissionCommand;
 				
 	end Waterways.i;
 	
