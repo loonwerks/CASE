@@ -12,18 +12,17 @@ public
 			recv_data: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			
-			air_vehicle_configuration: out event data port CMASI::AirVehicleConfiguration.i;
-			line_search: out event data port CMASI::LineSearch.i;
-            automation_request: out event data port CMASI::AutomationRequest.i;
+			AirVehicleConfiguration: out event data port CMASI::AirVehicleConfiguration.i;
+			LineSearch: out event data port CMASI::LineSearch.i;
+            AutomationRequest: out event data port CMASI::AutomationRequest.i;
             
-            automation_response: in event data port CMASI::AutomationResponse.i;
-            air_vehicle_state: in event data port CMASI::AirVehicleState.i;
-            mission_command_in: in event data port CMASI::MissionCommand.i;
-            mission_command_out: out event data port CMASI::MissionCommand.i;
+            AutomationResponse: in event data port CMASI::AutomationResponse.i;
+            AirVehicleState: in event data port CMASI::AirVehicleState.i;
+            MissionCommand: in event data port CMASI::MissionCommand.i;
 		properties
 			CASE_Properties::COMP_TYPE => COMM_DRIVER;
 --		annex agree {**
---			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
+--			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(MissionCommand);
 --		**};
 	end RadioDriver;
 
@@ -33,8 +32,8 @@ public
 	thread FC_UART_Driver
 		-- The UARTDriver is the software that enables other SW components to communicate to other systems over the serial connection
 		features
-			air_vehicle_state: out event data port CMASI::AirVehicleState.i;
-			mission_command: in event data port CMASI::MissionCommand.i;
+			AirVehicleState: out event data port CMASI::AirVehicleState.i;
+			MissionCommand: in event data port CMASI::MissionCommand.i;
 			
 			recv_data: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
 			send_data: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
@@ -47,21 +46,19 @@ public
 	thread implementation FC_UART_Driver.Impl
 	end FC_UART_Driver.Impl;
 
-    thread GC_UART_Driver
-        -- The UARTDriver is the software that enables other SW components to communicate to other systems over the serial connection
+    thread GimbalDriver
     	features
     		recv_data: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-            send_data: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
             
-            air_vehicle_state: in event data port CMASI::AirVehicleState.i;
-            gimbal_stare_action: in event data port CMASI::GimbalStareAction.i;
+            AirVehicleState: in event data port CMASI::AirVehicleState.i;
+            GimbalStareAction: in event data port CMASI::GimbalStareAction.i;
 --        annex agree {**
 --            assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(mission_window);
 --            guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data.crc;
 --        **};
-    end GC_UART_Driver;
+    end GimbalDriver;
 
-    thread implementation GC_UART_Driver.Impl
-    end GC_UART_Driver.Impl;
+    thread implementation GimbalDriver.Impl
+    end GimbalDriver.Impl;
 
 end DRVRS;

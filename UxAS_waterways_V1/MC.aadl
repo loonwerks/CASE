@@ -63,7 +63,7 @@ public
 	end MC_Bus.Impl;
 
 
-	-- The MissionComputer onboard the UAV
+	-- The MissionComputer on-board the UAV
 	system MissionComputer
 		
 		features
@@ -71,10 +71,7 @@ public
 			radio_send: out event data port;
 			fc_uart_recv: in event data port;
 			fc_uart_send: out event data port;
-			gc_uart_recv: in event data port;
-            gc_uart_send: out event data port;
 			FC_UART: requires bus access UAS_Buses::Serial_Bus.Impl;
-			GC_UART: requires bus access UAS_Buses::Serial_Bus.Impl;
 			RFA: requires bus access UAS_Buses::RF_Bus.Impl;
 
 	end MissionComputer;
@@ -84,7 +81,6 @@ public
 		subcomponents
 			RADIO_HW: device Radio.Impl;
 			FC_UART_HW: device UART.Impl;
-			GC_UART_HW: device UART.Impl;
 			PROC_HW: processor MC_Proc.Impl;
 			MEM_HW: memory MC_Mem.Impl;
 			BUS_HW: bus MC_Bus.Impl;
@@ -95,21 +91,18 @@ public
 			-- BUS_HW
 			bac1: bus access RADIO_HW.MCA <-> BUS_HW;
 			bac2: bus access FC_UART_HW.MCA <-> BUS_HW;
-			bac3: bus access GC_UART_HW.MCA <-> BUS_HW;
-			bac4: bus access PROC_HW.MCA <-> BUS_HW;
-			bac5: bus access MEM_HW.MCA <-> BUS_HW;
+			bac3: bus access PROC_HW.MCA <-> BUS_HW;
+			bac4: bus access MEM_HW.MCA <-> BUS_HW;
 			
 			-- RFA
-			bac6: bus access RADIO_HW.RFA <-> RFA;
+			bac5: bus access RADIO_HW.RFA <-> RFA;
 			
 			-- UART
-			bac7: bus access FC_UART_HW.UART <-> FC_UART;
-			bac8: bus access GC_UART_HW.UART <-> GC_UART;
+			bac6: bus access FC_UART_HW.UART <-> FC_UART;
 			
 			-- MissionComputer
 			c01: port radio_recv -> RADIO_HW.recv_data_in;
 			c02: port fc_uart_recv -> FC_UART_HW.recv_data_in;
-            c03: port gc_uart_recv -> GC_UART_HW.recv_data_in;
             
             -- RADIO_HW
 			c04: port RADIO_HW.recv_data_out -> PROC_SW.radio_recv;
@@ -118,20 +111,15 @@ public
 		    -- FC_UART_HW
 			c06: port FC_UART_HW.recv_data_out -> PROC_SW.fc_uart_recv;
 			c07: port FC_UART_HW.send_data_out -> fc_uart_send;
-		
-			-- GC UART Connections
-			c08: port GC_UART_HW.recv_data_out -> PROC_SW.gc_uart_recv;
-            c09: port GC_UART_HW.send_data_out -> gc_uart_send;
-            
+		            
             -- PROC_SW    
             c10: port PROC_SW.radio_send -> RADIO_HW.send_data_in;
             c11: port PROC_SW.fc_uart_send -> FC_UART_HW.send_data_in;
-            c12: port PROC_SW.gc_uart_send -> GC_UART_HW.send_data_in;
             
 		properties
 			Actual_Processor_Binding => (reference (PROC_HW)) applies to PROC_SW;
 			Actual_Memory_Binding => (reference (MEM_HW)) applies to PROC_SW;
-			Actual_Connection_Binding => (reference (BUS_HW)) applies to c04, c06, c08, c10, c11, c12;
+			Actual_Connection_Binding => (reference (BUS_HW)) applies to c04, c06, c10, c11;
 		
 	end MissionComputer.Impl;
 	

@@ -6,48 +6,40 @@ public
     
 	process SW
         features
-		   gc_uart_recv: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-           gc_uart_send: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl; 
 	       fc_uart_recv: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
            fc_uart_send: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
            radio_recv: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-           radio_send: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-           
+           radio_send: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;           
 	end SW;
 			
 	process implementation SW.Impl
 	   subcomponents
-	       GC_UART: thread DRVRS::GC_UART_Driver.Impl;
+	       GIMBAL: thread DRVRS::GimbalDriver.Impl;
            FC_UART: thread DRVRS::FC_UART_Driver.Impl;
            RADIO: thread DRVRS::RadioDriver.Impl;
            UXAS: thread group Waterways_UxAS::Waterways.i;
 	   connections
 	       -- SW
-		   c01: port gc_uart_recv -> GC_UART.recv_data; 
 		   c02: port fc_uart_recv -> FC_UART.recv_data;
 		   c03: port radio_recv -> RADIO.recv_data;
-		    	
-		   -- GC_UART
-           c04: port GC_UART.send_data -> gc_uart_send;
-           
+		    	           
            -- FC_UART
            c05: port FC_UART.send_data -> fc_uart_send;
-           c06: port FC_UART.air_vehicle_state -> GC_UART.air_vehicle_state;
-           c07: port FC_UART.air_vehicle_state -> UXAS.AirVehicleState;
-           c08: port FC_UART.air_vehicle_state -> RADIO.air_vehicle_state;
+           c06: port FC_UART.AirVehicleState -> GIMBAL.AirVehicleState;
+           c07: port FC_UART.AirVehicleState -> UXAS.AirVehicleState;
+           c08: port FC_UART.AirVehicleState -> RADIO.AirVehicleState;
            
            -- RADIO
            c09: port RADIO.send_data -> radio_send;
-           c10: port RADIO.mission_command_out -> UXAS.MissionCommand_in;
-           c11: port RADIO.automation_request -> UXAS.AutomationRequest; 	
-           c12: port RADIO.line_search -> UXAS.LineSearch;
-           c13: port RADIO.air_vehicle_configuration -> UXAS.AirVehicleConfiguration;
+           c11: port RADIO.AutomationRequest -> UXAS.AutomationRequest; 	
+           c12: port RADIO.LineSearch -> UXAS.LineSearch;
+           c13: port RADIO.AirVehicleConfiguration -> UXAS.AirVehicleConfiguration;
            
            -- UXAS
-           c14: port UXAS.MissionCommand_out -> FC_UART.mission_command;
-           c15: port UXAS.MissionCommand_out -> RADIO.mission_command_in;
-           c16: port UXAS.GimbalStareAction -> GC_UART.gimbal_stare_action;
-           c17: port UXAS.AutomationResponse -> RADIO.automation_response;
+           c14: port UXAS.MissionCommand -> FC_UART.MissionCommand;
+           c15: port UXAS.MissionCommand -> RADIO.MissionCommand;
+           c16: port UXAS.GimbalStareAction -> GIMBAL.GimbalStareAction;
+           c17: port UXAS.AutomationResponse -> RADIO.AutomationResponse;
 	end SW.Impl;
 	
 end SW;
