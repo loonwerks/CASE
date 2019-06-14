@@ -10,12 +10,12 @@ public
 	thread StatusReportService extends ServiceBase_Pkg::ServiceBase
 		features
 			-- Subscribed Messages
-			EntityState : in data port CMASI::EntityState.i;
-			EntityJoin : in data port UXNATIVE::EntityJoin.i;
-			EntityExit : in data port UXNATIVE::EntityExit.i;
-			AutoPilotKeepAlive : in data port UXNATIVE::AutoPilotKeepAlive.i;
+			EntityState : in event data port CMASI::EntityState.i;
+			EntityJoin : in event data port UXNATIVE::EntityJoin.i;
+			EntityExit : in event data port UXNATIVE::EntityExit.i;
+			AutoPilotKeepAlive : in event data port UXNATIVE::AutoPilotKeepAlive.i;
 			--Sent Messages
-			OnboardStatusReport : out data port UXNATIVE::OnboardStatusReport;
+			OnboardStatusReport : out event data port UXNATIVE::OnboardStatusReport;
 			
 		properties			
             Dispatch_Protocol => Sporadic;

@@ -13,22 +13,25 @@ public
 	thread RouteAggregatorService extends ServiceBase_Pkg::ServiceBase
 		features
 			-- Subscribed Messages
-			AirVehicleState : in data port CMASI::AirVehicleState.i;
-			GroundVehicleState : in data port VEHICLES::GroundVehicleState.i;
-			SurfaceVehicleState : in data port VEHICLES::SurfaceVehicleState.i;
-			AirVehicleConfiguration : in data port CMASI::AirVehicleConfiguration.i;
-			GroundVehicleConfiguration : in data port VEHICLES::GroundVehicleConfiguration.i;
-			SurfaceVehicleConfiguration : in data port VEHICLES::SurfaceVehicleConfiguration.i;
-			UniqueAutomationResquest : in data port UXTASK::UniqueAutomationRequest.i;
-			TaskPlanOptions : in data port UXTASK::TaskPlanOptions.i;
-			RouteRequest : in data port ROUTE::RouteRequest.i;
-			RoutePlanResponse : in data port ROUTE::RoutePlanResponse.i;			
+			AirVehicleState : in event data port CMASI::AirVehicleState.i;
+--			GroundVehicleState : in event data port VEHICLES::GroundVehicleState.i;
+--			SurfaceVehicleState : in event data port VEHICLES::SurfaceVehicleState.i;
+			AirVehicleConfiguration : in event data port CMASI::AirVehicleConfiguration.i;
+--			GroundVehicleConfiguration : in event data port VEHICLES::GroundVehicleConfiguration.i;
+--			SurfaceVehicleConfiguration : in event data port VEHICLES::SurfaceVehicleConfiguration.i;
+			UniqueAutomationResquest : in event data port UXTASK::UniqueAutomationRequest.i;
+			TaskPlanOptions : in event data port UXTASK::TaskPlanOptions.i;
+--			RouteRequest : in event data port ROUTE::RouteRequest.i;
+			RoutePlanResponse : in event data port ROUTE::RoutePlanResponse.i;			
 			
 			--Sent Messages
- 			RoutePlanRequest : out data port ROUTE::RoutePlanRequest.i;
-			RouteResponse : out data port ROUTE::RouteResponse.i;
-			AssignmentCostMatrix : out data port UXTASK::AssignmentCostMatrix.i;
-			ServiceStatus : out data port CMASI::ServiceStatus.i;
+ 			RoutePlanRequest : out event data port ROUTE::RoutePlanRequest.i;
+ 			-- see https://github.com/afrl-rq/OpenUxAS/blob/develop/src/Services/RouteAggregatorService.h
+ 			-- GroundPathPlanner
+            -- AircraftPathPlanner
+--			RouteResponse : out event data port ROUTE::RouteResponse.i;
+			AssignmentCostMatrix : out event data port UXTASK::AssignmentCostMatrix.i;
+			ServiceStatus : out event data port CMASI::ServiceStatus.i;
 			
 		properties			
             Dispatch_Protocol => Sporadic;

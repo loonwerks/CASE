@@ -12,26 +12,26 @@ public
 	abstract TaskServiceBase
 		features
 			-- Subscribed Messages
-			EntityState : in data port CMASI::EntityState;
-			EntityConfiguration : in data port CMASI::EntityConfiguration;
-			AirVehicleState : in data port CMASI::AirVehicleState;
-			AirVehicleConfiguration : in data port CMASI::AirVehicleConfiguration;
-			GroundVehicleState : in data port VEHICLES::GroundVehicleState;
-			GroundVehicleConfiguration : in data port VEHICLES::GroundVehicleConfiguration;
-			SurfaceVehicleState : in data port VEHICLES::SurfaceVehicleState;
-			SurfaceVehicleConfiguration : in data port VEHICLES::SurfaceVehicleConfiguration;
-			UniqueAutomationRequest : in data port UXTASK::UniqueAutomationRequest;
-			UniqueAutomationResponse : in data port UXTASK::UniqueAutomationResponse;
-			RoutePlanResponse : in data port ROUTE::RoutePlanResponse;
-			TaskImplementationRequest : in data port UXTASK::TaskImplementationRequest;
+--			EntityState : in event data port CMASI::EntityState;
+--			EntityConfiguration : in event data port CMASI::EntityConfiguration;
+			AirVehicleState : in event data port CMASI::AirVehicleState;
+			AirVehicleConfiguration : in event data port CMASI::AirVehicleConfiguration;
+--			GroundVehicleState : in event data port VEHICLES::GroundVehicleState;
+--			GroundVehicleConfiguration : in event data port VEHICLES::GroundVehicleConfiguration;
+--			SurfaceVehicleState : in event data port VEHICLES::SurfaceVehicleState;
+--			SurfaceVehicleConfiguration : in event data port VEHICLES::SurfaceVehicleConfiguration;
+			UniqueAutomationRequest : in event data port UXTASK::UniqueAutomationRequest;
+			UniqueAutomationResponse : in event data port UXTASK::UniqueAutomationResponse;
+			RoutePlanResponse : in event data port ROUTE::RoutePlanResponse;
+			TaskImplementationRequest : in event data port UXTASK::TaskImplementationRequest;
 			
 			-- Sent Messages
-			TaskInitialized : out data port UXTASK::TaskInitialized;
-			TaskActive : out data port UXTASK::TaskActive;
-			TaskComplete : out data port UXTASK::TaskComplete;
-			RoutePlanRequest : out data port ROUTE::RoutePlanRequest;
-			TaskPlanOptions : out data port UXTASK::TaskPlanOptions;
-			TaskImplementationResponse : out data port UXTASK::TaskImplementationResponse; 
+--			TaskInitialized : out event data port UXTASK::TaskInitialized;
+--			TaskActive : out event data port UXTASK::TaskActive;
+--			TaskComplete : out event data port UXTASK::TaskComplete;
+			RoutePlanRequest : out event data port ROUTE::RoutePlanRequest;
+			TaskPlanOptions : out event data port UXTASK::TaskPlanOptions;
+			TaskImplementationResponse : out event data port UXTASK::TaskImplementationResponse; 
 	end TaskServiceBase;
 	
 end TaskServiceBase_Pkg;

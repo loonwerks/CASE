@@ -524,10 +524,10 @@ public
 	end Task.i;
  
     -- Used to request a search task allocation from the automation service. -->
-    data SearchTask
+    data SearchTask extends Task
     end SearchTask;
             
-    data implementation SearchTask.i
+    data implementation SearchTask.i extends Task.i
     	subcomponents
             -- The wavelength bands that should be used to complete the task.   --
             DesiredWavelengthBands: data WavelengthBand {Data_Model::Data_Representation => Array; Data_Model::Dimension => (8);};
@@ -566,17 +566,17 @@ public
     -- UseInertialViewAngles option is true, then wedges are defined in terms of North-East coordinates, otherwise
     -- wedges are defined relative to the line segment currently being viewed (a vector from point i through point i+1).
     -- To be a valid look angle, the line segment must be viewed from an angle within the bounds of the wedge.
-    data LineSearch
-    end LineSearch;
+    data LineSearchTask extends SearchTask
+    end LineSearchTask;
     
-    data implementation LineSearch.i
+    data implementation LineSearchTask.i extends SearchTask.i
     	subcomponents
     		-- Line to search
     		PointList: data Location3D.i {Data_Model::Data_Representation => Array; Data_Model::Dimension => (1024);};
     		-- Defines a list of acceptable look-angles for this task.  See the documentation above for details. --
     		ViewAngleList: data Wedge.i {Data_Model::Data_Representation => Array; Data_Model::Dimension => (16);};
     		UseInertialViewAngles: data bool.i;
-    end LineSearch.i;
+    end LineSearchTask.i;
 
     ------------------------------------------------------------------------
 	-- Base class for an action to be taken by a vehicle. This is usually

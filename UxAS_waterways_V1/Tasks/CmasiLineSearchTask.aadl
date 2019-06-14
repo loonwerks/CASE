@@ -12,12 +12,16 @@ public
 	thread CmasiLineSearchTask extends TaskServiceBase_Pkg::TaskServiceBase
 		features
 			-- Subscribed Messages
-			SensorFootprintResponse : in data port UXTASK::SensorFootprintResponse;
+--			SensorFootprintResponse : in event data port UXTASK::SensorFootprintResponse;
+			
+			-- EGM: This port is _not_ a part of the line search task. I added it because
+			-- I don't know how to model the dynamic thread creation from the TaskManagerService
+			CreateNewService : in event data port UXNATIVE::CreateNewService.i;
 			
 			-- Sent Messages
-			VehicleActionCommand : out data port CMASI::VehicleActionCommand;
-			SensorFootprintRequest : out data port UXTASK::SensorFootprintRequests;
-			VideoRecord : out data port UXNATIVE::VideoRecord;
+			VehicleActionCommand : out event data port CMASI::VehicleActionCommand;
+--			SensorFootprintRequest : out event data port UXTASK::SensorFootprintRequests;
+--			VideoRecord : out event data port UXNATIVE::VideoRecord;
 			
 		properties
             Dispatch_Protocol => Sporadic;

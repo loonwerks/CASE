@@ -14,26 +14,25 @@ public
 	thread TaskManagerService extends ServiceBase_Pkg::ServiceBase
 		features
 			-- Subscribed Messages
-			 RemoveTasks : in data port CMASI::RemoveTasks.i;
-			 EntityState : in data port CMASI::EntityState.i;
-			 EntityConfiguration : in data port CMASI::EntityConfiguration.i;
-			 AirVehicleConfiguration : in data port CMASI::AirVehicleConfiguration.i;
-			 GroundVehicleConfiguration : in data port VEHICLES::GroundVehicleConfiguration;
-			 SurfaceVehicleConfiguration : in data port VEHICLES::SurfaceVehicleConfiguration;
-			 AirVehicleState : in data port CMASI::AirVehicleState.i;
-			 GroundVehicleState : in data port VEHICLES::GroundVehicleState;
-			 SurfaceVehicleState : in data port VEHICLES::SurfaceVehicleState;
-			 MissionCommand : in data port CMASI::MissionCommand.i;
-			 AutomationResponse : in data port CMASI::AutomationResponse.i;
-			 FollowPathCommand : in data port CMASI::FollowPathCommand.i;
-			 
-			 ZeroizeCommand : in data port CASE_Messages::ZeroizeCommand.i;
-			 
+			 RemoveTasks : in event data port CMASI::RemoveTasks.i;
+			 EntityState : in event data port CMASI::EntityState.i;
+			 EntityConfiguration : in event data port CMASI::EntityConfiguration.i;
+			 AirVehicleConfiguration : in event data port CMASI::AirVehicleConfiguration.i;
+			 GroundVehicleConfiguration : in event data port VEHICLES::GroundVehicleConfiguration;
+			 SurfaceVehicleConfiguration : in event data port VEHICLES::SurfaceVehicleConfiguration;
+			 AirVehicleState : in event data port CMASI::AirVehicleState.i;
+			 GroundVehicleState : in event data port VEHICLES::GroundVehicleState;
+			 SurfaceVehicleState : in event data port VEHICLES::SurfaceVehicleState;
+			 MissionCommand : in event data port CMASI::MissionCommand.i;
+			 AutomationResponse : in event data port CMASI::AutomationResponse.i;
+			 FollowPathCommand : in event data port CMASI::FollowPathCommand.i;
+			 LineSearchTask : in event data port CMASI::LineSearchTask.i;
+			  
 			 -- Sent Messages
-			 KillService : out data port UXNATIVE::KillService.i;
-			 CreateNewService : out data port UXNATIVE::CreateNewService.i;
-			 AutomationRequest: out data port CMASI::AutomationRequest.i;
-			 UniqueAutomationRequest : out data port UXTASK::UniqueAutomationRequest.i;
+			 KillService : out event data port UXNATIVE::KillService.i;
+			 CreateNewService : out event data port UXNATIVE::CreateNewService.i;
+			 AutomationRequest: out event data port CMASI::AutomationRequest.i;
+			 UniqueAutomationRequest : out event data port UXTASK::UniqueAutomationRequest.i;
 			 
         properties
             Dispatch_Protocol => Sporadic;
