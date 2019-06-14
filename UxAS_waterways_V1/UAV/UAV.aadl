@@ -3,7 +3,6 @@ public
 	
 	with MC;
 	with FC;
-	with GC;
 	with UAS_Buses;
 	with CASE_Properties;
 	
@@ -22,18 +21,13 @@ public
 		subcomponents
 			MCMP: system MC::MissionComputer.Impl;
 			FCTL: system FC::FlightController.Impl;
-			GCTL: system GC::GimballController.Impl;
 			FCTL_SBUS: bus UAS_Buses::Serial_Bus.Impl;
-			GCTL_SBUS: bus UAS_Buses::Serial_Bus.Impl;
 		connections
 			
 			-- FC UART bus access
 			bac1: bus access FCTL_SBUS <-> MCMP.FC_UART;
 			bac2: bus access FCTL_SBUS <-> FCTL.UART;
-			
-			-- GC UARE bus access
-			bac4: bus access GCTL_SBUS <-> GCTL.UART;
-			
+					
 			-- Radio bus access
 			bac5: bus access RFA -> MCMP.RFA;
 			

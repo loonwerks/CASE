@@ -1,0 +1,42 @@
+package TaskManagerService_Pkg
+public
+	with CMASI;
+	with UXNATIVE;
+	with UXTASK;
+	with VEHICLES;
+	with CASE_Messages;
+	
+	with ServiceBase_Pkg;
+	
+	---------------------------------------------------
+	-- This service constructs and destroys tasks.
+	---------------------------------------------------
+	thread TaskManagerService extends ServiceBase_Pkg::ServiceBase
+		features
+			-- Subscribed Messages
+--			 RemoveTasks : in event data port CMASI::RemoveTasks.i;
+--			 EntityState : in event data port CMASI::EntityState.i;
+--			 EntityConfiguration : in event data port CMASI::EntityConfiguration.i;
+			 AirVehicleConfiguration : in event data port CMASI::AirVehicleConfiguration.i;
+--			 GroundVehicleConfiguration : in event data port VEHICLES::GroundVehicleConfiguration;
+--			 SurfaceVehicleConfiguration : in event data port VEHICLES::SurfaceVehicleConfiguration;
+			 AirVehicleState : in event data port CMASI::AirVehicleState.i;
+--			 GroundVehicleState : in event data port VEHICLES::GroundVehicleState;
+--			 SurfaceVehicleState : in event data port VEHICLES::SurfaceVehicleState;
+--			 MissionCommand : in event data port CMASI::MissionCommand.i;
+--			 AutomationResponse : in event data port CMASI::AutomationResponse.i;
+--			 FollowPathCommand : in event data port CMASI::FollowPathCommand.i;
+			 LineSearchTask : in event data port CMASI::LineSearchTask.i;
+			  
+			 -- Sent Messages
+--			 KillService : out event data port UXNATIVE::KillService.i;
+			 CreateNewService : out event data port UXNATIVE::CreateNewService.i;
+--			 AutomationRequest: out event data port CMASI::AutomationRequest.i;
+--			 UniqueAutomationRequest : out event data port UXTASK::UniqueAutomationRequest.i;
+			 
+        properties
+            Dispatch_Protocol => Sporadic;
+            
+	end TaskManagerService;
+	
+end TaskManagerService_Pkg;
