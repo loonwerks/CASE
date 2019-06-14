@@ -109,12 +109,12 @@ public
 			c05: port RADIO_HW.send_data_out -> radio_send;
 		
 		    -- FC_UART_HW
-			c06: port FC_UART_HW.recv_data_out -> PROC_SW.fc_uart_recv;
+			c06: port FC_UART_HW.recv_data_out -> PROC_SW.uart_recv;
 			c07: port FC_UART_HW.send_data_out -> fc_uart_send;
 		            
             -- PROC_SW    
             c10: port PROC_SW.radio_send -> RADIO_HW.send_data_in;
-            c11: port PROC_SW.fc_uart_send -> FC_UART_HW.send_data_in;
+            c11: port PROC_SW.uart_send -> FC_UART_HW.send_data_in;
             
 		properties
 			Actual_Processor_Binding => (reference (PROC_HW)) applies to PROC_SW;

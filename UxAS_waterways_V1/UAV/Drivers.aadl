@@ -1,4 +1,4 @@
-package DRVRS
+package Drivers
 public
 
 	with CASE_Properties;
@@ -12,13 +12,19 @@ public
 			recv_data: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			
-			AirVehicleConfiguration: out event data port CMASI::AirVehicleConfiguration.i;
-            AutomationRequest: out event data port CMASI::AutomationRequest.i;
-            LineSeachTask: out event data port CMASI::LineSearchTask.i;
-            
+			-- UxAS
             AutomationResponse: in event data port CMASI::AutomationResponse.i;
             AirVehicleState: in event data port CMASI::AirVehicleState.i;
             MissionCommand: in event data port CMASI::MissionCommand.i;
+            ServiceStatus_ARVS : in event data port CMASI::ServiceStatus.i;
+            ServiceStatus_RAS : in event data port CMASI::ServiceStatus.i;
+            ServiceStatus_ATBBS: in event data port CMASI::ServiceStatus.i;
+            ServiceStatus_PBS: in event data port CMASI::ServiceStatus.i;
+            
+            AirVehicleConfiguration: out event data port CMASI::AirVehicleConfiguration.i;
+            AutomationRequest: out event data port CMASI::AutomationRequest.i;
+            LineSearchTask: out event data port CMASI::LineSearchTask.i;
+            
 		properties
 			CASE_Properties::COMP_TYPE => COMM_DRIVER;
 --		annex agree {**
@@ -29,7 +35,7 @@ public
 	thread implementation RadioDriver.Impl
 	end RadioDriver.Impl;
 
-	thread FC_UART_Driver
+	thread UARTDriver
 		-- The UARTDriver is the software that enables other SW components to communicate to other systems over the serial connection
 		features
 			AirVehicleState: out event data port CMASI::AirVehicleState.i;
@@ -41,10 +47,10 @@ public
 --			assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(mission_window);
 --			guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data.crc;
 --		**};
-	end FC_UART_Driver;
+	end UARTDriver;
 
-	thread implementation FC_UART_Driver.Impl
-	end FC_UART_Driver.Impl;
+	thread implementation UARTDriver.Impl
+	end UARTDriver.Impl;
 
     thread GimbalDriver
     	features
@@ -59,4 +65,4 @@ public
     thread implementation GimbalDriver.Impl
     end GimbalDriver.Impl;
 
-end DRVRS;
+end Drivers;

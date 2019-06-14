@@ -1,0 +1,1324 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="6e6b24ee-bf4f-427e-8ddb-a9d1fb00f69d" manual="true">
+    <element uuid="d0cd0d42-ce50-4075-a55f-49a4b79e05e1">
+      <element uuid="b38ff9bb-b088-45b3-aa64-1ca01adf7a22">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_acmtx_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="2336.0" y="488.0"/>
+        <point x="2336.0" y="541.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="e007bca0-0888-4264-b7df-1768c8218615">
+      <element uuid="9bfe9194-6b1d-4722-8894-2b4d0d30bc1f">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_areq_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="209.0" y="335.0"/>
+        <point x="209.0" y="1003.5"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="41f2b553-972c-4388-9da5-ed020c7dc180">
+      <element uuid="7074ff88-9d2c-496b-a260-8127773a2e76">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_arps_02</seg>
+      </bo>
+      <bendpoints>
+        <point x="985.0" y="966.0"/>
+        <point x="985.0" y="994.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="a843eab8-a916-432b-a8b1-977f8ee22368">
+      <element uuid="8a306c57-d9cc-4ef0-9fad-a787398539a0">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_arsp_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="985.0" y="966.0"/>
+        <point x="985.0" y="1072.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="dc4640c7-577a-4228-89d1-86d061810d83">
+      <element uuid="8fad9fe4-4252-4168-a6f9-4683b12d9654">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_arvs_sstts_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="975.0" y="1016.0"/>
+        <point x="975.0" y="1122.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="cf14b72b-ab0f-49eb-b0d7-e5579f0e3582">
+      <element uuid="139e30c7-c3cd-4c74-857a-75f78b741d8d">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_atbbsrvc_sstts_01</seg>
+      </bo>
+      <contentFilters/>
+    </element>
+    <element uuid="e4e8b209-b804-488b-83a1-dc3de48a73c5">
+      <element uuid="2d1cc7d3-d433-412a-8d5c-a4ba1bc0aff2">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_avcfg_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="239.0" y="93.0"/>
+        <point x="239.0" y="296.0"/>
+        <point x="1680.0" y="296.0"/>
+        <point x="1680.0" y="338.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="ef717820-9542-43fc-9f43-0e29af45228b">
+      <element uuid="e3441729-e959-497b-abc8-99bfe3ccd6bd">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_avcfg_02</seg>
+      </bo>
+      <bendpoints>
+        <point x="2336.0" y="93.0"/>
+        <point x="2336.0" y="135.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="67dbac67-136f-466b-8cd3-b0b84ea96240">
+      <element uuid="421bb3d4-1fa8-4489-b41e-0a24b0ceb7cf">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_avcfg_03</seg>
+      </bo>
+      <bendpoints>
+        <point x="239.0" y="93.0"/>
+        <point x="239.0" y="501.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="b22702c7-6e14-4d17-8d45-b4cc8e31b6a7">
+      <element uuid="f1ee45ba-2166-4d45-96d4-5ff73ae709b1">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_avcfg_04</seg>
+      </bo>
+      <bendpoints>
+        <point x="239.0" y="93.0"/>
+        <point x="239.0" y="878.5"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="c37ca7e9-c0b8-4207-bdf9-22e37f061d25">
+      <element uuid="233814c6-84ca-462a-8147-d280b68d672f">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_avcfg_05</seg>
+      </bo>
+      <bendpoints>
+        <point x="239.0" y="93.0"/>
+        <point x="239.0" y="399.0"/>
+        <point x="975.0" y="399.0"/>
+        <point x="975.0" y="471.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="52a5b33c-0b73-424f-a111-f64948187ebe">
+      <element uuid="bc9d089c-38f8-4ca0-a0e1-ffb81f9fb099">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_avst_06</seg>
+      </bo>
+      <bendpoints>
+        <point x="219.0" y="285.0"/>
+        <point x="219.0" y="1044.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="e70f95b4-e612-42b6-97ca-5588dc9f7dc8">
+      <element uuid="afca4276-5885-4eff-8125-5adc1443ef30">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_avst_07</seg>
+      </bo>
+      <contentFilters/>
+    </element>
+    <element uuid="829312b2-7ad2-41a7-bf44-ee674b49ab56">
+      <element uuid="e6c7890f-8325-466b-a921-e45a53a3b182">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_avst_08</seg>
+      </bo>
+      <bendpoints>
+        <point x="219.0" y="285.0"/>
+        <point x="219.0" y="813.0"/>
+        <point x="3066.0" y="813.0"/>
+        <point x="3066.0" y="852.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="a1227da1-f5d6-4655-8e32-a1dc347af1f1">
+      <element uuid="1bee7dcd-38cd-44c1-bdcd-eda4c4da62df">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_avst_09</seg>
+      </bo>
+      <bendpoints>
+        <point x="219.0" y="285.0"/>
+        <point x="219.0" y="601.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="b8a0b725-94a8-4e19-9cd5-b8eb0fe6dd60">
+      <element uuid="88eedb01-1e1c-4061-b382-cbcec73047a0">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_avst_10</seg>
+      </bo>
+      <bendpoints>
+        <point x="219.0" y="285.0"/>
+        <point x="219.0" y="941.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="c22afc19-fd44-4cec-8848-d0962e811c72">
+      <element uuid="99df4dc4-4fb4-41db-86b6-81ff1275701b">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_avst_11</seg>
+      </bo>
+      <bendpoints>
+        <point x="219.0" y="285.0"/>
+        <point x="219.0" y="388.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="64c919fa-2172-4e86-a05c-15f4c577156d">
+      <element uuid="71ee4211-6860-498c-ab02-75ddc5e346aa">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_avst_12</seg>
+      </bo>
+      <bendpoints>
+        <point x="219.0" y="285.0"/>
+        <point x="219.0" y="813.0"/>
+        <point x="975.0" y="813.0"/>
+        <point x="975.0" y="631.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="b193aead-0246-44e4-b2f1-70022e3d21c5">
+      <element uuid="a1a72cbc-9cc7-459b-99dd-114c1a38a0cf">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_clst_rpreq_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="1660.0" y="491.0"/>
+        <point x="1660.0" y="185.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="c6f0b60f-568e-4b67-9760-03f8c03d2efb">
+      <element uuid="e41974b5-76a1-4739-af0c-80d220951f91">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_lstsk_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="229.0" y="235.0"/>
+        <point x="229.0" y="551.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="556b7e23-7cf5-4a92-ab8e-d7cb0bb311f0">
+      <element uuid="83fea870-421e-45b5-833e-c66a64f11dda">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_mcmd_01</seg>
+      </bo>
+      <contentFilters/>
+    </element>
+    <element uuid="bc7ee47a-22da-4563-b83d-a8832b1cb030">
+      <element uuid="d47ea6c4-0dc9-429a-b546-c6f93cefe246">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_pbs_sstts_01</seg>
+      </bo>
+      <contentFilters/>
+    </element>
+    <element uuid="2dbefdd2-fbab-49ab-97f9-3981cfa16d1a">
+      <element uuid="d6a84ad7-c588-47b6-b2df-3fedb35e0f10">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_pbs_tireq_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="3066.0" y="702.0"/>
+        <point x="3066.0" y="780.0"/>
+        <point x="1670.0" y="780.0"/>
+        <point x="1670.0" y="641.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="d608101a-5325-4de0-8c81-0a568d41abfe">
+      <element uuid="6de76c9a-af22-40a3-8d44-59f70f8cd5df">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_pbs_uarsp_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="995.0" y="802.0"/>
+        <point x="995.0" y="916.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="654b8137-d30a-4263-8118-a87135490caf">
+      <element uuid="1b028690-e504-42af-93ec-74a411df8705">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_pbs_uarsp_02</seg>
+      </bo>
+      <bendpoints>
+        <point x="1650.0" y="802.0"/>
+        <point x="1650.0" y="741.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="eace1a28-20c2-4b72-96ff-2c1aa4f901e5">
+      <element uuid="ad0a9da9-6631-4940-a763-c1f7e8824e11">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_prvs_rpr_02</seg>
+      </bo>
+      <bendpoints>
+        <point x="2336.0" y="235.0"/>
+        <point x="2336.0" y="338.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="b662c00b-d7ba-41d4-bd47-76367ae103fb">
+      <element uuid="14427c3d-3436-42c5-8a1d-7d1ed41cbd95">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_ra_sstts_01</seg>
+      </bo>
+      <contentFilters/>
+    </element>
+    <element uuid="a69dafa8-b91c-4f0c-9518-ebc6c82d3255">
+      <element uuid="363b968b-cce2-4b01-b1c8-2a0dd582a201">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_rpreq_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="2346.0" y="388.0"/>
+        <point x="2346.0" y="335.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="0aba88ee-8a6d-4789-b8a1-c08ec06be12b">
+      <element uuid="6f09481e-a306-4510-abdb-1072d69bf7a5">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_rpvs_rpr_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="1670.0" y="235.0"/>
+        <point x="1670.0" y="541.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="005d6424-a7c0-4194-9de6-26da914b45c1">
+      <element uuid="d3caabe5-bc2c-4611-92cc-8db75c7ada78">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_tasum_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="3066.0" y="624.3333333333334"/>
+        <point x="3066.0" y="652.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="8088c227-233c-44aa-aa9e-b00db8d22a9c">
+      <element uuid="1331d8a5-5127-4fbf-815a-8e77cfea8c45">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_tirsp_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="1660.0" y="691.0"/>
+        <point x="1660.0" y="791.0"/>
+        <point x="3076.0" y="791.0"/>
+        <point x="3076.0" y="752.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="b134f6e6-7e3d-4290-981d-140af66e09cb">
+      <element uuid="8f73739e-20f8-49a1-bab6-77dd83afeabe">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_tmsrvc_cnt_01</seg>
+      </bo>
+      <contentFilters/>
+    </element>
+    <element uuid="3179f376-7f86-4e96-b2d5-bb65928dc888">
+      <element uuid="3ad585a1-efbb-4fd3-92e1-b004d0eb27a0">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_tpopts_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="1680.0" y="591.0"/>
+        <point x="1680.0" y="438.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="8f7f68ce-4987-4de3-bad8-bb41ec252499">
+      <element uuid="35b0ab24-ebfa-4e83-a35b-2bce7622b075">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_tpopts_02</seg>
+      </bo>
+      <contentFilters/>
+    </element>
+    <element uuid="ae1594f9-afee-499a-b779-0b880535ef98">
+      <element uuid="23cb005e-1b69-4f0a-9927-625b555a929d">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_uarsp_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="985.0" y="866.0"/>
+        <point x="985.0" y="769.0"/>
+        <point x="1690.0" y="769.0"/>
+        <point x="1690.0" y="488.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="89a700dc-2344-44f8-833f-8939123a5d1a">
+      <element uuid="18cd25bd-d14f-4025-975a-3c8d68a263c9">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_uarsp_02</seg>
+      </bo>
+      <bendpoints>
+        <point x="985.0" y="866.0"/>
+        <point x="985.0" y="769.0"/>
+        <point x="2336.0" y="769.0"/>
+        <point x="2336.0" y="641.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="2c66e441-f699-4050-8e85-c170390efb57">
+      <element uuid="516fbfdc-46da-4c4c-acd6-e0c079f035b7">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_uarsp_03</seg>
+      </bo>
+      <bendpoints>
+        <point x="3066.0" y="866.0"/>
+        <point x="3066.0" y="902.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="c700bd26-ede0-475f-8e8e-f77ca2a3bb22">
+      <element uuid="5bdc5c3b-3e2a-42de-be64-9e537164439b">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_uarsp_04</seg>
+      </bo>
+      <bendpoints>
+        <point x="985.0" y="866.0"/>
+        <point x="985.0" y="711.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="f5c1e723-e5a9-422f-832d-f3f5ad175ff0">
+      <element uuid="d00c79d6-05bb-4b11-93fd-26f0018175d4">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_vacmd_01</seg>
+      </bo>
+      <bendpoints>
+        <point x="1650.0" y="441.0"/>
+        <point x="1650.0" y="82.0"/>
+      </bendpoints>
+      <contentFilters/>
+    </element>
+    <element uuid="20f9796c-526a-483b-b1cd-04fcf84f5aff" dockArea="left">
+      <bo>
+        <seg>feature</seg>
+        <seg>airvehicleconfiguration</seg>
+      </bo>
+      <position y="49.0"/>
+      <contentFilters/>
+    </element>
+    <element uuid="293ccf01-68a6-4efb-92ab-b7e1206a33b4" dockArea="left">
+      <bo>
+        <seg>feature</seg>
+        <seg>airvehiclestate</seg>
+      </bo>
+      <position y="241.0"/>
+      <contentFilters/>
+    </element>
+    <element uuid="4ec5dad9-8a4f-42c9-b92d-4dff3bd6556f" dockArea="left">
+      <bo>
+        <seg>feature</seg>
+        <seg>automationrequest</seg>
+      </bo>
+      <position y="291.0"/>
+      <contentFilters/>
+    </element>
+    <element uuid="24a1090c-9673-4938-b8c5-975078310940" dockArea="right">
+      <bo>
+        <seg>feature</seg>
+        <seg>automationresponse</seg>
+      </bo>
+      <position x="3717.0" y="1028.0"/>
+      <contentFilters/>
+    </element>
+    <element uuid="24eb16ca-11c5-4205-92e5-5ee4c4b08e88" dockArea="left">
+      <bo>
+        <seg>feature</seg>
+        <seg>linesearchtask</seg>
+      </bo>
+      <position y="191.0"/>
+      <contentFilters/>
+    </element>
+    <element uuid="e2ef042d-f887-4fac-a51f-e8db280b05af" dockArea="right">
+      <bo>
+        <seg>feature</seg>
+        <seg>missioncommand</seg>
+      </bo>
+      <position x="3743.0" y="975.0"/>
+      <contentFilters/>
+    </element>
+    <element uuid="2c05999a-03eb-4144-a8f0-a15ebc44605f" dockArea="right">
+      <bo>
+        <seg>feature</seg>
+        <seg>servicestatus_arvs</seg>
+      </bo>
+      <position x="3722.0" y="1078.0"/>
+      <contentFilters/>
+    </element>
+    <element uuid="ec5c9f73-3da2-4dec-9fe7-cf1dc86a3f6b" dockArea="right">
+      <bo>
+        <seg>feature</seg>
+        <seg>servicestatus_atbbs</seg>
+      </bo>
+      <position x="3713.0" y="514.0"/>
+      <contentFilters/>
+    </element>
+    <element uuid="42e3ccd5-1ce1-4900-ba82-bbdbbd42c94d" dockArea="right">
+      <bo>
+        <seg>feature</seg>
+        <seg>servicestatus_pbs</seg>
+      </bo>
+      <position x="3733.0" y="733.0"/>
+      <contentFilters/>
+    </element>
+    <element uuid="eb2335f7-4500-4896-b382-ff025b3297ee" dockArea="right">
+      <bo>
+        <seg>feature</seg>
+        <seg>servicestatus_ras</seg>
+      </bo>
+      <position x="3732.0" y="394.0"/>
+      <contentFilters/>
+    </element>
+    <element uuid="b27024ab-3227-4c97-844d-e0a5c53aedce" dockArea="right">
+      <bo>
+        <seg>feature</seg>
+        <seg>vehicleactioncommand</seg>
+      </bo>
+      <position x="3701.0" y="38.0"/>
+      <contentFilters/>
+    </element>
+    <element uuid="7512d79d-642d-4a94-b59f-ec6c9793c7d1">
+      <element uuid="5230fb74-6315-4fa8-8aea-78c4073ef748" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>assignmentcostmatrix</seg>
+        </bo>
+        <position y="10.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="e927cf08-a5a4-416e-bf37-0d86a015adb6" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>servicestatus</seg>
+        </bo>
+        <position x="596.0" y="27.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="024a34dd-a656-423c-8d15-f1f9a3c9b30c" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>taskassignmentsummary</seg>
+        </bo>
+        <position x="513.0" y="93.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="56bf1841-6a3f-43fc-9470-aa6aec9626b6" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>taskplanoptions</seg>
+        </bo>
+        <position y="60.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="cb5163bb-960d-4e5e-b84c-56f123f5a5ef" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>uniqueautomationrequest</seg>
+        </bo>
+        <position y="110.0"/>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>assignmenttreebranchboundservice</seg>
+      </bo>
+      <position x="2344.0" y="487.0"/>
+      <size width="700.0" height="160.0"/>
+      <contentFilters>
+        <filter>features</filter>
+        <filter>internalFeatures</filter>
+        <filter>processorFeatures</filter>
+        <filter>connections</filter>
+        <filter>flowSpecifications</filter>
+      </contentFilters>
+    </element>
+    <element uuid="0c7ee8d0-8f1b-4c53-ac69-6e6f52ba5f76">
+      <element uuid="f9af70cb-bc32-4e20-99c2-e551c6976ee6" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>airvehicleconfiguration</seg>
+        </bo>
+        <position y="23.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="aa683f88-810e-4619-a5b3-809fbeab8468" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>airvehiclestate</seg>
+        </bo>
+        <position y="85.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="6b810fd5-9d0f-4a7d-9d88-6f82730bb069" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>automationrequest</seg>
+        </bo>
+        <position y="148.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="da7ccfa2-e116-4d03-b31e-45a356221cc9" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>automationresponse</seg>
+        </bo>
+        <position x="560.0" y="110.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="1ec27657-306e-4514-9dc2-8500f1ff20ed" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>servicestatus</seg>
+        </bo>
+        <position x="612.0" y="160.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="b3db283e-7cba-4ccc-9c18-11d264b2462e" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>uniqueautomationrequest</seg>
+        </bo>
+        <position x="522.0" y="10.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="62726484-506d-456b-8cc0-89a593dec25b" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>uniqueautomationresponse</seg>
+        </bo>
+        <position x="510.0" y="60.0"/>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>automationrequestvalidatorservice</seg>
+      </bo>
+      <position x="237.0" y="812.0"/>
+      <size width="716.0" height="210.0"/>
+      <contentFilters>
+        <filter>features</filter>
+        <filter>internalFeatures</filter>
+        <filter>processorFeatures</filter>
+        <filter>connections</filter>
+        <filter>flowSpecifications</filter>
+      </contentFilters>
+    </element>
+    <element uuid="2e023455-0672-4323-9862-b1ad0d787014">
+      <element uuid="9dde0b61-306b-4a99-8990-0567123563a6" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>airvehicleconfiguration</seg>
+        </bo>
+        <position y="40.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="ca5e35e6-27e6-44c4-881e-81ada63f71ad" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>airvehiclestate</seg>
+        </bo>
+        <position y="200.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="3e80d671-ed47-49f2-97b7-04ffc5a07b0e" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>createnewservice</seg>
+        </bo>
+        <position y="120.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="029c7bd9-220e-403f-b405-9308994f4daf" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>routeplanrequest</seg>
+        </bo>
+        <position x="500.0" y="60.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="02f4f50b-fcc5-4334-b2ac-c56aa22dae19" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>routeplanresponse</seg>
+        </bo>
+        <position x="488.0" y="110.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="8d5325c9-cbee-4d7d-b618-c8cd5efb81b1" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>taskimplementationrequest</seg>
+        </bo>
+        <position x="430.0" y="210.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="61d4091f-99fa-46f3-bbcf-e00680cbcea9" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>taskimplementationresponse</seg>
+        </bo>
+        <position x="419.0" y="260.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="b655026b-d314-461a-946d-0d9dab8fd533" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>taskplanoptions</seg>
+        </bo>
+        <position x="511.0" y="160.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="503cfe81-b8aa-41f6-9468-6c6151961c18" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>uniqueautomationrequest</seg>
+        </bo>
+        <position y="280.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="79e047b5-fc21-4e69-b612-4a7549abfbfd" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>uniqueautomationresponse</seg>
+        </bo>
+        <position x="429.0" y="310.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="a3c67a2c-1351-458c-8313-2b3f859f46c0" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>vehicleactioncommand</seg>
+        </bo>
+        <position x="463.0" y="10.0"/>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>cmasilinesearchtask</seg>
+      </bo>
+      <position x="993.0" y="387.0"/>
+      <size width="635.0" height="360.0"/>
+      <contentFilters>
+        <filter>features</filter>
+        <filter>internalFeatures</filter>
+        <filter>processorFeatures</filter>
+        <filter>connections</filter>
+        <filter>flowSpecifications</filter>
+      </contentFilters>
+    </element>
+    <element uuid="cf92cb43-2329-4cfa-b2eb-f294e3d901fe">
+      <element uuid="d96984a2-3e63-482c-a96c-959026c10bc8" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>airvehiclestate</seg>
+        </bo>
+        <position y="210.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="97fa49bd-dd50-4e41-baa7-fb4b86a7ab62" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>servicestatus</seg>
+        </bo>
+        <position x="511.0" y="135.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="9cbe878e-2b67-407a-a5af-e2b226712435" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>taskassignmentsummary</seg>
+        </bo>
+        <position y="10.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="f06c6088-7b6a-4461-a364-916eb157470f" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>taskimplementationrequest</seg>
+        </bo>
+        <position y="60.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="909463be-569e-492e-b8b4-74f31d9f8576" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>taskimplementationresponse</seg>
+        </bo>
+        <position y="110.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="0909564d-6871-4f48-a7f0-9b7aa0499254" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>uniqueautomationrequest</seg>
+        </bo>
+        <position y="260.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="6e96e2c9-2b76-4888-81e2-4a74f651cc74" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>uniqueautomationresponse</seg>
+        </bo>
+        <position y="160.0"/>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>planbuilderservice</seg>
+      </bo>
+      <position x="3074.0" y="598.0"/>
+      <size width="615.0" height="310.0"/>
+      <contentFilters>
+        <filter>features</filter>
+        <filter>internalFeatures</filter>
+        <filter>processorFeatures</filter>
+        <filter>connections</filter>
+        <filter>flowSpecifications</filter>
+      </contentFilters>
+    </element>
+    <element uuid="d2f12be4-90bb-4854-a65d-20e33cd7adc8">
+      <element uuid="25f75484-bd19-4b8f-a83f-fb246cebfa59" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>airvehicleconfiguration</seg>
+        </bo>
+        <position y="10.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="664bfe38-fd57-4835-8c1e-39a2574a3f1b" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>airvehiclestate</seg>
+        </bo>
+        <position y="60.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="b666eca4-c15f-4aa1-97f6-0ac6095c0535" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>assignmentcostmatrix</seg>
+        </bo>
+        <position x="461.0" y="160.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="2cdf751c-1a3d-41d8-9023-951a4ef45f98" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>routeplanrequest</seg>
+        </bo>
+        <position x="491.0" y="60.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="8a36c69d-ba4d-45a5-8b0a-d4771edcc773" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>routeplanresponse</seg>
+        </bo>
+        <position x="479.0" y="10.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="77a8ca12-2685-42d2-9735-d1158cb54193" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>servicestatus</seg>
+        </bo>
+        <position x="522.0" y="110.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="5bd0179a-9961-4d92-8fdf-63f58d9b6dd0" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>taskplanoptions</seg>
+        </bo>
+        <position y="110.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="7c92ffa8-f3c3-4024-bf05-e0c30af25373" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>uniqueautomationresquest</seg>
+        </bo>
+        <position y="160.0"/>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>routeaggregatorservice</seg>
+      </bo>
+      <position x="1688.0" y="284.0"/>
+      <size width="626.0" height="210.0"/>
+      <contentFilters>
+        <filter>features</filter>
+        <filter>internalFeatures</filter>
+        <filter>processorFeatures</filter>
+        <filter>connections</filter>
+        <filter>flowSpecifications</filter>
+      </contentFilters>
+    </element>
+    <element uuid="fc14ef7b-1e6f-45b6-a711-37c47e71fce9">
+      <element uuid="e6c91d98-53e8-4417-b334-6c2620f99bca" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>airvehicleconfiguration</seg>
+        </bo>
+        <position y="10.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="31745044-ff4b-4617-9107-85f54f1960de" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>airvehiclestate</seg>
+        </bo>
+        <position y="160.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="f6805b3b-a45f-4f55-8824-7e64751e0de6" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>routeplanrequest_ragg</seg>
+        </bo>
+        <position y="210.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="d6cf6e2f-4424-464e-af7a-a6e8abb26d48" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>routeplanrequest_task</seg>
+        </bo>
+        <position y="60.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="94d60205-4a46-4f5b-a568-4b2faea69618" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>routeplanresponse</seg>
+        </bo>
+        <position y="110.0"/>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>routeplannervisibilityservice</seg>
+      </bo>
+      <position x="2344.0" y="81.0"/>
+      <size width="610.0" height="260.0"/>
+      <contentFilters>
+        <filter>features</filter>
+        <filter>internalFeatures</filter>
+        <filter>processorFeatures</filter>
+        <filter>connections</filter>
+        <filter>flowSpecifications</filter>
+      </contentFilters>
+    </element>
+    <element uuid="7c5bc7e6-56a7-4b2a-baf4-0b357c182e20">
+      <element uuid="b517d38e-a23c-4406-aec6-9f48fdbd69a7" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>airvehicleconfiguration</seg>
+        </bo>
+        <position y="10.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="c140838f-117a-48ac-9d8c-ee04d44b6c82" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>airvehiclestate</seg>
+        </bo>
+        <position y="110.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="bfac1aa0-d0b3-4b5b-8572-711933dbf41b" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>createnewservice</seg>
+        </bo>
+        <position x="410.0" y="60.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="81f40ec8-8687-4fc8-a922-14ae0f20f392" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>linesearchtask</seg>
+        </bo>
+        <position y="60.0"/>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>taskmanagerservice</seg>
+      </bo>
+      <position x="280.0" y="447.0"/>
+      <size width="543.0" height="160.0"/>
+      <contentFilters>
+        <filter>features</filter>
+        <filter>internalFeatures</filter>
+        <filter>processorFeatures</filter>
+        <filter>connections</filter>
+        <filter>flowSpecifications</filter>
+      </contentFilters>
+    </element>
+    <element uuid="ad43be01-7da1-4dc8-b85c-f540bb294f5b">
+      <element uuid="972a8cf2-5b83-4013-9cdc-3d9034f0440e" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>airvehiclestate</seg>
+        </bo>
+        <position y="60.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="cd405f57-310c-4b77-8521-ef6752803bf3" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>automationresponse</seg>
+        </bo>
+        <position y="10.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="a292d8da-17c3-47ed-ad0b-c0dd52e66830" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>missioncommand</seg>
+        </bo>
+        <position x="440.0" y="35.0"/>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>waypointplanmanagerservice</seg>
+      </bo>
+      <position x="1015.0" y="940.0"/>
+      <size width="570.0" height="110.0"/>
+      <contentFilters>
+        <filter>features</filter>
+        <filter>internalFeatures</filter>
+        <filter>processorFeatures</filter>
+        <filter>connections</filter>
+        <filter>flowSpecifications</filter>
+      </contentFilters>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>waterways.i</seg>
+    </bo>
+    <position x="12.0" y="12.0"/>
+    <size width="3873.0" height="1130.0"/>
+    <contentFilters>
+      <filter>features</filter>
+      <filter>internalFeatures</filter>
+      <filter>processorFeatures</filter>
+      <filter>connections</filter>
+      <filter>flowSpecifications</filter>
+      <filter>subcomponents</filter>
+    </contentFilters>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>waterways_uxas::waterways.i</seg>
+    </context>
+  </config>
+</diagram:Diagram>

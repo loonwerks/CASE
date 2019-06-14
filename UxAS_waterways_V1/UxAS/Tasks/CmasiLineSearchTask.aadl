@@ -4,7 +4,6 @@
 package CmasiLineSearchTask_Pkg
 public
 	with CMASI;
-	with UXTASK;
 	with UXNATIVE;
 	
 	with TaskServiceBase_Pkg;

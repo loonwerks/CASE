@@ -20,11 +20,11 @@ public
 			-- Subscribed Messages
 			AutomationResponse: in event data port CMASI::AutomationResponse.i;
 			AirVehicleState: in event data port CMASI::AirVehicleState.i;
-			IncrementWaypoint : in event data port UXNATIVE::IncrementWaypoint.i;
-			MissionCommand_in: in event data port CMASI::MissionCommand.i;
+--			IncrementWaypoint : in event data port UXNATIVE::IncrementWaypoint.i;
+--			MissionCommand_in: in event data port CMASI::MissionCommand.i;
 			
 			-- Sent Messages
-			MissionCommand_out : out event data port CMASI::MissionCommand.i;
+			MissionCommand : out event data port CMASI::MissionCommand.i;
 						
 		properties
 			Dispatch_Protocol => Sporadic;
