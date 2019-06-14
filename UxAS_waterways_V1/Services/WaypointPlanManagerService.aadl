@@ -18,13 +18,13 @@ public
 	thread WaypointPlanManagerService extends ServiceBase_Pkg::ServiceBase
 		features
 			-- Subscribed Messages
-			AutomationResponse: in data port CMASI::AutomationResponse.i;
-			AirVehicleState: in data port CMASI::AirVehicleState.i;
-			IncrementWaypoint : in data port UXNATIVE::IncrementWaypoint.i;
-			MissionCommand_in: in data port CMASI::MissionCommand.i;
+			AutomationResponse: in event data port CMASI::AutomationResponse.i;
+			AirVehicleState: in event data port CMASI::AirVehicleState.i;
+			IncrementWaypoint : in event data port UXNATIVE::IncrementWaypoint.i;
+			MissionCommand_in: in event data port CMASI::MissionCommand.i;
 			
 			-- Sent Messages
-			MissionCommand_out : out data port CMASI::MissionCommand.i;
+			MissionCommand_out : out event data port CMASI::MissionCommand.i;
 						
 		properties
 			Dispatch_Protocol => Sporadic;

@@ -37,7 +37,7 @@ public
            -- UXAS
            c14: port UXAS.MissionCommand -> FC_UART.MissionCommand;
            c15: port UXAS.MissionCommand -> RADIO.MissionCommand;
-           c16: port UXAS.GimbalStareAction -> GIMBAL.GimbalStareAction;
+           c16: port UXAS.VehicleActionCommand -> GIMBAL.VehicleActionCommand;
            c17: port UXAS.AutomationResponse -> RADIO.AutomationResponse;
 	end SW.Impl;
 	

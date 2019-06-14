@@ -12,17 +12,17 @@ public
 	thread PlanBuilderService extends ServiceBase_Pkg::ServiceBase
 		features
 			-- Subscribed Messages 
-			AirVehicleState : in data port CMASI::AirVehicleState.i;
-			GroundVehicleState : in data port VEHICLES::GroundVehicleState.i;
-			SurfaceVehicleState : in data port VEHICLES::SurfaceVehicleState.i;
-			UniqueAutomationRequest : in data port UXTASK::UniqueAutomationRequest.i;
-			TaskAssignmentSummary : in data port UXTASK::TaskAssignmentSummary.i;
-			TaskImplementationRequest : in data port UXTASK::TaskImplementationRequest.i;
+			AirVehicleState : in event data port CMASI::AirVehicleState.i;
+--			GroundVehicleState : in event data port VEHICLES::GroundVehicleState.i;
+--			SurfaceVehicleState : in event data port VEHICLES::SurfaceVehicleState.i;
+			UniqueAutomationRequest : in event data port UXTASK::UniqueAutomationRequest.i;
+			TaskAssignmentSummary : in event data port UXTASK::TaskAssignmentSummary.i;
+			TaskImplementationResponse : in event data port UXTASK::TaskImplementationResponse.i;
 
 			-- Sent Messages
- 			ServiceStatus : out data port CMASI::ServiceStatus.i;
-			TaskImplementationResponse : out data port UXTASK::TaskImplementationResponse.i;
-			UniqueAutomationResponse : out data port UXTASK::UniqueAutomationResponse.i;	
+ 			ServiceStatus : out event data port CMASI::ServiceStatus.i;
+			TaskImplementationRequest : out event data port UXTASK::TaskImplementationRequest.i;
+			UniqueAutomationResponse : out event data port UXTASK::UniqueAutomationResponse.i;	
 					
 		properties			
             Dispatch_Protocol => Sporadic;

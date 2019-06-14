@@ -10,13 +10,15 @@ public
 	thread AssignmentTreeBranchBoundService extends ServiceBase_Pkg::ServiceBase
 		features
 			-- Subscribed Messages
-			UniqueAutomationRequest : in data port UXTASK::UniqueAutomationRequest.i;
-			TaskPlanOptions : in data port UXTASK::TaskPlanOptions.i;
-			AssignmentCostMatrix : in data port UXTASK::AssignmentCostMatrix.i;
+			UniqueAutomationRequest : in event data port UXTASK::UniqueAutomationRequest.i;
+			TaskPlanOptions : in event data port UXTASK::TaskPlanOptions.i;
+			AssignmentCostMatrix : in event data port UXTASK::AssignmentCostMatrix.i;
+			-- see https://github.com/afrl-rq/OpenUxAS/blob/develop/src/Services/AssignmentTreeBranchBoundService.h
+			-- PSIR_AssignmentType
 			
 			-- Sent Messages
-			ServiceStatus : out data port CMASI::ServiceStatus.i;
-			TaskAssignmentSummary : out data port UXTASK::TaskAssignmentSummary.i;			
+			ServiceStatus : out event data port CMASI::ServiceStatus.i;
+			TaskAssignmentSummary : out event data port UXTASK::TaskAssignmentSummary.i;			
 
         properties
             Dispatch_Protocol => Sporadic;

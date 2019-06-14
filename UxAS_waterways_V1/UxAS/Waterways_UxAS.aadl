@@ -11,6 +11,7 @@ public
 	with TaskManagerService_Pkg;
 	with WaypointPlanManagerService_Pkg;
 	with StatusReportService_Pkg;
+	with CmasiLineSearchTask_Pkg;
 	
 	with UxAS;
 		
@@ -19,8 +20,9 @@ public
 			AutomationRequest : in event data port CMASI::AutomationRequest.i;
 			AirVehicleConfiguration : in event data port CMASI::AirVehicleConfiguration.i;
 			AirVehicleState : in event data port CMASI::AirVehicleState.i;
+			LineSearchTask : in event data port CMASI::LineSearchTask.i;
 			MissionCommand : out event data port CMASI::MissionCommand.i;
-			GimbalStareAction : out event data port CMASI::GimbalStareAction.i;
+			VehicleActionCommand : out event data port CMASI::VehicleActionCommand.i;
 			AutomationResponse : out event data port CMASI::AutomationResponse.i;
 	end Waterways;
 	
@@ -37,7 +39,8 @@ public
 		  AssignmentTreeBranchBoundService: thread AssignmentTreeBranchBoundService_Pkg::AssignmentTreeBranchBoundService;
 		  PlanBuilderService: thread PlanBuilderService_Pkg::PlanBuilderService;
 		  WaypointPlanManagerService: thread WaypointPlanManagerService_Pkg::WaypointPlanManagerService;       
-            
+		  CmasiLineSearchTask: thread CmasiLineSearchTask_Pkg::CmasiLineSearchTask;
+		  
 		connections
 			
 			------------------------------------------------------------------------------------------------------------------
@@ -48,38 +51,73 @@ public
 			------------------------------------------------------------------------------------------------------------------
 			
 			------------------
-			-- Initialization
+			-- Primary Inputs
 			------------------
-			c_init_01 : port AirVehicleConfiguration -> RouteAggregatorService.AirVehicleConfiguration;
-			c_init_02 : port AirVehicleConfiguration -> RoutePlannerVisibilityService.AirVehicleConfiguration;
-			c_init_03 : port AirVehicleConfiguration -> TaskManagerService.AirVehicleConfiguration;
-			c_init_04 : port AirVehicleConfiguration -> AutomationRequestValidatorService.AirVehicleConfiguration;
+			c_AVCfg_01 : port AirVehicleConfiguration -> RouteAggregatorService.AirVehicleConfiguration;
+			c_AVCfg_02 : port AirVehicleConfiguration -> RoutePlannerVisibilityService.AirVehicleConfiguration;
+			c_AVCfg_03 : port AirVehicleConfiguration -> TaskManagerService.AirVehicleConfiguration;
+			c_AVCfg_04 : port AirVehicleConfiguration -> AutomationRequestValidatorService.AirVehicleConfiguration;
+			c_AVCfg_05 : port AirVehicleConfiguration -> CmasiLineSearchTask.AirVehicleConfiguration;
 			
-			c_init_05 : port AirVehicleState -> WaypointPlanManagerService.AirVehicleState;
-			c_init_06 : port AirVehicleState -> RoutePlannerVisibilityService.AirVehicleState;
-			c_init_07 : port AirVehicleState -> PlanBuilderService.AirVehicleState;
-			c_init_08 : port AirVehicleState -> TaskManagerService.AirVehicleState;
-			c_init_09 : port AirVehicleState -> AutomationRequestValidatorService.AirVehicleState;
-						
-			--------------
-			-- Assignment
-			--------------			
-			c_asn_01 : port AutomationRequest -> AutomationRequestValidatorService.AutomationRequest;
-			c_asn_02 : port AutomationRequestValidatorService.UniqueAutomationRequest -> RouteAggregatorService.UniqueAutomationResquest;			
-			c_asn_03 : port AutomationRequestValidatorService.UniqueAutomationRequest -> AssignmentTreeBranchBoundService.UniqueAutomationRequest;
-			c_asn_04 : port AutomationRequestValidatorService.UniqueAutomationRequest -> PlanBuilderService.UniqueAutomationRequest;						
-		
-			c_asn_96 : port RouteAggregatorService.RoutePlanRequest -> RoutePlannerVisibilityService.RoutePlanRequest;
-            c_asn_97 : port RoutePlannerVisibilityService.RoutePlanResponse -> RouteAggregatorService.RoutePlanResponse;
-       		c_asn_98 : port RouteAggregatorService.AssignmentCostMatrix -> AssignmentTreeBranchBoundService.AssignmentCostMatrix;
-       		c_asn_99 : port AssignmentTreeBranchBoundService.TaskAssignmentSummary -> PlanBuilderService.TaskAssignmentSummary;
+			c_AVSt_06 : port AirVehicleState -> WaypointPlanManagerService.AirVehicleState;
+			c_AVSt_07 : port AirVehicleState -> RoutePlannerVisibilityService.AirVehicleState;
+			c_AVSt_08 : port AirVehicleState -> PlanBuilderService.AirVehicleState;
+			c_AVSt_09 : port AirVehicleState -> TaskManagerService.AirVehicleState;
+			c_AVSt_10 : port AirVehicleState -> AutomationRequestValidatorService.AirVehicleState;
+			c_AVSt_11 : port AirVehicleState -> RouteAggregatorService.AirVehicleState;
+			c_AVSt_12 : port AirVehicleState -> CmasiLineSearchTask.AirVehicleState;
+			
+			c_AVSt_01 : port AutomationRequest -> AutomationRequestValidatorService.AutomationRequest;
+            	
+            c_LST_01 : port LineSearchTask -> TaskManagerService.LineSearchTask;
+            
+            -------------------------------------
+            -- AutomationRequestValidatorService
+            -------------------------------------
+            c_UAR_01 : port AutomationRequestValidatorService.UniqueAutomationRequest -> RouteAggregatorService.UniqueAutomationResquest;           
+            c_UAR_02 : port AutomationRequestValidatorService.UniqueAutomationRequest -> AssignmentTreeBranchBoundService.UniqueAutomationRequest;
+            c_UAR_03 : port AutomationRequestValidatorService.UniqueAutomationRequest -> PlanBuilderService.UniqueAutomationRequest;                       
+            c_UAR_04 : port AutomationRequestValidatorService.UniqueAutomationRequest -> CmasiLineSearchTask.UniqueAutomationRequest;
+            -- EGM: All the sequence charts in the UxAS docks show the below connection, but it is _not_ in the code.
+            -- The TaskManagerService does _not_ subscribe to UniqueAutomationRequest though it does send that message.
+            -- c_UAR_05 : port AutomationRequestValidatorService.UniqueAutomationRequest -> TaskManagerService.UniqueAutomationRequest;
+            
+            c_AR_01 : port AutomationRequestValidatorService.AutomationResponse -> AutomationResponse;
+            c_AR_02 : port AutomationRequestValidatorService.AutomationResponse -> WaypointPlanManagerService.AutomationResponse;
+            
+            -----------------------
+            -- CmasiLineSearchTask
+            -----------------------
+            c_TPO_01 : port CmasiLineSearchTask.TaskPlanOptions -> RouteAggregatorService.TaskPlanOptions;
+            c_TPO_02 : port CmasiLineSearchTask.TaskPlanOptions -> AssignmentTreeBranchBoundService.TaskPlanOptions;
+            
+            c_VAC_01 : port CmasiLineSearchTask.VehicleActionCommand -> VehicleActionCommand;
+            
+            c_TIR_01 : port CmasiLineSearchTask.TaskImplementationResponse -> PlanBuilderService.TaskImplementationResponse;
+            
+            c_CLST_RPR_01 : port CmasiLineSearchTask.RoutePlanRequest -> RoutePlannerVisibilityService.RoutePlanRequest_task;
+            
+            -------------------------
+            -- RouteAggregatorService
+            -------------------------
+			c_RPR_01 : port RouteAggregatorService.RoutePlanRequest -> RoutePlannerVisibilityService.RoutePlanRequest_ragg;
+            c_ACM_01 : port RouteAggregatorService.AssignmentCostMatrix -> AssignmentTreeBranchBoundService.AssignmentCostMatrix;
+                 
+			---------------------------------------
+			-- AssignmentTreeBranchAndBoundService
+			---------------------------------------
+			c_TAS_01 : port AssignmentTreeBranchBoundService.TaskAssignmentSummary -> PlanBuilderService.TaskAssignmentSummary;
        		
         	-------------------
-       		-- Implementation
+       		-- PlanBuilderService
        		-------------------
+       		c_PBS_TIR_01: port PlanBuilderService.TaskImplementationRequest -> CmasiLineSearchTask.TaskImplementationRequest;
   			c_impl_01 : port PlanBuilderService.UniqueAutomationResponse -> AutomationRequestValidatorService.UniqueAutomationResponse;
-			c_impl_03 : port AutomationRequestValidatorService.AutomationResponse -> AutomationResponse;
-       		
+			
+			---------------------------------
+			-- RoutePlannerVisibilityService
+			---------------------------------
+		
        		-------------
        		-- Execution
        		-------------
