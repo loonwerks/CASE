@@ -1,0 +1,78 @@
+package testvm
+public
+ 	data TIPC_Message
+  end TIPC_Message;
+
+	thread emitter_t
+		features
+			enq: out event data port TIPC_Message;
+			deq: in event data port TIPC_Message;
+		--properties
+		--	Source_Text => ("behavior_code/components/emitter/src/run_emitter.c");
+		--	Initialize_Entrypoint_Source_Text => "testepmon_emitter_component_init";
+		--	SB_SYS::Compute_Entrypoint_Source_Text => ("run_emitter");
+	end emitter_t;
+
+	thread implementation emitter_t.impl
+	end emitter_t.impl;
+
+	thread consumer_t
+		features
+			enq: out event data port TIPC_Message;
+			deq: in event data port TIPC_Message;
+       		properties
+            		Source_Text => ("behavior_code/components/consumer/src/run_ping.c");
+            		Initialize_Entrypoint_Source_Text => "testepvm_ping_init";
+	end consumer_t;
+
+	thread implementation consumer_t.impl
+	end consumer_t.impl;
+
+	virtual processor vm_proc
+	end vm_proc;
+
+	virtual processor implementation vm_proc.impl
+	end vm_proc.impl;
+
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+		--properties
+			--SB_SYS::OS => CAmkES;
+			--SB_SYS::HW => TK1;
+			--SB_SYS::Add_Dummy_Args_To_Void_Fns => True;
+	end proc.impl;
+	
+	virtual processor vproc
+	end vproc;
+	
+	virtual processor implementation vproc.impl
+	end vproc.impl;
+
+	process sw_p
+	end sw_p;
+	
+	process implementation sw_p.impl
+		subcomponents
+			vm : thread emitter_t.impl;
+			ping : thread consumer_t.impl;
+		connections
+			vm_to_ping : port vm.enq -> ping.deq;
+			ping_to_vm : port ping.enq -> vm.deq;
+	end sw_p.impl;
+	
+	system top
+	end top;
+
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			vproc: virtual processor vproc.impl;
+			sw : process sw_p.impl;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to vproc;
+			Actual_Processor_Binding => (reference (vproc)) applies to sw.vm;
+			Actual_Processor_Binding => (reference (proc)) applies to sw.ping;
+	end top.impl;
+end testvm;
