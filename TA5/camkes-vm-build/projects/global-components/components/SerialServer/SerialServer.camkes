@@ -1,0 +1,52 @@
+/*
+ * Copyright 2018, Data61
+ * Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+ * ABN 41 687 119 230.
+ *
+ * This software may be distributed and modified according to the terms of
+ * the BSD 2-Clause license. Note that NO WARRANTY is provided.
+ * See "LICENSE_BSD2.txt" for details.
+ *
+ * @TAG(DATA61_BSD)
+ */
+
+#include <plat/serial.h>
+
+import <GetChar.idl4>;
+import <PutChar.idl4>;
+import <Timer.idl4>;
+import <serial.camkes>;
+import <VirtQueue/VirtQueue.camkes>;
+
+component SerialServer {
+    control;
+    has mutex serial;
+    provides PutChar processed_putchar;
+    provides PutChar raw_putchar;
+    provides GetChar getchar;
+    uses Timer timeout;
+
+    /* Virtqueue connection to faciliate read and write */
+    maybe uses VirtQueueDev read;
+    maybe uses VirtQueueDev write;
+    emits Callback self;
+    maybe consumes Callback serial_wait;
+
+    /* Size of the driver's heap */
+    attribute int heap_size = 16 * 1024;
+    /* Unique endpoint for incoming timer notifications to serial driver */
+    attribute string timeout_global_endpoint = "serial_server";
+    /* Badge number for timer notifications coming into the serial driver */
+    attribute string timeout_badge = "1";
+
+    HARDWARE_SERIAL_INTERFACES
+    HARDWARE_SERIAL_ATTRIBUTES
+
+    composition {
+        HARDWARE_SERIAL_COMPOSITION
+    }
+
+    configuration {
+        HARDWARE_SERIAL_CONFIG
+    }
+}

@@ -1,0 +1,135 @@
+/*
+ * Copyright 2017, Data61
+ * Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+ * ABN 41 687 119 230.
+ *
+ * This software may be distributed and modified according to the terms of
+ * the GNU General Public License version 2. Note that NO WARRANTY is provided.
+ * See "LICENSE_GPLv2.txt" for details.
+ *
+ * @TAG(DATA61_GPL)
+ */
+
+#include <configurations/vm.h>
+
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+
+import <VirtIOPort.idl4>;
+import <InterruptGenerator.idl4>;
+import <PCIConfig.idl4>;
+import <Timer.idl4>;
+import <RTC.idl4>;
+import <Ethdriver.idl4>;
+import <VchanInterface.idl4>;
+import <ExtraRAM.idl4>;
+import <ExcludeGuestPAddr.idl4>;
+import <VMIOPorts.idl4>;
+import <VMIRQs.idl4>;
+import <VMPCIDevices.idl4>;
+import <FileServerInterface.camkes>;
+import <InitConnection.idl4>;
+import <GuestMaps.idl4>;
+import <VchanInitInterface.idl4>;
+
+import "PIC.camkes";
+
+import <Init/Init.camkes>;
+import <PCIConfigIO/PCIConfigIO.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <RTC/RTC.camkes>;
+import <SerialServer/SerialServer.camkes>;
+import <Ethdriver/Ethdriver.camkes>;
+import <UDPServer/UDPServer.camkes>;
+import <PicoUDPServer/PicoUDPServer.camkes>;
+import <Vchan/Vchan.camkes>;
+import <HelloWorld/HelloWorld.camkes>;
+import <FileServer/FileServer.camkes>;
+
+import <Echo/Echo.camkes>;
+
+connector seL4UDPSend {
+    from Procedure template "seL4UDPSend-from.template.c";
+    to Procedure template "seL4UDPSend-to.template.c";
+}
+
+connector seL4UDPRecv {
+    from Procedure template "seL4UDPRecv-from.template.c";
+    to Procedure template "seL4UDPRecv-to.template.c";
+}
+
+connector seL4PicoUDPSend {
+    from Procedure template "seL4PicoUDPSend-from.template.c";
+    to Procedure template "seL4PicoUDPSend-to.template.c";
+}
+
+connector seL4PicoUDPRecv {
+    from Procedure template "seL4PicoUDPRecv-from.template.c";
+    to Procedure template "seL4PicoUDPRecv-to.template.c";
+}
+
+connector seL4VMNet {
+    from Dataport template "seL4VMNet-from.template.c";
+    to Dataport template "seL4VMNet-to.template.c";
+}
+
+connector seL4ExtraRAM {
+    from Procedure template "seL4ExtraRAM.template.c";
+    to hardware Procedure;
+}
+
+connector seL4ExcludeGuestPAddr {
+    from Procedure template "seL4ExcludeGuestPAddr.template.c";
+    to hardware Procedure;
+}
+
+connector seL4InitConnection {
+    from Procedure template "seL4InitConnection.template.c";
+    to hardware Procedure;
+}
+
+connector seL4VMIOPorts {
+    from Procedure template "seL4VMIOPorts.template.c";
+    to hardware Procedure;
+}
+
+connector seL4GuestMaps {
+    from Procedure template "seL4GuestMaps.template.c";
+    to hardware Procedure;
+}
+
+connector seL4VMIRQs {
+    from Procedure template "seL4VMIRQs.template.c";
+    to hardware Procedure;
+}
+
+connector seL4VMPCIDevices {
+    from Procedure template "seL4VMPCIDevices.template.c";
+    to hardware Procedure;
+}
+
+connector seL4MultiSharedData {
+    from Dataport template "seL4MultiSharedData-from.template.c";
+    to Dataport template "seL4MultiSharedData-to.template.c";
+}
+
+connector seL4SharedDataWithCaps {
+    from Dataport template "seL4SharedDataWithCaps-from.template.c";
+    to Dataport template "seL4SharedDataWithCaps-to.template.c";
+}
+
+connector seL4VChanInit {
+    from Procedures template "seL4VChanInit-from.template.c";
+    to Procedure template "seL4VChanInit-to.template.c";
+}
+
+component VMConfig {
+    hardware;
+    provides ExtraRAM ram;
+    provides ExcludeGuestPAddr exclude_paddr;
+    provides VMIOPorts ioports;
+    provides GuestMaps guest_mappings;
+    provides VMIRQs irqs;
+    provides VMPCIDevices pci_devices;
+    provides InitConnection init_cons;
+};

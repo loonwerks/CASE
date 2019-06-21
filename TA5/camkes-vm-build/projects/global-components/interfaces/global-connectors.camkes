@@ -1,0 +1,236 @@
+/*
+ * Copyright 2017, Data61
+ * Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+ * ABN 41 687 119 230.
+ *
+ * This software may be distributed and modified according to the terms of
+ * the BSD 2-Clause license. Note that NO WARRANTY is provided.
+ * See "LICENSE_BSD2.txt" for details.
+ *
+ * @TAG(DATA61_BSD)
+ */
+/**
+ * @file
+ *
+ * This file defines a list of connectors. A connection is an instance of a
+ * connector, allowing two components to communicate with each other.
+ * Different connectors are used for different purposes.
+ *
+ * In essence, a connector defines how exactly a component connects to another
+ * component. There are two parts, from and to. Most of the connectors are
+ * defined such that the "from" component sends data to the "to" component. So
+ * the "from" component is more like a sender and the "to" component is like a
+ * receiver. Having said that, a totally different semantic can be implemented.
+ * It's really up to the programmer to decide it.
+ *
+ * To use the connector, you define it like this:
+ *
+ *    connection RPC util_fatfs_FS(from util.fs, to fatfs.fs);
+ *
+ * where the util_fatfs_FS connection is an instance of the RPC connector. It
+ * connects util.fs interface to fatfs.fs interface.
+ */
+
+/**
+ * RPCCallSignal connector
+ *
+ * This connector is like the regular RPCCall connector, except that
+ * there is a Notification endpoint allocated and associated with the 
+ * connector. The Notification endpoint is a 1-to-n relationship in that
+ * a component connected to many other components on the same interface
+ * with this connector is able to signal the connected components individually.
+ *
+ * It requires an attribute to define a badge for it to use and to couple
+ * the RPC connector and the associated dataport. The badge can be any
+ * unique number.
+ * 	<from_component>.<from_interface>_attributes = "<badge>";
+ *
+ * The 'from' side of the connector can access the associated Notification
+ * endpoint via this exposed function:
+ *      seL4_CPtr <interface name>_notification(void);
+ *
+ * The 'to' side of the connector can signal the desired connected component
+ * by passing the component's badge into the following function:
+ *      void <interface_name>_emit(unsigned int badge);
+ * There is also a function to query the largest badge of all the connected
+ * components:
+ *      int <interface_name>_largest_badge(void);
+ */
+connector seL4RPCCallSignal {
+    from Procedures template "seL4RPCCallSignal-from.template.c";
+    to Procedure template "seL4RPCCallSignal-to.template.c";
+}
+
+/**
+ * RPCCallDataport connector
+ *
+ * This connector is like the regular RPCCall connector, except that
+ * it transparanty allocates and uses a shared dataport between sender
+ * and receiver, rather than the IPC buffer.
+ *
+ * It requires an attribute to define a badge for it to use and to couple
+ * the RPC connector and the associated dataport. The badge can be any
+ * unique number.
+ * 	<from_component>.<from_interface>_attributes = "<badge>";
+ */
+connector seL4RPCCallDataport {
+    from Procedures template "seL4RPCCallDataport-from.template.c";
+    to Procedure template "seL4RPCCallDataport-to.template.c";
+}
+
+/**
+ * RPCDataport connect
+ *
+ * This connect provides a regular RPCCall connector, except that
+ * it allocates an additional shared dataport between each sender
+ * and receiver. The intention being that each client can place
+ * data directory into a buffer, and then use RPC as the control
+ * interface.
+ *
+ * It requires an attribute to define a badge for it to use and to couple
+ * the RPC connector and the associated dataport. The badge can be any
+ * unique number.
+ * 	<from_component>.<from_interface>_attributes = "<badge>";
+ *
+ * The 'from' side of the connector can access its dataport by
+ * using a symbol named '<from_interface>_buf', which is just an
+ * alias for the actual shared memory allocation.
+ *
+ * The 'to' side of the connection can get a specific dataport
+ * with <from_interface>_buf(<badge>) and can enumerate badges
+ * with <from_interface>_enumerate_badge(<badge_number>) and
+ * <from_interface>_num_badges()
+ */
+connector seL4RPCDataport {
+    from Procedures template "seL4RPCDataport-from.template.c";
+    to Procedure template "seL4RPCDataport-to.template.c";
+}
+
+/**
+ * RPCDataportSignal connector
+ *
+ * This connector is similar to the seL4RPCCallSignal connector, except
+ * that this connector is built on top of the seL4RPCDataport connector.
+ *
+ * The features and requirements are similar to the seL4RPCDataport connector.
+ *
+ * Additionally, the 'from' side of the connector can access the associated Notification
+ * endpoint via this exposed function:
+ *      seL4_CPtr <interface name>_notification(void);
+ *
+ * The 'to' side of the connector can signal the desired connected component
+ * by passing the component's badge into the following function:
+ *      void <interface_name>_emit(unsigned int badge);
+ * There is also a function to query the largest badge of all the connected
+ * components:
+ *      int <interface_name>_largest_badge(void);
+ */
+connector seL4RPCDataportSignal {
+    from Procedures template "seL4RPCDataportSignal-from.template.c";
+    to Procedure template "seL4RPCDataportSignal-to.template.c";
+}
+
+/**
+ * seL4GlobalAsynch
+ *
+ * This is a 1-to-n global endpoint Event connector that makes the underlying
+ * seL4 Notification endpoint capability available directly to the consuming
+ * component.
+ *
+ * This Event connector does not provide the consumer with the
+ * usual wait or callback interfaces, but only provides the following function:
+ *      seL4_CPtr <interface name>_notification(void);
+ *
+ * Global endpoint connectors allows an Event interface to be coupled with
+ * other interfaces in a component.  The interfaces coupled with
+ * an Event will be able to access that Event's underlying Notification
+ * endpoint capability.
+ *
+ * Coupling of interfaces occurs through matching attribute values. Each global
+ * endpoint connection defines a "_global_endpoint" attribute for its associated
+ * interfaces.  Those interfaces (within a component) whose "_global_endpoint"
+ * attributes match are coupled.
+ */
+connector seL4GlobalAsynch {
+    from Event template "seL4GlobalAsynch-from.template.c";
+    to Events template "seL4GlobalAsynch-to.template.c";
+}
+
+/**
+ * seL4GlobalAsynchCallback
+ *
+ * This is a 1-to-n global endpoint Event connector that makes the underlying
+ * seL4 Notification endpoint capability available directly to the consuming
+ * component.
+ *
+ * This Event connector provides the consumer with the usual callback
+ * interface as well as the following function:
+ *      seL4_CPtr <interface name>_notification(void);
+ *
+ * Global endpoint connectors allow an Event interface to be coupled with
+ * other interfaces in a component.  The interfaces coupled with
+ * an Event will be able to access that Event's underlying Notification
+ * endpoint capability.
+ *
+ * Coupling of interfaces occurs through matching attribute values. Each global
+ * endpoint connection defines a "_global_endpoint" attribute for its associated
+ * interfaces.  Those interfaces (within a component) whose "_global_endpoint"
+ * attributes match are coupled.
+ */
+connector seL4GlobalAsynchCallback {
+    from Event template "seL4GlobalAsynchCallback-from.template.c";
+    to Events template "seL4GlobalAsynchCallback-to.template.c";
+}
+
+/* Custom connectors which use existing global connectors just with no threads configured. */
+connector seL4TimeServer {
+    from Procedures template "seL4RPCCallSignal-from.template.c" with 0 threads;
+    to Procedure template "seL4RPCCallSignal-to.template.c";
+}
+
+connector seL4SerialServer {
+    from Procedures template "seL4RPCDataportSignal-from.template.c" with 0 threads;
+    to Procedure template "seL4RPCDataportSignal-to.template.c";
+}
+
+connector seL4PicoServerSignal {
+    from Procedures template "seL4RPCCallSignal-from.template.c" with 0 threads;
+    to Procedure template "seL4RPCCallSignal-to.template.c";
+}
+
+connector seL4PicoServer {
+    from Procedures template "seL4RPCDataport-from.template.c" with 0 threads;
+    to Procedure template "seL4RPCDataport-to.template.c";
+}
+
+/**
+ * seL4Ethdriver
+ * 
+ * This connector is intended to be used with the Ethdriver component.
+ *
+ * The connector itself is very similar to the seL4RPCDataportSignal connector
+ * except that it contains an additional function to query a client's assigned MAC
+ * address.
+ */ 
+connector seL4Ethdriver {
+    from Procedures template "seL4Ethdriver-from.template.c" with 0 threads;
+    to Procedure template "seL4Ethdriver-to.template.c";
+}
+
+/**
+* seL4VirtQueues
+*
+* This is an n-n global endpoint connector that makes use of an seL4
+* Notification endpoint capability and shared memory region to faciliate
+* the implementation of a virtqueue-based communication protocol.
+*
+* Multiple components can participate in a virtqueue connection where
+* participating components are in the 'from' end of the connection.
+* A virtqueue connection can have only 1 component in the 'to' end, which
+* is intended to be an empty/stub component.
+*/
+connector seL4VirtQueues {
+    from Procedures template "seL4VirtQueues-from.template.c";
+    to Procedure template "seL4VirtQueues-to.template.c";
+    attribute bool disable_interface_type_checking = true;
+}
