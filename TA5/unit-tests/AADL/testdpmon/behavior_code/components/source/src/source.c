@@ -19,6 +19,6 @@ void run_sender(const int64_t *in_arg)
 {
     if (sb_enq_write( &_value ) ) {
         printf("[source] Sent %d\n", _value );
-        _value++;
+        _value = (_value + 1) % 500;
     }
 }
