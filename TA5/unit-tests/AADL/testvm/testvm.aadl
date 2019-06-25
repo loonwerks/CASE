@@ -1,7 +1,7 @@
 package testvm
 public
  	data TIPC_Message
-  end TIPC_Message;
+  	end TIPC_Message;
 
 	thread emitter_t
 		features
@@ -50,17 +50,33 @@ public
 	virtual processor implementation vproc.impl
 	end vproc.impl;
 
-	process sw_p
-	end sw_p;
+	process vm_p
+		features
+			enq: out event data port TIPC_Message;
+			deq: in event data port TIPC_Message;
+	end vm_p;
 	
-	process implementation sw_p.impl
+	process implementation vm_p.impl
 		subcomponents
 			vm : thread emitter_t.impl;
-			ping : thread consumer_t.impl;
 		connections
-			vm_to_ping : port vm.enq -> ping.deq;
-			ping_to_vm : port ping.enq -> vm.deq;
-	end sw_p.impl;
+			outgoing : port vm.enq -> enq;
+			incoming : port deq -> vm.deq;
+	end vm_p.impl;
+	
+	process ping_p
+		features
+			enq: out event data port TIPC_Message;
+			deq: in event data port TIPC_Message;
+	end ping_p;
+	
+	process implementation ping_p.impl
+		subcomponents
+			vm : thread emitter_t.impl;
+		connections
+			outgoing : port vm.enq -> enq;
+			incoming : port deq -> vm.deq;
+	end ping_p.impl;
 	
 	system top
 	end top;
@@ -69,10 +85,14 @@ public
 		subcomponents
 			proc: processor proc.impl;
 			vproc: virtual processor vproc.impl;
-			sw : process sw_p.impl;
+			vm : process vm_p.impl;
+			ping : process ping_p.impl;
+		connections
+			vm_to_ping : port vm.enq -> ping.deq;
+			ping_to_vm : port ping.enq -> vm.deq;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to vproc;
-			Actual_Processor_Binding => (reference (vproc)) applies to sw.vm;
-			Actual_Processor_Binding => (reference (proc)) applies to sw.ping;
+			Actual_Processor_Binding => (reference (vproc)) applies to vm;
+			Actual_Processor_Binding => (reference (proc)) applies to ping;
 	end top.impl;
 end testvm;
