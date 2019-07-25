@@ -28,12 +28,6 @@ public
 	thread implementation consumer_t.impl
 	end consumer_t.impl;
 
-	virtual processor vm_proc
-	end vm_proc;
-
-	virtual processor implementation vm_proc.impl
-	end vm_proc.impl;
-
 	processor proc
 	end proc;
 
