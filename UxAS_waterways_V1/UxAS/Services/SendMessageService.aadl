@@ -1,0 +1,21 @@
+package SendMessageService_Pkg
+public
+	with CMASI;
+    with ServiceBase_Pkg;
+    
+    thread SendMessageService extends ServiceBase_Pkg::ServiceBase
+        features
+            -- Sent Messages
+            AirVehicleConfiguration : out event data port CMASI::AirVehicleConfiguration.i;
+            KeepInZone : out event data port CMASI::KeepInZone.i;
+            KeepOutZone : out event data port CMASI::KeepOutZone.i;
+            OperatingRegion: out event data port CMASI::OperatingRegion.i;
+            LineSearchTask : out event data port CMASI::LineSearchTask.i;
+        
+        properties          
+            Dispatch_Protocol => Sporadic;
+            
+    end SendMessageService;
+    
+    
+end SendMessageService_Pkg;

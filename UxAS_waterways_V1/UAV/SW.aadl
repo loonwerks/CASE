@@ -38,21 +38,15 @@ public
            ---------
            c07: port RADIO.send_data -> radio_send;
            c08: port RADIO.AutomationRequest -> UXAS.AutomationRequest; 	
-           c09: port RADIO.AirVehicleConfiguration -> UXAS.AirVehicleConfiguration;
-           c10: port RADIO.LineSearchTask -> UxAS.LineSearchTask;
-           
+            
            --------
            -- UXAS
            --------
-           c11: port UXAS.MissionCommand -> FC_UART.MissionCommand;
-           c12: port UXAS.MissionCommand -> RADIO.MissionCommand;
-           c13: port UXAS.VehicleActionCommand -> GIMBAL.VehicleActionCommand;
-           c14: port UXAS.AutomationResponse -> RADIO.AutomationResponse;
-           c15: port UXAS.ServiceStatus_ARVS -> RADIO.ServiceStatus_ARVS;
-           c16: port UXAS.ServiceStatus_RAS -> RADIO.ServiceStatus_RAS;
-           c17: port UXAS.ServiceStatus_ATBBS -> RADIO.ServiceStatus_ATBBS;
-           c18: port UXAS.ServiceStatus_PBS -> RADIO.ServiceStatus_PBS;
-           
+           c09: port UXAS.MissionCommand -> FC_UART.MissionCommand;
+           c10: port UXAS.MissionCommand -> RADIO.MissionCommand;
+           c11: port UXAS.VehicleActionCommand -> GIMBAL.VehicleActionCommand;
+           c12: port UXAS.AutomationResponse -> RADIO.AutomationResponse;
+               
 	end SW.Impl;
 	
 end SW;

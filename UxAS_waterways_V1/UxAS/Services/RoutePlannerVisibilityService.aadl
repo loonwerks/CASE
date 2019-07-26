@@ -2,7 +2,6 @@ package RoutePlannerVisibilityService_Pkg
 public
 	with CMASI;
 	with ROUTE;
-	with VEHICLES;
 	with ServiceBase_Pkg;
 	
 	---------------------------------------------------------------------------------------------------------
@@ -16,9 +15,9 @@ public
 	thread RoutePlannerVisibilityService extends ServiceBase_Pkg::ServiceBase
 		features
 			-- Subscribed Messages 
---			KeepOutZone : in event data port CMASI::KeepOutZone.i;
---			KeepInZone : in event data port CMASI::KeepInZone.i;
---			OperatingRegion : in event data port CMASI::OperatingRegion.i;
+			KeepOutZone : in event data port CMASI::KeepOutZone.i;
+			KeepInZone : in event data port CMASI::KeepInZone.i;
+			OperatingRegion : in event data port CMASI::OperatingRegion.i;
 			AirVehicleConfiguration : in event data port CMASI::AirVehicleConfiguration.i;
 --			GroundVehicleConfiguration : in event data port VEHICLES::GroundVehicleConfiguration.i;
 --			SurfaceVehicleConfiguration : in event data port VEHICLES::SurfaceVehicleConfiguration.i;

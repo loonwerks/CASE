@@ -16,14 +16,8 @@ public
             AutomationResponse: in event data port CMASI::AutomationResponse.i;
             AirVehicleState: in event data port CMASI::AirVehicleState.i;
             MissionCommand: in event data port CMASI::MissionCommand.i;
-            ServiceStatus_ARVS : in event data port CMASI::ServiceStatus.i;
-            ServiceStatus_RAS : in event data port CMASI::ServiceStatus.i;
-            ServiceStatus_ATBBS: in event data port CMASI::ServiceStatus.i;
-            ServiceStatus_PBS: in event data port CMASI::ServiceStatus.i;
             
-            AirVehicleConfiguration: out event data port CMASI::AirVehicleConfiguration.i;
             AutomationRequest: out event data port CMASI::AutomationRequest.i;
-            LineSearchTask: out event data port CMASI::LineSearchTask.i;
             
 		properties
 			CASE_Properties::COMP_TYPE => COMM_DRIVER;
