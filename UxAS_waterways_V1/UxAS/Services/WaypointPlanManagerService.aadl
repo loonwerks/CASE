@@ -1,7 +1,6 @@
 package WaypointPlanManagerService_Pkg
 public
 	with CMASI;
-	with UXNATIVE;
 	with ServiceBase_Pkg;
 	
 	---------------------------------------------------------------------------------------------------------------------

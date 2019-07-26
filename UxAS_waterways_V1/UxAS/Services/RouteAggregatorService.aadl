@@ -3,7 +3,6 @@ public
 	with CMASI;
 	with ROUTE;
 	with UXTASK;
-	with VEHICLES;	
 	with ServiceBase_Pkg;
 	
 	------------------------------------------------------------------------

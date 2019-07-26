@@ -5,10 +5,8 @@ package AutomationRequestValidatorService_Pkg
 
 public
 	with CMASI;
-	with IMPACT;
 	with UXTASK;
-	with VEHICLES;
-
+	
 	with ServiceBase_Pkg;
 
 	----------------------------------------------------------------------------------------------------
@@ -33,9 +31,9 @@ public
 --			SurfaceVehicleState: in event data port VEHICLES::SurfaceVehicleState.i;
 --			RemoveTasks: in event data port CMASI::RemoveTasks.i;
 --			TaskInitialized: in event data port UXTASK::TaskInitialized.i;
---			OperatingRegion: in event data port CMASI::OperatingRegion.i;
---			KeepInZone: in event data port CMASI::KeepInZone.i;
---			KeepOutZone: in event data port CMASI::KeepOutZone.i;
+			OperatingRegion: in event data port CMASI::OperatingRegion.i;
+			KeepInZone: in event data port CMASI::KeepInZone.i;
+			KeepOutZone: in event data port CMASI::KeepOutZone.i;
 			
 			-- Sent Messages 
 --			TaskAutomationResponse: out event data port UXTASK::TaskAutomationResponse.i;
