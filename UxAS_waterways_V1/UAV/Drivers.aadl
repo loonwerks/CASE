@@ -20,6 +20,7 @@ public
             AutomationRequest: out event data port CMASI::AutomationRequest.i;
             
 		properties
+			Dispatch_Protocol => Periodic;
 			CASE_Properties::COMP_TYPE => COMM_DRIVER;
 --		annex agree {**
 --			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(MissionCommand);
@@ -37,6 +38,10 @@ public
 			
 			recv_data: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
 			send_data: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			
+		properties
+			Dispatch_Protocol => Periodic;
+			
 --		annex agree {**
 --			assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(mission_window);
 --			guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data.crc;
@@ -50,6 +55,8 @@ public
     	features
     	   AirVehicleState: in event data port CMASI::AirVehicleState.i;
            VehicleActionCommand: in event data port CMASI::VehicleActionCommand.i;
+    	properties
+    		Dispatch_Protocol => Periodic;
 --        annex agree {**
 --            assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(mission_window);
 --            guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data.crc;

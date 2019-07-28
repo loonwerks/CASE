@@ -22,7 +22,12 @@ public
 
         properties
             Dispatch_Protocol => Sporadic;
-
+            Queue_Size => 1 applies to UniqueAutomationRequest, TaskPlanOptions, AssignmentCostMatrix;
+            Queue_Processing_Protocol => FIFO applies to UniqueAutomationRequest, TaskPlanOptions, AssignmentCostMatrix;
+            Overflow_Handling_Protocol => ERROR applies to UniqueAutomationRequest, TaskPlanOptions, AssignmentCostMatrix;
+            Dequeue_Protocol => OneItem applies to UniqueAutomationRequest, TaskPlanOptions, AssignmentCostMatrix;
+            Fan_Out_Policy => Broadcast applies to ServiceStatus, TaskAssignmentSummary;
+            
 	end AssignmentTreeBranchBoundService;
 
-end AssignmentTreeBranchBoundService_Pkg;
+end AssignmentTreeBranchBoundService_Pkg;   
