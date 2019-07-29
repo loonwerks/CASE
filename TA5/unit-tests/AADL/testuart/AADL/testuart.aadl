@@ -1,0 +1,179 @@
+-- Simple example of UART driver integrated into an AADL model.
+-- Components include:
+-- * The UART base, which interfaces directly with the UART hardware
+-- * The UART component, which acts as an intermediary filter for UART data
+-- * The Pilot component, which reads the data from the UART component
+package testuart
+public
+	with SB_SYS;
+	with Base_Types;
+
+	data Buf_d
+	end Buf_d;
+
+	data implementation Buf_d.impl
+	end Buf_d.impl;
+	
+	--subprogram uart_read
+	--	features
+	--		uart_num: in parameter Base_Types::Integer_32;
+	--		c: in parameter Base_Types::Unsigned_32;
+	--		rsize: in parameter Base_Types::Integer_32;
+	--		result: out parameter Base_Types::Integer_32;
+	--end uart_read;
+
+	subprogram uart_write
+		features
+			uart_num: in parameter Base_Types::Integer_32;
+			wsize: in parameter Base_Types::Integer_32;
+			result: out parameter Base_Types::Integer_32;
+	end uart_write;
+
+	subprogram group uart_interface
+		features
+			--read: provides subprogram access uart_read;
+			write: provides subprogram access uart_write;  
+	end uart_interface;
+
+	subprogram pilot_recv
+		features
+			uart_num: in parameter Base_Types::Integer_32;
+			c: in parameter Base_Types::Integer_32;
+	end pilot_recv;
+
+	subprogram group pilot_interface
+		features
+			recv: provides subprogram access pilot_recv;  
+	end pilot_interface;
+
+	thread uart_t
+		features
+			uart_inf: requires subprogram group access uart_interface;
+			pilot_inf : requires subprogram group access pilot_interface;
+			uart_data: provides data access Buf_d.impl;
+			
+			uartbase_mem : requires data access Buf_d.impl;
+			uartbase_irq : in event port;
+	end uart_t;
+	
+	thread implementation uart_t.impl
+	   properties
+            Source_Text => ("CAmkES/components/uart/src/driver.c");
+            Initialize_Entrypoint_Source_Text => "uart__init";
+            SB_SYS::Compute_Entrypoint_Source_Text => ("run");
+	end uart_t.impl;
+		
+	process uart_p
+		features
+			uart_inf: requires subprogram group access uart_interface;
+			pilot_inf : requires subprogram group access pilot_interface;
+			uart_data: provides data access Buf_d.impl;
+			
+			uartbase_mem : requires data access Buf_d.impl;
+			uartbase_irq : in event port;
+	end uart_p;
+
+	process implementation uart_p.impl
+		subcomponents
+			uart : thread uart_t.impl;
+		connections
+			uart_inf_con : subprogram group access uart.uart_inf -> uart_inf;
+			pilot_inf_con : subprogram group access uart.pilot_inf -> pilot_inf;
+			uart_data_con : data access uart.uart_data -> uart_data;
+			uartbase_mem_con : data access uart.uartbase_mem -> uartbase_mem;
+			uartbase_irq_con : port uartbase_irq -> uart.uartbase_irq;
+		--properties
+		-- This get written to the CAmkES configuration spec
+		--	SB_SYS::CONFIG_ID => ("1");
+	end uart_p.impl;
+
+	thread pilot_t
+		features
+			pilot_inf: provides subprogram group access pilot_interface;
+			uart_inf: provides subprogram group access uart_interface;
+			gcs_buf: requires data access Buf_d.impl;
+	end pilot_t;
+	
+	thread implementation pilot_t.impl
+	   properties
+            Initialize_Entrypoint_Source_Text => "pre_init";
+            Source_Text => ("CAmkES/components/pilot/src/pilot.c");
+            SB_SYS::Compute_Entrypoint_Source_Text => ("run");
+	end pilot_t.impl;
+	
+	process pilot_p
+		features
+			pilot_inf: provides subprogram group access pilot_interface;
+			uart_inf: provides subprogram group access uart_interface;
+			gcs_buf: requires data access Buf_d.impl;
+	end pilot_p;
+	
+	process implementation pilot_p.impl
+		subcomponents
+			pilot : thread pilot_t.impl;
+		connections
+			pilot_inf_con : subprogram group access pilot.pilot_inf -> pilot_inf;
+			uart_inf_con : subprogram group access pilot.uart_inf -> uart_inf;
+			gcs_buf_con : data access pilot.gcs_buf -> gcs_buf;
+	end pilot_p.impl;
+
+	thread uartbase_t
+		features
+			mem: provides data access Buf_d.impl;
+			irq: out event port;
+	end uartbase_t;
+	
+	thread implementation uartbase_t.impl
+	end uartbase_t.impl;
+		
+	process uartbase_p
+		features
+			mem : provides data access Buf_d.impl;
+			irq : out event port;
+	end uartbase_p;
+
+	process implementation uartbase_p.impl
+		subcomponents
+			uartbase : thread uartbase_t.impl;
+		connections
+			mem_con : data access uartbase.mem -> mem; -- seL4HardwareMMIO
+			irq_con : port uartbase.irq -> irq;        -- seL4HardwareInterrupt
+		--properties
+		-- These get written to the CAmkES configuration spec
+		--	SB_SYS::Is_ISR => true;
+		--	SB_SYS::CONFIG_MEM_PADDR => ("0x12C30000");
+		--	SB_SYS::Mem_Size => ("0x1000");
+		--	SB_SYS::Signal_Number => ("86");
+	end uartbase_p.impl;
+
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+	end proc.impl;
+	
+	system top
+	end top;
+	
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			uartbase_gcs: process uartbase_p.impl;
+			uart_gcs : process uart_p.impl;
+			pilot_obj : process pilot_p.impl;
+		connections
+			-- GCS connections;
+			uartbase_mem : data access uart_gcs.uartbase_mem -> uartbase_gcs.mem;
+			uarbase_irq : port uartbase_gcs.irq -> uart_gcs.uartbase_irq;
+			-- Pilot connections
+			uart_inf : subprogram group access pilot_obj.uart_inf -> uart_gcs.uart_inf;
+			uart_data : data access pilot_obj.gcs_buf -> uart_gcs.uart_data;
+			-- Recv connection
+			gcs_recv_inf : subprogram group access uart_gcs.pilot_inf -> pilot_obj.pilot_inf;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to uartbase_gcs; 
+			Actual_Processor_Binding => (reference (proc)) applies to uart_gcs; 
+			Actual_Processor_Binding => (reference (proc)) applies to pilot_obj; 
+	end top.impl;
+	
+end testuart;
