@@ -81,6 +81,8 @@ public
 	end CASE_Virtual_Processor;
 
 	virtual processor implementation CASE_Virtual_Processor.Impl
+		properties
+			CASE_Properties::OS => "Linux";
 	end CASE_Virtual_Processor.Impl;
 
 		-- The MissionComputer onboard the UAV
