@@ -1,0 +1,99 @@
+package Producer_Filter_Consumer
+public
+	with Base_Types;
+
+	with CASE_Properties;
+
+	with CASE_Model_Transformations;
+
+	thread CASE_Filter
+		features
+			filter_in: in event data port Coordinate.Impl;
+			filter_out: out event data port Coordinate.Impl;
+		properties
+			CASE_Properties::COMP_TYPE => FILTER;
+			CASE_Properties::COMP_SPEC => ("Req_Filter");
+		annex agree {**
+			guarantee Req_Filter "The Consumer shall only receive well-formed messages" : WELL_FORMED_MESSAGE(filter_out);
+		**};
+	end CASE_Filter;
+
+	thread implementation CASE_Filter.Impl
+		properties
+			CASE_Properties::COMP_IMPL => "CakeML";
+	end CASE_Filter.Impl;
+
+	data Coordinate
+	end Coordinate;
+
+	data implementation Coordinate.Impl
+		-- This is the structure to hold the lat/long/alt values of a coordinate
+		subcomponents
+			latitude: data Base_Types::Integer;
+			longitude: data Base_Types::Integer;
+			altitude: data Base_Types::Integer;
+	end Coordinate.Impl;
+
+	thread Producer
+		features
+			trigger: in event data port Base_Types::Boolean;
+			msg_out: out event data port Coordinate.Impl;
+	end Producer;
+
+	thread implementation Producer.Impl
+	end Producer.Impl;
+
+	thread Consumer
+		features
+			msg_in: in event data port Coordinate.Impl;
+			status: out event data port Base_types::Boolean;
+		annex agree {**
+			-- This is the formalized version of the well-formed requirement from the TA1 tool
+			assume Req_Wellformed "The Consumer shall only receive well-formed messages" : WELL_FORMED_MESSAGE(msg_in);
+			guarantee "Consumer status shall never be false" : status;
+		**};
+	end Consumer;
+
+	thread implementation Consumer.Impl
+	end Consumer.Impl;
+
+	process SW
+		features
+			input: in event data port Base_Types::Boolean;
+			output: out event data port Base_Types::Boolean;
+		annex agree {**
+			guarantee "Consumer status is never false" : output;
+		**};
+	end SW;
+
+	process implementation SW.Impl
+		subcomponents
+			Producer: thread Producer.Impl;
+			Consumer: thread Consumer.Impl;
+			FLT: thread CASE_Filter.Impl;
+		connections
+			c0: port input -> Producer.trigger;
+			c1: port Producer.msg_out -> FLT.filter_in;
+			c3: port FLT.filter_out -> Consumer.msg_in;
+			c2: port Consumer.status -> output;
+		annex resolute {**
+			prove Req_Wellformed(this.Consumer, "Req_Wellformed", this.FLT, "c3", Coordinate.Impl)
+		**};
+	end SW.Impl;
+
+	annex agree {**
+		-- This is the filter spec
+		fun WELL_FORMED_MESSAGE(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180 and coord.altitude >= 0 and coord.altitude <= 15000;
+	**};
+
+private
+	with CASE_Model_Transformations;
+
+	annex resolute {**
+		Req_Wellformed(comp_context : component, property_id : string, filter : component, connection_name : string, message_type : data) <=
+			** "[well-formed] The Consumer shall only receive well-formed messages" **
+			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, connection_name, message_type)
+		
+	**};
+	
+end Producer_Filter_Consumer;
