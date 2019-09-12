@@ -12,9 +12,10 @@ public
 			filter_out: out event data port Coordinate.Impl;
 		properties
 			CASE_Properties::COMP_TYPE => FILTER;
-			CASE_Properties::COMP_SPEC => ("Req_Filter");
+			CASE_Properties::COMP_SPEC => ("Req_Filter_LatLong", "Req_Filter_Alt");
 		annex agree {**
-			guarantee Req_Filter "The Consumer shall only receive well-formed messages" : WELL_FORMED_MESSAGE(filter_out);
+			guarantee Req_Filter_LatLong "The Consumer shall only receive well-formed lat-long values" : WELL_FORMED_LAT_LONG(filter_out);
+			guarantee Req_Filter_Alt "The Consumer shall only receive well-formed altitude values" : WELL_FORMED_ALT(filter_out);
 		**};
 	end CASE_Filter;
 
@@ -49,7 +50,8 @@ public
 			status: out event data port Base_types::Boolean;
 		annex agree {**
 			-- This is the formalized version of the well-formed requirement from the TA1 tool
-			assume Req_Wellformed "The Consumer shall only receive well-formed messages" : WELL_FORMED_MESSAGE(msg_in);
+			assume Req_Wellformed_LatLong "The Consumer shall only receive well-formed lat-long values" : WELL_FORMED_LAT_LONG(msg_in);
+			assume Req_Wellformed_Alt "The Consumer shall only receive well-formed alt values" : WELL_FORMED_ALT(msg_in);
 			guarantee "Consumer status shall never be false" : status;
 		**};
 	end Consumer;
@@ -77,23 +79,29 @@ public
 			c3: port FLT.filter_out -> Consumer.msg_in;
 			c2: port Consumer.status -> output;
 		annex resolute {**
-			prove Req_Wellformed(this.Consumer, "Req_Wellformed", this.FLT, "c3", Coordinate.Impl)
+			prove Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong", this.FLT, "c3", Coordinate.Impl)
+			prove Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt", this.FLT, "c3", Coordinate.Impl)
 		**};
 	end SW.Impl;
 
 	annex agree {**
 		-- This is the filter spec
-		fun WELL_FORMED_MESSAGE(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180 and coord.altitude >= 0 and coord.altitude <= 15000;
+		fun WELL_FORMED_LAT_LONG(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180;
+		fun WELL_FORMED_ALT(coord : Coordinate.Impl) : bool = coord.altitude >= 0 and coord.altitude <= 15000;
 	**};
 
 private
 	with CASE_Model_Transformations;
 
 	annex resolute {**
-		Req_Wellformed(comp_context : component, property_id : string, filter : component, connection_name : string, message_type : data) <=
-			** "[well-formed] The Consumer shall only receive well-formed messages" **
+		Req_Wellformed_LatLong(comp_context : component, property_id : string, filter : component, connection_name : string, message_type : data) <=
+			** "[well_formed] The Consumer shall only receive well-formed latitude-longitude coordinates" **
 			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, connection_name, message_type)
 		
+		Req_Wellformed_Alt(comp_context : component, property_id : string, filter : component, connection_name : string, message_type : data) <=
+			** "[well_formed] The Consumer shall only receive well-formed altitude coordinates" **
+			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, connection_name, message_type)
+
 	**};
 	
 end Producer_Filter_Consumer;

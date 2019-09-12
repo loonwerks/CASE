@@ -28,7 +28,8 @@ public
 			status: out event data port Base_types::Boolean;
 		annex agree {**
 			-- This is the formalized version of the well-formed requirement from the TA1 tool
-			assume Req_Wellformed "The Consumer shall only receive well-formed messages" : WELL_FORMED_MESSAGE(msg_in);
+			assume Req_Wellformed_LatLong "The Consumer shall only receive well-formed lat-long values" : WELL_FORMED_LAT_LONG(msg_in);
+			assume Req_Wellformed_Alt "The Consumer shall only receive well-formed alt values" : WELL_FORMED_ALT(msg_in);
 			guarantee "Consumer status shall never be false" : status;
 		**};
 	end Consumer;
@@ -54,20 +55,27 @@ public
 			c1: port Producer.msg_out -> Consumer.msg_in;
 			c2: port Consumer.status -> output;
 		annex resolute {**
-			prove (Req_Wellformed(this.Consumer, "Req_Wellformed"))
+			prove (Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong"))
+			prove (Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt"))
 		**};
 	end SW.Impl;
 	
 	annex agree {**
 		-- This is the filter spec
-		fun WELL_FORMED_MESSAGE(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180 and coord.altitude >= 0 and coord.altitude <= 15000;
+		fun WELL_FORMED_LAT_LONG(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180;
+		fun WELL_FORMED_ALT(coord : Coordinate.Impl) : bool = coord.altitude >= 0 and coord.altitude <= 15000;
 	**};
 
 private
 	annex resolute {**
-		-- This is the well-formedness requirement from TA1
-		Req_Wellformed(comp_context : component, property_id : string) <=
-			** "[well-formed] The Consumer shall only receive well-formed messages" **
+		-- This is the lat-long well-formedness requirement from TA1
+		Req_Wellformed_LatLong(comp_context : component, property_id : string) <=
+			** "[well_formed] The Consumer shall only receive well-formed latitude-longitude coordinates" **
+			agree_prop_checked(comp_context, property_id)
+			
+		-- This is an alt well-formedness requirement
+		Req_Wellformed_Alt(comp_context : component, property_id : string) <=
+			** "[well_formed] The Consumer shall only receive well-formed altitude coordinates" **
 			agree_prop_checked(comp_context, property_id)
 	**};
 	
