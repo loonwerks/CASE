@@ -1,0 +1,44 @@
+package No_Attestation
+public
+	with CASE_Model_Transformations;
+
+	with CASE_Properties;
+
+	thread RadioDriver
+		features
+			new_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+		properties
+			CASE_Properties::COMP_TYPE => COMM_DRIVER;
+	end RadioDriver;
+
+	thread implementation RadioDriver.Impl
+	end RadioDriver.Impl;
+
+	thread Critical
+		features
+			recv_command: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+	end Critical;
+
+	thread implementation Critical.Impl
+	end Critical.Impl;
+
+	process SW
+	end SW;
+
+	process implementation SW.Impl
+		subcomponents
+			RADIO: thread RadioDriver.Impl;
+			CRITICAL: thread Critical.Impl;
+		connections
+			c1: port RADIO.new_message -> CRITICAL.recv_command;
+	end SW.Impl;
+	
+private
+	
+	annex resolute {**
+		Req_Attestation(comp_context : component) <=
+			** "Command messages shall only come from trusted sources" **
+			false
+	**};
+	
+end No_Attestation;
