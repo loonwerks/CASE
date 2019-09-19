@@ -136,7 +136,7 @@ public
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
 			Actual_Processor_Binding => (reference (VPROC)) applies to PROC_SW.FPLN;
 		annex resolute {**
-			prove Req001_SW(this.PROC_SW, this.VPROC)
+			prove Req001_SW(this.PROC_SW, {this.PROC_SW.FPLN}, this.VPROC)
 		**};
 	end MissionComputer.Impl;
 
@@ -144,10 +144,9 @@ private
 	with CASE_Model_Transformations;
 
 	annex resolute {**
-		Req001_SW(comp_context : component, isolator : component) <=
+		Req001_SW(comp_context : component, isolated_components : {component}, isolator : component) <=
 			** "[isolated] Third-party software shall be isolated from critical components" **
---			add_isolator(comp_context, isolator)
-true
+			add_isolator(comp_context, isolated_components, isolator)
 		
 	**};
 end MC;
