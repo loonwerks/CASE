@@ -1,0 +1,7 @@
+import "../../../interfaces/sb_Monitor_SW__Coordinate_Impl_1.idl4";
+
+component sb_FPLN_position_status_Monitor {
+
+  provides sb_Monitor_SW__Coordinate_Impl_1 mon;
+  emits QueuedData monsig;
+}

@@ -1,0 +1,45 @@
+import <std_connector.camkes>;
+
+import "components/RadioDriver_Impl/RadioDriver_Impl.camkes";
+import "components/FlightPlanner_Impl/FlightPlanner_Impl.camkes";
+import "components/WaypointManager_Impl/WaypointManager_Impl.camkes";
+import "components/UARTDriver_Impl/UARTDriver_Impl.camkes";
+import "components/sb_Monitors/sb_WPM_tracking_id_Monitor/sb_WPM_tracking_id_Monitor.camkes";
+import "components/sb_Monitors/sb_FPLN_recv_map_Monitor/sb_FPLN_recv_map_Monitor.camkes";
+import "components/sb_Monitors/sb_WPM_flight_plan_Monitor/sb_WPM_flight_plan_Monitor.camkes";
+import "components/sb_Monitors/sb_UART_mission_window_Monitor/sb_UART_mission_window_Monitor.camkes";
+import "components/sb_Monitors/sb_FPLN_mission_rcv_Monitor/sb_FPLN_mission_rcv_Monitor.camkes";
+
+assembly {
+  composition {
+    component RadioDriver_Impl RADIO;
+    component FlightPlanner_Impl FPLN;
+    component WaypointManager_Impl WPM;
+    component UARTDriver_Impl UART;
+    component sb_WPM_tracking_id_Monitor sb_wpm_tracking_id_monitor;
+    component sb_FPLN_recv_map_Monitor sb_fpln_recv_map_monitor;
+    component sb_WPM_flight_plan_Monitor sb_wpm_flight_plan_monitor;
+    component sb_UART_mission_window_Monitor sb_uart_mission_window_monitor;
+    component sb_FPLN_mission_rcv_Monitor sb_fpln_mission_rcv_monitor;
+
+    connection seL4RPCCall conn1(from RADIO.sb_recv_map_out0, to sb_fpln_recv_map_monitor.mon);
+    connection seL4RPCCall conn2(from FPLN.sb_recv_map, to sb_fpln_recv_map_monitor.mon);
+    connection seL4Notification conn3(from sb_fpln_recv_map_monitor.monsig, to FPLN.sb_recv_map_notification);
+    connection seL4RPCCall conn4(from FPLN.sb_flight_plan0, to sb_wpm_flight_plan_monitor.mon);
+    connection seL4RPCCall conn5(from WPM.sb_flight_plan, to sb_wpm_flight_plan_monitor.mon);
+    connection seL4Notification conn6(from sb_wpm_flight_plan_monitor.monsig, to WPM.sb_flight_plan_notification);
+    connection seL4RPCCall conn7(from WPM.sb_mission_rcv0, to sb_fpln_mission_rcv_monitor.mon);
+    connection seL4RPCCall conn8(from FPLN.sb_mission_rcv, to sb_fpln_mission_rcv_monitor.mon);
+    connection seL4Notification conn9(from sb_fpln_mission_rcv_monitor.monsig, to FPLN.sb_mission_rcv_notification);
+    connection seL4RPCCall conn10(from WPM.sb_mission_window0, to sb_uart_mission_window_monitor.mon);
+    connection seL4RPCCall conn11(from UART.sb_mission_window, to sb_uart_mission_window_monitor.mon);
+    connection seL4Notification conn12(from sb_uart_mission_window_monitor.monsig, to UART.sb_mission_window_notification);
+    connection seL4RPCCall conn13(from UART.sb_tracking_id0, to sb_wpm_tracking_id_monitor.mon);
+    connection seL4RPCCall conn14(from WPM.sb_tracking_id, to sb_wpm_tracking_id_monitor.mon);
+    connection seL4Notification conn15(from sb_wpm_tracking_id_monitor.monsig, to WPM.sb_tracking_id_notification);
+  }
+
+  configuration {
+
+  }
+}

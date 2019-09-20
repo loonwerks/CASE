@@ -1,0 +1,5 @@
+procedure sb_Monitor_uintmax_t_1 {
+  include <sb_PROC_HW_types.h>;
+  bool enqueue(refin uintmax_t m);
+  bool dequeue(out uintmax_t m);
+};
