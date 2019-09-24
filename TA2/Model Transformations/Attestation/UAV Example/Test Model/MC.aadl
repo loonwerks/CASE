@@ -92,7 +92,7 @@ public
 			PROC_HW: processor MC_Proc.Impl;
 			MEM_HW: memory MC_Mem.Impl;
 			BUS_HW: bus MC_Bus.Impl;
-			PROC_SW: process SW::SW.Impl;
+			PROC_SW: process SW::SW.Init;
 			WIFI_HW: device Wifi.Impl;
 		connections
 			bac1: bus access RADIO_HW.MCA <-> BUS_HW;

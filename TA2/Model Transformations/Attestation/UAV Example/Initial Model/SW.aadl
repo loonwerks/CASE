@@ -131,8 +131,7 @@ public
 		annex agree {**
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);
-			assume Req003_FlightPlanner "The FlightPlanner shall only accept well-formed maps from the GroundStation" : good_map(recv_map.payload.map);
-			assume Req004_FlightPlanner "The FlightPlanner shall only accept well-formed patterns from the GroundStation" : good_pattern(recv_map.payload.pattern);
+			assume Req_TrustedSource "The FlightPlanner shall only accept messages from a trusted GroundStation" : TRUSTED_MESSAGE(recv_map);
 		**};
 	end FlightPlanner;
 
@@ -238,8 +237,7 @@ public
 			c17: port WIFI.send_data -> wifi_send;
 			c18: port wifi_recv -> WIFI.recv_data;
 		annex resolute {**
-			prove Req003_FlightPlanner(this.FPLN, "Req003_FlightPlanner")
-			prove Req004_FlightPlanner(this.FPLN, "Req003_FlightPlanner")
+			prove Req_TrustedSource(this.FPLN, "Req_TrustedSource")
 		**};
 	end SW.Impl;
 
@@ -262,12 +260,8 @@ private
 	with CASE_Model_Transformations;
 
 	annex resolute {**
-		Req003_FlightPlanner(comp_context : component, property_id : string) <=
-			** "[well_formed] The FlightPlanner shall only accept well-formed maps from the GroundStation" **
-			agree_prop_checked(comp_context, property_id)
-		
-		Req004_FlightPlanner(comp_context : component, property_id : string) <=
-			** "[well_formed] The FlightPlanner shall only accept well-formed patterns from the GroundStation" **
+		Req_TrustedSource(comp_context : component, property_id : string) <=
+			** "Messages shall come from a trusted source" **
 			agree_prop_checked(comp_context, property_id)
 		
 	**};

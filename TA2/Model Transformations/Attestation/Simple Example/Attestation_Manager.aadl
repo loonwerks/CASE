@@ -4,9 +4,35 @@ public
 
 	with CASE_Properties;
 
+	with Base_Types;
+
+	thread CASE_AttestationManager
+		features
+			am_command_message_in: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			am_command_message_out: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			am_other_message_in: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			am_other_message_out: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			am_request: out event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
+			am_response: in event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+		properties
+			CASE_Properties::COMP_TYPE => ATTESTATION;
+			CASE_Properties::COMP_SPEC => ("Req_Attestation");
+		annex agree {**
+			guarantee Req_Attestation "Command messages shall only come from trusted sources" : am_command_message_out.header.trusted;
+		**};
+	end CASE_AttestationManager;
+
+	thread implementation CASE_AttestationManager.Impl
+		properties
+			CASE_Properties::COMP_IMPL => "CakeML";
+			CASE_Properties::CACHE_TIMEOUT => 30;
+			CASE_Properties::CACHE_SIZE => 4;
+	end CASE_AttestationManager.Impl;
+
 	thread RadioDriver
 		features
-			new_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			command_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			other_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 		properties
 			CASE_Properties::COMP_TYPE => COMM_DRIVER;
 	end RadioDriver;
@@ -14,31 +40,71 @@ public
 	thread implementation RadioDriver.Impl
 	end RadioDriver.Impl;
 
-	thread Critical
+	thread Critical_A
 		features
 			recv_command: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-	end Critical;
+			status: out event data port Base_types::Boolean;
+		annex agree {**
+			assume Req_Trusted "Command messages shall only come from trusted sources" : recv_command.header.trusted;
+			guarantee "Critical component status shall never be false" : status;
+		**};
+	end Critical_A;
 
-	thread implementation Critical.Impl
-	end Critical.Impl;
+	thread implementation Critical_A.Impl
+	end Critical_A.Impl;
+
+	thread Critical_B
+		features
+			recv_message: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+	end Critical_B;
+
+	thread implementation Critical_B.Impl
+	end Critical_B.Impl;
+
+	thread RadioDriver_Attestation extends RadioDriver
+		features
+			am_request: in event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
+			am_response: out event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+	end RadioDriver_Attestation;
+
+	thread implementation RadioDriver_Attestation.Impl extends RadioDriver.Impl
+	end RadioDriver_Attestation.Impl;
 
 	process SW
+		features
+			output: out event data port Base_Types::Boolean;
+		annex agree {**
+			guarantee "Output status shall never be false" : output;
+		**};
 	end SW;
 
 	process implementation SW.Impl
 		subcomponents
-			RADIO: thread RadioDriver.Impl;
-			CRITICAL: thread Critical.Impl;
+			RADIO: thread RadioDriver_Attestation.Impl;
+			CRIT_A: thread Critical_A.Impl;
+			CRIT_B: thread Critical_B.Impl;
+			AM: thread CASE_AttestationManager.Impl;
 		connections
-			c1: port RADIO.new_message -> CRITICAL.recv_command;
+			c1: port RADIO.command_message -> AM.am_command_message_in;
+			c2: port RADIO.other_message -> AM.am_other_message_in;
+			c4: port AM.am_command_message_out -> CRIT_A.recv_command;
+			c5: port AM.am_other_message_out -> CRIT_B.recv_message;
+			c6: port AM.am_request -> RADIO.am_request;
+			c7: port RADIO.am_response -> AM.am_response;
+			c3: port CRIT_A.status -> output;
+		annex resolute {**
+			prove Req_Trusted(this.CRIT_A, "Req_Trusted", this.RADIO, this.AM)
+		**};
 	end SW.Impl;
 	
 private
-	
+	with CASE_Model_Transformations;
+
 	annex resolute {**
-		Req_Attestation(comp_context : component) <=
+		Req_Trusted(comp_context : component, property_id : string, comm_driver : component, attestation_manager : component) <=
 			** "Command messages shall only come from trusted sources" **
-			false
+			agree_prop_checked(comp_context, property_id) and add_attestation_manager(comm_driver, attestation_manager)
+		
 	**};
 	
 end Attestation_Manager;
