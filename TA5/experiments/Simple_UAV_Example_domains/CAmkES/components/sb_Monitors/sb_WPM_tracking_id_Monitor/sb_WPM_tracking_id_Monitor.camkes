@@ -1,0 +1,7 @@
+import "../../../interfaces/sb_Monitor_uintmax_t_1.idl4";
+
+component sb_WPM_tracking_id_Monitor {
+
+  provides sb_Monitor_uintmax_t_1 mon;
+  emits QueuedData monsig;
+}

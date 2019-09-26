@@ -1,0 +1,32 @@
+
+// [2019/09/20:JCC] Replaced sb_Monitors with sampling ports
+
+//import "../../interfaces/sb_Monitor_SW__Mission_1.idl4";
+//import "../../interfaces/sb_Monitor_bool_1.idl4";
+//import "../../interfaces/sb_Monitor_SW__Command_Impl_1.idl4";
+
+component FlightPlanner_Impl {
+
+  include <sb_PROC_HW_types.h>;
+  include "sp_bool.h";
+  include "sp_Command.h";
+  include "sp_Mission.h";
+
+  control;
+
+  //uses sb_Monitor_SW__Mission_1 sb_flight_plan0;
+  dataport sp_Mission_t flight_plan_out;
+
+  //uses sb_Monitor_bool_1 sb_mission_rcv;
+  //consumes QueuedData sb_mission_rcv_notification;
+  dataport sp_bool_t mission_rcv_in;
+
+  //uses sb_Monitor_SW__Command_Impl_1 sb_recv_map;
+  //consumes QueuedData sb_recv_map_notification;
+  dataport sp_Command_t recv_map_in;
+
+  //has semaphore sb_dispatch_sem;
+
+  // [2019/09/20:JCC] Event for next period signaled by Pacer
+  consumes Period period;
+}

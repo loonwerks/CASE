@@ -1,0 +1,20 @@
+
+// [2019/09/20:JCC] Replaced sb_Monitors with sampling ports
+
+//import "../../interfaces/sb_Monitor_SW__Command_Impl_1.idl4";
+
+component RadioDriver_Impl {
+
+  include <sb_PROC_HW_types.h>;
+  include "sp_Command.h";
+  
+  control;
+  
+  //uses sb_Monitor_SW__Command_Impl_1 sb_recv_map_out0;
+  dataport sp_Command_t recv_map_out;
+
+  //has semaphore sb_dispatch_sem;
+  
+  // [2019/09/20:JCC] Event for next period signaled by Pacer
+  consumes Period period;
+}

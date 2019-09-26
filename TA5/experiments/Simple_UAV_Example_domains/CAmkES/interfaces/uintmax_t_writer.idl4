@@ -1,0 +1,4 @@
+procedure uintmax_t_writer {
+  include <sb_PROC_HW_types.h>;
+  bool write_uintmax_t(refin uintmax_t arg);
+};

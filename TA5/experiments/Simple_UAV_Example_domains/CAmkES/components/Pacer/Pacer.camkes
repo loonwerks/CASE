@@ -1,0 +1,8 @@
+component Pacer {
+    control;
+    emits TickTock tick;
+    consumes TickTock tock;
+    // For this example, all threads run at the same period as the pacer. To
+    // support multi-rate there would multiple periodic events.
+    emits Period period;
+}

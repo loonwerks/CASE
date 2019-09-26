@@ -1,0 +1,80 @@
+
+// [2019/09/20:JCC] Replaced sb_Monitors with sampling ports
+
+import <std_connector.camkes>;
+
+import "components/RadioDriver_Impl/RadioDriver_Impl.camkes";
+import "components/FlightPlanner_Impl/FlightPlanner_Impl.camkes";
+import "components/WaypointManager_Impl/WaypointManager_Impl.camkes";
+import "components/UARTDriver_Impl/UARTDriver_Impl.camkes";
+
+//import "components/sb_Monitors/sb_WPM_tracking_id_Monitor/sb_WPM_tracking_id_Monitor.camkes";
+//import "components/sb_Monitors/sb_FPLN_recv_map_Monitor/sb_FPLN_recv_map_Monitor.camkes";
+//import "components/sb_Monitors/sb_WPM_flight_plan_Monitor/sb_WPM_flight_plan_Monitor.camkes";
+//import "components/sb_Monitors/sb_UART_mission_window_Monitor/sb_UART_mission_window_Monitor.camkes";
+//import "components/sb_Monitors/sb_FPLN_mission_rcv_Monitor/sb_FPLN_mission_rcv_Monitor.camkes";
+
+import "components/Pacer/Pacer.camkes";
+
+assembly {
+  composition {
+    component RadioDriver_Impl RADIO;
+    component FlightPlanner_Impl FPLN;
+    component WaypointManager_Impl WPM;
+    component UARTDriver_Impl UART;
+    //component sb_WPM_tracking_id_Monitor sb_wpm_tracking_id_monitor;
+    //component sb_FPLN_recv_map_Monitor sb_fpln_recv_map_monitor;
+    //component sb_WPM_flight_plan_Monitor sb_wpm_flight_plan_monitor;
+    //component sb_UART_mission_window_Monitor sb_uart_mission_window_monitor;
+    //component sb_FPLN_mission_rcv_Monitor sb_fpln_mission_rcv_monitor;
+
+    //connection seL4RPCCall conn1(from RADIO.sb_recv_map_out0, to sb_fpln_recv_map_monitor.mon);
+    //connection seL4RPCCall conn2(from FPLN.sb_recv_map, to sb_fpln_recv_map_monitor.mon);
+    //connection seL4Notification conn3(from sb_fpln_recv_map_monitor.monsig, to FPLN.sb_recv_map_notification);
+    connection seL4SharedData recv_map(from RADIO.recv_map_out, to FPLN.recv_map_in);
+
+    //connection seL4RPCCall conn4(from FPLN.sb_flight_plan0, to sb_wpm_flight_plan_monitor.mon);
+    //connection seL4RPCCall conn5(from WPM.sb_flight_plan, to sb_wpm_flight_plan_monitor.mon);
+    //connection seL4Notification conn6(from sb_wpm_flight_plan_monitor.monsig, to WPM.sb_flight_plan_notification);
+    connection seL4SharedData flight_plan(from FPLN.flight_plan_out, to WPM.flight_plan_in);
+
+    //connection seL4RPCCall conn7(from WPM.sb_mission_rcv0, to sb_fpln_mission_rcv_monitor.mon);
+    //connection seL4RPCCall conn8(from FPLN.sb_mission_rcv, to sb_fpln_mission_rcv_monitor.mon);
+    //connection seL4Notification conn9(from sb_fpln_mission_rcv_monitor.monsig, to FPLN.sb_mission_rcv_notification);
+    connection seL4SharedData mission_rcv(from WPM.mission_rcv_out, to FPLN.mission_rcv_in);
+
+    //connection seL4RPCCall conn10(from WPM.sb_mission_window0, to sb_uart_mission_window_monitor.mon);
+    //connection seL4RPCCall conn11(from UART.sb_mission_window, to sb_uart_mission_window_monitor.mon);
+    //connection seL4Notification conn12(from sb_uart_mission_window_monitor.monsig, to UART.sb_mission_window_notification);
+    connection seL4SharedData mission_window(from WPM.mission_window_out, to UART.mission_window_in);
+
+    //connection seL4RPCCall conn13(from UART.sb_tracking_id0, to sb_wpm_tracking_id_monitor.mon);
+    //connection seL4RPCCall conn14(from WPM.sb_tracking_id, to sb_wpm_tracking_id_monitor.mon);
+    //connection seL4Notification conn15(from sb_wpm_tracking_id_monitor.monsig, to WPM.sb_tracking_id_notification);
+    connection seL4SharedData tracking_id(from UART.tracking_id_out, to WPM.tracking_id_in);
+
+    // [2019/09/20:JCC] Pacer provides periodic pacing for other components
+    component Pacer   pacer;
+    connection seL4Notification simpleEvent0(from pacer.period, to RADIO.period);
+    connection seL4Notification simpleEvent1(from pacer.period, to FPLN.period);
+    connection seL4Notification simpleEvent2(from pacer.period, to WPM.period);
+    connection seL4Notification simpleEvent3(from pacer.period, to UART.period);
+    // TickTock from pacer to itself. This only works if the pacer
+    // thread is not in domain 0. If it is in domain 0, the signal
+    // seems to happen immediatly rather than at domain
+    // switch. Perhaps event signaling is handled in thread 0. 
+    connection seL4Notification simpleEvent4(from pacer.tick, to pacer.tock);
+    }
+
+  configuration {
+
+    // [2019/09/20:JCC] Allocation of components to domains
+    // Leave any misc seL4 threads in domain 0 by default
+    RADIO._domain = 1;
+    FPLN._domain  = 2;
+    WPM._domain   = 3;
+    UART._domain  = 4;
+    pacer._domain = 5;
+
+  }
+}

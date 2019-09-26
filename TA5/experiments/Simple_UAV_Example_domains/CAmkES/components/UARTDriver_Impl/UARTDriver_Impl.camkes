@@ -1,0 +1,26 @@
+
+// [2019/09/20:JCC] Replaced sb_Monitors with sampling ports
+
+//import "../../interfaces/sb_Monitor_SW__MissionWindow_1.idl4";
+//import "../../interfaces/sb_Monitor_uintmax_t_1.idl4";
+
+component UARTDriver_Impl {
+
+  include <sb_PROC_HW_types.h>;
+  include "sp_MissionWindow.h";
+  include "sp_uintmax.h";
+
+  control;
+
+  //uses sb_Monitor_SW__MissionWindow_1 sb_mission_window;
+  //consumes QueuedData sb_mission_window_notification;
+  dataport sp_MissionWindow_t mission_window_in;
+
+  //uses sb_Monitor_uintmax_t_1 sb_tracking_id0;
+  dataport sp_uintmax_t tracking_id_out;
+
+  //has semaphore sb_dispatch_sem;
+
+  // [2019/09/20:JCC] Event for next period signaled by Pacer
+  consumes Period period;
+}
