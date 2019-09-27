@@ -76,5 +76,17 @@ assembly {
     UART._domain  = 4;
     pacer._domain = 5;
 
+    // Enforce access controls on the sampling port to be one-way
+    RADIO.recv_map_access = "W";
+    FPLN.recv_map_in_access = "R";
+    FPLN.flight_plan_access = "W";
+    WPM.flight_plan_in_access = "R";
+    WPM.mission_rcv_access = "W";
+    FPLN.mission_rcv_in_access = "R";
+    WPM.mission_window__access = "W";
+    UART.mission_window_in_access = "R";
+    UART.tracking_id__access = "W";
+    WPM.tracking_id_in_access = "R";
+
   }
 }

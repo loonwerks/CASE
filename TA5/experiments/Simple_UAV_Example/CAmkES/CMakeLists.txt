@@ -4,7 +4,7 @@ project (PROC_SW C)
 
 
 set(cSources "")
-set(cIncludes "")
+set(cIncludes "aux/includes")
 
 # [2019/09/13:JCC] These source files are coppies of
 # files with the same name in the component dirs. The result of adding them to

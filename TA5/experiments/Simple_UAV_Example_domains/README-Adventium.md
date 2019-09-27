@@ -1,16 +1,17 @@
-# Simple UAV Example with temporal isolation
+# Simple UAV Example (ACT_Demo_Dec2018_alt) with temporal isolation
+
+Revision R_2019_09_27
 
 ## Overview
 
-This version of the "Simple UAV" example is a from a private CASE GitHub 
-repository hosted by Kansas University:
+The code in this directory is an example of how to do temporal isolation using
+seL4. It is a conversion of the original Simple UAV Example
+(ACT_Demo_Dec2018_alt) in ../Simple_UAV_Example/. See
+../Simple_UAV_Example/README-Adventium.md for detailed information about the
+origins.
 
-https://github.com/ku-sldg/CASETeam/tree/master/examples/tool-eval-2/ACT_Demo_Dec2018_alt
-
-The code originally used sporadic threads and queues for communications.
-
-The AADL and code in this directory have been modified to provide ane example
-of how to do temporal isolation using seL4.
+The AADL and code in this directory has been modified by Jim Carciofini to
+provide ane example of how to do temporal isolation using seL4.
 
 - Threads are now all periodic.  They have the same period, but the same
 approach can be used to support multiple rates.

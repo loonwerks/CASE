@@ -81,7 +81,7 @@ thread RadioDriver
         properties
                 Source_Text => ("behavior/radiodriver.c");
                 Dispatch_Protocol => Periodic;
-                Period => 1000 ms
+                Period => 1000 ms;
                 Initialize_Entrypoint_Source_Text => "init";
 end RadioDriver;
         
@@ -104,7 +104,7 @@ thread FlightPlanner
         properties
                 Source_Text => ("behavior/flightplanner.c");
                 Dispatch_Protocol => Periodic;
-                Period => 1000 ms
+                Period => 1000 ms;
                 Initialize_Entrypoint_Source_Text => "init";
 end FlightPlanner;
   
@@ -127,7 +127,7 @@ thread WaypointManager
                         (
                         "behavior/waypointmanager.c");  
                 Dispatch_Protocol => Periodic;
-                Period => 1000 ms
+                Period => 1000 ms;
             	Initialize_Entrypoint_Source_Text => "init";
 end WaypointManager;
 	
@@ -145,7 +145,7 @@ thread UARTDriver
 	properties
 		Source_Text => ("behavior/uartdriver.c");
    		Dispatch_Protocol => Periodic;
-                Period => 1000 ms
+                Period => 1000 ms;
     	        Initialize_Entrypoint_Source_Text => "init";
 end UARTDriver;	
 	

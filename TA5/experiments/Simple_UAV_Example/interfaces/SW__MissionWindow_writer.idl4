@@ -1,4 +1,0 @@
-procedure SW__MissionWindow_writer {
-  include <sb_PROC_HW_types.h>;
-  bool write_SW__MissionWindow(refin sb_SW__MissionWindow_container arg);
-};

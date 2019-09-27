@@ -1,4 +1,0 @@
-procedure int64_t_writer {
-  include <sb_PROC_HW_types.h>;
-  bool write_int64_t(refin int64_t arg);
-};
