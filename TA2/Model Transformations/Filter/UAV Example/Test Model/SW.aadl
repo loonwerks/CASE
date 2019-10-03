@@ -268,7 +268,7 @@ public
 	-- The software implementation after the Filter model transformation is applied
 	-- AGREE should pass
 	-- Resolute should pass
-	--	Note that "Filter property implemented by CakeML" will fail if SPLAT was not run
+	--	Note that "Filter proof checked" will fail if SPLAT was not run
 	process implementation SW.Transformed
 		subcomponents
 			RADIO: thread RadioDriver.Impl;
@@ -299,8 +299,8 @@ public
 			c17: port WIFI.send_data -> wifi_send;
 			c18: port wifi_recv -> WIFI.recv_data;
 		annex resolute {**
-			prove Req003_FlightPlanner_Transformed(this.FPLN, "Req003_FlightPlanner", this.FLT, "c4", RF_Msg.Impl)
-			prove Req004_FlightPlanner_Transformed(this.FPLN, "Req004_FlightPlanner", this.FLT, "c4", RF_Msg.Impl)
+			prove Req003_FlightPlanner_Transformed(this.FPLN, "Req003_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
+			prove Req004_FlightPlanner_Transformed(this.FPLN, "Req004_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
 		**};
 	end SW.Transformed;
 	
@@ -358,8 +358,8 @@ public
 			c17: port WIFI.send_data -> wifi_send;
 			c18: port wifi_recv -> WIFI.recv_data;
 		annex resolute {**
-			prove Req003_FlightPlanner_Test(this.FPLN, "Req003_FlightPlanner", this.FLT, "c4", RF_Msg.Impl)
-			prove Req004_FlightPlanner_Test(this.FPLN, "Req004_FlightPlanner", this.FLT, "c4", RF_Msg.Impl)
+			prove Req003_FlightPlanner_Test(this.FPLN, "Req003_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
+			prove Req004_FlightPlanner_Test(this.FPLN, "Req004_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
 		**};
 	end SW.Test_Filter_Exists_1;
 	
@@ -397,8 +397,8 @@ public
 			c17: port WIFI.send_data -> wifi_send;
 			c18: port wifi_recv -> WIFI.recv_data;
 		annex resolute {**
-			prove Req003_FlightPlanner_Test(this.FPLN, "Req003_FlightPlanner", this.FLT, "c4", RF_Msg.Impl)
-			prove Req004_FlightPlanner_Test(this.FPLN, "Req004_FlightPlanner", this.FLT, "c4", RF_Msg.Impl)
+			prove Req003_FlightPlanner_Test(this.FPLN, "Req003_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
+			prove Req004_FlightPlanner_Test(this.FPLN, "Req004_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
 		**};
 	end SW.Test_Filter_Exists_2;
 	
@@ -436,8 +436,8 @@ public
 			c18: port wifi_recv -> WIFI.recv_data;
 			c19: port RADIO.mission_command -> FPLN.recv_map;
 		annex resolute {**
-			prove Req003_FlightPlanner_Test(this.FPLN, "Req003_FlightPlanner", this.FLT, "c4", RF_Msg.Impl)
-			prove Req004_FlightPlanner_Test(this.FPLN, "Req004_FlightPlanner", this.FLT, "c4", RF_Msg.Impl)
+			prove Req003_FlightPlanner_Test(this.FPLN, "Req003_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
+			prove Req004_FlightPlanner_Test(this.FPLN, "Req004_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
 		**};
 	end SW.Test_Filter_Not_Bypassed_1;
 
@@ -496,8 +496,8 @@ public
 			c18: port wifi_recv -> WIFI.recv_data;
 			c19: port RADIO.mission_command -> TEST.test_in;
 		annex resolute {**
-			prove Req003_FlightPlanner_Test(this.TEST, "Req003_FlightPlanner", this.FLT, "c4", RF_Msg.Impl)
-			prove Req004_FlightPlanner_Test(this.TEST, "Req004_FlightPlanner", this.FLT, "c4", RF_Msg.Impl)
+			prove Req003_FlightPlanner_Test(this.TEST, "Req003_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
+			prove Req004_FlightPlanner_Test(this.TEST, "Req004_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
 		**};
 	end SW.Test_Filter_Not_Bypassed_2;
 	
@@ -514,7 +514,7 @@ public
 			UART: thread UARTDriver.Impl;
 			WIFI: thread WifiDriver.Impl;
 			NFDB: thread NoFlyZoneDatabase.Impl;
-			FLT: thread CASE_Filter.Impl {CASE_Properties::COMP_IMPL => "CakeML";};
+			FLT: thread CASE_Filter.Impl {CASE_Properties::COMP_IMPL => "c";};
 			-- test
 		connections
 			c1: port radio_recv -> RADIO.recv_data;
@@ -536,8 +536,8 @@ public
 			c17: port WIFI.send_data -> wifi_send;
 			c18: port wifi_recv -> WIFI.recv_data;
 		annex resolute {**
-			prove Req003_FlightPlanner_Test(this.FPLN, "Req003_FlightPlanner", this.FLT, "c4", RF_Msg.Impl)
-			prove Req004_FlightPlanner_Test(this.FPLN, "Req004_FlightPlanner", this.FLT, "c4", RF_Msg.Impl)
+			prove Req003_FlightPlanner_Test(this.FPLN, "Req003_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
+			prove Req004_FlightPlanner_Test(this.FPLN, "Req004_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
 		**};
 	end SW.Test_Filter_Implemented;
 
@@ -569,21 +569,21 @@ private
 			** "[well_formed] The FlightPlanner shall only accept well-formed patterns from the GroundStation" **
 			agree_prop_checked(comp_context, property_id)
 			
-		Req003_FlightPlanner_Transformed(comp_context : component, property_id : string, filter : component, connection_name : string, message_type : data) <=
+		Req003_FlightPlanner_Transformed(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
 			** "[well_formed] The FlightPlanner shall only accept well-formed maps from the GroundStation" **
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, connection_name, message_type)
+			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 		
-		Req004_FlightPlanner_Transformed(comp_context : component, property_id : string, filter : component, connection_name : string, message_type : data) <=
+		Req004_FlightPlanner_Transformed(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
 			** "[well_formed] The FlightPlanner shall only accept well-formed patterns from the GroundStation" **
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, connection_name, message_type)
+			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 			
-		Req003_FlightPlanner_Test(comp_context : component, property_id : string, filter : component, connection_name : string, message_type : data) <=
+		Req003_FlightPlanner_Test(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
 			** "[well_formed] The FlightPlanner shall only accept well-formed maps from the GroundStation" **
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, connection_name, message_type)
+			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 		
-		Req004_FlightPlanner_Test(comp_context : component, property_id : string, filter : component, connection_name : string, message_type : data) <=
+		Req004_FlightPlanner_Test(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
 			** "[well_formed] The FlightPlanner shall only accept well-formed patterns from the GroundStation" **
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, connection_name, message_type)
+			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 		
 	**};
 end SW;

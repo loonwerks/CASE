@@ -79,8 +79,8 @@ public
 			c3: port FLT.filter_out -> Consumer.msg_in;
 			c2: port Consumer.status -> output;
 		annex resolute {**
-			prove Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong", this.FLT, "c3", Coordinate.Impl)
-			prove Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt", this.FLT, "c3", Coordinate.Impl)
+			prove Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong", this.FLT, this.c3, Coordinate.Impl)
+			prove Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt", this.FLT, this.c3, Coordinate.Impl)
 		**};
 	end SW.Impl;
 
@@ -94,14 +94,14 @@ private
 	with CASE_Model_Transformations;
 
 	annex resolute {**
-		Req_Wellformed_LatLong(comp_context : component, property_id : string, filter : component, connection_name : string, message_type : data) <=
+		Req_Wellformed_LatLong(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
 			** "[well_formed] The Consumer shall only receive well-formed latitude-longitude coordinates" **
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, connection_name, message_type)
+			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 		
-		Req_Wellformed_Alt(comp_context : component, property_id : string, filter : component, connection_name : string, message_type : data) <=
+		Req_Wellformed_Alt(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
 			** "[well_formed] The Consumer shall only receive well-formed altitude coordinates" **
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, connection_name, message_type)
-
+			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
+		
 	**};
 	
 end Producer_Filter_Consumer;
