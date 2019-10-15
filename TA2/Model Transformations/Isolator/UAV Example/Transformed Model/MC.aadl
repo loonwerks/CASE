@@ -140,13 +140,4 @@ public
 		**};
 	end MissionComputer.Impl;
 
-private
-	with CASE_Model_Transformations;
-
-	annex resolute {**
-		Req001_SW(comp_context : component, isolated_components : {component}, isolator : component) <=
-			** "[isolated] Third-party software shall be isolated from critical components" **
-			add_isolator(comp_context, isolated_components, isolator)
-		
-	**};
 end MC;

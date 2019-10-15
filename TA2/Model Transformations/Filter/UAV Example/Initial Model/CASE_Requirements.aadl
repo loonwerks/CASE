@@ -1,0 +1,21 @@
+package CASE_Requirements
+private
+	annex resolute {**
+		Req003_FlightPlanner(comp_context : component, property_id : string) <=
+			** "[well_formed_map] The FlightPlanner shall only accept well-formed maps from the GroundStation" **
+			context Generated_By : "GearCASE"
+			context Generated_On : "May 23, 1970"
+			context Req_Component : "SW::SW.Impl.FPLN"
+			context Formalized : "True"
+			agree_prop_checked(comp_context, property_id)
+		
+		Req004_FlightPlanner(comp_context : component, property_id : string) <=
+			** "[well_formed_pattern] The FlightPlanner shall only accept well-formed flight patterns from the GroundStation" **
+			context Generated_By : "GearCASE"
+			context Generated_On : "May 23, 1970"
+			context Req_Component : "SW::SW.Impl.FPLN"
+			context Formalized : "True"
+			agree_prop_checked(comp_context, property_id)
+		
+	**};
+end CASE_Requirements;

@@ -153,7 +153,8 @@ public
 		annex agree {**
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);
-			assume Req_TrustedSource "The FlightPlanner shall only accept messages from a trusted GroundStation" : TRUSTED_MESSAGE(recv_map);
+			assume Req_TrustedSource_Init "The FlightPlanner shall only accept messages from a trusted GroundStation" : TRUSTED_MESSAGE(recv_map);
+			assume Req_TrustedSource_Transformed "The FlightPlanner shall only accept messages from a trusted GroundStation" : TRUSTED_MESSAGE(recv_map);
 		**};
 	end FlightPlanner;
 
@@ -463,17 +464,4 @@ public
 		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
 	**};
 
-private
-	with CASE_Model_Transformations;
-
-	annex resolute {**
-		Req_TrustedSource_Init(comp_context : component, property_id : string) <=
-			** "Messages shall come from a trusted source" **
-			agree_prop_checked(comp_context, property_id)
-			
-		Req_TrustedSource_Transformed(comp_context : component, property_id : string, comm_driver : component, attestation_manager : component) <=
-			** "Messages shall come from a trusted source" **
-			agree_prop_checked(comp_context, property_id) and add_attestation_manager(comm_driver, attestation_manager)
-		
-	**};
 end SW;

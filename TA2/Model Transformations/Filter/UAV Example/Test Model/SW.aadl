@@ -556,34 +556,4 @@ public
 		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
 	**};
 
-private
-	with CASE_Model_Transformations;
-
-	annex resolute {**
-			
-		Req003_FlightPlanner_Init(comp_context : component, property_id : string) <=
-			** "[well_formed] The FlightPlanner shall only accept well-formed maps from the GroundStation" **
-			agree_prop_checked(comp_context, property_id)
-		
-		Req004_FlightPlanner_Init(comp_context : component, property_id : string) <=
-			** "[well_formed] The FlightPlanner shall only accept well-formed patterns from the GroundStation" **
-			agree_prop_checked(comp_context, property_id)
-			
-		Req003_FlightPlanner_Transformed(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
-			** "[well_formed] The FlightPlanner shall only accept well-formed maps from the GroundStation" **
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
-		
-		Req004_FlightPlanner_Transformed(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
-			** "[well_formed] The FlightPlanner shall only accept well-formed patterns from the GroundStation" **
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
-			
-		Req003_FlightPlanner_Test(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
-			** "[well_formed] The FlightPlanner shall only accept well-formed maps from the GroundStation" **
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
-		
-		Req004_FlightPlanner_Test(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
-			** "[well_formed] The FlightPlanner shall only accept well-formed patterns from the GroundStation" **
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
-		
-	**};
 end SW;

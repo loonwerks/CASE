@@ -126,11 +126,4 @@ public
 		**};
 	end MissionComputer.Impl;
 
-private
-	annex resolute {**
-		Req001_SW(comp_context : component) <=
-			** "[isolated] Third-party software shall be isolated from critical components" **
-			false
-		
-	**};
 end MC;

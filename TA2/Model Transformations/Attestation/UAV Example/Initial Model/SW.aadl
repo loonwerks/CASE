@@ -256,13 +256,4 @@ public
 		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
 	**};
 
-private
-	with CASE_Model_Transformations;
-
-	annex resolute {**
-		Req_TrustedSource(comp_context : component, property_id : string) <=
-			** "Messages shall come from a trusted source" **
-			agree_prop_checked(comp_context, property_id)
-		
-	**};
 end SW;

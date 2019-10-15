@@ -479,18 +479,4 @@ public
 		**};
 	end MissionComputer.Test_Subcomponents_Not_Bound_To_Other_Processors;
 
-private
-	with CASE_Model_Transformations;
-
-	annex resolute {**
-		
-		Req001_SW_Init(comp_context : component) <=
-			** "[isolated] Third-party software shall be isolated from critical components" **
-			false
-		
-		Req001_SW_Transformed(comp_context : component, isolated_components : {component}, isolator : component) <=
-			** "[isolated] Third-party software shall be isolated from critical components" **
-			add_isolator(comp_context, isolated_components, isolator)
-		
-	**};
 end MC;

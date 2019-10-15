@@ -14,17 +14,15 @@ public
 			filter_out: out event data port RF_Msg.Impl;
 		properties
 			CASE_Properties::COMP_TYPE => FILTER;
-			CASE_Properties::COMP_SPEC => ("Req001_Filter", "Req002_Filter");
+			CASE_Properties::COMP_SPEC => ("Req003_FlightPlanner_Filter", "ightPlanner_Filter");
 		annex agree {**
 			guarantee Req001_RadioDriver_Filter "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(filter_out);
-			guarantee Req001_Filter "The FlightPlanner shall only receive well-formed maps" : good_map(filter_out.payload.map);
-			guarantee Req002_Filter "The FlightPlanner shall only receive well-formed patterns" : good_pattern(filter_out.payload.pattern);
+			guarantee Req003_FlightPlanner_Filter "The FlightPlanner shall only accept well-formed maps from the GroundStation" : good_map(filter_out.payload.map);
+			guarantee Req004_FlightPlanner_Filter "The FlightPlanner shall only accept well-formed patterns from the GroundStation" : good_pattern(filter_out.payload.pattern);
 		**};
 	end CASE_Filter;
 
 	thread implementation CASE_Filter.Impl
-		properties
-			CASE_Properties::COMP_IMPL => "CakeML";
 	end CASE_Filter.Impl;
 
 	data Coordinate
@@ -151,7 +149,7 @@ public
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);
 			assume Req003_FlightPlanner "The FlightPlanner shall only accept well-formed maps from the GroundStation" : good_map(recv_map.payload.map);
-			assume Req004_FlightPlanner "The FlightPlanner shall only accept well-formed patterns from the GroundStation" : good_pattern(recv_map.payload.pattern);
+			assume Req004_FlightPlanner "The FlightPlanner shall only accept well-formed flight patterns from the GroundStation" : good_pattern(recv_map.payload.pattern);
 		**};
 	end FlightPlanner;
 
@@ -260,7 +258,7 @@ public
 			c18: port wifi_recv -> WIFI.recv_data;
 		annex resolute {**
 			prove Req003_FlightPlanner(this.FPLN, "Req003_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
-			prove Req004_FlightPlanner(this.FPLN, "Req003_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
+			prove Req004_FlightPlanner(this.FPLN, "Req004_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
 		**};
 	end SW.Impl;
 
@@ -279,17 +277,4 @@ public
 		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
 	**};
 
-private
-	with CASE_Model_Transformations;
-
-	annex resolute {**
-		Req003_FlightPlanner(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
-			** "[well_formed] The FlightPlanner shall only accept well-formed maps from the GroundStation" **
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
-		
-		Req004_FlightPlanner(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
-			** "[well_formed] The FlightPlanner shall only accept well-formed patterns from the GroundStation" **
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
-		
-	**};
 end SW;

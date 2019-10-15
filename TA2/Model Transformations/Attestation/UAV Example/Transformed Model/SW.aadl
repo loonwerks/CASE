@@ -16,10 +16,10 @@ public
 			am_response: in event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
 		properties
 			CASE_Properties::COMP_TYPE => ATTESTATION;
-			CASE_Properties::COMP_SPEC => ("Req_Attestation");
+			CASE_Properties::COMP_SPEC => ("Req_TrustedSource_Attestation");
 		annex agree {**
 			guarantee Req001_RadioDriver_AttestationManager "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(am_mission_command_out);
-			guarantee Req_Attestation "Messages shall come from a trusted source" : TRUSTED_MESSAGE(am_mission_command_out);
+			guarantee Req_TrustedSource_Attestation "The FlightPlanner shall only accept messages from a trusted GroundStation" : TRUSTED_MESSAGE(am_mission_command_out);
 		**};
 	end CASE_AttestationManager;
 
@@ -253,10 +253,10 @@ public
 		connections
 			c1: port radio_recv -> RADIO.recv_data;
 			c2: port RADIO.send_data -> radio_send;
-			c3: port RADIO.mission_command -> AM.am_mission_command_in;
-			c4: port AM.am_mission_command_out -> FPLN.recv_map;
+			c4: port RADIO.mission_command -> AM.am_mission_command_in;
 			c19: port AM.am_request -> RADIO.am_request;
 			c20: port RADIO.am_response -> AM.am_response;
+			c3: port AM.am_mission_command_out -> FPLN.recv_map;
 			c5: port FPLN.flight_plan -> WPM.flight_plan;
 			c6: port FPLN.request_nofly_zones -> NFDB.map;
 			c7: port NFDB.zones -> FPLN.nofly_zones;
@@ -291,13 +291,4 @@ public
 		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
 	**};
 
-private
-	with CASE_Model_Transformations;
-
-	annex resolute {**
-		Req_TrustedSource(comp_context : component, property_id : string, comm_driver : component, attestation_manager : component) <=
-			** "Messages shall come from a trusted source" **
-			agree_prop_checked(comp_context, property_id) and add_attestation_manager(comm_driver, attestation_manager)
-		
-	**};
 end SW;

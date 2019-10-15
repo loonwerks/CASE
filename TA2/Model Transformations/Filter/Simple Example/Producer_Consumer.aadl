@@ -60,23 +60,24 @@ public
 		**};
 	end SW.Impl;
 	
+	system Sys
+		features
+			input: in event data port Base_Types::Boolean;
+			output: out event data port Base_Types::Boolean;
+	end Sys;
+	
+	system implementation Sys.Impl
+		subcomponents
+			SW: process SW.Impl;
+		connections
+			c1: port input -> SW.input;
+			c2: port SW.output -> output;
+	end Sys.Impl;
+	
 	annex agree {**
 		-- This is the filter spec
 		fun WELL_FORMED_LAT_LONG(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180;
 		fun WELL_FORMED_ALT(coord : Coordinate.Impl) : bool = coord.altitude >= 0 and coord.altitude <= 15000;
-	**};
-
-private
-	annex resolute {**
-		-- This is the lat-long well-formedness requirement from TA1
-		Req_Wellformed_LatLong(comp_context : component, property_id : string) <=
-			** "[well_formed] The Consumer shall only receive well-formed latitude-longitude coordinates" **
-			agree_prop_checked(comp_context, property_id)
-			
-		-- This is an alt well-formedness requirement
-		Req_Wellformed_Alt(comp_context : component, property_id : string) <=
-			** "[well_formed] The Consumer shall only receive well-formed altitude coordinates" **
-			agree_prop_checked(comp_context, property_id)
 	**};
 	
 end Producer_Consumer;

@@ -1,4 +1,4 @@
-package No_Attestation
+package Attestation
 public
 	with CASE_Model_Transformations;
 
@@ -8,6 +8,7 @@ public
 
 	thread RadioDriver
 		features
+			recv_message: in event data port;
 			command_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			other_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 		properties
@@ -40,6 +41,7 @@ public
 
 	process SW
 		features
+			input: in event data port;
 			output: out event data port Base_Types::Boolean;
 		annex agree {**
 			guarantee "Output status shall never be false" : output;
@@ -52,20 +54,27 @@ public
 			CRIT_A: thread Critical_A.Impl;
 			CRIT_B: thread Critical_B.Impl;
 		connections
-			c1: port RADIO.command_message -> CRIT_A.recv_command;
-			c2: port RADIO.other_message -> CRIT_B.recv_message;
-			c3: port CRIT_A.status -> output;
+			c1: port input -> RADIO.recv_message;
+			c2: port RADIO.command_message -> CRIT_A.recv_command;
+			c3: port RADIO.other_message -> CRIT_B.recv_message;
+			c4: port CRIT_A.status -> output;
 		annex resolute {**
 			prove(Req_Trusted(this.CRIT_A, "Req_Trusted"))
 		**};
 	end SW.Impl;
 	
-private
+	system Sys
+		features
+			input: in event data port;
+			output: out event data port Base_Types::Boolean;
+	end Sys;
 	
-	annex resolute {**
-		Req_Trusted(comp_context : component, property_id : string) <=
-			** "Command messages shall only come from trusted sources" **
-			agree_prop_checked(comp_context, property_id)
-	**};
+	system implementation Sys.Impl
+		subcomponents
+			SW: process SW.Impl;
+		connections
+			c1: port input -> SW.input;
+			c2: port SW.output -> output;
+	end Sys.Impl;
 	
-end No_Attestation;
+end Attestation;

@@ -1,4 +1,4 @@
-package Untrusted_Component
+package Isolation
 public
 	
 	with CASE_Properties;
@@ -63,12 +63,4 @@ public
 		**};
 	end Critical.Impl;
 	
-private
-	
-	annex resolute {**
-		Req_Isolated(comp_context : component) <=
-			** "Third-party software shall be isolated from critical components" **
-			false
-	**};
-	
-end Untrusted_Component;
+end Isolation;

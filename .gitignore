@@ -15,6 +15,7 @@ CASE_simple_example/AADL/json-generated
 **/splat/.HOLMK
 **/splat/.hollogs
 .aadlbin-gen
+.reqdb
 
 json-generated
 
