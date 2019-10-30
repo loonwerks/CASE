@@ -1,0 +1,102 @@
+#include <types.h>
+
+void Type_assign(void *dest, void *src, size_t destSize) {
+  Type srcType = (Type) src;
+  if (srcType->type == TString) {
+    String_assign((String) dest, (String) src);
+    return;
+  }
+  size_t srcSize = sizeOf(srcType);
+  memcpy(dest, src, srcSize);
+  memset(((char *) dest) + srcSize, 0, destSize - srcSize);
+}
+
+char *TYPE_string(void *type) {
+  static char *strings[] = {
+    "(Z, Z)",
+    "(Z, art.DataContent)",
+    "ACT_Demo_Dec2018__camkes_X.Base_Types.Boolean",
+    "ACT_Demo_Dec2018__camkes_X.Base_Types.Boolean_Payload",
+    "ACT_Demo_Dec2018__camkes_X.Base_Types.Integer_64",
+    "ACT_Demo_Dec2018__camkes_X.Base_Types.Integer_64_Payload",
+    "ACT_Demo_Dec2018__camkes_X.MC.MISSING_TYPE_Impl",
+    "ACT_Demo_Dec2018__camkes_X.MC.Radio_Impl_Bridge",
+    "ACT_Demo_Dec2018__camkes_X.MC.Radio_Impl_Bridge.Api",
+    "ACT_Demo_Dec2018__camkes_X.MC.Radio_Impl_Bridge.EntryPoints",
+    "ACT_Demo_Dec2018__camkes_X.MC.Radio_Impl_Impl",
+    "ACT_Demo_Dec2018__camkes_X.MC.UART_Impl_Bridge",
+    "ACT_Demo_Dec2018__camkes_X.MC.UART_Impl_Bridge.Api",
+    "ACT_Demo_Dec2018__camkes_X.MC.UART_Impl_Bridge.EntryPoints",
+    "ACT_Demo_Dec2018__camkes_X.MC.UART_Impl_Impl",
+    "ACT_Demo_Dec2018__camkes_X.SW.Command_Impl",
+    "ACT_Demo_Dec2018__camkes_X.SW.Command_Impl_Payload",
+    "ACT_Demo_Dec2018__camkes_X.SW.Coordinate_Impl",
+    "ACT_Demo_Dec2018__camkes_X.SW.FlightPlanner_Impl_Bridge",
+    "ACT_Demo_Dec2018__camkes_X.SW.FlightPlanner_Impl_Bridge.Api",
+    "ACT_Demo_Dec2018__camkes_X.SW.FlightPlanner_Impl_Bridge.EntryPoints",
+    "ACT_Demo_Dec2018__camkes_X.SW.FlightPlanner_Impl_Impl",
+    "ACT_Demo_Dec2018__camkes_X.SW.Mission",
+    "ACT_Demo_Dec2018__camkes_X.SW.MissionWindow",
+    "ACT_Demo_Dec2018__camkes_X.SW.MissionWindow_Payload",
+    "ACT_Demo_Dec2018__camkes_X.SW.Mission_Payload",
+    "ACT_Demo_Dec2018__camkes_X.SW.RadioDriver_Impl_Bridge",
+    "ACT_Demo_Dec2018__camkes_X.SW.RadioDriver_Impl_Bridge.Api",
+    "ACT_Demo_Dec2018__camkes_X.SW.RadioDriver_Impl_Bridge.EntryPoints",
+    "ACT_Demo_Dec2018__camkes_X.SW.RadioDriver_Impl_Impl",
+    "ACT_Demo_Dec2018__camkes_X.SW.SW__Map",
+    "ACT_Demo_Dec2018__camkes_X.SW.UARTDriver_Impl_Bridge",
+    "ACT_Demo_Dec2018__camkes_X.SW.UARTDriver_Impl_Bridge.Api",
+    "ACT_Demo_Dec2018__camkes_X.SW.UARTDriver_Impl_Bridge.EntryPoints",
+    "ACT_Demo_Dec2018__camkes_X.SW.UARTDriver_Impl_Impl",
+    "ACT_Demo_Dec2018__camkes_X.SW.WaypointManager_Impl_Bridge",
+    "ACT_Demo_Dec2018__camkes_X.SW.WaypointManager_Impl_Bridge.Api",
+    "ACT_Demo_Dec2018__camkes_X.SW.WaypointManager_Impl_Bridge.EntryPoints",
+    "ACT_Demo_Dec2018__camkes_X.SW.WaypointManager_Impl_Impl",
+    "IS[Z, (Z, Z)]",
+    "IS[Z, ACT_Demo_Dec2018__camkes_X.SW.Coordinate_Impl]",
+    "IS[Z, String]",
+    "IS[Z, Z]",
+    "IS[Z, art.UConnection]",
+    "IS[Z, art.UPort]",
+    "MNone[art.Bridge]",
+    "MS[Z, IS[Z, (Z, Z)]]",
+    "MS[Z, IS[Z, Z]]",
+    "MS[Z, MOption[art.Bridge]]",
+    "MS[Z, Option[art.DataContent]]",
+    "MS[Z, Option[art.UPort]]",
+    "MS[Z, Z]",
+    "MS[Z, art.Bridge]",
+    "MSome[art.Bridge]",
+    "None[(Z, art.DataContent)]",
+    "None[ACT_Demo_Dec2018__camkes_X.SW.Mission]",
+    "None[Z]",
+    "None[art.DataContent]",
+    "None[art.UPort]",
+    "Some[(Z, art.DataContent)]",
+    "Some[ACT_Demo_Dec2018__camkes_X.SW.Mission]",
+    "Some[Z]",
+    "Some[art.DataContent]",
+    "Some[art.UPort]",
+    "art.ArchitectureDescription",
+    "art.Bridge.Ports",
+    "art.Connection[ACT_Demo_Dec2018__camkes_X.Base_Types.Boolean]",
+    "art.Connection[ACT_Demo_Dec2018__camkes_X.Base_Types.Integer_64]",
+    "art.Connection[ACT_Demo_Dec2018__camkes_X.SW.Command_Impl]",
+    "art.Connection[ACT_Demo_Dec2018__camkes_X.SW.MissionWindow]",
+    "art.Connection[ACT_Demo_Dec2018__camkes_X.SW.Mission]",
+    "art.DispatchPropertyProtocol.Periodic",
+    "art.DispatchPropertyProtocol.Sporadic",
+    "art.Empty",
+    "art.EventTriggered",
+    "art.Port[ACT_Demo_Dec2018__camkes_X.Base_Types.Boolean]",
+    "art.Port[ACT_Demo_Dec2018__camkes_X.Base_Types.Integer_64]",
+    "art.Port[ACT_Demo_Dec2018__camkes_X.MC.MISSING_TYPE_Impl]",
+    "art.Port[ACT_Demo_Dec2018__camkes_X.SW.Command_Impl]",
+    "art.Port[ACT_Demo_Dec2018__camkes_X.SW.Coordinate_Impl]",
+    "art.Port[ACT_Demo_Dec2018__camkes_X.SW.MissionWindow]",
+    "art.Port[ACT_Demo_Dec2018__camkes_X.SW.Mission]",
+    "art.TimeTriggered",
+    "String"
+  };
+  return strings[((Type) type)->type];
+}

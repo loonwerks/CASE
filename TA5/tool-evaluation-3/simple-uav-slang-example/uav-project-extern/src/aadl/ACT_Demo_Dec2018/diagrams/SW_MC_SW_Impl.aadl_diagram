@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="46eba58b-1a5d-447e-8da4-5f51100e159e" manual="true">
+    <element uuid="ef0869d1-dfa8-4d5a-961f-aaf9895f164a">
+      <element uuid="754c71e5-a15b-47ee-a650-8b79db04445e">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c1</seg>
+      </bo>
+      <contentFilters/>
+    </element>
+    <element uuid="785fe631-d2b4-4626-aa1b-d0c3c4e091aa">
+      <element uuid="2f63c104-56c5-4228-ac87-829ba034f430">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c2</seg>
+      </bo>
+      <contentFilters/>
+    </element>
+    <element uuid="b48c5802-cad9-408f-9507-5fb11d249949">
+      <element uuid="32ba09a8-9cf3-4dab-8573-0a718836be2b">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c3</seg>
+      </bo>
+      <contentFilters/>
+    </element>
+    <element uuid="fb843777-f1f2-42ad-832c-06e87bac689d">
+      <element uuid="2d99aa86-eabe-4864-89ea-656eccb73649">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c6</seg>
+      </bo>
+      <contentFilters/>
+    </element>
+    <element uuid="5898fb7c-e187-4606-a5e2-4b028a3c1531">
+      <element uuid="cfe16d75-601c-4729-9a62-2c312ae4b45c">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c7</seg>
+      </bo>
+      <contentFilters/>
+    </element>
+    <element uuid="1f5a0b92-2b29-4e4c-a98a-bc96e2b0629f">
+      <element uuid="a6107943-e3c3-4a87-8192-285324ea4a32" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>flight_plan</seg>
+        </bo>
+        <position x="217.0" y="10.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="fae5aafe-56ee-4653-987a-1aae045832f0" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>mission_rcv</seg>
+        </bo>
+        <position x="208.0" y="61.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="cf8a048c-0e2d-4ab1-86c9-940e1ab5d465" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>recv_map</seg>
+        </bo>
+        <position y="36.0"/>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>fpln</seg>
+      </bo>
+      <position x="385.0" y="39.0"/>
+      <size width="315.0" height="112.0"/>
+      <contentFilters>
+        <filter>features</filter>
+        <filter>internalFeatures</filter>
+        <filter>processorFeatures</filter>
+        <filter>connections</filter>
+        <filter>flowSpecifications</filter>
+      </contentFilters>
+    </element>
+    <element uuid="c0a0115b-8ba3-4f5c-8b31-f806e17112a4">
+      <element uuid="1a5f1116-8045-4075-9df5-94c0c1386986" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>recv_map_out</seg>
+        </bo>
+        <position x="231.0" y="10.0"/>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>radio</seg>
+      </bo>
+      <position x="12.0" y="65.0"/>
+      <size width="353.0" height="61.0"/>
+      <contentFilters>
+        <filter>features</filter>
+        <filter>internalFeatures</filter>
+        <filter>processorFeatures</filter>
+        <filter>connections</filter>
+        <filter>flowSpecifications</filter>
+      </contentFilters>
+    </element>
+    <element uuid="f8a25285-fe8a-47c2-a31c-6714ab02e086">
+      <element uuid="01710b1d-2509-4b40-bb02-a5c482f737d2" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>mission_window</seg>
+        </bo>
+        <position y="10.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="6218736f-506b-44fd-86d1-16997d01b227" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>tracking_id</seg>
+        </bo>
+        <position y="61.0"/>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>uart</seg>
+      </bo>
+      <position x="1120.0" y="39.0"/>
+      <size width="381.0" height="112.0"/>
+      <contentFilters>
+        <filter>features</filter>
+        <filter>internalFeatures</filter>
+        <filter>processorFeatures</filter>
+        <filter>connections</filter>
+        <filter>flowSpecifications</filter>
+      </contentFilters>
+    </element>
+    <element uuid="b11192f7-bd57-49e1-9e6f-4ec40cdac2e9">
+      <element uuid="085e0669-a767-4614-b05a-c9697b1a1a6a" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>flight_plan</seg>
+        </bo>
+        <position y="10.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="7657e25d-72a4-4bdf-970c-2a0f0a1a52fd" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>mission_rcv</seg>
+        </bo>
+        <position y="61.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="528bf889-dd18-4f6d-bcc4-6e6b72a51ce1" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>mission_window</seg>
+        </bo>
+        <position x="240.0" y="10.0"/>
+        <contentFilters/>
+      </element>
+      <element uuid="4024b5d7-5020-4534-9697-20ec1bf6e41e" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>tracking_id</seg>
+        </bo>
+        <position x="277.0" y="61.0"/>
+        <contentFilters/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>wpm</seg>
+      </bo>
+      <position x="720.0" y="39.0"/>
+      <size width="380.0" height="112.0"/>
+      <contentFilters>
+        <filter>features</filter>
+        <filter>internalFeatures</filter>
+        <filter>processorFeatures</filter>
+        <filter>connections</filter>
+        <filter>flowSpecifications</filter>
+      </contentFilters>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>mc_sw.impl</seg>
+    </bo>
+    <position x="12.0" y="12.0"/>
+    <size width="1513.0" height="163.0"/>
+    <contentFilters>
+      <filter>features</filter>
+      <filter>internalFeatures</filter>
+      <filter>processorFeatures</filter>
+      <filter>connections</filter>
+      <filter>flowSpecifications</filter>
+      <filter>subcomponents</filter>
+    </contentFilters>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>sw::mc_sw.impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>

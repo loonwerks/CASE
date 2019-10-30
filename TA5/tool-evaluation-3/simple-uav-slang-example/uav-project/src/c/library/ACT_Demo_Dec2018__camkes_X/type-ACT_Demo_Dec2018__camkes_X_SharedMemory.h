@@ -1,0 +1,6 @@
+#ifndef SIREUM_TYPE_H_ACT_Demo_Dec2018__camkes_X_SharedMemory
+#define SIREUM_TYPE_H_ACT_Demo_Dec2018__camkes_X_SharedMemory
+#include <misc.h>
+
+
+#endif

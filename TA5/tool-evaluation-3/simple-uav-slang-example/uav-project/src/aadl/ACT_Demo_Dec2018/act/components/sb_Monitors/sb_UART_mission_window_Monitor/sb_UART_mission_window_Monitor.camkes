@@ -1,0 +1,7 @@
+import "../../../interfaces/sb_Monitor_SW__MissionWindow_23388.idl4";
+
+component sb_UART_mission_window_Monitor {
+
+  provides sb_Monitor_SW__MissionWindow_23388 mon;
+  emits QueuedData monsig;
+}

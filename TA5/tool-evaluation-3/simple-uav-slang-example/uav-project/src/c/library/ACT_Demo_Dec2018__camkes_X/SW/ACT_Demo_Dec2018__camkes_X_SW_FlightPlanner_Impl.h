@@ -1,0 +1,9 @@
+#ifndef SIREUM_H_ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl
+#define SIREUM_H_ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl
+#include <types.h>
+
+Unit ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl_initialise_(STACK_FRAME ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl this);
+
+Unit ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl_finalise_(STACK_FRAME ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl this);
+
+#endif

@@ -1,0 +1,7 @@
+#ifndef SIREUM_H_uav_project_extern_SW_WaypointManager_Impl
+#define SIREUM_H_uav_project_extern_SW_WaypointManager_Impl
+#include <types.h>
+
+Unit uav_project_extern_SW_WaypointManager_Impl_Impl_finalise_(STACK_FRAME uav_project_extern_SW_WaypointManager_Impl_Impl this);
+
+#endif

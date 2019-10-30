@@ -1,0 +1,7 @@
+#ifndef SIREUM_H_uav_project_extern_SW_UARTDriver_Util
+#define SIREUM_H_uav_project_extern_SW_UARTDriver_Util
+#include <types.h>
+
+Unit uav_project_extern_SW_UARTDriver_Util_pause(STACK_FRAME_ONLY);
+
+#endif

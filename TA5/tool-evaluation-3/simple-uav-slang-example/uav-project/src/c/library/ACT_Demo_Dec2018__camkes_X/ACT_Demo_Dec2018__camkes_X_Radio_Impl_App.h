@@ -1,0 +1,11 @@
+#ifndef SIREUM_H_ACT_Demo_Dec2018__camkes_X_Radio_Impl_App
+#define SIREUM_H_ACT_Demo_Dec2018__camkes_X_Radio_Impl_App
+#include <types.h>
+
+Z ACT_Demo_Dec2018__camkes_X_Radio_Impl_App_main(STACK_FRAME IS_948B60 args);
+
+Unit ACT_Demo_Dec2018__camkes_X_Radio_Impl_App_atExit(STACK_FRAME_LAST);
+
+Unit ACT_Demo_Dec2018__camkes_X_Radio_Impl_App_exit(STACK_FRAME_LAST);
+
+#endif

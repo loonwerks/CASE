@@ -1,0 +1,23 @@
+#ifndef SIREUM_H_uav_project_extern_UARTDriver_Impl_App
+#define SIREUM_H_uav_project_extern_UARTDriver_Impl_App
+#include <types.h>
+
+void uav_project_extern_UARTDriver_Impl_App_init(STACK_FRAME_ONLY);
+
+art_Bridge_EntryPoints uav_project_extern_UARTDriver_Impl_App_entryPoints(STACK_FRAME_ONLY);
+Z uav_project_extern_UARTDriver_Impl_App_appPortId(STACK_FRAME_ONLY);
+Option_882048 uav_project_extern_UARTDriver_Impl_App_appPortIdOpt(STACK_FRAME_ONLY);
+Z uav_project_extern_UARTDriver_Impl_App_mission_windowPortId(STACK_FRAME_ONLY);
+Option_882048 uav_project_extern_UARTDriver_Impl_App_mission_windowPortIdOpt(STACK_FRAME_ONLY);
+
+Z uav_project_extern_UARTDriver_Impl_App_main(STACK_FRAME IS_948B60 args);
+
+Unit uav_project_extern_UARTDriver_Impl_App_atExit(STACK_FRAME_ONLY);
+
+Unit uav_project_extern_UARTDriver_Impl_App_initialise(STACK_FRAME Z seed);
+
+Unit uav_project_extern_UARTDriver_Impl_App_compute(STACK_FRAME_ONLY);
+
+Unit uav_project_extern_UARTDriver_Impl_App_exit(STACK_FRAME_ONLY);
+
+#endif

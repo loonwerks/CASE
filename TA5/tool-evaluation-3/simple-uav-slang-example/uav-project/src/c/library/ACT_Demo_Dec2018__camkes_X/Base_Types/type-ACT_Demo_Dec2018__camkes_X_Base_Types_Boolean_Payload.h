@@ -1,0 +1,17 @@
+#ifndef SIREUM_TYPE_H_ACT_Demo_Dec2018__camkes_X_Base_Types_Boolean_Payload
+#define SIREUM_TYPE_H_ACT_Demo_Dec2018__camkes_X_Base_Types_Boolean_Payload
+#include <misc.h>
+
+// ACT_Demo_Dec2018__camkes_X.Base_Types.Boolean_Payload
+#include <type-ACT_Demo_Dec2018__camkes_X_Base_Types_Boolean.h>
+
+typedef struct ACT_Demo_Dec2018__camkes_X_Base_Types_Boolean_Payload *ACT_Demo_Dec2018__camkes_X_Base_Types_Boolean_Payload;
+struct ACT_Demo_Dec2018__camkes_X_Base_Types_Boolean_Payload {
+  TYPE type;
+  struct ACT_Demo_Dec2018__camkes_X_Base_Types_Boolean value;
+};
+
+#define DeclNewACT_Demo_Dec2018__camkes_X_Base_Types_Boolean_Payload(x) struct ACT_Demo_Dec2018__camkes_X_Base_Types_Boolean_Payload x = { .type = TACT_Demo_Dec2018__camkes_X_Base_Types_Boolean_Payload }
+
+
+#endif

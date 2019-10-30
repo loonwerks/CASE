@@ -1,0 +1,6 @@
+#ifndef SIREUM_TYPE_H_ACT_Demo_Dec2018__camkes_X_SW_UARTDriver_Impl
+#define SIREUM_TYPE_H_ACT_Demo_Dec2018__camkes_X_SW_UARTDriver_Impl
+#include <misc.h>
+
+
+#endif

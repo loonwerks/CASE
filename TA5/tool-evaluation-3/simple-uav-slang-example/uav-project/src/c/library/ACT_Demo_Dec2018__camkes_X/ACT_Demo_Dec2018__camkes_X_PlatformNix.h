@@ -1,0 +1,22 @@
+#ifndef SIREUM_H_ACT_Demo_Dec2018__camkes_X_PlatformNix
+#define SIREUM_H_ACT_Demo_Dec2018__camkes_X_PlatformNix
+#include <types.h>
+
+void ACT_Demo_Dec2018__camkes_X_PlatformNix_init(STACK_FRAME_LAST);
+
+Z ACT_Demo_Dec2018__camkes_X_PlatformNix_seed(STACK_FRAME_LAST);
+void ACT_Demo_Dec2018__camkes_X_PlatformNix_seed_a(STACK_FRAME Z p_seed);
+IS_82ABD8 ACT_Demo_Dec2018__camkes_X_PlatformNix_ids(STACK_FRAME_LAST);
+void ACT_Demo_Dec2018__camkes_X_PlatformNix_ids_a(STACK_FRAME IS_82ABD8 p_ids);
+
+Unit ACT_Demo_Dec2018__camkes_X_PlatformNix_initialise(STACK_FRAME Z seed, Option_882048 portOpt);
+
+void ACT_Demo_Dec2018__camkes_X_PlatformNix_receive(STACK_FRAME Tuple2_D0E3BB result, Option_882048 portOpt);
+
+void ACT_Demo_Dec2018__camkes_X_PlatformNix_receiveAsync(STACK_FRAME Option_02FA6D result, Option_882048 portOpt);
+
+B ACT_Demo_Dec2018__camkes_X_PlatformNix_sendAsync(STACK_FRAME Z app, Z port, art_DataContent data);
+
+Unit ACT_Demo_Dec2018__camkes_X_PlatformNix_finalise(STACK_FRAME_LAST);
+
+#endif

@@ -1,0 +1,35 @@
+#ifndef SIREUM_H_ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl
+#define SIREUM_H_ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl
+#include <types.h>
+
+// ACT_Demo_Dec2018__camkes_X.SW.FlightPlanner_Impl_Impl
+
+#define ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl_api_(this) ((ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Bridge_Api) &(this)->api)
+#define ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl_missioncommand_sent_(this) ((this)->missioncommand_sent)
+#define ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl_missioncommand_sent_a(this, value) (this)->missioncommand_sent = (value)
+
+B ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl__eq(ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl this, ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl other);
+static inline B ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl__ne(ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl this, ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl other) {
+  return !ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl__eq(this, other);
+};
+void ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl_cprint(ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl this, B isOut);
+void ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl_string(STACK_FRAME String result, ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl this);
+
+static inline B ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl__is(STACK_FRAME void* this) {
+  return ((ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl) this)->type == TACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl;
+}
+
+static inline ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl__as(STACK_FRAME void *this) {
+  if (ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl__is(CALLER this)) return (ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl) this;
+  fprintf(stderr, "Invalid case from %s to ACT_Demo_Dec2018__camkes_X.SW.FlightPlanner_Impl_Impl.", TYPE_string(this));
+  sfAbortImpl(CALLER "");
+  abort();
+}
+
+void ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl_apply(STACK_FRAME ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl this, ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Bridge_Api api);
+
+Unit ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl_handlemission_rcv_(STACK_FRAME ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl this, ACT_Demo_Dec2018__camkes_X_Base_Types_Boolean value);
+
+Unit ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl_handlerecv_map_(STACK_FRAME ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Impl this, ACT_Demo_Dec2018__camkes_X_SW_Command_Impl value);
+
+#endif

@@ -1,0 +1,6 @@
+#ifndef SIREUM_TYPE_H_uav_project_extern_SW_FlightPlanner_Impl
+#define SIREUM_TYPE_H_uav_project_extern_SW_FlightPlanner_Impl
+#include <misc.h>
+
+
+#endif

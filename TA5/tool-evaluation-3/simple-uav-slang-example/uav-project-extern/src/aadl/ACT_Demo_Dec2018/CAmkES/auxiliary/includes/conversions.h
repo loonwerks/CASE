@@ -1,0 +1,19 @@
+#ifndef CONVERSION_H
+#define CONVERSION_H
+
+#include <all.h>
+#include <sb_PROC_HW_types.h>
+
+void convertTo_Camkes_Boolean(uav_project_extern_Base_Types_Boolean_Payload, bool*);
+void convertTo_Camkes_Command(uav_project_extern_SW_Command_Impl_Payload, SW__Command_Impl*);
+void convertTo_Camkes_Integer_64(uav_project_extern_Base_Types_Integer_64_Payload, int64_t*);
+void convertTo_Camkes_Mission(uav_project_extern_SW_Mission_Payload, sb_SW__Mission_container*);
+void convertTo_Camkes_MissionWindow(uav_project_extern_SW_MissionWindow_Payload, sb_SW__MissionWindow_container*);
+
+void convertTo_Slang_Boolean_Payload(bool, uav_project_extern_Base_Types_Boolean_Payload);
+void convertTo_Slang_Command_Impl_Payload(SW__Command_Impl, uav_project_extern_SW_Command_Impl_Payload);
+void convertTo_Slang_Integer_64_Payload(int64_t, uav_project_extern_Base_Types_Integer_64_Payload);
+void convertTo_Slang_Mission_Payload(sb_SW__Mission_container, uav_project_extern_SW_Mission_Payload);
+void convertTo_Slang_MissionWindow_Payload(sb_SW__MissionWindow_container, uav_project_extern_SW_MissionWindow_Payload);
+
+#endif

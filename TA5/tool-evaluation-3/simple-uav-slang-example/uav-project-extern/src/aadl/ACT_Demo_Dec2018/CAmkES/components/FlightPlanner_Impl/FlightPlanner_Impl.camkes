@@ -1,0 +1,14 @@
+import "../../interfaces/sb_Monitor_bool_1.idl4";
+import "../../interfaces/sb_Monitor_SW__Command_Impl_1.idl4";
+import "../../interfaces/sb_Monitor_SW__Mission_1.idl4";
+
+component FlightPlanner_Impl {
+  include <sb_PROC_HW_types.h>;
+  control;
+  uses sb_Monitor_bool_1 sb_mission_rcv;
+  uses sb_Monitor_SW__Command_Impl_1 sb_recv_map;
+  uses sb_Monitor_SW__Mission_1 sb_flight_plan0;
+  consumes QueuedData sb_mission_rcv_notification;
+  consumes QueuedData sb_recv_map_notification;
+  has semaphore sb_dispatch_sem;
+}

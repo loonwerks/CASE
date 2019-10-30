@@ -1,0 +1,27 @@
+#ifndef SIREUM_TYPE_H_art_Bridge_EntryPoints
+#define SIREUM_TYPE_H_art_Bridge_EntryPoints
+#include <misc.h>
+
+// art.Bridge.EntryPoints
+
+#include <type-ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Bridge_EntryPoints.h>
+#include <type-ACT_Demo_Dec2018__camkes_X_SW_WaypointManager_Impl_Bridge_EntryPoints.h>
+#include <type-ACT_Demo_Dec2018__camkes_X_SW_UARTDriver_Impl_Bridge_EntryPoints.h>
+#include <type-ACT_Demo_Dec2018__camkes_X_SW_RadioDriver_Impl_Bridge_EntryPoints.h>
+#include <type-ACT_Demo_Dec2018__camkes_X_MC_Radio_Impl_Bridge_EntryPoints.h>
+#include <type-ACT_Demo_Dec2018__camkes_X_MC_UART_Impl_Bridge_EntryPoints.h>
+
+typedef union art_Bridge_EntryPoints *art_Bridge_EntryPoints;
+union art_Bridge_EntryPoints {
+  TYPE type;
+  struct ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Bridge_EntryPoints ACT_Demo_Dec2018__camkes_X_SW_FlightPlanner_Impl_Bridge_EntryPoints;
+  struct ACT_Demo_Dec2018__camkes_X_SW_WaypointManager_Impl_Bridge_EntryPoints ACT_Demo_Dec2018__camkes_X_SW_WaypointManager_Impl_Bridge_EntryPoints;
+  struct ACT_Demo_Dec2018__camkes_X_SW_UARTDriver_Impl_Bridge_EntryPoints ACT_Demo_Dec2018__camkes_X_SW_UARTDriver_Impl_Bridge_EntryPoints;
+  struct ACT_Demo_Dec2018__camkes_X_SW_RadioDriver_Impl_Bridge_EntryPoints ACT_Demo_Dec2018__camkes_X_SW_RadioDriver_Impl_Bridge_EntryPoints;
+  struct ACT_Demo_Dec2018__camkes_X_MC_Radio_Impl_Bridge_EntryPoints ACT_Demo_Dec2018__camkes_X_MC_Radio_Impl_Bridge_EntryPoints;
+  struct ACT_Demo_Dec2018__camkes_X_MC_UART_Impl_Bridge_EntryPoints ACT_Demo_Dec2018__camkes_X_MC_UART_Impl_Bridge_EntryPoints;
+};
+
+#define DeclNewart_Bridge_EntryPoints(x) union art_Bridge_EntryPoints x = { 0 }
+
+#endif

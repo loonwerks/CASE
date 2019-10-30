@@ -1,0 +1,42 @@
+#ifndef SIREUM_H_ACT_Demo_Dec2018__camkes_X_ArtNix
+#define SIREUM_H_ACT_Demo_Dec2018__camkes_X_ArtNix
+#include <types.h>
+
+void ACT_Demo_Dec2018__camkes_X_ArtNix_init(STACK_FRAME_LAST);
+
+Z ACT_Demo_Dec2018__camkes_X_ArtNix_maxPortIds(STACK_FRAME_LAST);
+art_TimeTriggered ACT_Demo_Dec2018__camkes_X_ArtNix_timeTriggered(STACK_FRAME_LAST);
+MS_2590FE ACT_Demo_Dec2018__camkes_X_ArtNix_data(STACK_FRAME_LAST);
+Option_8E9F45 ACT_Demo_Dec2018__camkes_X_ArtNix_noData(STACK_FRAME_LAST);
+MS_B5E3E6 ACT_Demo_Dec2018__camkes_X_ArtNix_connection(STACK_FRAME_LAST);
+MS_30A5B4 ACT_Demo_Dec2018__camkes_X_ArtNix_eventInPorts(STACK_FRAME_LAST);
+MS_2590FE ACT_Demo_Dec2018__camkes_X_ArtNix_frozen(STACK_FRAME_LAST);
+void ACT_Demo_Dec2018__camkes_X_ArtNix_frozen_a(STACK_FRAME MS_2590FE p_frozen);
+MS_2590FE ACT_Demo_Dec2018__camkes_X_ArtNix_outgoing(STACK_FRAME_LAST);
+void ACT_Demo_Dec2018__camkes_X_ArtNix_outgoing_a(STACK_FRAME MS_2590FE p_outgoing);
+B ACT_Demo_Dec2018__camkes_X_ArtNix_isTimeDispatch(STACK_FRAME_LAST);
+void ACT_Demo_Dec2018__camkes_X_ArtNix_isTimeDispatch_a(STACK_FRAME B p_isTimeDispatch);
+
+Unit ACT_Demo_Dec2018__camkes_X_ArtNix_timeDispatch(STACK_FRAME_LAST);
+
+Unit ACT_Demo_Dec2018__camkes_X_ArtNix_eventDispatch(STACK_FRAME_LAST);
+
+Unit ACT_Demo_Dec2018__camkes_X_ArtNix_run(STACK_FRAME_LAST);
+
+Unit ACT_Demo_Dec2018__camkes_X_ArtNix_updateData(STACK_FRAME Z port, art_DataContent d);
+
+Unit ACT_Demo_Dec2018__camkes_X_ArtNix_logInfo(STACK_FRAME String title, String msg);
+
+void ACT_Demo_Dec2018__camkes_X_ArtNix_dispatchStatus(STACK_FRAME art_DispatchStatus result, Z bridgeId);
+
+Unit ACT_Demo_Dec2018__camkes_X_ArtNix_receiveInput(STACK_FRAME IS_82ABD8 eventPortIds, IS_82ABD8 dataPortIds);
+
+void ACT_Demo_Dec2018__camkes_X_ArtNix_getValue(STACK_FRAME Option_8E9F45 result, Z portId);
+
+Unit ACT_Demo_Dec2018__camkes_X_ArtNix_sendOutput(STACK_FRAME IS_82ABD8 eventPortIds, IS_82ABD8 dataPortIds);
+
+Unit ACT_Demo_Dec2018__camkes_X_ArtNix_putValue(STACK_FRAME Z portId, art_DataContent data);
+
+Unit ACT_Demo_Dec2018__camkes_X_ArtNix_logError(STACK_FRAME String title, String msg);
+
+#endif

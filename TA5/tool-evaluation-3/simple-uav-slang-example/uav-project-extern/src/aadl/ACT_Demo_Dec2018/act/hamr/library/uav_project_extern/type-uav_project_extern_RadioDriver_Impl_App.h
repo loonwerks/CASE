@@ -1,0 +1,6 @@
+#ifndef SIREUM_TYPE_H_uav_project_extern_RadioDriver_Impl_App
+#define SIREUM_TYPE_H_uav_project_extern_RadioDriver_Impl_App
+#include <misc.h>
+
+
+#endif
