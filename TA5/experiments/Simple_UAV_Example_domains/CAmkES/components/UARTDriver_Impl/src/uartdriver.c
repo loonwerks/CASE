@@ -22,7 +22,7 @@ void mission_window(const sb_SW__MissionWindow_container * missionWindow){
 
   // [2019/09/22:JCC] Note sure what this busy loop was for. Now that we have
   // a fixed periodc schedule, I see no reason for this.
-  //for(unsigned int j = 0; j < 100000000; j++){}
+  for(unsigned int j = 0; j < 500000000; j++){}
 
   i++;
   

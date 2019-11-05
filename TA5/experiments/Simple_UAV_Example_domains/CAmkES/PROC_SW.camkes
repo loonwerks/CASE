@@ -67,6 +67,9 @@ assembly {
     }
 
   configuration {
+    // WARNING: CAmkES does no error checking on configuration items.
+    // Unrecognized items are simpley ignored.  For example:
+    FOOBAR.dingbats = 42;
 
     // [2019/09/20:JCC] Allocation of components to domains
     // Leave any misc seL4 threads in domain 0 by default
@@ -76,16 +79,21 @@ assembly {
     UART._domain  = 4;
     pacer._domain = 5;
 
-    // Enforce access controls on the sampling port to be one-way
-    RADIO.recv_map_access = "W";
+    // Enforce access controls on the sampling port to be one-way.
+    // Proper identifier to set access: <instanceName>.<portName>_access
+    // Access string can contain R/W/X for read/write/execute access.
+    // I have no idea what execute access means for a port.
+    // There does not appear to be a way to specify no access. If you specify
+    // an empty string you get the default of all access.
+    RADIO.recv_map_out_access = "W";
     FPLN.recv_map_in_access = "R";
-    FPLN.flight_plan_access = "W";
+    FPLN.flight_plan_out_access = "W";
     WPM.flight_plan_in_access = "R";
-    WPM.mission_rcv_access = "W";
+    WPM.mission_rcv_out_access = "W";
     FPLN.mission_rcv_in_access = "R";
-    WPM.mission_window__access = "W";
+    WPM.mission_window_out_access = "W";
     UART.mission_window_in_access = "R";
-    UART.tracking_id__access = "W";
+    UART.tracking_id_out_access = "W";
     WPM.tracking_id_in_access = "R";
 
   }
