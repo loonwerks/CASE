@@ -12,7 +12,7 @@ assembly {
   }
 
   configuration {
-    source_t_impl.enq_access = "W";
-    destination_t_impl.deq_access = "R";
+    src.enq_access = "W";
+    dest.deq_access = "R";
   }
 }

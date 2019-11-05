@@ -11,12 +11,6 @@ void testdpmon_source_component_init(const int64_t *in_arg)
 {
     printf("testdpmon_source_component_init called\n");
     _value = 0;
-    
-    printf("source: can we read from the shared data?\n");
-    
-    printf("source: value is %i\n", enq->data);
-    enq->data = 41;
-    printf("source: value is %i\n", enq->data);
 }
 
 /* control thread: keep calling enqueue for thing
