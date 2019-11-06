@@ -1,0 +1,36 @@
+package System_Build
+
+public
+	
+	annex resolute {**
+			
+		ruleset SystemBuild {
+			info (print("Linting System Build ruleset"))
+			warning (no_bus_access_in_model())
+			warning (bi_directional_connections())
+			error (single_thread_per_process())
+		}
+		
+	**};
+	
+private
+	annex resolute {**
+			
+		print(s:string) <=
+			** s **
+			false
+			
+		no_bus_access_in_model() <=
+			** "Trusted build ignores bus accesses" **
+			forall (a : aadl) . not is_bus_access(a)
+		
+		bi_directional_connections() <=
+			** "Trusted build treats all connections as bidirectional" **
+			forall (c : connection) . is_bidirectional(c)
+			
+		single_thread_per_process() <=
+			** "Each thread must be in its own process" **
+			forall (c : component) . is_process(c) => length({t for (t : subcomponents(c)) | is_thread(t)}) <= 1
+			
+	**};
+end System_Build;
