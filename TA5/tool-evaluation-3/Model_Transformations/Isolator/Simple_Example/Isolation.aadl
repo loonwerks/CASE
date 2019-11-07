@@ -2,6 +2,9 @@ package Isolation
 public
 	
 	with CASE_Properties;
+	with HAMR;
+	with SB_Sys;
+	with Base_Types;
 	
 	processor HW_Proc
 		properties
@@ -26,7 +29,9 @@ public
 	
 	thread Comp_A
 		features
-			output: out event data port;
+			output: out event data port Base_Types::Integer_32;
+		properties
+			Dispatch_Protocol => Sporadic;
 	end Comp_A;
 	
 	thread implementation Comp_A.Impl
@@ -34,8 +39,13 @@ public
 	
 	thread Comp_B
 		features
-			input: in event data port;
-			output: out event data port;
+			input: in event data port Base_Types::Integer_32 {
+				SB_Sys::Compute_Entrypoint_Source_Text => ("input_event_handler");
+			};
+			output: out event data port Base_Types::Integer_32;
+		properties
+			Dispatch_Protocol => Sporadic;		
+			Source_Text => ("behavior/comp_b.c");
 	end Comp_B;
 	
 	thread implementation Comp_B.Impl
@@ -43,7 +53,12 @@ public
 	
 	thread Comp_C
 		features
-			input: in event data port;
+			input: in event data port Base_Types::Integer_32 {
+				SB_Sys::Compute_Entrypoint_Source_Text => ("input_event_handler");
+			};
+		properties
+			Dispatch_Protocol => Sporadic;
+			Source_Text => ("behavior/comp_c.c");	
 	end Comp_C;
 	
 	thread implementation Comp_C.Impl
@@ -58,8 +73,10 @@ public
 			SW : process SW.Impl;
 		properties
 			Actual_Processor_Binding => (reference (PROC)) applies to SW;
+			HAMR::Platform => (seL4_TB);
 		annex resolute {**
 			prove(Req_Isolated(this.SW))
+			check CASE_Tools
 		**};
 	end Critical.Impl;
 	

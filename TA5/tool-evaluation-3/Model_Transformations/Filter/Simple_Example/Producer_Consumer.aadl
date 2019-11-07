@@ -1,22 +1,26 @@
 package Producer_Consumer
 public
 	with Base_Types;
-
+	with SB_Sys;
+	with HAMR;
+	
 	data Coordinate
 	end Coordinate;
 
 	data implementation Coordinate.Impl
 		-- This is the structure to hold the lat/long/alt values of a coordinate
 		subcomponents
-			latitude: data Base_Types::Integer;
-			longitude: data Base_Types::Integer;
-			altitude: data Base_Types::Integer;
+			latitude: data Base_Types::Integer_32;
+			longitude: data Base_Types::Integer_32;
+			altitude: data Base_Types::Integer_32;
 	end Coordinate.Impl;
 
 	thread Producer
 		features
 			trigger: in event data port Base_Types::Boolean;
 			msg_out: out event data port Coordinate.Impl;
+		properties
+			Dispatch_Protocol => Sporadic;
 	end Producer;
 
 	thread implementation Producer.Impl
@@ -24,8 +28,13 @@ public
 
 	thread Consumer
 		features
-			msg_in: in event data port Coordinate.Impl;
+			msg_in: in event data port Coordinate.Impl {
+				SB_Sys::Compute_Entrypoint_Source_Text => ("msg_in_event_handler");
+			};
 			status: out event data port Base_types::Boolean;
+		properties
+			Source_Text => ("behavior/consumer.c");
+			Dispatch_Protocol => Sporadic;			
 		annex agree {**
 			-- This is the formalized version of the well-formed requirement from the TA1 tool
 			assume Req_Wellformed_LatLong "The Consumer shall only receive well-formed lat-long values" : WELL_FORMED_LAT_LONG(msg_in);
@@ -34,9 +43,15 @@ public
 		**};
 	end Consumer;
 
-	thread implementation Consumer.Impl
+	thread implementation Consumer.Impl	
 	end Consumer.Impl;
 
+	processor HW_Proc
+	end HW_Proc;
+	
+	processor implementation HW_Proc.Impl
+	end HW_Proc.Impl;
+	
 	process SW
 		features
 			input: in event data port Base_Types::Boolean;
@@ -68,10 +83,17 @@ public
 	
 	system implementation Sys.Impl
 		subcomponents
+			PROC : processor HW_Proc.Impl;			
 			SW: process SW.Impl;
 		connections
 			c1: port input -> SW.input;
 			c2: port SW.output -> output;
+		properties
+			Actual_Processor_Binding => (reference (PROC)) applies to SW;
+			HAMR::Platform => (seL4_TB);			
+		annex resolute {**
+			check CASE_Tools
+		**};
 	end Sys.Impl;
 	
 	annex agree {**
