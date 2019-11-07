@@ -1,0 +1,83 @@
+package Producer_Consumer
+public
+	with Base_Types;
+
+	data Coordinate
+	end Coordinate;
+
+	data implementation Coordinate.Impl
+		-- This is the structure to hold the lat/long/alt values of a coordinate
+		subcomponents
+			latitude: data Base_Types::Integer;
+			longitude: data Base_Types::Integer;
+			altitude: data Base_Types::Integer;
+	end Coordinate.Impl;
+
+	thread Producer
+		features
+			trigger: in event data port Base_Types::Boolean;
+			msg_out: out event data port Coordinate.Impl;
+	end Producer;
+
+	thread implementation Producer.Impl
+	end Producer.Impl;
+
+	thread Consumer
+		features
+			msg_in: in event data port Coordinate.Impl;
+			status: out event data port Base_types::Boolean;
+		annex agree {**
+			-- This is the formalized version of the well-formed requirement from the TA1 tool
+			assume Req_Wellformed_LatLong "The Consumer shall only receive well-formed lat-long values" : WELL_FORMED_LAT_LONG(msg_in);
+			assume Req_Wellformed_Alt "The Consumer shall only receive well-formed alt values" : WELL_FORMED_ALT(msg_in);
+			guarantee "Consumer status shall never be false" : status;
+		**};
+	end Consumer;
+
+	thread implementation Consumer.Impl
+	end Consumer.Impl;
+
+	process SW
+		features
+			input: in event data port Base_Types::Boolean;
+			output: out event data port Base_Types::Boolean;
+		annex agree {**
+			guarantee "Consumer status is never false" : output;
+		**};
+	end SW;
+
+	process implementation SW.Impl
+		subcomponents
+			Producer: thread Producer.Impl;
+			Consumer: thread Consumer.Impl;
+		connections
+			c0: port input -> Producer.trigger;
+			c1: port Producer.msg_out -> Consumer.msg_in;
+			c2: port Consumer.status -> output;
+		annex resolute {**
+			prove (Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong"))
+			prove (Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt"))
+		**};
+	end SW.Impl;
+	
+	system Sys
+		features
+			input: in event data port Base_Types::Boolean;
+			output: out event data port Base_Types::Boolean;
+	end Sys;
+	
+	system implementation Sys.Impl
+		subcomponents
+			SW: process SW.Impl;
+		connections
+			c1: port input -> SW.input;
+			c2: port SW.output -> output;
+	end Sys.Impl;
+	
+	annex agree {**
+		-- This is the filter spec
+		fun WELL_FORMED_LAT_LONG(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180;
+		fun WELL_FORMED_ALT(coord : Coordinate.Impl) : bool = coord.altitude >= 0 and coord.altitude <= 15000;
+	**};
+	
+end Producer_Consumer;
