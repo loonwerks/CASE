@@ -8,6 +8,28 @@ public
 
 	with CASE_Model_Transformations;
 
+	thread CASE_AttestationManager
+		features
+			am_mission_command_in: in event data port RF_Msg.Impl;
+			am_mission_command_out: out event data port RF_Msg.Impl;
+			am_request: out event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
+			am_response: in event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+		properties
+			CASE_Properties::COMP_TYPE => ATTESTATION;
+			CASE_Properties::COMP_SPEC => ("Req_AM");
+		annex agree {**
+			guarantee Req001_RadioDriver_AttestationManager "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(am_mission_command_out);
+			guarantee Req_AM "trusted" : TRUSTED_MESSAGE(am_mission_command_out);
+		**};
+	end CASE_AttestationManager;
+
+	thread implementation CASE_AttestationManager.Impl
+		properties
+			CASE_Properties::COMP_IMPL => "CakeML";
+			CASE_Properties::CACHE_TIMEOUT => 30;
+			CASE_Properties::CACHE_SIZE => 4;
+	end CASE_AttestationManager.Impl;
+
 	data Coordinate
 	end Coordinate;
 
@@ -131,8 +153,7 @@ public
 		annex agree {**
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);
-			assume Req003_FlightPlanner "The FlightPlanner shall only accept well-formed maps from the GroundStation" : good_map(recv_map.payload.map);
-			assume Req004_FlightPlanner "The FlightPlanner shall only accept well-formed patterns from the GroundStation" : good_pattern(recv_map.payload.pattern);
+			assume Req_TrustedSource "The FlightPlanner shall only accept messages from a trusted GroundStation" : TRUSTED_MESSAGE(recv_map);
 		**};
 	end FlightPlanner;
 
@@ -196,6 +217,15 @@ public
 	thread implementation UARTDriver.Impl
 	end UARTDriver.Impl;
 
+	thread RadioDriver_Attestation extends RadioDriver
+		features
+			am_request: in event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
+			am_response: out event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+	end RadioDriver_Attestation;
+
+	thread implementation RadioDriver_Attestation.Impl extends RadioDriver.Impl
+	end RadioDriver_Attestation.Impl;
+
 	process SW
 		-- The Mission Computer Software process runs all threads
 		features
@@ -212,17 +242,21 @@ public
 
 	process implementation SW.Impl
 		subcomponents
-			RADIO: thread RadioDriver.Impl;
+			RADIO: thread RadioDriver_Attestation.Impl;
 			FPLN: thread FlightPlanner.Impl;
 			WPM: thread WaypointManager.Impl;
 			CM: thread CameraManager.Impl;
 			UART: thread UARTDriver.Impl;
 			WIFI: thread WifiDriver.Impl;
 			NFDB: thread NoFlyZoneDatabase.Impl;
+			AM: thread CASE_AttestationManager.Impl;
 		connections
 			c1: port radio_recv -> RADIO.recv_data;
 			c2: port RADIO.send_data -> radio_send;
-			c3: port RADIO.mission_command -> FPLN.recv_map;
+			c4: port RADIO.mission_command -> AM.am_mission_command_in;
+			c19: port AM.am_request -> RADIO.am_request;
+			c20: port RADIO.am_response -> AM.am_response;
+			c3: port AM.am_mission_command_out -> FPLN.recv_map;
 			c5: port FPLN.flight_plan -> WPM.flight_plan;
 			c6: port FPLN.request_nofly_zones -> NFDB.map;
 			c7: port NFDB.zones -> FPLN.nofly_zones;
@@ -237,10 +271,6 @@ public
 			c16: port CM.gimbal_command -> WIFI.gimbal_command;
 			c17: port WIFI.send_data -> wifi_send;
 			c18: port wifi_recv -> WIFI.recv_data;
-		annex resolute {**
-			prove Req003_FlightPlanner(this.FPLN, "Req003_FlightPlanner")
-			prove Req004_FlightPlanner(this.FPLN, "Req003_FlightPlanner")
-		**};
 	end SW.Impl;
 
 	annex agree {**
@@ -258,17 +288,4 @@ public
 		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
 	**};
 
-private
-	with CASE_Model_Transformations;
-
-	annex resolute {**
-		Req003_FlightPlanner(comp_context : component, property_id : string) <=
-			** "[well_formed] The FlightPlanner shall only accept well-formed maps from the GroundStation" **
-			agree_prop_checked(comp_context, property_id)
-		
-		Req004_FlightPlanner(comp_context : component, property_id : string) <=
-			** "[well_formed] The FlightPlanner shall only accept well-formed patterns from the GroundStation" **
-			agree_prop_checked(comp_context, property_id)
-		
-	**};
 end SW;

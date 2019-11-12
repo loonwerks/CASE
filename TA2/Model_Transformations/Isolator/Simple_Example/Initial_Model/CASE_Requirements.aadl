@@ -1,0 +1,13 @@
+package CASE_Requirements
+private
+	annex resolute {**
+		Req_Isolated(comp_context : component) <=
+			** "[isolated] Third-party software shall be isolated from critical components" **
+			context Generated_By : "GearCASE"
+			context Generated_On : "May 23, 1970"
+			context Req_Component : "Isolation::Critical.Impl.SW"
+			context Formalized : "False"
+			false
+		
+	**};
+end CASE_Requirements;

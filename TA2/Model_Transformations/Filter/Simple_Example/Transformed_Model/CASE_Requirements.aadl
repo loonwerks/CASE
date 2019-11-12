@@ -1,0 +1,21 @@
+package CASE_Requirements
+private
+	annex resolute {**
+		Req_Wellformed_LatLong(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
+			** "[well_formed_latlong] The Consumer shall only receive well-formed latitude-longitude coordinates" **
+			context Generated_By : "GearCASE"
+			context Generated_On : "May 23, 1970"
+			context Req_Component : "Producer_Consumer::SW.Impl.Consumer"
+			context Formalized : "True"
+			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
+		
+		Req_Wellformed_Alt(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
+			** "[well_formed_alt] The Consumer shall only receive well-formed altitude coordinates" **
+			context Generated_By : "GearCASE"
+			context Generated_On : "May 23, 1970"
+			context Req_Component : "Producer_Consumer::SW.Impl.Consumer"
+			context Formalized : "True"
+			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
+		
+	**};
+end CASE_Requirements;
