@@ -22,6 +22,7 @@ public
 	thread implementation CASE_Filter.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Source_Text => ("CASE_Filter.c");
 	end CASE_Filter.Impl;
 
 	data Coordinate
@@ -30,20 +31,21 @@ public
 	data implementation Coordinate.Impl
 		-- This is the structure to hold the lat/long/alt values of a coordinate
 		subcomponents
-			latitude: data Base_Types::Integer;
-			longitude: data Base_Types::Integer;
-			altitude: data Base_Types::Integer;
+			latitude: data Base_Types::Integer_32;
+			longitude: data Base_Types::Integer_32;
+			altitude: data Base_Types::Integer_32;
 	end Coordinate.Impl;
 
 	thread Producer
 		features
-			trigger: in event data port Base_Types::Integer;
+			trigger: in event data port Base_Types::Integer_32;
 			msg_out: out event data port Coordinate.Impl;
 	end Producer;
 
 	thread implementation Producer.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Source_Text => ("Producer.c");
 	end Producer.Impl;
 
 	thread Consumer
@@ -61,11 +63,12 @@ public
 	thread implementation Consumer.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Source_Text => ("Consumer.c");
 	end Consumer.Impl;
 
 	process SW
 		features
-			input: in event data port Base_Types::Integer;
+			input: in event data port Base_Types::Integer_32;
 			output: out event data port Base_Types::Boolean;
 		annex agree {**
 			guarantee "Consumer status is never false" : output;
@@ -87,19 +90,30 @@ public
 			prove Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt", this.FLT, this.c3, Coordinate.Impl)
 		**};
 	end SW.Impl;
+	
+	processor Proc
+	end Proc;
+	
+	processor implementation Proc.Impl
+		properties
+			CASE_Properties::OS => "Linux";
+	end Proc.Impl;
 
 	system Sys
 		features
-			input: in event data port Base_Types::Integer;
+			input: in event data port Base_Types::Integer_32;
 			output: out event data port Base_Types::Boolean;
 	end Sys;
 
 	system implementation Sys.Impl
 		subcomponents
 			SW: process SW.Impl;
+			PROC: processor Proc.Impl;
 		connections
 			c1: port input -> SW.input;
 			c2: port SW.output -> output;
+		properties
+			Actual_Processor_Binding => (reference (PROC)) applies to SW;
 	end Sys.Impl;
 
 	annex agree {**

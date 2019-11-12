@@ -33,6 +33,7 @@ public
 	thread implementation Comp_A.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Source_Text => ("Comp_A.c");
 	end Comp_A.Impl;
 
 	thread Comp_B
@@ -44,6 +45,7 @@ public
 	thread implementation Comp_B.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Source_Text => ("Comp_B.c");
 	end Comp_B.Impl;
 
 	thread Comp_C
@@ -54,6 +56,7 @@ public
 	thread implementation Comp_C.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Source_Text => ("Comp_C.c");
 	end Comp_C.Impl;
 
 	virtual processor CASE_Virtual_Processor

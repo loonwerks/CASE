@@ -18,6 +18,7 @@ public
 	thread implementation RadioDriver.Impl
 		properties
 			Dispatch_Protocol => Periodic;
+			Source_Text => ("RadioDriver.c");
 	end RadioDriver.Impl;
 
 	thread Critical_A
@@ -33,6 +34,7 @@ public
 	thread implementation Critical_A.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Source_Text => ("Critical_A.c");
 	end Critical_A.Impl;
 	
 	thread Critical_B
@@ -43,6 +45,7 @@ public
 	thread implementation Critical_B.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Source_Text => ("Critical_B.c");
 	end Critical_B.Impl;
 
 	process SW
@@ -69,6 +72,14 @@ public
 		**};
 	end SW.Impl;
 	
+	processor Proc
+	end Proc;
+
+	processor implementation Proc.Impl
+		properties
+			CASE_Properties::OS => "Linux";
+	end Proc.Impl;
+	
 	system Sys
 		features
 			input: in event data port;
@@ -78,9 +89,12 @@ public
 	system implementation Sys.Impl
 		subcomponents
 			SW: process SW.Impl;
+			PROC: processor Proc.Impl;
 		connections
 			c1: port input -> SW.input;
 			c2: port SW.output -> output;
+		properties
+			Actual_Processor_Binding => (reference (PROC)) applies to SW;
 	end Sys.Impl;
 	
 end Attestation;

@@ -2,6 +2,8 @@ package Producer_Consumer
 public
 	with Base_Types;
 
+	with CASE_Properties;
+
 	data Coordinate
 	end Coordinate;
 
@@ -22,6 +24,7 @@ public
 	thread implementation Producer.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Source_Text => ("Producer.c");
 	end Producer.Impl;
 
 	thread Consumer
@@ -39,6 +42,7 @@ public
 	thread implementation Consumer.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Source_Text => ("Consumer.c");
 	end Consumer.Impl;
 
 	process SW
@@ -59,25 +63,36 @@ public
 			c1: port Producer.msg_out -> Consumer.msg_in;
 			c2: port Consumer.status -> output;
 		annex resolute {**
-			prove (Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong"))
-			prove (Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt"))
+			prove(Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong"))
+			prove(Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt"))
 		**};
 	end SW.Impl;
-	
+
+	processor Proc
+	end Proc;
+
+	processor implementation Proc.Impl
+		properties
+			CASE_Properties::OS => "Linux";
+	end Proc.Impl;
+
 	system Sys
 		features
 			input: in event data port Base_Types::Integer;
 			output: out event data port Base_Types::Boolean;
 	end Sys;
-	
+
 	system implementation Sys.Impl
 		subcomponents
 			SW: process SW.Impl;
+			PROC: processor Proc.Impl;
 		connections
 			c1: port input -> SW.input;
 			c2: port SW.output -> output;
+		properties
+			Actual_Processor_Binding => (reference (PROC)) applies to SW;
 	end Sys.Impl;
-	
+
 	annex agree {**
 		-- This is the filter spec
 		fun WELL_FORMED_LAT_LONG(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180;
