@@ -1,13 +1,13 @@
 package CASE_Requirements
 private
 	annex resolute {**
-		Req_TrustedSource(comp_context : component, property_id : string, comm_driver : component, attestation_manager : component) <=
+		Req_TrustedSource(comp_context : component, property_id : string) <=
 			** "[trusted_source] The FlightPlanner shall only accept messages from a trusted GroundStation" **
 			context Generated_By : "GearCASE"
 			context Generated_On : "May 23, 1970"
 			context Req_Component : "SW::SW.Impl.FPLN"
 			context Formalized : "True"
-			agree_prop_checked(comp_context, property_id) and add_attestation_manager(comm_driver, attestation_manager)
+			agree_prop_checked(comp_context, property_id)
 		
 	**};
 end CASE_Requirements;
