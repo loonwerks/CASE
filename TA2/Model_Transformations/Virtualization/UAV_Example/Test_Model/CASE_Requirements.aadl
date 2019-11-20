@@ -1,0 +1,22 @@
+package CASE_Requirements
+private
+	annex resolute {**
+		
+		Req001_SW_Init(comp_context : component) <=
+			** "[virtualization_init] Third-party software shall be isolated from critical components" **
+			context Generated_By : "GearCASE"
+			context Generated_On : "May 23, 1970"
+			context Req_Component : "MC::MissionComputer.Impl.PROC_SW"
+			context Formalized : "False"
+			false
+		
+		Req001_SW_Transformed(comp_context : component, bound_components : {component}, virtual_machine : component) <=
+			** "[virtualization_transformed] Third-party software shall be isolated from critical components" **
+			context Generated_By : "GearCASE"
+			context Generated_On : "May 23, 1970"
+			context Req_Component : "MC::MissionComputer.Impl.PROC_SW"
+			context Formalized : "False"
+			add_virtualization(bound_components, virtual_machine)
+		
+	**};
+end CASE_Requirements;

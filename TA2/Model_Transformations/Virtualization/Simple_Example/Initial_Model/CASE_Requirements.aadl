@@ -1,0 +1,13 @@
+package CASE_Requirements
+private
+	annex resolute {**
+		Req_Virtualization(comp_context : component) <=
+			** "[virtualization] Third-party software shall be isolated from critical components" **
+			context Generated_By : "GearCASE"
+			context Generated_On : "May 23, 1970"
+			context Req_Component : "Virtualization::Critical.Impl.SW"
+			context Formalized : "False"
+			false
+		
+	**};
+end CASE_Requirements;

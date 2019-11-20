@@ -1,0 +1,88 @@
+package Virtualization
+public
+	with CASE_Properties;
+
+	with CASE_Model_Transformations;
+
+	processor HW_Proc
+	end HW_Proc;
+
+	processor implementation HW_Proc.Impl
+		properties
+			CASE_Properties::OS => "sel4";
+	end HW_Proc.Impl;
+
+	process SW
+	end SW;
+
+	process implementation SW.Impl
+		subcomponents
+			A: thread Comp_A.Impl;
+			B: thread Comp_B.Impl;
+			C: thread Comp_C.Impl;
+		connections
+			c1: port A.output -> B.input;
+			c2: port B.output -> C.input;
+	end SW.Impl;
+
+	thread Comp_A
+		features
+			output: out event data port;
+	end Comp_A;
+
+	thread implementation Comp_A.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+			Source_Text => ("Comp_A.c");
+	end Comp_A.Impl;
+
+	thread Comp_B
+		features
+			input: in event data port;
+			output: out event data port;
+	end Comp_B;
+
+	thread implementation Comp_B.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+			Source_Text => ("Comp_B.c");
+	end Comp_B.Impl;
+
+	thread Comp_C
+		features
+			input: in event data port;
+	end Comp_C;
+
+	thread implementation Comp_C.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+			Source_Text => ("Comp_C.c");
+	end Comp_C.Impl;
+
+	virtual processor CASE_Virtual_Machine
+		properties
+			CASE_Properties::COMP_TYPE => VIRTUAL_MACHINE;
+	end CASE_Virtual_Machine;
+
+	virtual processor implementation CASE_Virtual_Machine.Impl
+		properties
+			CASE_Properties::OS => "Linux";
+	end CASE_Virtual_Machine.Impl;
+
+	system Critical
+	end Critical;
+
+	system implementation Critical.Impl
+		subcomponents
+			PROC: processor HW_Proc.Impl;
+			SW: process SW.Impl;
+			VM: virtual processor CASE_Virtual_Machine.Impl;
+		properties
+			Actual_Processor_Binding => (reference (PROC)) applies to SW, VM;
+			Actual_Processor_Binding => (reference (VM)) applies to SW.B;
+		annex resolute {**
+			prove Req_Virtualization(this.SW, {this.SW.B}, this.VM)
+		**};
+	end Critical.Impl;
+	
+end Virtualization;
