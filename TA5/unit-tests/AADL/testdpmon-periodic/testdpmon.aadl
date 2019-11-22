@@ -1,0 +1,64 @@
+package testdpmon
+public
+	with SB_SYS;
+	with Base_Types;
+	
+	thread source_t
+		features
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1sec;
+			Source_Text => ("behavior_code/components/source/src/source.c");
+			Initialize_Entrypoint_Source_Text => "testdpmon_source_component_init";
+			SB_SYS::Compute_Entrypoint_Source_Text => ("testdpmon_source_component_time_triggered");
+	end source_t;
+	
+	thread implementation source_t.impl
+	end source_t.impl;
+	
+	thread destination_t
+		features
+			read_port: in data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 2sec;
+			Source_Text => ("behavior_code/components/destination/src/destination.c");
+			SB_SYS::Compute_Entrypoint_Source_Text => ("testdpmon_destination_component_time_triggered");
+	end destination_t;
+	
+	thread implementation destination_t.impl
+	end destination_t.impl;
+
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+	end proc.impl;
+
+	process top_process
+	end top_process;
+
+	process implementation top_process.impl
+		subcomponents
+			src: thread source_t.impl;
+			dest: thread destination_t.impl;
+		connections
+ 			conn1: port src.write_port -> dest.read_port;
+	end top_process.impl;
+
+	system top
+	end top;
+	
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			testdpmon: process top_process.impl;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to testdpmon;
+		annex resolute {**
+			check CASE_Tools
+		**};
+	end top.impl;
+	
+end testdpmon;

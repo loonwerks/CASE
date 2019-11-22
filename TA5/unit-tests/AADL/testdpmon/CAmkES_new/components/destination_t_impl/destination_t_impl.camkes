@@ -2,6 +2,6 @@ component destination_t_impl {
   include <sb_proc_types.h>;
   include <sp_int8_t.h>;
   control;
-  dataport sp_int8_t_t deq;
+  dataport sp_int8_t_t read_port;
   has semaphore sb_dispatch_sem;
 }

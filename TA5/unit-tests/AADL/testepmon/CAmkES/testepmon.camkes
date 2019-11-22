@@ -1,5 +1,4 @@
 import <std_connector.camkes>;
-
 import "components/emitter_t_impl/emitter_t_impl.camkes";
 import "components/consumer_t_impl/consumer_t_impl.camkes";
 import "components/sb_Monitors/sb_dest_deq_Monitor/sb_dest_deq_Monitor.camkes";

@@ -1,0 +1,37 @@
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <TimeServer/TimeServer.camkes>;;
+import "components/source_t_impl/source_t_impl.camkes";
+import "components/destination_t_impl/destination_t_impl.camkes";
+import "components/dispatch_periodic/dispatch_periodic.camkes";
+
+assembly {
+  composition {
+    component source_t_impl src;
+    component destination_t_impl dest;
+    component dispatch_periodic dispatch_periodic_inst;
+    component TimeServer time_server;
+
+    connection seL4TimeServer conn1(from src.sb_timer, to time_server.the_timer);
+    connection seL4Notification conn2(from dispatch_periodic_inst.src_periodic_dispatcher, to src.sb_timer_complete);
+    connection seL4TimeServer conn3(from dest.sb_timer, to time_server.the_timer);
+    connection seL4Notification conn4(from dispatch_periodic_inst.dest_periodic_dispatcher, to dest.sb_timer_complete);
+    connection seL4TimeServer conn5(from dispatch_periodic_inst.timer, to time_server.the_timer);
+    connection seL4GlobalAsynchCallback conn6(from time_server.timer_notification, to dispatch_periodic_inst.timer_complete);
+    connection seL4SharedData conn7(from src.write_port, to dest.read_port);
+  }
+
+  configuration {
+    src.write_port_access = "W";
+    src.sb_timer_attributes = 0;
+    src.sb_timer_global_endpoint = "source_t_impl_sb_timer";
+    dest.read_port_access = "R";
+    dest.sb_timer_attributes = 1;
+    dest.sb_timer_global_endpoint = "destination_t_impl_sb_timer";
+    dispatch_periodic_inst.timer_attributes = 2;
+    dispatch_periodic_inst.timer_global_endpoint = "dispatch_periodic_timer";
+    dispatch_periodic_inst.timer_complete_global_endpoint = "dispatch_periodic_timer";
+    dispatch_periodic_inst.priority = 201;
+    time_server.timers_per_client = 1;
+  }
+}

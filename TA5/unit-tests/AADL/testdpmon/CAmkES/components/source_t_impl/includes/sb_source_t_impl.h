@@ -3,7 +3,7 @@
 
 #include "../../../includes/sb_proc_types.h"
 
-bool sb_enq_write(const int8_t * sb_enq);
+bool sb_write_port_write(const int8_t * sb_write_port);
 
 void testdpmon_source_component_init(const int64_t *arg);
 

@@ -44,7 +44,7 @@ int run(void) {
 
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-    // Drain the queues
+
   }
   return 0;
 }

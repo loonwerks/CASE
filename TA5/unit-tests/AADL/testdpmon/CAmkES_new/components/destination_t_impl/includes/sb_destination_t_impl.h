@@ -3,9 +3,7 @@
 
 #include "../../../includes/sb_proc_types.h"
 
-bool sb_deq_read(int8_t * value);
-bool sb_deq_read_isFresh(int8_t * value, bool * isFresh);
-
-void testdpmon_destination_component_init(const int64_t *arg);
+bool sb_read_port_read(int8_t * value);
+bool sb_read_port_read_isFresh(int8_t * value, bool * isFresh);
 
 #endif // __sb_AADL_destination_t_impl_types__H

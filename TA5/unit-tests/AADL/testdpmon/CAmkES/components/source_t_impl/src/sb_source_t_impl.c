@@ -3,7 +3,7 @@
 #include <camkes.h>
 
 /************************************************************************
- * sb_enq_write:
+ * sb_write_port_write:
  * Invoked from user code in the local thread.
  *
  * This is the function invoked by the local thread to make a
@@ -15,9 +15,9 @@
  * enqueue attempt failed.
  *
  ************************************************************************/
-bool sb_enq_write(const int8_t * sb_enq){
+bool sb_write_port_write(const int8_t * sb_write_port){
   bool sb_result = true;
-  sb_result &= sb_enq0_write((int8_t *) sb_enq);
+  sb_result &= sb_write_port0_write((int8_t *) sb_write_port);
   return sb_result;
 }
 
@@ -48,7 +48,7 @@ int run(void) {
 
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-    // Drain the queues
+
   }
   return 0;
 }

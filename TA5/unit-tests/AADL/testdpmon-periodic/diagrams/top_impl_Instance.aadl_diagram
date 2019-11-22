@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="02e6cab9-b530-49b8-b880-85bffae594f7" manual="true">
+    <element uuid="2e0c21d0-ad6b-4bed-99ec-39aa2f752968" manual="true">
+      <element uuid="731516a0-fc7f-4f95-a411-ae05e61e87cc" manual="true">
+        <element uuid="5ab59047-af5c-4680-935e-c5c25a62f626" manual="true" dockArea="left">
+          <bo>
+            <seg>org.osate.ge.diagrams.instance</seg>
+            <seg>feature_instance</seg>
+            <seg>read_port</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>org.osate.ge.diagrams.instance</seg>
+          <seg>component_instance</seg>
+          <seg>dest</seg>
+        </bo>
+        <position x="302.0" y="39.0"/>
+        <size width="272.0" height="61.0"/>
+      </element>
+      <element uuid="d17180d3-6f35-4610-9ecd-b356b3a88b61" manual="true">
+        <element uuid="215997b2-1614-4209-ac2c-c4ee0c889a27" manual="true" dockArea="right">
+          <bo>
+            <seg>org.osate.ge.diagrams.instance</seg>
+            <seg>feature_instance</seg>
+            <seg>write_port</seg>
+          </bo>
+          <position x="174.0" y="10.0"/>
+        </element>
+        <bo>
+          <seg>org.osate.ge.diagrams.instance</seg>
+          <seg>component_instance</seg>
+          <seg>src</seg>
+        </bo>
+        <position x="12.0" y="39.0"/>
+        <size width="270.0" height="61.0"/>
+      </element>
+      <element uuid="1bf615dc-54e6-475d-af97-89c0b04a453e" manual="true">
+        <bo>
+          <seg>org.osate.ge.diagrams.instance</seg>
+          <seg>connection_reference</seg>
+          <seg>conn1 : top_impl_instance.testdpmon.src.write_port -> top_impl_instance.testdpmon.dest.read_port</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>org.osate.ge.diagrams.instance</seg>
+        <seg>component_instance</seg>
+        <seg>testdpmon</seg>
+      </bo>
+      <position x="12.0" y="39.0"/>
+      <size width="586.0" height="112.0"/>
+    </element>
+    <bo>
+      <seg>org.osate.ge.diagrams.instance</seg>
+      <seg>system_instance</seg>
+      <seg>/testdpmon-periodic/instances/testdpmon_top_impl_instance.aaxl2</seg>
+    </bo>
+    <position x="12.0" y="12.0"/>
+    <size width="610.0" height="163.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>org.osate.ge.diagrams.instance</seg>
+      <seg>system_instance</seg>
+      <seg>/testdpmon-periodic/instances/testdpmon_top_impl_instance.aaxl2</seg>
+    </context>
+  </config>
+</diagram:Diagram>

@@ -48,7 +48,7 @@ int run(void) {
 
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-    // Drain the queues
+
     while (sb_deq_dequeue((int8_t *) &sb_deq)) {
       sb_entrypointsb_consumer_t_impl_deq(&sb_deq);
     }

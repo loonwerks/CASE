@@ -80,7 +80,7 @@ int run(void) {
 
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-    // Drain the queues
+
     if(sb_consumer_impl_read_s()){
       sb_entrypointsb_consumer_impl_s();
     }
