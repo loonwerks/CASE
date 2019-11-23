@@ -3,22 +3,31 @@
 ![arch](diagrams/arch.png)
 
 This example illustrates how AADL event data ports are represented using seL4 
-artifacts.   AADL event data ports (and associated connections between ports) 
-are used to model one-way queued data transfer between components.  Intuitively, 
-a component with an AADL out event data port can write values into the port; 
-a component with an AADL in event data port can read values from the port.  As 
-specified by AADL semantics, arrival of an event on an in event data port may
-trigger a dispatch of the consuming thread.  Therefore, AADL threads that have in 
-event data ports are 
-time-triggered (declared with PERIODIC AADL dispatch mode) or event-triggered 
-(declared with a SPORADIC AADL dispatch mode and dispatched upon arrival 
-of information on an AADL event or event data port).  A typical computation 
-pattern is that when a thread is dispatched via a time-trigger or event-trigger, 
-it will then make calls from the user code to read the current values of 
-data ports.  AADL properties can be attached to ports/connections to indicate 
-latency bounds on propagation of values from out data ports to connected in 
-ports (scheduling of threads/communication necessary to achieve these bounds 
-is outside the scope of CASE). 
+artifacts. AADL event data ports (and associated connections between ports) are 
+used to model one-way queued message passing between components. Intuitively, a
+component with an AADL out event data port can send a message out of the port; 
+a component with an AADL in event data port can retrieve messages from the queue 
+associated with the port (each incoming event data port has a distinct 
+queue/buffer). As specified by AADL semantics, arrival of an event on an in 
+event data port can be set to trigger a dispatch of the consuming thread. Therefore, 
+AADL threads that have in event data ports are typically event-triggered (declared 
+with a SPORADIC AADL dispatch mode and dispatched upon arrival of information on an 
+AADL event or event data port).  With a SPORADIC dispatch mode, a minimum separation 
+time between event arrivals is also specified.  Messages arriving before the minimum 
+interval expires are dropped (providing some protection from denial of service 
+situations where incoming messages may flood a component).   A typical computation 
+pattern is that when a thread is dispatched via event arrival, it will process the 
+payload from the incoming message and also make calls from the user code to read 
+the current values of data ports. The user code action of sending a message out 
+an event data port is always non-blocking; if a receiving component’s message queue 
+is full, a message is dropped according to a policy specified as a property in the 
+model on the input port (e.g., drop newest message, drop oldest message, etc.)  AADL 
+properties can be attached to ports/connections to indicate latency bounds 
+on propagation of messages from out event data ports to connected in ports 
+(scheduling of threads/communication necessary to achieve these bounds is outside 
+the scope of CASE).  A variety of AADL properties can be used to state priorities 
+regarding which input event data ports within a component trigger the dispatching 
+of the thread. 
 
 Components can have any number of out event data ports and in event data ports.  This example 
 represents a simple producer-consumer pattern, with a single out event data port on the 
@@ -66,3 +75,12 @@ and consumer side
 [sb_consumer_t_impl.c](CAmkES/components/consumer_t_impl/src/sb_consumer_t_impl.c)
 to isolate the application code of both components from some of the 
 details of interacting with lower-level CAmkES/seL4 APIs.
+
+## HAMR Code Generation for seL4 [CASE Phase 2]
+
+(Documentation and examples are forth-coming. Quick notes: The new version of
+the translation removes the monitor component and has the queue between the 
+producer and consumer communicate through a shared memory region where seL4 
+memory protections are used to ensure that the producer can only write and 
+the consumer can only read.  The new version is also more closely aligned 
+with the semantics and APIs described in the AADL standard.)
