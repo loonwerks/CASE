@@ -3,21 +3,34 @@
 ![arch](diagrams/arch.png)
 
 This example illustrates how AADL event ports are represented using seL4 
-artifacts.   AADL event ports (and associated connections between ports) 
-are used to model one-way queued event transmission between components.  Intuitively, 
-a component with an AADL out event port can pass events into the port; 
-a component with an AADL in event port can dequeue one or more events from the port.  As 
-specified by AADL semantics, arrival of events on an in event port may
-trigger a dispatch of the consuming thread.  Therefore, AADL threads that have in event ports are 
-time-triggered (declared with PERIODIC AADL dispatch mode) or event-triggered 
-(declared with a SPORADIC AADL dispatch mode and dispatched upon arrival 
-of information on an AADL event or event data port).  A typical computation 
-pattern is that when a thread is dispatched via a time-trigger or event-trigger, 
-it will then make calls from the user code to fetch events from the
-event ports.  AADL properties can be attached to ports/connections to indicate 
-latency bounds on propagation of values from out data ports to connected in 
-ports (scheduling of threads/communication necessary to achieve these bounds 
-is outside the scope of CASE). 
+artifacts. AADL event ports (and associated connections between ports) are
+used to model one-way queued signaling between components. Intuitively, a 
+component with an AADL out event port can send a signal/notification out 
+of the port; a component with an AADL in event port can retrieve the signals 
+from the queue associated with the port (each incoming event port has a 
+distinct queue/buffer).  AADL event port communication behaves exactly 
+as event data port communication, except the events sent between 
+components have no user data payloads in the case of event ports.  As 
+specified by AADL semantics, arrival of an event on an in event port 
+can be set to trigger a dispatch of the consuming thread. Therefore, AADL 
+threads that have in event ports are typically event-triggered (declared 
+with a SPORADIC AADL dispatch mode and dispatched upon arrival of information 
+on an AADL event or event data port). With a SPORADIC dispatch mode, a 
+minimum separation time between event arrivals is also specified.  Messages 
+arriving before the minimum interval expires are dropped (providing some 
+protection from denial of service situations where incoming messages may 
+flood a component).  A typical computation pattern is that when a thread is 
+dispatched via event arrival, it may make calls from the user code to read 
+the current values of data ports (optional) and then take some appropriate
+action. The user code action of sending an event is always non-blocking; if
+a receiving component’s event queue is full, a message is dropped according
+to a policy specified as a property in the model in the input port (e.g., drop 
+newest event, drop oldest event, etc.)  AADL properties can be attached to
+ports/connections to indicate latency bounds on propagation of events from 
+out event ports to connected in ports (scheduling of threads/communication 
+necessary to achieve these bounds is outside the scope of CASE).  A variety 
+of AADL properties can be used to state priorities regarding which input 
+event ports within a component trigger the dispatching of the thread.
 
 Components can have any number of out event ports and in event ports.  This example 
 represents a simple producer-consumer pattern, with a single out event port on the 
@@ -58,3 +71,13 @@ and consumer side
 [sb_consumer_impl.c](CAmkES/components/consumer_impl/src/sb_consumer_impl.c)
 to isolate the application code of both components from some of the 
 details of interacting with lower-level CAmkES/seL4 APIs.
+
+
+## HAMR Code Generation for seL4 [CASE Phase 2]
+
+(Documentation and examples are forth-coming. Quick notes: The new version
+of the translation removes the monitor component and has the queue between
+the producer and consumer communicate through a shared memory region where
+seL4 memory protections are used to ensure that the producer can only write
+and the consumer can only read.  The new version is also more closely 
+aligned with the semantics and APIs described in the AADL standard.)
