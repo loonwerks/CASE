@@ -1,0 +1,4 @@
+procedure sb_Monitor_int64_t_1_Sender {
+  include <sb_PROC_HW_types.h>;
+  bool enqueue(refin int64_t m);
+};

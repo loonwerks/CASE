@@ -1,0 +1,4 @@
+procedure sb_Monitor_int8_t_1_Receiver {
+  include <sb_proc_types.h>;
+  bool dequeue(out int8_t m);
+};

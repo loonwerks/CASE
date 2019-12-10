@@ -1,0 +1,14 @@
+import "../../interfaces/sb_Monitor_SW__Mission_1_Sender.idl4";
+import "../../interfaces/sb_Monitor_bool_1_Receiver.idl4";
+import "../../interfaces/sb_Monitor_SW__Command_Impl_1_Receiver.idl4";
+
+component FlightPlanner_Impl {
+  include <sb_PROC_HW_types.h>;
+  control;
+  uses sb_Monitor_SW__Mission_1_Sender sb_flight_plan0;
+  uses sb_Monitor_bool_1_Receiver sb_mission_rcv;
+  uses sb_Monitor_SW__Command_Impl_1_Receiver sb_recv_map;
+  consumes ReceiveEvent sb_mission_rcv_notification;
+  consumes ReceiveEvent sb_recv_map_notification;
+  has semaphore sb_dispatch_sem;
+}

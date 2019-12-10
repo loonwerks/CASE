@@ -1,0 +1,7 @@
+component emitter_impl {
+  include <sb_proc_types.h>;
+  control;
+  emits ReceiveEvent sb_e;
+  dataport int32_t sb_e_counter;
+  has semaphore sb_dispatch_sem;
+}

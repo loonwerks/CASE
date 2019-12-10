@@ -1,0 +1,9 @@
+import "../../interfaces/sb_Monitor_int8_t_1_Receiver.idl4";
+
+component consumer_t_impl {
+  include <sb_proc_types.h>;
+  control;
+  uses sb_Monitor_int8_t_1_Receiver sb_deq;
+  consumes ReceiveEvent sb_deq_notification;
+  has semaphore sb_dispatch_sem;
+}

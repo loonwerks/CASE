@@ -1,0 +1,16 @@
+import "../../interfaces/sb_Monitor_SW__Mission_1_Receiver.idl4";
+import "../../interfaces/sb_Monitor_bool_1_Sender.idl4";
+import "../../interfaces/sb_Monitor_SW__MissionWindow_1_Sender.idl4";
+import "../../interfaces/sb_Monitor_int64_t_1_Receiver.idl4";
+
+component WaypointManager_Impl {
+  include <sb_PROC_HW_types.h>;
+  control;
+  uses sb_Monitor_SW__Mission_1_Receiver sb_flight_plan;
+  uses sb_Monitor_bool_1_Sender sb_mission_rcv0;
+  uses sb_Monitor_SW__MissionWindow_1_Sender sb_mission_window0;
+  uses sb_Monitor_int64_t_1_Receiver sb_tracking_id;
+  consumes ReceiveEvent sb_flight_plan_notification;
+  consumes ReceiveEvent sb_tracking_id_notification;
+  has semaphore sb_dispatch_sem;
+}

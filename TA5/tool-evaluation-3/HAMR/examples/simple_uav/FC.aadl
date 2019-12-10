@@ -1,0 +1,12 @@
+package FC
+public
+	with UAV;
+
+	system FlightController
+		features
+			UARTA: requires bus access UAV::Serial.Impl;
+	end FlightController;
+
+	system implementation FlightController.Impl
+	end FlightController.Impl;
+end FC;

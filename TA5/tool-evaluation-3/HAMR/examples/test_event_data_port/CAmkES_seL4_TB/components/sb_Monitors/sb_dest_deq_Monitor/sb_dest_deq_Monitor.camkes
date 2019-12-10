@@ -1,0 +1,7 @@
+import "../../../interfaces/sb_Monitor_int8_t_1.idl4";
+
+component sb_dest_deq_Monitor {
+
+  provides sb_Monitor_int8_t_1 mon;
+  emits QueuedData monsig;
+}

@@ -1,0 +1,10 @@
+import "../../../interfaces/sb_Monitor_SW__MissionWindow_1_Receiver.idl4";
+import "../../../interfaces/sb_Monitor_SW__MissionWindow_1_Sender.idl4";
+
+component sb_UART_mission_window_Monitor {
+
+  provides sb_Monitor_SW__MissionWindow_1_Receiver mon_receive;
+  provides sb_Monitor_SW__MissionWindow_1_Sender mon_send;
+  emits ReceiveEvent monsig;
+  has mutex m;
+}

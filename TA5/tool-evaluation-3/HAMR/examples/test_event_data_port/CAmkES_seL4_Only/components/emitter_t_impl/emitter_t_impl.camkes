@@ -1,0 +1,8 @@
+import "../../interfaces/sb_Monitor_int8_t_1_Sender.idl4";
+
+component emitter_t_impl {
+  include <sb_proc_types.h>;
+  control;
+  uses sb_Monitor_int8_t_1_Sender sb_enq0;
+  has semaphore sb_dispatch_sem;
+}

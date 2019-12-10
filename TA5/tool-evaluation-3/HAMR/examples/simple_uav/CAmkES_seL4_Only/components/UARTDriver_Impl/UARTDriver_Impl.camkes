@@ -1,0 +1,11 @@
+import "../../interfaces/sb_Monitor_SW__MissionWindow_1_Receiver.idl4";
+import "../../interfaces/sb_Monitor_int64_t_1_Sender.idl4";
+
+component UARTDriver_Impl {
+  include <sb_PROC_HW_types.h>;
+  control;
+  uses sb_Monitor_SW__MissionWindow_1_Receiver sb_mission_window;
+  uses sb_Monitor_int64_t_1_Sender sb_tracking_id0;
+  consumes ReceiveEvent sb_mission_window_notification;
+  has semaphore sb_dispatch_sem;
+}

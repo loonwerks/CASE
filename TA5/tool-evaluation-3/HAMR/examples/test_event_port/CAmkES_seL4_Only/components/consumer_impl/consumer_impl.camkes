@@ -1,0 +1,7 @@
+component consumer_impl {
+  include <sb_proc_types.h>;
+  control;
+  consumes ReceiveEvent sb_s;
+  dataport int32_t sb_s_counter;
+  has semaphore sb_dispatch_sem;
+}

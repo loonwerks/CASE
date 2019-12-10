@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="2418b298-c2f6-461a-80a4-e1253b48ed00" manual="true">
+    <element uuid="5a509396-6d15-4c8b-af79-9ca7010b5b36" manual="true">
+      <element uuid="a6fb6c84-9c8e-4014-bfb1-5c02c7abedcf" manual="true">
+        <element uuid="e4cfea94-be53-4de2-b38b-63bc8ec479e9" manual="true">
+          <element uuid="4737df75-f14d-41ea-a44f-b6ef0b1f4a69" manual="true" dockArea="left">
+            <bo>
+              <seg>org.osate.ge.diagrams.instance</seg>
+              <seg>feature_instance</seg>
+              <seg>flight_plan</seg>
+            </bo>
+            <position y="61.0"/>
+          </element>
+          <element uuid="024b7e3d-a308-4425-90ed-0bc0582cdfb3" manual="true" dockArea="left">
+            <bo>
+              <seg>org.osate.ge.diagrams.instance</seg>
+              <seg>feature_instance</seg>
+              <seg>mission_rcv</seg>
+            </bo>
+            <position y="10.0"/>
+          </element>
+          <element uuid="9e6190f0-ff8b-4cdc-9ab0-7725b09410dd" manual="true" dockArea="left">
+            <bo>
+              <seg>org.osate.ge.diagrams.instance</seg>
+              <seg>feature_instance</seg>
+              <seg>recv_map</seg>
+            </bo>
+            <position y="112.0"/>
+          </element>
+          <bo>
+            <seg>org.osate.ge.diagrams.instance</seg>
+            <seg>component_instance</seg>
+            <seg>fpln</seg>
+          </bo>
+          <position x="405.0" y="171.0"/>
+          <size width="308.0" height="163.0"/>
+        </element>
+        <element uuid="c7aa1694-399e-40bf-8b36-3f7c7ea40d7e" manual="true">
+          <element uuid="40a5c80e-18f4-4893-9823-70d781792aac" manual="true" dockArea="right">
+            <bo>
+              <seg>org.osate.ge.diagrams.instance</seg>
+              <seg>feature_instance</seg>
+              <seg>recv_map_out</seg>
+            </bo>
+            <position x="224.0" y="10.0"/>
+          </element>
+          <bo>
+            <seg>org.osate.ge.diagrams.instance</seg>
+            <seg>component_instance</seg>
+            <seg>radio</seg>
+          </bo>
+          <position x="39.0" y="273.0"/>
+          <size width="346.0" height="61.0"/>
+        </element>
+        <element uuid="0bffa22f-0778-446c-aceb-cf7aff533101" manual="true">
+          <element uuid="8873bb6d-509e-45f6-b2a3-5db45e48ffb5" manual="true" dockArea="left">
+            <bo>
+              <seg>org.osate.ge.diagrams.instance</seg>
+              <seg>feature_instance</seg>
+              <seg>mission_window</seg>
+            </bo>
+            <position y="10.0"/>
+          </element>
+          <element uuid="97b3396b-fabf-4647-a269-da0bb01d8490" manual="true" dockArea="left">
+            <bo>
+              <seg>org.osate.ge.diagrams.instance</seg>
+              <seg>feature_instance</seg>
+              <seg>tracking_id</seg>
+            </bo>
+            <position y="61.0"/>
+          </element>
+          <bo>
+            <seg>org.osate.ge.diagrams.instance</seg>
+            <seg>component_instance</seg>
+            <seg>uart</seg>
+          </bo>
+          <position x="405.0" y="39.0"/>
+          <size width="374.0" height="112.0"/>
+        </element>
+        <element uuid="ecd75488-675c-42e1-a05a-0f1e1f675854" manual="true">
+          <element uuid="c96442f5-1cf7-4296-9d27-87972202f4e5" manual="true" dockArea="right">
+            <bo>
+              <seg>org.osate.ge.diagrams.instance</seg>
+              <seg>feature_instance</seg>
+              <seg>flight_plan</seg>
+            </bo>
+            <position x="275.0" y="163.0"/>
+          </element>
+          <element uuid="ddbab844-6de9-4879-9cd1-546396045531" manual="true" dockArea="right">
+            <bo>
+              <seg>org.osate.ge.diagrams.instance</seg>
+              <seg>feature_instance</seg>
+              <seg>mission_rcv</seg>
+            </bo>
+            <position x="266.0" y="112.0"/>
+          </element>
+          <element uuid="af6e1a5b-d4ed-41a8-984b-5f7acbc649f1" manual="true" dockArea="right">
+            <bo>
+              <seg>org.osate.ge.diagrams.instance</seg>
+              <seg>feature_instance</seg>
+              <seg>mission_window</seg>
+            </bo>
+            <position x="233.0" y="10.0"/>
+          </element>
+          <element uuid="eab92c4b-0b84-4c60-b962-54312836ac40" manual="true" dockArea="right">
+            <bo>
+              <seg>org.osate.ge.diagrams.instance</seg>
+              <seg>feature_instance</seg>
+              <seg>tracking_id</seg>
+            </bo>
+            <position x="270.0" y="61.0"/>
+          </element>
+          <bo>
+            <seg>org.osate.ge.diagrams.instance</seg>
+            <seg>component_instance</seg>
+            <seg>wpm</seg>
+          </bo>
+          <position x="12.0" y="39.0"/>
+          <size width="373.0" height="214.0"/>
+        </element>
+        <element uuid="fa589564-516d-4ea6-b1ab-5f7ecbf492b5" manual="true">
+          <bo>
+            <seg>org.osate.ge.diagrams.instance</seg>
+            <seg>connection_reference</seg>
+            <seg>c1 : uav_impl_instance.mcmp.proc_sw.fpln.flight_plan -> uav_impl_instance.mcmp.proc_sw.wpm.flight_plan</seg>
+          </bo>
+          <bendpoints>
+            <point x="431.0" y="355.0"/>
+            <point x="431.0" y="325.0"/>
+          </bendpoints>
+        </element>
+        <element uuid="be7f7e10-9b29-4515-bd0d-d66928f3bb52" manual="true">
+          <bo>
+            <seg>org.osate.ge.diagrams.instance</seg>
+            <seg>connection_reference</seg>
+            <seg>c2 : uav_impl_instance.mcmp.proc_sw.wpm.mission_rcv -> uav_impl_instance.mcmp.proc_sw.fpln.mission_rcv</seg>
+          </bo>
+          <bendpoints>
+            <point x="431.0" y="274.0"/>
+            <point x="431.0" y="304.0"/>
+          </bendpoints>
+        </element>
+        <element uuid="04206bd9-c65a-48f6-b228-6e332dab61d8" manual="true">
+          <bo>
+            <seg>org.osate.ge.diagrams.instance</seg>
+            <seg>connection_reference</seg>
+            <seg>c3 : uav_impl_instance.mcmp.proc_sw.radio.recv_map_out -> uav_impl_instance.mcmp.proc_sw.fpln.recv_map</seg>
+          </bo>
+        </element>
+        <element uuid="325245ba-898c-4356-9295-f1f6b9e9e21c" manual="true">
+          <bo>
+            <seg>org.osate.ge.diagrams.instance</seg>
+            <seg>connection_reference</seg>
+            <seg>c6 : uav_impl_instance.mcmp.proc_sw.wpm.mission_window -> uav_impl_instance.mcmp.proc_sw.uart.mission_window</seg>
+          </bo>
+        </element>
+        <element uuid="60c36391-6dc9-483a-aad5-ca56ef0e82fd" manual="true">
+          <bo>
+            <seg>org.osate.ge.diagrams.instance</seg>
+            <seg>connection_reference</seg>
+            <seg>c7 : uav_impl_instance.mcmp.proc_sw.uart.tracking_id -> uav_impl_instance.mcmp.proc_sw.wpm.tracking_id</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>org.osate.ge.diagrams.instance</seg>
+          <seg>component_instance</seg>
+          <seg>proc_sw</seg>
+        </bo>
+        <position x="12.0" y="39.0"/>
+        <size width="791.0" height="346.0"/>
+      </element>
+      <bo>
+        <seg>org.osate.ge.diagrams.instance</seg>
+        <seg>component_instance</seg>
+        <seg>mcmp</seg>
+      </bo>
+      <position x="12.0" y="39.0"/>
+      <size width="815.0" height="397.0"/>
+    </element>
+    <bo>
+      <seg>org.osate.ge.diagrams.instance</seg>
+      <seg>system_instance</seg>
+      <seg>/simple_uav/instances/uav_uav_impl_instance.aaxl2</seg>
+    </bo>
+    <position x="12.0" y="12.0"/>
+    <size width="839.0" height="448.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>org.osate.ge.diagrams.instance</seg>
+      <seg>system_instance</seg>
+      <seg>/simple_uav/instances/uav_uav_impl_instance.aaxl2</seg>
+    </context>
+  </config>
+</diagram:Diagram>

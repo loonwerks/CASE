@@ -1,0 +1,4 @@
+procedure sb_Monitor_int8_t_1_Sender {
+  include <sb_proc_types.h>;
+  bool enqueue(refin int8_t m);
+};
