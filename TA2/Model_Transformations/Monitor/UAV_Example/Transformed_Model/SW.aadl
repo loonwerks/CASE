@@ -17,7 +17,7 @@ public
 			CASE_Properties::COMP_TYPE => MONITOR;
 		annex agree {**
 			property monitor_policy = event(observed) => event(expected);
-			guarantee Req001_Monitor "The monitor shall only output an alert when the monitor policy is true" : if monitor_policy then event(alert) else not event(alert);
+			guarantee Req001_Monitor "The monitor shall only output an alert when the monitor policy is true" : event(observed) and if monitor_policy then event(alert) else not event(alert);
 		**};
 	end CASE_Monitor;
 
