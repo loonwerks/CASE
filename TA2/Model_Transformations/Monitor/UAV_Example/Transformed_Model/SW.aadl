@@ -8,27 +8,56 @@ public
 
 	with CASE_Model_Transformations;
 
-	thread CASE_AttestationManager
+	thread CASE_Monitor
 		features
-			am_mission_command_in: in event data port RF_Msg.Impl;
-			am_mission_command_out: out event data port RF_Msg.Impl;
-			am_request: out event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
-			am_response: in event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+			observed: in event data port Mission;
+			expected: in event data port RF_Msg.Impl;
+			alert: out event data port;
 		properties
-			CASE_Properties::COMP_TYPE => ATTESTATION;
-			CASE_Properties::COMP_SPEC => ("Req_AM");
+			CASE_Properties::COMP_TYPE => MONITOR;
 		annex agree {**
-			guarantee Req001_RadioDriver_AttestationManager "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(am_mission_command_out);
-			guarantee Req_AM "trusted" : TRUSTED_MESSAGE(am_mission_command_out);
+			property monitor_policy = event(observed) => event(expected);
+			guarantee Req001_Monitor "The monitor shall only output an alert when the monitor policy is true" : if monitor_policy then event(alert) else not event(alert);
 		**};
-	end CASE_AttestationManager;
+	end CASE_Monitor;
 
-	thread implementation CASE_AttestationManager.Impl
+	thread implementation CASE_Monitor.Impl
 		properties
-			CASE_Properties::COMP_IMPL => "CakeML";
-			CASE_Properties::CACHE_TIMEOUT => 30;
-			CASE_Properties::CACHE_SIZE => 4;
-	end CASE_AttestationManager.Impl;
+			Dispatch_Protocol => Sporadic;
+	end CASE_Monitor.Impl;
+
+	thread CASE_Monitor1
+		features
+			observed: in data port Mission;
+			expected: in data port MapArray;
+			alert: out event data port;
+		properties
+			CASE_Properties::COMP_TYPE => MONITOR;
+		annex agree {**
+			property monitor_policy = WAYPOINTS_IN_KEEPIN_ZONE(observed, expected);
+			fun WAYPOINTS_IN_KEEPIN_ZONE(o : Mission, e : MapArray) : bool = true;	-- some actual function needs to go here
+			guarantee Req001_Monitor1 "The monitor shall only output an alert when the monitor policy is true" : if monitor_policy then event(alert) else not event(alert);
+		**};
+	end CASE_Monitor1;
+
+	thread implementation CASE_Monitor1.Impl
+	end CASE_Monitor1.Impl;
+
+	thread CASE_Filter
+		features
+			filter_in: in data port Mission;
+			filter_out: out data port Mission;
+		properties
+			CASE_Properties::COMP_TYPE => FILTER;
+		annex agree {**
+			guarantee Req002_FlightPlanner_Filter "The Flight Planner shall generate a valid mission" : good_mission(filter_out);
+		**};
+	end CASE_Filter;
+
+	thread implementation CASE_Filter.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+	end CASE_Filter.Impl;
 
 	data Coordinate
 	end Coordinate;
@@ -36,9 +65,9 @@ public
 	data implementation Coordinate.Impl
 		-- This is the structure to hold the lat/long/alt values of a coordinate
 		subcomponents
-			latitude: data Base_Types::Integer;
-			longitude: data Base_Types::Integer;
-			altitude: data Base_Types::Integer;
+			latitude: data Base_Types::Integer_32;
+			longitude: data Base_Types::Integer_32;
+			altitude: data Base_Types::Integer_32;
 	end Coordinate.Impl;
 
 	data Map
@@ -149,11 +178,11 @@ public
 			recv_map: in event data port RF_Msg.Impl;
 			request_nofly_zones: out event data port Map;
 			nofly_zones: in event data port MapArray;
-			position_status: in event data port Coordinate.Impl;
+		properties
+			CASE_Properties::BOUNDARY => (UNCONTROLLED);
 		annex agree {**
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);
-			assume Req_TrustedSource "The FlightPlanner shall only accept messages from a trusted GroundStation" : TRUSTED_MESSAGE(recv_map);
 		**};
 	end FlightPlanner;
 
@@ -217,15 +246,6 @@ public
 	thread implementation UARTDriver.Impl
 	end UARTDriver.Impl;
 
-	thread RadioDriver_Attestation extends RadioDriver
-		features
-			am_request: in event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
-			am_response: out event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
-	end RadioDriver_Attestation;
-
-	thread implementation RadioDriver_Attestation.Impl extends RadioDriver.Impl
-	end RadioDriver_Attestation.Impl;
-
 	process SW
 		-- The Mission Computer Software process runs all threads
 		features
@@ -242,42 +262,42 @@ public
 
 	process implementation SW.Impl
 		subcomponents
-			RADIO: thread RadioDriver_Attestation.Impl;
+			RADIO: thread RadioDriver.Impl;
 			FPLN: thread FlightPlanner.Impl;
 			WPM: thread WaypointManager.Impl;
-			CM: thread CameraManager.Impl;
 			UART: thread UARTDriver.Impl;
-			WIFI: thread WifiDriver.Impl;
 			NFDB: thread NoFlyZoneDatabase.Impl;
-			AM: thread CASE_AttestationManager.Impl;
+			FLT: thread CASE_Filter.Impl;
+			MON: thread CASE_Monitor.Impl;
+			MON1: thread CASE_Monitor1.Impl;
 		connections
 			c1: port radio_recv -> RADIO.recv_data;
 			c2: port RADIO.send_data -> radio_send;
-			c4: port RADIO.mission_command -> AM.am_mission_command_in;
-			c19: port AM.am_request -> RADIO.am_request;
-			c20: port RADIO.am_response -> AM.am_response;
-			c3: port AM.am_mission_command_out -> FPLN.recv_map;
-			c5: port FPLN.flight_plan -> WPM.flight_plan;
+			c4: port RADIO.mission_command -> FPLN.recv_map;
+			c5: port FPLN.flight_plan -> FLT.filter_in;
+			c21: port FLT.filter_out -> MON1.observed;
+			c20: port RADIO.mission_command -> MON.expected;
+			c19: port FPLN.flight_plan -> MON.observed;
+			c3: port FLT.filter_out -> WPM.flight_plan;
 			c6: port FPLN.request_nofly_zones -> NFDB.map;
 			c7: port NFDB.zones -> FPLN.nofly_zones;
 			c8: port WPM.mission_window -> UART.mission_window;
 			c9: port UART.status -> WPM.position_status;
-			c10: port UART.status -> FPLN.position_status;
 			c11: port UART.status -> RADIO.status;
 			c12: port UART.send_data -> uart_send;
 			c13: port uart_recv -> UART.recv_data;
-			c14: port FPLN.flight_plan -> CM.flight_plan;
-			c15: port UART.status -> CM.position_status;
-			c16: port CM.gimbal_command -> WIFI.gimbal_command;
-			c17: port WIFI.send_data -> wifi_send;
-			c18: port wifi_recv -> WIFI.recv_data;
+			c22: port NFDB.zones -> MON1.expected;
+		annex resolute {**
+			prove Req005_WaypointManager(this.WPM, this.FLT, this.c3, Mission)
+			prove Req003_FlightPlanner(this.FPLN, this.MON)
+			prove Req004_FlightPlanner(this.FPLN, this.MON1)
+		**};
 	end SW.Impl;
 
 	annex agree {**
 		-- ID of this UAV
 		const CASE_UAV_ID : int = 42;
 		fun VALID_MESSAGE(msg : RF_Msg.Impl) : bool = (msg.header.src > 0 and msg.header.dst = CASE_UAV_ID and msg.header.HMAC);
-		fun TRUSTED_MESSAGE(msg : RF_Msg.Impl) : bool = msg.header.trusted;
 		fun WELL_FORMED_MESSAGE(msg : RF_Msg.Impl) : bool = good_command(msg.payload);
 		-- These functions check the well-formedness of message structures
 		fun good_coordinate(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180 and coord.altitude >= 0 and coord.altitude <= 15000;

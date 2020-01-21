@@ -1,6 +1,12 @@
 package CASE_Requirements
 private
 	annex resolute {**
-		
+		Req003_FlightPlanner(comp_context : component) <=
+			** "Third-party software shall only output data when requested" **
+			false
+			
+		Req004_FlightPlanner(comp_context : component) <=
+			** "The output of third-party software shall be monitored for correctness" **
+			false
 	**};
 end CASE_Requirements;

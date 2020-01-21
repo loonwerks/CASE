@@ -79,21 +79,21 @@ public
 		subcomponents
 			Producer: thread Producer.Impl;
 			Consumer: thread Consumer.Impl;
-			FLT: thread CASE_Filter.Impl;
+			Filter: thread CASE_Filter.Impl;
 		connections
 			c0: port input -> Producer.trigger;
-			c1: port Producer.msg_out -> FLT.filter_in;
-			c3: port FLT.filter_out -> Consumer.msg_in;
+			c1: port Producer.msg_out -> Filter.filter_in;
+			c3: port Filter.filter_out -> Consumer.msg_in;
 			c2: port Consumer.status -> output;
 		annex resolute {**
-			prove Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong", this.FLT, this.c3, Coordinate.Impl)
-			prove Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt", this.FLT, this.c3, Coordinate.Impl)
+			prove Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong", this.Filter, this.c3, Coordinate.Impl)
+			prove Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt", this.Filter, this.c3, Coordinate.Impl)
 		**};
 	end SW.Impl;
-	
+
 	processor Proc
 	end Proc;
-	
+
 	processor implementation Proc.Impl
 		properties
 			CASE_Properties::OS => "Linux";
