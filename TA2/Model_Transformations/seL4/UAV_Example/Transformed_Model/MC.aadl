@@ -55,7 +55,7 @@ public
 
 	processor implementation MC_Proc.Impl
 		properties
-			CASE_Properties::OS => "Linux";
+			CASE_Properties::OS => "seL4";
 	end MC_Proc.Impl;
 
 	-- The Mission Computer RAM
@@ -105,7 +105,7 @@ public
 			PROC_HW: processor MC_Proc.Impl;
 			MEM_HW: memory MC_Mem.Impl;
 			BUS_HW: bus MC_Bus.Impl;
-			PROC_SW: process SW::SW.Impl;
+			PROC_SW: system SW::SW_Sys.Impl;
 			WIFI_HW: device Wifi.Impl;
 			VM: virtual processor CASE_Virtual_Machine.Impl;
 		connections
@@ -134,9 +134,6 @@ public
 			Actual_Memory_Binding => (reference (MEM_HW)) applies to PROC_SW;
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
 			Actual_Processor_Binding => (reference (VM)) applies to PROC_SW.UXAS;
-		annex resolute {**
-			prove Req001_SW(this.PROC_SW, {this.PROC_SW.UXAS}, this.VM)
-		**};
 	end MissionComputer.Impl;
 
 end MC;

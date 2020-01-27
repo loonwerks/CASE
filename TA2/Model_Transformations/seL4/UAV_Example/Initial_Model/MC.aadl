@@ -84,6 +84,20 @@ public
 			CASE_Properties::OS => "Linux";
 	end CASE_Virtual_Machine.Impl;
 
+	system test1
+	end test1;
+	system implementation test1.impl
+		subcomponents
+			SYS: system test2.impl;
+	end test1.impl;
+	
+	system test2
+	end test2;
+	system implementation test2.impl
+		subcomponents
+			PROC_SW: process SW::SW.Impl;
+	end test2.impl;
+
 	-- The MissionComputer onboard the UAV
 	system MissionComputer
 		features
@@ -134,9 +148,6 @@ public
 			Actual_Memory_Binding => (reference (MEM_HW)) applies to PROC_SW;
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
 			Actual_Processor_Binding => (reference (VM)) applies to PROC_SW.UXAS;
-		annex resolute {**
-			prove Req001_SW(this.PROC_SW, {this.PROC_SW.UXAS}, this.VM)
-		**};
 	end MissionComputer.Impl;
 
 end MC;

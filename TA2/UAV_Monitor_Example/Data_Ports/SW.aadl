@@ -1,0 +1,383 @@
+package SW
+public
+	with Data_Model;
+
+	with Base_Types;
+
+	with CASE_Properties;
+	with CASE_Model_Transformations;
+
+
+	thread CASE_Monitor_Coord
+		features
+			observed: in data port Mission;
+			expected: in data port MapArray;
+			alert: out data port Base_Types::Boolean;
+			reset: in data port Base_Types::Boolean;
+		properties
+			CASE_Properties::COMP_TYPE => MONITOR;
+			CASE_Properties::COMP_SPEC => ("monitor_policy");
+		annex agree {**
+				
+			property monitor_policy = WAYPOINTS_IN_KEEPIN_ZONE(observed, expected, reset);
+			fun WAYPOINTS_IN_KEEPIN_ZONE(o : Mission, e : MapArray, r : bool) : bool = true;	-- something real needs to go here
+			const is_latched : bool = true;
+			guarantee Req001_Monitor1 "The monitor shall only output an alert when the monitor policy is true" : alert =
+				if reset then
+					monitor_policy
+				else if is_latched and prev(alert, monitor_policy) then
+					true
+				else 
+					monitor_policy;
+
+		**};
+	end CASE_Monitor_Coord;
+
+	thread implementation CASE_Monitor_Coord.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end CASE_Monitor_Coord.Impl;
+	
+	thread CASE_Switch_Coord
+		features
+			activation: in data port Base_Types::Boolean;
+			input: in data port Mission;
+			output: out data port Mission;
+		properties
+			CASE_Properties::COMP_TYPE => SWITCH;
+			CASE_Properties::COMP_SPEC => ("Req001_Switch");
+		annex agree {**
+--			guarantee Req001_Switch "The switch shall only forward messages when activated." : if activation then output = input else output = NULL_MESSAGE;
+		**};
+	end CASE_Switch_Coord;
+	
+	thread implementation CASE_Switch_Coord.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end CASE_Switch_Coord.Impl;
+	
+	thread CASE_Monitor_Req
+		features
+			observed: in data port Mission;
+			expected: in data port RF_Msg.Impl;
+			alert: out data port Base_Types::Boolean;
+			reset: in data port Base_Types::Boolean;
+		properties
+			CASE_Properties::COMP_TYPE => MONITOR;
+			CASE_Properties::COMP_SPEC => ("monitor_policy");
+		annex agree {**
+			const is_latched : bool = true;
+--			property monitor_policy = observed => expected;
+--			guarantee Req001_Monitor "The monitor shall only output an alert when the monitor policy is true" : alert =
+--				if reset then
+--					monitor_policy
+--				else if is_latched and prev(alert, monitor_policy) then
+--					true
+--				else 
+--					monitor_policy;
+		**};
+	end CASE_Monitor_Req;
+
+	thread implementation CASE_Monitor_Req.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end CASE_Monitor_Req.Impl;
+	
+	thread CASE_Switch_Req
+		features
+			activation: in data port Base_Types::Boolean;
+			input: in data port Mission;
+			output: out data port Mission;
+		properties
+			CASE_Properties::COMP_TYPE => SWITCH;
+			CASE_Properties::COMP_SPEC => ("Req002_Switch");
+		annex agree {**
+			-- Need to figure out NULL_MESSAGE
+--			guarantee Req002_Switch "The switch shall only forward messages when activated." : if activation then output = input else output = NULL_MESSAGE;
+		**};
+	end CASE_Switch_Req;
+	
+	thread implementation CASE_Switch_Req.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end CASE_Switch_Req.Impl;
+
+	thread CASE_Filter
+		features
+			filter_in: in data port Mission;
+			filter_out: out data port Mission;
+		properties
+			CASE_Properties::COMP_TYPE => FILTER;
+		annex agree {**
+			guarantee Req002_FlightPlanner_Filter "The Flight Planner shall generate a valid mission" : good_mission(filter_out);
+		**};
+	end CASE_Filter;
+
+	thread implementation CASE_Filter.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end CASE_Filter.Impl;
+
+	data Coordinate
+	end Coordinate;
+
+	data implementation Coordinate.Impl
+		-- This is the structure to hold the lat/long/alt values of a coordinate
+		subcomponents
+			latitude: data Base_Types::Integer_32;
+			longitude: data Base_Types::Integer_32;
+			altitude: data Base_Types::Integer_32;
+	end Coordinate.Impl;
+
+	data Map
+		-- The Map is a structure that contains a list of coordinates that encircle a
+		-- region.  
+		-- In this implementation, we fix the size of the map to 4 waypoints
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Coordinate.Impl));
+			Data_Model::Dimension => (4);
+	end Map;
+
+	data MapArray
+		-- The MapArray is a structure that hold multiple Maps
+		-- In this implementation, we fix the size of the map array to 5 maps
+		-- Future versions will use an array
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Map));
+			Data_Model::Dimension => (5);
+	end MapArray;
+
+	data FlightPattern
+		-- The Flight Pattern is an enumeration that defines how the UAV will fly through the
+		-- sensing region to conduct surveillance.
+		properties
+			Data_Model::Data_Representation => Enum;
+			Data_Model::Enumerators => ("ZigZag", "StraightLine", "Perimeter");
+	end FlightPattern;
+
+	data implementation FlightPattern.Impl
+	end FlightPattern.Impl;
+
+	data Command
+	end Command;
+
+	data implementation Command.Impl
+		-- The Command structure contains data that the Ground Station passes to the UAV.
+		-- It contains a message header, Map and Flight Pattern.
+		subcomponents
+			map: data Map;
+			pattern: data FlightPattern;
+	end Command.Impl;
+
+	data RF_Msg extends CASE_Model_Transformations::CASE_RF_Msg
+	end RF_Msg;
+
+	data implementation RF_Msg.Impl extends CASE_Model_Transformations::CASE_RF_Msg.Impl
+		subcomponents
+			payload: refined to data Command.Impl;
+	end RF_Msg.Impl;
+
+	data Mission
+		-- The Mission is a list of waypoints that is generated by the Flight Planner based on a
+		-- Map and Flight Pattern.
+		-- For this implementation, we fix the size of the Mission to 10 waypoints.
+		-- Future versions will use an array
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Coordinate.Impl));
+			Data_Model::Dimension => (10);
+	end Mission;
+
+	data MissionWindow
+		-- The Mission Window is a list of waypoints that the Waypoint Manager assembles from the Mission.
+		-- For this implementation, we fix the size of the Mission Window to 4 waypoints.
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Coordinate.Impl));
+			Data_Model::Dimension => (4);
+	end MissionWindow;
+
+	thread RadioDriver
+		-- The RadioDriver is the software that enables other SW components to communicate to other systems over RF
+		features
+			recv_data: in data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			send_data: out data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			mission_command: out data port RF_Msg.Impl;
+			status: in data port Coordinate.Impl;
+		properties
+			CASE_Properties::COMP_TYPE => COMM_DRIVER;
+		annex agree {**
+			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
+		**};
+	end RadioDriver;
+
+	thread implementation RadioDriver.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+	end RadioDriver.Impl;
+
+	thread FlightPlanner
+		-- The FlightPlanner is an abstraction for UxAS.
+		-- It accepts a command message containing a map and flight pattern, and generates a mission.
+		-- The FlightPlanner also has access to a No-Fly zone database, which it uses to generate the mission 
+		-- to avoid specified no-fly zones
+		features
+			flight_plan: out data port Mission;
+			recv_map: in data port RF_Msg.Impl;
+			nofly_zones: in data port MapArray;
+		properties
+			CASE_Properties::BOUNDARY => (UNCONTROLLED);
+		annex agree {**
+			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
+			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);
+		**};
+	end FlightPlanner;
+
+	thread implementation FlightPlanner.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end FlightPlanner.Impl;
+
+	thread NoFlyZoneDatabase
+		-- The NoFlyZoneDatabase is a collection of polygons that represent areas on a map which the UAV should avoid.
+		-- The database is populated at build-time and stored in memory.
+		features
+			zones: out data port MapArray;
+	end NoFlyZoneDatabase;
+
+	thread implementation NoFlyZoneDatabase.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end NoFlyZoneDatabase.Impl;
+
+	thread WaypointManager
+		-- The WaypointManager divides a mission into a small window of waypoints suitable for the FlightController.
+		-- Because the FlightController can only process a small number of waypoints at a time, the WaypointManager
+		-- creates these mission windows in response to the current position of the UAV, provided by the FlightController GPS.
+		features
+			flight_plan: in data port Mission;
+			mission_window: out data port MissionWindow;
+			position_status: in data port Coordinate.Impl;
+		annex agree {**
+			assume Req001_WaypointManager "The Waypoint Manager shall receive a well-formed mission" : good_mission(flight_plan);
+			guarantee Req002_WaypointManager "The Waypoint Manager shall output a well-formed mission window" : good_mission_window(mission_window);
+		**};
+	end WaypointManager;
+
+	thread implementation WaypointManager.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end WaypointManager.Impl;
+
+	thread UARTDriver
+		-- The UARTDriver is the software that enables other SW components to communicate to other systems over the serial connection
+		features
+			status: out data port Coordinate.Impl;
+			mission_window: in data port MissionWindow;
+			recv_data: in data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			send_data: out data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+		annex agree {**
+			assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(mission_window);
+			guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data.crc;
+		**};
+	end UARTDriver;
+
+	thread implementation UARTDriver.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end UARTDriver.Impl;
+
+	process SW
+		-- The Mission Computer Software process runs all threads
+		features
+			radio_recv: in data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			radio_send: out data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			uart_recv: in data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			uart_send: out data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+		annex agree {**
+			guarantee Req001_SW "The Mission Computer shall output a valid mission window to the Flight Controller" : uart_send.crc;
+		**};
+	end SW;
+
+	-- This is the original SW 
+	process implementation SW.Original
+		subcomponents
+			RADIO: thread RadioDriver.Impl;
+			FPLN: thread FlightPlanner.Impl;
+			WPM: thread WaypointManager.Impl;
+			UART: thread UARTDriver.Impl;
+			NFDB: thread NoFlyZoneDatabase.Impl;
+		connections
+			c1: port radio_recv -> RADIO.recv_data;
+			c2: port RADIO.send_data -> radio_send;
+			c3: port RADIO.mission_command -> FPLN.recv_map;
+			c4: port FPLN.flight_plan -> WPM.flight_plan;
+			c5: port NFDB.zones -> FPLN.nofly_zones;
+			c6: port WPM.mission_window -> UART.mission_window;
+			c7: port UART.status -> WPM.position_status;
+			c8: port UART.status -> RADIO.status;
+			c9: port UART.send_data -> uart_send;
+			c10: port uart_recv -> UART.recv_data;
+	end SW.Original;
+
+	-- This software implementation includes both monitors
+	-- It also includes a filter to check that flight
+	-- plans are well-formed
+	process implementation SW.Transformed
+		subcomponents
+			RADIO: thread RadioDriver.Impl;
+			FPLN: thread FlightPlanner.Impl;
+			WPM: thread WaypointManager.Impl;
+			UART: thread UARTDriver.Impl;
+			NFDB: thread NoFlyZoneDatabase.Impl;
+			FLT: thread CASE_Filter.Impl;
+			COORD_MON: thread CASE_Monitor_Coord.Impl;
+			COORD_SWITCH: thread CASE_Switch_Coord.Impl;
+			REQ_MON: thread CASE_Monitor_Req.Impl;
+			REQ_SWITCH: thread CASE_Switch_Req.Impl;
+		connections
+			c1: port radio_recv -> RADIO.recv_data;
+			c2: port RADIO.send_data -> radio_send;
+			c3: port RADIO.mission_command -> FPLN.recv_map;
+			c4: port NFDB.zones -> FPLN.nofly_zones;
+			c5: port FPLN.flight_plan -> REQ_SWITCH.input;
+			c6: port RADIO.mission_command -> REQ_MON.expected;
+			c7: port FPLN.flight_plan -> REQ_MON.observed;
+			c8: port REQ_MON.alert -> REQ_SWITCH.activation;
+			c9: port REQ_SWITCH.output -> FLT.filter_in;
+			c10: port FLT.filter_out -> COORD_MON.observed;
+			c11: port NFDB.zones -> COORD_MON.expected;
+			c12: port COORD_MON.alert -> COORD_SWITCH.activation;
+			c13: port FLT.filter_out -> COORD_SWITCH.input;
+			c14: port COORD_SWITCH.output -> WPM.flight_plan;
+			c15: port WPM.mission_window -> UART.mission_window;
+			c16: port UART.status -> WPM.position_status;
+			c17: port UART.status -> RADIO.status;
+			c18: port UART.send_data -> uart_send;
+			c19: port uart_recv -> UART.recv_data;
+			
+		annex resolute {**
+			prove Req005_WaypointManager(this.WPM, this.FLT, this.c3, Mission)
+			prove Req004_FlightPlanner(this.FPLN, this.COORD_MON)
+			prove Req003_FlightPlanner(this.FPLN, this.REQ_MON)
+		**};
+	end SW.Transformed;
+
+
+	annex agree {**
+		-- ID of this UAV
+		const CASE_UAV_ID : int = 42;
+		fun VALID_MESSAGE(msg : RF_Msg.Impl) : bool = (msg.header.src > 0 and msg.header.dst = CASE_UAV_ID and msg.header.HMAC);
+		fun WELL_FORMED_MESSAGE(msg : RF_Msg.Impl) : bool = good_command(msg.payload);
+		-- These functions check the well-formedness of message structures
+		fun good_coordinate(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180 and coord.altitude >= 0 and coord.altitude <= 15000;
+		fun good_map(map : Map) : bool = forall wp in map, good_coordinate(wp);
+		fun good_pattern(pattern : FlightPattern) : bool = (pattern = enum(FlightPattern, ZigZag)) or (pattern = enum(FlightPattern, StraightLine)) or (pattern = enum(FlightPattern, Perimeter));
+		fun good_command(cmd : Command.Impl) : bool = good_map(cmd.map) and good_pattern(cmd.pattern);
+		fun good_mission(mission : Mission) : bool = forall wp in mission, good_coordinate(wp);
+		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
+	**};
+
+end SW;

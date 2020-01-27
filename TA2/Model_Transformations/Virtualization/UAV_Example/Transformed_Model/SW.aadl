@@ -164,6 +164,30 @@ public
 	thread implementation WaypointManager.Impl
 	end WaypointManager.Impl;
 
+	thread group UxAS
+		features
+			flight_plan: out data port Mission;
+			recv_map: in event data port RF_Msg.Impl;
+			position_status: in event data port Coordinate.Impl;
+			mission_window: out event data port MissionWindow;
+	end UxAS;
+	
+	thread group implementation UxAS.Impl
+		subcomponents
+			FPLN: thread FlightPlanner.Impl;
+			NFDB: thread NoFlyZoneDatabase.Impl;
+			WPM: thread WaypointManager.Impl;
+		connections
+			c1: port recv_map -> FPLN.recv_map;
+			c2: port FPLN.flight_plan -> WPM.flight_plan;
+			c3: port FPLN.request_nofly_zones -> NFDB.map;
+			c4: port NFDB.zones -> FPLN.nofly_zones;
+			c5: port WPM.mission_window -> mission_window;
+			c6: port position_status -> FPLN.position_status;
+			c7: port position_status -> WPM.position_status;
+			c8: port FPLN.flight_plan -> flight_plan;
+	end UxAS.Impl;
+
 	thread CameraManager
 		-- The CameraManager determines the gimbal settings for the onboard camera based on the current position of the UAV and the mission.
 		-- The CameraManager then sends out gimbal commands to the camera over the wifi connection
@@ -209,30 +233,24 @@ public
 	process implementation SW.Impl
 		subcomponents
 			RADIO: thread RadioDriver.Impl;
-			FPLN: thread FlightPlanner.Impl;
-			WPM: thread WaypointManager.Impl;
 			CM: thread CameraManager.Impl;
 			UART: thread UARTDriver.Impl;
 			WIFI: thread WifiDriver.Impl;
-			NFDB: thread NoFlyZoneDatabase.Impl;
+			UXAS: thread group UxAS.Impl;
 		connections
 			c1: port radio_recv -> RADIO.recv_data;
 			c2: port RADIO.send_data -> radio_send;
-			c3: port RADIO.mission_command -> FPLN.recv_map;
-			c5: port FPLN.flight_plan -> WPM.flight_plan;
-			c6: port FPLN.request_nofly_zones -> NFDB.map;
-			c7: port NFDB.zones -> FPLN.nofly_zones;
-			c8: port WPM.mission_window -> UART.mission_window;
-			c9: port UART.status -> WPM.position_status;
-			c10: port UART.status -> FPLN.position_status;
-			c11: port UART.status -> RADIO.status;
-			c12: port UART.send_data -> uart_send;
-			c13: port uart_recv -> UART.recv_data;
-			c14: port FPLN.flight_plan -> CM.flight_plan;
-			c15: port UART.status -> CM.position_status;
-			c16: port CM.gimbal_command -> WIFI.gimbal_command;
-			c17: port WIFI.send_data -> wifi_send;
-			c18: port wifi_recv -> WIFI.recv_data;
+			c3: port RADIO.mission_command -> UXAS.recv_map;
+			c4: port UXAS.mission_window -> UART.mission_window;
+			c5: port UART.status -> UXAS.position_status;
+			c6: port UART.status -> RADIO.status;
+			c7: port UART.send_data -> uart_send;
+			c8: port uart_recv -> UART.recv_data;
+			c9: port UXAS.flight_plan -> CM.flight_plan;
+			c10: port UART.status -> CM.position_status;
+			c11: port CM.gimbal_command -> WIFI.gimbal_command;
+			c12: port WIFI.send_data -> wifi_send;
+			c13: port wifi_recv -> WIFI.recv_data;
 	end SW.Impl;
 
 	annex agree {**
