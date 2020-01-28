@@ -30,9 +30,9 @@ bash case-setup.sh
 
 ### Requirements
 
-* VirtualBox [6.0.`x`](https://www.virtualbox.org/wiki/Download_Old_Builds_6_0)
+* VirtualBox [6.1.*x*](https://www.virtualbox.org/)
 
-* [Vagrant](https://www.vagrantup.com/) 2.2.6+ 
+* [Vagrant](https://www.vagrantup.com/) 2.2.7+ 
 
 * [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest) plugin
 

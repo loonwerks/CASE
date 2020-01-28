@@ -67,7 +67,7 @@ git clone https://github.com/sireum/kekinian Sireum
 cd $SIREUM_HOME
 git checkout $SIREUM_V
 git submodule update --init --recursive
-bin/build.cmd setup
+bin/build.cmd # setup
 echo "export SIREUM_HOME=$SIREUM_HOME" >> "$HOME/.bashrc"
 echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
 echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"

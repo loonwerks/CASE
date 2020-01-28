@@ -13,11 +13,15 @@ Vagrant.configure("2") do |config|
     vb.gui = true
     vb.linked_clone = true
     vb.customize ["modifyvm", :id, "--vram", "64"]
-    vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+    vb.customize ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
     vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
   end
 
   config.vm.box = "debian/buster64"
+
+  config.vm.provision "file", source: "case-setup.sh", destination: "case-setup.sh"
+
+  config.vm.provision "file", source: "addons", destination: "addons"
 
   config.vm.provision "shell", inline: <<-SHELL
     export DEBIAN_FRONTEND=noninteractive
@@ -26,10 +30,8 @@ Vagrant.configure("2") do |config|
     tasksel install xfce-desktop
   SHELL
 
-  config.vm.provision "file", source: "case-setup.sh", destination: "case-setup.sh"
-
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     bash case-setup.sh
-    rm case-setup.sh
+    rm -R case-setup.sh addons
   SHELL
 end
