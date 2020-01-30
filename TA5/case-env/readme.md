@@ -34,12 +34,6 @@ bash case-setup.sh
 
 * [Vagrant](https://www.vagrantup.com/) 2.2.7+ 
 
-* [vagrant-vbguest](https://github.com/dotless-de/vagrant-vbguest) plugin
-
-  ```bash
-  vagrant plugin install vagrant-vbguest
-  ```
-
 ### Steps
 
 * Windows
