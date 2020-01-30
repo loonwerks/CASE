@@ -18,18 +18,30 @@ public
 			CASE_Properties::COMP_TYPE => MONITOR;
 			CASE_Properties::COMP_SPEC => ("monitor_policy");
 		annex agree {**
-				
-			property monitor_policy = WAYPOINTS_IN_KEEPIN_ZONE(observed, expected, reset);
-			fun WAYPOINTS_IN_KEEPIN_ZONE(o : Mission, e : MapArray, r : bool) : bool = true;	-- something real needs to go here
-			const is_latched : bool = true;
-			guarantee Req001_Monitor1 "The monitor shall only output an alert when the monitor policy is true" : alert =
-				if reset then
-					monitor_policy
-				else if is_latched and prev(alert, monitor_policy) then
-					true
-				else 
-					monitor_policy;
 
+			property monitor_policy = event(reset) or Historically(event(observed) => WAYPOINTS_IN_KEEPIN_ZONE(observed, expected));
+
+			const is_latched : bool = true;
+			guarantee Req001_Monitor1 "The monitor shall only output an alert when the monitor policy is true" : 
+			  alert = not(monitor_policy);
+			  
+            fun WAYPOINTS_IN_KEEPIN_ZONE(mission : Mission, keepInZone : MapArray) : bool =
+              forall waypoint in mission, WAYPOINT_IN_KEEPIN_ZONE(waypoint, keepInZone);
+              
+            fun WAYPOINT_IN_KEEPIN_ZONE(waypoint : Coordinate.Impl, keepInZone: MapArray) : bool = 
+              exists zone in keepInZone, WAYPOINT_IN_ZONE(waypoint, zone);
+            
+            -- Assumes rectangle that is defined by two corners so it is aligned
+            -- with the origin (not rotated in space)
+            -- Assumes that the altitude is the same in all the coordinates
+            -- Assmes zone[0] is the bottom left corner and zone[2] in the upper right corner
+            fun WAYPOINT_IN_ZONE(waypoint : Coordinate.Impl, zone : Map) : bool = 
+                  (waypoint.latitude >= (zone[0]).latitude)
+              and (waypoint.latitude <= (zone[2]).latitude)
+              and (waypoint.longitude >= (zone[0]).longitude)
+              and (waypoint.longitude <= (zone[2]).longitude)
+              and (waypoint.altitude >= (zone[0]).altitude);
+             
 		**};
 	end CASE_Monitor_Coord;
 
@@ -144,6 +156,7 @@ public
 		-- The Map is a structure that contains a list of coordinates that encircle a
 		-- region.  
 		-- In this implementation, we fix the size of the map to 4 waypoints
+		-- Waypoints ordered clockwise around polygon
 		properties
 			Data_Model::Data_Representation => Array;
 			Data_Model::Base_Type => (classifier (Coordinate.Impl));
