@@ -6,7 +6,7 @@ public
 
 	with CASE_Properties;
 	with CASE_Model_Transformations;
-
+	renames AGREE_PLTL::all;
 
 	thread CASE_Monitor_Coord
 		features
@@ -67,6 +67,17 @@ public
 			CASE_Properties::COMP_SPEC => ("monitor_policy");
 		annex agree {**
 			const is_latched : bool = true;
+			property monitor_policy = event(reset) or Historically(event(observed) => Yesterday(Since(not event(observed), event(expected))));
+
+--			Full Past-time LTL property:
+--			Historically(radio_send => Yesterday(Since(not radio_send, radio_recv))) and
+--			Historically(radio_recv => Zyesterday(Since(not radio_recv, radio_send)) or  Zyesterday(Historically(not radio_recv)));
+
+			guarantee Req001_Monitor "The monitor shall only output an alert when the monitor policy is true" :
+				alert =	not monitor_policy;
+--			Monitor internally is a DFA. Once it generates an alert it stays in the alert state until it receives a reset signal.
+--			Once a reset is received, the monitor goes to its initial state.
+					
 --			property monitor_policy = observed => expected;
 --			guarantee Req001_Monitor "The monitor shall only output an alert when the monitor policy is true" : alert =
 --				if reset then
@@ -74,7 +85,7 @@ public
 --				else if is_latched and prev(alert, monitor_policy) then
 --					true
 --				else 
---					monitor_policy;
+--					monitor_policy;					
 		**};
 	end CASE_Monitor_Req;
 
