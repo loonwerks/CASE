@@ -32,9 +32,14 @@ bash case-setup.sh
 
 * VirtualBox [6.1.*x*](https://www.virtualbox.org/)
 
-* [Vagrant](https://www.vagrantup.com/) 2.2.7+ 
+* [Vagrant](https://www.vagrantup.com/) 2.2.7 or above
 
-### Steps
+### Notes
+
+By default, the VM is configured with 4 cores, 8GB RAM, 60GB disk size, and 64MB video memory.
+These settings can be changed in [Vagrantfile](Vagrantfile) or in the built VM after provisioning.
+
+### Setup
 
 * Windows
 
@@ -48,11 +53,35 @@ bash case-setup.sh
   bash setup.sh
   ```
 
-Once Vagrant finished setting up the VM, log in using ``vagrant`` for both the username and the password and then run:
-
-```bash
-startx
-```
+Once Vagrant finished setting up the VM, log in using ``vagrant`` for both the username and the password.
 
 Then, optionally, logout/shutdown the VM and take a VM snapshot (to allow for rolling back later) and re-start it from VirtualBox.
 
+
+## Post Setup
+
+* To update FMIDE to the latest nightly release, simply re-run:
+
+  ```bash
+  $SIREUM_HOME/bin/install/fmide.cmd
+  ```
+
+* To install the IntelliJ-based [Sireum IVE](https://github.com/sireum/kekinian)
+  (for HAMR Slang component development, etc.):
+
+  ```bash
+  $SIREUM_HOME/bin/build.cmd setup
+  ```
+
+  Then, to launch it:
+
+  ```bash
+  $SIREUM_HOME/bin/linux/idea/bin/IVE.sh&
+  ```
+
+* To install [CLion](https://www.jetbrains.com/clion/) C/C++ IDE 
+  (for browsing HAMR generated C code, etc.; license required/free 30-day evaluation):
+
+  ```bash
+  $SIREUM_HOME/bin/install/clion.cmd
+  ```

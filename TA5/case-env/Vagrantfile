@@ -27,7 +27,7 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
     vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
   end
-  config.disksize.size = '40GB'
+  config.disksize.size = '60GB'
 
   if ENV['FIRST_RUN'] == 'true'
     config.vbguest.auto_update = false

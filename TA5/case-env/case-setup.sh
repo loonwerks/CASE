@@ -7,7 +7,7 @@ set -exuo pipefail
 : "${GIT_USER:=Snail Mail}"
 : "${GIT_EMAIL:=<>}"
 
-: "${SIREUM_V:=352eb88}"
+: "${SIREUM_V:=ffa047c}"
 : "${OCAML_V:=4.07.1}"
 : "${COQ_V:=8.9.1}"
 : "${MENHIR_V:=20190626}"
@@ -67,7 +67,7 @@ git clone https://github.com/sireum/kekinian Sireum
 cd $SIREUM_HOME
 git checkout $SIREUM_V
 git submodule update --init --recursive
-bin/build.cmd # setup
+bin/build.cmd 
 echo "export SIREUM_HOME=$SIREUM_HOME" >> "$HOME/.bashrc"
 echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
 echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
@@ -133,7 +133,7 @@ ninja
 #opam install coq=$COQ_V -vv --debug -y -j 4
 
 
-# CompCert (for evaluation, research and educational purposes only)
+# CompCert (for evaluation, research and educational purposes only); requires the Coq setup above
 #cd $BASE_DIR
 #opam install menhir=$MENHIR_V -vv --debug -y -j 4
 #git clone --recursive -b $COMPCERT_V https://github.com/AbsInt/CompCert.git
