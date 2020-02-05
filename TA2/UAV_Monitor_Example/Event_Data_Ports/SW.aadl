@@ -29,19 +29,33 @@ public
               forall waypoint in mission, WAYPOINT_IN_KEEPIN_ZONE(waypoint, keepInZone);
               
             fun WAYPOINT_IN_KEEPIN_ZONE(waypoint : Coordinate.Impl, keepInZone: MapArray) : bool = 
-              exists zone in keepInZone, WAYPOINT_IN_ZONE(waypoint, zone);
+              exists zone in keepInZone, WAYPOINT_IN_ZONE_POLYGON(waypoint, zone);
             
             -- Assumes rectangle that is defined by two corners so it is aligned
             -- with the origin (not rotated in space)
             -- Assumes that the altitude is the same in all the coordinates
             -- Assmes zone[0] is the bottom left corner and zone[2] in the upper right corner
-            fun WAYPOINT_IN_ZONE(waypoint : Coordinate.Impl, zone : Map) : bool = 
+            fun WAYPOINT_IN_ZONE_RECTANGLE(waypoint : Coordinate.Impl, zone : Map) : bool = 
                   (waypoint.latitude >= (zone[0]).latitude)
               and (waypoint.latitude <= (zone[2]).latitude)
               and (waypoint.longitude >= (zone[0]).longitude)
               and (waypoint.longitude <= (zone[2]).longitude)
               and (waypoint.altitude >= (zone[0]).altitude);
-             
+            
+            -- see https://en.wikipedia.org/wiki/Even%E2%80%93odd_rule
+            fun WAYPOINT_IN_ZONE_POLYGON(waypoint : Coordinate.Impl, zone : Map ) : bool =
+              foldl i in indices(zone) into inZone = false, 
+                if (point_crosses(waypoint, zone[i], zone[previous_index(i, 4)])) then inZone = 1 - inZone else inZone = inZone;
+            
+            fun previous_index(i : int, size : int) : int = 
+              if (i = 0) then size-1 else i - 1;
+              
+            fun point_crosses(waypoint : Coordinate.Impl, currentWaypoint : Coordinate.Impl, previousWaypoint : Coordinate.Impl) : bool =
+                  (currentWaypoint.latitude > waypoint.latitude) != (previousWaypoint.latitude > waypoint.latitude)
+              and (real(waypoint.longitude) < (real(currentWaypoint.longitude) + 
+                                        (real(previousWaypoint.longitude) - real(currentWaypoint.longitude)) * 
+                                        ((real(waypoint.latitude) - real(currentWaypoint.latitude)) / 
+                                        (real(previousWaypoint.latitude) - real(currentWaypoint.latitude)))));
 		**};
 	end CASE_Monitor_Coord;
 
