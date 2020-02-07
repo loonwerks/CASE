@@ -66,6 +66,15 @@ Then, optionally, logout/shutdown the VM and take a VM snapshot (to allow for ro
   $SIREUM_HOME/bin/install/fmide.cmd
   ```
 
+* To update Sireum to the latest version:
+
+  ```bash
+  cd $SIREUM_HOME
+  git checkout master
+  git submodule update --init --recursive
+  bin\build.cmd
+  ```
+
 * To install the IntelliJ-based [Sireum IVE](https://github.com/sireum/kekinian)
   (for HAMR Slang component development, etc.):
 
