@@ -60,7 +60,7 @@ Then, optionally, logout/shutdown the VM and take a VM snapshot (to allow for ro
 
 ## Post Setup
 
-* To update FMIDE to the latest nightly release, simply re-run:
+* To update FMIDE to the latest nightly release, simply (re-)run the following in the VM:
 
   ```bash
   $SIREUM_HOME/bin/install/fmide.cmd
