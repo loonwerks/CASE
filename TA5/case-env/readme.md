@@ -10,6 +10,7 @@ to run FMIDE:
 fmide&
 ```
 
+The above will launch ``fmide`` installed at ``~/CASE/Sireum/bin/linux/fmide``
 
 ## Setting Up A Linux Machine
 
@@ -41,6 +42,8 @@ These settings can be changed in [Vagrantfile](Vagrantfile) or in the built VM a
 
 ### Setup
 
+Run the following (and subsequent commands) in your local repo's ``case-env`` directory:
+
 * Windows
 
   ```bash
@@ -53,9 +56,15 @@ These settings can be changed in [Vagrantfile](Vagrantfile) or in the built VM a
   bash setup.sh
   ```
 
-Once Vagrant finished setting up the VM, log in using ``vagrant`` for both the username and the password.
+Once Vagrant finished setting up the VM, log in using ``vagrant`` for both the username and the password in the Linux login GUI.
 
 Then, optionally, logout/shutdown the VM and take a VM snapshot (to allow for rolling back later) and re-start it from VirtualBox.
+
+If there is an error when running the setup script (e.g., internet connection is down during provisioning), destroy the VM before re-launching the setup script.  To destroy the VM:
+
+```bash
+vagrant destroy
+```
 
 
 ## Post Setup
@@ -71,7 +80,7 @@ Then, optionally, logout/shutdown the VM and take a VM snapshot (to allow for ro
   ```bash
   cd $SIREUM_HOME
   git checkout master
-  git submodule update --init --recursive
+  git pull --recurse-submodules
   bin\build.cmd
   ```
 
