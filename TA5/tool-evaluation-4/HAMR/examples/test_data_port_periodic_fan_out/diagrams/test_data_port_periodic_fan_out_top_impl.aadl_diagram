@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="0991fc86-6df7-4b4f-8d00-871e43c199b4" manual="true">
+    <element uuid="cf5836ed-dfcc-49ee-8d93-59b1a87c948c" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>proc</seg>
+      </bo>
+      <position x="12.0" y="38.0"/>
+      <size width="88.0" height="35.0"/>
+    </element>
+    <element uuid="5cbe0ec4-f222-4753-98c4-3495af1890a5" manual="true">
+      <element uuid="e40ba1b5-ac87-498e-9f59-04d5b13f9870" manual="true">
+        <element uuid="a4a7982d-636e-4b4f-a128-e8fc97380ea5" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>conn1</seg>
+        </bo>
+      </element>
+      <element uuid="c724537f-919e-443e-af7e-203cbdd3f365" manual="true">
+        <element uuid="9e04eac5-0eda-4971-ada2-5ef7358bbb1e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>conn2</seg>
+        </bo>
+        <bendpoints>
+          <point x="285.0" y="185.0"/>
+          <point x="285.0" y="265.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="b8639303-b9bb-4bc7-a3ff-058054061d4f" manual="true">
+        <element uuid="a9a1157e-e5a3-484e-b496-cd8cd7455c8e" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>read_port</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>dest_a</seg>
+        </bo>
+        <position x="271.0" y="38.0"/>
+        <size width="257.0" height="60.0"/>
+      </element>
+      <element uuid="1a51cb75-db03-4842-b97b-5956b990d0fa" manual="true">
+        <element uuid="a76ed7b2-b648-4428-aecf-df34222483b1" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>read_port</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>dest_b</seg>
+        </bo>
+        <position x="271.0" y="118.0"/>
+        <size width="257.0" height="60.0"/>
+      </element>
+      <element uuid="17195f7a-8602-4069-bfe6-fe308ceae18f" manual="true">
+        <element uuid="ae321abf-cbe7-4fd6-a59b-79011de6e3a2" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>write_port</seg>
+          </bo>
+          <position x="159.0" y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>src</seg>
+        </bo>
+        <position x="12.0" y="38.0"/>
+        <size width="239.0" height="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>test_data_port_periodic</seg>
+      </bo>
+      <position x="12.0" y="93.0"/>
+      <size width="540.0" height="190.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>top.impl</seg>
+    </bo>
+    <position x="12.0" y="12.0"/>
+    <size width="564.0" height="295.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>test_data_port_periodic_fan_out::top.impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>

@@ -1,0 +1,5 @@
+procedure sb_Monitor_int8_t_5 {
+  include <sb_proc_types.h>;
+  bool enqueue(refin int8_t m);
+  bool dequeue(out int8_t m);
+};

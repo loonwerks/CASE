@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="4e0f90a1-8c58-4d59-bc0c-01a6438033c2" manual="true">
+    <element uuid="c264d248-2875-4f5c-8d72-9cdb3dd4e7f5" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>proc</seg>
+      </bo>
+      <position x="12.0" y="38.0"/>
+      <size width="88.0" height="35.0"/>
+    </element>
+    <element uuid="7fd28eb4-682e-4931-9c15-9e55161b9eb2" manual="true">
+      <element uuid="ece315a0-f340-408a-ba6c-c15b00d5ed9b" manual="true">
+        <element uuid="53f16813-808f-4155-b78f-21ac8e736e08" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>conn1</seg>
+        </bo>
+      </element>
+      <element uuid="aad9897d-097b-475f-bf6b-424587158ce3" manual="true">
+        <element uuid="364714e6-a105-48ce-b540-ea89245e25c7" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>read_port</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>dest</seg>
+        </bo>
+        <position x="271.0" y="38.0"/>
+        <size width="240.0" height="60.0"/>
+      </element>
+      <element uuid="3e18344b-a4a6-489c-b7eb-8398bcb5e140" manual="true">
+        <element uuid="09e5358d-23d7-46de-99cd-32364212edf7" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>write_port</seg>
+          </bo>
+          <position x="159.0" y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>src</seg>
+        </bo>
+        <position x="12.0" y="38.0"/>
+        <size width="239.0" height="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>test_data_port</seg>
+      </bo>
+      <position x="12.0" y="93.0"/>
+      <size width="523.0" height="110.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>top.impl</seg>
+    </bo>
+    <position x="12.0" y="12.0"/>
+    <size width="547.0" height="215.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>test_data_port::top.impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>

@@ -1,0 +1,155 @@
+digraph g {
+graph [
+  overlap = false,
+  rankdir = "LR"
+];
+node [
+  fontsize = "16",
+  shape = "ellipse"
+];
+edge [
+];
+
+RADIO [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>RADIO</B></TD></TR>
+      <TR><TD PORT="sb_recv_map_out_queue_1"><FONT COLOR="red">dataport sb_queue_SW__Command_Impl_1_t <B>sb_recv_map_out_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_recv_map_out_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_recv_map_out_1_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+FPLN [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>FPLN</B></TD></TR>
+      <TR><TD PORT="sb_flight_plan_queue_1"><FONT COLOR="red">dataport sb_queue_sb_SW__Mission_container_1_t <B>sb_flight_plan_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_mission_rcv_queue"><FONT COLOR="red">dataport sb_queue_bool_1_t <B>sb_mission_rcv_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_recv_map_queue"><FONT COLOR="red">dataport sb_queue_SW__Command_Impl_1_t <B>sb_recv_map_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_flight_plan_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_flight_plan_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_mission_rcv_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_mission_rcv_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_recv_map_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_recv_map_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+WPM [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>WPM</B></TD></TR>
+      <TR><TD PORT="sb_flight_plan_queue"><FONT COLOR="red">dataport sb_queue_sb_SW__Mission_container_1_t <B>sb_flight_plan_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_mission_rcv_queue_1"><FONT COLOR="red">dataport sb_queue_bool_1_t <B>sb_mission_rcv_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_mission_window_queue_1"><FONT COLOR="red">dataport sb_queue_sb_SW__MissionWindow_container_1_t <B>sb_mission_window_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_tracking_id_queue"><FONT COLOR="red">dataport sb_queue_int64_t_1_t <B>sb_tracking_id_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_mission_rcv_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_mission_rcv_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_mission_window_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_mission_window_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_flight_plan_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_flight_plan_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_tracking_id_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_tracking_id_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+UART [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>UART</B></TD></TR>
+      <TR><TD PORT="sb_mission_window_queue"><FONT COLOR="red">dataport sb_queue_sb_SW__MissionWindow_container_1_t <B>sb_mission_window_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_tracking_id_queue_1"><FONT COLOR="red">dataport sb_queue_int64_t_1_t <B>sb_tracking_id_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_tracking_id_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_tracking_id_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_mission_window_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_mission_window_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+connectiontypekey [
+  label=<
+   <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+     <TR><TD COLSPAN="2"><B>Key: Connection Types</B></TD></TR>
+     <TR><TD><FONT COLOR="red">seL4SharedData</FONT></TD><TD BGCOLOR="red">red</TD></TR>
+     <TR><TD><FONT COLOR="blue">seL4Notification</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="orange">seL4RPCCall</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+   </TABLE>
+  >
+  shape=plaintext
+];
+
+interfacetypekey [
+  label=<
+   <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+     <TR><TD COLSPAN="2"><B>Key: Interface Types</B></TD></TR>
+     <TR><TD><FONT COLOR="red">dataport</FONT></TD><TD BGCOLOR="red">red</TD></TR>
+     <TR><TD><FONT COLOR="blue">emits</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="blue">consumes</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="orange">provides</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+     <TR><TD><FONT COLOR="orange">uses</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+   </TABLE>
+  >
+  shape=plaintext
+];
+
+"RADIO":sb_recv_map_out_1_notification -> "FPLN":sb_recv_map_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn1
+];
+
+"RADIO":sb_recv_map_out_queue_1 -> "FPLN":sb_recv_map_queue [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn2
+];
+
+"FPLN":sb_flight_plan_1_notification -> "WPM":sb_flight_plan_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn3
+];
+
+"FPLN":sb_flight_plan_queue_1 -> "WPM":sb_flight_plan_queue [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn4
+];
+
+"WPM":sb_mission_rcv_1_notification -> "FPLN":sb_mission_rcv_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn5
+];
+
+"WPM":sb_mission_rcv_queue_1 -> "FPLN":sb_mission_rcv_queue [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn6
+];
+
+"WPM":sb_mission_window_1_notification -> "UART":sb_mission_window_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn7
+];
+
+"WPM":sb_mission_window_queue_1 -> "UART":sb_mission_window_queue [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn8
+];
+
+"UART":sb_tracking_id_1_notification -> "WPM":sb_tracking_id_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn9
+];
+
+"UART":sb_tracking_id_queue_1 -> "WPM":sb_tracking_id_queue [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn10
+];
+
+}

@@ -1,0 +1,8 @@
+component emitter_t_impl {
+  include <sb_proc_types.h>;
+  include <sb_queue_int8_t_1.h>;
+  control;
+  emits ReceiveEvent sb_enq_1_notification;
+  dataport sb_queue_int8_t_1_t sb_enq_queue_1;
+  has semaphore sb_dispatch_sem;
+}

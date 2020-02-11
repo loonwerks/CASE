@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="c9be5238-ba8f-438c-af2a-4c12efae7339" manual="true">
+    <element uuid="d4823eba-a510-42b9-87c2-1c1c905b2c2d" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>proc</seg>
+      </bo>
+      <position x="12.0" y="38.0"/>
+      <size width="88.0" height="35.0"/>
+    </element>
+    <element uuid="5a037928-6279-4ae5-94bd-4cd40a1bdf4f" manual="true">
+      <element uuid="7bcbbb70-247a-4deb-93b7-a1f9fe10db42" manual="true">
+        <element uuid="54dc5e74-d7d9-4520-b4da-c03f6b436ef6" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>conn1</seg>
+        </bo>
+        <bendpoints>
+          <point x="283.0" y="130.0"/>
+          <point x="283.0" y="290.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="363b88c7-3147-490e-994b-409ec53149d7" manual="true">
+        <element uuid="530dac47-defe-4acf-974b-4b77610cf62b" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>conn2</seg>
+        </bo>
+      </element>
+      <element uuid="45aad09d-0896-4640-866b-12dc21154d1a" manual="true">
+        <element uuid="c23b2fc1-68fd-45f5-bf42-f9ce79df9c51" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>conn3</seg>
+        </bo>
+        <bendpoints>
+          <point x="283.0" y="130.0"/>
+          <point x="283.0" y="210.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="2e57d421-1798-4079-ad43-18b7b73b690a" manual="true">
+        <element uuid="36d3c27b-ea72-400a-8984-882520fd77a0" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>conn5</seg>
+        </bo>
+        <bendpoints>
+          <point x="283.0" y="130.0"/>
+          <point x="283.0" y="370.0"/>
+        </bendpoints>
+      </element>
+      <element uuid="d8444cc9-264e-4d3f-bb98-a5108728c362" manual="true">
+        <element uuid="032ece6a-022d-4e14-a9ee-d61f5fecd246" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>s</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>snkdefault</seg>
+        </bo>
+        <position x="161.0" y="198.0"/>
+        <size width="176.0" height="60.0"/>
+      </element>
+      <element uuid="b3a0d7dc-95af-485a-9a86-aadad4f825b3" manual="true">
+        <element uuid="dad0e743-47ee-485e-897d-18c708529d48" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>s</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>snkqueue2_a</seg>
+        </bo>
+        <position x="161.0" y="38.0"/>
+        <size width="196.0" height="60.0"/>
+      </element>
+      <element uuid="d65e2a91-c334-4cf6-8a43-5a1c94933a94" manual="true">
+        <element uuid="8f520b4e-8a6b-491a-96ae-fc3e5344aca1" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>s</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>snkqueue2_b</seg>
+        </bo>
+        <position x="161.0" y="118.0"/>
+        <size width="196.0" height="60.0"/>
+      </element>
+      <element uuid="acc79305-4fbe-4642-9e6a-5e069c256635" manual="true">
+        <element uuid="65f4ee8b-d18a-4f54-a278-d32791086042" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>s</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>snkqueue5</seg>
+        </bo>
+        <position x="161.0" y="278.0"/>
+        <size width="179.0" height="60.0"/>
+      </element>
+      <element uuid="1c3c106d-e820-4302-a10c-b435d2cd461a" manual="true">
+        <element uuid="b45ef592-593e-41af-b129-e5c4d4c217d3" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>e</seg>
+          </bo>
+          <position x="104.0" y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>src</seg>
+        </bo>
+        <position x="12.0" y="38.0"/>
+        <size width="129.0" height="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>test_event_port</seg>
+      </bo>
+      <position x="120.0" y="38.0"/>
+      <size width="369.0" height="350.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>top.impl</seg>
+    </bo>
+    <position x="12.0" y="12.0"/>
+    <size width="501.0" height="400.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>test_event_port_fan_out::top.impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>

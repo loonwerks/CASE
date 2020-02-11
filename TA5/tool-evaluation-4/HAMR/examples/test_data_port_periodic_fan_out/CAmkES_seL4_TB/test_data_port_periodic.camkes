@@ -1,0 +1,40 @@
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <TimeServer/TimeServer.camkes>;;
+import "components/source_t_impl/source_t_impl.camkes";
+import "components/destination_t_impl/destination_t_impl.camkes";
+import "components/sb_Monitors/sb_dest_A_read_port_Monitor/sb_dest_A_read_port_Monitor.camkes";
+import "components/sb_Monitors/sb_dest_B_read_port_Monitor/sb_dest_B_read_port_Monitor.camkes";
+import "components/dispatch_periodic/dispatch_periodic.camkes";
+
+assembly {
+  composition {
+    component source_t_impl src;
+    component destination_t_impl dest_A;
+    component destination_t_impl dest_B;
+    component sb_dest_A_read_port_Monitor sb_dest_a_read_port_monitor;
+    component sb_dest_B_read_port_Monitor sb_dest_b_read_port_monitor;
+    component dispatch_periodic dispatch_periodic_inst;
+    component TimeServer time_server;
+
+    connection seL4Notification conn1(from dispatch_periodic_inst.sb_src_periodic_dispatch_notification, to src.sb_periodic_dispatch_notification);
+    connection seL4Notification conn2(from dispatch_periodic_inst.sb_dest_A_periodic_dispatch_notification, to dest_A.sb_periodic_dispatch_notification);
+    connection seL4Notification conn3(from dispatch_periodic_inst.sb_dest_B_periodic_dispatch_notification, to dest_B.sb_periodic_dispatch_notification);
+    connection seL4RPCCall conn4(from src.sb_write_port0, to sb_dest_a_read_port_monitor.mon);
+    connection seL4RPCCall conn5(from dest_A.sb_read_port, to sb_dest_a_read_port_monitor.mon);
+    connection seL4Notification conn6(from sb_dest_a_read_port_monitor.monsig, to dest_A.sb_read_port_notification);
+    connection seL4RPCCall conn7(from src.sb_write_port1, to sb_dest_b_read_port_monitor.mon);
+    connection seL4RPCCall conn8(from dest_B.sb_read_port, to sb_dest_b_read_port_monitor.mon);
+    connection seL4Notification conn9(from sb_dest_b_read_port_monitor.monsig, to dest_B.sb_read_port_notification);
+    connection seL4TimeServer conn10(from dispatch_periodic_inst.timer, to time_server.the_timer);
+    connection seL4GlobalAsynchCallback conn11(from time_server.timer_notification, to dispatch_periodic_inst.timer_complete);
+  }
+
+  configuration {
+    time_server.timers_per_client = 1;
+    dispatch_periodic_inst.timer_attributes = 1;
+    dispatch_periodic_inst.timer_global_endpoint = "dispatch_periodic_timer";
+    dispatch_periodic_inst.timer_complete_global_endpoint = "dispatch_periodic_timer";
+    dispatch_periodic_inst.priority = 201;
+  }
+}

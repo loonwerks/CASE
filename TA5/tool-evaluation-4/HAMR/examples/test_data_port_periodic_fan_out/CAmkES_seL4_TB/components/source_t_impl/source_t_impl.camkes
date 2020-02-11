@@ -1,0 +1,11 @@
+import "../../interfaces/sb_Monitor_int8_t.idl4";
+import <std_connector.camkes>;
+
+component source_t_impl {
+  include <sb_proc_types.h>;
+  control;
+  uses sb_Monitor_int8_t sb_write_port0;
+  uses sb_Monitor_int8_t sb_write_port1;
+  consumes Notification sb_periodic_dispatch_notification;
+  has semaphore sb_dispatch_sem;
+}

@@ -1,0 +1,31 @@
+package UAV
+public
+	with MC;
+	with FC;
+	with UAS;
+	with HAMR;
+
+	bus Serial
+	end Serial;
+
+	bus implementation Serial.Impl
+	end Serial.Impl;
+
+	system UAV
+		features
+			RFA: requires bus access UAS::RF.Impl;
+	end UAV;
+
+	system implementation UAV.Impl
+		subcomponents
+			MCMP: system MC::MissionComputer.Impl;
+			FCTL: system FC::FlightController.Impl;
+			SBUS: bus Serial.Impl;
+		connections
+			bac1: bus access SBUS <-> MCMP.UARTA;
+			bac2: bus access SBUS <-> FCTL.UARTA;
+			bac3: bus access RFA -> MCMP.RFA;
+		properties
+			HAMR::Platform => (seL4_TB, seL4_Only);
+	end UAV.Impl;
+end UAV;

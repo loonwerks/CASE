@@ -1,0 +1,9 @@
+import <global-connectors.camkes>;
+
+component dispatch_periodic {
+  control;
+  uses Timer timer;
+  emits Notification sb_src_periodic_dispatch_notification;
+  emits Notification sb_dest_periodic_dispatch_notification;
+  consumes Notification timer_complete;
+}

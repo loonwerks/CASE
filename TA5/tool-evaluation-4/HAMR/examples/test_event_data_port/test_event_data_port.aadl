@@ -1,0 +1,65 @@
+package test_event_data_port
+public
+	with HAMR;
+	with Base_Types;
+	
+	thread emitter_t
+		features
+			enq: out event data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Sporadic;			
+			Source_Text => ("behavior_code/components/emitter/src/emitter.c");
+			Initialize_Entrypoint_Source_Text => "test_event_data_port_emitter_component_init";
+			Compute_Entrypoint_Source_Text => "run_emitter";
+	end emitter_t;
+	
+	thread implementation emitter_t.impl
+	end emitter_t.impl;
+	
+	thread consumer_t
+		features
+			deq: in event data port Base_Types::Integer_8 {
+				Compute_Entrypoint_Source_Text => "test_event_data_port_consumer_s_event_handler";
+			};
+		properties
+			Dispatch_Protocol => Sporadic;
+			Source_Text => ("behavior_code/components/consumer/src/consumer.c");
+			Initialize_Entrypoint_Source_Text => "test_event_data_port_consumer_component_init";
+	end consumer_t;
+	
+	thread implementation consumer_t.impl
+	end consumer_t.impl;
+
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+	end proc.impl;
+
+	process top_process
+	end top_process;
+
+	process implementation top_process.impl
+		subcomponents
+			src: thread emitter_t.impl;
+			dest: thread consumer_t.impl;
+		connections
+ 			conn1: port src.enq -> dest.deq;
+	end top_process.impl;
+
+	system top
+	end top;
+	
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			test_event_data_port: process top_process.impl;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to test_event_data_port;
+			HAMR::Platform => (seL4_TB, seL4_Only);
+		annex resolute {**
+			check CASE_Tools
+		**};
+	end top.impl;
+
+end test_event_data_port;

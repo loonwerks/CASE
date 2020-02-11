@@ -1,0 +1,173 @@
+digraph g {
+graph [
+  overlap = false,
+  rankdir = "LR"
+];
+node [
+  fontsize = "16",
+  shape = "ellipse"
+];
+edge [
+];
+
+src [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>src</B></TD></TR>
+      <TR><TD PORT="sb_e_counter"><FONT COLOR="red">dataport sb_event_counter_t <B>sb_e_counter</B></FONT></TD></TR>
+      <TR><TD PORT="sb_e"><FONT COLOR="blue">emits ReceiveEvent <B>sb_e</B></FONT></TD></TR>
+      <TR><TD PORT="sb_periodic_dispatch_notification"><FONT COLOR="blue">consumes Notification <B>sb_periodic_dispatch_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+snkDefault [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>snkDefault</B></TD></TR>
+      <TR><TD PORT="sb_s_counter"><FONT COLOR="red">dataport sb_event_counter_t <B>sb_s_counter</B></FONT></TD></TR>
+      <TR><TD PORT="sb_s"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_s</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+snkQueue2_A [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>snkQueue2_A</B></TD></TR>
+      <TR><TD PORT="sb_s_counter"><FONT COLOR="red">dataport sb_event_counter_t <B>sb_s_counter</B></FONT></TD></TR>
+      <TR><TD PORT="sb_s"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_s</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+snkQueue2_B [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>snkQueue2_B</B></TD></TR>
+      <TR><TD PORT="sb_s_counter"><FONT COLOR="red">dataport sb_event_counter_t <B>sb_s_counter</B></FONT></TD></TR>
+      <TR><TD PORT="sb_s"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_s</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+snkQueue5 [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>snkQueue5</B></TD></TR>
+      <TR><TD PORT="sb_s_counter"><FONT COLOR="red">dataport sb_event_counter_t <B>sb_s_counter</B></FONT></TD></TR>
+      <TR><TD PORT="sb_s"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_s</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+dispatch_periodic_inst [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>dispatch_periodic_inst</B></TD></TR>
+      <TR><TD PORT="sb_src_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_src_periodic_dispatch_notification</B></FONT></TD></TR>
+      <TR><TD PORT="timer"><FONT COLOR="orange">uses Timer <B>timer</B></FONT></TD></TR>
+      <TR><TD PORT="timer_complete"><FONT COLOR="blue">consumes Notification <B>timer_complete</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+connectiontypekey [
+  label=<
+   <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+     <TR><TD COLSPAN="2"><B>Key: Connection Types</B></TD></TR>
+     <TR><TD><FONT COLOR="red">seL4SharedData</FONT></TD><TD BGCOLOR="red">red</TD></TR>
+     <TR><TD><FONT COLOR="blue">seL4Notification</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="orange">seL4RPCCall</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+   </TABLE>
+  >
+  shape=plaintext
+];
+
+interfacetypekey [
+  label=<
+   <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+     <TR><TD COLSPAN="2"><B>Key: Interface Types</B></TD></TR>
+     <TR><TD><FONT COLOR="red">dataport</FONT></TD><TD BGCOLOR="red">red</TD></TR>
+     <TR><TD><FONT COLOR="blue">emits</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="blue">consumes</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="orange">provides</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+     <TR><TD><FONT COLOR="orange">uses</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+   </TABLE>
+  >
+  shape=plaintext
+];
+
+"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn1
+];
+
+"src":sb_e -> "snkDefault":sb_s [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn2
+];
+
+"src":sb_e_counter -> "snkDefault":sb_s_counter [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn3
+];
+
+"src":sb_e -> "snkQueue2_A":sb_s [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn4
+];
+
+"src":sb_e_counter -> "snkQueue2_A":sb_s_counter [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn5
+];
+
+"src":sb_e -> "snkQueue2_B":sb_s [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn6
+];
+
+"src":sb_e_counter -> "snkQueue2_B":sb_s_counter [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn7
+];
+
+"src":sb_e -> "snkQueue5":sb_s [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn8
+];
+
+"src":sb_e_counter -> "snkQueue5":sb_s_counter [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn9
+];
+
+"dispatch_periodic_inst":timer -> "time_server":the_timer [
+  color="grey"
+  //label = "seL4TimeServer"
+  id = conn10
+];
+
+"time_server":timer_notification -> "dispatch_periodic_inst":timer_complete [
+  color="grey"
+  //label = "seL4GlobalAsynchCallback"
+  id = conn11
+];
+
+}

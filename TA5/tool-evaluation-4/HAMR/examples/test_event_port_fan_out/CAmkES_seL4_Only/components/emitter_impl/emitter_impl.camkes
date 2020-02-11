@@ -1,0 +1,11 @@
+import <std_connector.camkes>;
+
+component emitter_impl {
+  include <sb_proc_types.h>;
+  include <sb_event_counter.h>;
+  control;
+  emits ReceiveEvent sb_e;
+  consumes Notification sb_periodic_dispatch_notification;
+  dataport sb_event_counter_t sb_e_counter;
+  has semaphore sb_dispatch_sem;
+}

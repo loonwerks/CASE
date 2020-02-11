@@ -1,0 +1,64 @@
+package test_data_port
+public
+	with Base_Types;
+	with HAMR;
+
+	thread source_t
+		features
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Sporadic;
+			Source_Text => ("behavior_code/components/source/src/source.c");
+			Initialize_Entrypoint_Source_Text => "test_data_port_source_component_init";
+			Compute_Entrypoint_Source_Text => "run_sender";
+	end source_t;
+	
+	thread implementation source_t.impl
+	end source_t.impl;
+		
+	thread destination_t
+		features
+			read_port: in data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Sporadic;
+			Source_Text => ("behavior_code/components/destination/src/destination.c");
+			Initialize_Entrypoint_Source_Text => "test_data_port_destination_component_init";
+			Compute_Entrypoint_Source_Text => "run_receiver";
+	end destination_t;
+	
+	thread implementation destination_t.impl
+	end destination_t.impl;
+
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+	end proc.impl;
+
+	process top_process
+	end top_process;
+
+	process implementation top_process.impl
+		subcomponents
+			src: thread source_t.impl;
+			dest: thread destination_t.impl;
+		connections
+ 			conn1: port src.write_port -> dest.read_port;
+	end top_process.impl;
+
+	system top
+	end top;
+	
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			test_data_port: process top_process.impl;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to test_data_port;
+			HAMR::PLatform => (seL4_TB, seL4_Only);
+		annex resolute {**
+			check CASE_Tools
+		**};
+	end top.impl;
+	
+end test_data_port;

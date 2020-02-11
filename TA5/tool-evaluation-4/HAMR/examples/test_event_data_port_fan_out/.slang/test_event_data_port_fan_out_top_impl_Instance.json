@@ -1,0 +1,3898 @@
+{
+  "type" : "Aadl",
+  "components" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : ["top_impl_Instance"],
+        "pos" : {
+          "type" : "Some",
+          "value" : {
+            "type" : "Position",
+            "uriOpt" : {
+              "type" : "Some",
+              "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+            },
+            "beginLine" : 90,
+            "beginColumn" : 2,
+            "endLine" : 100,
+            "endColumn" : 15,
+            "offset" : 2654,
+            "length" : 329
+          }
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "System"
+      },
+      "classifier" : {
+        "type" : "None"
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "test_event_data_port"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                },
+                "beginLine" : 93,
+                "beginColumn" : 4,
+                "endLine" : 93,
+                "endColumn" : 51,
+                "offset" : 2734,
+                "length" : 47
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Process"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "test_event_data_port_fan_out::top_process.impl"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "src"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 75,
+                    "beginColumn" : 4,
+                    "endLine" : 75,
+                    "endColumn" : 29,
+                    "offset" : 2232,
+                    "length" : 25
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "test_event_data_port_fan_out::emitter.impl"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 8,
+                        "beginColumn" : 4,
+                        "endLine" : 8,
+                        "endColumn" : 51,
+                        "offset" : 105,
+                        "length" : 47
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq", "Programming_Properties::Source_Text"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                            },
+                            "beginLine" : 234,
+                            "beginColumn" : 2,
+                            "endLine" : 236,
+                            "endColumn" : 76,
+                            "offset" : 17037,
+                            "length" : 224
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "behavior_code\/components\/emitter\/src\/emitter.c"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 78,
+                            "beginColumn" : 4,
+                            "endLine" : 78,
+                            "endColumn" : 88,
+                            "offset" : 3653,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 91,
+                            "beginColumn" : 2,
+                            "endLine" : 92,
+                            "endColumn" : 137,
+                            "offset" : 4757,
+                            "length" : 152
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "8.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 26,
+                            "beginColumn" : 4,
+                            "endLine" : 29,
+                            "endColumn" : 36,
+                            "offset" : 1108,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src", "Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                        },
+                        "beginLine" : 46,
+                        "beginColumn" : 2,
+                        "endLine" : 47,
+                        "endColumn" : 81,
+                        "offset" : 3075,
+                        "length" : 189
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 12,
+                        "beginColumn" : 2,
+                        "endLine" : 13,
+                        "endColumn" : 50,
+                        "offset" : 476,
+                        "length" : 97
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Periodic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src", "Timing_Properties::Period"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                        },
+                        "beginLine" : 191,
+                        "beginColumn" : 2,
+                        "endLine" : 192,
+                        "endColumn" : 99,
+                        "offset" : 11575,
+                        "length" : 119
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "UnitProp",
+                      "value" : "2.0E12",
+                      "unit" : {
+                        "type" : "Some",
+                        "value" : "ps"
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src", "Programming_Properties::Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 234,
+                        "beginColumn" : 2,
+                        "endLine" : 236,
+                        "endColumn" : 76,
+                        "offset" : 17037,
+                        "length" : 224
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "behavior_code\/components\/emitter\/src\/emitter.c"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src", "Programming_Properties::Initialize_Entrypoint_Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 159,
+                        "beginColumn" : 2,
+                        "endLine" : 160,
+                        "endColumn" : 31,
+                        "offset" : 11570,
+                        "length" : 76
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "test_event_data_port_emitter_component_init"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src", "Programming_Properties::Compute_Entrypoint_Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 71,
+                        "beginColumn" : 2,
+                        "endLine" : 72,
+                        "endColumn" : 79,
+                        "offset" : 5356,
+                        "length" : 121
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "run_emitter"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "snk_default"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 76,
+                    "beginColumn" : 4,
+                    "endLine" : 76,
+                    "endColumn" : 52,
+                    "offset" : 2261,
+                    "length" : 48
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "test_event_data_port_fan_out::consumer_queue_default.impl"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_default", "deq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 22,
+                        "beginColumn" : 4,
+                        "endLine" : 24,
+                        "endColumn" : 6,
+                        "offset" : 545,
+                        "length" : 140
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_default", "deq", "Programming_Properties::Source_Text"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                            },
+                            "beginLine" : 234,
+                            "beginColumn" : 2,
+                            "endLine" : 236,
+                            "endColumn" : 76,
+                            "offset" : 17037,
+                            "length" : 224
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "behavior_code\/components\/consumer\/src\/consumer_queue_default.c"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_default", "deq", "Programming_Properties::Compute_Entrypoint_Source_Text"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                            },
+                            "beginLine" : 71,
+                            "beginColumn" : 2,
+                            "endLine" : 72,
+                            "endColumn" : 79,
+                            "offset" : 5356,
+                            "length" : 121
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "test_event_data_port_consumer_s_event_handler"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_default", "deq", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 78,
+                            "beginColumn" : 4,
+                            "endLine" : 78,
+                            "endColumn" : 88,
+                            "offset" : 3653,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_default", "deq", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 91,
+                            "beginColumn" : 2,
+                            "endLine" : 92,
+                            "endColumn" : 137,
+                            "offset" : 4757,
+                            "length" : 152
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "8.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_default", "deq", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 26,
+                            "beginColumn" : 4,
+                            "endLine" : 29,
+                            "endColumn" : 36,
+                            "offset" : 1108,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_default", "Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                        },
+                        "beginLine" : 46,
+                        "beginColumn" : 2,
+                        "endLine" : 47,
+                        "endColumn" : 81,
+                        "offset" : 3075,
+                        "length" : 189
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_default", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 12,
+                        "beginColumn" : 2,
+                        "endLine" : 13,
+                        "endColumn" : 50,
+                        "offset" : 476,
+                        "length" : 97
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Sporadic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_default", "Programming_Properties::Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 234,
+                        "beginColumn" : 2,
+                        "endLine" : 236,
+                        "endColumn" : 76,
+                        "offset" : 17037,
+                        "length" : 224
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "behavior_code\/components\/consumer\/src\/consumer_queue_default.c"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_default", "Programming_Properties::Initialize_Entrypoint_Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 159,
+                        "beginColumn" : 2,
+                        "endLine" : 160,
+                        "endColumn" : 31,
+                        "offset" : 11570,
+                        "length" : 76
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "test_event_data_port_consumer_component_init"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 77,
+                    "beginColumn" : 4,
+                    "endLine" : 77,
+                    "endColumn" : 42,
+                    "offset" : 2313,
+                    "length" : 38
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "test_event_data_port_fan_out::consumer_queue_2.impl"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "deq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 36,
+                        "beginColumn" : 4,
+                        "endLine" : 39,
+                        "endColumn" : 6,
+                        "offset" : 1062,
+                        "length" : 161
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "deq", "Programming_Properties::Source_Text"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                            },
+                            "beginLine" : 234,
+                            "beginColumn" : 2,
+                            "endLine" : 236,
+                            "endColumn" : 76,
+                            "offset" : 17037,
+                            "length" : 224
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "behavior_code\/components\/consumer\/src\/consumer_queue_2.c"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "deq", "Programming_Properties::Compute_Entrypoint_Source_Text"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                            },
+                            "beginLine" : 71,
+                            "beginColumn" : 2,
+                            "endLine" : 72,
+                            "endColumn" : 79,
+                            "offset" : 5356,
+                            "length" : 121
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "test_event_data_port_consumer_s_event_handler"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "deq", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 78,
+                            "beginColumn" : 4,
+                            "endLine" : 78,
+                            "endColumn" : 88,
+                            "offset" : 3653,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "deq", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 91,
+                            "beginColumn" : 2,
+                            "endLine" : 92,
+                            "endColumn" : 137,
+                            "offset" : 4757,
+                            "length" : 152
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "8.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "deq", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 26,
+                            "beginColumn" : 4,
+                            "endLine" : 29,
+                            "endColumn" : 36,
+                            "offset" : 1108,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "deq", "Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Communication_Properties.aadl"
+                            },
+                            "beginLine" : 50,
+                            "beginColumn" : 2,
+                            "endLine" : 51,
+                            "endColumn" : 63,
+                            "offset" : 2571,
+                            "length" : 111
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "2.0",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                        },
+                        "beginLine" : 46,
+                        "beginColumn" : 2,
+                        "endLine" : 47,
+                        "endColumn" : 81,
+                        "offset" : 3075,
+                        "length" : 189
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 12,
+                        "beginColumn" : 2,
+                        "endLine" : 13,
+                        "endColumn" : 50,
+                        "offset" : 476,
+                        "length" : 97
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Sporadic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "Programming_Properties::Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 234,
+                        "beginColumn" : 2,
+                        "endLine" : 236,
+                        "endColumn" : 76,
+                        "offset" : 17037,
+                        "length" : 224
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "behavior_code\/components\/consumer\/src\/consumer_queue_2.c"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "Programming_Properties::Initialize_Entrypoint_Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 159,
+                        "beginColumn" : 2,
+                        "endLine" : 160,
+                        "endColumn" : 31,
+                        "offset" : 11570,
+                        "length" : 76
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "test_event_data_port_consumer_component_init"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 78,
+                    "beginColumn" : 4,
+                    "endLine" : 78,
+                    "endColumn" : 42,
+                    "offset" : 2355,
+                    "length" : 38
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "test_event_data_port_fan_out::consumer_queue_2.impl"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "deq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 36,
+                        "beginColumn" : 4,
+                        "endLine" : 39,
+                        "endColumn" : 6,
+                        "offset" : 1062,
+                        "length" : 161
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "deq", "Programming_Properties::Source_Text"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                            },
+                            "beginLine" : 234,
+                            "beginColumn" : 2,
+                            "endLine" : 236,
+                            "endColumn" : 76,
+                            "offset" : 17037,
+                            "length" : 224
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "behavior_code\/components\/consumer\/src\/consumer_queue_2.c"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "deq", "Programming_Properties::Compute_Entrypoint_Source_Text"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                            },
+                            "beginLine" : 71,
+                            "beginColumn" : 2,
+                            "endLine" : 72,
+                            "endColumn" : 79,
+                            "offset" : 5356,
+                            "length" : 121
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "test_event_data_port_consumer_s_event_handler"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "deq", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 78,
+                            "beginColumn" : 4,
+                            "endLine" : 78,
+                            "endColumn" : 88,
+                            "offset" : 3653,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "deq", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 91,
+                            "beginColumn" : 2,
+                            "endLine" : 92,
+                            "endColumn" : 137,
+                            "offset" : 4757,
+                            "length" : 152
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "8.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "deq", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 26,
+                            "beginColumn" : 4,
+                            "endLine" : 29,
+                            "endColumn" : 36,
+                            "offset" : 1108,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "deq", "Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Communication_Properties.aadl"
+                            },
+                            "beginLine" : 50,
+                            "beginColumn" : 2,
+                            "endLine" : 51,
+                            "endColumn" : 63,
+                            "offset" : 2571,
+                            "length" : 111
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "2.0",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                        },
+                        "beginLine" : 46,
+                        "beginColumn" : 2,
+                        "endLine" : 47,
+                        "endColumn" : 81,
+                        "offset" : 3075,
+                        "length" : 189
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 12,
+                        "beginColumn" : 2,
+                        "endLine" : 13,
+                        "endColumn" : 50,
+                        "offset" : 476,
+                        "length" : 97
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Sporadic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "Programming_Properties::Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 234,
+                        "beginColumn" : 2,
+                        "endLine" : 236,
+                        "endColumn" : 76,
+                        "offset" : 17037,
+                        "length" : 224
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "behavior_code\/components\/consumer\/src\/consumer_queue_2.c"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "Programming_Properties::Initialize_Entrypoint_Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 159,
+                        "beginColumn" : 2,
+                        "endLine" : 160,
+                        "endColumn" : 31,
+                        "offset" : 11570,
+                        "length" : 76
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "test_event_data_port_consumer_component_init"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "type" : "Component",
+              "identifier" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "snk_5"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 79,
+                    "beginColumn" : 4,
+                    "endLine" : 79,
+                    "endColumn" : 40,
+                    "offset" : 2397,
+                    "length" : 36
+                  }
+                }
+              },
+              "category" : {
+                "type" : "ComponentCategory",
+                "value" : "Thread"
+              },
+              "classifier" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Classifier",
+                  "name" : "test_event_data_port_fan_out::consumer_queue_5.impl"
+                }
+              },
+              "features" : [
+                {
+                  "type" : "FeatureEnd",
+                  "identifier" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "deq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 51,
+                        "beginColumn" : 4,
+                        "endLine" : 54,
+                        "endColumn" : 6,
+                        "offset" : 1576,
+                        "length" : 161
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  },
+                  "category" : {
+                    "type" : "FeatureCategory",
+                    "value" : "EventDataPort"
+                  },
+                  "classifier" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Classifier",
+                      "name" : "Base_Types::Integer_8"
+                    }
+                  },
+                  "properties" : [
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "deq", "Programming_Properties::Source_Text"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                            },
+                            "beginLine" : 234,
+                            "beginColumn" : 2,
+                            "endLine" : 236,
+                            "endColumn" : 76,
+                            "offset" : 17037,
+                            "length" : 224
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "behavior_code\/components\/consumer\/src\/consumer_queue_5.c"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "deq", "Programming_Properties::Compute_Entrypoint_Source_Text"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                            },
+                            "beginLine" : 71,
+                            "beginColumn" : 2,
+                            "endLine" : 72,
+                            "endColumn" : 79,
+                            "offset" : 5356,
+                            "length" : 121
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "test_event_data_port_consumer_s_event_handler"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "deq", "Data_Model::Number_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 78,
+                            "beginColumn" : 4,
+                            "endLine" : 78,
+                            "endColumn" : 88,
+                            "offset" : 3653,
+                            "length" : 84
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Signed"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "deq", "Memory_Properties::Data_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                            },
+                            "beginLine" : 91,
+                            "beginColumn" : 2,
+                            "endLine" : 92,
+                            "endColumn" : 137,
+                            "offset" : 4757,
+                            "length" : 152
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "8.0",
+                          "unit" : {
+                            "type" : "Some",
+                            "value" : "bits"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "deq", "Data_Model::Data_Representation"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                            },
+                            "beginLine" : 26,
+                            "beginColumn" : 4,
+                            "endLine" : 29,
+                            "endColumn" : 36,
+                            "offset" : 1108,
+                            "length" : 162
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "ValueProp",
+                          "value" : "Integer"
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    },
+                    {
+                      "type" : "Property",
+                      "name" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "deq", "Communication_Properties::Queue_Size"],
+                        "pos" : {
+                          "type" : "Some",
+                          "value" : {
+                            "type" : "Position",
+                            "uriOpt" : {
+                              "type" : "Some",
+                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Communication_Properties.aadl"
+                            },
+                            "beginLine" : 50,
+                            "beginColumn" : 2,
+                            "endLine" : 51,
+                            "endColumn" : 63,
+                            "offset" : 2571,
+                            "length" : 111
+                          }
+                        }
+                      },
+                      "propertyValues" : [
+                        {
+                          "type" : "UnitProp",
+                          "value" : "5.0",
+                          "unit" : {
+                            "type" : "None"
+                          }
+                        }
+                      ],
+                      "appliesTo" : [
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "subComponents" : [
+              ],
+              "connections" : [
+              ],
+              "connectionInstances" : [
+              ],
+              "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                        },
+                        "beginLine" : 46,
+                        "beginColumn" : 2,
+                        "endLine" : 47,
+                        "endColumn" : 81,
+                        "offset" : 3075,
+                        "length" : 189
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "Thread_Properties::Dispatch_Protocol"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                        },
+                        "beginLine" : 12,
+                        "beginColumn" : 2,
+                        "endLine" : 13,
+                        "endColumn" : 50,
+                        "offset" : 476,
+                        "length" : 97
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "Sporadic"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "Programming_Properties::Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 234,
+                        "beginColumn" : 2,
+                        "endLine" : 236,
+                        "endColumn" : 76,
+                        "offset" : 17037,
+                        "length" : 224
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "behavior_code\/components\/consumer\/src\/consumer_queue_5.c"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "Programming_Properties::Initialize_Entrypoint_Source_Text"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                        },
+                        "beginLine" : 159,
+                        "beginColumn" : 2,
+                        "endLine" : 160,
+                        "endColumn" : 31,
+                        "offset" : 11570,
+                        "length" : 76
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ValueProp",
+                      "value" : "test_event_data_port_consumer_component_init"
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                }
+              ],
+              "flows" : [
+              ],
+              "modes" : [
+              ],
+              "annexes" : [
+                {
+                  "type" : "Annex",
+                  "name" : "Emv2",
+                  "clause" : {
+                    "type" : "Emv2Clause",
+                    "libraries" : [
+                    ],
+                    "propagations" : [
+                    ],
+                    "flows" : [
+                    ],
+                    "componentBehavior" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Emv2BehaviorSection",
+                        "events" : [
+                        ],
+                        "transitions" : [
+                        ],
+                        "propagations" : [
+                        ]
+                      }
+                    },
+                    "properties" : [
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "connections" : [
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "conn1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 81,
+                    "beginColumn" : 4,
+                    "endLine" : 81,
+                    "endColumn" : 43,
+                    "offset" : 2451,
+                    "length" : 39
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 75,
+                        "beginColumn" : 4,
+                        "endLine" : 75,
+                        "endColumn" : 29,
+                        "offset" : 2232,
+                        "length" : 25
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                          },
+                          "beginLine" : 8,
+                          "beginColumn" : 4,
+                          "endLine" : 8,
+                          "endColumn" : 51,
+                          "offset" : 105,
+                          "length" : 47
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_default"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 76,
+                        "beginColumn" : 4,
+                        "endLine" : 76,
+                        "endColumn" : 52,
+                        "offset" : 2261,
+                        "length" : 48
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "test_event_data_port", "snk_default", "deq"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                          },
+                          "beginLine" : 22,
+                          "beginColumn" : 4,
+                          "endLine" : 24,
+                          "endColumn" : 6,
+                          "offset" : 545,
+                          "length" : 140
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq -> snk_default", "deq"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ]
+            },
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "conn2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 82,
+                    "beginColumn" : 4,
+                    "endLine" : 82,
+                    "endColumn" : 39,
+                    "offset" : 2494,
+                    "length" : 35
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 75,
+                        "beginColumn" : 4,
+                        "endLine" : 75,
+                        "endColumn" : 29,
+                        "offset" : 2232,
+                        "length" : 25
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                          },
+                          "beginLine" : 8,
+                          "beginColumn" : 4,
+                          "endLine" : 8,
+                          "endColumn" : 51,
+                          "offset" : 105,
+                          "length" : 47
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 77,
+                        "beginColumn" : 4,
+                        "endLine" : 77,
+                        "endColumn" : 42,
+                        "offset" : 2313,
+                        "length" : 38
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "deq"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                          },
+                          "beginLine" : 36,
+                          "beginColumn" : 4,
+                          "endLine" : 39,
+                          "endColumn" : 6,
+                          "offset" : 1062,
+                          "length" : 161
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq -> snk_2_A", "deq"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ]
+            },
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "conn3"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 83,
+                    "beginColumn" : 4,
+                    "endLine" : 83,
+                    "endColumn" : 39,
+                    "offset" : 2533,
+                    "length" : 35
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 75,
+                        "beginColumn" : 4,
+                        "endLine" : 75,
+                        "endColumn" : 29,
+                        "offset" : 2232,
+                        "length" : 25
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                          },
+                          "beginLine" : 8,
+                          "beginColumn" : 4,
+                          "endLine" : 8,
+                          "endColumn" : 51,
+                          "offset" : 105,
+                          "length" : 47
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 78,
+                        "beginColumn" : 4,
+                        "endLine" : 78,
+                        "endColumn" : 42,
+                        "offset" : 2355,
+                        "length" : 38
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "deq"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                          },
+                          "beginLine" : 36,
+                          "beginColumn" : 4,
+                          "endLine" : 39,
+                          "endColumn" : 6,
+                          "offset" : 1062,
+                          "length" : 161
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq -> snk_2_B", "deq"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ]
+            },
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "conn4"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 84,
+                    "beginColumn" : 4,
+                    "endLine" : 84,
+                    "endColumn" : 37,
+                    "offset" : 2572,
+                    "length" : 33
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 75,
+                        "beginColumn" : 4,
+                        "endLine" : 75,
+                        "endColumn" : 29,
+                        "offset" : 2232,
+                        "length" : 25
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                          },
+                          "beginLine" : 8,
+                          "beginColumn" : 4,
+                          "endLine" : 8,
+                          "endColumn" : 51,
+                          "offset" : 105,
+                          "length" : 47
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "Out"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_5"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 79,
+                        "beginColumn" : 4,
+                        "endLine" : 79,
+                        "endColumn" : 40,
+                        "offset" : 2397,
+                        "length" : 36
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "deq"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                          },
+                          "beginLine" : 51,
+                          "beginColumn" : 4,
+                          "endLine" : 54,
+                          "endColumn" : 6,
+                          "offset" : 1576,
+                          "length" : 161
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "In"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "isBiDirectional" : false,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq -> snk_5", "deq"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ]
+            }
+          ],
+          "connectionInstances" : [
+            {
+              "type" : "ConnectionInstance",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "src.enq -> snk_default.deq"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 81,
+                    "beginColumn" : 4,
+                    "endLine" : 81,
+                    "endColumn" : 43,
+                    "offset" : 2451,
+                    "length" : 39
+                  }
+                }
+              },
+              "src" : {
+                "type" : "EndPoint",
+                "component" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "test_event_data_port", "src"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                      },
+                      "beginLine" : 75,
+                      "beginColumn" : 4,
+                      "endLine" : 75,
+                      "endColumn" : 29,
+                      "offset" : 2232,
+                      "length" : 25
+                    }
+                  }
+                },
+                "feature" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 8,
+                        "beginColumn" : 4,
+                        "endLine" : 8,
+                        "endColumn" : 51,
+                        "offset" : 105,
+                        "length" : 47
+                      }
+                    }
+                  }
+                },
+                "direction" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  }
+                }
+              },
+              "dst" : {
+                "type" : "EndPoint",
+                "component" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "test_event_data_port", "snk_default"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                      },
+                      "beginLine" : 76,
+                      "beginColumn" : 4,
+                      "endLine" : 76,
+                      "endColumn" : 52,
+                      "offset" : 2261,
+                      "length" : 48
+                    }
+                  }
+                },
+                "feature" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_default", "deq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 22,
+                        "beginColumn" : 4,
+                        "endLine" : 24,
+                        "endColumn" : 6,
+                        "offset" : 545,
+                        "length" : 140
+                      }
+                    }
+                  }
+                },
+                "direction" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  }
+                }
+              },
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "connectionRefs" : [
+                {
+                  "type" : "ConnectionReference",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "conn1"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 81,
+                        "beginColumn" : 4,
+                        "endLine" : 81,
+                        "endColumn" : 43,
+                        "offset" : 2451,
+                        "length" : 39
+                      }
+                    }
+                  },
+                  "context" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 93,
+                        "beginColumn" : 4,
+                        "endLine" : 93,
+                        "endColumn" : 51,
+                        "offset" : 2734,
+                        "length" : 47
+                      }
+                    }
+                  },
+                  "isParent" : true
+                }
+              ],
+              "properties" : [
+              ]
+            },
+            {
+              "type" : "ConnectionInstance",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "src.enq -> snk_2_A.deq"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 82,
+                    "beginColumn" : 4,
+                    "endLine" : 82,
+                    "endColumn" : 39,
+                    "offset" : 2494,
+                    "length" : 35
+                  }
+                }
+              },
+              "src" : {
+                "type" : "EndPoint",
+                "component" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "test_event_data_port", "src"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                      },
+                      "beginLine" : 75,
+                      "beginColumn" : 4,
+                      "endLine" : 75,
+                      "endColumn" : 29,
+                      "offset" : 2232,
+                      "length" : 25
+                    }
+                  }
+                },
+                "feature" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 8,
+                        "beginColumn" : 4,
+                        "endLine" : 8,
+                        "endColumn" : 51,
+                        "offset" : 105,
+                        "length" : 47
+                      }
+                    }
+                  }
+                },
+                "direction" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  }
+                }
+              },
+              "dst" : {
+                "type" : "EndPoint",
+                "component" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                      },
+                      "beginLine" : 77,
+                      "beginColumn" : 4,
+                      "endLine" : 77,
+                      "endColumn" : 42,
+                      "offset" : 2313,
+                      "length" : 38
+                    }
+                  }
+                },
+                "feature" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_A", "deq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 36,
+                        "beginColumn" : 4,
+                        "endLine" : 39,
+                        "endColumn" : 6,
+                        "offset" : 1062,
+                        "length" : 161
+                      }
+                    }
+                  }
+                },
+                "direction" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  }
+                }
+              },
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "connectionRefs" : [
+                {
+                  "type" : "ConnectionReference",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "conn2"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 82,
+                        "beginColumn" : 4,
+                        "endLine" : 82,
+                        "endColumn" : 39,
+                        "offset" : 2494,
+                        "length" : 35
+                      }
+                    }
+                  },
+                  "context" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 93,
+                        "beginColumn" : 4,
+                        "endLine" : 93,
+                        "endColumn" : 51,
+                        "offset" : 2734,
+                        "length" : 47
+                      }
+                    }
+                  },
+                  "isParent" : true
+                }
+              ],
+              "properties" : [
+              ]
+            },
+            {
+              "type" : "ConnectionInstance",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "src.enq -> snk_2_B.deq"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 83,
+                    "beginColumn" : 4,
+                    "endLine" : 83,
+                    "endColumn" : 39,
+                    "offset" : 2533,
+                    "length" : 35
+                  }
+                }
+              },
+              "src" : {
+                "type" : "EndPoint",
+                "component" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "test_event_data_port", "src"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                      },
+                      "beginLine" : 75,
+                      "beginColumn" : 4,
+                      "endLine" : 75,
+                      "endColumn" : 29,
+                      "offset" : 2232,
+                      "length" : 25
+                    }
+                  }
+                },
+                "feature" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 8,
+                        "beginColumn" : 4,
+                        "endLine" : 8,
+                        "endColumn" : 51,
+                        "offset" : 105,
+                        "length" : 47
+                      }
+                    }
+                  }
+                },
+                "direction" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  }
+                }
+              },
+              "dst" : {
+                "type" : "EndPoint",
+                "component" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                      },
+                      "beginLine" : 78,
+                      "beginColumn" : 4,
+                      "endLine" : 78,
+                      "endColumn" : 42,
+                      "offset" : 2355,
+                      "length" : 38
+                    }
+                  }
+                },
+                "feature" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_2_B", "deq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 36,
+                        "beginColumn" : 4,
+                        "endLine" : 39,
+                        "endColumn" : 6,
+                        "offset" : 1062,
+                        "length" : 161
+                      }
+                    }
+                  }
+                },
+                "direction" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  }
+                }
+              },
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "connectionRefs" : [
+                {
+                  "type" : "ConnectionReference",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "conn3"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 83,
+                        "beginColumn" : 4,
+                        "endLine" : 83,
+                        "endColumn" : 39,
+                        "offset" : 2533,
+                        "length" : 35
+                      }
+                    }
+                  },
+                  "context" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 93,
+                        "beginColumn" : 4,
+                        "endLine" : 93,
+                        "endColumn" : 51,
+                        "offset" : 2734,
+                        "length" : 47
+                      }
+                    }
+                  },
+                  "isParent" : true
+                }
+              ],
+              "properties" : [
+              ]
+            },
+            {
+              "type" : "ConnectionInstance",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "src.enq -> snk_5.deq"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                    },
+                    "beginLine" : 84,
+                    "beginColumn" : 4,
+                    "endLine" : 84,
+                    "endColumn" : 37,
+                    "offset" : 2572,
+                    "length" : 33
+                  }
+                }
+              },
+              "src" : {
+                "type" : "EndPoint",
+                "component" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "test_event_data_port", "src"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                      },
+                      "beginLine" : 75,
+                      "beginColumn" : 4,
+                      "endLine" : 75,
+                      "endColumn" : 29,
+                      "offset" : 2232,
+                      "length" : 25
+                    }
+                  }
+                },
+                "feature" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "src", "enq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 8,
+                        "beginColumn" : 4,
+                        "endLine" : 8,
+                        "endColumn" : 51,
+                        "offset" : 105,
+                        "length" : 47
+                      }
+                    }
+                  }
+                },
+                "direction" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Direction",
+                    "value" : "Out"
+                  }
+                }
+              },
+              "dst" : {
+                "type" : "EndPoint",
+                "component" : {
+                  "type" : "Name",
+                  "name" : ["top_impl_Instance", "test_event_data_port", "snk_5"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                      },
+                      "beginLine" : 79,
+                      "beginColumn" : 4,
+                      "endLine" : 79,
+                      "endColumn" : 40,
+                      "offset" : 2397,
+                      "length" : 36
+                    }
+                  }
+                },
+                "feature" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "snk_5", "deq"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 51,
+                        "beginColumn" : 4,
+                        "endLine" : 54,
+                        "endColumn" : 6,
+                        "offset" : 1576,
+                        "length" : 161
+                      }
+                    }
+                  }
+                },
+                "direction" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Direction",
+                    "value" : "In"
+                  }
+                }
+              },
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Port"
+              },
+              "connectionRefs" : [
+                {
+                  "type" : "ConnectionReference",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port", "conn4"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 84,
+                        "beginColumn" : 4,
+                        "endLine" : 84,
+                        "endColumn" : 37,
+                        "offset" : 2572,
+                        "length" : 33
+                      }
+                    }
+                  },
+                  "context" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "test_event_data_port"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                        },
+                        "beginLine" : 93,
+                        "beginColumn" : 4,
+                        "endLine" : 93,
+                        "endColumn" : 51,
+                        "offset" : 2734,
+                        "length" : 47
+                      }
+                    }
+                  },
+                  "isParent" : true
+                }
+              ],
+              "properties" : [
+              ]
+            }
+          ],
+          "properties" : [
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "test_event_data_port", "Deployment_Properties::Actual_Processor_Binding"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                    },
+                    "beginLine" : 46,
+                    "beginColumn" : 2,
+                    "endLine" : 47,
+                    "endColumn" : 81,
+                    "offset" : 3075,
+                    "length" : 189
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "None"
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            }
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "Emv2",
+              "clause" : {
+                "type" : "Emv2Clause",
+                "libraries" : [
+                ],
+                "propagations" : [
+                ],
+                "flows" : [
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                },
+                "properties" : [
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type" : "Component",
+          "identifier" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "proc"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/test_event_data_port_fan_out\/test_event_data_port_fan_out.aadl"
+                },
+                "beginLine" : 92,
+                "beginColumn" : 4,
+                "endLine" : 92,
+                "endColumn" : 30,
+                "offset" : 2704,
+                "length" : 26
+              }
+            }
+          },
+          "category" : {
+            "type" : "ComponentCategory",
+            "value" : "Processor"
+          },
+          "classifier" : {
+            "type" : "Some",
+            "value" : {
+              "type" : "Classifier",
+              "name" : "test_event_data_port_fan_out::proc.impl"
+            }
+          },
+          "features" : [
+          ],
+          "subComponents" : [
+          ],
+          "connections" : [
+          ],
+          "connectionInstances" : [
+          ],
+          "properties" : [
+          ],
+          "flows" : [
+          ],
+          "modes" : [
+          ],
+          "annexes" : [
+            {
+              "type" : "Annex",
+              "name" : "Emv2",
+              "clause" : {
+                "type" : "Emv2Clause",
+                "libraries" : [
+                ],
+                "propagations" : [
+                ],
+                "flows" : [
+                ],
+                "componentBehavior" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Emv2BehaviorSection",
+                    "events" : [
+                    ],
+                    "transitions" : [
+                    ],
+                    "propagations" : [
+                    ]
+                  }
+                },
+                "properties" : [
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["top_impl_Instance", "HAMR::Platform"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
+                },
+                "beginLine" : 28,
+                "beginColumn" : 3,
+                "endLine" : 28,
+                "endColumn" : 153,
+                "offset" : 1125,
+                "length" : 150
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "seL4_TB"
+            },
+            {
+              "type" : "ValueProp",
+              "value" : "seL4_Only"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+        {
+          "type" : "Annex",
+          "name" : "Emv2",
+          "clause" : {
+            "type" : "Emv2Clause",
+            "libraries" : [
+            ],
+            "propagations" : [
+            ],
+            "flows" : [
+            ],
+            "componentBehavior" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Emv2BehaviorSection",
+                "events" : [
+                ],
+                "transitions" : [
+                ],
+                "propagations" : [
+                ]
+              }
+            },
+            "properties" : [
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "errorLib" : [
+  ],
+  "dataComponents" : [
+    {
+      "type" : "Component",
+      "identifier" : {
+        "type" : "Name",
+        "name" : [],
+        "pos" : {
+          "type" : "None"
+        }
+      },
+      "category" : {
+        "type" : "ComponentCategory",
+        "value" : "Data"
+      },
+      "classifier" : {
+        "type" : "Some",
+        "value" : {
+          "type" : "Classifier",
+          "name" : "Base_Types::Integer_8"
+        }
+      },
+      "features" : [
+      ],
+      "subComponents" : [
+      ],
+      "connections" : [
+      ],
+      "connectionInstances" : [
+      ],
+      "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Data_Model::Number_Representation"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.contribution.sei\/resources\/properties\/Data_Model.aadl"
+                },
+                "beginLine" : 78,
+                "beginColumn" : 4,
+                "endLine" : 78,
+                "endColumn" : 88,
+                "offset" : 3653,
+                "length" : 84
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "Signed"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        },
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["Memory_Properties::Data_Size"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Memory_Properties.aadl"
+                },
+                "beginLine" : 91,
+                "beginColumn" : 2,
+                "endLine" : 92,
+                "endColumn" : 137,
+                "offset" : 4757,
+                "length" : 152
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "UnitProp",
+              "value" : "8.0",
+              "unit" : {
+                "type" : "Some",
+                "value" : "bits"
+              }
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
+      ],
+      "flows" : [
+      ],
+      "modes" : [
+      ],
+      "annexes" : [
+      ]
+    }
+  ]
+}

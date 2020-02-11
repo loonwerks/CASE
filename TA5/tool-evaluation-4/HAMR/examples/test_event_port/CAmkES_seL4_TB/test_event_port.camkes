@@ -1,0 +1,19 @@
+import <std_connector.camkes>;
+import "components/emitter_impl/emitter_impl.camkes";
+import "components/consumer_impl/consumer_impl.camkes";
+import "components/sb_Monitors/sb_snk_s_Monitor/sb_snk_s_Monitor.camkes";
+
+assembly {
+  composition {
+    component emitter_impl src;
+    component consumer_impl snk;
+    component sb_snk_s_Monitor sb_snk_s_monitor;
+
+    connection seL4RPCCall conn1(from src.sb_e0, to sb_snk_s_monitor.mon_send);
+    connection seL4RPCCall conn2(from snk.sb_s, to sb_snk_s_monitor.mon_receive);
+    connection seL4Notification conn3(from sb_snk_s_monitor.monsig, to snk.sb_s_notification);
+  }
+
+  configuration {
+  }
+}

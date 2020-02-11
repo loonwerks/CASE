@@ -1,0 +1,8 @@
+import "../../interfaces/AADLEvent_Sender.idl4";
+
+component emitter_impl {
+  include <sb_proc_types.h>;
+  control;
+  uses AADLEvent_Sender sb_e0;
+  has semaphore sb_dispatch_sem;
+}

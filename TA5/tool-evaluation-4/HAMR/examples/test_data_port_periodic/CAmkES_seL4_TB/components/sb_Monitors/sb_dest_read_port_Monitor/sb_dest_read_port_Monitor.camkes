@@ -1,0 +1,7 @@
+import "../../../interfaces/sb_Monitor_int8_t.idl4";
+
+component sb_dest_read_port_Monitor {
+
+  provides sb_Monitor_int8_t mon;
+  emits DataportWrite monsig;
+}

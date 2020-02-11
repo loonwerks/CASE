@@ -1,0 +1,45 @@
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <TimeServer/TimeServer.camkes>;;
+import "components/emitter_impl/emitter_impl.camkes";
+import "components/consumer_queue_default_impl/consumer_queue_default_impl.camkes";
+import "components/consumer_queue_2_impl/consumer_queue_2_impl.camkes";
+import "components/consumer_queue_5_impl/consumer_queue_5_impl.camkes";
+import "components/dispatch_periodic/dispatch_periodic.camkes";
+
+assembly {
+  composition {
+    component emitter_impl src;
+    component consumer_queue_default_impl snkDefault;
+    component consumer_queue_2_impl snkQueue2_A;
+    component consumer_queue_2_impl snkQueue2_B;
+    component consumer_queue_5_impl snkQueue5;
+    component dispatch_periodic dispatch_periodic_inst;
+    component TimeServer time_server;
+
+    connection seL4Notification conn1(from dispatch_periodic_inst.sb_src_periodic_dispatch_notification, to src.sb_periodic_dispatch_notification);
+    connection seL4Notification conn2(from src.sb_e, to snkDefault.sb_s);
+    connection seL4SharedData conn3(from src.sb_e_counter, to snkDefault.sb_s_counter);
+    connection seL4Notification conn4(from src.sb_e, to snkQueue2_A.sb_s);
+    connection seL4SharedData conn5(from src.sb_e_counter, to snkQueue2_A.sb_s_counter);
+    connection seL4Notification conn6(from src.sb_e, to snkQueue2_B.sb_s);
+    connection seL4SharedData conn7(from src.sb_e_counter, to snkQueue2_B.sb_s_counter);
+    connection seL4Notification conn8(from src.sb_e, to snkQueue5.sb_s);
+    connection seL4SharedData conn9(from src.sb_e_counter, to snkQueue5.sb_s_counter);
+    connection seL4TimeServer conn10(from dispatch_periodic_inst.timer, to time_server.the_timer);
+    connection seL4GlobalAsynchCallback conn11(from time_server.timer_notification, to dispatch_periodic_inst.timer_complete);
+  }
+
+  configuration {
+    src.sb_e_counter_access = "W";
+    snkDefault.sb_s_counter_access = "R";
+    snkQueue2_A.sb_s_counter_access = "R";
+    snkQueue2_B.sb_s_counter_access = "R";
+    snkQueue5.sb_s_counter_access = "R";
+    time_server.timers_per_client = 1;
+    dispatch_periodic_inst.timer_attributes = 1;
+    dispatch_periodic_inst.timer_global_endpoint = "dispatch_periodic_timer";
+    dispatch_periodic_inst.timer_complete_global_endpoint = "dispatch_periodic_timer";
+    dispatch_periodic_inst.priority = 201;
+  }
+}

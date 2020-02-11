@@ -1,0 +1,102 @@
+package test_event_port_fan_out
+public
+	with HAMR;
+		
+	thread emitter
+		features
+			e: out event port;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 2 sec;
+			
+			Initialize_Entrypoint_Source_Text => "test_event_port_emitter_component_init";
+			Source_Text => ("behavior_code/components/Emitter/src/emitter.c");
+			Compute_Entrypoint_Source_Text => "run_emitter";
+	end emitter;
+	
+	thread implementation emitter.impl
+	end emitter.impl;
+
+	thread consumer_queue_default
+		features
+			s: in event port {
+				Compute_Entrypoint_Source_Text => "test_event_port_consumer_s_event_handler";
+			};
+		properties
+			Dispatch_Protocol => Sporadic;
+			Initialize_Entrypoint_Source_Text => "test_event_port_consumer_component_init";
+			Source_Text => ("behavior_code/components/Consumer/src/consumer_queue_default.c");
+	end consumer_queue_default;
+	
+	thread implementation consumer_queue_default.impl
+	end consumer_queue_default.impl;
+	
+	thread consumer_queue_2
+		features
+			s: in event port {
+				Compute_Entrypoint_Source_Text => "test_event_port_consumer_s_event_handler";
+				Queue_Size => 2;
+			};
+		properties
+			Dispatch_Protocol => Sporadic;
+			Initialize_Entrypoint_Source_Text => "test_event_port_consumer_component_init";
+			Source_Text => ("behavior_code/components/Consumer/src/consumer_queue_2.c");
+	end consumer_queue_2;
+	
+	thread implementation consumer_queue_2.impl
+	end consumer_queue_2.impl;
+
+	thread consumer_queue_5
+		features
+			s: in event port {
+				Compute_Entrypoint_Source_Text => "test_event_port_consumer_s_event_handler";
+				Queue_Size => 5;
+			};
+		properties
+			Dispatch_Protocol => Sporadic;
+			Initialize_Entrypoint_Source_Text => "test_event_port_consumer_component_init";
+			Source_Text => ("behavior_code/components/Consumer/src/consumer_queue_5.c");
+	end consumer_queue_5;
+	
+	thread implementation consumer_queue_5.impl
+	end consumer_queue_5.impl;
+	
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+	end proc.impl;
+
+	process top_process
+	end top_process;
+
+	process implementation top_process.impl
+		subcomponents
+			src: thread emitter.impl;
+			snkDefault: thread consumer_queue_default.impl;
+			snkQueue2_A: thread consumer_queue_2.impl;
+			snkQueue2_B: thread consumer_queue_2.impl;
+			snkQueue5: thread consumer_queue_5.impl;
+		connections
+			conn1: port src.e -> snkDefault.s;
+			conn2: port src.e -> snkQueue2_A.s;
+			conn3: port src.e -> snkQueue2_B.s;
+			conn5: port src.e -> snkQueue5.s;
+	end top_process.impl;
+
+	system top
+	end top;
+	
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			test_event_port: process top_process.impl;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to test_event_port;
+			HAMR::Platform => (seL4_TB, seL4_Only);
+		annex resolute {**
+			check CASE_Tools
+		**};
+	end top.impl;
+	
+end test_event_port_fan_out;
