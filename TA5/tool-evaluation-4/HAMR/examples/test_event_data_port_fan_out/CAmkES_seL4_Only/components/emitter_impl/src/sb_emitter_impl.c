@@ -28,7 +28,7 @@ bool periodic_dispatcher_write_int64_t(const int64_t * arg) {
 
 void sb_periodic_dispatch_notification_callback(void *_ UNUSED) {
    // we want time in microseconds, not nanoseconds, so we divide by 1000.
-   int64_t sb_time_periodic_dispatcher = 0;
+   int64_t sb_time_periodic_dispatcher = 0; // sb_timer_time() / 1000LL -- timer connection disabled;
    (void)periodic_dispatcher_write_int64_t(&sb_time_periodic_dispatcher);
    CALLBACKOP(sb_periodic_dispatch_notification_reg_callback(sb_periodic_dispatch_notification_callback, NULL));
 }

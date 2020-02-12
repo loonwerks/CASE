@@ -37,6 +37,8 @@ connectiontypekey [
      <TR><TD><FONT COLOR="red">seL4SharedData</FONT></TD><TD BGCOLOR="red">red</TD></TR>
      <TR><TD><FONT COLOR="blue">seL4Notification</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
      <TR><TD><FONT COLOR="orange">seL4RPCCall</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+     <TR><TD><FONT COLOR="green">seL4TimeServer</FONT></TD><TD BGCOLOR="green">green</TD></TR>
+     <TR><TD><FONT COLOR="brown">seL4GlobalAsynchCallback</FONT></TD><TD BGCOLOR="brown">brown</TD></TR>
    </TABLE>
   >
   shape=plaintext
