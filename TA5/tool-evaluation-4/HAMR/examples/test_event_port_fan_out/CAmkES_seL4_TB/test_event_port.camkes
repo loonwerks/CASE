@@ -45,8 +45,6 @@ assembly {
   configuration {
     time_server.timers_per_client = 1;
     dispatch_periodic_inst.timer_attributes = 1;
-    dispatch_periodic_inst.timer_global_endpoint = "dispatch_periodic_timer";
-    dispatch_periodic_inst.timer_complete_global_endpoint = "dispatch_periodic_timer";
     dispatch_periodic_inst.priority = 201;
   }
 }
