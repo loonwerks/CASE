@@ -7,7 +7,7 @@ set -exuo pipefail
 : "${GIT_USER:=Snail Mail}"
 : "${GIT_EMAIL:=<>}"
 
-: "${SIREUM_V:=ffa047c}"
+: "${SIREUM_V:=bcbee6d}"
 : "${OCAML_V:=4.07.1}"
 : "${COQ_V:=8.9.1}"
 : "${MENHIR_V:=20190626}"

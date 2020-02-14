@@ -37,8 +37,9 @@ bash case-setup.sh
 
 ### Notes
 
-By default, the VM is configured with 4 cores, 8GB RAM, 60GB disk size, and 64MB video memory.
+By default, the VM is configured with 4 cores, 8GB RAM, and 64MB video memory.
 These settings can be changed in [Vagrantfile](Vagrantfile) or in the built VM after provisioning.
+The VM disk size is derived from the base box [bento/debian-10](https://app.vagrantup.com/bento/boxes/debian-10), which is 64GB.
 
 ### Setup
 

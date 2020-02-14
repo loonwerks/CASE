@@ -16,18 +16,18 @@ Vagrant.configure("2") do |config|
     exec "vagrant " + ARGV.join(' ')
   end
 
-  config.vm.box = "debian/buster64"
+  config.vm.box = "bento/debian-10"
+  config.vm.box_version = "202002.04.0"
   config.vm.provider :virtualbox do |vb|
     vb.cpus = 4
     vb.memory = 8092
     vb.gui = true
-    vb.linked_clone = true
+    vb.linked_clone = false
     vb.customize ["modifyvm", :id, "--vram", "64"]
     vb.customize ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
     vb.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
     vb.customize ["modifyvm", :id, "--graphicscontroller", "vmsvga"]
   end
-  config.disksize.size = '60GB'
 
   if ENV['FIRST_RUN'] == 'true'
     config.vbguest.auto_update = false
