@@ -84,7 +84,8 @@ vagrant destroy
   cd $SIREUM_HOME
   git checkout master
   git pull --recurse-submodules
-  bin\build.cmd
+  git submodule update --init --recursive
+  bin/build.cmd
   ```
 
 * To install the IntelliJ-based [Sireum IVE](https://github.com/sireum/kekinian)
@@ -113,5 +114,3 @@ vagrant destroy
   bash ~/bin/sel4-cache.sh <BASE_DIR> <SEL4-MANIFEST-COMMIT> # commit sha of https://github.com/seL4/sel4test-manifest
   bash ~/bin/camkes-cache.sh <BASE_DIR> <CAMKES_MANIFEST_COMMIT> # commit sha of https://github.com/seL4/camkes-manifest
   ```
-
-  Reminder: by default, ``<BASE_DIR>`` is ``~/CASE``.
