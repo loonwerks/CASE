@@ -3,7 +3,9 @@
 This folder contains scripts and Vagrantfile to setup environment for CASE tools.
 
 Once setup (instructions below), all CASE tools/artifacts are installed in ``~/CASE`` 
-(can be overriden by specifying ``BASE_DIR`` env var; pease see [case-setup.sh](case-setup.sh)); 
+(can be overriden by specifying ``BASE_DIR`` env var; pease see [case-setup.sh](case-setup.sh)).
+Additional tools and scripts are installed in ``~/bin``.
+
 to run FMIDE:
 
 ```bash
@@ -104,3 +106,12 @@ vagrant destroy
   ```bash
   $SIREUM_HOME/bin/install/clion.cmd
   ```
+
+* To update seL4 and friends (cache, etc.):
+
+  ```bash
+  bash ~/bin/sel4-cache.sh <BASE_DIR> <SEL4-MANIFEST-COMMIT> # commit sha of https://github.com/seL4/sel4test-manifest
+  bash ~/bin/camkes-cache.sh <BASE_DIR> <CAMKES_MANIFEST_COMMIT> # commit sha of https://github.com/seL4/camkes-manifest
+  ```
+
+  Reminder: by default, ``<BASE_DIR>`` is ``~/CASE``.

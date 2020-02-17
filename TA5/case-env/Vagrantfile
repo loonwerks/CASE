@@ -3,7 +3,7 @@
 
 Vagrant.configure("2") do |config|
 
-  required_plugins = %w( vagrant-vbguest vagrant-disksize )
+  required_plugins = %w( vagrant-vbguest )
   _retry = false
   required_plugins.each do |plugin|
     unless Vagrant.has_plugin? plugin
@@ -36,6 +36,8 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "case-setup.sh", destination: "case-setup.sh"
 
   config.vm.provision "file", source: "addons", destination: "addons"
+
+  config.vm.provision "file", source: "bin", destination: "bin"
 
   config.vm.provision "shell", inline: <<-SHELL
     export DEBIAN_FRONTEND=noninteractive
