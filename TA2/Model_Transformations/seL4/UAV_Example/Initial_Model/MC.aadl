@@ -74,6 +74,22 @@ public
 	bus implementation MC_Bus.Impl
 	end MC_Bus.Impl;
 
+	system test1
+	end test1;
+
+	system implementation test1.impl
+		subcomponents
+			SYS: system test2.impl;
+	end test1.impl;
+
+	system test2
+	end test2;
+
+	system implementation test2.impl
+		subcomponents
+			PROC_SW: process SW::SW.Impl;
+	end test2.impl;
+
 	virtual processor CASE_Virtual_Machine
 		properties
 			CASE_Properties::COMP_TYPE => VIRTUAL_MACHINE;
@@ -83,20 +99,6 @@ public
 		properties
 			CASE_Properties::OS => "Linux";
 	end CASE_Virtual_Machine.Impl;
-
-	system test1
-	end test1;
-	system implementation test1.impl
-		subcomponents
-			SYS: system test2.impl;
-	end test1.impl;
-	
-	system test2
-	end test2;
-	system implementation test2.impl
-		subcomponents
-			PROC_SW: process SW::SW.Impl;
-	end test2.impl;
 
 	-- The MissionComputer onboard the UAV
 	system MissionComputer
@@ -144,7 +146,7 @@ public
 			bac7: bus access UART_HW.UARTA <-> UARTA;
 			bac8: bus access WIFI_HW.WIFIA <-> WIFIA;
 		properties
-			Actual_Processor_Binding => (reference (PROC_HW)) applies to PROC_SW, VM;
+			Actual_Processor_Binding => (reference (PROC_HW)) applies to PROC_SW, VM, PROC_SW.UXAS.WPM;
 			Actual_Memory_Binding => (reference (MEM_HW)) applies to PROC_SW;
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
 			Actual_Processor_Binding => (reference (VM)) applies to PROC_SW.UXAS;

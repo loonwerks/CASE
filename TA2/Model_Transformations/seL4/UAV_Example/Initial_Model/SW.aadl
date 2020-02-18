@@ -123,8 +123,7 @@ public
 		features
 			flight_plan: out data port Mission;
 			recv_map: in event data port RF_Msg.Impl;
-			request_nofly_zones: out event data port Map;
-			nofly_zones: in event data port MapArray;
+			nofly_zones: in data port MapArray;
 			position_status: in event data port Coordinate.Impl;
 		annex agree {**
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
@@ -140,8 +139,7 @@ public
 		-- The database is populated at build-time and stored in memory.
 		-- When provided a map of a region, it will return all no-fly areas within that region.
 		features
-			map: in event data port Map;
-			zones: out event data port MapArray;
+			zones: out data port MapArray;
 	end NoFlyZoneDatabase;
 
 	thread implementation NoFlyZoneDatabase.Impl
@@ -180,12 +178,11 @@ public
 		connections
 			c1: port recv_map -> FPLN.recv_map;
 			c2: port FPLN.flight_plan -> WPM.flight_plan;
-			c3: port FPLN.request_nofly_zones -> NFDB.map;
-			c4: port NFDB.zones -> FPLN.nofly_zones;
-			c5: port WPM.mission_window -> mission_window;
-			c6: port position_status -> FPLN.position_status;
-			c7: port position_status -> WPM.position_status;
-			c8: port FPLN.flight_plan -> flight_plan;
+			c3: port NFDB.zones -> FPLN.nofly_zones;
+			c4: port WPM.mission_window -> mission_window;
+			c5: port position_status -> FPLN.position_status;
+			c6: port position_status -> WPM.position_status;
+			c7: port FPLN.flight_plan -> flight_plan;
 	end UxAS.Impl;
 
 	thread CameraManager

@@ -3,7 +3,6 @@ public
 	with SW;
 	with UAS_Buses;
 	with CASE_Model_Transformations;
-	with CASE_Properties;
 
 	-- The radio communication hardware
 	device Radio
@@ -19,7 +18,7 @@ public
 	device implementation Radio.Impl
 	end Radio.Impl;
 
-	-- The serial communication hardware
+		-- The serial communication hardware
 	device UART
 		features
 			MCA: requires bus access MC_Bus.Impl;
@@ -33,7 +32,7 @@ public
 	device implementation UART.Impl
 	end UART.Impl;
 
-	-- The Wifi communication hardware
+		-- The Wifi communication hardware
 	device Wifi
 		features
 			MCA: requires bus access MC_Bus.Impl;
@@ -47,18 +46,16 @@ public
 	device implementation Wifi.Impl
 	end Wifi.Impl;
 
-	-- The Mission Computer processor
+		-- The Mission Computer processor
 	processor MC_Proc
 		features
 			MCA: requires bus access MC_Bus.Impl;
 	end MC_Proc;
 
 	processor implementation MC_Proc.Impl
-		properties
-			CASE_Properties::OS => "seL4";
 	end MC_Proc.Impl;
 
-	-- The Mission Computer RAM
+		-- The Mission Computer RAM
 	memory MC_Mem
 		features
 			MCA: requires bus access MC_Bus.Impl;
@@ -67,24 +64,14 @@ public
 	memory implementation MC_Mem.Impl
 	end MC_Mem.Impl;
 
-	-- The Mission Computer on-board bus
+		-- The Mission Computer on-board bus
 	bus MC_Bus
 	end MC_Bus;
 
 	bus implementation MC_Bus.Impl
 	end MC_Bus.Impl;
 
-	virtual processor CASE_Virtual_Machine
-		properties
-			CASE_Properties::COMP_TYPE => VIRTUAL_MACHINE;
-	end CASE_Virtual_Machine;
-
-	virtual processor implementation CASE_Virtual_Machine.Impl
-		properties
-			CASE_Properties::OS => "Linux";
-	end CASE_Virtual_Machine.Impl;
-
-	-- The MissionComputer onboard the UAV
+		-- The MissionComputer onboard the UAV
 	system MissionComputer
 		features
 			radio_recv: in event data port;
@@ -107,8 +94,15 @@ public
 			BUS_HW: bus MC_Bus.Impl;
 			PROC_SW: process SW::SW.Impl;
 			WIFI_HW: device Wifi.Impl;
---			VM: virtual processor CASE_Virtual_Machine.Impl;
 		connections
+			bac1: bus access RADIO_HW.MCA <-> BUS_HW;
+			bac2: bus access UART_HW.MCA <-> BUS_HW;
+			bac3: bus access PROC_HW.MCA <-> BUS_HW;
+			bac4: bus access MEM_HW.MCA <-> BUS_HW;
+			bac5: bus access WIFI_HW.MCA <-> BUS_HW;
+			bac6: bus access RADIO_HW.RFA <-> RFA;
+			bac7: bus access UART_HW.UARTA <-> UARTA;
+			bac8: bus access WIFI_HW.WIFIA <-> WIFIA;
 			c1: port radio_recv -> RADIO_HW.recv_data_in;
 			c2: port RADIO_HW.recv_data_out -> PROC_SW.radio_recv;
 			c3: port PROC_SW.radio_send -> RADIO_HW.send_data_in;
@@ -121,19 +115,10 @@ public
 			c10: port WIFI_HW.recv_data_out -> PROC_SW.wifi_recv;
 			c11: port PROC_SW.wifi_send -> WIFI_HW.send_data_in;
 			c12: port WIFI_HW.send_data_out -> wifi_send;
-			bac1: bus access RADIO_HW.MCA <-> BUS_HW;
-			bac2: bus access UART_HW.MCA <-> BUS_HW;
-			bac3: bus access PROC_HW.MCA <-> BUS_HW;
-			bac4: bus access MEM_HW.MCA <-> BUS_HW;
-			bac5: bus access WIFI_HW.MCA <-> BUS_HW;
-			bac6: bus access RADIO_HW.RFA <-> RFA;
-			bac7: bus access UART_HW.UARTA <-> UARTA;
-			bac8: bus access WIFI_HW.WIFIA <-> WIFIA;
 		properties
 			Actual_Processor_Binding => (reference (PROC_HW)) applies to PROC_SW;
 			Actual_Memory_Binding => (reference (MEM_HW)) applies to PROC_SW;
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
---			Actual_Processor_Binding => (reference (VM)) applies to PROC_SW.UXAS;
 	end MissionComputer.Impl;
 
 end MC;
