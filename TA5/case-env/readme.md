@@ -121,7 +121,7 @@ vagrant destroy
   Then, to launch it:
 
   ```bash
-  $SIREUM_HOME/bin/linux/clion/bin/clion.sh
+  $SIREUM_HOME/bin/linux/clion/bin/clion.sh&
   ```
 
 * To install [CompCert](http://compcert.inria.fr/) (including [Coq](https://coq.inria.fr/)):
