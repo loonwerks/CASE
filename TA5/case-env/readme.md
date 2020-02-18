@@ -1,6 +1,10 @@
 # CASE Environment Setup
 
-This folder contains scripts and Vagrantfile to setup environment for CASE tools.
+This folder contains scripts and Vagrantfile to setup environment for CASE tools, either:
+
+* [in a dedicated Linux machine](#setting-up-a-dedicated-linux-machine), or
+
+* [by automatically provisioning a Linux VM using VirtualBox and Vagrant](#setting-up-a-virtualbox-vm-using-vagrant).
 
 Once setup (instructions below), all CASE tools/artifacts are installed in ``~/CASE`` 
 (can be overriden by specifying ``BASE_DIR`` env var; pease see [case-setup.sh](case-setup.sh)).
@@ -13,7 +17,7 @@ fmide&
 The above will launch ``fmide`` installed in ``~/CASE/Sireum/bin/linux/fmide``.
 
 
-## Setting Up A Linux Machine
+## Setting Up A Dedicated Linux Machine
 
 ### Requirement
 
@@ -21,11 +25,13 @@ The above will launch ``fmide`` installed in ``~/CASE/Sireum/bin/linux/fmide``.
 
 ### Steps
 
-Install Debian 10 and run the following in a terminal:
+Run the following (and subsequent commands) in your local repo's case-env directory:
 
 ```bash
 bash case-setup.sh
 ```
+
+See [Post Setup](#post-setup) below for additional instructions.
 
 
 ## Setting Up A VirtualBox VM Using Vagrant
@@ -67,6 +73,8 @@ If there is an error when running the setup script (e.g., internet connection is
 ```bash
 vagrant destroy
 ```
+
+See [Post Setup](#post-setup) below for additional instructions.
 
 
 ## Post Setup
