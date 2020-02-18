@@ -1,7 +1,7 @@
 #include <camkes.h>
 #include <stdio.h>
 #include <sb_proc_types.h>
-#include <sb_destination_t_impl.h>
+#include <sb_destination_thread_impl.h>
 
 void test_data_port_periodic_domains_destination_component_init(const int64_t *arg) {
   printf("[%s] test_data_port_periodic_domains_destination_component_init called\n", get_instance_name());

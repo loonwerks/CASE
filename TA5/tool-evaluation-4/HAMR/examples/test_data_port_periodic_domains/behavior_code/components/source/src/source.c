@@ -1,7 +1,7 @@
 #include <camkes.h>
 #include <stdio.h>
 #include <sb_proc_types.h>
-#include <sb_source_t_impl.h>
+#include <sb_source_thread_impl.h>
 
 static int8_t _value;
 

@@ -104,11 +104,11 @@ public
 			data_interconnect: port source_process_component.write_port -> destination_process_component.read_port;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to source_process_component;
-			Actual_Processor_Binding => (reference (proc)) applies to destination_process_component;
+			--Actual_Processor_Binding => (reference (proc)) applies to destination_process_component;
 			HAMR::Platform => (seL4_TB, seL4_Only);
-		annex resolute {**
-			check CASE_Tools
-		**};
+		--annex resolute {**
+		--	check CASE_Tools
+		--**};
 	end top.impl;
 	
 end test_data_port_periodic_domains;
