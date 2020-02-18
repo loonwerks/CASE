@@ -8,10 +8,6 @@ set -exuo pipefail
 : "${GIT_EMAIL:=<>}"
 
 : "${SIREUM_V:=e97dfb8}"
-: "${OCAML_V:=4.07.1}"
-: "${COQ_V:=8.9.1}"
-: "${MENHIR_V:=20190626}"
-: "${COMPCERT_V:=v3.6}"
 : "${SEL4_V:=3232714b267c613775287472ae229000dd24aa8d}"
 : "${CAMKES_V:=67ce937df0c8f821e6a9f4615d9d2fa2bf9a8885}"
 
