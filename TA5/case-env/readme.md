@@ -32,9 +32,9 @@ bash case-setup.sh
 
 ### Requirements
 
-* [VirtualBox](https://www.virtualbox.org/) 6.1.2 or above
+* [VirtualBox](https://www.virtualbox.org/) **6.1.2** or above
 
-* [Vagrant](https://www.vagrantup.com/) 2.2.7 or above
+* [Vagrant](https://www.vagrantup.com/) **2.2.7** or above
 
 ### Notes
 
@@ -130,7 +130,7 @@ vagrant destroy
   bash ~/bin/compcert-install.sh
   ```
 
-  Note that CompCert can only be used for evaluation, research and education purposes, but not for commercial purposes.
+  Note that CompCert "can be used for evaluation, research and education purposes, but not for commercial purposes".
 
   To only install [Coq](https://coq.inria.fr/) (without CompCert):
 
