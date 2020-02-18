@@ -25,11 +25,13 @@ The above will launch ``fmide`` installed in ``~/CASE/Sireum/bin/linux/fmide``.
 
 ### Steps
 
-Install Debian 10 and run the following in a terminal:
+Run the following (and subsequent commands) in your local repo's case-env directory:
 
 ```bash
 bash case-setup.sh
 ```
+
+See [Post Setup](#post-setup) below for additional instructions.
 
 
 ## Setting Up A VirtualBox VM Using Vagrant
@@ -71,6 +73,8 @@ If there is an error when running the setup script (e.g., internet connection is
 ```bash
 vagrant destroy
 ```
+
+See [Post Setup](#post-setup) below for additional instructions.
 
 
 ## Post Setup
