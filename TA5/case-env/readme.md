@@ -4,15 +4,14 @@ This folder contains scripts and Vagrantfile to setup environment for CASE tools
 
 Once setup (instructions below), all CASE tools/artifacts are installed in ``~/CASE`` 
 (can be overriden by specifying ``BASE_DIR`` env var; pease see [case-setup.sh](case-setup.sh)).
-Additional tools and scripts are installed in ``~/bin``.
-
-to run FMIDE:
+Additional tools and scripts are installed in ``~/bin``.  To run FMIDE:
 
 ```bash
 fmide&
 ```
 
-The above will launch ``fmide`` installed at ``~/CASE/Sireum/bin/linux/fmide``
+The above will launch ``fmide`` installed in ``~/CASE/Sireum/bin/linux/fmide``.
+
 
 ## Setting Up A Linux Machine
 
@@ -33,7 +32,7 @@ bash case-setup.sh
 
 ### Requirements
 
-* VirtualBox [6.1.*x*](https://www.virtualbox.org/)
+* [VirtualBox(https://www.virtualbox.org/) 6.1.2 or above
 
 * [Vagrant](https://www.vagrantup.com/) 2.2.7 or above
 
@@ -59,7 +58,7 @@ Run the following (and subsequent commands) in your local repo's ``case-env`` di
   bash setup.sh
   ```
 
-Once Vagrant finished setting up the VM, log in using ``vagrant`` for both the username and the password in the Linux login GUI.
+Once Vagrant finished setting up the VM, log in using ``vagrant`` for both the username and the password in the Linux VM login GUI.
 
 Then, optionally, logout/shutdown the VM and take a VM snapshot (to allow for rolling back later) and re-start it from VirtualBox.
 
@@ -71,6 +70,8 @@ vagrant destroy
 
 
 ## Post Setup
+
+### Updating Installed CASE Tools & Artifacts
 
 * To update FMIDE to the latest nightly release, simply (re-)run the following in the VM:
 
@@ -87,6 +88,15 @@ vagrant destroy
   git submodule update --init --recursive
   bin/build.cmd
   ```
+
+* To update seL4 and friends (cache, etc.):
+
+  ```bash
+  bash ~/bin/sel4-cache.sh <SEL4-MANIFEST-COMMIT> # desired version as commit SHA of https://github.com/seL4/sel4test-manifest
+  bash ~/bin/camkes-cache.sh <CAMKES_MANIFEST_COMMIT> # desired version as commit SHA of https://github.com/seL4/camkes-manifest
+  ```
+
+### Optionals
 
 * To install the IntelliJ-based [Sireum IVE](https://github.com/sireum/kekinian)
   (for HAMR Slang component development, etc.):
@@ -108,9 +118,22 @@ vagrant destroy
   $SIREUM_HOME/bin/install/clion.cmd
   ```
 
-* To update seL4 and friends (cache, etc.):
+  Then, to launch it:
 
   ```bash
-  bash ~/bin/sel4-cache.sh <BASE_DIR> <SEL4-MANIFEST-COMMIT> # commit sha of https://github.com/seL4/sel4test-manifest
-  bash ~/bin/camkes-cache.sh <BASE_DIR> <CAMKES_MANIFEST_COMMIT> # commit sha of https://github.com/seL4/camkes-manifest
+  $SIREUM_HOME/bin/linux/clion/bin/clion.sh
+  ```
+
+* To install [CompCert](http://compcert.inria.fr/) (including [Coq](https://coq.inria.fr/)):
+
+  ```bash
+  bash ~/bin/compcert-install.sh
+  ```
+
+  Note that CompCert can only be used for evaluation, research and education purposes, but not for commercial purposes.
+
+  To only install [Coq](https://coq.inria.fr/) (without CompCert):
+
+  ```bash
+  bash ~/bin/coq-install.sh
   ```
