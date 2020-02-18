@@ -6,7 +6,9 @@ bash ~/bin/coq-install.sh
 : "${COMPCERT_V:=v3.6}"
 . $BASE_DIR/seL4-CAmkES-L4v-dockerfiles/scripts/utils/common.sh
 cd $BASE_DIR
+eval `opam env`
 opam install menhir=$MENHIR_V -vv --debug -y -j 4
+rm -fR CompCert
 git clone --recursive -b $COMPCERT_V https://github.com/AbsInt/CompCert.git
 cd CompCert
 ./configure x86_64-linux
