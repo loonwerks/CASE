@@ -7,11 +7,7 @@ set -exuo pipefail
 : "${GIT_USER:=Snail Mail}"
 : "${GIT_EMAIL:=<>}"
 
-: "${SIREUM_V:=bcbee6d}"
-: "${OCAML_V:=4.07.1}"
-: "${COQ_V:=8.9.1}"
-: "${MENHIR_V:=20190626}"
-: "${COMPCERT_V:=v3.6}"
+: "${SIREUM_V:=e97dfb8}"
 : "${SEL4_V:=3232714b267c613775287472ae229000dd24aa8d}"
 : "${CAMKES_V:=67ce937df0c8f821e6a9f4615d9d2fa2bf9a8885}"
 
@@ -99,29 +95,8 @@ echo "LANG=en_US.UTF-8" | as_root tee -a /etc/default/locale > /dev/null
 echo "export LANG=en_US.UTF-8" >> "$HOME/.bashrc"
 export LANG=en_US.UTF-8
 
-bash ~/bin/sel4-cache.sh $BASE_DIR $SEL4_V
+bash ~/bin/sel4-cache.sh $SEL4_V
 
 bash $SEL4_SCRIPTS/camkes.sh
 
-bash ~/bin/camkes-cache.sh $BASE_DIR $CAMKES_V
-
-#bash $SEL4_SCRIPTS/cakeml.sh
-
-
-# Coq
-#as_root apt install -y mccs m4 opam
-#opam init --solver=mccs -vv --debug --comp=$OCAML_V --disable-sandboxing --reinit -a -j 4
-#eval `opam env`
-#opam install coq=$COQ_V -vv --debug -y -j 4
-
-
-# CompCert (for evaluation, research and educational purposes only); requires the Coq setup above
-#cd $BASE_DIR
-#opam install menhir=$MENHIR_V -vv --debug -y -j 4
-#git clone --recursive -b $COMPCERT_V https://github.com/AbsInt/CompCert.git
-#cd CompCert
-#./configure x86_64-linux
-#make -j 4 all
-#as_root make install
-#cd ..
-#rm -fR CompCert
+bash ~/bin/camkes-cache.sh $CAMKES_V
