@@ -14,7 +14,7 @@ public
 			filter_out: out event data port RF_Msg.Impl;
 		properties
 			CASE_Properties::COMP_TYPE => FILTER;
-			CASE_Properties::COMP_SPEC => ("Req003_FlightPlanner_Filter", "ightPlanner_Filter");
+			CASE_Properties::COMP_SPEC => ("Req003_FlightPlanner_Filter", "Req004_FlightPlanner_Filter");
 		annex agree {**
 			guarantee Req001_RadioDriver_Filter "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(filter_out);
 			guarantee Req003_FlightPlanner_Filter "The FlightPlanner shall only accept well-formed maps from the GroundStation" : good_map(filter_out.payload.map);

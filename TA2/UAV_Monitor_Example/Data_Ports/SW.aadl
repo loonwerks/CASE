@@ -19,9 +19,47 @@ public
 			CASE_Properties::COMP_SPEC => ("monitor_policy");
 		annex agree {**
 				
-			property monitor_policy = WAYPOINTS_IN_KEEPIN_ZONE(observed, expected, reset);
-			fun WAYPOINTS_IN_KEEPIN_ZONE(o : Mission, e : MapArray, r : bool) : bool = true;	-- something real needs to go here
+			property monitor_policy = WAYPOINTS_IN_KEEPIN_ZONE(observed, expected);
+
 			const is_latched : bool = true;
+
+            fun WAYPOINTS_IN_KEEPIN_ZONE(mission : Mission, keepInZone : MapArray) : bool =
+              forall waypoint in mission, WAYPOINT_IN_KEEPIN_ZONE(waypoint, keepInZone);
+              
+            fun WAYPOINT_IN_KEEPIN_ZONE(waypoint : Coordinate.Impl, keepInZone: MapArray) : bool = 
+              exists zone in keepInZone, WAYPOINT_IN_ZONE_POLYGON(waypoint, zone);
+            
+            -- Assumes rectangle that is defined by two corners so it is aligned
+            -- with the origin (not rotated in space)
+            -- Assumes that the altitude is the same in all the coordinates
+            -- Assmes zone[0] is the bottom left corner and zone[2] in the upper right corner
+            fun WAYPOINT_IN_ZONE_RECTANGLE(waypoint : Coordinate.Impl, zone : Map) : bool = 
+                  (waypoint.latitude >= (zone[0]).latitude)
+              and (waypoint.latitude <= (zone[2]).latitude)
+              and (waypoint.longitude >= (zone[0]).longitude)
+              and (waypoint.longitude <= (zone[2]).longitude)
+              and (waypoint.altitude >= (zone[0]).altitude);
+            
+            -- see https://en.wikipedia.org/wiki/Even%E2%80%93odd_rule
+            fun WAYPOINT_IN_ZONE_POLYGON(waypoint : Coordinate.Impl, zone : Map ) : bool =
+              foldl i in indices(zone) into inZone = false, 
+                if (point_crosses(waypoint, zone[i], zone[previous_index(i, 4)])) then inZone = 1 - inZone else inZone = inZone;
+            
+            fun previous_index(i : int, size : int) : int = 
+              if (i = 0) then size-1 else i - 1;
+              
+             fun point_crosses(waypoint : Coordinate.Impl, currentWaypoint : Coordinate.Impl, previousWaypoint : Coordinate.Impl) : bool =
+                 (currentWaypoint.latitude > waypoint.latitude) != (previousWaypoint.latitude > waypoint.latitude)
+             and (
+              (waypoint.longitude * (previousWaypoint.latitude - currentWaypoint.latitude))
+              <
+(
+                ((previousWaypoint.longitude - currentWaypoint.longitude) * (waypoint.latitude - currentWaypoint.latitude))
+                   +
+                   (currentWaypoint.longitude * (previousWaypoint.latitude - currentWaypoint.latitude))
+               )
+               );
+               
 			guarantee Req001_Monitor1 "The monitor shall only output an alert when the monitor policy is true" : alert =
 				if reset then
 					monitor_policy
@@ -47,7 +85,7 @@ public
 			CASE_Properties::COMP_TYPE => SWITCH;
 			CASE_Properties::COMP_SPEC => ("Req001_Switch");
 		annex agree {**
---			guarantee Req001_Switch "The switch shall only forward messages when activated." : if activation then output = input else output = NULL_MESSAGE;
+			guarantee Req001_Switch "The switch shall only forward messages when activated." : activation => output = input;
 		**};
 	end CASE_Switch_Coord;
 	
@@ -93,7 +131,7 @@ public
 			CASE_Properties::COMP_SPEC => ("Req002_Switch");
 		annex agree {**
 			-- Need to figure out NULL_MESSAGE
---			guarantee Req002_Switch "The switch shall only forward messages when activated." : if activation then output = input else output = NULL_MESSAGE;
+			guarantee Req002_Switch "The switch shall only forward messages when activated." : activation => output = input;
 		**};
 	end CASE_Switch_Req;
 	

@@ -39,15 +39,15 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "file", source: "bin", destination: "bin"
 
-  config.vm.provision "shell", inline: <<-SHELL
-    export DEBIAN_FRONTEND=noninteractive
-    apt-get update
-    echo "Installing xfce-desktop ..."
-    tasksel install xfce-desktop
-  SHELL
-
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     bash case-setup.sh
     rm -R case-setup.sh addons
+  SHELL
+
+  config.vm.provision "shell", inline: <<-SHELL
+    export DEBIAN_FRONTEND=noninteractive
+    adduser vagrant vboxsf
+    echo "Installing xfce-desktop ..."
+    tasksel install xfce-desktop
   SHELL
 end

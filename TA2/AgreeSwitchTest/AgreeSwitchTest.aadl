@@ -1,0 +1,75 @@
+package AgreeSwitchTest
+public
+	with Base_Types;
+	
+	thread Producer
+		features
+			input: in event data port Base_Types::Integer {Queue_Size => 1;};
+			output: out event data port Base_Types::Integer {Queue_Size => 1;};
+			control: out event data port Base_Types::Boolean {Queue_Size => 1;};
+		annex agree {**
+			assume "Input is less than or equal to 50" : input <= 50;
+			guarantee "Output is less than Input" : output < input;
+			guarantee "Signal if Output is less 25" : control = (output < 25);
+		**};
+	end Producer;
+	
+	thread implementation Producer.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end Producer.Impl;
+	
+	thread Switch
+		features
+			control: in event data port Base_Types::Boolean {Queue_Size => 1;};
+			input: in event data port Base_Types::Integer {Queue_Size => 1;};
+			output: out event data port Base_Types::Integer {Queue_Size => 1;};
+		annex agree {**
+			guarantee "The switch shall only forward messages when activated." : if control then event(output) and output = input else not event(output);
+		**};
+	end Switch;
+	
+	thread implementation Switch.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end Switch.Impl;
+	
+	thread Consumer
+		features
+			input: in event data port Base_Types::Integer {Queue_Size => 1;};
+			output: out event data port Base_Types::Boolean {Queue_Size => 1;};
+		annex agree {**
+			assume "Input is less than 25 (when there is input)" : event(input) => input < 25;
+			guarantee "Output is always true (when there is input)" : if event(input) then event(output) and output else not event(output);
+		**};
+	end Consumer;
+	
+	thread implementation Consumer.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end Consumer.Impl;
+	
+	process SW
+		features
+			input: in event data port Base_Types::Integer {Queue_Size => 1;};
+			output: out event data port Base_Types::Boolean {Queue_Size => 1;};
+		annex agree {**
+			assume "Input is less than 40" : input < 40;
+			guarantee "Output is always true (when there is output)" : event(output) => output;
+		**};
+	end SW;
+	
+	process implementation SW.Impl
+		subcomponents
+			Producer: thread Producer.Impl;
+			Switch: thread Switch.Impl;
+			Consumer: thread Consumer.Impl;
+		connections
+			c1: port input -> Producer.input;
+			c2: port Producer.control -> Switch.control;
+			c3: port Producer.output -> Switch.input;
+			c4: port Switch.output -> Consumer.input;
+			c5: port Consumer.output -> output;
+	end SW.Impl;
+	
+end AgreeSwitchTest;

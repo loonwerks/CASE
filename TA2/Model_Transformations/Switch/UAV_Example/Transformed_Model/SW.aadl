@@ -1,10 +1,63 @@
 package SW
 public
-
 	with Data_Model;
+
 	with Base_Types;
+
 	with CASE_Properties;
+
 	with CASE_Model_Transformations;
+
+	thread CASE_Monitor
+		features
+			observed: in event data port Mission;
+			expected: in event data port RF_Msg.Impl;
+			alert: out event data port;
+		properties
+			CASE_Properties::COMP_TYPE => MONITOR;
+		annex agree {**
+			property monitor_policy = event(observed) => event(expected);
+			guarantee Req001_Monitor "The monitor shall only output an alert when the monitor policy is true" : event(observed) and if monitor_policy then event(alert) else not event(alert);
+		**};
+	end CASE_Monitor;
+
+	thread implementation CASE_Monitor.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+	end CASE_Monitor.Impl;
+
+	thread CASE_Monitor1
+		features
+			observed: in data port Mission;
+			expected: in data port MapArray;
+			alert: out event data port;
+		properties
+			CASE_Properties::COMP_TYPE => MONITOR;
+		annex agree {**
+			property monitor_policy = WAYPOINTS_IN_KEEPIN_ZONE(observed, expected);
+			fun WAYPOINTS_IN_KEEPIN_ZONE(o : Mission, e : MapArray) : bool = true;	-- some actual function needs to go here
+			guarantee Req001_Monitor1 "The monitor shall only output an alert when the monitor policy is true" : if monitor_policy then event(alert) else not event(alert);
+		**};
+	end CASE_Monitor1;
+
+	thread implementation CASE_Monitor1.Impl
+	end CASE_Monitor1.Impl;
+
+	thread CASE_Filter
+		features
+			filter_in: in data port Mission;
+			filter_out: out data port Mission;
+		properties
+			CASE_Properties::COMP_TYPE => FILTER;
+		annex agree {**
+			guarantee Req002_FlightPlanner_Filter "The Flight Planner shall generate a valid mission" : good_mission(filter_out);
+		**};
+	end CASE_Filter;
+
+	thread implementation CASE_Filter.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+	end CASE_Filter.Impl;
 
 	data Coordinate
 	end Coordinate;
@@ -12,9 +65,9 @@ public
 	data implementation Coordinate.Impl
 		-- This is the structure to hold the lat/long/alt values of a coordinate
 		subcomponents
-			latitude: data Base_Types::Integer;
-			longitude: data Base_Types::Integer;
-			altitude: data Base_Types::Integer;
+			latitude: data Base_Types::Integer_32;
+			longitude: data Base_Types::Integer_32;
+			altitude: data Base_Types::Integer_32;
 	end Coordinate.Impl;
 
 	data Map
@@ -123,8 +176,10 @@ public
 		features
 			flight_plan: out data port Mission;
 			recv_map: in event data port RF_Msg.Impl;
-			nofly_zones: in data port MapArray;
-			position_status: in event data port Coordinate.Impl;
+			request_nofly_zones: out event data port Map;
+			nofly_zones: in event data port MapArray;
+		properties
+			CASE_Properties::BOUNDARY => (UNCONTROLLED);
 		annex agree {**
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);
@@ -139,7 +194,8 @@ public
 		-- The database is populated at build-time and stored in memory.
 		-- When provided a map of a region, it will return all no-fly areas within that region.
 		features
-			zones: out data port MapArray;
+			map: in event data port Map;
+			zones: out event data port MapArray;
 	end NoFlyZoneDatabase;
 
 	thread implementation NoFlyZoneDatabase.Impl
@@ -161,29 +217,6 @@ public
 
 	thread implementation WaypointManager.Impl
 	end WaypointManager.Impl;
-
-	thread group UxAS
-		features
-			flight_plan: out data port Mission;
-			recv_map: in event data port RF_Msg.Impl;
-			position_status: in event data port Coordinate.Impl;
-			mission_window: out event data port MissionWindow;
-	end UxAS;
-	
-	thread group implementation UxAS.Impl
-		subcomponents
-			FPLN: thread FlightPlanner.Impl;
-			NFDB: thread NoFlyZoneDatabase.Impl;
-			WPM: thread WaypointManager.Impl;
-		connections
-			c1: port recv_map -> FPLN.recv_map;
-			c2: port FPLN.flight_plan -> WPM.flight_plan;
-			c3: port NFDB.zones -> FPLN.nofly_zones;
-			c4: port WPM.mission_window -> mission_window;
-			c5: port position_status -> FPLN.position_status;
-			c6: port position_status -> WPM.position_status;
-			c7: port FPLN.flight_plan -> flight_plan;
-	end UxAS.Impl;
 
 	thread CameraManager
 		-- The CameraManager determines the gimbal settings for the onboard camera based on the current position of the UAV and the mission.
@@ -230,31 +263,41 @@ public
 	process implementation SW.Impl
 		subcomponents
 			RADIO: thread RadioDriver.Impl;
-			CM: thread CameraManager.Impl;
+			FPLN: thread FlightPlanner.Impl;
+			WPM: thread WaypointManager.Impl;
 			UART: thread UARTDriver.Impl;
-			WIFI: thread WifiDriver.Impl;
-			UXAS: thread group UxAS.Impl;
+			NFDB: thread NoFlyZoneDatabase.Impl;
+			FLT: thread CASE_Filter.Impl;
+			MON: thread CASE_Monitor.Impl;
+			MON1: thread CASE_Monitor1.Impl;
 		connections
 			c1: port radio_recv -> RADIO.recv_data;
 			c2: port RADIO.send_data -> radio_send;
-			c3: port RADIO.mission_command -> UXAS.recv_map;
-			c4: port UXAS.mission_window -> UART.mission_window;
-			c5: port UART.status -> UXAS.position_status;
-			c6: port UART.status -> RADIO.status;
-			c7: port UART.send_data -> uart_send;
-			c8: port uart_recv -> UART.recv_data;
-			c9: port UXAS.flight_plan -> CM.flight_plan;
-			c10: port UART.status -> CM.position_status;
-			c11: port CM.gimbal_command -> WIFI.gimbal_command;
-			c12: port WIFI.send_data -> wifi_send;
-			c13: port wifi_recv -> WIFI.recv_data;
+			c4: port RADIO.mission_command -> FPLN.recv_map;
+			c5: port FPLN.flight_plan -> FLT.filter_in;
+			c21: port FLT.filter_out -> MON1.observed;
+			c20: port RADIO.mission_command -> MON.expected;
+			c19: port FPLN.flight_plan -> MON.observed;
+			c3: port FLT.filter_out -> WPM.flight_plan;
+			c6: port FPLN.request_nofly_zones -> NFDB.map;
+			c7: port NFDB.zones -> FPLN.nofly_zones;
+			c8: port WPM.mission_window -> UART.mission_window;
+			c9: port UART.status -> WPM.position_status;
+			c11: port UART.status -> RADIO.status;
+			c12: port UART.send_data -> uart_send;
+			c13: port uart_recv -> UART.recv_data;
+			c22: port NFDB.zones -> MON1.expected;
+		annex resolute {**
+			prove Req005_WaypointManager(this.WPM, this.FLT, this.c3, Mission)
+			prove Req003_FlightPlanner(this.FPLN, this.MON)
+			prove Req004_FlightPlanner(this.FPLN, this.MON1)
+		**};
 	end SW.Impl;
 
 	annex agree {**
 		-- ID of this UAV
 		const CASE_UAV_ID : int = 42;
 		fun VALID_MESSAGE(msg : RF_Msg.Impl) : bool = (msg.header.src > 0 and msg.header.dst = CASE_UAV_ID and msg.header.HMAC);
-		fun TRUSTED_MESSAGE(msg : RF_Msg.Impl) : bool = msg.header.trusted;
 		fun WELL_FORMED_MESSAGE(msg : RF_Msg.Impl) : bool = good_command(msg.payload);
 		-- These functions check the well-formedness of message structures
 		fun good_coordinate(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180 and coord.altitude >= 0 and coord.altitude <= 15000;
@@ -264,5 +307,5 @@ public
 		fun good_mission(mission : Mission) : bool = forall wp in mission, good_coordinate(wp);
 		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
 	**};
-	
+
 end SW;

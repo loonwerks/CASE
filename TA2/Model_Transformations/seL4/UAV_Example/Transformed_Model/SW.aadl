@@ -100,21 +100,6 @@ public
 	thread implementation WifiDriver.Impl
 	end WifiDriver.Impl;
 	
-	process WifiDriver_Proc
-		features
-			gimbal_command: in event data port;
-			send_data: out event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
-			recv_data: in event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
-	end WifiDriver_Proc;
-	
-	process implementation WifiDriver_Proc.Impl
-		subcomponents
-			WifiDriver: thread WifiDriver.Impl;
-		connections
-			c1: port gimbal_command -> WifiDriver.gimbal_command;
-			c2: port WifiDriver.send_data -> send_data;
-			c3: port recv_data -> WifiDriver.recv_data;
-	end WifiDriver_Proc.Impl;
 
 	thread RadioDriver
 		-- The RadioDriver is the software that enables other SW components to communicate to other systems over RF
@@ -130,29 +115,34 @@ public
 		**};
 	end RadioDriver;
 
+
 	thread implementation RadioDriver.Impl
 	end RadioDriver.Impl;
 	
-	process RadioDriver_Proc
-		features
-			recv_data: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			mission_command: out event data port RF_Msg.Impl;
-			status: in event data port Coordinate.Impl;
-		properties
-			CASE_Properties::COMP_TYPE => COMM_DRIVER;
---			CASE_Properties::COMP_TYPE => SEL4;
-	end RadioDriver_Proc;
+--	process RadioDriver_seL4
+--		features
+--			recv_data: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+--			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+--			mission_command: out event data port RF_Msg.Impl;
+--			status: in event data port Coordinate.Impl;
+--		properties
+--			CASE_Properties::COMP_TYPE => COMM_DRIVER;
+--	end RadioDriver_seL4;
+--	
+--	
+--	process implementation RadioDriver_seL4.Impl
+--		subcomponents
+--			RadioDriver: thread RadioDriver.Impl;
+--		connections
+--			c1: port RadioDriver.mission_command -> mission_command;
+--			c2: port RadioDriver.send_data -> send_data;
+--			c3: port recv_data -> RadioDriver.recv_data;
+--			c4: port status -> RadioDriver.status;
+--		annex agree {**
+--			lift contract;
+--		**};
+--	end RadioDriver_seL4.Impl;
 	
-	process implementation RadioDriver_Proc.Impl
-		subcomponents
-			RadioDriver: thread RadioDriver.Impl;
-		connections
-			c1: port recv_data -> RadioDriver.recv_data;
-			c2: port RadioDriver.send_data -> send_data;
-			c3: port RadioDriver.mission_command -> mission_command;
-			c4: port status -> RadioDriver.status;
-	end RadioDriver_Proc.Impl;
 
 	thread FlightPlanner
 		-- The FlightPlanner is an abstraction for UxAS.
@@ -161,9 +151,8 @@ public
 		-- to avoid specified no-fly zones
 		features
 			flight_plan: out data port Mission;
+			nofly_zones: in data port MapArray;
 			recv_map: in event data port RF_Msg.Impl;
-			request_nofly_zones: out event data port Map;
-			nofly_zones: in event data port MapArray;
 			position_status: in event data port Coordinate.Impl;
 		annex agree {**
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
@@ -174,55 +163,18 @@ public
 	thread implementation FlightPlanner.Impl
 	end FlightPlanner.Impl;
 	
-	process FlightPlanner_Proc
-		features
-			flight_plan: out data port Mission;
-			recv_map: in event data port RF_Msg.Impl;
-			request_nofly_zones: out event data port Map;
-			nofly_zones: in event data port MapArray;
-			position_status: in event data port Coordinate.Impl;
-		properties
-			CASE_Properties::COMP_TYPE => SEL4;
-	end FlightPlanner_Proc;
-	
-	process implementation FlightPlanner_Proc.Impl
-		subcomponents
-			FlightPlanner: thread FlightPlanner.Impl;
-		connections
-			c1: port FlightPlanner.flight_plan -> flight_plan;
-			c2: port recv_map -> FlightPlanner.recv_map;
-			c3: port FlightPlanner.request_nofly_zones -> request_nofly_zones;
-			c4: port nofly_zones -> FlightPlanner.nofly_zones;
-			c5: port position_status -> FlightPlanner.position_status;
-	end FlightPlanner_Proc.Impl;
 
 	thread NoFlyZoneDatabase
 		-- The NoFlyZoneDatabase is a collection of polygons that represent areas on a map which the UAV should avoid.
 		-- The database is populated at build-time and stored in memory.
 		-- When provided a map of a region, it will return all no-fly areas within that region.
 		features
-			map: in event data port Map;
-			zones: out event data port MapArray;
+			zones: out data port MapArray;
 	end NoFlyZoneDatabase;
 
 	thread implementation NoFlyZoneDatabase.Impl
 	end NoFlyZoneDatabase.Impl;
 	
-	process NoFlyZoneDatabase_Proc
-		features
-			map: in event data port Map;
-			zones: out event data port MapArray;
-		properties
-			CASE_Properties::COMP_TYPE => SEL4;
-	end NoFlyZoneDatabase_Proc;
-	
-	process implementation NoFlyZoneDatabase_Proc.Impl
-		subcomponents
-			NoFlyZoneDatabase: thread NoFlyZoneDatabase.Impl;
-		connections
-			c1: port map -> NoFlyZoneDatabase.map;
-			c2: port NoFlyZoneDatabase.zones -> zones;
-	end NoFlyZoneDatabase_Proc.Impl;
 
 	thread WaypointManager
 		-- The WaypointManager divides a mission into a small window of waypoints suitable for the FlightController.
@@ -241,23 +193,6 @@ public
 	thread implementation WaypointManager.Impl
 	end WaypointManager.Impl;
 	
-	process WaypointManager_Proc
-		features
-			flight_plan: in data port Mission;
-			mission_window: out event data port MissionWindow;
-			position_status: in event data port Coordinate.Impl;
-		properties
-			CASE_Properties::COMP_TYPE => SEL4;
-	end WaypointManager_Proc;
-	
-	process implementation WaypointManager_Proc.Impl
-		subcomponents
-			WaypointManager: thread WaypointManager.Impl;
-		connections
-			c1: port flight_plan -> WaypointManager.flight_plan;
-			c2: port WaypointManager.mission_window -> mission_window;
-			c3: port position_status -> WaypointManager.position_status;
-	end WaypointManager_Proc.Impl;
 	
 	thread group UxAS
 		features
@@ -275,37 +210,13 @@ public
 		connections
 			c1: port recv_map -> FPLN.recv_map;
 			c2: port FPLN.flight_plan -> WPM.flight_plan;
-			c3: port FPLN.request_nofly_zones -> NFDB.map;
-			c4: port NFDB.zones -> FPLN.nofly_zones;
-			c5: port WPM.mission_window -> mission_window;
-			c6: port position_status -> FPLN.position_status;
-			c7: port position_status -> WPM.position_status;
-			c8: port FPLN.flight_plan -> flight_plan;
+			c3: port NFDB.zones -> FPLN.nofly_zones;
+			c4: port WPM.mission_window -> mission_window;
+			c5: port position_status -> FPLN.position_status;
+			c6: port position_status -> WPM.position_status;
+			c7: port FPLN.flight_plan -> flight_plan;
 	end UxAS.Impl;
 	
-	system UxAS_Sys
-		features
-			flight_plan: out data port Mission;
-			recv_map: in event data port RF_Msg.Impl;
-			position_status: in event data port Coordinate.Impl;
-			mission_window: out event data port MissionWindow;
-	end UxAS_Sys;
-	
-	system implementation UxAS_Sys.Impl
-		subcomponents
-			FPLN: process FlightPlanner_Proc.Impl;
-			NFDB: process NoFlyZoneDatabase_Proc.Impl;
-			WPM: process WaypointManager_Proc.Impl;
-		connections
-			c1: port recv_map -> FPLN.recv_map;
-			c2: port FPLN.flight_plan -> WPM.flight_plan;
-			c3: port FPLN.request_nofly_zones -> NFDB.map;
-			c4: port NFDB.zones -> FPLN.nofly_zones;
-			c5: port WPM.mission_window -> mission_window;
-			c6: port position_status -> FPLN.position_status;
-			c7: port position_status -> WPM.position_status;
-			c8: port FPLN.flight_plan -> flight_plan;
-	end UxAS_Sys.Impl;
 
 	thread CameraManager
 		-- The CameraManager determines the gimbal settings for the onboard camera based on the current position of the UAV and the mission.
@@ -318,24 +229,23 @@ public
 
 	thread implementation CameraManager.Impl
 	end CameraManager.Impl;
-	
-	process CameraManager_Proc
+
+	process CameraManager_seL4
 		features
 			flight_plan: in data port Mission;
 			position_status: in event data port Coordinate.Impl;
 			gimbal_command: out event data port;
-		properties
-			CASE_Properties::COMP_TYPE => SEL4;
-	end CameraManager_Proc;
-	
-	process implementation CameraManager_Proc.Impl
+	end CameraManager_seL4;
+
+	process implementation CameraManager_seL4.Impl
 		subcomponents
 			CameraManager: thread CameraManager.Impl;
 		connections
-			c1: port flight_plan -> CameraManager.flight_plan;
-			c2: port position_status -> CameraManager.position_status;
-			c3: port CameraManager.gimbal_command -> gimbal_command;
-	end CameraManager_Proc.Impl;
+			c1: port CameraManager.gimbal_command -> gimbal_command;
+			c2: port flight_plan -> CameraManager.flight_plan;
+			c3: port position_status -> CameraManager.position_status;
+	end CameraManager_seL4.Impl;
+	
 
 	thread UARTDriver
 		-- The UARTDriver is the software that enables other SW components to communicate to other systems over the serial connection
@@ -352,26 +262,7 @@ public
 
 	thread implementation UARTDriver.Impl
 	end UARTDriver.Impl;
-	
-	process UARTDriver_Proc
-		features
-			status: out event data port Coordinate.Impl;
-			mission_window: in event data port MissionWindow;
-			recv_data: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-			send_data: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-		properties
-			CASE_Properties::COMP_TYPE => SEL4;
-	end UARTDriver_Proc;
-	
-	process implementation UARTDriver_Proc.Impl
-		subcomponents
-			UARTDriver: thread UARTDriver.Impl;
-		connections
-			c1: port UARTDriver.status -> status;
-			c2: port mission_window -> UARTDriver.mission_window;
-			c3: port recv_data -> UARTDriver.recv_data;
-			c4: port UARTDriver.send_data -> send_data;
-	end UARTDriver_Proc.Impl;
+
 
 	process SW
 		-- The Mission Computer Software process runs all threads
@@ -410,39 +301,6 @@ public
 			c13: port wifi_recv -> WIFI.recv_data;
 	end SW.Impl;
 	
-	system SW_Sys
-		features
-			radio_recv: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			radio_send: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			uart_recv: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-			uart_send: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-			wifi_recv: in event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
-			wifi_send: out event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
-	end SW_Sys;
-	
-	system implementation SW_Sys.Impl
-		subcomponents
-			RADIO: process RadioDriver_Proc.Impl;
-			CM: process CameraManager_Proc.Impl;
-			UART: process UARTDriver_Proc.Impl;
-			WIFI: process WifiDriver_Proc.Impl;
-			UXAS: system UxAS_Sys.Impl;
-		connections
-			c1: port radio_recv -> RADIO.recv_data;
-			c2: port RADIO.send_data -> radio_send;
-			c3: port RADIO.mission_command -> UXAS.recv_map;
-			c4: port UXAS.mission_window -> UART.mission_window;
-			c5: port UART.status -> UXAS.position_status;
-			c6: port UART.status -> RADIO.status;
-			c7: port UART.send_data -> uart_send;
-			c8: port uart_recv -> UART.recv_data;
-			c9: port UXAS.flight_plan -> CM.flight_plan;
-			c10: port UART.status -> CM.position_status;
-			c11: port CM.gimbal_command -> WIFI.gimbal_command;
-			c12: port WIFI.send_data -> wifi_send;
-			c13: port wifi_recv -> WIFI.recv_data;
-	end SW_Sys.Impl;
-
 	annex agree {**
 		-- ID of this UAV
 		const CASE_UAV_ID : int = 42;
@@ -458,4 +316,4 @@ public
 		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
 	**};
 
-end SW;
+	end SW;
