@@ -21,7 +21,7 @@ public
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ms;
-			Compute_Execution_Time => 200ms .. 200ms;
+			Compute_Execution_Time => 10ms .. 10ms;
 			Source_Text => ("behavior_code/components/source/src/source.c");
 			Initialize_Entrypoint_Source_Text => "test_data_port_periodic_domains_source_component_init";
 			Compute_Entrypoint_Source_Text => "test_data_port_periodic_domains_source_component_time_triggered";
@@ -56,7 +56,7 @@ public
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ms;
-			Compute_Execution_Time => 200ms .. 200ms;
+			Compute_Execution_Time => 10ms .. 10ms;
 			Source_Text => ("behavior_code/components/destination/src/destination.c");
 			Initialize_Entrypoint_Source_Text => "test_data_port_periodic_domains_destination_component_init";
 			Compute_Entrypoint_Source_Text => "test_data_port_periodic_domains_destination_component_time_triggered";

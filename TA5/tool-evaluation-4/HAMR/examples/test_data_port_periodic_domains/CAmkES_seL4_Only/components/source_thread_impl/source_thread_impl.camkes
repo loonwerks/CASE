@@ -1,0 +1,9 @@
+import <std_connector.camkes>;
+
+component source_thread_impl {
+  include <sb_proc_types.h>;
+  include <sp_int8_t.h>;
+  control;
+  consumes Period sb_periodic_dispatch_notification;
+  dataport sp_int8_t_t sb_write_port;
+}
