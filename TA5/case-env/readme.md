@@ -127,6 +127,19 @@ See [Post Setup](#post-setup) below for additional instructions.
   bin/clean.sh
   bin/build.cmd setup
   ```
+  
+  As a last resort, a thorough cleaning and re-cloning is in order:
+  
+  ```bash
+  cd $SIREUM_HOME
+  cd ..
+  rm -fR Sireum ~/Downloads/sireum
+  git clone https://github.com/sireum/kekinian Sireum
+  cd Sireum
+  git checkout <COMMIT> # see SIREUM_V env var in case-setup.sh
+  git submodule update --init --recursive
+  bin/build.cmd setup
+  ```
 
 * To install [CLion](https://www.jetbrains.com/clion/) C/C++ IDE 
   (for browsing HAMR generated C code, etc.; license required/free 30-day evaluation):
