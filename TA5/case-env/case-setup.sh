@@ -7,7 +7,7 @@ set -exuo pipefail
 : "${GIT_USER:=Snail Mail}"
 : "${GIT_EMAIL:=<>}"
 
-: "${SIREUM_V:=52c16cc}"
+: "${SIREUM_V:=6d4b20f}"
 : "${SEL4_V:=3232714b267c613775287472ae229000dd24aa8d}"
 : "${CAMKES_V:=67ce937df0c8f821e6a9f4615d9d2fa2bf9a8885}"
 
@@ -69,8 +69,8 @@ echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
 echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
 
 
-# FMIDE (latest nightly/release); note: change for CASE tool evaluation to pinpoint to a specific release
-$SIREUM_HOME/bin/install/fmide.cmd
+# FMIDE (latest nightly/release)
+$SIREUM_HOME/bin/install/fmide.cmd # optionally, add a release tag name as an argument
 echo "export PATH=\$PATH:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
 
 

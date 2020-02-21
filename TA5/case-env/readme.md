@@ -81,10 +81,10 @@ See [Post Setup](#post-setup) below for additional instructions.
 
 ### Updating Installed CASE Tools & Artifacts
 
-* To update FMIDE to the latest nightly release, simply (re-)run the following in the VM:
+* To update FMIDE, simply (re-)run the following in the VM:
 
   ```bash
-  $SIREUM_HOME/bin/install/fmide.cmd
+  $SIREUM_HOME/bin/install/fmide.cmd [<tag-name>] # Optional release tag name; latest nightly release is used if unspecified 
   ```
 
 * To update Sireum to the latest version:
@@ -128,7 +128,7 @@ See [Post Setup](#post-setup) below for additional instructions.
   bin/build.cmd setup
   ```
   
-  As a last resort, a thorough cleaning and re-cloning is in order:
+  As a last resort, a thorough re-cloning is in order:
   
   ```bash
   cd $SIREUM_HOME
