@@ -119,12 +119,13 @@ See [Post Setup](#post-setup) below for additional instructions.
   $SIREUM_HOME/bin/linux/idea/bin/IVE.sh&
   ```
   
-  If the installation somehow did not finish (e.g., due to a network issue), you might need to run the ``clean.sh`` 
-  script in Sireum before re-running the setup script:
+  If the installation somehow did not finish (e.g., due to a network issue), you might need to clean the Sireum installation
+  before re-running the setup script:
 
   ```bash
-  $SIREUM_HOME/bin/clean.sh
-  $SIREUM_HOME/bin/build.cmd setup
+  cd $SIREUM_HOME
+  bin/clean.sh
+  bin/build.cmd setup
   ```
 
 * To install [CLion](https://www.jetbrains.com/clion/) C/C++ IDE 
