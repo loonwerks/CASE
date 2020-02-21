@@ -118,6 +118,14 @@ See [Post Setup](#post-setup) below for additional instructions.
   ```bash
   $SIREUM_HOME/bin/linux/idea/bin/IVE.sh&
   ```
+  
+  If the installation somehow did not finish (e.g., due to a network issue), you might need to run the ``clean.sh`` 
+  script in Sireum before re-running the setup script:
+
+  ```bash
+  $SIREUM_HOME/bin/clean.sh
+  $SIREUM_HOME/bin/build.cmd setup
+  ```
 
 * To install [CLion](https://www.jetbrains.com/clion/) C/C++ IDE 
   (for browsing HAMR generated C code, etc.; license required/free 30-day evaluation):
