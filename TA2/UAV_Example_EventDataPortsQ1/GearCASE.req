@@ -1,0 +1,29 @@
+{
+	"tool" : "GearCASE",
+	"implementation" : "UAS::UAS.Impl",
+	"date" : 1580334627,
+	"hash" : "00000000",
+	"requirements" : 
+	[
+		{
+			"type" : "Attestation",
+			"text" : "Only command messages from trusted sources shall be accepted",
+			"context" : "SW::SW.Impl.UxAS"
+		},
+		{
+			"type" : "Sandboxing",
+			"text" : "Component MissionComputer.Impl must sandbox its processes to prevent injection attacks",
+			"context" : "MC::MissionComputer.Impl.PROC_SW"
+		},
+		{
+			"type" : "Well-formedness",
+			"text" : "The Flight Controller shall only receive well-formed messages from uncontrolled UxAS component",
+			"context" : "SW::SW.Impl.UART"
+		},
+		{
+			"type" : "Monitor",
+			"text" : "Uncontrolled component UxAS must be monitored to mitigate trojan attacks",
+			"context" : "SW::SW.Impl.UxAS"
+		}
+	]
+}

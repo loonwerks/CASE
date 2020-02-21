@@ -1,12 +1,27 @@
 package SW
 public
 	with Data_Model;
-
 	with Base_Types;
-
 	with CASE_Properties;
 	with CASE_Model_Transformations;
 	renames AGREE_PLTL::all;
+
+	thread CASE_Filter
+		features
+			filter_in: in event data port Mission;
+			filter_out: out event data port Mission;
+			message_log: out event data port;
+		properties
+			CASE_Properties::COMP_TYPE => FILTER;
+		annex agree {**
+			guarantee "" : good_mission(filter_out);
+		**};
+	end CASE_Filter;
+
+	thread implementation CASE_Filter.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+	end CASE_Filter.Impl;
 
 	data Coordinate
 	end Coordinate;
@@ -116,11 +131,13 @@ public
 		-- to avoid specified no-fly zones
 		features
 			flight_plan: out event data port Mission {Queue_Size => 1;};
-			recv_map: in event data port RF_Msg.Impl {Queue_Size => 1;};
-			nofly_zones: in event data port MapArray {Queue_Size => 1;};
+			recv_command: in event data port RF_Msg.Impl {Queue_Size => 1;};
+			keep_in_zones: in event data port MapArray {Queue_Size => 1;};
 		annex agree {**
-			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
+			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_command);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);
+			assume Req_Mon "Uncontrolled component UxAS must be monitored to mitigate trojan attacks" : false;
+			assume Req_AM "Only command messages from trusted sources shall be accepted" : false;
 		**};
 	end FlightPlanner;
 
@@ -129,43 +146,17 @@ public
 			Dispatch_Protocol => Sporadic;
 	end FlightPlanner.Impl;
 
-	thread NoFlyZoneDatabase
+	thread KeepInZoneDatabase
 		-- The NoFlyZoneDatabase is a collection of polygons that represent areas on a map which the UAV should avoid.
 		-- The database is populated at build-time and stored in memory.
 		features
 			zones: out event data port MapArray {Queue_Size => 1;};
-	end NoFlyZoneDatabase;
+	end KeepInZoneDatabase;
 
-	thread implementation NoFlyZoneDatabase.Impl
+	thread implementation KeepInZoneDatabase.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
-	end NoFlyZoneDatabase.Impl;
-	
-	thread group UxAS
-		features
-			recv_map: in event data port RF_Msg.Impl {Queue_Size => 1;};
-			position_status: in event data port Coordinate.Impl {Queue_Size => 1;};
-			mission_window: out event data port MissionWindow {Queue_Size => 1;};
-		properties
-			CASE_Properties::BOUNDARY => (UNCONTROLLED);
-		annex agree {**
-			assume Req001_UxAS "UxAS shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
-			guarantee Req002_UxAS "UxAS shall output a well-formed mission window" : good_mission_window(mission_window);
-		**};
-	end UxAS;
-	
-	thread group implementation UxAS.Impl
-		subcomponents
-			FPLN: thread FlightPlanner.Impl;
-			NFDB: thread NoFlyZoneDatabase.Impl;
-			WPM: thread WaypointManager.Impl;
-		connections
-			c1: port recv_map -> FPLN.recv_map;
-			c2: port FPLN.flight_plan -> WPM.flight_plan;
-			c3: port NFDB.zones -> FPLN.nofly_zones;
-			c4: port WPM.mission_window -> mission_window;
-			c5: port position_status -> WPM.position_status;
-	end UxAS.Impl;
+	end KeepInZoneDatabase.Impl;
 
 	thread WaypointManager
 		-- The WaypointManager divides a mission into a small window of waypoints suitable for the FlightController.
@@ -195,7 +186,8 @@ public
 			send_data: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl {Queue_Size => 1;};
 		annex agree {**
 			assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(mission_window);
-			guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data.crc;
+			guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data . crc;
+			assume Req_Filter "The Flight Controller shall only receive well-formed messages from uncontrolled UxAS component" : false;
 		**};
 	end UARTDriver;
 
@@ -216,28 +208,39 @@ public
 		**};
 	end SW;
 
-
 	process implementation SW.Impl
 		subcomponents
-			RADIO: thread RadioDriver.Impl;
-			UXAS: thread group UXAS.Impl;
+			Radio: thread RadioDriver.Impl;
+			UxAS: thread FlightPlanner.Impl;
+			KeepInZones: thread KeepInZoneDatabase.Impl;
+			WaypointManager: thread WaypointManager.Impl;
 			UART: thread UARTDriver.Impl;
+			FLT: thread CASE_Filter.Impl;
 		connections
-			c1: port radio_recv -> RADIO.recv_data;
-			c2: port RADIO.send_data -> radio_send;
-			c3: port RADIO.mission_command -> UXAS.recv_map;
-			c4: port UXAS.mission_window -> UART.mission_window;
-			c5: port UART.status -> UXAS.position_status;
-			c8: port UART.status -> RADIO.status;
+			c1: port radio_recv -> Radio.recv_data;
+			c2: port Radio.send_data -> radio_send;
+			c3: port Radio.mission_command -> UxAS.recv_command;
+			c4: port KeepInZones.zones -> UxAS.keep_in_zones;
+			c5: port UxAS.flight_plan -> FLT.filter_in;
+			c11: port FLT.filter_out -> WaypointManager.flight_plan;
+			c6: port WaypointManager.mission_window -> UART.mission_window;
+			c7: port UART.status -> WaypointManager.position_status;
+			c8: port UART.status -> Radio.status;
 			c9: port UART.send_data -> uart_send;
 			c10: port uart_recv -> UART.recv_data;
+		annex resolute {**
+			prove Req_Mon(this.UxAS, "Req_Mon")
+			prove Req_AM(this.UxAS, "Req_AM")
+			prove Req_Filter(this.UART, "Req_Filter", this.FLT, this.c11, Mission)
+		**};
 	end SW.Impl;
 
 	annex agree {**
 		-- ID of this UAV
 		const CASE_UAV_ID : int = 42;
 		fun VALID_MESSAGE(msg : RF_Msg.Impl) : bool = (msg.header.src > 0 and msg.header.dst = CASE_UAV_ID and msg.header.HMAC);
-		fun WELL_FORMED_MESSAGE(msg : RF_Msg.Impl) : bool = good_command(msg.payload);
+		--		fun WELL_FORMED_MESSAGE(msg : RF_Msg.Impl) : bool = good_command(msg.payload);
+		fun TRUSTED_MESSAGE(msg : RF_Msg.Impl) : bool = msg.header.trusted;
 		-- These functions check the well-formedness of message structures
 		fun good_coordinate(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180 and coord.altitude >= 0 and coord.altitude <= 15000;
 		fun good_map(map : Map) : bool = forall wp in map, good_coordinate(wp);

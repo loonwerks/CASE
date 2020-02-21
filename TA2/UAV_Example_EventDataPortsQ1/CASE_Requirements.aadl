@@ -1,29 +1,37 @@
 package CASE_Requirements
 private
 	annex resolute {**
-		Req005_WaypointManager(comp_context : component, filter : component, conn : connection, message_type : data) <=
-			** "[well-formed] The WaypointManager shall only recieve well-formed messages" **
+		Req_AM(comp_context : component, property_id : string) <=
+			** "[Attestation] Only command messages from trusted sources shall be accepted" **
 			context Generated_By : "GearCASE"
-			context Generated_On : "May 23, 1970"
-			context Req_Component : "SW::SW.Impl.WPM"
-			context Formalized : "False"
-			add_filter(comp_context, filter, conn, message_type)
+			context Generated_On : "Jan 29, 2020"
+			context Req_Component : "SW::SW.Impl.UxAS"
+			context Formalized : "True"
+			agree_prop_checked(comp_context, property_id)
 		
-		Req003_FlightPlanner(comp_context : component, monitor : component) <=
-			** "[response-on-request] Third-party software shall only output data when requested" **
+		Req_Mon(comp_context : component, property_id : string) <=
+			** "[Monitor] Uncontrolled component UxAS must be monitored to mitigate trojan attacks" **
 			context Generated_By : "GearCASE"
-			context Generated_On : "May 23, 1970"
-			context Req_Component : "SW::SW.Impl.FPLN"
-			context Formalized : "False"
-			add_monitor(comp_context, monitor)
+			context Generated_On : "Jan 29, 2020"
+			context Req_Component : "SW::SW.Impl.UxAS"
+			context Formalized : "True"
+			agree_prop_checked(comp_context, property_id)
 		
-		Req004_FlightPlanner(comp_context : component, monitor : component) <=
-			** "[monitor-output] The output of third-party software shall be monitored for correctness" **
+		Req_VM(comp_context : component) <=
+			** "[Sandboxing] Component MissionComputer.Impl must sandbox its processes to prevent injection attacks" **
 			context Generated_By : "GearCASE"
-			context Generated_On : "May 23, 1970"
-			context Req_Component : "SW::SW.Impl.FPLN"
+			context Generated_On : "Jan 29, 2020"
+			context Req_Component : "MC::MissionComputer.Impl.PROC_SW"
 			context Formalized : "False"
-			add_monitor(comp_context, monitor)
+			false
+		
+		Req_Filter(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
+			** "[Well-formedness] The Flight Controller shall only receive well-formed messages from uncontrolled UxAS component" **
+			context Generated_By : "GearCASE"
+			context Generated_On : "Jan 29, 2020"
+			context Req_Component : "SW::SW.Impl.UART"
+			context Formalized : "True"
+			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 		
 	**};
 end CASE_Requirements;
