@@ -1,22 +1,6 @@
 package CASE_Requirements
 private
 	annex resolute {**
-		Req_AM(comp_context : component, property_id : string) <=
-			** "[Attestation] Only command messages from trusted sources shall be accepted" **
-			context Generated_By : "GearCASE"
-			context Generated_On : "Jan 29, 2020"
-			context Req_Component : "SW::SW.Impl.UxAS"
-			context Formalized : "True"
-			agree_prop_checked(comp_context, property_id)
-		
-		Req_Mon(comp_context : component, property_id : string) <=
-			** "[Monitor] Uncontrolled component UxAS must be monitored to mitigate trojan attacks" **
-			context Generated_By : "GearCASE"
-			context Generated_On : "Jan 29, 2020"
-			context Req_Component : "SW::SW.Impl.UxAS"
-			context Formalized : "True"
-			agree_prop_checked(comp_context, property_id)
-		
 		Req_VM(comp_context : component) <=
 			** "[Sandboxing] Component MissionComputer.Impl must sandbox its processes to prevent injection attacks" **
 			context Generated_By : "GearCASE"
@@ -25,13 +9,29 @@ private
 			context Formalized : "False"
 			false
 		
-		Req_Filter(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
-			** "[Well-formedness] The Flight Controller shall only receive well-formed messages from uncontrolled UxAS component" **
+		Req_Mon(comp_context : component) <=
+			** "[Monitor] Uncontrolled component UxAS must be monitored to mitigate trojan attacks" **
+			context Generated_By : "GearCASE"
+			context Generated_On : "Jan 29, 2020"
+			context Req_Component : "SW::SW.Impl.UxAS"
+			context Formalized : "True"
+			false
+			
+		Req_Filter(comp_context : component, property_id : string) <=
+			** "[Well-formedness] The WaypointManager shall only receive well-formed messages from uncontrolled UxAS component" **
 			context Generated_By : "GearCASE"
 			context Generated_On : "Jan 29, 2020"
 			context Req_Component : "SW::SW.Impl.UART"
 			context Formalized : "True"
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
+			agree_prop_checked(comp_context, property_id)
+		
+		Req_AM(comp_context : component, property_id : string) <=
+			** "[Attestation] Only command messages from trusted sources shall be accepted" **
+			context Generated_By : "GearCASE"
+			context Generated_On : "Jan 29, 2020"
+			context Req_Component : "SW::SW.Impl.UxAS"
+			context Formalized : "True"
+			agree_prop_checked(comp_context, property_id)
 		
 	**};
 end CASE_Requirements;

@@ -12,13 +12,13 @@
 		},
 		{
 			"type" : "Sandboxing",
-			"text" : "Component MissionComputer.Impl must sandbox its processes to prevent injection attacks",
+			"text" : "Component MissionComputer.Impl shall sandbox its processes to prevent injection attacks",
 			"context" : "MC::MissionComputer.Impl.PROC_SW"
 		},
 		{
-			"type" : "Well-formedness",
-			"text" : "The Flight Controller shall only receive well-formed messages from uncontrolled UxAS component",
-			"context" : "SW::SW.Impl.UART"
+			"type" : "Wellformed",
+			"text" : "The Waypoint Manager shall only receive well-formed messages from uncontrolled UxAS component",
+			"context" : "SW::SW.Impl.WaypointManager"
 		},
 		{
 			"type" : "Monitor",

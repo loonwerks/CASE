@@ -18,7 +18,7 @@ public
 	device implementation Radio.Impl
 	end Radio.Impl;
 
-		-- The serial communication hardware
+	-- The serial communication hardware
 	device UART
 		features
 			MCA: requires bus access MC_Bus.Impl;
@@ -32,7 +32,7 @@ public
 	device implementation UART.Impl
 	end UART.Impl;
 
-		-- The Mission Computer processor
+	-- The Mission Computer processor
 	processor MC_Proc
 		features
 			MCA: requires bus access MC_Bus.Impl;
@@ -41,7 +41,7 @@ public
 	processor implementation MC_Proc.Impl
 	end MC_Proc.Impl;
 
-		-- The Mission Computer RAM
+	-- The Mission Computer RAM
 	memory MC_Mem
 		features
 			MCA: requires bus access MC_Bus.Impl;
@@ -50,14 +50,14 @@ public
 	memory implementation MC_Mem.Impl
 	end MC_Mem.Impl;
 
-		-- The Mission Computer on-board bus
+	-- The Mission Computer on-board bus
 	bus MC_Bus
 	end MC_Bus;
 
 	bus implementation MC_Bus.Impl
 	end MC_Bus.Impl;
 
-		-- The MissionComputer onboard the UAV
+	-- The MissionComputer onboard the UAV
 	system MissionComputer
 		features
 			radio_recv: in event data port;
@@ -69,35 +69,35 @@ public
 	end MissionComputer;
 
 	system implementation MissionComputer.Impl
-	subcomponents
-		RADIO_HW: device Radio.Impl;
-		UART_HW: device UART.Impl;
-		PROC_HW: processor MC_Proc.Impl;
-		MEM_HW: memory MC_Mem.Impl;
-		BUS_HW: bus MC_Bus.Impl;
-		PROC_SW: process SW::SW.Impl;
-	connections
-		bac1: bus access RADIO_HW.MCA <-> BUS_HW;
-		bac2: bus access UART_HW.MCA <-> BUS_HW;
-		bac3: bus access PROC_HW.MCA <-> BUS_HW;
-		bac4: bus access MEM_HW.MCA <-> BUS_HW;
-		bac6: bus access RADIO_HW.RFA <-> RFA;
-		bac7: bus access UART_HW.UARTA <-> UARTA;
-		c1: port radio_recv -> RADIO_HW.recv_data_in;
-		c2: port RADIO_HW.recv_data_out -> PROC_SW.radio_recv;
-		c3: port PROC_SW.radio_send -> RADIO_HW.send_data_in;
-		c4: port RADIO_HW.send_data_out -> radio_send;
-		c5: port uart_recv -> UART_HW.recv_data_in;
-		c6: port UART_HW.recv_data_out -> PROC_SW.uart_recv;
-		c7: port PROC_SW.uart_send -> UART_HW.send_data_in;
-		c8: port UART_HW.send_data_out -> uart_send;
-	properties
-		Actual_Processor_Binding => (reference (PROC_HW)) applies to PROC_SW;
-		Actual_Memory_Binding => (reference (MEM_HW)) applies to PROC_SW;
-		Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7;
-	annex resolute {**
+		subcomponents
+			RADIO_HW: device Radio.Impl;
+			UART_HW: device UART.Impl;
+			PROC_HW: processor MC_Proc.Impl;
+			MEM_HW: memory MC_Mem.Impl;
+			BUS_HW: bus MC_Bus.Impl;
+			PROC_SW: process SW::SW.Impl;
+		connections
+			bac1: bus access RADIO_HW.MCA <-> BUS_HW;
+			bac2: bus access UART_HW.MCA <-> BUS_HW;
+			bac3: bus access PROC_HW.MCA <-> BUS_HW;
+			bac4: bus access MEM_HW.MCA <-> BUS_HW;
+			bac6: bus access RADIO_HW.RFA <-> RFA;
+			bac7: bus access UART_HW.UARTA <-> UARTA;
+			c1: port radio_recv -> RADIO_HW.recv_data_in;
+			c2: port RADIO_HW.recv_data_out -> PROC_SW.radio_recv;
+			c3: port PROC_SW.radio_send -> RADIO_HW.send_data_in;
+			c4: port RADIO_HW.send_data_out -> radio_send;
+			c5: port uart_recv -> UART_HW.recv_data_in;
+			c6: port UART_HW.recv_data_out -> PROC_SW.uart_recv;
+			c7: port PROC_SW.uart_send -> UART_HW.send_data_in;
+			c8: port UART_HW.send_data_out -> uart_send;
+		properties
+			Actual_Processor_Binding => (reference (PROC_HW)) applies to PROC_SW;
+			Actual_Memory_Binding => (reference (MEM_HW)) applies to PROC_SW;
+			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7;
+		annex resolute {**
 			prove Req_VM(this.PROC_SW)
 		**};
-end MissionComputer.Impl;
+	end MissionComputer.Impl;
 
 end MC;

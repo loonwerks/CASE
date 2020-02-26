@@ -65,8 +65,8 @@
         <point x="688.0" y="272.0"/>
       </bendpoints>
     </element>
-    <element uuid="9cb5978e-96c4-43a0-9ad5-ba78c7628e7b" manual="true">
-      <element uuid="3fdba3c1-df1e-4777-9c6e-5a3a0c7a9983" manual="true">
+    <element uuid="166f4ad6-994d-4914-b441-56a8e87a855b" manual="true">
+      <element uuid="24d1948e-c048-43e5-8273-bb2d519f1acc" manual="true">
         <bo>
           <seg>tag</seg>
           <seg>unidirectional</seg>

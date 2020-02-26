@@ -6,23 +6,6 @@ public
 	with CASE_Model_Transformations;
 	renames AGREE_PLTL::all;
 
-	thread CASE_Filter
-		features
-			filter_in: in event data port Mission;
-			filter_out: out event data port Mission;
-			message_log: out event data port;
-		properties
-			CASE_Properties::COMP_TYPE => FILTER;
-		annex agree {**
-			guarantee "" : good_mission(filter_out);
-		**};
-	end CASE_Filter;
-
-	thread implementation CASE_Filter.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
-	end CASE_Filter.Impl;
-
 	data Coordinate
 	end Coordinate;
 
@@ -136,8 +119,6 @@ public
 		annex agree {**
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_command);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);
-			assume Req_Mon "Uncontrolled component UxAS must be monitored to mitigate trojan attacks" : false;
-			assume Req_AM "Only command messages from trusted sources shall be accepted" : false;
 		**};
 	end FlightPlanner;
 
@@ -186,8 +167,7 @@ public
 			send_data: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl {Queue_Size => 1;};
 		annex agree {**
 			assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(mission_window);
-			guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data . crc;
-			assume Req_Filter "The Flight Controller shall only receive well-formed messages from uncontrolled UxAS component" : false;
+			guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data.crc;
 		**};
 	end UARTDriver;
 
@@ -215,24 +195,17 @@ public
 			KeepInZones: thread KeepInZoneDatabase.Impl;
 			WaypointManager: thread WaypointManager.Impl;
 			UART: thread UARTDriver.Impl;
-			FLT: thread CASE_Filter.Impl;
 		connections
 			c1: port radio_recv -> Radio.recv_data;
 			c2: port Radio.send_data -> radio_send;
 			c3: port Radio.mission_command -> UxAS.recv_command;
 			c4: port KeepInZones.zones -> UxAS.keep_in_zones;
-			c5: port UxAS.flight_plan -> FLT.filter_in;
-			c11: port FLT.filter_out -> WaypointManager.flight_plan;
+			c5: port UxAS.flight_plan -> WaypointManager.flight_plan;
 			c6: port WaypointManager.mission_window -> UART.mission_window;
 			c7: port UART.status -> WaypointManager.position_status;
 			c8: port UART.status -> Radio.status;
 			c9: port UART.send_data -> uart_send;
 			c10: port uart_recv -> UART.recv_data;
-		annex resolute {**
-			prove Req_Mon(this.UxAS, "Req_Mon")
-			prove Req_AM(this.UxAS, "Req_AM")
-			prove Req_Filter(this.UART, "Req_Filter", this.FLT, this.c11, Mission)
-		**};
 	end SW.Impl;
 
 	annex agree {**
