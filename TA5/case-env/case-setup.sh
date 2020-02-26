@@ -7,7 +7,8 @@ set -exuo pipefail
 : "${GIT_USER:=Snail Mail}"
 : "${GIT_EMAIL:=<>}"
 
-: "${SIREUM_V:=73e7d49}"
+: "${SIREUM_V:=6ba4355}"
+: "${SEL4_SCRIPTS_V:=d934fa1}"
 : "${SEL4_V:=3232714b267c613775287472ae229000dd24aa8d}"
 : "${CAMKES_V:=67ce937df0c8f821e6a9f4615d9d2fa2bf9a8885}"
 
@@ -15,7 +16,7 @@ export DESKTOP_MACHINE=no
 export MAKE_CACHES=no
 export DEBIAN_FRONTEND=noninteractive
 export SIREUM_HOME=$BASE_DIR/Sireum
-export PATH=$PATH:$HOME/bin:$SIREUM_HOME/bin/linux/java/bin:$SIREUM_HOME/bin
+export PATH=$PATH:$HOME/bin:$SIREUM_HOME/bin/linux/java/bin:$SIREUM_HOME/bin:$BASE_DIR/camkes/build/capDL-tool
 
 command_exists() {
 	command -v "$@" > /dev/null 2>&1
@@ -58,12 +59,7 @@ as_root apt install -y curl wget git p7zip-full zip unzip libgomp1 xz-utils buil
 
 
 # Sireum
-cd $BASE_DIR
-git clone https://github.com/sireum/kekinian Sireum
-cd $SIREUM_HOME
-git checkout $SIREUM_V
-git submodule update --init --recursive
-bin/build.cmd 
+bash ~/bin/sireum-install.sh $SIREUM_V 
 echo "export SIREUM_HOME=$SIREUM_HOME" >> "$HOME/.bashrc"
 echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
 echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
@@ -78,6 +74,9 @@ echo "export PATH=\$PATH:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
 cd $BASE_DIR
 git clone https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles
 SEL4_SCRIPTS=$BASE_DIR/seL4-CAmkES-L4v-dockerfiles/scripts
+cd $SEL4_SCRIPTS
+git checkout $SEL4_SCRIPTS_V
+cd $BASE_DIR
 
 git config --global user.name $GIT_USER
 git config --global user.email $GIT_EMAIL
@@ -100,3 +99,4 @@ bash ~/bin/sel4-cache.sh $SEL4_V
 bash $SEL4_SCRIPTS/camkes.sh
 
 bash ~/bin/camkes-cache.sh $CAMKES_V
+echo "export PATH=\$PATH:$BASE_DIR/camkes/build/capDL-tool" >> "$HOME/.bashrc"

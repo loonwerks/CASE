@@ -87,14 +87,13 @@ See [Post Setup](#post-setup) below for additional instructions.
   $SIREUM_HOME/bin/install/fmide.cmd [<tag-name>] # Optional release tag name; latest nightly release is used if unspecified 
   ```
 
-* To update Sireum to the latest version:
+  If the installation somehow did not finish (e.g., due to a network issue), remove the problematic file in Sireum's cache directory 
+  (``~/Downloads/sireum``) and re-run the above.
+
+* To update Sireum:
 
   ```bash
-  cd $SIREUM_HOME
-  git checkout master
-  git pull --recurse-submodules
-  git submodule update --init --recursive
-  bin/build.cmd
+  ~/bin/sireum-install.sh [<COMMIT>] # Optional SHA commit of https://github.com/sireum/kekinian; the tip of master is used if unspecified
   ```
 
 * To update seL4 and friends (cache, etc.):
@@ -117,28 +116,6 @@ See [Post Setup](#post-setup) below for additional instructions.
 
   ```bash
   $SIREUM_HOME/bin/linux/idea/bin/IVE.sh&
-  ```
-  
-  If the installation somehow did not finish (e.g., due to a network issue), you might need to clean the Sireum installation
-  before re-running the setup script:
-
-  ```bash
-  cd $SIREUM_HOME
-  bin/clean.sh
-  bin/build.cmd setup
-  ```
-  
-  As a last resort, a thorough re-cloning is in order:
-  
-  ```bash
-  cd $SIREUM_HOME
-  cd ..
-  rm -fR Sireum ~/Downloads/sireum
-  git clone https://github.com/sireum/kekinian Sireum
-  cd Sireum
-  git checkout <COMMIT> # see SIREUM_V env var in case-setup.sh
-  git submodule update --init --recursive
-  bin/build.cmd setup
   ```
 
 * To install [CLion](https://www.jetbrains.com/clion/) C/C++ IDE 

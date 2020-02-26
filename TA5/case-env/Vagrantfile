@@ -49,5 +49,6 @@ Vagrant.configure("2") do |config|
     adduser vagrant vboxsf
     echo "Installing xfce-desktop ..."
     tasksel install xfce-desktop
+    #apt install -y materia-gtk-theme papirus-icon-theme
   SHELL
 end
