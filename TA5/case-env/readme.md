@@ -16,6 +16,7 @@ fmide&
 
 The above will launch ``fmide`` installed in ``~/CASE/Sireum/bin/linux/fmide``.
 
+If you are interested to also setup FMIDE and HAMR directly in your machine running either Windows, Linux, or macOS, please see the instructions at [the bottom of this page](#setting-up-fmide-and-hamr-only).
 
 ## Setting Up A Dedicated Linux Machine
 
@@ -143,4 +144,42 @@ See [Post Setup](#post-setup) below for additional instructions.
 
   ```bash
   bash ~/bin/coq-install.sh
+  ```
+ 
+## Setting Up FMIDE and HAMR Only
+
+* Windows:
+
+  ```batch
+  git clone https://github.com/sireum/kekinian Sireum
+  cd Sireum
+  git checkout <commit> & REM^; SHA commit of https://github.com/sireum/kekinian, see SIREUM_V in case-setup.sh; optional step
+  git submodule update --init --recursive
+  bin\build.cmd setup
+  bin\install\fmide.cmd [<tag-name>] & REM^; Optional release tag name; latest nightly release is used if unspecified
+  start /B bin\win\fmide\fmide.exe
+  ```
+
+* Linux:
+
+  ```bash
+  git clone https://github.com/sireum/kekinian Sireum
+  cd Sireum
+  git checkout <commit> # SHA commit of https://github.com/sireum/kekinian, see SIREUM_V in case-setup.sh; optional step
+  git submodule update --init --recursive
+  bin/build.cmd setup
+  bin/install/fmide.cmd [<tag-name>] # Optional release tag name; latest nightly release is used if unspecified 
+  bin/linux/fmide/fmide&
+  ```
+
+* macOS:
+
+  ```bash
+  git clone https://github.com/sireum/kekinian Sireum
+  cd Sireum
+  git checkout <commit> # SHA commit of https://github.com/sireum/kekinian, see SIREUM_V in case-setup.sh; optional step
+  git submodule update --init --recursive
+  bin/build.cmd setup
+  bin/install/fmide.cmd [<tag-name>] # Optional release tag name; latest nightly release is used if unspecified 
+  open bin/mac/fmide.app
   ```
