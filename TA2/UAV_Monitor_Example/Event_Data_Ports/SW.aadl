@@ -14,14 +14,14 @@ public
 			alert: out event data port Base_Types::Boolean;
 		properties
 			CASE_Properties::COMP_TYPE => MONITOR;
-			CASE_Properties::COMP_SPEC => ("monitor_policy");
+			CASE_Properties::COMP_SPEC => ("Req001_GeofenceMonitor");
 		annex agree {**
 
-			property monitor_policy = event(reset) or Historically(event(observed) => WAYPOINTS_IN_KEEPIN_ZONE(observed, reference_1));
+			property CASE_Monitor_Coord_policy = Historically(event(observed) => WAYPOINTS_IN_KEEPIN_ZONE(observed, reference_1));
 
 			const is_latched : bool = true;
-			guarantee Req001_Monitor1 "The monitor shall only output an alert when the monitor policy is true" : 
-			  alert = not(monitor_policy);
+			guarantee Req001_GeofenceMonitor "The monitor shall only output an alert when the monitor policy is true" : 
+			  alert = not(CASE_Monitor_Coord_policy);
 			  
             fun WAYPOINTS_IN_KEEPIN_ZONE(mission : Mission, keepInZone : MapArray) : bool =
               forall waypoint in mission, WAYPOINT_IN_KEEPIN_ZONE(waypoint, keepInZone);
@@ -72,17 +72,18 @@ public
 --			reset: in event data port Base_Types::Boolean;
 		properties
 			CASE_Properties::COMP_TYPE => MONITOR;
-			CASE_Properties::COMP_SPEC => ("monitor_policy");
+			CASE_Properties::COMP_SPEC => ("Req001_RequestMonitor");
 		annex agree {**
 			const is_latched : bool = true;
-			property monitor_policy = event(reset) or Historically(event(observed) => Yesterday(Since(not event(observed), event(reference_1))));
+			property CASE_Monitor_Req_policy = Historically(event(observed) => Yesterday(Since(not event(observed), event(reference_1))));
+--			property CASE_Monitor_Req_policy = event(reset) or Historically(event(observed) => Yesterday(Since(not event(observed), event(reference_1))));
 
 --			Full Past-time LTL property:
 --			Historically(radio_send => Yesterday(Since(not radio_send, radio_recv))) and
 --			Historically(radio_recv => Zyesterday(Since(not radio_recv, radio_send)) or  Zyesterday(Historically(not radio_recv)));
 
-			guarantee Req001_Monitor "The monitor shall only output an alert when the monitor policy is true" :
-				alert =	not monitor_policy;
+			guarantee Req001_RequestMonitor "The monitor shall only output an alert when the monitor policy is true" :
+				alert =	not CASE_Monitor_Req_policy;
 --			Monitor internally is a DFA. Once it generates an alert it stays in the alert state until it receives a reset signal.
 --			Once a reset is received, the monitor goes to its initial state.
 					
@@ -109,6 +110,7 @@ public
 			filter_out: out event data port Mission;
 		properties
 			CASE_Properties::COMP_TYPE => FILTER;
+			CASE_Properties::COMP_SPEC => ("Req002_Flight_Planner_Filter");
 		annex agree {**
 			guarantee Req002_FlightPlanner_Filter "The Flight Planner shall generate a valid mission" : good_mission(filter_out);
 		**};
@@ -363,7 +365,7 @@ public
 			c18: port UART.send_data -> uart_send;
 			c19: port uart_recv -> UART.recv_data;
 		annex resolute {**
-			prove Req005_WaypointManager(this.WaypointManager, this.ResponseFilter, this.c3, Mission)
+			prove Req005_WaypointManager(this.WaypointManager, this.ResponseFilter, this.c13, Mission)
 			prove Req004_FlightPlanner(this.UxAS, this.GeofenceMonitor)
 			prove Req003_FlightPlanner(this.UxAS, this.RequestMonitor)
 		**};
