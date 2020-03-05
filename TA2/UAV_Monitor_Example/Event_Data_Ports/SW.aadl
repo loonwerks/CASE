@@ -1,7 +1,6 @@
 package SW
 public
 	with Data_Model;
-
 	with Base_Types;
 
 	with CASE_Properties;
@@ -11,15 +10,14 @@ public
 	thread CASE_Monitor_Coord
 		features
 			observed: in event data port Mission;
-			expected: in data port MapArray;
-			alert: out data port Base_Types::Boolean;
-			reset: in event data port Base_Types::Boolean;
+			reference_1: in data port MapArray;
+			alert: out event data port Base_Types::Boolean;
 		properties
 			CASE_Properties::COMP_TYPE => MONITOR;
 			CASE_Properties::COMP_SPEC => ("monitor_policy");
 		annex agree {**
 
-			property monitor_policy = event(reset) or Historically(event(observed) => WAYPOINTS_IN_KEEPIN_ZONE(observed, expected));
+			property monitor_policy = event(reset) or Historically(event(observed) => WAYPOINTS_IN_KEEPIN_ZONE(observed, reference_1));
 
 			const is_latched : bool = true;
 			guarantee Req001_Monitor1 "The monitor shall only output an alert when the monitor policy is true" : 
@@ -64,36 +62,20 @@ public
 			Dispatch_Protocol => Sporadic;
 	end CASE_Monitor_Coord.Impl;
 	
-	thread CASE_Switch_Coord
-		features
-			activation: in data port Base_Types::Boolean;
-			input: in event data port Mission;
-			output: out event data port Mission;
-		properties
-			CASE_Properties::COMP_TYPE => SWITCH;
-			CASE_Properties::COMP_SPEC => ("Req001_Switch");
-		annex agree {**
---			guarantee Req001_Switch "The switch shall only forward messages when activated." : if activation then output = input else output = NULL_MESSAGE;
-		**};
-	end CASE_Switch_Coord;
-	
-	thread implementation CASE_Switch_Coord.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
-	end CASE_Switch_Coord.Impl;
 	
 	thread CASE_Monitor_Req
 		features
-			observed: in event data port Mission;
-			expected: in event data port RF_Msg.Impl;
-			alert: out data port Base_Types::Boolean;
-			reset: in event data port Base_Types::Boolean;
+			observed: in event data port RF_Msg.Impl;
+			reference_1: in event data port Mission;
+			output: out event data port Mission;
+			alert: out event data port Base_Types::Boolean;
+--			reset: in event data port Base_Types::Boolean;
 		properties
 			CASE_Properties::COMP_TYPE => MONITOR;
 			CASE_Properties::COMP_SPEC => ("monitor_policy");
 		annex agree {**
 			const is_latched : bool = true;
-			property monitor_policy = event(reset) or Historically(event(observed) => Yesterday(Since(not event(observed), event(expected))));
+			property monitor_policy = event(reset) or Historically(event(observed) => Yesterday(Since(not event(observed), event(reference_1))));
 
 --			Full Past-time LTL property:
 --			Historically(radio_send => Yesterday(Since(not radio_send, radio_recv))) and
@@ -120,24 +102,6 @@ public
 			Dispatch_Protocol => Sporadic;
 	end CASE_Monitor_Req.Impl;
 	
-	thread CASE_Switch_Req
-		features
-			activation: in data port Base_Types::Boolean;
-			input: in event data port Mission;
-			output: out event data port Mission;
-		properties
-			CASE_Properties::COMP_TYPE => SWITCH;
-			CASE_Properties::COMP_SPEC => ("Req002_Switch");
-		annex agree {**
-			-- Need to figure out NULL_MESSAGE
---			guarantee Req002_Switch "The switch shall only forward messages when activated." : if activation then output = input else output = NULL_MESSAGE;
-		**};
-	end CASE_Switch_Req;
-	
-	thread implementation CASE_Switch_Req.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
-	end CASE_Switch_Req.Impl;
 
 	thread CASE_Filter
 		features
@@ -244,6 +208,7 @@ public
 			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			mission_command: out event data port RF_Msg.Impl;
 			status: in event data port Coordinate.Impl;
+			alert: in event data port Base_Types::Boolean;
 		properties
 			CASE_Properties::COMP_TYPE => COMM_DRIVER;
 		annex agree {**
@@ -264,7 +229,8 @@ public
 		features
 			flight_plan: out event data port Mission;
 			recv_map: in event data port RF_Msg.Impl;
-			nofly_zones: in data port MapArray;
+			keep_in_zones: in data port MapArray;
+			keep_out_zones: in data port MapArray;
 		properties
 			CASE_Properties::BOUNDARY => (UNCONTROLLED);
 		annex agree {**
@@ -278,17 +244,18 @@ public
 			Dispatch_Protocol => Sporadic;
 	end FlightPlanner.Impl;
 
-	thread NoFlyZoneDatabase
+	thread FlyZonesDatabase
 		-- The NoFlyZoneDatabase is a collection of polygons that represent areas on a map which the UAV should avoid.
 		-- The database is populated at build-time and stored in memory.
 		features
-			zones: out data port MapArray;
-	end NoFlyZoneDatabase;
+			keep_in_zones: out data port MapArray;
+			keep_out_zones: out data port MapArray;
+	end FlyZonesDatabase;
 
-	thread implementation NoFlyZoneDatabase.Impl
+	thread implementation FlyZonesDatabase.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
-	end NoFlyZoneDatabase.Impl;
+	end FlyZonesDatabase.Impl;
 
 	thread WaypointManager
 		-- The WaypointManager divides a mission into a small window of waypoints suitable for the FlightController.
@@ -298,6 +265,7 @@ public
 			flight_plan: in event data port Mission;
 			mission_window: out event data port MissionWindow;
 			position_status: in event data port Coordinate.Impl;
+			return_home: in event data port Base_Types::Boolean;
 		annex agree {**
 			assume Req001_WaypointManager "The Waypoint Manager shall receive a well-formed mission" : good_mission(flight_plan);
 			guarantee Req002_WaypointManager "The Waypoint Manager shall output a well-formed mission window" : good_mission_window(mission_window);
@@ -342,22 +310,23 @@ public
 	-- This is the original SW 
 	process implementation SW.Original
 		subcomponents
-			RADIO: thread RadioDriver.Impl;
-			FPLN: thread FlightPlanner.Impl;
-			WPM: thread WaypointManager.Impl;
+			Radio: thread RadioDriver.Impl;
+			UxAS: thread FlightPlanner.Impl;
+			WaypointManager: thread WaypointManager.Impl;
 			UART: thread UARTDriver.Impl;
-			NFDB: thread NoFlyZoneDatabase.Impl;
+			FlyZones: thread FlyZonesDatabase.Impl;
 		connections
-			c1: port radio_recv -> RADIO.recv_data;
-			c2: port RADIO.send_data -> radio_send;
-			c3: port RADIO.mission_command -> FPLN.recv_map;
-			c4: port FPLN.flight_plan -> WPM.flight_plan;
-			c5: port NFDB.zones -> FPLN.nofly_zones;
-			c6: port WPM.mission_window -> UART.mission_window;
-			c7: port UART.status -> WPM.position_status;
-			c8: port UART.status -> RADIO.status;
-			c9: port UART.send_data -> uart_send;
-			c10: port uart_recv -> UART.recv_data;
+			c1: port radio_recv -> Radio.recv_data;
+			c2: port Radio.send_data -> radio_send;
+			c3: port Radio.mission_command -> UxAS.recv_map;
+			c4: port UxAS.flight_plan -> WaypointManager.flight_plan;
+			c5: port FlyZones.keep_in_zones -> UxAS.keep_in_zones;
+			c6: port FlyZones.keep_in_zones -> UxAS.keep_in_zones;
+			c7: port WaypointManager.mission_window -> UART.mission_window;
+			c8: port UART.status -> WaypointManager.position_status;
+			c9: port UART.status -> Radio.status;
+			c10: port UART.send_data -> uart_send;
+			c11: port uart_recv -> UART.recv_data;
 	end SW.Original;
 
 	-- This software implementation includes both monitors
@@ -365,41 +334,38 @@ public
 	-- plans are well-formed
 	process implementation SW.Transformed
 		subcomponents
-			RADIO: thread RadioDriver.Impl;
-			FPLN: thread FlightPlanner.Impl;
-			WPM: thread WaypointManager.Impl;
+			Radio: thread RadioDriver.Impl;
+			UxAS: thread FlightPlanner.Impl;
+			WaypointManager: thread WaypointManager.Impl;
 			UART: thread UARTDriver.Impl;
-			NFDB: thread NoFlyZoneDatabase.Impl;
-			FLT: thread CASE_Filter.Impl;
-			COORD_MON: thread CASE_Monitor_Coord.Impl;
-			COORD_SWITCH: thread CASE_Switch_Coord.Impl;
-			REQ_MON: thread CASE_Monitor_Req.Impl;
-			REQ_SWITCH: thread CASE_Switch_Req.Impl;
+			FlyZones: thread FlyZonesDatabase.Impl;
+			ResponseFilter: thread CASE_Filter.Impl;
+			GeofenceMonitor: thread CASE_Monitor_Coord.Impl;
+			RequestMonitor: thread CASE_Monitor_Req.Impl;
 		connections
-			c1: port radio_recv -> RADIO.recv_data;
-			c2: port RADIO.send_data -> radio_send;
-			c3: port RADIO.mission_command -> FPLN.recv_map;
-			c4: port NFDB.zones -> FPLN.nofly_zones;
-			c5: port FPLN.flight_plan -> REQ_SWITCH.input;
-			c6: port RADIO.mission_command -> REQ_MON.expected;
-			c7: port FPLN.flight_plan -> REQ_MON.observed;
-			c8: port REQ_MON.alert -> REQ_SWITCH.activation;
-			c9: port REQ_SWITCH.output -> FLT.filter_in;
-			c10: port FLT.filter_out -> COORD_MON.observed;
-			c11: port NFDB.zones -> COORD_MON.expected;
-			c12: port COORD_MON.alert -> COORD_SWITCH.activation;
-			c13: port FLT.filter_out -> COORD_SWITCH.input;
-			c14: port COORD_SWITCH.output -> WPM.flight_plan;
-			c15: port WPM.mission_window -> UART.mission_window;
-			c16: port UART.status -> WPM.position_status;
-			c17: port UART.status -> RADIO.status;
+			c1: port radio_recv -> Radio.recv_data;
+			c2: port Radio.send_data -> radio_send;
+			c3: port Radio.mission_command -> UxAS.recv_map;
+			c4: port FlyZones.keep_in_zones -> UxAS.keep_in_zones;
+			c5: port FlyZones.keep_out_zones -> UxAS.keep_out_zones;
+			c6: port Radio.mission_command -> RequestMonitor.observed;
+			c7: port UxAS.flight_plan -> RequestMonitor.reference_1;
+			c8: port RequestMonitor.alert -> Radio.alert;
+			c9: port RequestMonitor.output -> ResponseFilter.filter_in;
+			c10: port ResponseFilter.filter_out -> GeofenceMonitor.observed;
+			c11: port FlyZones.keep_in_zones -> GeofenceMonitor.reference_1;
+			c12: port ResponseFilter.filter_out -> GeofenceMonitor.observed;
+			c13: port ResponseFilter.filter_out -> WaypointManager.flight_plan;
+			c14: port GeofenceMonitor.alert -> WaypointManager.return_home;
+			c15: port WaypointManager.mission_window -> UART.mission_window;
+			c16: port UART.status -> WaypointManager.position_status;
+			c17: port UART.status -> Radio.status;
 			c18: port UART.send_data -> uart_send;
 			c19: port uart_recv -> UART.recv_data;
-			
 		annex resolute {**
-			prove Req005_WaypointManager(this.WPM, this.FLT, this.c3, Mission)
-			prove Req004_FlightPlanner(this.FPLN, this.COORD_MON)
-			prove Req003_FlightPlanner(this.FPLN, this.REQ_MON)
+			prove Req005_WaypointManager(this.WaypointManager, this.ResponseFilter, this.c3, Mission)
+			prove Req004_FlightPlanner(this.UxAS, this.GeofenceMonitor)
+			prove Req003_FlightPlanner(this.UxAS, this.RequestMonitor)
 		**};
 	end SW.Transformed;
 

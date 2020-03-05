@@ -24,14 +24,6 @@
         <seg>connection</seg>
         <seg>c10</seg>
       </bo>
-      <bendpoints>
-        <point x="1451.0" y="352.0"/>
-        <point x="1451.0" y="352.0"/>
-        <point x="1451.0" y="352.0"/>
-        <point x="1451.0" y="352.0"/>
-        <point x="1490.0" y="352.0"/>
-        <point x="1490.0" y="499.0"/>
-      </bendpoints>
     </element>
     <element uuid="96615768-429c-4067-b639-aaf30e179510" manual="true">
       <element uuid="1d7b6011-6838-4f5b-9d3b-8c404428dd8d" manual="true">
@@ -45,12 +37,12 @@
         <seg>c11</seg>
       </bo>
       <bendpoints>
-        <point x="1014.0" y="472.0"/>
-        <point x="1014.0" y="547.0"/>
+        <point x="859.0" y="398.0"/>
+        <point x="859.0" y="317.0"/>
       </bendpoints>
     </element>
-    <element uuid="5fa0b505-5645-4839-8003-02f7129f1539" manual="true">
-      <element uuid="0e478f0e-26b6-4596-aa75-d966dec64ca9" manual="true">
+    <element uuid="8fb7af36-2449-4ac6-b454-8eadc1839b45" manual="true">
+      <element uuid="b930cbc9-6e5c-446a-aac2-505a9e9bcd60" manual="true">
         <bo>
           <seg>tag</seg>
           <seg>unidirectional</seg>
@@ -60,9 +52,6 @@
         <seg>connection</seg>
         <seg>c12</seg>
       </bo>
-      <bendpoints>
-        <point x="1737.0" y="507.0"/>
-      </bendpoints>
     </element>
     <element uuid="de0fe62f-8c6d-4f0e-ad87-c9cf7aec44f9" manual="true">
       <element uuid="4c2747ac-5a7b-4807-92d4-5356c7e445b3" manual="true">
@@ -75,6 +64,12 @@
         <seg>connection</seg>
         <seg>c13</seg>
       </bo>
+      <bendpoints>
+        <point x="849.0" y="267.0"/>
+        <point x="849.0" y="214.0"/>
+        <point x="1235.0" y="214.0"/>
+        <point x="1235.0" y="242.0"/>
+      </bendpoints>
     </element>
     <element uuid="35021373-b65e-418a-85d3-5b9f685faeda" manual="true">
       <element uuid="c7c635a5-f667-410d-8cb0-0cb7d5899160" manual="true">
@@ -124,11 +119,8 @@
         <seg>c17</seg>
       </bo>
       <bendpoints>
-        <point x="2145.0" y="392.0"/>
-        <point x="2145.0" y="627.0"/>
-        <point x="1288.0" y="627.0"/>
-        <point x="413.0" y="627.0"/>
-        <point x="413.0" y="383.0"/>
+        <point x="460.0" y="192.0"/>
+        <point x="460.0" y="544.6666666666667"/>
       </bendpoints>
     </element>
     <element uuid="4c2b5f7a-b0d1-4ba4-a39c-a77fb906e355" manual="true">
@@ -142,6 +134,10 @@
         <seg>connection</seg>
         <seg>c18</seg>
       </bo>
+      <bendpoints>
+        <point x="460.0" y="92.0"/>
+        <point x="460.0" y="89.0"/>
+      </bendpoints>
     </element>
     <element uuid="6177499a-c939-42b1-8641-a9ed9d241e9e" manual="true">
       <element uuid="c343408b-b5f3-4216-927d-9efdadbba7c5" manual="true">
@@ -178,6 +174,10 @@
         <seg>connection</seg>
         <seg>c3</seg>
       </bo>
+      <bendpoints>
+        <point x="849.0" y="552.0"/>
+        <point x="849.0" y="498.0"/>
+      </bendpoints>
     </element>
     <element uuid="45585f05-0fa2-478d-b94a-4f3ba49be6d0" manual="true">
       <element uuid="a0ed218d-2201-423c-b41c-7f6e5dfcf182" manual="true">
@@ -190,9 +190,6 @@
         <seg>connection</seg>
         <seg>c4</seg>
       </bo>
-      <bendpoints>
-        <point x="601.0" y="470.0"/>
-      </bendpoints>
     </element>
     <element uuid="93e538a4-69c7-47c5-8a72-dc533ce3c832" manual="true">
       <element uuid="fc5795d0-ccd8-435e-bc23-fc87a272b2c0" manual="true">
@@ -217,10 +214,6 @@
         <seg>connection</seg>
         <seg>c6</seg>
       </bo>
-      <bendpoints>
-        <point x="405.0" y="313.0"/>
-        <point x="405.0" y="152.0"/>
-      </bendpoints>
     </element>
     <element uuid="f1dc53c4-1e25-45d5-9147-7b1603206b77" manual="true">
       <element uuid="f1109136-c304-4139-97cf-592f70a9e6fa" manual="true">
@@ -234,12 +227,12 @@
         <seg>c7</seg>
       </bo>
       <bendpoints>
-        <point x="689.0" y="321.0"/>
-        <point x="689.0" y="202.0"/>
+        <point x="1235.0" y="448.0"/>
+        <point x="1235.0" y="478.0"/>
       </bendpoints>
     </element>
-    <element uuid="e04b5f3f-960e-4cc5-b30a-4db59b25441a" manual="true">
-      <element uuid="cfbfe235-23ff-4063-a863-314142a43212" manual="true">
+    <element uuid="8e10ce94-284a-4625-ae1e-b5da0bef8490" manual="true">
+      <element uuid="34010040-f8b5-4590-9b98-0b84ddd8a6f5" manual="true">
         <bo>
           <seg>tag</seg>
           <seg>unidirectional</seg>
@@ -249,10 +242,6 @@
         <seg>connection</seg>
         <seg>c8</seg>
       </bo>
-      <bendpoints>
-        <point x="926.0" y="172.0"/>
-        <point x="926.0" y="277.0"/>
-      </bendpoints>
     </element>
     <element uuid="67838be5-1987-401b-b1bd-24d9c019e59c" manual="true">
       <element uuid="b1e82848-7cc0-4e68-950f-19b6c5fecceb" manual="true">
@@ -266,9 +255,10 @@
         <seg>c9</seg>
       </bo>
       <bendpoints>
-        <point x="1202.0" y="277.0"/>
-        <point x="1202.0" y="317.0"/>
-        <point x="1202.0" y="352.0"/>
+        <point x="1235.0" y="428.0"/>
+        <point x="1235.0" y="345.0"/>
+        <point x="849.0" y="345.0"/>
+        <point x="849.0" y="317.0"/>
       </bendpoints>
     </element>
     <element uuid="1933cf6b-fbd4-4054-8abb-51c30c512ab9" manual="true" dockArea="left">
@@ -276,332 +266,295 @@
         <seg>feature</seg>
         <seg>radio_recv</seg>
       </bo>
-      <position y="279.0"/>
+      <position y="567.0"/>
     </element>
-    <element uuid="3d797c3f-b47e-49f2-8673-14341ec6ae7f" manual="true" dockArea="left">
+    <element uuid="3d797c3f-b47e-49f2-8673-14341ec6ae7f" manual="true" dockArea="right">
       <bo>
         <seg>feature</seg>
         <seg>radio_send</seg>
       </bo>
-      <position y="328.0"/>
+      <position x="1668.0" y="598.0"/>
     </element>
-    <element uuid="9ac55534-b0c9-49c3-aada-91029dc97e00" manual="true" dockArea="right">
+    <element uuid="9ac55534-b0c9-49c3-aada-91029dc97e00" manual="true" dockArea="left">
       <bo>
         <seg>feature</seg>
         <seg>uart_recv</seg>
       </bo>
-      <position x="2432.0" y="328.0"/>
+      <position y="98.0"/>
     </element>
     <element uuid="8c33898a-30c2-4482-9aa8-782a1fdb6196" manual="true" dockArea="right">
       <bo>
         <seg>feature</seg>
         <seg>uart_send</seg>
       </bo>
-      <position x="2429.0" y="279.0"/>
+      <position x="1676.0" y="45.0"/>
     </element>
-    <element uuid="ea0d6113-59ee-4d98-a5e5-29616ac97451" manual="true">
-      <element uuid="acd4454d-a1f6-4c8c-955d-8350a09cce91" manual="true" dockArea="right">
+    <element uuid="aeeb6fe2-0906-4ce8-bea7-0284a23ebb99" manual="true">
+      <element uuid="d5e6eb94-6626-4b8a-9fa2-99b2687d1d6e" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>keep_in_zones</seg>
+        </bo>
+        <position x="244.0" y="10.0"/>
+      </element>
+      <element uuid="20df5f3d-1b9c-438c-a774-33c91f7b3941" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>keep_out_zones</seg>
+        </bo>
+        <position x="236.0" y="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>flyzones</seg>
+      </bo>
+      <position x="471.0" y="344.0"/>
+      <size width="356.0" height="110.0"/>
+    </element>
+    <element uuid="933e28a7-c5a4-4628-bf05-711dbb508d1c" manual="true">
+      <element uuid="beac0171-74f6-4d47-9ac2-f534580bfdda" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>alert</seg>
         </bo>
-        <position x="164.0" y="60.0"/>
+        <position x="309.0" y="35.0"/>
       </element>
-      <element uuid="4d247ce0-a416-4533-947e-f2f04a26dd41" manual="true" dockArea="left">
-        <bo>
-          <seg>feature</seg>
-          <seg>expected</seg>
-        </bo>
-        <position y="97.0"/>
-      </element>
-      <element uuid="26d15afc-4cc2-48e7-a5a2-a6afbcecc1ff" manual="true" dockArea="left">
+      <element uuid="4b89b382-ba20-4b90-b52f-a3c6ce823a06" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>observed</seg>
         </bo>
-        <position y="52.0"/>
+        <position y="10.0"/>
       </element>
-      <element uuid="16a81671-bf18-46b0-aab4-530eac0da49e" manual="true" dockArea="bottom">
+      <element uuid="a5490d30-c03f-420f-a346-09b9ef6b13b3" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
-          <seg>reset</seg>
+          <seg>reference_1</seg>
         </bo>
-        <position x="76.0" y="136.0"/>
+        <position y="60.0"/>
       </element>
       <bo>
         <seg>subcomponent</seg>
-        <seg>coord_mon</seg>
+        <seg>geofencemonitor</seg>
       </bo>
-      <position x="1498.0" y="403.0"/>
-      <size width="211.0" height="160.0"/>
-    </element>
-    <element uuid="50953f04-705a-405e-9a4f-e7f9a33a5223" manual="true">
-      <element uuid="8c05d976-7414-4c06-87fd-348d0c4c6ce6" manual="true" dockArea="bottom">
-        <bo>
-          <seg>feature</seg>
-          <seg>activation</seg>
-        </bo>
-        <position x="49.0" y="86.0"/>
-      </element>
-      <element uuid="e12dff71-58cd-4651-98f7-30e0f7d29732" manual="true" dockArea="left">
-        <bo>
-          <seg>feature</seg>
-          <seg>input</seg>
-        </bo>
-        <position y="35.0"/>
-      </element>
-      <element uuid="2c2b4a3e-181c-4b50-8478-f3027dedeace" manual="true" dockArea="right">
-        <bo>
-          <seg>feature</seg>
-          <seg>output</seg>
-        </bo>
-        <position x="168.0" y="35.0"/>
-      </element>
-      <bo>
-        <seg>subcomponent</seg>
-        <seg>coord_switch</seg>
-      </bo>
-      <position x="1588.0" y="272.0"/>
-      <size width="226.0" height="110.0"/>
-    </element>
-    <element uuid="1a76e3c0-98b2-449f-a966-c66267d35d44" manual="true">
-      <element uuid="7803da7f-76bc-4f31-9bb2-f0eb9ae5f062" manual="true" dockArea="left">
-        <bo>
-          <seg>feature</seg>
-          <seg>filter_in</seg>
-        </bo>
-        <position y="23.0"/>
-      </element>
-      <element uuid="ad5b7ed1-eb7f-4349-b3a7-53a11be12508" manual="true" dockArea="right">
-        <bo>
-          <seg>feature</seg>
-          <seg>filter_out</seg>
-        </bo>
-        <position x="157.0" y="23.0"/>
-      </element>
-      <bo>
-        <seg>subcomponent</seg>
-        <seg>flt</seg>
-      </bo>
-      <position x="1208.0" y="285.0"/>
-      <size width="231.0" height="79.0"/>
-    </element>
-    <element uuid="4f55ef77-821d-4d1c-80c8-13ca16d2cdd7" manual="true">
-      <element uuid="5489262a-3069-4b72-86e4-b09e233aa812" manual="true" dockArea="right">
-        <bo>
-          <seg>feature</seg>
-          <seg>flight_plan</seg>
-        </bo>
-        <position x="133.0" y="33.0"/>
-      </element>
-      <element uuid="c8534840-5af9-43ea-948b-4d788a26b3b0" manual="true" dockArea="bottom">
-        <bo>
-          <seg>feature</seg>
-          <seg>nofly_zones</seg>
-        </bo>
-        <position x="50.0" y="86.0"/>
-      </element>
-      <element uuid="0677ae40-002e-4c35-a211-ead6538ad404" manual="true" dockArea="left">
-        <bo>
-          <seg>feature</seg>
-          <seg>recv_map</seg>
-        </bo>
-        <position y="24.0"/>
-      </element>
-      <bo>
-        <seg>subcomponent</seg>
-        <seg>fpln</seg>
-      </bo>
-      <position x="438.0" y="244.0"/>
-      <size width="218.0" height="110.0"/>
-    </element>
-    <element uuid="81ed0f5a-c41f-48aa-9152-24b1b446040e" manual="true">
-      <element uuid="db84165c-b166-4c38-8749-6bc40d847b54" manual="true" dockArea="right">
-        <bo>
-          <seg>feature</seg>
-          <seg>zones</seg>
-        </bo>
-        <position x="79.0" y="10.0"/>
-      </element>
-      <bo>
-        <seg>subcomponent</seg>
-        <seg>nfdb</seg>
-      </bo>
-      <position x="428.0" y="418.0"/>
-      <size width="134.0" height="60.0"/>
+      <position x="857.0" y="213.0"/>
+      <size width="356.0" height="110.0"/>
     </element>
     <element uuid="ecc39134-4932-4f49-91e6-d954f8706ebf" manual="true">
+      <element uuid="ee831ea3-2083-4a37-b34d-6e630eeaac37" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>alert</seg>
+        </bo>
+        <position x="322.0" y="79.0"/>
+      </element>
       <element uuid="767cc942-e747-41f2-be5a-53b86e250980" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>mission_command</seg>
         </bo>
-        <position x="105.0" y="50.0"/>
+        <position x="233.0" y="34.0"/>
       </element>
       <element uuid="35668145-c5de-48ce-9ea6-154719524a81" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>recv_data</seg>
         </bo>
-        <position y="60.0"/>
+        <position y="93.0"/>
       </element>
-      <element uuid="4f2e7cf6-81d1-43b6-8b09-6c1ad1a036f4" manual="true" dockArea="left">
+      <element uuid="4f2e7cf6-81d1-43b6-8b09-6c1ad1a036f4" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>send_data</seg>
         </bo>
-        <position y="105.0"/>
+        <position x="286.0" y="124.0"/>
       </element>
-      <element uuid="17771fed-ff3b-498c-9077-a9cd99f8aa1a" manual="true" dockArea="right">
+      <element uuid="17771fed-ff3b-498c-9077-a9cd99f8aa1a" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>status</seg>
         </bo>
-        <position x="187.0" y="120.0"/>
+        <position y="27.0"/>
       </element>
       <bo>
         <seg>subcomponent</seg>
         <seg>radio</seg>
       </bo>
-      <position x="123.0" y="219.0"/>
-      <size width="241.0" height="160.0"/>
+      <position x="458.0" y="474.0"/>
+      <size width="369.0" height="190.0"/>
     </element>
-    <element uuid="0346b2d9-1a51-4ccb-93cb-5c2a946adc8e" manual="true">
-      <element uuid="741fbdb4-0e8d-48c4-a5ab-3b4c99304e05" manual="true" dockArea="right">
+    <element uuid="63c820de-d5f5-4551-8435-9b2fc0d38233" manual="true">
+      <element uuid="d885e1cb-bb59-4343-8d5a-29a029c30d42" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>alert</seg>
         </bo>
-        <position x="144.0" y="60.0"/>
+        <position y="179.0"/>
       </element>
-      <element uuid="afbfb396-631d-48e2-a30d-6a9f0aa77708" manual="true" dockArea="left">
-        <bo>
-          <seg>feature</seg>
-          <seg>expected</seg>
-        </bo>
-        <position y="40.0"/>
-      </element>
-      <element uuid="e75904b4-c114-4f6c-8d9b-35f90145fcb9" manual="true" dockArea="left">
+      <element uuid="e9a9dabb-7a4b-4402-a938-65fe2cd0c62d" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>observed</seg>
         </bo>
-        <position y="90.0"/>
+        <position y="134.0"/>
       </element>
-      <element uuid="9f562d74-e4b3-4915-915b-cea62b338877" manual="true" dockArea="bottom">
-        <bo>
-          <seg>feature</seg>
-          <seg>reset</seg>
-        </bo>
-        <position x="60.0" y="136.0"/>
-      </element>
-      <bo>
-        <seg>subcomponent</seg>
-        <seg>req_mon</seg>
-      </bo>
-      <position x="708.0" y="68.0"/>
-      <size width="191.0" height="160.0"/>
-    </element>
-    <element uuid="187cb84e-cf51-4c20-aedf-dddad447930a" manual="true">
-      <element uuid="769dcc0f-66a6-4a00-89c3-336f74a42674" manual="true" dockArea="left">
-        <bo>
-          <seg>feature</seg>
-          <seg>activation</seg>
-        </bo>
-        <position y="35.0"/>
-      </element>
-      <element uuid="ed82290f-34ef-4f42-a72d-dfcb081ea8a9" manual="true" dockArea="left">
-        <bo>
-          <seg>feature</seg>
-          <seg>input</seg>
-        </bo>
-        <position y="80.0"/>
-      </element>
-      <element uuid="508d9aef-5fc5-4185-8632-d9d5dc488af2" manual="true" dockArea="right">
+      <element uuid="291e1395-9876-45b1-86be-163cd2ca42fa" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>output</seg>
         </bo>
-        <position x="185.0" y="35.0"/>
+        <position y="10.0"/>
+      </element>
+      <element uuid="f773b593-66c5-4419-91fe-b7f9388b1991" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>reference_1</seg>
+        </bo>
+        <position y="60.0"/>
       </element>
       <bo>
         <seg>subcomponent</seg>
-        <seg>req_switch</seg>
+        <seg>requestmonitor</seg>
       </bo>
-      <position x="928.0" y="198.0"/>
-      <size width="243.0" height="131.0"/>
+      <position x="1233.0" y="374.0"/>
+      <size width="345.0" height="235.0"/>
+    </element>
+    <element uuid="474e58ea-7ec4-411d-891b-bf3bafa0ac9f" manual="true">
+      <element uuid="7e989bd6-2a00-49d3-bfd8-bf3f6dd18f3b" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>filter_in</seg>
+        </bo>
+        <position x="236.0" y="60.0"/>
+      </element>
+      <element uuid="64c44e18-edcc-4d4e-8bdd-744ab2f02899" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>filter_out</seg>
+        </bo>
+        <position x="228.0" y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>responsefilter</seg>
+      </bo>
+      <position x="525.0" y="213.0"/>
+      <size width="302.0" height="110.0"/>
     </element>
     <element uuid="ac4b4226-8f45-4b8f-88c5-8a3fb9e4b4e8" manual="true">
-      <element uuid="0259287c-e536-47ba-a906-092d58f6d0dc" manual="true" dockArea="left">
+      <element uuid="0259287c-e536-47ba-a906-092d58f6d0dc" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>mission_window</seg>
         </bo>
-        <position y="51.0"/>
+        <position x="218.0" y="60.0"/>
       </element>
-      <element uuid="65320095-e5c3-4107-8bf5-3c6a1b0ab602" manual="true" dockArea="right">
+      <element uuid="65320095-e5c3-4107-8bf5-3c6a1b0ab602" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>recv_data</seg>
         </bo>
-        <position x="161.0" y="90.0"/>
+        <position y="60.0"/>
       </element>
       <element uuid="c9cd7760-6526-4845-9909-beff51593c7c" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>send_data</seg>
         </bo>
-        <position x="158.0" y="40.0"/>
+        <position x="258.0" y="10.0"/>
       </element>
-      <element uuid="ef97353d-da56-4efb-8f08-43d44225a8fc" manual="true" dockArea="left">
+      <element uuid="ef97353d-da56-4efb-8f08-43d44225a8fc" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>status</seg>
         </bo>
-        <position y="110.0"/>
+        <position x="287.0" y="110.0"/>
       </element>
       <bo>
         <seg>subcomponent</seg>
         <seg>uart</seg>
       </bo>
-      <position x="2178.0" y="238.0"/>
-      <size width="241.0" height="160.0"/>
+      <position x="97.0" y="38.0"/>
+      <size width="341.0" height="160.0"/>
     </element>
-    <element uuid="99c12ccb-8639-4d87-aaf6-4031591d40d4" manual="true">
-      <element uuid="aaa88c1b-91af-446a-8602-f1796ed2a20f" manual="true" dockArea="left">
+    <element uuid="0e100d6b-f8f2-4ae9-8865-6f9445ad3a24" manual="true">
+      <element uuid="315cefbb-cbce-4216-9ea6-1a0ca23c480c" manual="true" dockArea="right">
         <bo>
           <seg>feature</seg>
           <seg>flight_plan</seg>
         </bo>
-        <position y="63.0"/>
+        <position x="250.0" y="60.0"/>
       </element>
-      <element uuid="e724b2e9-8306-42bc-80bf-2eb16ad117f0" manual="true" dockArea="right">
+      <element uuid="26c09132-4190-4b84-aa01-1f7bdeac195e" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>keep_in_zones</seg>
+        </bo>
+        <position y="10.0"/>
+      </element>
+      <element uuid="805fb2fa-ccc2-4edb-a4f8-c1f92bfaaa7c" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>keep_out_zones</seg>
+        </bo>
+        <position y="60.0"/>
+      </element>
+      <element uuid="a1969a1a-4457-4e10-9002-c88cecb2c524" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>recv_map</seg>
+        </bo>
+        <position y="110.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>uxas</seg>
+      </bo>
+      <position x="862.0" y="344.0"/>
+      <size width="335.0" height="160.0"/>
+    </element>
+    <element uuid="1825db00-34fa-479c-b156-5accc13d8531" manual="true">
+      <element uuid="1cd847ee-78d0-4f2d-bd55-7e36e8028b2e" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>flight_plan</seg>
+        </bo>
+        <position y="110.0"/>
+      </element>
+      <element uuid="695efb23-4aa0-416d-bb6f-08722bf97edc" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>mission_window</seg>
         </bo>
-        <position x="88.0" y="42.0"/>
+        <position y="10.0"/>
       </element>
-      <element uuid="aebbfefa-fe03-4543-b2e8-429fb242debc" manual="true" dockArea="right">
+      <element uuid="04813e9a-26ab-448c-831e-9924a2cf954e" manual="true" dockArea="left">
         <bo>
           <seg>feature</seg>
           <seg>position_status</seg>
         </bo>
-        <position x="100.0" y="102.0"/>
+        <position y="60.0"/>
+      </element>
+      <element uuid="45206287-c84b-4235-bf0f-53466e24d74b" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>return_home</seg>
+        </bo>
+        <position y="160.0"/>
       </element>
       <bo>
         <seg>subcomponent</seg>
-        <seg>wpm</seg>
+        <seg>waypointmanager</seg>
       </bo>
-      <position x="1888.0" y="244.0"/>
-      <size width="211.0" height="160.0"/>
+      <position x="1233.0" y="88.0"/>
+      <size width="423.0" height="210.0"/>
     </element>
     <bo>
       <seg>classifier</seg>
       <seg>sw.transformed</seg>
     </bo>
     <position x="12.0" y="12.0"/>
-    <size width="2509.0" height="647.0"/>
+    <size width="1756.0" height="679.0"/>
   </element>
   <config type="structure" connectionPrimaryLabelsVisible="false">
     <enabledAadlProperties/>
