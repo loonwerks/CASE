@@ -1,12 +1,25 @@
 package SW
 public
 	with Data_Model;
-
 	with Base_Types;
-
+	with CASE_Model_Transformations;
 	with CASE_Properties;
 
-	with CASE_Model_Transformations;
+	thread CASE_Filter
+		features
+			filter_in: in event data port RF_Msg.Impl;
+			filter_out: out event data port RF_Msg.Impl;
+		properties
+			CASE_Properties::Component_Type => FILTER;
+		annex agree {**
+			guarantee Req001_RadioDriver_Filter "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(filter_out);
+		**};
+	end CASE_Filter;
+
+	thread implementation CASE_Filter.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+	end CASE_Filter.Impl;
 
 	data Coordinate
 	end Coordinate;
@@ -107,8 +120,8 @@ public
 			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			mission_command: out event data port RF_Msg.Impl;
 			status: in event data port Coordinate.Impl;
-		properties
-			CASE_Properties::COMP_TYPE => COMM_DRIVER;
+--		properties
+--			CASE_Properties::COMP_TYPE => COMM_DRIVER;
 		annex agree {**
 			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
 		**};
@@ -219,10 +232,12 @@ public
 			UART: thread UARTDriver.Impl;
 			WIFI: thread WifiDriver.Impl;
 			NFDB: thread NoFlyZoneDatabase.Impl;
+			FLT: thread CASE_Filter.Impl;
 		connections
 			c1: port radio_recv -> RADIO.recv_data;
 			c2: port RADIO.send_data -> radio_send;
-			c3: port RADIO.mission_command -> FPLN.recv_map;
+			c3: port RADIO.mission_command -> FLT.filter_in;
+			c4: port FLT.filter_out -> FPLN.recv_map;
 			c5: port FPLN.flight_plan -> WPM.flight_plan;
 			c6: port FPLN.request_nofly_zones -> NFDB.map;
 			c7: port NFDB.zones -> FPLN.nofly_zones;
@@ -238,8 +253,8 @@ public
 			c17: port WIFI.send_data -> wifi_send;
 			c18: port wifi_recv -> WIFI.recv_data;
 		annex resolute {**
-			prove Req003_FlightPlanner(this.FPLN, "Req003_FlightPlanner")
 			prove Req004_FlightPlanner(this.FPLN, "Req004_FlightPlanner")
+			prove Req003_FlightPlanner(this.FPLN, "Req003_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
 		**};
 	end SW.Impl;
 

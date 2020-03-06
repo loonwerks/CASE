@@ -13,8 +13,8 @@ public
 			reference_1: in data port MapArray;
 			alert: out event data port Base_Types::Boolean;
 		properties
-			CASE_Properties::COMP_TYPE => MONITOR;
-			CASE_Properties::COMP_SPEC => ("Req001_GeofenceMonitor");
+			CASE_Properties::Component_Type => MONITOR;
+			CASE_Properties::Component_Spec => ("Req001_GeofenceMonitor");
 		annex agree {**
 
 			property CASE_Monitor_Coord_policy = Historically(event(observed) => WAYPOINTS_IN_KEEPIN_ZONE(observed, reference_1));
@@ -71,8 +71,8 @@ public
 			alert: out event data port Base_Types::Boolean;
 --			reset: in event data port Base_Types::Boolean;
 		properties
-			CASE_Properties::COMP_TYPE => MONITOR;
-			CASE_Properties::COMP_SPEC => ("Req001_RequestMonitor");
+			CASE_Properties::Component_Type => MONITOR;
+			CASE_Properties::Component_Spec => ("Req001_RequestMonitor");
 		annex agree {**
 			const is_latched : bool = true;
 			property CASE_Monitor_Req_policy = Historically(event(observed) => Yesterday(Since(not event(observed), event(reference_1))));
@@ -109,8 +109,8 @@ public
 			filter_in: in event data port Mission;
 			filter_out: out event data port Mission;
 		properties
-			CASE_Properties::COMP_TYPE => FILTER;
-			CASE_Properties::COMP_SPEC => ("Req002_Flight_Planner_Filter");
+			CASE_Properties::Component_Type => FILTER;
+			CASE_Properties::Component_Spec => ("Req002_Flight_Planner_Filter");
 		annex agree {**
 			guarantee Req002_FlightPlanner_Filter "The Flight Planner shall generate a valid mission" : good_mission(filter_out);
 		**};
@@ -212,7 +212,7 @@ public
 			status: in event data port Coordinate.Impl;
 			alert: in event data port Base_Types::Boolean;
 		properties
-			CASE_Properties::COMP_TYPE => COMM_DRIVER;
+			CASE_Properties::Component_Type => COMM_DRIVER;
 		annex agree {**
 			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
 		**};
