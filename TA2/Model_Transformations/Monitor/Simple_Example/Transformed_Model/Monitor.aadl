@@ -12,7 +12,7 @@ public
 			command_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			other_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 		properties
-			CASE_Properties::COMP_TYPE => COMM_DRIVER;
+			CASE_Properties::Component_Type => COMM_DRIVER;
 	end RadioDriver;
 
 	thread implementation RadioDriver.Impl

@@ -77,7 +77,7 @@ public
 
 	virtual processor CASE_Virtual_Machine
 		properties
-			CASE_Properties::COMP_TYPE => VIRTUAL_MACHINE;
+			CASE_Properties::Component_Type => VIRTUAL_MACHINE;
 	end CASE_Virtual_Machine;
 
 	virtual processor implementation CASE_Virtual_Machine.Impl
@@ -180,7 +180,7 @@ public
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
 			Actual_Processor_Binding => (reference (VM)) applies to PROC_SW.FPLN;
 		annex resolute {**
-			prove Req001_SW_Transformed(this.PROC_SW, {this.PROC_SW.FPLN}, this.VM)
+			prove Req001_SW_Transformed(this.PROC_SW, {this.PROC_SW.FPLN}, {}, this.VM)
 		**};
 	end MissionComputer.Transformed;
 
@@ -192,7 +192,7 @@ public
 			CASE_Properties::OS => "Linux";
 	end CASE_Virtual_Machine_Test_1.Impl;
 
-	-- VM has no COMP_TYPE property
+	-- VM has no Component_Type property
 	-- Resolute should fail
 	system implementation MissionComputer.Test_VM_Bound_To_Processor_1
 		subcomponents
@@ -231,11 +231,11 @@ public
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
 			Actual_Processor_Binding => (reference (VM)) applies to PROC_SW.FPLN;
 		annex resolute {**
-			prove Req001_SW_Transformed(this.PROC_SW, {this.PROC_SW.FPLN}, this.VM)
+			prove Req001_SW_Transformed(this.PROC_SW, {this.PROC_SW.FPLN}, {}, this.VM)
 		**};
 	end MissionComputer.Test_VM_Bound_To_Processor_1;
 	
-	-- Give VM a different COMP_TYPE value
+	-- Give VM a different Component_Type value
 	-- Resolute should fail
 	system implementation MissionComputer.Test_VM_Bound_To_Processor_2
 		subcomponents
@@ -246,7 +246,7 @@ public
 			BUS_HW: bus MC_Bus.Impl;
 			PROC_SW: process SW::SW.Impl;
 			WIFI_HW: device Wifi.Impl;
-			VM: virtual processor CASE_Virtual_Machine_Test_1.Impl {CASE_Properties::COMP_TYPE => MONITOR;};
+			VM: virtual processor CASE_Virtual_Machine_Test_1.Impl {CASE_Properties::Component_Type => MONITOR;};
 		connections
 			c1: port radio_recv -> RADIO_HW.recv_data_in;
 			c2: port RADIO_HW.recv_data_out -> PROC_SW.radio_recv;
@@ -274,7 +274,7 @@ public
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
 			Actual_Processor_Binding => (reference (VM)) applies to PROC_SW.FPLN;
 		annex resolute {**
-			prove Req001_SW_Transformed(this.PROC_SW, {this.PROC_SW.FPLN}, this.VM)
+			prove Req001_SW_Transformed(this.PROC_SW, {this.PROC_SW.FPLN}, {}, this.VM)
 		**};
 	end MissionComputer.Test_VM_Bound_To_Processor_2;
 	
@@ -317,7 +317,7 @@ public
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
 			Actual_Processor_Binding => (reference (VM)) applies to PROC_SW.FPLN;
 		annex resolute {**
-			prove Req001_SW_Transformed(this.PROC_SW, {this.PROC_SW.FPLN}, this.VM)
+			prove Req001_SW_Transformed(this.PROC_SW, {this.PROC_SW.FPLN}, {}, this.VM)
 		**};
 	end MissionComputer.Test_VM_Bound_To_Processor_3;
 	
@@ -359,7 +359,7 @@ public
 			Actual_Memory_Binding => (reference (MEM_HW)) applies to PROC_SW;
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
 		annex resolute {**
-			prove Req001_SW_Transformed(this.PROC_SW, {this.PROC_SW.FPLN}, this.VM)
+			prove Req001_SW_Transformed(this.PROC_SW, {this.PROC_SW.FPLN}, {}, this.VM)
 		**};
 	end MissionComputer.Test_Components_Bound_To_VM;
 	
@@ -475,7 +475,7 @@ public
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
 			Actual_Processor_Binding => (reference (VM)) applies to PROC_SW.FPLN;
 		annex resolute {**
-			prove Req001_SW_Transformed(this.PROC_SW, {this.PROC_SW.FPLN}, this.VM)
+			prove Req001_SW_Transformed(this.PROC_SW, {this.PROC_SW.FPLN}, {this.PROC_SW.FPLN.FP_SUB}, this.VM)
 		**};
 	end MissionComputer.Test_Subcomponents_Not_Bound_To_Other_Processors;
 

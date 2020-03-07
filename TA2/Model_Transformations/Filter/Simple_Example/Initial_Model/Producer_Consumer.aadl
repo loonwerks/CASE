@@ -1,7 +1,6 @@
 package Producer_Consumer
 public
 	with Base_Types;
-
 	with CASE_Properties;
 
 	data Coordinate

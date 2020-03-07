@@ -1,8 +1,7 @@
 package Virtualization
 public
-	with CASE_Properties;
 
-	with CASE_Model_Transformations;
+	with CASE_Properties;
 
 	processor HW_Proc
 	end HW_Proc;
@@ -61,7 +60,7 @@ public
 
 	virtual processor CASE_Virtual_Machine
 		properties
-			CASE_Properties::COMP_TYPE => VIRTUAL_MACHINE;
+			CASE_Properties::Component_Type => VIRTUAL_MACHINE;
 	end CASE_Virtual_Machine;
 
 	virtual processor implementation CASE_Virtual_Machine.Impl
@@ -81,7 +80,7 @@ public
 			Actual_Processor_Binding => (reference (PROC)) applies to SW, VM;
 			Actual_Processor_Binding => (reference (VM)) applies to SW.B;
 		annex resolute {**
-			prove Req_Virtualization(this.SW, {this.SW.B}, this.VM)
+			prove Req_Virtualization(this.SW, {this.SW.B}, {}, this.VM)
 		**};
 	end Critical.Impl;
 	

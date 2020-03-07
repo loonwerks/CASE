@@ -1,28 +1,28 @@
 package SW
 public
 	with Data_Model;
-
 	with Base_Types;
-
+	with CASE_Model_Transformations;
 	with CASE_Properties;
 
-	with CASE_Model_Transformations;
-
 	thread CASE_Filter
-		features
-			filter_in: in event data port RF_Msg.Impl;
-			filter_out: out event data port RF_Msg.Impl;
-		properties
-			CASE_Properties::COMP_TYPE => FILTER;
-			CASE_Properties::COMP_SPEC => ("Req003_FlightPlanner_Filter", "Req004_FlightPlanner_Filter");
-		annex agree {**
+	features
+		filter_in: in event data port RF_Msg.Impl;
+		filter_out: out event data port RF_Msg.Impl;
+	properties
+		CASE_Properties::Component_Type => FILTER;
+		CASE_Properties::Component_Spec => ("Req003_FlightPlanner_Filter", "Req004_FlightPlanner_Filter");
+
+	annex agree {**
 			guarantee Req001_RadioDriver_Filter "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(filter_out);
 			guarantee Req003_FlightPlanner_Filter "The FlightPlanner shall only accept well-formed maps from the GroundStation" : good_map(filter_out.payload.map);
 			guarantee Req004_FlightPlanner_Filter "The FlightPlanner shall only accept well-formed patterns from the GroundStation" : good_pattern(filter_out.payload.pattern);
 		**};
-	end CASE_Filter;
+end CASE_Filter;
 
 	thread implementation CASE_Filter.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
 	end CASE_Filter.Impl;
 
 	data Coordinate
@@ -124,8 +124,8 @@ public
 			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			mission_command: out event data port RF_Msg.Impl;
 			status: in event data port Coordinate.Impl;
-		properties
-			CASE_Properties::COMP_TYPE => COMM_DRIVER;
+--		properties
+--			CASE_Properties::COMP_TYPE => COMM_DRIVER;
 		annex agree {**
 			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
 		**};

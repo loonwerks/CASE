@@ -8,5 +8,6 @@ private
 			context Req_Component : "Attestation::SW.Impl.CRIT_A"
 			context Formalized : "True"
 			agree_prop_checked(comp_context, property_id)
+		
 	**};
 end CASE_Requirements;

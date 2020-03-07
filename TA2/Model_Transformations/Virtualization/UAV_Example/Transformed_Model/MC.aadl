@@ -76,7 +76,7 @@ public
 
 	virtual processor CASE_Virtual_Machine
 		properties
-			CASE_Properties::COMP_TYPE => VIRTUAL_MACHINE;
+			CASE_Properties::Component_Type => VIRTUAL_MACHINE;
 	end CASE_Virtual_Machine;
 
 	virtual processor implementation CASE_Virtual_Machine.Impl
@@ -133,9 +133,10 @@ public
 			Actual_Processor_Binding => (reference (PROC_HW)) applies to PROC_SW, VM;
 			Actual_Memory_Binding => (reference (MEM_HW)) applies to PROC_SW;
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
-			Actual_Processor_Binding => (reference (VM)) applies to PROC_SW.UXAS;
+			Actual_Processor_Binding => (
+				reference (VM)) applies to PROC_SW.UXAS, PROC_SW.UXAS.FPLN, PROC_SW.UXAS.NFDB, PROC_SW.UXAS.WPM;
 		annex resolute {**
-			prove Req001_SW(this.PROC_SW, {this.PROC_SW.UXAS}, this.VM)
+			prove Req001_SW(this.PROC_SW, {this.PROC_SW.UXAS, this.PROC_SW.UXAS.FPLN, this.PROC_SW.UXAS.NFDB, this.PROC_SW.UXAS.WPM}, {}, this.VM)
 		**};
 	end MissionComputer.Impl;
 

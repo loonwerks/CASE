@@ -1,9 +1,7 @@
 package Attestation
 public
 	with CASE_Model_Transformations;
-
 	with CASE_Properties;
-
 	with Base_Types;
 
 	thread CASE_AttestationManager
@@ -15,8 +13,8 @@ public
 			am_request: out event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
 			am_response: in event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
 		properties
-			CASE_Properties::COMP_TYPE => ATTESTATION;
-			CASE_Properties::COMP_SPEC => ("Req_Trusted_Attestation");
+			CASE_Properties::Component_Type => ATTESTATION;
+			CASE_Properties::Component_Spec => ("Req_Trusted_Attestation");
 		annex agree {**
 			guarantee Req_Trusted_Attestation "Only messages from trusted sources shall be permitted" : am_command_message_out.header.trusted;
 		**};
@@ -24,8 +22,9 @@ public
 
 	thread implementation CASE_AttestationManager.Impl
 		properties
-			CASE_Properties::CACHE_TIMEOUT => 30;
-			CASE_Properties::CACHE_SIZE => 4;
+			CASE_Properties::Component_Impl => "CakeML";
+			CASE_Properties::Cache_Timeout => 30;
+			CASE_Properties::Cache_Size => 4;
 			Dispatch_Protocol => Sporadic;
 	end CASE_AttestationManager.Impl;
 
@@ -35,7 +34,7 @@ public
 			command_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			other_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 		properties
-			CASE_Properties::COMP_TYPE => COMM_DRIVER;
+			CASE_Properties::Component_Type => COMM_DRIVER;
 	end RadioDriver;
 
 	thread implementation RadioDriver.Impl
@@ -80,8 +79,6 @@ public
 	end RadioDriver_Attestation;
 
 	thread implementation RadioDriver_Attestation.Impl extends RadioDriver.Impl
-		properties
-			Source_Text => ("RadioDriver_Attestation.c");
 	end RadioDriver_Attestation.Impl;
 
 	process SW
