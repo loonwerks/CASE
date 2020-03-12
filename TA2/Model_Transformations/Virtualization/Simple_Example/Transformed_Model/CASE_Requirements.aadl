@@ -3,10 +3,10 @@ private
 	annex resolute {**
 		Req_Virtualization(comp_context : component, vm_components : {component}, non_vm_child_components : {component}, virtual_machine : component) <=
 			** "[virtualization] Third-party software shall be isolated from critical components" **
-			context Generated_By : "GearCASE"
-			context Generated_On : "May 23, 1970"
-			context Req_Component : "Virtualization::Critical.Impl.SW"
-			context Formalized : "False"
+			context Generated_By : "GearCASE";
+			context Generated_On : "May 23, 1970";
+			context Req_Component : "Virtualization::Critical.Impl.SW";
+			context Formalized : "False";
 			add_virtualization(vm_components, non_vm_child_components, virtual_machine)
 		
 	**};

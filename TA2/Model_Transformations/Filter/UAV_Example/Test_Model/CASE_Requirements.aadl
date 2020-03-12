@@ -3,50 +3,50 @@ private
 	annex resolute {**
 		Req003_FlightPlanner_Init(comp_context : component, property_id : string) <=
 			** "[well_formed_init_map] The FlightPlanner shall only accept well-formed maps from the GroundStation" **
-			context Generated_By : "GearCASE"
-			context Generated_On : "May 23, 1970"
-			context Req_Component : "SW::SW.Impl.FPLN"
-			context Formalized : "True"
+			context Generated_By : "GearCASE";
+			context Generated_On : "May 23, 1970";
+			context Req_Component : "SW::SW.Impl.FPLN";
+			context Formalized : "True";
 			agree_prop_checked(comp_context, property_id)
 		
 		Req004_FlightPlanner_Init(comp_context : component, property_id : string) <=
 			** "[well_formed_init_pattern] The FlightPlanner shall only accept well-formed patterns from the GroundStation" **
-			context Generated_By : "GearCASE"
-			context Generated_On : "May 23, 1970"
-			context Req_Component : "SW::SW.Impl.FPLN"
-			context Formalized : "True"
+			context Generated_By : "GearCASE";
+			context Generated_On : "May 23, 1970";
+			context Req_Component : "SW::SW.Impl.FPLN";
+			context Formalized : "True";
 			agree_prop_checked(comp_context, property_id)
 			
 		Req003_FlightPlanner_Transformed(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
 			** "[well_formed_transformed_map] The FlightPlanner shall only accept well-formed maps from the GroundStation" **
-			context Generated_By : "GearCASE"
-			context Generated_On : "May 23, 1970"
-			context Req_Component : "SW::SW.Impl.FPLN"
-			context Formalized : "True"
+			context Generated_By : "GearCASE";
+			context Generated_On : "May 23, 1970";
+			context Req_Component : "SW::SW.Impl.FPLN";
+			context Formalized : "True";
 			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 		
 		Req004_FlightPlanner_Transformed(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
 			** "[well_formed_transformed_pattern] The FlightPlanner shall only accept well-formed patterns from the GroundStation" **
-			context Generated_By : "GearCASE"
-			context Generated_On : "May 23, 1970"
-			context Req_Component : "SW::SW.Impl.FPLN"
-			context Formalized : "True"
+			context Generated_By : "GearCASE";
+			context Generated_On : "May 23, 1970";
+			context Req_Component : "SW::SW.Impl.FPLN";
+			context Formalized : "True";
 			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 			
 		Req003_FlightPlanner_Test(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
 			** "[well_formed_test_map] The FlightPlanner shall only accept well-formed maps from the GroundStation" **
-			context Generated_By : "GearCASE"
-			context Generated_On : "May 23, 1970"
-			context Req_Component : "SW::SW.Impl.FPLN"
-			context Formalized : "True"
+			context Generated_By : "GearCASE";
+			context Generated_On : "May 23, 1970";
+			context Req_Component : "SW::SW.Impl.FPLN";
+			context Formalized : "True";
 			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 		
 		Req004_FlightPlanner_Test(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
 			** "[well_formed_test_pattern] The FlightPlanner shall only accept well-formed patterns from the GroundStation" **
-			context Generated_By : "GearCASE"
-			context Generated_On : "May 23, 1970"
-			context Req_Component : "SW::SW.Impl.FPLN"
-			context Formalized : "True"
+			context Generated_By : "GearCASE";
+			context Generated_On : "May 23, 1970";
+			context Req_Component : "SW::SW.Impl.FPLN";
+			context Formalized : "True";
 			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 				
 	**};

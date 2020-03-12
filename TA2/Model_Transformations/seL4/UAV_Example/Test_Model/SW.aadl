@@ -13,8 +13,8 @@ public
 			filter_in: in event data port RF_Msg.Impl;
 			filter_out: out event data port RF_Msg.Impl;
 		properties
-			CASE_Properties::COMP_TYPE => FILTER;
-			CASE_Properties::COMP_SPEC => ("Req001_Filter", "Req002_Filter");
+			CASE_Properties::Component_Type => FILTER;
+			CASE_Properties::Component_Spec => ("Req001_Filter", "Req002_Filter");
 		annex agree {**
 			guarantee Req001_RadioDriver_Filter "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(filter_out);
 			guarantee Req001_Filter "The FlightPlanner shall only receive well-formed maps" : good_map(filter_out.payload.map);
@@ -24,7 +24,7 @@ public
 
 	thread implementation CASE_Filter.Impl
 		properties
-			CASE_Properties::COMP_IMPL => "CakeML";
+			CASE_Properties::Component_Impl => "CakeML";
 	end CASE_Filter.Impl;
 
 	data Coordinate
@@ -127,7 +127,7 @@ public
 			mission_command: out event data port RF_Msg.Impl;
 			status: in event data port Coordinate.Impl;
 		properties
-			CASE_Properties::COMP_TYPE => COMM_DRIVER;
+			CASE_Properties::Component_Type => COMM_DRIVER;
 		annex agree {**
 			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
 		**};
@@ -312,7 +312,7 @@ public
 			filter_in: in event data port RF_Msg.Impl;
 			filter_out: out event data port RF_Msg.Impl;
 		properties
-			CASE_Properties::COMP_SPEC => ("Req001_Filter", "Req002_Filter");
+			CASE_Properties::Component_Spec => ("Req001_Filter", "Req002_Filter");
 		annex agree {**
 			guarantee Req001_RadioDriver_Filter_Test_1 "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(filter_out);
 			guarantee Req001_Filter_Test_1 "The FlightPlanner shall only receive well-formed maps" : good_map(filter_out.payload.map);
@@ -322,7 +322,7 @@ public
 	
 	thread implementation CASE_Filter_Test_1.Impl
 		properties
-			CASE_Properties::COMP_IMPL => "CakeML";
+			CASE_Properties::Component_Impl => "CakeML";
 	end CASE_Filter_Test_1.Impl;
 	
 	-- Filter has no COMP_TYPE property value
@@ -376,7 +376,7 @@ public
 			UART: thread UARTDriver.Impl;
 			WIFI: thread WifiDriver.Impl;
 			NFDB: thread NoFlyZoneDatabase.Impl;
-			FLT: thread CASE_Filter.Impl {CASE_Properties::COMP_TYPE => MONITOR;};
+			FLT: thread CASE_Filter.Impl {CASE_Properties::Component_Type => MONITOR;};
 		connections
 			c1: port radio_recv -> RADIO.recv_data;
 			c2: port RADIO.send_data -> radio_send;
@@ -514,7 +514,7 @@ public
 			UART: thread UARTDriver.Impl;
 			WIFI: thread WifiDriver.Impl;
 			NFDB: thread NoFlyZoneDatabase.Impl;
-			FLT: thread CASE_Filter.Impl {CASE_Properties::COMP_IMPL => "c";};
+			FLT: thread CASE_Filter.Impl {CASE_Properties::Component_Impl => "c";};
 			-- test
 		connections
 			c1: port radio_recv -> RADIO.recv_data;

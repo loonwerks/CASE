@@ -76,7 +76,7 @@ public
 
 	virtual processor CASE_Virtual_Machine
 		properties
-			CASE_Properties::COMP_TYPE => VIRTUAL_MACHINE;
+			CASE_Properties::Component_Type => VIRTUAL_MACHINE;
 	end CASE_Virtual_Machine;
 
 	virtual processor implementation CASE_Virtual_Machine.Impl

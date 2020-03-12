@@ -3,10 +3,10 @@ private
 	annex resolute {**
 		Req101_Radio(comp_context : component) <=
 			** "[Monitor] The Radio command message shall be monitored for correctness" **
-			context Generated_By : "GearCASE"
-			context Generated_On : "Jan 29, 2020"
-			context Req_Component : "SW::SW.Impl.UxAS"
-			context Formalized : "False"
+			context Generated_By : "GearCASE";
+			context Generated_On : "Jan 29, 2020";
+			context Req_Component : "SW::SW.Impl.UxAS";
+			context Formalized : "False";
 			false
 		
 	**};

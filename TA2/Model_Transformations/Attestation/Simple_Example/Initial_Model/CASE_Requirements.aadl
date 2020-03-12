@@ -3,10 +3,10 @@ private
 	annex resolute {**
 		Req_Trusted(comp_context : component, property_id : string) <=
 			** "[trusted] Command messages shall only come from trusted sources" **
-			context Generated_By : "GearCASE"
-			context Generated_On : "May 23, 1970"
-			context Req_Component : "Attestation::SW.Impl.CRIT_A"
-			context Formalized : "True"
+			context Generated_By : "GearCASE";
+			context Generated_On : "May 23, 1970";
+			context Req_Component : "Attestation::SW.Impl.CRIT_A";
+			context Formalized : "True";
 			agree_prop_checked(comp_context, property_id)
 		
 	**};

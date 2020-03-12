@@ -15,8 +15,8 @@ public
 			alert: out data port Base_Types::Boolean;
 			reset: in data port Base_Types::Boolean;
 		properties
-			CASE_Properties::COMP_TYPE => MONITOR;
-			CASE_Properties::COMP_SPEC => ("monitor_policy");
+			CASE_Properties::Component_Type => MONITOR;
+			CASE_Properties::Component_Spec => ("monitor_policy");
 		annex agree {**
 				
 			property monitor_policy = WAYPOINTS_IN_KEEPIN_ZONE(observed, expected);
@@ -82,8 +82,8 @@ public
 			input: in data port Mission;
 			output: out data port Mission;
 		properties
-			CASE_Properties::COMP_TYPE => SWITCH;
-			CASE_Properties::COMP_SPEC => ("Req001_Switch");
+			CASE_Properties::Component_Type => SWITCH;
+			CASE_Properties::Component_Spec => ("Req001_Switch");
 		annex agree {**
 			guarantee Req001_Switch "The switch shall only forward messages when activated." : activation => output = input;
 		**};
@@ -101,8 +101,8 @@ public
 			alert: out data port Base_Types::Boolean;
 			reset: in data port Base_Types::Boolean;
 		properties
-			CASE_Properties::COMP_TYPE => MONITOR;
-			CASE_Properties::COMP_SPEC => ("monitor_policy");
+			CASE_Properties::Component_Type => MONITOR;
+			CASE_Properties::Component_Spec => ("monitor_policy");
 		annex agree {**
 			const is_latched : bool = true;
 --			property monitor_policy = observed => expected;
@@ -127,8 +127,8 @@ public
 			input: in data port Mission;
 			output: out data port Mission;
 		properties
-			CASE_Properties::COMP_TYPE => SWITCH;
-			CASE_Properties::COMP_SPEC => ("Req002_Switch");
+			CASE_Properties::Component_Type => SWITCH;
+			CASE_Properties::Component_Spec => ("Req002_Switch");
 		annex agree {**
 			-- Need to figure out NULL_MESSAGE
 			guarantee Req002_Switch "The switch shall only forward messages when activated." : activation => output = input;
@@ -145,7 +145,7 @@ public
 			filter_in: in data port Mission;
 			filter_out: out data port Mission;
 		properties
-			CASE_Properties::COMP_TYPE => FILTER;
+			CASE_Properties::Component_Type => FILTER;
 		annex agree {**
 			guarantee Req002_FlightPlanner_Filter "The Flight Planner shall generate a valid mission" : good_mission(filter_out);
 		**};
@@ -245,7 +245,7 @@ public
 			mission_command: out data port RF_Msg.Impl;
 			status: in data port Coordinate.Impl;
 		properties
-			CASE_Properties::COMP_TYPE => COMM_DRIVER;
+			CASE_Properties::Component_Type => COMM_DRIVER;
 		annex agree {**
 			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
 		**};
