@@ -6,19 +6,19 @@ public
 	with CASE_Properties;
 
 	thread CASE_Filter
-	features
-		filter_in: in event data port RF_Msg.Impl;
-		filter_out: out event data port RF_Msg.Impl;
-	properties
-		CASE_Properties::Component_Type => FILTER;
-		CASE_Properties::Component_Spec => ("Req003_FlightPlanner_Filter", "Req004_FlightPlanner_Filter");
+		features
+			filter_in: in event data port RF_Msg.Impl;
+			filter_out: out event data port RF_Msg.Impl;
+		properties
+			CASE_Properties::Component_Type => FILTER;
+			CASE_Properties::Component_Spec => ("Req003_FlightPlanner_Filter", "Req004_FlightPlanner_Filter");
 
-	annex agree {**
+		annex agree {**
 			guarantee Req001_RadioDriver_Filter "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(filter_out);
 			guarantee Req003_FlightPlanner_Filter "The FlightPlanner shall only accept well-formed maps from the GroundStation" : good_map(filter_out.payload.map);
 			guarantee Req004_FlightPlanner_Filter "The FlightPlanner shall only accept well-formed patterns from the GroundStation" : good_pattern(filter_out.payload.pattern);
 		**};
-end CASE_Filter;
+	end CASE_Filter;
 
 	thread implementation CASE_Filter.Impl
 		properties

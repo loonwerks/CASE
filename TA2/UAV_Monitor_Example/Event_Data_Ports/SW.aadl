@@ -43,7 +43,7 @@ public
             -- see https://en.wikipedia.org/wiki/Even%E2%80%93odd_rule
             fun WAYPOINT_IN_ZONE_POLYGON(waypoint : Coordinate.Impl, zone : Map ) : bool =
               foldl i in indices(zone) into inZone = false, 
-                if (point_crosses(waypoint, zone[i], zone[previous_index(i, 4)])) then inZone = 1 - inZone else inZone = inZone;
+                inZone = if (point_crosses(waypoint, zone[i], zone[previous_index(i, 4)])) then not inZone else inZone;
             
             fun previous_index(i : int, size : int) : int = 
               if (i = 0) then size-1 else i - 1;
