@@ -1,0 +1,113 @@
+----------------------------------------------------------------------
+-- Copyright 2020 DARPA CASE
+--
+-- Micro example AADL to show single AADL dataport communications for
+-- a periodic process running under the seL4 domain scheduler
+----------------------------------------------------------------------
+package test_data_port_single_vm
+public
+	with HAMR;
+	with Base_Types;
+	with seL4_Properties;
+
+	thread producer_t
+		features
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Source_Text => ("behavior_code/vm/app/sender/sender.c");
+	end producer_t;
+
+	thread implementation producer_t.impl
+	end producer_t.impl;
+	
+	process producer_p
+		features 
+			write_port : out data port Base_Types::Integer_8;
+	end producer_p;
+	
+    -- process specifies boundary of spatial isolation
+	process implementation producer_p.impl
+		subcomponents
+			src_thread : thread producer_t.impl;
+		connections
+			write_connection : port src_thread.write_port -> write_port;
+		properties
+			seL4_Properties::Domain => 2; -- pacer 1, source 2, destination 3
+	end producer_p.impl;
+
+	thread consumer_t
+		features
+			read_port: in data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Source_Text => ("behavior_code/components/Receiver/src/receiver.c");
+			Initialize_Entrypoint_Source_Text => "receiver_init";
+			Compute_Entrypoint_Source_Text => "run_receiver";
+	end consumer_t;
+
+	thread implementation consumer_t.impl
+	end consumer_t.impl;
+	
+	process consumer_p
+		features
+			read_port : in data port Base_Types::Integer_8;
+	end consumer_p;
+	
+    -- process specifies boundary of spatial isolation
+	process implementation consumer_p.impl
+		subcomponents
+			dst_thread : thread consumer_t.impl;
+		connections
+			read_connection : port read_port -> dst_thread.read_port;
+		properties
+			seL4_Properties::Domain => 3; -- pacer 1, source 2, destination 3
+	end consumer_p.impl;
+
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+		properties
+			Frame_Period => 1000ms;
+            Clock_Period => 2ms;
+			seL4_Properties::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
+			seL4_Properties::OS => CAmkES;
+	end proc.impl;
+	
+	virtual processor vproc
+	end vproc;
+	
+	virtual processor implementation vproc.impl
+		properties
+			seL4_Properties::OS => Linux;
+			seL4_Properties::Source_Binary => "projects/camkes-vm-images/exynos5422/linux";
+			seL4_Properties::Source_Filesystem_Binary => "projects/camkes-vm-images/exynos5422/root_fs_crossvm.cpio.gz";
+	end vproc.impl;
+
+	system top
+	end top;
+
+	system implementation top.impl
+		subcomponents
+			proc : processor proc.impl;
+			vproc :  virtual processor vproc.impl;
+			src_process : process producer_p.impl;
+			dst_process : process consumer_p.impl;
+		connections
+			data_interconnect: port src_process.write_port -> dst_process.read_port;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to vproc;
+			Actual_Processor_Binding => (reference (vproc)) applies to src_process;
+			Actual_Processor_Binding => (reference (proc)) applies to dst_process;
+			HAMR::Platform => (seL4_TB, seL4_Only);
+		annex resolute {**
+			check CASE_Tools
+		**};
+	end top.impl;
+
+end test_data_port_single_vm;
