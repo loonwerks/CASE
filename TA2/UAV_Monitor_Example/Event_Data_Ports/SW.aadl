@@ -11,7 +11,7 @@ public
 		features
 			observed: in event data port Mission;
 			reference_1: in data port MapArray;
-			alert: out event data port Base_Types::Boolean;
+			output: out event data port Mission;
 		properties
 			CASE_Properties::Component_Type => MONITOR;
 			CASE_Properties::Component_Spec => ("Req001_GeofenceMonitor");
@@ -19,13 +19,13 @@ public
 
 			property CASE_Monitor_Coord_policy = Historically(event(observed) => WAYPOINTS_IN_KEEPIN_ZONE(observed, reference_1));
 
-			const is_latched : bool = true;
-			guarantee Req001_RequestMonitor "The monitor shall only output an alert when the monitor policy is true" : alert =
-                if is_latched and prev(alert, not CASE_Monitor_Coord_policy) then
-                    true
-                else 
-                    not CASE_Monitor_Coord_policy;        
-                    
+			guarantee Req001_GeoMonitor "The output is the same as observed" : output = observed;
+			guarantee Req001_GeoMonitorEvent "The output event only fires when observed is valid" : event(output) = 
+			  if(event(observed) and CASE_Monitor_Coord_policy) then
+			    true
+			  else
+			    false;
+			           
             fun WAYPOINTS_IN_KEEPIN_ZONE(mission : Mission, keepInZone : MapArray) : bool =
               forall waypoint in mission, WAYPOINT_IN_KEEPIN_ZONE(waypoint, keepInZone);
               
@@ -35,12 +35,12 @@ public
             -- Assumes rectangle that is defined by two corners so it is aligned
             -- with the origin (not rotated in space)
             -- Assumes that the altitude is the same in all the coordinates
-            -- Assmes zone[0] is the bottom left corner and zone[2] in the upper right corner
+            -- Assmes zone[0] is the bottom left corner and zone[1] in the upper right corner
             fun WAYPOINT_IN_ZONE_RECTANGLE(waypoint : Coordinate.Impl, zone : Map) : bool = 
                   (waypoint.latitude >= (zone[0]).latitude)
-              and (waypoint.latitude <= (zone[2]).latitude)
+              and (waypoint.latitude <= (zone[1]).latitude)
               and (waypoint.longitude >= (zone[0]).longitude)
-              and (waypoint.longitude <= (zone[2]).longitude)
+              and (waypoint.longitude <= (zone[1]).longitude)
               and (waypoint.altitude >= (zone[0]).altitude);
             
 		**};
@@ -185,7 +185,6 @@ public
 			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			mission_command: out event data port RF_Msg.Impl;
 			status: in event data port Coordinate.Impl;
-			alert: in event data port Base_Types::Boolean;
 		properties
 			CASE_Properties::Component_Type => COMM_DRIVER;
 		annex agree {**
@@ -316,7 +315,6 @@ public
 			WaypointManager: thread WaypointManager.Impl;
 			UART: thread UARTDriver.Impl;
 			FlyZones: thread FlyZonesDatabase.Impl;
-			ResponseFilter: thread CASE_Filter.Impl;
 			GeofenceMonitor: thread CASE_Monitor_Coord.Impl;
 			RequestMonitor: thread CASE_Monitor_Req.Impl;
 		connections
@@ -327,13 +325,9 @@ public
 			c5: port FlyZones.keep_out_zones -> UxAS.keep_out_zones;
 			c6: port Radio.mission_command -> RequestMonitor.observed;
 			c7: port UxAS.flight_plan -> RequestMonitor.reference_1;
-			c8: port RequestMonitor.alert -> Radio.alert;
---			c9: port RequestMonitor.output -> ResponseFilter.filter_in;
---			c10: port ResponseFilter.filter_out -> GeofenceMonitor.observed;
 			c11: port FlyZones.keep_in_zones -> GeofenceMonitor.reference_1;
 			c12: port UxAS.flight_plan -> GeofenceMonitor.observed;
-			c13: port UxAS.flight_plan -> WaypointManager.flight_plan;
-			c14: port GeofenceMonitor.alert -> WaypointManager.return_home;
+			c14: port GeofenceMonitor.output -> WaypointManager.flight_plan;
 			c15: port WaypointManager.mission_window -> UART.mission_window;
 			c16: port UART.status -> WaypointManager.position_status;
 			c17: port UART.status -> Radio.status;
