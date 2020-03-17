@@ -20,14 +20,17 @@ public
 			property CASE_Monitor_Coord_policy = Historically(event(observed) => WAYPOINTS_IN_KEEPIN_ZONE(observed, reference_1));
 
 			const is_latched : bool = true;
-			guarantee Req001_GeofenceMonitor "The monitor shall only output an alert when the monitor policy is true" : 
-			  alert = not(CASE_Monitor_Coord_policy);
-			  
+			guarantee Req001_RequestMonitor "The monitor shall only output an alert when the monitor policy is true" : alert =
+                if is_latched and prev(alert, not CASE_Monitor_Coord_policy) then
+                    true
+                else 
+                    not CASE_Monitor_Coord_policy;        
+                    
             fun WAYPOINTS_IN_KEEPIN_ZONE(mission : Mission, keepInZone : MapArray) : bool =
               forall waypoint in mission, WAYPOINT_IN_KEEPIN_ZONE(waypoint, keepInZone);
               
             fun WAYPOINT_IN_KEEPIN_ZONE(waypoint : Coordinate.Impl, keepInZone: MapArray) : bool = 
-              exists zone in keepInZone, WAYPOINT_IN_ZONE_POLYGON(waypoint, zone);
+              exists zone in keepInZone, WAYPOINT_IN_ZONE_RECTANGLE(waypoint, zone);
             
             -- Assumes rectangle that is defined by two corners so it is aligned
             -- with the origin (not rotated in space)
@@ -40,20 +43,6 @@ public
               and (waypoint.longitude <= (zone[2]).longitude)
               and (waypoint.altitude >= (zone[0]).altitude);
             
-            -- see https://en.wikipedia.org/wiki/Even%E2%80%93odd_rule
-            fun WAYPOINT_IN_ZONE_POLYGON(waypoint : Coordinate.Impl, zone : Map ) : bool =
-              foldl i in indices(zone) into inZone = false, 
-                inZone = if (point_crosses(waypoint, zone[i], zone[previous_index(i, 4)])) then not inZone else inZone;
-            
-            fun previous_index(i : int, size : int) : int = 
-              if (i = 0) then size-1 else i - 1;
-              
-            fun point_crosses(waypoint : Coordinate.Impl, currentWaypoint : Coordinate.Impl, previousWaypoint : Coordinate.Impl) : bool =
-                  (currentWaypoint.latitude > waypoint.latitude) != (previousWaypoint.latitude > waypoint.latitude)
-              and (real(waypoint.longitude) < (real(currentWaypoint.longitude) + 
-                                        (real(previousWaypoint.longitude) - real(currentWaypoint.longitude)) * 
-                                        ((real(waypoint.latitude) - real(currentWaypoint.latitude)) / 
-                                        (real(previousWaypoint.latitude) - real(currentWaypoint.latitude)))));
 		**};
 	end CASE_Monitor_Coord;
 
