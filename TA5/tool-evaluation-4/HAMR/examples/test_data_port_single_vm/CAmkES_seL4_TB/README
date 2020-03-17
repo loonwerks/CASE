@@ -1,0 +1,47 @@
+<!--
+     Copyright 2017, Data61
+     Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+     ABN 41 687 119 230.
+
+     Copyright 2019 Adventium Labs
+     Modifications made to original
+
+     This software may be distributed and modified according to the terms of
+     the BSD 2-Clause license. Note that NO WARRANTY is provided.
+     See "LICENSE_BSD2.txt" for details.
+
+     @TAG(DATA61_Adventium_BSD)
+-->
+
+AADL Event Data Port Example
+
+This application demonstrates the use of a counter and a circular queue to
+implement AADL Event Data Port semantics. This provides one-way data flow from
+the sender to the receiver preserving order of event data. Data can be lost
+when the buffer fills and receivers are not reading fast enough.  Receivers
+will be able to detect number of lost event data items. The implementation
+supports a single producer and any number of receivers. Three styles of
+receiver are supported:
+
+  poll - Non-blocking check for an event.  This is intended to be used in
+  cases where there is some natural wait time for poll interval such as a periodic
+  wait. This is the typical style used for safety critical realtime systems.
+
+  wait - Blocking wait for an event.
+
+  callback - When an event is sent, the receiver calls a callback function on some
+  arbitrary thread.
+
+This implementation assume the following AADL properties on the port:
+
+  Fan_out_policy => Broadcast;
+  Overflow_Handling_protocol => DropOldest;
+  Queue_Processing_Protocol => FIFO;
+  Queue_Size => <aadlinteger>;
+
+NOTE: With a little more work this implementation could be generalized to handle
+AADL event and data ports as well.
+
+  event - Just use the numSent and numRecv counters. Disable queue.
+
+  data - Set QUEUE_SIZE to 2 (ie a double buffer).
