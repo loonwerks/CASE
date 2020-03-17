@@ -339,11 +339,11 @@ public
 			c6: port Radio.mission_command -> RequestMonitor.observed;
 			c7: port UxAS.flight_plan -> RequestMonitor.reference_1;
 			c8: port RequestMonitor.alert -> Radio.alert;
-			c9: port RequestMonitor.output -> ResponseFilter.filter_in;
-			c10: port ResponseFilter.filter_out -> GeofenceMonitor.observed;
+--			c9: port RequestMonitor.output -> ResponseFilter.filter_in;
+--			c10: port ResponseFilter.filter_out -> GeofenceMonitor.observed;
 			c11: port FlyZones.keep_in_zones -> GeofenceMonitor.reference_1;
-			c12: port ResponseFilter.filter_out -> GeofenceMonitor.observed;
-			c13: port ResponseFilter.filter_out -> WaypointManager.flight_plan;
+			c12: port UxAS.flight_plan -> GeofenceMonitor.observed;
+			c13: port UxAS.flight_plan -> WaypointManager.flight_plan;
 			c14: port GeofenceMonitor.alert -> WaypointManager.return_home;
 			c15: port WaypointManager.mission_window -> UART.mission_window;
 			c16: port UART.status -> WaypointManager.position_status;
