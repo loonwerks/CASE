@@ -51,13 +51,13 @@ The message is an address followed by a set of attributes and then the payload. 
   * `string` : Content type (e.g., `lmcp`, `json`, `xml`, etc.)
   * `|`: delimiter
   * `string`: Descriptor (e.g., `afrl.cmasi.OperatingRegion` if content type is `lmcp`, etc.)
-  * `|`: delimitor
+  * `|`: delimiter
   * `string`: Source group (e.g., `uxas.roadmonitor`, etc.)
-  * `|`: delimetor
+  * `|`: delimiter
   * `string`: Source entity ID
-  * `|`
+  * `|`: delimiter
   * `string`: Source service ID
-  * `$`
+  * `$`: delimiter
   * LMCP Object: (see above)
 
 The format is address `$` payload. (See `AddressedMessage.h`). Ah. The real stuff is in `AddressAttributedMessage`. It has both the address and the attributes.
