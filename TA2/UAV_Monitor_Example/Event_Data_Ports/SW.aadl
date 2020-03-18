@@ -10,26 +10,33 @@ public
 	thread CASE_Monitor_Coord
 		features
 			observed: in event data port Mission; -- flight plan
-			reference_1: in data port MapArray;   -- keep-in zones
+			keep_in_zones: in data port MapArray; 
+			keep_out_zones: in data port MapArray;
 			output: out event data port Mission;
+			alert: out event port;
 		properties
 			CASE_Properties::Component_Type => MONITOR;
 			CASE_Properties::Component_Spec => ("Req001_GeofenceMonitor");
 		annex agree {**
 
-			property CASE_Monitor_Coord_policy = Historically(event(observed) => WAYPOINTS_IN_KEEPIN_ZONE(observed, reference_1));
+			property CASE_Monitor_Coord_policy = Historically(event(observed) => 
+			    (WAYPOINTS_IN_ZONES(observed, keep_in_zones) and WAYPOINTS_NOT_IN_ZONES(observed, keep_out_zones))
+			);
         
 			guarantee Req001_GeoMonitorEvent "The output event only fires when observed is valid" : 
 				if event(observed) and CASE_Monitor_Coord_policy then
-					event(output) and output = observed			
+					event(output) and output = observed	and event(alert)
 				else
-					not event(output);
+					not event(output) and not event(alert);
 			
-            fun WAYPOINTS_IN_KEEPIN_ZONE(mission : Mission, keepInZone : MapArray) : bool =
-              forall waypoint in mission, WAYPOINT_IN_KEEPIN_ZONE(waypoint, keepInZone);
+			fun WAYPOINTS_NOT_IN_ZONES(mission : Mission, zones : MapArray) : bool =
+              forall waypoint in mission, not WAYPOINT_IN_ZONES(waypoint, zones);
               
-            fun WAYPOINT_IN_KEEPIN_ZONE(waypoint : Coordinate.Impl, keepInZone: MapArray) : bool = 
-              exists zone in keepInZone, WAYPOINT_IN_ZONE_RECTANGLE(waypoint, zone);
+            fun WAYPOINTS_IN_ZONES(mission : Mission, zones : MapArray) : bool =
+              forall waypoint in mission, WAYPOINT_IN_ZONES(waypoint, zones);
+              
+            fun WAYPOINT_IN_ZONES(waypoint : Coordinate.Impl, zones: MapArray) : bool = 
+              exists zone in zones, WAYPOINT_IN_ZONE_RECTANGLE(waypoint, zone);
             
             -- Assumes rectangle that is defined by two corners so it is aligned
             -- with the origin (not rotated in space)
@@ -240,7 +247,7 @@ public
 			flight_plan: in event data port Mission;
 			mission_window: out event data port MissionWindow;
 			position_status: in event data port Coordinate.Impl;
-			return_home: in event data port Base_Types::Boolean;
+			return_home: in event port;
 		annex agree {**
 			assume Req001_WaypointManager "The Waypoint Manager shall receive a well-formed mission" : good_mission(flight_plan);
 			guarantee Req002_WaypointManager "The Waypoint Manager shall output a well-formed mission window" : good_mission_window(mission_window);
@@ -324,9 +331,11 @@ public
 			c5: port FlyZones.keep_out_zones -> UxAS.keep_out_zones;
 			c6: port Radio.mission_command -> RequestMonitor.observed;
 			c7: port UxAS.flight_plan -> RequestMonitor.reference_1;
-			c11: port FlyZones.keep_in_zones -> GeofenceMonitor.reference_1;
+			c11: port FlyZones.keep_in_zones -> GeofenceMonitor.keep_in_zones;
+			c20: port FlyZones.keep_out_zones -> GeofenceMonitor.keep_out_zones;
 			c12: port UxAS.flight_plan -> GeofenceMonitor.observed;
 			c14: port GeofenceMonitor.output -> WaypointManager.flight_plan;
+			c21: port GeofenceMonitor.alert -> WaypointManager.return_home;
 			c15: port WaypointManager.mission_window -> UART.mission_window;
 			c16: port UART.status -> WaypointManager.position_status;
 			c17: port UART.status -> Radio.status;
@@ -334,7 +343,7 @@ public
 			c19: port uart_recv -> UART.recv_data;
 		annex resolute {**
 --			prove Req005_WaypointManager(this.WaypointManager, this.ResponseFilter, this.c13, Mission)
-			prove Req004_FlightPlanner(this.UxAS, this.GeofenceMonitor)
+			--prove Req004_FlightPlanner(this.UxAS, this.GeofenceMonitor)
 			prove Req003_FlightPlanner(this.UxAS, this.RequestMonitor)
 		**};
 	end SW.Transformed;
