@@ -9,8 +9,8 @@ public
 
 	thread CASE_Monitor_Coord
 		features
-			observed: in event data port Mission;
-			reference_1: in data port MapArray;
+			observed: in event data port Mission; -- flight plan
+			reference_1: in data port MapArray;   -- keep-in zones
 			output: out event data port Mission;
 		properties
 			CASE_Properties::Component_Type => MONITOR;
@@ -18,14 +18,13 @@ public
 		annex agree {**
 
 			property CASE_Monitor_Coord_policy = Historically(event(observed) => WAYPOINTS_IN_KEEPIN_ZONE(observed, reference_1));
-
-			guarantee Req001_GeoMonitor "The output is the same as observed" : output = observed;
-			guarantee Req001_GeoMonitorEvent "The output event only fires when observed is valid" : event(output) = 
-			  if(event(observed) and CASE_Monitor_Coord_policy) then
-			    true
-			  else
-			    false;
-			           
+        
+			guarantee Req001_GeoMonitorEvent "The output event only fires when observed is valid" : 
+				if event(observed) and CASE_Monitor_Coord_policy then
+					event(output) and output = observed			
+				else
+					not event(output);
+			
             fun WAYPOINTS_IN_KEEPIN_ZONE(mission : Mission, keepInZone : MapArray) : bool =
               forall waypoint in mission, WAYPOINT_IN_KEEPIN_ZONE(waypoint, keepInZone);
               
@@ -334,7 +333,7 @@ public
 			c18: port UART.send_data -> uart_send;
 			c19: port uart_recv -> UART.recv_data;
 		annex resolute {**
-			prove Req005_WaypointManager(this.WaypointManager, this.ResponseFilter, this.c13, Mission)
+--			prove Req005_WaypointManager(this.WaypointManager, this.ResponseFilter, this.c13, Mission)
 			prove Req004_FlightPlanner(this.UxAS, this.GeofenceMonitor)
 			prove Req003_FlightPlanner(this.UxAS, this.RequestMonitor)
 		**};

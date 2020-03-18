@@ -1,13 +1,13 @@
 package CASE_Requirements
 private
 	annex resolute {**
-		Req005_WaypointManager(comp_context : component, filter : component, conn : connection, message_type : data) <=
-			** "[well-formed] The WaypointManager shall only recieve well-formed messages" **
-			context Generated_By : "GearCASE";
-			context Generated_On : "May 23, 1970";
-			context Req_Component : "SW::SW.Impl.WPM";
-			context Formalized : "False";
-			add_filter(comp_context, filter, conn, message_type)
+--		Req005_WaypointManager(comp_context : component, filter : component, conn : connection, message_type : data) <=
+--			** "[well-formed] The WaypointManager shall only recieve well-formed messages" **
+--			context Generated_By : "GearCASE";
+--			context Generated_On : "May 23, 1970";
+--			context Req_Component : "SW::SW.Impl.WPM";
+--			context Formalized : "False";
+--			add_filter(comp_context, filter, conn, message_type)
 		
 		Req003_FlightPlanner(comp_context : component, monitor : component) <=
 			** "[response-on-request] Third-party software shall only output data when requested" **
