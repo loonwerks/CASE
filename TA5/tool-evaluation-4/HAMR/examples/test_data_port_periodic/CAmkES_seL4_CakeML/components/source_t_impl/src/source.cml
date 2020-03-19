@@ -1,0 +1,72 @@
+(* This structure is populated with HAMR-generated code *)
+structure API =
+struct
+
+  (* Used to make FFI calls where no response from the outside world is expected *)
+  val empty_byte_array = Word8Array.array 0 (Word8.fromInt 0);
+  val singleton_byte_array = Word8Array.array 1 (Word8.fromInt 0);  
+
+  (**********************************
+   * begin generic API functions    *
+   **********************************)
+
+  fun logInfo s = (#(loginfo) s empty_byte_array);
+  fun logDebug s = (#(logdebug) s empty_byte_array);
+  fun logError s = (#(logerror) s empty_byte_array);
+
+  fun initialise() = (#(initialise) "" empty_byte_array);
+
+  fun wait() =
+      (#(wait) "" singleton_byte_array;
+       Word8Array.sub singleton_byte_array 0 <> Word8.fromInt 0);
+
+  (**********************************
+   * begin component-specific API   *
+   **********************************)
+
+  fun sb_write_port_write s = #(sb_write_port_write) s empty_byte_array; (* TODO: validate length of s *)
+end;
+
+(* This structure is populated with developer-written code *)
+structure Client =
+struct
+
+  val value = Ref(Char.chr 0)
+
+  fun initialise() = ();
+  
+  fun timeTriggered() =
+      (API.sb_write_port_write(String.implode[!value]);
+       API.logInfo "---------------------------------------\n";
+       API.logInfo(String.concat ["[src] Sent ",Int.toString(Char.ord(!value)),"\n"]);
+       value := Char.chr(Int.mod (Char.ord(!value) + 1) 128)
+      );
+
+  (* ===========================================================*
+   * The methods below are not currently used in HAMR/Slang     *
+   * ===========================================================*)
+
+  fun activate() = ();
+
+  fun deactivate() = ();
+
+  fun finalise() = ();
+
+  fun recover() = ();
+end;
+
+(* This structure is populated with HAMR-generated code *)
+structure Control =
+struct
+  fun loop () =
+      if API.wait() then
+        (Client.timeTriggered();
+         loop())
+      else
+        loop();
+end;
+
+(* Startup: client initalisation, then enter main loop *)
+val _ = API.initialise();
+val _ = Client.initialise();
+val _ = Control.loop();

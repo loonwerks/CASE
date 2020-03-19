@@ -1,0 +1,29 @@
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <TimeServer/TimeServer.camkes>;;
+import "components/source_t_impl/source_t_impl.camkes";
+import "components/destination_t_impl/destination_t_impl.camkes";
+import "components/dispatch_periodic/dispatch_periodic.camkes";
+
+assembly {
+  composition {
+    component source_t_impl src;
+    component destination_t_impl dest;
+    component dispatch_periodic dispatch_periodic_inst;
+    component TimeServer time_server;
+
+    connection seL4Notification conn1(from dispatch_periodic_inst.sb_src_periodic_dispatch_notification, to src.sb_periodic_dispatch_notification);
+    connection seL4Notification conn2(from dispatch_periodic_inst.sb_dest_periodic_dispatch_notification, to dest.sb_periodic_dispatch_notification);
+    connection seL4SharedData conn3(from src.sb_write_port, to dest.sb_read_port);
+    connection seL4TimeServer conn4(from dispatch_periodic_inst.timer, to time_server.the_timer);
+    connection seL4GlobalAsynchCallback conn5(from time_server.timer_notification, to dispatch_periodic_inst.timer_complete);
+  }
+
+  configuration {
+    src.write_port_access = "W";
+    dest.read_port_access = "R";
+    time_server.timers_per_client = 1;
+    dispatch_periodic_inst.timer_attributes = 1;
+    dispatch_periodic_inst.priority = 201;
+  }
+}
