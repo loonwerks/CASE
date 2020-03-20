@@ -1,0 +1,4 @@
+procedure AADLEvent_Sender {
+  include <sb_proc_types.h>;
+  void raise();
+};

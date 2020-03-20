@@ -1,0 +1,4 @@
+procedure AADLEvent_Receiver {
+  include <sb_proc_types.h>;
+  int32_t get_events();
+};

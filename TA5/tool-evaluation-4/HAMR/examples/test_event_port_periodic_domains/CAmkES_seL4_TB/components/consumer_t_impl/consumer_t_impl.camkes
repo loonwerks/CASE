@@ -1,0 +1,11 @@
+import "../../interfaces/AADLEvent_Receiver.idl4";
+import <std_connector.camkes>;
+
+component consumer_t_impl {
+  include <sb_proc_types.h>;
+  control;
+  uses AADLEvent_Receiver sb_consume;
+  consumes ReceiveEvent sb_consume_notification;
+  consumes Notification sb_periodic_dispatch_notification;
+  has semaphore sb_dispatch_sem;
+}

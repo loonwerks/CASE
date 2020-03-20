@@ -1,0 +1,31 @@
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <TimeServer/TimeServer.camkes>;;
+import "components/emitter_t_impl/emitter_t_impl.camkes";
+import "components/sb_Monitors/sb_dst_thread_read_port_Monitor/sb_dst_thread_read_port_Monitor.camkes";
+import "components/consumer_t_impl/consumer_t_impl.camkes";
+import "components/dispatch_periodic/dispatch_periodic.camkes";
+
+assembly {
+  composition {
+    component emitter_t_impl src_thread;
+    component sb_dst_thread_read_port_Monitor sb_dst_thread_read_port_monitor;
+    component consumer_t_impl dst_thread;
+    component dispatch_periodic dispatch_periodic_inst;
+    component TimeServer time_server;
+
+    connection seL4Notification conn1(from dispatch_periodic_inst.sb_src_thread_periodic_dispatch_notification, to src_thread.sb_periodic_dispatch_notification);
+    connection seL4Notification conn2(from dispatch_periodic_inst.sb_dst_thread_periodic_dispatch_notification, to dst_thread.sb_periodic_dispatch_notification);
+    connection seL4RPCCall conn3(from src_thread.sb_write_port0, to sb_dst_thread_read_port_monitor.mon);
+    connection seL4RPCCall conn4(from dst_thread.sb_read_port, to sb_dst_thread_read_port_monitor.mon);
+    connection seL4Notification conn5(from sb_dst_thread_read_port_monitor.monsig, to dst_thread.sb_read_port_notification);
+    connection seL4TimeServer conn6(from dispatch_periodic_inst.timer, to time_server.the_timer);
+    connection seL4GlobalAsynchCallback conn7(from time_server.timer_notification, to dispatch_periodic_inst.timer_complete);
+  }
+
+  configuration {
+    time_server.timers_per_client = 1;
+    dispatch_periodic_inst.timer_attributes = 1;
+    dispatch_periodic_inst.priority = 201;
+  }
+}

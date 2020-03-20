@@ -1,0 +1,101 @@
+----------------------------------------------------------------------
+-- Copyright 2020 DARPA CASE
+--
+-- Micro example AADL to show single AADL dataport communications for
+-- a periodic process running under the seL4 domain scheduler
+----------------------------------------------------------------------
+package test_event_port_periodic_domains
+public
+	with HAMR;
+	with seL4_Properties;
+		
+	thread emitter_t
+		features
+			emit: out event port;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Initialize_Entrypoint_Source_Text => "test_event_port_emitter_component_init";
+			Source_Text => ("behavior_code/components/Emitter/src/emitter.c");
+			Compute_Entrypoint_Source_Text => "run_emitter";
+	end emitter_t;
+	
+	thread implementation emitter_t.impl
+	end emitter_t.impl;
+	
+	process emitter_p
+		features
+			emit : out event port;
+		properties
+			seL4_Properties::Domain => 2; -- pacer 1, emitter 2, consumer 3
+	end emitter_p;
+	
+	process implementation emitter_p.impl
+		subcomponents
+			src_thread : thread emitter_t.impl;
+		connections
+			write_connection : port src_thread.emit -> emit;
+	end emitter_p.impl;
+
+	thread consumer_t
+		features
+			consume: in event port {
+				Compute_Entrypoint_Source_Text => "test_event_port_consumer_s_event_handler";
+			};
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Initialize_Entrypoint_Source_Text => "test_event_port_consumer_component_init";
+			Source_Text => ("behavior_code/components/Consumer/src/consumer.c");
+			Compute_Entrypoint_Source_Text => "test_event_port_consumer_s_event_handler";
+	end consumer_t;
+	
+	thread implementation consumer_t.impl
+	end consumer_t.impl;
+	
+	process consumer_p
+		features
+			consume : in event port;
+		properties
+			seL4_Properties::Domain => 3; -- pacer 1, emitter 2, consumer 3
+	end consumer_p;
+	
+	process implementation consumer_p.impl
+		subcomponents
+			dst_thread : thread consumer_t.impl;
+		connections
+			read_connection : port consume -> dst_thread.consume;
+	end consumer_p.impl;
+
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+		properties
+			Frame_Period => 1000ms;
+            Clock_Period => 2ms;
+			seL4_Properties::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
+	end proc.impl;
+
+	system top
+	end top;
+	
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			src_process : process emitter_p.impl;
+			dst_process : process consumer_p.impl;
+		connections
+			data_interconnect : port src_process.emit -> dst_process.consume;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to src_process;
+			--Actual_Processor_Binding => (reference (proc)) applies to dst_process;
+			HAMR::Platform => (seL4_TB, seL4_Only);
+		--annex resolute {**
+		--	check CASE_Tools
+		--**};
+	end top.impl;
+	
+end test_event_port_periodic_domains;
