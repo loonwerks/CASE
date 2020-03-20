@@ -26,7 +26,7 @@ The `Client` module is expected to contain at least two functions:
 * `initialise : unit -> unit` defines any inititialisation code the client wishes to run at component startup time.
 * `timeTrigged : unit -> unit` defines the behaviour of the client when triggered.
 
-== FFI calls and glue gode ==
+## FFI calls and glue gode
 
 CakeML foreign function calls are of the shape `#(foo) s arr`, where `s` is a string and `arr` is a byte array. The intent is that the string is used to pass parameters to the outside world, and `a` is a buffer through which the outside world can pass data to CakeML. This FFI call to the port `foo` will be implemented as a `Call` to the label `ffifoo`, which we assume is implemented by a C function with signature
 
@@ -36,7 +36,7 @@ CakeML will pass the contents of `s` to `c`, the length of `s` to `clen`, the co
 
 For an example, from the point of view of CakeML client code, writing to the port `sb_write_port` is done by calling the function `API.sb_write_port_write : string -> unit`. This function is implemented as an FFI call `#(sb_write_port_write)`, which passes the string argument supplied by the client to the C function `ffisb_write_port_write`. This function, in turn, passes the string to the C function `sb_write_port_write`, which is the exact same entry point used by client code written in C.
 
-== Known issues/future work ==
+## Known issues/future work
 
 We need to account for the possibility that `Client` comes not as concrete syntax but as a CakeML AST in S-expression form. This is because the code that SPLAT and similar tools synthesise will not come in concrete syntax form; in general, this code may use CakeML language features that are outside the domain of the CakeML parser. Because CakeML unfortunately doesn't have separate compilation, this can be done by generating, and `cat`ing together, S-expressions for the `API` and `Control` modules too. I (Johannes ÅP) have a rough idea of how to stitch this together, but it needs to happen.
 
