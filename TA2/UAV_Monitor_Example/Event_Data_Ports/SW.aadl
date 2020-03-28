@@ -17,6 +17,7 @@ public
 		properties
 			CASE_Properties::Component_Type => MONITOR;
 			CASE_Properties::Component_Spec => ("Req001_GeofenceMonitor");
+			Dispatch_Protocol => Periodic;
 		annex agree {**
 
 			property CASE_Monitor_Coord_policy = Historically(event(observed) => 
@@ -53,8 +54,6 @@ public
 	end CASE_Monitor_Coord;
 
 	thread implementation CASE_Monitor_Coord.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
 	end CASE_Monitor_Coord.Impl;
 	
 	
@@ -66,6 +65,7 @@ public
 		properties
 			CASE_Properties::Component_Type => MONITOR;
 			CASE_Properties::Component_Spec => ("Req001_RequestMonitor");
+            Dispatch_Protocol => Periodic;
 		annex agree {**
 			const is_latched : bool = true;  -- once alert becomes true, it stays true (unless the monitor is reset)
 			-- Yesterday refers to the scheduling cycles regardless of the existence of events
@@ -80,8 +80,6 @@ public
 	end CASE_Monitor_Req;
 
 	thread implementation CASE_Monitor_Req.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
 	end CASE_Monitor_Req.Impl;
 	
 
