@@ -1,9 +1,7 @@
 package Monitor
 public
 	with CASE_Model_Transformations;
-
 	with CASE_Properties;
-
 	with Base_Types;
 
 	thread RadioDriver
@@ -34,7 +32,7 @@ public
 		properties
 			Dispatch_Protocol => Sporadic;
 	end Critical_A.Impl;
-	
+
 	thread Critical_B
 		features
 			recv_message: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
@@ -48,7 +46,9 @@ public
 	process SW
 		features
 			input: in event data port;
+			reset: in event data port Base_Types::Boolean;
 			output: out event data port Base_Types::Boolean;
+			alert: out event data port Base_Types::Boolean;
 		annex agree {**
 			guarantee "Output status shall never be false" : output;
 		**};
@@ -65,13 +65,13 @@ public
 			c3: port RADIO.other_message -> CRIT_B.recv_message;
 			c4: port CRIT_A.status -> output;
 	end SW.Impl;
-	
+
 	system Sys
 		features
 			input: in event data port;
 			output: out event data port Base_Types::Boolean;
 	end Sys;
-	
+
 	system implementation Sys.Impl
 		subcomponents
 			SW: process SW.Impl;
