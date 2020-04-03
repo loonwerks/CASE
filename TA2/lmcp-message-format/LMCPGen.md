@@ -34,7 +34,7 @@ See `Object * Factory::getObject(ByteBuffer & buffer)` in `avtas/lmcp/Factory.cp
   * `int64_t`: Series ID
   * `uint32_t`: Message type
   * `uint16_t`: Version
-  *  Message Payload containing on LMCP object (see below `OperatingRegion` Payload)
+  *  Message Payload containing on LMCP object (see above `OperatingRegion` Payload)
   * `uint32_t`: Checksum
 
 `HEADER_SIZE` is 8 bytes and `CHECKSUM` is 4 bytes. Byte order is **big-endian** for multi-byte data.
