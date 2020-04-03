@@ -26,20 +26,31 @@ The layout is defined in the `pack`/`unpack` methods for the object definition g
 
 # LMCP Messages
 
-See `Object * Factory::getObject(ByteBuffer & buffer)` in `avtas/lmcp/Factory.cpp` below included below. In order from beginning to end of the buffer:
+See `Object * Factory::getObject(ByteBuffer & buffer)` in `avtas/lmcp/Factory.cpp` below included below.  `HEADER_SIZE` is 8 bytes and `CHECKSUM` is 4 bytes. Byte order is **big-endian** for multi-byte data.
+
+The ID, type, and version are defined in the source for the individual messages. There are corresponding string versions for the ID and type in that same file. The size of the payload depends on the message type and is made clear in the `pack` method for the message type. In general, arrays are preceded by a length specifier.
+
+Beware: the actual representation of a boolean depends on that used in LMCP source language (C++) and that language doesn't say what bit patterns are used for true and false. See [https://stackoverflow.com/questions/19351483/how-is-a-bool-represented-in-memory]
+
+**Regular Message**
 
   * `int32_t`: LMCP control string (`0x4c4d4350`)
   * `uint32_t`: Message size
-  * `bool`: `false` is a NULL message
+  * `bool`: `true`
   * `int64_t`: Series ID
   * `uint32_t`: Message type
   * `uint16_t`: Version
   *  Message Payload containing on LMCP object (see above `OperatingRegion` Payload)
   * `uint32_t`: Checksum
 
-`HEADER_SIZE` is 8 bytes and `CHECKSUM` is 4 bytes. Byte order is **big-endian** for multi-byte data.
+**NULL Message**
 
-The ID, type, and version are defined in the source for the individual messages. There are corresponding string versions for the ID and type in that same file. The size of the payload depends on the message type and is made clear in the `pack` method for the message type. In general, arrays are preceded by a length specifier.
+  * `int32_t`: LMCP control string (`0x4c4d4350`)
+  * `uint32_t`: Message size
+  * `bool`: `false` is a NULL message
+  * `uint32_t`: Checksum
+
+**Code**
 
 ```cpp
 Object * Factory::getObject(ByteBuffer & buffer)
