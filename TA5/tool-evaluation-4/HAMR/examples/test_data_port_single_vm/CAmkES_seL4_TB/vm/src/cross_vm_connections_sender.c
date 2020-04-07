@@ -31,17 +31,17 @@ static struct camkes_crossvm_connection connections[] = {
 };
 
 
-void done_emit_underlying(void) WEAK;
-void ready_emit_underlying(void) WEAK;
+//void done_emit_underlying(void) WEAK;
+//void ready_emit_underlying(void) WEAK;
 void init_cross_vm_connections(vm_t *vm, void *cookie)
 {
-	if (done_emit_underlying) {
-		connections[0].emit_fn = done_emit_underlying;
-	} else if (ready_emit_underlying) {
-		connections[0].emit_fn = ready_emit_underlying;
-	} else {
-		ZF_LOGF("Could not find emit function");
-	}
+//	if (done_emit_underlying) {
+//		connections[0].emit_fn = done_emit_underlying;
+//	} else if (ready_emit_underlying) {
+//		connections[0].emit_fn = ready_emit_underlying;
+//	} else {
+//		ZF_LOGF("Could not find emit function");
+//	}
 
     cross_vm_connections_init(vm, CONNECTION_BASE_ADDRESS, connections, ARRAY_SIZE(connections));
 }

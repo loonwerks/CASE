@@ -54,8 +54,10 @@ bool p1_in_aadl_event_data_poll(counter_t *numDropped, data_t *data) {
 
 void run_poll(void) {
     counter_t numDropped;
+    counter_t numDelay;
     data_t data;
 
+    numDelay = 0;
     while (true) {
 
         // Busy loop to wait a bit and slow things down
@@ -70,7 +72,11 @@ void run_poll(void) {
             if (dataReceived) {
                 p1_in_aadl_event_data_receive(numDropped, &data);
             } else {
-                printf("%s: received nothing\n", get_instance_name());
+                numDelay++;
+                if (numDelay >= 100) {
+                    printf("%s: received nothing\n", get_instance_name());
+                    numDelay = 0;
+                }
             }
         }
 
@@ -78,11 +84,11 @@ void run_poll(void) {
 
 }
 
-void receiver_init(void) {
+void post_init(void) {
    recv_queue_init(&recvQueue, p1_in_queue);
 }
 
-int run_receiver(void) {
+int run(void) {
     run_poll();
 }
 
