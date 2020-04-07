@@ -16,6 +16,9 @@ property set CASE_Properties is
 
 	-- Runtime
 	OS: aadlstring applies to (processor, virtual processor);
+	
+	-- Monitor
+	Monitor_Latched: aadlboolean applies to (thread);
 
 --TO DO:  Need additional pattern types such as clearing keys or erasing the directory of a file system
 	-- A system has the potential to have multiple subcomponents that require to be zeroized,

@@ -9,5 +9,69 @@ private
 			context Formalized : "False";
 			false
 		
+		Mon_Data_Reset_Gate(comp_context : component) <=
+			** "[Monitor_Data_Reset_Gate] The Radio command message shall be monitored for correctness" **
+			context Generated_By : "GearCASE";
+			context Generated_On : "Jan 29, 2020";
+			context Req_Component : "SW::SW.Impl.UxAS";
+			context Formalized : "False";
+			false
+		
+		Mon_Data(comp_context : component, monitor : component) <=
+			** "[Monitor_Data] The Radio command message shall be monitored for correctness" **
+			context Generated_By : "GearCASE";
+			context Generated_On : "Jan 29, 2020";
+			context Req_Component : "SW::SW.Impl.UxAS";
+			context Formalized : "False";
+			add_monitor(comp_context, monitor)
+		
+		Mon_Event(comp_context : component, monitor : component) <=
+			** "[Monitor_Event] The Radio command message shall be monitored for correctness" **
+			context Generated_By : "GearCASE";
+			context Generated_On : "Jan 29, 2020";
+			context Req_Component : "SW::SW.Impl.UxAS";
+			context Formalized : "False";
+			add_monitor(comp_context, monitor)
+		
+		Mon_Data_Reset(comp_context : component, monitor : component) <=
+			** "[Monitor_Data_Reset] The Radio command message shall be monitored for correctness" **
+			context Generated_By : "GearCASE";
+			context Generated_On : "Jan 29, 2020";
+			context Req_Component : "SW::SW.Impl.UxAS";
+			context Formalized : "False";
+			add_monitor(comp_context, monitor)
+		
+		Mon_Event_Reset(comp_context : component, monitor : component) <=
+			** "[Monitor_Event_Reset] The Radio command message shall be monitored for correctness" **
+			context Generated_By : "GearCASE";
+			context Generated_On : "Jan 29, 2020";
+			context Req_Component : "SW::SW.Impl.UxAS";
+			context Formalized : "False";
+			add_monitor(comp_context, monitor)
+		
+		Mon_Data_Gate(comp_context : component, monitor : component, gate_context : component, message_type : data) <=
+			** "[Monitor_Data_Gate] The Radio command message shall be monitored for correctness" **
+			context Generated_By : "GearCASE";
+			context Generated_On : "Jan 29, 2020";
+			context Req_Component : "SW::SW.Impl.UxAS";
+			context Formalized : "False";
+			add_monitor_gate(comp_context, monitor, gate_context, message_type)
+		
+		Mon_Event_Gate(comp_context : component) <=
+			** "[Monitor_Event_Gate] The Radio command message shall be monitored for correctness" **
+			context Generated_By : "GearCASE";
+			context Generated_On : "Jan 29, 2020";
+			context Req_Component : "SW::SW.Impl.UxAS";
+			context Formalized : "False";
+			false
+		
+		Mon_Event_Reset_Gate(comp_context : component, monitor : component, gate_context : component, message_type : data) <=
+			** "[Monitor_Event_Reset_Gate] The Radio command message shall be monitored for correctness" **
+			context Generated_By : "GearCASE";
+			context Generated_On : "Jan 29, 2020";
+			context Req_Component : "SW::SW.Impl.UxAS";
+			context Formalized : "False";
+			add_monitor_gate(comp_context, monitor, gate_context, message_type)
+		
 	**};
 end CASE_Requirements;
