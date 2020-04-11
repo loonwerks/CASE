@@ -18,7 +18,7 @@ The sources creates directories for each of the namespaces and in those it place
 
 **Non-null Object**
 
-  * `bool`: `true` (this array entry is not `null`)
+  * `bool`: `true` (this entry is not `null`)
   * `int64_t`: Series ID
   * `uint32_t`: Message type
   * `uint16_t`: Version
@@ -26,11 +26,11 @@ The sources creates directories for each of the namespaces and in those it place
  
 **NULL Object**
 
-  * `bool`: `false` (this array entry is `null`)
+  * `bool`: `false` (this entry is `null`)
 
 The ID, type, and version are defined in the source for the individual messages. There are corresponding string versions for the ID and type in that same file. 
 
-**Beware**: the actual representation of a boolean depends on that used in LMCP source language (C++) and that language doesn't say what bit patterns are used for true and false. See [https://stackoverflow.com/questions/19351483/how-is-a-bool-represented-in-memory]
+**Beware**: the actual representation of a boolean depends on that used in the LMCP source language (C++) and that language doesn't say what bit patterns are used for true and false. See [https://stackoverflow.com/questions/19351483/how-is-a-bool-represented-in-memory](https://stackoverflow.com/questions/19351483/how-is-a-bool-represented-in-memory)
 
 ```c++
 void Factory::putObject(const Object* o, ByteBuffer & buffer)
