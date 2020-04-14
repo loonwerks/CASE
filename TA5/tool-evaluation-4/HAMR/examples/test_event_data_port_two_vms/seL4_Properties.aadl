@@ -1,0 +1,43 @@
+----------------------------------------------------------------------
+-- Copyright 2020 DARPA CASE
+--
+-- Experimental seL4 specific properties for configuring kernel
+-- and run-time schedule
+----------------------------------------------------------------------
+property set seL4_Properties is
+-- The values of these properties are not computed
+-- values; they will be user specified, typically by the integrator's
+-- Systems Engineer.
+--
+-- We will get fancier if we do a general ARINC653 solution. This
+-- works for a basic schedule.
+
+-- seL4_Properties::Domain is the numeric ID of the domain to which
+-- the Systems Engineer assigns the thread. Once the examples get
+-- fixed to have processes, this should be at the process level,
+-- rather than thread level.
+
+Domain: aadlinteger applies to (thread, process);
+
+-- Schedule_Source_Text specifies the location of the source text for a
+-- periodic domain schedule. For seL4, this will be a kernel modification.
+
+Schedule_Source_Text: aadlstring applies to (processor, virtual processor);
+
+-- use Timing_Properties::Compute_Execution_Time to specify the duration
+-- for which the thread is scheduled. This ends up in the domain schedule. 
+
+-- Use Timing_Properties::Frame_Period to specify the duration of the
+-- major frame.
+
+-- use TimingProperties::Clock_Period to specify tick duration in ms.
+-- (seL4 default is 2) on the vanilla (non-MCS) seL4, the length of
+-- the timer tick is configurable, defaulting to 2ms. None of the
+-- verified configurations change this. See:
+-- https://github.com/seL4/seL4/blob/master/config.cmake#L213
+
+OS : enumeration(CAmkES, Linux) applies to (processor, virtual processor);
+Source_Binary: aadlstring applies to (virtual processor);
+Source_Filesystem_Binary: aadlstring applies to (virtual processor);
+
+end seL4_Properties;

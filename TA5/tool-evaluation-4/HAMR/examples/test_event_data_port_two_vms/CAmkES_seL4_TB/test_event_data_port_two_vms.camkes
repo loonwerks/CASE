@@ -1,0 +1,123 @@
+/*
+ * Copyright 2017, Data61
+ * Commonwealth Scientific and Industrial Research Organisation (CSIRO)
+ * ABN 41 687 119 230.
+ *
+ * Copyright 2019 Adventium Labs
+ * Modifications made to original
+ *
+ * This software may be distributed and modified according to the terms of
+ * the BSD 2-Clause license. Note that NO WARRANTY is provided.
+ * See "LICENSE_BSD2.txt" for details.
+ *
+ * @TAG(DATA61_Adventium_BSD)
+ */
+#include <configurations/vm.h>
+
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <seL4VMDTBPassthrough.idl4>;
+import <FileServerInterface.camkes>;
+import <FileServer/FileServer.camkes>;
+import <SerialServer/SerialServer.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <vm-connectors.camkes>;
+import <devices.camkes>;
+
+//import "components/Receiver/Receiver.camkes";
+//import "components/Sender/Sender.camkes";
+
+
+component VM {
+    VM_INIT_DEF()
+    include <queue.h>;
+    dataport queue_t crossvm_dp_0;
+    emits SendEvent ready;
+    maybe consumes SendEvent done;
+}
+
+
+assembly {
+    composition {
+
+        // Scenario 1: Native sender and receiver
+        // component Receiver receiver;
+        // component Sender sender;
+
+        // // AADL Event Data Port connection representation from sender.p1_out to reciever.p1_in
+        // connection seL4Notification pc1_event(from sender.p1_out_SendEvent, to receiver.p1_in_SendEvent);
+        // connection seL4SharedData pc1_queue(from sender.p1_out_queue, to receiver.p1_in_queue);
+
+
+        // Scenario 2: Nativer sender, VM receiver
+        // component Sender sender;
+        // VM_GENERAL_COMPOSITION_DEF()
+        // component VM vmReceiver;
+        // VM_COMPONENT_CONNECTIONS_DEF(Receiver)
+        // /* vm serial connections */
+        // VM_VIRTUAL_SERIAL_COMPOSITION_DEF(Receiver)
+
+        // connection seL4GlobalAsynch event_conn_1(from sender.p1_out_SendEvent, to vmReceiver.done);
+        // connection seL4SharedDataWithCaps cross_vm_conn_1(from sender.p1_out_queue, to vmReceiver.crossvm_dp_0);
+        // connection seL4VMDTBPassthrough vm_dtb1(from vmReceiver.dtb_self, to vmReceiver.dtb);
+
+        // Scenario 3: VM Sender, Native receiver
+        // component Receiver receiver;
+        // VM_GENERAL_COMPOSITION_DEF()
+        // component VM vmSender;
+        // VM_COMPONENT_CONNECTIONS_DEF(Sender)
+        // /* vm serial connections */
+        // VM_VIRTUAL_SERIAL_COMPOSITION_DEF(Sender)
+
+        // connection seL4Notification event_conn_1(from vmSender.ready, to receiver.p1_in_SendEvent);
+        // connection seL4SharedDataWithCaps cross_vm_conn_1(from vmSender.crossvm_dp_0,  to receiver.p1_in_queue);
+        // connection seL4VMDTBPassthrough vm_dtb1(from vmSender.dtb_self, to vmSender.dtb);
+
+
+
+        // Scenario 4: VM Sender and VM receiver
+        VM_GENERAL_COMPOSITION_DEF()
+
+        component VM vmReceiver;
+        VM_COMPONENT_CONNECTIONS_DEF(Receiver)
+        component VM vmSender;
+        VM_COMPONENT_CONNECTIONS_DEF(Sender)
+        /* vm serial connections */
+        VM_VIRTUAL_SERIAL_COMPOSITION_DEF(Receiver,Sender)
+
+        connection seL4GlobalAsynch event_conn_1(from vmSender.ready, to vmReceiver.done);
+        connection seL4SharedDataWithCaps cross_vm_conn_0(from vmSender.crossvm_dp_0, to vmReceiver.crossvm_dp_0);
+        connection seL4VMDTBPassthrough vm_dtb(from vmReceiver.dtb_self, to vmReceiver.dtb);
+        connection seL4VMDTBPassthrough vm_dtb1(from vmSender.dtb_self, to vmSender.dtb);
+
+
+    }
+    configuration {
+
+        //sender.p1_out_queue_access = "W";
+        //receiver.p1_in_queue_access = "R";
+        //sender._priority = 50;
+        //sender._domain = 1;
+        //receiver._priority = 50;
+        //receiver._domain = 1;
+        //receiver.p1_in_SendEvent_domain = 1;
+        vmReceiver.crossvm_dp_0 = "R";
+        vmSender.crossvm_dp_0 = "W";
+        VM_GENERAL_CONFIGURATION_DEF()
+        VM_CONFIGURATION_DEF(Receiver)
+        VM_CONFIGURATION_DEF(Sender)
+        VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(Receiver,Sender)
+
+        vmReceiver.cnode_size_bits = 18;
+        vmReceiver.simple_untyped21_pool = 12;
+        vmReceiver.simple_untyped12_pool = 12;
+        vmReceiver.num_extra_frame_caps = 0;
+        vmReceiver.extra_frame_map_address = 0;
+        vmSender.cnode_size_bits = 18;
+        vmSender.simple_untyped21_pool = 12;
+        vmSender.simple_untyped12_pool = 12;
+        vmSender.num_extra_frame_caps = 0;
+        vmSender.extra_frame_map_address = 0;
+
+    }
+}
