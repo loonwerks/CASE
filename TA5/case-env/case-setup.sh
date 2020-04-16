@@ -8,9 +8,9 @@ set -exuo pipefail
 : "${GIT_EMAIL:=<>}"
 
 : "${SIREUM_V:=5e00c74}"
-: "${SEL4_SCRIPTS_V:=d934fa1}"
-: "${SEL4_V:=3232714b267c613775287472ae229000dd24aa8d}"
-: "${CAMKES_V:=67ce937df0c8f821e6a9f4615d9d2fa2bf9a8885}"
+: "${SEL4_SCRIPTS_V:=ade4e6a4062f214009fde5fee385e3ae999af56c}"
+: "${SEL4_V:=28831f579e3560bd3aa18a3898505f091d66b076}"
+: "${CAMKES_V:=e7f5c6da03fc8a71a5a2e503de9f9004acf3ef2a}"
 
 export DESKTOP_MACHINE=no
 export MAKE_CACHES=no
