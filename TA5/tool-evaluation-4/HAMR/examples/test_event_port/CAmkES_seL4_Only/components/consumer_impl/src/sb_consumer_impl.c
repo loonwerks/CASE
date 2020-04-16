@@ -28,14 +28,14 @@ static void sb_s_handler(void *_ UNUSED){
 }
 
 /************************************************************************
- * sb_s_read:
+ * sb_s_dequeue:
  * Invoked from local active thread.
  *
  * This is the function invoked by the active thread to decrement the
  * input event index.
  *
  ************************************************************************/
-bool sb_s_read() {
+bool sb_s_dequeue() {
   if(sb_s_received_events > 0) {
     sb_s_received_events--;
     return true;
@@ -116,6 +116,8 @@ int run(void) {
           sb_s_received_events = 1;
         }
 
+        // dequeue one event and call the event handler
+        sb_s_dequeue();
         sb_entrypoint_consumer_impl_s();
       }
     }

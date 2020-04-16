@@ -31,26 +31,26 @@ void sb_periodic_dispatch_notification_callback(void *_ UNUSED) {
 }
 
 
+void sb_entrypoint_emitter_impl_periodic_dispatcher(const int64_t * in_arg) {
+  run_emitter((int64_t *) in_arg);
+}
+
 /************************************************************************
- * sb_e_write
+ * sb_e_enqueue
  * Invoked from user code in the local thread.
  *
  * This is the function invoked by the local thread to make a
  * call to send to a remote event port.
  *
  ************************************************************************/
-bool sb_e_write(void) {
-  sb_e0_raise();
-  sb_e1_raise();
-  sb_e2_raise();
-  sb_e3_raise();
+bool sb_e_enqueue(void) {
+  sb_e0_enqueue();
+  sb_e1_enqueue();
+  sb_e2_enqueue();
+  sb_e3_enqueue();
   return true;
 }
 
-
-void sb_entrypoint_emitter_impl_periodic_dispatcher(const int64_t * in_arg) {
-  run_emitter((int64_t *) in_arg);
-}
 
 /************************************************************************
  *  sb_entrypoint_emitter_impl_initializer:

@@ -11,7 +11,7 @@ void test_event_port_consumer_component_init(const int64_t *in_arg) {
 
 void test_event_port_consumer_s_event_handler() {
   int8_t old_value = _value;
-  while(sb_s_read()) {
+  while(sb_s_dequeue()) {
     _value = (_value + 1) % 500;
   }
   

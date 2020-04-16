@@ -31,6 +31,10 @@ void sb_periodic_dispatch_notification_callback(void *_ UNUSED) {
 }
 
 
+void sb_entrypoint_emitter_impl_periodic_dispatcher(const int64_t * in_arg) {
+  run_emitter((int64_t *) in_arg);
+}
+
 /************************************************************************
  * sb_enq_enqueue:
  * Invoked from user code in the local thread.
@@ -51,10 +55,6 @@ bool sb_enq_enqueue(const int8_t * sb_enq){
   sb_result &= sb_enq2_enqueue((int8_t *) sb_enq);
   sb_result &= sb_enq3_enqueue((int8_t *) sb_enq);
   return sb_result;
-}
-
-void sb_entrypoint_emitter_impl_periodic_dispatcher(const int64_t * in_arg) {
-  run_emitter((int64_t *) in_arg);
 }
 
 /************************************************************************

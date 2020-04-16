@@ -85,31 +85,31 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn1
-];
-
-"dispatch_periodic_inst":sb_dest_periodic_dispatch_notification -> "dest":sb_periodic_dispatch_notification [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn2
-];
-
 "src":sb_write_port0 -> "sb_dest_read_port_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn3
+  id = conn1
 ];
 
 "dest":sb_read_port -> "sb_dest_read_port_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn4
+  id = conn2
 ];
 
 "sb_dest_read_port_monitor":monsig -> "dest":sb_read_port_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn3
+];
+
+"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn4
+];
+
+"dispatch_periodic_inst":sb_dest_periodic_dispatch_notification -> "dest":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn5

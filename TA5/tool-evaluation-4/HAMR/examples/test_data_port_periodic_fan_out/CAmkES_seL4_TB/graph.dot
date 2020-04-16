@@ -110,55 +110,55 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn1
-];
-
-"dispatch_periodic_inst":sb_dest_A_periodic_dispatch_notification -> "dest_A":sb_periodic_dispatch_notification [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn2
-];
-
-"dispatch_periodic_inst":sb_dest_B_periodic_dispatch_notification -> "dest_B":sb_periodic_dispatch_notification [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn3
-];
-
 "src":sb_write_port0 -> "sb_dest_a_read_port_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn4
+  id = conn1
 ];
 
 "dest_A":sb_read_port -> "sb_dest_a_read_port_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn5
+  id = conn2
 ];
 
 "sb_dest_a_read_port_monitor":monsig -> "dest_A":sb_read_port_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn6
+  id = conn3
 ];
 
 "src":sb_write_port1 -> "sb_dest_b_read_port_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn7
+  id = conn4
 ];
 
 "dest_B":sb_read_port -> "sb_dest_b_read_port_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn8
+  id = conn5
 ];
 
 "sb_dest_b_read_port_monitor":monsig -> "dest_B":sb_read_port_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn6
+];
+
+"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn7
+];
+
+"dispatch_periodic_inst":sb_dest_A_periodic_dispatch_notification -> "dest_A":sb_periodic_dispatch_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn8
+];
+
+"dispatch_periodic_inst":sb_dest_B_periodic_dispatch_notification -> "dest_B":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn9

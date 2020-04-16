@@ -1,5 +1,5 @@
 component UARTDriver_Impl {
-  include <sb_PROC_HW_types.h>;
+  include <sb_UAV_Impl_Instance_types.h>;
   include <sb_queue_sb_SW__MissionWindow_container_1.h>;
   include <sb_queue_int64_t_1.h>;
   control;

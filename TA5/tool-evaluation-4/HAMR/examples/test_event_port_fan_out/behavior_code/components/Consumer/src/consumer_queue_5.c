@@ -7,8 +7,8 @@ void test_event_port_consumer_component_init(const int64_t *in_arg) {
 }
 
 void test_event_port_consumer_s_event_handler() {
- int32_t counter = 0;
-  while(sb_s_read()) {
+ int32_t counter = 1; // 1 for the event that triggered the handler
+  while(sb_s_dequeue()) {
     counter++;
   }
   

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8.2)
 
-project (PROC_SW C)
+project (UAV_Impl_Instance C)
 
 add_definitions(-DCAMKES)
 
@@ -28,4 +28,4 @@ DeclareCAmkESComponent(UARTDriver_Impl
 
 )
 
-DeclareCAmkESRootserver(PROC_SW.camkes)
+DeclareCAmkESRootserver(UAV_Impl_Instance.camkes)

@@ -1,6 +1,6 @@
 #include <camkes.h>
 #include <stdio.h>
-#include <sb_proc_types.h>
+#include <sb_top_impl_Instance_types.h>
 #include <sb_destination_t_impl.h>
 
 void test_data_port_destination_component_init(const int64_t *in_arg) {

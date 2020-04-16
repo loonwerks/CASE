@@ -2,7 +2,7 @@ import "../../interfaces/sb_Monitor_SW__MissionWindow_1.idl4";
 import "../../interfaces/sb_Monitor_int64_t_1.idl4";
 
 component UARTDriver_Impl {
-  include <sb_PROC_HW_types.h>;
+  include <sb_UAV_Impl_Instance_types.h>;
   control;
   uses sb_Monitor_SW__MissionWindow_1 sb_mission_window;
   uses sb_Monitor_int64_t_1 sb_tracking_id0;

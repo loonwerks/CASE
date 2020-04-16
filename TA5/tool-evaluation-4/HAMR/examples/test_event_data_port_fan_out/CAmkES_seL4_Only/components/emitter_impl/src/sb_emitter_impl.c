@@ -1,7 +1,7 @@
 #include "../includes/sb_emitter_impl.h"
-#include <sb_queue_int8_t_5.h>
 #include <sb_queue_int8_t_1.h>
 #include <sb_queue_int8_t_2.h>
+#include <sb_queue_int8_t_5.h>
 #include <string.h>
 #include <camkes.h>
 
@@ -34,21 +34,21 @@ void sb_periodic_dispatch_notification_callback(void *_ UNUSED) {
 }
 
 
-bool sb_enq_enqueue(const int8_t *data) {
-  sb_queue_int8_t_5_enqueue(sb_enq_queue_5, (int8_t*) data);
-  sb_enq_5_notification_emit();
+void sb_entrypoint_emitter_impl_periodic_dispatcher(const int64_t * in_arg) {
+  run_emitter((int64_t *) in_arg);
+}
 
+bool sb_enq_enqueue(const int8_t *data) {
   sb_queue_int8_t_1_enqueue(sb_enq_queue_1, (int8_t*) data);
   sb_enq_1_notification_emit();
 
   sb_queue_int8_t_2_enqueue(sb_enq_queue_2, (int8_t*) data);
   sb_enq_2_notification_emit();
 
-  return true;
-}
+  sb_queue_int8_t_5_enqueue(sb_enq_queue_5, (int8_t*) data);
+  sb_enq_5_notification_emit();
 
-void sb_entrypoint_emitter_impl_periodic_dispatcher(const int64_t * in_arg) {
-  run_emitter((int64_t *) in_arg);
+  return true;
 }
 
 /************************************************************************
@@ -65,9 +65,9 @@ void sb_entrypoint_emitter_impl_initializer(const int64_t * in_arg) {
 
 
 void post_init(void){
-  sb_queue_int8_t_5_init(sb_enq_queue_5);
   sb_queue_int8_t_1_init(sb_enq_queue_1);
   sb_queue_int8_t_2_init(sb_enq_queue_2);
+  sb_queue_int8_t_5_init(sb_enq_queue_5);
 }
 
 /************************************************************************

@@ -1,6 +1,6 @@
 #include <string.h>
 #include <camkes.h>
-#include <sb_proc_types.h>
+#include <sb_top_impl_Instance_types.h>
 
 // prototypes for clock functions
 void clock_init();

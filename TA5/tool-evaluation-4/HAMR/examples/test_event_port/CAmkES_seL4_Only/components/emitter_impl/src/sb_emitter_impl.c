@@ -4,14 +4,14 @@
 #include <camkes.h>
 
 /************************************************************************
- * sb_e_write
+ * sb_e_enqueue
  * Invoked from user code in the local thread.
  *
  * This is the function invoked by the local thread to make a
  * call to send to a remote event port.
  *
  ************************************************************************/
-bool sb_e_write(void) {
+bool sb_e_enqueue(void) {
   // sb_e_counter is a dataport (shared memory) that is written by the sender 
   // and read by the receiver(s). This counter is monotonicly increasing, 
   // but can wrap.

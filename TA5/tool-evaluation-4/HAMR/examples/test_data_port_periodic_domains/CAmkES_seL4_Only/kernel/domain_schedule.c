@@ -1,21 +1,13 @@
 // Copyright 2020 Adventium Labs
 
-// This is a kernal data structure. To get your kernal compiled with this
-// domain schedule you need to modify the top level settings.cmake file to have
-// these lines.  Make sure you replace the existing "set(KernelNumDomains"
-// line.
-//
-// camkes-project/projects/camkes/settings.cmake
-//
-// set(KernelDomainSchedule "${CMAKE_CURRENT_LIST_DIR}/apps/test_data_port_periodic_domains/behavior_code/kernel/domain_schedule.c" CACHE INTERNAL "")
-// set(KernelNumDomains 4 CACHE STRING "" FORCE)
+// This is a kernel data structure. 
 
 #include <config.h>
 #include <object/structures.h>
 #include <model/statedata.h>
 
-// An arbitrary hand generated schedule. The lenght is in seL4 ticks
-// (2 ms default). This schedule shoule be generated from the AADL
+// An arbitrary hand generated schedule. The length is in seL4 ticks
+// (2 ms default). This schedule should be generated from the AADL model
 // using execution time and data flow latency specifications.
 //
 // Pacer runs at highest rate
