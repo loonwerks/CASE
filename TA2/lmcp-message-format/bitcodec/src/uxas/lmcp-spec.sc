@@ -49,27 +49,29 @@ val lmcpLocation3D = Concat(name = "LMCPLocation3D", elements = ISZ(
   location3D,
 ))
 
-val stringType = Concat(name = "StringType", elements = ISZ(
-  PredRepeatUntil (
-    "stringChars", 
-    ISZ(bytes(ISZ(0))),
-    UByte("c"),
-  ),
-  UByteConst("nullValue", 0)
+@strictpure def stringType(name: String): Concat = Concat(name = name, elements = ISZ(
+  UShort(name = "_stringCharsSize"),
+  BoundedRepeat[U16](
+    name = "stringChars",
+    maxElements = 65535,
+    dependsOn = ISZ("_stringCharsSize"),
+    size = l => conversions.U16.toZ(l),
+    element = UByte("c"),
+  )
 ))
 
 // KeyValuePair (see  ./afrl/cmasi/afrlcmasiKeyValuePair.cpp)
-val keyValuePair = Concat(name = "KeyValuePair", elements = ISZ(
-  stringType(name = "Key"),
-  stringType(name = "Value")
+@strictpure def keyValuePair(name: String): Concat = Concat(name = name, elements = ISZ(
+  stringType(name = s"${name}Key"),
+  stringType(name = s"${name}Value")
 ))
 
-val lmcpKeyValuePair =  Concat(name = "LMCPKeyValuePair", elements = ISZ(
+@strictpure def lmcpKeyValuePair(name: String): Concat = Concat(name = name, elements = ISZ(
   UByteRange(name = "isNonNull", min = 1, max = 255),
   LongConst(name = "seriesID", value = 4849604199710720000L),
   UIntConst(name = "typeID", value = 2),
   UShortConst(name = "seriesVersion", value = 3),
-  keyValuePair,
+  keyValuePair(s"${name}KeyValuePair"),
 ))
 
 // PayloadState (see ./afrl/cmasi/afrlcmasiPayloadState.cpp)
@@ -81,7 +83,7 @@ val payloadState = Concat(name = "PayloadState", elements = ISZ(
     maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
     dependsOn = ISZ("_parametersSize"),
     size = l => conversions.U16.toZ(l),
-    element = lmcpKeyValuePair)
+    element = lmcpKeyValuePair("PayloadStateLmcp"))
 ))
 
 val lmcpPayloadState = Concat(name = "LMCPPayloadState", elements = ISZ(
@@ -94,7 +96,7 @@ val lmcpPayloadState = Concat(name = "LMCPPayloadState", elements = ISZ(
 
 val entityState = Concat(name = "EntityState", elements = ISZ(
   Long(name = "id"),
-  Float(name = "u"), 
+  Float(name = "u"),
   Float(name = "v"),
   Float(name = "w"),
   Float(name = "udot"),
@@ -106,7 +108,7 @@ val entityState = Concat(name = "EntityState", elements = ISZ(
   Float(name = "p"),
   Float(name = "q"),
   Float(name = "r"),
-  Float(name = "course"),  
+  Float(name = "course"),
   Float(name = "groundspeed"),
   lmcpLocation3D,
   Float(name = "energyAvailable"),
@@ -138,7 +140,7 @@ val entityState = Concat(name = "EntityState", elements = ISZ(
     maxElements = 32, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
     dependsOn = ISZ("_infoSize"),
     size = l => conversions.U16.toZ(l),
-    element = lmcpKeyValuePair
+    element = lmcpKeyValuePair("EntityStateKeyValuePair")
   )
 ))
 
@@ -168,7 +170,7 @@ val nonNullObject = Concat(name = "NonNullObject", elements = ISZ(
       // OperatingRegion (see ./afrl/cmasi/afrlcmasiOperatingRegion.cpp)
       case (s64"4849604199710720000", u32"39", u16"3") => 0
       // AirVehicleState (see ./afrl/cmasi/afrlcmasiAirVehicleState.cpp)
-      case (s64"4849604199710720000", u32"15", u16"3") => 0
+      case (s64"4849604199710720000", u32"15", u16"3") => 1
       case (_, _, _) => -1
     },
     subs = ISZ(
@@ -193,7 +195,7 @@ val lmcpObject = PredUnion(
   )
 )
 
-// LMPC Message Definition 
+// LMPC Message Definition
 val lmcpMessage = Concat(name = "LMCPMessage", elements = ISZ(
   IntConst(name = "controlString", value = 0x4c4d4350),
   UInt(name = "messageSize"),
