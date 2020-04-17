@@ -17,15 +17,15 @@ val PAYLOADACTION = 4
 val PAYLOADCONFIGURATION = 5
 val PAYLOADSTATE = u32"6"
 val VEHICLEACTION = 7
-val TASK = 8
-val SEARCHTASK = 9
+val TASK = u32"8"
+val SEARCHTASK = u32"9"
 val ABSTRACTZONE = 10
 val ENTITYCONFIGURATION = 11
 val FLIGHTPROFILE = 12
 val AIRVEHICLECONFIGURATION = 13
 val ENTITYSTATE = u32"14"
 val AIRVEHICLESTATE = u32"15"
-val WEDGE = 16
+val WEDGE = u32"16"
 val AREASEARCHTASK = 17
 val CAMERAACTION = 18
 val CAMERACONFIGURATION = 19
@@ -40,7 +40,7 @@ val GIMBALSTATE = 27
 val GOTOWAYPOINTACTION = 28
 val KEEPINZONE = 29
 val KEEPOUTZONE = 30
-val LINESEARCHTASK = 31
+val LINESEARCHTASK = u32"31"
 val NAVIGATIONACTION = 32
 val LOITERACTION = 33
 val LOITERTASK = 34
@@ -95,7 +95,7 @@ val PAYLOADSTOWACTION = 60
 //      to track the size of the array internally.
 
 // OperatingRegion (see ./afrl/cmasi/afrlcmasiOperatingRegion.cpp)
-@strictpure def operatingRegion(name: String): Concat = 
+@strictpure def OperatingRegion(name: String): Concat = 
   Concat(name = name, elements = ISZ(
     Long(name = "id"),
     UShort(name = "_keepInAreasSize"),
@@ -117,7 +117,7 @@ val PAYLOADSTOWACTION = 60
   ))
 
 // Location3D (see ./afrl/cmasi/afrlcmasiLocation3D.cpp)
-@strictpure def location3D(name: String) : Concat = 
+@strictpure def Location3D(name: String) : Concat = 
   Concat(name = name, elements = ISZ(
     Double("latitude"),
     Double("longitude"),
@@ -126,7 +126,7 @@ val PAYLOADSTOWACTION = 60
   ))
 
 // See ByteBuffer.putString(string)
-@strictpure def stringType(name: String): Concat = 
+@strictpure def StringType(name: String): Concat = 
   Concat(name = name, elements = ISZ(
     UShort(name = "_stringCharsSize"),
     BoundedRepeat[U16](
@@ -139,14 +139,14 @@ val PAYLOADSTOWACTION = 60
   ))
 
 // KeyValuePair (see  ./afrl/cmasi/afrlcmasiKeyValuePair.cpp)
-@strictpure def keyValuePair(name: String): Concat = 
+@strictpure def KeyValuePair(name: String): Concat = 
   Concat(name = name, elements = ISZ(
-    stringType(name = s"${name}Key"),
-    stringType(name = s"${name}Value")
+    StringType(name = s"${name}Key"),
+    StringType(name = s"${name}Value")
   ))
 
 // PayloadState (see ./afrl/cmasi/afrlcmasiPayloadState.cpp)
-@strictpure def payloadState(name: String): Concat = 
+@strictpure def PayloadState(name: String): Concat = 
   Concat(name = name, elements = ISZ(
     Long(name = "payloadID"),
     UShort(name = "_parametersSize"),
@@ -155,11 +155,12 @@ val PAYLOADSTOWACTION = 60
       maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
       dependsOn = ISZ("_parametersSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("Parameters", KEYVALUEPAIR, keyValuePair _))
+      element = lmcpObject("payloadStateParameter", KEYVALUEPAIR, KeyValuePair _)
+    )
   ))
 
 // EntitiyState (see ./afrl/cmasi/afrlcmasiEntityState.cpp)
-@strictpure def entityState(name: String): Concat = 
+@strictpure def EntityState(name: String): Concat = 
   Concat(name = name, elements = ISZ(
     Long(name = "id"),
     Float(name = "u"),
@@ -176,7 +177,7 @@ val PAYLOADSTOWACTION = 60
     Float(name = "r"),
     Float(name = "course"),
     Float(name = "groundspeed"),
-    lmcpObject("LMCPLocation3D", LOCATION3D, location3D _),
+    lmcpObject("LMCPLocation3D", LOCATION3D, Location3D _),
     Float(name = "energyAvailable"),
     Float(name = "actualEnergyRate"),
     // PayloadStateList (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml for max size)
@@ -186,7 +187,7 @@ val PAYLOADSTOWACTION = 60
       maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
       dependsOn = ISZ("_payloadStateListSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("PayloadStateList", PAYLOADSTATE, payloadState _)
+      element = lmcpObject("PayloadState", PAYLOADSTATE, PayloadState _)
     ),
     Long(name = "currentWaypoint"),
     Long(name = "currentCommand"),
@@ -206,18 +207,92 @@ val PAYLOADSTOWACTION = 60
       maxElements = 32, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
       dependsOn = ISZ("_infoSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("Info", KEYVALUEPAIR, keyValuePair _)
+      element = lmcpObject("Info", KEYVALUEPAIR, KeyValuePair _)
     )
   ))
 
 // AirVehicleState (see ./afrl/cmasi/afrlcmasiAirVehicleState.cpp)
-@strictpure def airVehicleState(name: String): Concat = 
+@strictpure def AirVehicleState(name: String): Concat = 
   Concat(name = name, elements = ISZ(
-    entityState("EntityState"),
+    EntityState("EntityState"),
     Float(name = "airspeed"),
     Float(name = "verticalSpeed"),
     Float(name = "windSpeed"),
     Float(name = "windDirection")
+  ))
+
+// Wedge (see ./afrl/cmasi/afrlcmasiWedge.cpp)
+@strictpure def Wedge(name: String): Concat = 
+  Concat(name = name, elements = ISZ(
+    Float("azimuthCenterline"),
+    Float("verticalCenterline"),
+    Float("azimuthExtent"),
+    Float("verticalExtent")
+  ))
+
+// SearchTask (see ./afrl/cmasi/afrlcmasiSearchTask.cpp)
+@strictpure def Task(name: String): Concat = 
+  Concat(name = name, elements = ISZ(
+    Long("taskID"),
+    StringType("Label"),
+    UShort("_eligibleEntitiesSize"),
+    BoundedRepeat[U16](
+      name = "eligibleEntities",
+      maxElements = 32, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
+      dependsOn = ISZ("_eligibleEntitiesSize"),
+      size = l => conversions.U16.toZ(l), 
+      element = Long("entity")
+    ),
+    Float("revisitRate"),
+    UShort("_parametersSize"),
+    BoundedRepeat[U16](
+      name = "parameters",
+      maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
+      dependsOn = ISZ("_parametersSize"),
+      size = l => conversions.U16.toZ(l),
+      element = lmcpObject("taskParameter", KEYVALUEPAIR, KeyValuePair _)
+    ),
+    Byte("priority"),
+    UByte("required")
+  ))
+
+// SearchTask (see ./afrl/cmasi/afrlcmasiSearchTask.cpp)
+@strictpure def SearchTask(name: String): Concat = 
+  Concat(name = name, elements = ISZ(
+    Task("Task"),
+    UShort("_desiredWavelengthBandsSize"),
+    BoundedRepeat[U16](
+      name = "desiredWavelengthBands",
+      maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
+      dependsOn = ISZ("_desiredWavelengthBandsSize"),
+      size = l => conversions.U16.toZ(l),
+      element = Int("band")
+    ),
+    Long("dwellTime"),
+    Float("groundSampleDistance")
+  ))
+
+// LineSearchTask (see ./afrl/cmasi/afrlcmasiLineSearchTask.cpp)
+@strictpure def LineSearchTask(name: String): Concat = 
+  Concat(name = name, elements = ISZ(
+    SearchTask("SearchTask"),
+    UShort("_pointListSize"),
+    BoundedRepeat[U16](
+      name = "pointList",
+      maxElements = 1024, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
+      dependsOn = ISZ("_pointListSize"),
+      size = l => conversions.U16.toZ(l),
+      element = lmcpObject("Point", LOCATION3D, Location3D _)
+    ),
+    UShort("_viewAngleListSize"),
+    BoundedRepeat[U16](
+      name = "viewAngleList",
+      maxElements = 16, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
+      dependsOn = ISZ("_viewAngleListSize"),
+      size = l => conversions.U16.toZ(l),
+      element = lmcpObject("ViewAngle", WEDGE, Wedge _)
+    ),
+    UByte("useInertialViewAngles")
   ))
 
 // END Packed Object Definitions
@@ -235,12 +310,14 @@ val lmcpObjectDecode = Concat(name = "LMCPObjectDecode", elements = ISZ(
       case (CMASISeriesID, OPERATINGREGION, CMASISeriesVersion) => 0
       // AirVehicleState (see ./afrl/cmasi/afrlcmasiAirVehicleState.cpp)
       case (CMASISeriesID, AIRVEHICLESTATE, CMASISeriesVersion) => 1
+      // LineSearchTask (see ./afrl/cmasi/afrlcmasiLineSearchTask.cpp)
+      case (CMASISeriesID, LINESEARCHTASK, CMASISeriesVersion) => 2
       case (_, _, _) => -1
     },
     subs = ISZ(
-      operatingRegion("OperatingRegion"),
-      airVehicleState("AirVehicleState")
-      // ...
+      OperatingRegion("OperatingRegion"),
+      AirVehicleState("AirVehicleState"),
+      LineSearchTask("LineSearchTask")
     )
   )
 ))
