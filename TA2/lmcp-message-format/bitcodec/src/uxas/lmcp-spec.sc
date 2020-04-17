@@ -71,7 +71,6 @@ val STOPMOVEMENTACTION = 58
 val WAYPOINTTRANSFER = 59
 val PAYLOADSTOWACTION = 60
 
-// Packed Object Definitions
 @strictpure def lmcpObject(name: String, typeID: U32, packedObject: (String) => Concat) : PredUnion =
   PredUnion(name = s"PredUnion${name}", subs = ISZ(
     PredSpec(
@@ -88,12 +87,14 @@ val PAYLOADSTOWACTION = 60
         packedObject(s"Packed${name}")
     )))  
   )) 
-  
 
-// EGM: the underscore on list size definitions in to avoid the name clash with
-//      internal generated variable by bitcodec that use the same name to track
-//      the size of the list internally.
+// Packed Object Definitions
 
+// EGM: the underscore on list size definitions is to avoid name clash with
+//      internally generated variables by bitcodec that use the same name 
+//      to track the size of the array internally.
+
+// OperatingRegion (see ./afrl/cmasi/afrlcmasiOperatingRegion.cpp)
 @strictpure def operatingRegion(name: String): Concat = 
   Concat(name = name, elements = ISZ(
     Long(name = "id"),
@@ -124,6 +125,7 @@ val PAYLOADSTOWACTION = 60
     Int(name = "altitudeType")
   ))
 
+// See ByteBuffer.putString(string)
 @strictpure def stringType(name: String): Concat = 
   Concat(name = name, elements = ISZ(
     UShort(name = "_stringCharsSize"),
@@ -156,6 +158,7 @@ val PAYLOADSTOWACTION = 60
       element = lmcpObject("Parameters", KEYVALUEPAIR, keyValuePair _))
   ))
 
+// EntitiyState (see ./afrl/cmasi/afrlcmasiEntityState.cpp)
 @strictpure def entityState(name: String): Concat = 
   Concat(name = name, elements = ISZ(
     Long(name = "id"),
@@ -207,6 +210,7 @@ val PAYLOADSTOWACTION = 60
     )
   ))
 
+// AirVehicleState (see ./afrl/cmasi/afrlcmasiAirVehicleState.cpp)
 @strictpure def airVehicleState(name: String): Concat = 
   Concat(name = name, elements = ISZ(
     entityState("EntityState"),
@@ -216,11 +220,7 @@ val PAYLOADSTOWACTION = 60
     Float(name = "windDirection")
   ))
 
-// LMCP Object Definition
-
-// val nullObject = Concat(name = "NullObject", elements = ISZ(
-//   UByte(name = "isNonNull") // bool is 1 byte (see getBool in avtas/lmcp/ByteBuffer.cpp)
-// ))
+// END Packed Object Definitions
 
 val lmcpObjectDecode = Concat(name = "LMCPObjectDecode", elements = ISZ(
   UByteRange(name = "nonNullValue", min = 1, max = 255),
@@ -259,7 +259,6 @@ val lmcpObjectNullCheck = PredUnion(
   )
 )
 
-// LMPC Message Definition
 val lmcpMessage = Concat(name = "LMCPMessage", elements = ISZ(
   IntConst(name = "controlString", value = 0x4c4d4350),
   UInt(name = "messageSize"),
