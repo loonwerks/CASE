@@ -106,57 +106,57 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
+"src":sb_e -> "snkDefault":sb_s [
   color="blue"
   //label = "seL4Notification"
   id = conn1
 ];
 
-"src":sb_e -> "snkDefault":sb_s [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn2
-];
-
 "src":sb_e_counter -> "snkDefault":sb_s_counter [
   color="red"
   //label = "seL4SharedData"
-  id = conn3
+  id = conn2
 ];
 
 "src":sb_e -> "snkQueue2_A":sb_s [
   color="blue"
   //label = "seL4Notification"
-  id = conn4
+  id = conn3
 ];
 
 "src":sb_e_counter -> "snkQueue2_A":sb_s_counter [
   color="red"
   //label = "seL4SharedData"
-  id = conn5
+  id = conn4
 ];
 
 "src":sb_e -> "snkQueue2_B":sb_s [
   color="blue"
   //label = "seL4Notification"
-  id = conn6
+  id = conn5
 ];
 
 "src":sb_e_counter -> "snkQueue2_B":sb_s_counter [
   color="red"
   //label = "seL4SharedData"
-  id = conn7
+  id = conn6
 ];
 
 "src":sb_e -> "snkQueue5":sb_s [
   color="blue"
   //label = "seL4Notification"
-  id = conn8
+  id = conn7
 ];
 
 "src":sb_e_counter -> "snkQueue5":sb_s_counter [
   color="red"
   //label = "seL4SharedData"
+  id = conn8
+];
+
+"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
+  color="blue"
+  //label = "seL4Notification"
   id = conn9
 ];
 

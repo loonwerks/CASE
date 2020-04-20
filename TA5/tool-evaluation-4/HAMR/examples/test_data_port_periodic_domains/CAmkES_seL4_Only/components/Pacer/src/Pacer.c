@@ -17,9 +17,6 @@ int run(void) {
     period_emit();
 
     tock_wait();
-
   }
-
   return 0;
 }
-

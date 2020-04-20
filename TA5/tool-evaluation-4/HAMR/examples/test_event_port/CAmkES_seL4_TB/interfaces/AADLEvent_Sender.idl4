@@ -1,4 +1,4 @@
 procedure AADLEvent_Sender {
-  include <sb_proc_types.h>;
-  void raise();
+  include <sb_top_impl_Instance_types.h>;
+  bool enqueue();
 };

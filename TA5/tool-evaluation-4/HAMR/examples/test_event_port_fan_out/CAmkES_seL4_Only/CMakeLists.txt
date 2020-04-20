@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8.2)
 
-project (test_event_port C)
+project (top_impl_Instance C)
 
 add_definitions(-DCAMKES)
 
@@ -42,4 +42,4 @@ DeclareCAmkESComponent(dispatch_periodic
 
 )
 
-DeclareCAmkESRootserver(test_event_port.camkes)
+DeclareCAmkESRootserver(top_impl_Instance.camkes)

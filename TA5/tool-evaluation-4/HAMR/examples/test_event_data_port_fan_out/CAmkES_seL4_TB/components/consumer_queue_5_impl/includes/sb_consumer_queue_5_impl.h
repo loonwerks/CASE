@@ -1,7 +1,7 @@
 #ifndef __sb_AADL_consumer_queue_5_impl_types__H
 #define __sb_AADL_consumer_queue_5_impl_types__H
 
-#include <sb_proc_types.h>
+#include <sb_top_impl_Instance_types.h>
 
 bool sb_deq_dequeue(int8_t * sb_deq);
 

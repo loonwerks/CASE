@@ -7,7 +7,7 @@
 package test_event_port_periodic_domains
 public
 	with HAMR;
-	with seL4_Properties;
+	with CASE_Scheduling;
 		
 	thread emitter_t
 		features
@@ -28,7 +28,7 @@ public
 		features
 			emit : out event port;
 		properties
-			seL4_Properties::Domain => 2; -- pacer 1, emitter 2, consumer 3
+			CASE_Scheduling::Domain => 2; -- pacer 1, emitter 2, consumer 3
 	end emitter_p;
 	
 	process implementation emitter_p.impl
@@ -59,7 +59,7 @@ public
 		features
 			consume : in event port;
 		properties
-			seL4_Properties::Domain => 3; -- pacer 1, emitter 2, consumer 3
+			CASE_Scheduling::Domain => 3; -- pacer 1, emitter 2, consumer 3
 	end consumer_p;
 	
 	process implementation consumer_p.impl
@@ -76,7 +76,7 @@ public
 		properties
 			Frame_Period => 1000ms;
             Clock_Period => 2ms;
-			seL4_Properties::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
+			CASE_Scheduling::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
 	end proc.impl;
 
 	system top
@@ -91,7 +91,7 @@ public
 			data_interconnect : port src_process.emit -> dst_process.consume;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to src_process;
-			--Actual_Processor_Binding => (reference (proc)) applies to dst_process;
+			Actual_Processor_Binding => (reference (proc)) applies to dst_process;
 			HAMR::Platform => (seL4_TB, seL4_Only);
 		--annex resolute {**
 		--	check CASE_Tools

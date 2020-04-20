@@ -1,0 +1,4 @@
+#ifdef __sb_destination_thread_component_read_port_Monitor_H__
+#define __sb_destination_thread_component_read_port_Monitor_H__
+
+#endif // __sb_destination_thread_component_read_port_Monitor_H__

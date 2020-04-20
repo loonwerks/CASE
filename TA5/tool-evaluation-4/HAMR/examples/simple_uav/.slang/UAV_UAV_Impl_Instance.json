@@ -151,6 +151,17 @@
                 "properties" : [
                 ]
               }
+            },
+            {
+              "type" : "Annex",
+              "name" : "smf",
+              "clause" : {
+                "type" : "SmfClause",
+                "classification" : [
+                ],
+                "declass" : [
+                ]
+              }
             }
           ]
         },
@@ -512,6 +523,17 @@
                     "properties" : [
                     ]
                   }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
+                    ]
+                  }
                 }
               ]
             },
@@ -837,6 +859,17 @@
                     "properties" : [
                     ]
                   }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
+                    ]
+                  }
                 }
               ]
             },
@@ -1122,6 +1155,17 @@
                     "properties" : [
                     ]
                   }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
+                    ]
+                  }
                 }
               ]
             },
@@ -1241,6 +1285,17 @@
                       }
                     },
                     "properties" : [
+                    ]
+                  }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
                     ]
                   }
                 }
@@ -1629,6 +1684,17 @@
                           }
                         },
                         "properties" : [
+                        ]
+                      }
+                    },
+                    {
+                      "type" : "Annex",
+                      "name" : "smf",
+                      "clause" : {
+                        "type" : "SmfClause",
+                        "classification" : [
+                        ],
+                        "declass" : [
                         ]
                       }
                     }
@@ -2386,6 +2452,17 @@
                           }
                         },
                         "properties" : [
+                        ]
+                      }
+                    },
+                    {
+                      "type" : "Annex",
+                      "name" : "smf",
+                      "clause" : {
+                        "type" : "SmfClause",
+                        "classification" : [
+                        ],
+                        "declass" : [
                         ]
                       }
                     }
@@ -3446,6 +3523,17 @@
                         "properties" : [
                         ]
                       }
+                    },
+                    {
+                      "type" : "Annex",
+                      "name" : "smf",
+                      "clause" : {
+                        "type" : "SmfClause",
+                        "classification" : [
+                        ],
+                        "declass" : [
+                        ]
+                      }
                     }
                   ]
                 },
@@ -4128,6 +4216,17 @@
                           }
                         },
                         "properties" : [
+                        ]
+                      }
+                    },
+                    {
+                      "type" : "Annex",
+                      "name" : "smf",
+                      "clause" : {
+                        "type" : "SmfClause",
+                        "classification" : [
+                        ],
+                        "declass" : [
                         ]
                       }
                     }
@@ -5895,6 +5994,17 @@
                     "properties" : [
                     ]
                   }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
+                    ]
+                  }
                 }
               ]
             },
@@ -6107,6 +6217,17 @@
                       }
                     },
                     "properties" : [
+                    ]
+                  }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
                     ]
                   }
                 }
@@ -6984,27 +7105,7 @@
                   }
                 },
                 "feature" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Name",
-                    "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/Simple_UAV\/MC.aadl"
-                        },
-                        "beginLine" : 84,
-                        "beginColumn" : 4,
-                        "endLine" : 84,
-                        "endColumn" : 28,
-                        "offset" : 2022,
-                        "length" : 24
-                      }
-                    }
-                  }
+                  "type" : "None"
                 },
                 "direction" : {
                   "type" : "None"
@@ -7059,7 +7160,7 @@
                   "type" : "Some",
                   "value" : {
                     "type" : "Direction",
-                    "value" : "InOut"
+                    "value" : "In"
                   }
                 }
               },
@@ -7161,27 +7262,7 @@
                   }
                 },
                 "feature" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Name",
-                    "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/Simple_UAV\/MC.aadl"
-                        },
-                        "beginLine" : 84,
-                        "beginColumn" : 4,
-                        "endLine" : 84,
-                        "endColumn" : 28,
-                        "offset" : 2022,
-                        "length" : 24
-                      }
-                    }
-                  }
+                  "type" : "None"
                 },
                 "direction" : {
                   "type" : "None"
@@ -7236,7 +7317,7 @@
                   "type" : "Some",
                   "value" : {
                     "type" : "Direction",
-                    "value" : "InOut"
+                    "value" : "In"
                   }
                 }
               },
@@ -7338,27 +7419,7 @@
                   }
                 },
                 "feature" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Name",
-                    "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/Simple_UAV\/MC.aadl"
-                        },
-                        "beginLine" : 84,
-                        "beginColumn" : 4,
-                        "endLine" : 84,
-                        "endColumn" : 28,
-                        "offset" : 2022,
-                        "length" : 24
-                      }
-                    }
-                  }
+                  "type" : "None"
                 },
                 "direction" : {
                   "type" : "None"
@@ -7413,7 +7474,7 @@
                   "type" : "Some",
                   "value" : {
                     "type" : "Direction",
-                    "value" : "InOut"
+                    "value" : "In"
                   }
                 }
               },
@@ -7515,27 +7576,7 @@
                   }
                 },
                 "feature" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Name",
-                    "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/Simple_UAV\/MC.aadl"
-                        },
-                        "beginLine" : 84,
-                        "beginColumn" : 4,
-                        "endLine" : 84,
-                        "endColumn" : 28,
-                        "offset" : 2022,
-                        "length" : 24
-                      }
-                    }
-                  }
+                  "type" : "None"
                 },
                 "direction" : {
                   "type" : "None"
@@ -7590,7 +7631,7 @@
                   "type" : "Some",
                   "value" : {
                     "type" : "Direction",
-                    "value" : "InOut"
+                    "value" : "In"
                   }
                 }
               },
@@ -7718,7 +7759,7 @@
                   "type" : "Some",
                   "value" : {
                     "type" : "Direction",
-                    "value" : "InOut"
+                    "value" : "In"
                   }
                 }
               },
@@ -7745,27 +7786,7 @@
                   }
                 },
                 "feature" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Name",
-                    "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/Simple_UAV\/MC.aadl"
-                        },
-                        "beginLine" : 84,
-                        "beginColumn" : 4,
-                        "endLine" : 84,
-                        "endColumn" : 28,
-                        "offset" : 2022,
-                        "length" : 24
-                      }
-                    }
-                  }
+                  "type" : "None"
                 },
                 "direction" : {
                   "type" : "None"
@@ -7895,7 +7916,7 @@
                   "type" : "Some",
                   "value" : {
                     "type" : "Direction",
-                    "value" : "InOut"
+                    "value" : "In"
                   }
                 }
               },
@@ -7922,27 +7943,7 @@
                   }
                 },
                 "feature" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Name",
-                    "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/Simple_UAV\/MC.aadl"
-                        },
-                        "beginLine" : 84,
-                        "beginColumn" : 4,
-                        "endLine" : 84,
-                        "endColumn" : 28,
-                        "offset" : 2022,
-                        "length" : 24
-                      }
-                    }
-                  }
+                  "type" : "None"
                 },
                 "direction" : {
                   "type" : "None"
@@ -8072,7 +8073,7 @@
                   "type" : "Some",
                   "value" : {
                     "type" : "Direction",
-                    "value" : "InOut"
+                    "value" : "In"
                   }
                 }
               },
@@ -8099,27 +8100,7 @@
                   }
                 },
                 "feature" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Name",
-                    "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/Simple_UAV\/MC.aadl"
-                        },
-                        "beginLine" : 84,
-                        "beginColumn" : 4,
-                        "endLine" : 84,
-                        "endColumn" : 28,
-                        "offset" : 2022,
-                        "length" : 24
-                      }
-                    }
-                  }
+                  "type" : "None"
                 },
                 "direction" : {
                   "type" : "None"
@@ -8249,7 +8230,7 @@
                   "type" : "Some",
                   "value" : {
                     "type" : "Direction",
-                    "value" : "InOut"
+                    "value" : "In"
                   }
                 }
               },
@@ -8276,27 +8257,7 @@
                   }
                 },
                 "feature" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Name",
-                    "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/Simple_UAV\/MC.aadl"
-                        },
-                        "beginLine" : 84,
-                        "beginColumn" : 4,
-                        "endLine" : 84,
-                        "endColumn" : 28,
-                        "offset" : 2022,
-                        "length" : 24
-                      }
-                    }
-                  }
+                  "type" : "None"
                 },
                 "direction" : {
                   "type" : "None"
@@ -8387,6 +8348,17 @@
                   }
                 },
                 "properties" : [
+                ]
+              }
+            },
+            {
+              "type" : "Annex",
+              "name" : "smf",
+              "clause" : {
+                "type" : "SmfClause",
+                "classification" : [
+                ],
+                "declass" : [
                 ]
               }
             }
@@ -8508,6 +8480,17 @@
                   }
                 },
                 "properties" : [
+                ]
+              }
+            },
+            {
+              "type" : "Annex",
+              "name" : "smf",
+              "clause" : {
+                "type" : "SmfClause",
+                "classification" : [
+                ],
+                "declass" : [
                 ]
               }
             }
@@ -8996,7 +8979,7 @@
               "type" : "Some",
               "value" : {
                 "type" : "Direction",
-                "value" : "InOut"
+                "value" : "In"
               }
             }
           },
@@ -9049,7 +9032,7 @@
               "type" : "Some",
               "value" : {
                 "type" : "Direction",
-                "value" : "InOut"
+                "value" : "In"
               }
             }
           },
@@ -9195,27 +9178,7 @@
               }
             },
             "feature" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Name",
-                "name" : ["UAV_Impl_Instance", "SBUS"],
-                "pos" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Position",
-                    "uriOpt" : {
-                      "type" : "Some",
-                      "value" : "\/Simple_UAV\/UAV.aadl"
-                    },
-                    "beginLine" : 23,
-                    "beginColumn" : 4,
-                    "endLine" : 23,
-                    "endColumn" : 26,
-                    "offset" : 352,
-                    "length" : 22
-                  }
-                }
-              }
+              "type" : "None"
             },
             "direction" : {
               "type" : "None"
@@ -9270,7 +9233,7 @@
               "type" : "Some",
               "value" : {
                 "type" : "Direction",
-                "value" : "InOut"
+                "value" : "In"
               }
             }
           },
@@ -9416,27 +9379,7 @@
               }
             },
             "feature" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Name",
-                "name" : ["UAV_Impl_Instance", "SBUS"],
-                "pos" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Position",
-                    "uriOpt" : {
-                      "type" : "Some",
-                      "value" : "\/Simple_UAV\/UAV.aadl"
-                    },
-                    "beginLine" : 23,
-                    "beginColumn" : 4,
-                    "endLine" : 23,
-                    "endColumn" : 26,
-                    "offset" : 352,
-                    "length" : 22
-                  }
-                }
-              }
+              "type" : "None"
             },
             "direction" : {
               "type" : "None"
@@ -9491,7 +9434,7 @@
               "type" : "Some",
               "value" : {
                 "type" : "Direction",
-                "value" : "InOut"
+                "value" : "In"
               }
             }
           },
@@ -9619,7 +9562,7 @@
               "type" : "Some",
               "value" : {
                 "type" : "Direction",
-                "value" : "InOut"
+                "value" : "In"
               }
             }
           },
@@ -9646,27 +9589,7 @@
               }
             },
             "feature" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Name",
-                "name" : ["UAV_Impl_Instance", "SBUS"],
-                "pos" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Position",
-                    "uriOpt" : {
-                      "type" : "Some",
-                      "value" : "\/Simple_UAV\/UAV.aadl"
-                    },
-                    "beginLine" : 23,
-                    "beginColumn" : 4,
-                    "endLine" : 23,
-                    "endColumn" : 26,
-                    "offset" : 352,
-                    "length" : 22
-                  }
-                }
-              }
+              "type" : "None"
             },
             "direction" : {
               "type" : "None"
@@ -9840,7 +9763,7 @@
               "type" : "Some",
               "value" : {
                 "type" : "Direction",
-                "value" : "InOut"
+                "value" : "In"
               }
             }
           },
@@ -9867,27 +9790,7 @@
               }
             },
             "feature" : {
-              "type" : "Some",
-              "value" : {
-                "type" : "Name",
-                "name" : ["UAV_Impl_Instance", "SBUS"],
-                "pos" : {
-                  "type" : "Some",
-                  "value" : {
-                    "type" : "Position",
-                    "uriOpt" : {
-                      "type" : "Some",
-                      "value" : "\/Simple_UAV\/UAV.aadl"
-                    },
-                    "beginLine" : 23,
-                    "beginColumn" : 4,
-                    "endLine" : 23,
-                    "endColumn" : 26,
-                    "offset" : 352,
-                    "length" : 22
-                  }
-                }
-              }
+              "type" : "None"
             },
             "direction" : {
               "type" : "None"
@@ -10015,11 +9918,22 @@
             "properties" : [
             ]
           }
+        },
+        {
+          "type" : "Annex",
+          "name" : "smf",
+          "clause" : {
+            "type" : "SmfClause",
+            "classification" : [
+            ],
+            "declass" : [
+            ]
+          }
         }
       ]
     }
   ],
-  "errorLib" : [
+  "annexLib" : [
   ],
   "dataComponents" : [
     {

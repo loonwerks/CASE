@@ -31,6 +31,10 @@ void sb_periodic_dispatch_notification_callback(void *_ UNUSED) {
 }
 
 
+void sb_entrypoint_destination_t_impl_periodic_dispatcher(const int64_t * in_arg) {
+  test_data_port_periodic_destination_component_time_triggered((int64_t *) in_arg);
+}
+
 seqNum_t sb_read_port_seqNum;
 
 bool sb_read_port_read(int8_t * value) {
@@ -41,10 +45,6 @@ bool sb_read_port_read(int8_t * value) {
   } else {
     return false;
   } 
-}
-
-void sb_entrypoint_destination_t_impl_periodic_dispatcher(const int64_t * in_arg) {
-  test_data_port_periodic_destination_component_time_triggered((int64_t *) in_arg);
 }
 
 /************************************************************************

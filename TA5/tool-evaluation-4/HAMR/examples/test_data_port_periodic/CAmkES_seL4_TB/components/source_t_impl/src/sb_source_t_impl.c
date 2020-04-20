@@ -31,6 +31,10 @@ void sb_periodic_dispatch_notification_callback(void *_ UNUSED) {
 }
 
 
+void sb_entrypoint_source_t_impl_periodic_dispatcher(const int64_t * in_arg) {
+  test_data_port_periodic_source_component_time_triggered((int64_t *) in_arg);
+}
+
 /************************************************************************
  * sb_write_port_write:
  * Invoked from user code in the local thread.
@@ -48,10 +52,6 @@ bool sb_write_port_write(const int8_t * sb_write_port){
   bool sb_result = true;
   sb_result &= sb_write_port0_write((int8_t *) sb_write_port);
   return sb_result;
-}
-
-void sb_entrypoint_source_t_impl_periodic_dispatcher(const int64_t * in_arg) {
-  test_data_port_periodic_source_component_time_triggered((int64_t *) in_arg);
 }
 
 /************************************************************************

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #endif // SB_VERIFY
 
-#include <sb_PROC_HW_types.h>
+#include <sb_UAV_Impl_Instance_types.h>
 #include "../includes/sb_UART_mission_window_Monitor.h"
 
 int mon_get_sender_id(void);
@@ -16,12 +16,12 @@ static bool is_full(void) {
   return length == 1;
 }
 
-static bool is_empty(void) {
+bool mon_is_empty(void) {
   return length == 0;
 }
 
 bool mon_dequeue(sb_SW__MissionWindow_container * m) {
-  if (is_empty()) {
+  if (mon_is_empty()) {
     return false;
   } else {
     *m = contents[front];
