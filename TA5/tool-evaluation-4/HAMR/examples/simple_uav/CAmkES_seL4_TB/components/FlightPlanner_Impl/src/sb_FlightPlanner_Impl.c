@@ -84,10 +84,8 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_FlightPlanner_Impl_initializer(&sb_dummy);
   }
-
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
     while (sb_mission_rcv_dequeue((bool *) &sb_mission_rcv)) {
       sb_entrypoint_FlightPlanner_Impl_mission_rcv(&sb_mission_rcv);
     }

@@ -41,7 +41,7 @@ public
 	thread consumer_t
 		features
 			consume: in event port {
-				Compute_Entrypoint_Source_Text => "test_event_port_consumer_s_event_handler";
+				Compute_Entrypoint_Source_Text => "periodic_thread_so_should_ignore";
 			};
 		properties
 			Dispatch_Protocol => Periodic;
@@ -49,7 +49,7 @@ public
 			Compute_Execution_Time => 10ms .. 10ms;
 			Initialize_Entrypoint_Source_Text => "test_event_port_consumer_component_init";
 			Source_Text => ("behavior_code/components/Consumer/src/consumer.c");
-			Compute_Entrypoint_Source_Text => "test_event_port_consumer_s_event_handler";
+			Compute_Entrypoint_Source_Text => "test_event_port_consumer_time_triggered_handler";
 	end consumer_t;
 	
 	thread implementation consumer_t.impl
@@ -76,6 +76,7 @@ public
 		properties
 			Frame_Period => 1000ms;
             Clock_Period => 2ms;
+            CASE_Scheduling::Max_Domain => 3;
 			CASE_Scheduling::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
 	end proc.impl;
 

@@ -14,12 +14,12 @@
               "type" : "Some",
               "value" : "\/test_event_data_port_periodic_domains\/test_event_data_port_periodic_domains.aadl"
             },
-            "beginLine" : 88,
+            "beginLine" : 89,
             "beginColumn" : 2,
-            "endLine" : 102,
+            "endLine" : 103,
             "endColumn" : 15,
-            "offset" : 2701,
-            "length" : 524
+            "offset" : 2741,
+            "length" : 522
           }
         }
       },
@@ -46,11 +46,11 @@
                   "type" : "Some",
                   "value" : "\/test_event_data_port_periodic_domains\/test_event_data_port_periodic_domains.aadl"
                 },
-                "beginLine" : 91,
+                "beginLine" : 92,
                 "beginColumn" : 4,
-                "endLine" : 91,
+                "endLine" : 92,
                 "endColumn" : 41,
-                "offset" : 2781,
+                "offset" : 2821,
                 "length" : 37
               }
             }
@@ -84,7 +84,7 @@
                     "beginColumn" : 4,
                     "endLine" : 30,
                     "endColumn" : 59,
-                    "offset" : 943,
+                    "offset" : 972,
                     "length" : 55
                   }
                 }
@@ -223,7 +223,7 @@
                     "beginColumn" : 4,
                     "endLine" : 38,
                     "endColumn" : 39,
-                    "offset" : 1223,
+                    "offset" : 1241,
                     "length" : 35
                   }
                 }
@@ -257,7 +257,7 @@
                         "beginColumn" : 4,
                         "endLine" : 15,
                         "endColumn" : 58,
-                        "offset" : 456,
+                        "offset" : 445,
                         "length" : 54
                       }
                     }
@@ -652,7 +652,7 @@
                   "propertyValues" : [
                     {
                       "type" : "ValueProp",
-                      "value" : "run_emitter"
+                      "value" : "test_event_data_port_emitter_time_triggered_handler"
                     }
                   ],
                   "appliesTo" : [
@@ -723,7 +723,7 @@
                     "beginColumn" : 4,
                     "endLine" : 40,
                     "endColumn" : 64,
-                    "offset" : 1276,
+                    "offset" : 1294,
                     "length" : 60
                   }
                 }
@@ -746,7 +746,7 @@
                         "beginColumn" : 4,
                         "endLine" : 38,
                         "endColumn" : 39,
-                        "offset" : 1223,
+                        "offset" : 1241,
                         "length" : 35
                       }
                     }
@@ -768,7 +768,7 @@
                           "beginColumn" : 4,
                           "endLine" : 15,
                           "endColumn" : 58,
-                          "offset" : 456,
+                          "offset" : 445,
                           "length" : 54
                         }
                       }
@@ -810,7 +810,7 @@
                           "beginColumn" : 4,
                           "endLine" : 30,
                           "endColumn" : 59,
-                          "offset" : 943,
+                          "offset" : 972,
                           "length" : 55
                         }
                       }
@@ -887,20 +887,20 @@
               "type" : "Property",
               "name" : {
                 "type" : "Name",
-                "name" : ["top_impl_Instance", "src_process", "CASE_Scheduling_Properties::Domain"],
+                "name" : ["top_impl_Instance", "src_process", "CASE_Scheduling::Domain"],
                 "pos" : {
                   "type" : "Some",
                   "value" : {
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling_Properties.aadl"
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
                     },
-                    "beginLine" : 20,
+                    "beginLine" : 19,
                     "beginColumn" : 2,
-                    "endLine" : 20,
+                    "endLine" : 19,
                     "endColumn" : 51,
-                    "offset" : 791,
+                    "offset" : 778,
                     "length" : 49
                   }
                 }
@@ -976,11 +976,11 @@
                   "type" : "Some",
                   "value" : "\/test_event_data_port_periodic_domains\/test_event_data_port_periodic_domains.aadl"
                 },
-                "beginLine" : 92,
+                "beginLine" : 93,
                 "beginColumn" : 4,
-                "endLine" : 92,
+                "endLine" : 93,
                 "endColumn" : 42,
-                "offset" : 2822,
+                "offset" : 2862,
                 "length" : 38
               }
             }
@@ -1014,7 +1014,7 @@
                     "beginColumn" : 4,
                     "endLine" : 62,
                     "endColumn" : 57,
-                    "offset" : 2011,
+                    "offset" : 2027,
                     "length" : 53
                   }
                 }
@@ -1153,7 +1153,7 @@
                     "beginColumn" : 4,
                     "endLine" : 70,
                     "endColumn" : 40,
-                    "offset" : 2291,
+                    "offset" : 2296,
                     "length" : 36
                   }
                 }
@@ -1187,8 +1187,8 @@
                         "beginColumn" : 4,
                         "endLine" : 47,
                         "endColumn" : 6,
-                        "offset" : 1392,
-                        "length" : 146
+                        "offset" : 1410,
+                        "length" : 137
                       }
                     }
                   },
@@ -1361,7 +1361,7 @@
                       "propertyValues" : [
                         {
                           "type" : "ValueProp",
-                          "value" : "test_event_data_port_consumer_s_event_handler"
+                          "value" : "Periodic_thread_so_should_be_ignored"
                         }
                       ],
                       "appliesTo" : [
@@ -1377,6 +1377,43 @@
               "connectionInstances" : [
               ],
               "properties" : [
+                {
+                  "type" : "Property",
+                  "name" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "dst_process", "dst_thread", "Deployment_Properties::Actual_Processor_Binding"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                        },
+                        "beginLine" : 46,
+                        "beginColumn" : 2,
+                        "endLine" : 47,
+                        "endColumn" : 81,
+                        "offset" : 3075,
+                        "length" : 189
+                      }
+                    }
+                  },
+                  "propertyValues" : [
+                    {
+                      "type" : "ReferenceProp",
+                      "value" : {
+                        "type" : "Name",
+                        "name" : ["top_impl_Instance", "proc"],
+                        "pos" : {
+                          "type" : "None"
+                        }
+                      }
+                    }
+                  ],
+                  "appliesTo" : [
+                  ]
+                },
                 {
                   "type" : "Property",
                   "name" : {
@@ -1576,7 +1613,7 @@
                   "propertyValues" : [
                     {
                       "type" : "ValueProp",
-                      "value" : "test_event_data_port_consumer_s_event_handler"
+                      "value" : "test_event_data_port_consumer_time_triggered_handler"
                     }
                   ],
                   "appliesTo" : [
@@ -1647,7 +1684,7 @@
                     "beginColumn" : 4,
                     "endLine" : 72,
                     "endColumn" : 61,
-                    "offset" : 2345,
+                    "offset" : 2350,
                     "length" : 57
                   }
                 }
@@ -1679,7 +1716,7 @@
                           "beginColumn" : 4,
                           "endLine" : 62,
                           "endColumn" : 57,
-                          "offset" : 2011,
+                          "offset" : 2027,
                           "length" : 53
                         }
                       }
@@ -1712,7 +1749,7 @@
                         "beginColumn" : 4,
                         "endLine" : 70,
                         "endColumn" : 40,
-                        "offset" : 2291,
+                        "offset" : 2296,
                         "length" : 36
                       }
                     }
@@ -1734,8 +1771,8 @@
                           "beginColumn" : 4,
                           "endLine" : 47,
                           "endColumn" : 6,
-                          "offset" : 1392,
-                          "length" : 146
+                          "offset" : 1410,
+                          "length" : 137
                         }
                       }
                     }
@@ -1774,20 +1811,57 @@
               "type" : "Property",
               "name" : {
                 "type" : "Name",
-                "name" : ["top_impl_Instance", "dst_process", "CASE_Scheduling_Properties::Domain"],
+                "name" : ["top_impl_Instance", "dst_process", "Deployment_Properties::Actual_Processor_Binding"],
                 "pos" : {
                   "type" : "Some",
                   "value" : {
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling_Properties.aadl"
+                      "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
                     },
-                    "beginLine" : 20,
+                    "beginLine" : 46,
                     "beginColumn" : 2,
-                    "endLine" : 20,
+                    "endLine" : 47,
+                    "endColumn" : 81,
+                    "offset" : 3075,
+                    "length" : 189
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "ReferenceProp",
+                  "value" : {
+                    "type" : "Name",
+                    "name" : ["top_impl_Instance", "proc"],
+                    "pos" : {
+                      "type" : "None"
+                    }
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "dst_process", "CASE_Scheduling::Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
+                    },
+                    "beginLine" : 19,
+                    "beginColumn" : 2,
+                    "endLine" : 19,
                     "endColumn" : 51,
-                    "offset" : 791,
+                    "offset" : 778,
                     "length" : 49
                   }
                 }
@@ -1863,11 +1937,11 @@
                   "type" : "Some",
                   "value" : "\/test_event_data_port_periodic_domains\/test_event_data_port_periodic_domains.aadl"
                 },
-                "beginLine" : 90,
+                "beginLine" : 91,
                 "beginColumn" : 4,
-                "endLine" : 90,
+                "endLine" : 91,
                 "endColumn" : 30,
-                "offset" : 2751,
+                "offset" : 2791,
                 "length" : 26
               }
             }
@@ -1966,20 +2040,54 @@
               "type" : "Property",
               "name" : {
                 "type" : "Name",
-                "name" : ["top_impl_Instance", "proc", "CASE_Scheduling_Properties::Schedule_Source_Text"],
+                "name" : ["top_impl_Instance", "proc", "CASE_Scheduling::Max_Domain"],
                 "pos" : {
                   "type" : "Some",
                   "value" : {
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling_Properties.aadl"
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
                     },
-                    "beginLine" : 25,
+                    "beginLine" : 23,
                     "beginColumn" : 2,
-                    "endLine" : 25,
+                    "endLine" : 23,
+                    "endColumn" : 68,
+                    "offset" : 885,
+                    "length" : 66
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "3.0",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
+                "name" : ["top_impl_Instance", "proc", "CASE_Scheduling::Schedule_Source_Text"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
+                    },
+                    "beginLine" : 28,
+                    "beginColumn" : 2,
+                    "endLine" : 28,
                     "endColumn" : 77,
-                    "offset" : 995,
+                    "offset" : 1106,
                     "length" : 75
                   }
                 }
@@ -2054,11 +2162,11 @@
                   "type" : "Some",
                   "value" : "\/test_event_data_port_periodic_domains\/test_event_data_port_periodic_domains.aadl"
                 },
-                "beginLine" : 94,
+                "beginLine" : 95,
                 "beginColumn" : 4,
-                "endLine" : 94,
+                "endLine" : 95,
                 "endColumn" : 76,
-                "offset" : 2878,
+                "offset" : 2918,
                 "length" : 72
               }
             }
@@ -2077,11 +2185,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_data_port_periodic_domains\/test_event_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 91,
+                    "beginLine" : 92,
                     "beginColumn" : 4,
-                    "endLine" : 91,
+                    "endLine" : 92,
                     "endColumn" : 41,
-                    "offset" : 2781,
+                    "offset" : 2821,
                     "length" : 37
                   }
                 }
@@ -2103,7 +2211,7 @@
                       "beginColumn" : 4,
                       "endLine" : 30,
                       "endColumn" : 59,
-                      "offset" : 943,
+                      "offset" : 972,
                       "length" : 55
                     }
                   }
@@ -2132,11 +2240,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_data_port_periodic_domains\/test_event_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 92,
+                    "beginLine" : 93,
                     "beginColumn" : 4,
-                    "endLine" : 92,
+                    "endLine" : 93,
                     "endColumn" : 42,
-                    "offset" : 2822,
+                    "offset" : 2862,
                     "length" : 38
                   }
                 }
@@ -2158,7 +2266,7 @@
                       "beginColumn" : 4,
                       "endLine" : 62,
                       "endColumn" : 57,
-                      "offset" : 2011,
+                      "offset" : 2027,
                       "length" : 53
                     }
                   }
@@ -2209,7 +2317,7 @@
                 "beginColumn" : 4,
                 "endLine" : 40,
                 "endColumn" : 64,
-                "offset" : 1276,
+                "offset" : 1294,
                 "length" : 60
               }
             }
@@ -2231,7 +2339,7 @@
                   "beginColumn" : 4,
                   "endLine" : 38,
                   "endColumn" : 39,
-                  "offset" : 1223,
+                  "offset" : 1241,
                   "length" : 35
                 }
               }
@@ -2253,7 +2361,7 @@
                     "beginColumn" : 4,
                     "endLine" : 15,
                     "endColumn" : 58,
-                    "offset" : 456,
+                    "offset" : 445,
                     "length" : 54
                   }
                 }
@@ -2284,7 +2392,7 @@
                   "beginColumn" : 4,
                   "endLine" : 70,
                   "endColumn" : 40,
-                  "offset" : 2291,
+                  "offset" : 2296,
                   "length" : 36
                 }
               }
@@ -2306,8 +2414,8 @@
                     "beginColumn" : 4,
                     "endLine" : 47,
                     "endColumn" : 6,
-                    "offset" : 1392,
-                    "length" : 146
+                    "offset" : 1410,
+                    "length" : 137
                   }
                 }
               }
@@ -2342,7 +2450,7 @@
                     "beginColumn" : 4,
                     "endLine" : 40,
                     "endColumn" : 64,
-                    "offset" : 1276,
+                    "offset" : 1294,
                     "length" : 60
                   }
                 }
@@ -2358,11 +2466,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_data_port_periodic_domains\/test_event_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 91,
+                    "beginLine" : 92,
                     "beginColumn" : 4,
-                    "endLine" : 91,
+                    "endLine" : 92,
                     "endColumn" : 41,
-                    "offset" : 2781,
+                    "offset" : 2821,
                     "length" : 37
                   }
                 }
@@ -2382,11 +2490,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_data_port_periodic_domains\/test_event_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 94,
+                    "beginLine" : 95,
                     "beginColumn" : 4,
-                    "endLine" : 94,
+                    "endLine" : 95,
                     "endColumn" : 76,
-                    "offset" : 2878,
+                    "offset" : 2918,
                     "length" : 72
                   }
                 }
@@ -2402,12 +2510,12 @@
                       "type" : "Some",
                       "value" : "\/test_event_data_port_periodic_domains\/test_event_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 88,
+                    "beginLine" : 89,
                     "beginColumn" : 2,
-                    "endLine" : 102,
+                    "endLine" : 103,
                     "endColumn" : 15,
-                    "offset" : 2701,
-                    "length" : 524
+                    "offset" : 2741,
+                    "length" : 522
                   }
                 }
               },
@@ -2430,7 +2538,7 @@
                     "beginColumn" : 4,
                     "endLine" : 72,
                     "endColumn" : 61,
-                    "offset" : 2345,
+                    "offset" : 2350,
                     "length" : 57
                   }
                 }
@@ -2446,11 +2554,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_data_port_periodic_domains\/test_event_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 92,
+                    "beginLine" : 93,
                     "beginColumn" : 4,
-                    "endLine" : 92,
+                    "endLine" : 93,
                     "endColumn" : 42,
-                    "offset" : 2822,
+                    "offset" : 2862,
                     "length" : 38
                   }
                 }

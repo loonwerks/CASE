@@ -65,10 +65,8 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_UARTDriver_Impl_initializer(&sb_dummy);
   }
-
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
     while (sb_mission_window_dequeue((sb_SW__MissionWindow_container *) &sb_mission_window)) {
       sb_entrypoint_UARTDriver_Impl_mission_window(&sb_mission_window);
     }

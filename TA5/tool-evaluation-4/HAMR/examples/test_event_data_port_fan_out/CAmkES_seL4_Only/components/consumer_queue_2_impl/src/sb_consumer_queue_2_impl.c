@@ -4,11 +4,6 @@
 #include <string.h>
 #include <camkes.h>
 
-static void sb_deq_notification_handler(void * unused) {
-  MUTEXOP(sb_dispatch_sem_post())
-  CALLBACKOP(sb_deq_notification_reg_callback(sb_deq_notification_handler, NULL));
-}
-
 sb_queue_int8_t_2_Recv_t sb_deq_recv_queue;
 
 /************************************************************************
@@ -25,6 +20,12 @@ bool sb_deq_dequeue(int8_t *data) {
   sb_event_counter_t numDropped;
   return sb_deq_dequeue_poll(&numDropped, data);
 }
+
+static void sb_deq_notification_handler(void * unused) {
+  MUTEXOP(sb_dispatch_sem_post())
+  CALLBACKOP(sb_deq_notification_reg_callback(sb_deq_notification_handler, NULL));
+}
+
 
 /************************************************************************
  * sb_entrypoint_consumer_queue_2_impl_deq:
@@ -59,6 +60,7 @@ void post_init(void){
   sb_queue_int8_t_2_Recv_init(&sb_deq_recv_queue, sb_deq_queue);
 }
 
+
 /************************************************************************
  * int run(void)
  * Main active thread function.
@@ -69,10 +71,8 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_consumer_queue_2_impl_initializer(&sb_dummy);
   }
-
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
     {
       int8_t sb_deq;
       while (sb_deq_dequeue((int8_t *) &sb_deq)) {

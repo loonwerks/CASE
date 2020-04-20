@@ -352,11 +352,18 @@
       <propertyAssociation href="../test_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.1"/>
     </ownedPropertyAssociation>
     <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling.aadl#CASE_Scheduling.Max_Domain"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:IntegerLiteral" value="3"/>
+      </ownedValue>
+      <propertyAssociation href="../test_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.2"/>
+    </ownedPropertyAssociation>
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
       <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling.aadl#CASE_Scheduling.Schedule_Source_Text"/>
       <ownedValue>
         <ownedValue xsi:type="aadl2:StringLiteral" value="behavior_code/kernel/domain_schedule.c"/>
       </ownedValue>
-      <propertyAssociation href="../test_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.2"/>
+      <propertyAssociation href="../test_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.3"/>
     </ownedPropertyAssociation>
     <subcomponent xsi:type="aadl2:ProcessorSubcomponent" href="../test_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedProcessorSubcomponent.0"/>
     <index>0</index>

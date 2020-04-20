@@ -5,11 +5,6 @@
 #include <string.h>
 #include <camkes.h>
 
-static void sb_mission_window_notification_handler(void * unused) {
-  MUTEXOP(sb_dispatch_sem_post())
-  CALLBACKOP(sb_mission_window_notification_reg_callback(sb_mission_window_notification_handler, NULL));
-}
-
 sb_queue_sb_SW__MissionWindow_container_1_Recv_t sb_mission_window_recv_queue;
 
 /************************************************************************
@@ -26,6 +21,12 @@ bool sb_mission_window_dequeue(sb_SW__MissionWindow_container *data) {
   sb_event_counter_t numDropped;
   return sb_mission_window_dequeue_poll(&numDropped, data);
 }
+
+static void sb_mission_window_notification_handler(void * unused) {
+  MUTEXOP(sb_dispatch_sem_post())
+  CALLBACKOP(sb_mission_window_notification_reg_callback(sb_mission_window_notification_handler, NULL));
+}
+
 
 /************************************************************************
  * sb_entrypoint_UARTDriver_Impl_mission_window:
@@ -68,6 +69,7 @@ void post_init(void){
   sb_queue_int64_t_1_init(sb_tracking_id_queue_1);
 }
 
+
 /************************************************************************
  * int run(void)
  * Main active thread function.
@@ -78,10 +80,8 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_UARTDriver_Impl_initializer(&sb_dummy);
   }
-
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
     {
       sb_SW__MissionWindow_container sb_mission_window;
       while (sb_mission_window_dequeue((sb_SW__MissionWindow_container *) &sb_mission_window)) {

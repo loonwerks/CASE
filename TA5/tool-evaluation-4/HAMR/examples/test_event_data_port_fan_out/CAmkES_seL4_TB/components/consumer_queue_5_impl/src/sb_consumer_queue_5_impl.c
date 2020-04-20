@@ -46,10 +46,8 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_consumer_queue_5_impl_initializer(&sb_dummy);
   }
-
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
     while (sb_deq_dequeue((int8_t *) &sb_deq)) {
       sb_entrypoint_consumer_queue_5_impl_deq(&sb_deq);
     }

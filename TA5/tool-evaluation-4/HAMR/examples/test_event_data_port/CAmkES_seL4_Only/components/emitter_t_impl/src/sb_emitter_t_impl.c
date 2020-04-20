@@ -22,10 +22,10 @@ void sb_entrypoint_emitter_t_impl_initializer(const int64_t * in_arg) {
   test_event_data_port_emitter_component_init((int64_t *) in_arg);
 }
 
-
 void post_init(void){
   sb_queue_int8_t_1_init(sb_enq_queue_1);
 }
+
 
 /************************************************************************
  * int run(void)
@@ -36,10 +36,8 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_emitter_t_impl_initializer(&sb_dummy);
   }
-
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
   }
   return 0;
 }

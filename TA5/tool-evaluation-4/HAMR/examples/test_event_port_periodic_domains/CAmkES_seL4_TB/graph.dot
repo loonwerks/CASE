@@ -1,0 +1,131 @@
+digraph g {
+graph [
+  overlap = false,
+  rankdir = "LR"
+];
+node [
+  fontsize = "16",
+  shape = "ellipse"
+];
+edge [
+];
+
+src_thread [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>src_thread</B></TD></TR>
+      <TR><TD PORT="sb_emit0"><FONT COLOR="orange">uses AADLEvent_Sender <B>sb_emit0</B></FONT></TD></TR>
+      <TR><TD PORT="sb_periodic_dispatch_notification"><FONT COLOR="blue">consumes Notification <B>sb_periodic_dispatch_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+sb_dst_thread_consume_monitor [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>sb_dst_thread_consume_monitor</B></TD></TR>
+      <TR><TD PORT="monsig"><FONT COLOR="blue">emits ReceiveEvent <B>monsig</B></FONT></TD></TR>
+      <TR><TD PORT="mon_receive"><FONT COLOR="orange">provides AADLEvent_Receiver <B>mon_receive</B></FONT></TD></TR>
+      <TR><TD PORT="mon_send"><FONT COLOR="orange">provides AADLEvent_Sender <B>mon_send</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+dst_thread [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>dst_thread</B></TD></TR>
+      <TR><TD PORT="sb_consume"><FONT COLOR="orange">uses AADLEvent_Receiver <B>sb_consume</B></FONT></TD></TR>
+      <TR><TD PORT="sb_consume_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_consume_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_periodic_dispatch_notification"><FONT COLOR="blue">consumes Notification <B>sb_periodic_dispatch_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+dispatch_periodic_inst [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>dispatch_periodic_inst</B></TD></TR>
+      <TR><TD PORT="sb_src_thread_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_src_thread_periodic_dispatch_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_dst_thread_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_dst_thread_periodic_dispatch_notification</B></FONT></TD></TR>
+      <TR><TD PORT="timer"><FONT COLOR="orange">uses Timer <B>timer</B></FONT></TD></TR>
+      <TR><TD PORT="timer_complete"><FONT COLOR="blue">consumes Notification <B>timer_complete</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+connectiontypekey [
+  label=<
+   <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+     <TR><TD COLSPAN="2"><B>Key: Connection Types</B></TD></TR>
+     <TR><TD><FONT COLOR="red">seL4SharedData</FONT></TD><TD BGCOLOR="red">red</TD></TR>
+     <TR><TD><FONT COLOR="blue">seL4Notification</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="orange">seL4RPCCall</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+     <TR><TD><FONT COLOR="green">seL4TimeServer</FONT></TD><TD BGCOLOR="green">green</TD></TR>
+     <TR><TD><FONT COLOR="brown">seL4GlobalAsynchCallback</FONT></TD><TD BGCOLOR="brown">brown</TD></TR>
+   </TABLE>
+  >
+  shape=plaintext
+];
+
+interfacetypekey [
+  label=<
+   <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+     <TR><TD COLSPAN="2"><B>Key: Interface Types</B></TD></TR>
+     <TR><TD><FONT COLOR="red">dataport</FONT></TD><TD BGCOLOR="red">red</TD></TR>
+     <TR><TD><FONT COLOR="blue">emits</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="blue">consumes</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="orange">provides</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+     <TR><TD><FONT COLOR="orange">uses</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+   </TABLE>
+  >
+  shape=plaintext
+];
+
+"src_thread":sb_emit0 -> "sb_dst_thread_consume_monitor":mon_send [
+  color="orange"
+  //label = "seL4RPCCall"
+  id = conn1
+];
+
+"dst_thread":sb_consume -> "sb_dst_thread_consume_monitor":mon_receive [
+  color="orange"
+  //label = "seL4RPCCall"
+  id = conn2
+];
+
+"sb_dst_thread_consume_monitor":monsig -> "dst_thread":sb_consume_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn3
+];
+
+"dispatch_periodic_inst":sb_src_thread_periodic_dispatch_notification -> "src_thread":sb_periodic_dispatch_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn4
+];
+
+"dispatch_periodic_inst":sb_dst_thread_periodic_dispatch_notification -> "dst_thread":sb_periodic_dispatch_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn5
+];
+
+"dispatch_periodic_inst":timer -> "time_server":the_timer [
+  color="green"
+  //label = "seL4TimeServer"
+  id = conn6
+];
+
+"time_server":timer_notification -> "dispatch_periodic_inst":timer_complete [
+  color="brown"
+  //label = "seL4GlobalAsynchCallback"
+  id = conn7
+];
+
+}

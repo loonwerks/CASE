@@ -34,7 +34,6 @@ void sb_entrypoint_emitter_t_impl_initializer(const int64_t * in_arg) {
 }
 
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.
@@ -44,10 +43,8 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_emitter_t_impl_initializer(&sb_dummy);
   }
-
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
   }
   return 0;
 }

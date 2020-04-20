@@ -14,11 +14,11 @@
               "type" : "Some",
               "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
             },
-            "beginLine" : 98,
+            "beginLine" : 99,
             "beginColumn" : 2,
-            "endLine" : 112,
+            "endLine" : 113,
             "endColumn" : 15,
-            "offset" : 3654,
+            "offset" : 3700,
             "length" : 627
           }
         }
@@ -46,11 +46,11 @@
                   "type" : "Some",
                   "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
                 },
-                "beginLine" : 101,
+                "beginLine" : 102,
                 "beginColumn" : 4,
-                "endLine" : 101,
+                "endLine" : 102,
                 "endColumn" : 58,
-                "offset" : 3734,
+                "offset" : 3780,
                 "length" : 54
               }
             }
@@ -896,11 +896,11 @@
                       "type" : "Some",
                       "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
                     },
-                    "beginLine" : 20,
+                    "beginLine" : 19,
                     "beginColumn" : 2,
-                    "endLine" : 20,
+                    "endLine" : 19,
                     "endColumn" : 51,
-                    "offset" : 780,
+                    "offset" : 778,
                     "length" : 49
                   }
                 }
@@ -976,11 +976,11 @@
                   "type" : "Some",
                   "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
                 },
-                "beginLine" : 102,
+                "beginLine" : 103,
                 "beginColumn" : 4,
-                "endLine" : 102,
+                "endLine" : 103,
                 "endColumn" : 68,
-                "offset" : 3792,
+                "offset" : 3838,
                 "length" : 64
               }
             }
@@ -1826,11 +1826,11 @@
                       "type" : "Some",
                       "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
                     },
-                    "beginLine" : 20,
+                    "beginLine" : 19,
                     "beginColumn" : 2,
-                    "endLine" : 20,
+                    "endLine" : 19,
                     "endColumn" : 51,
-                    "offset" : 780,
+                    "offset" : 778,
                     "length" : 49
                   }
                 }
@@ -1906,11 +1906,11 @@
                   "type" : "Some",
                   "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
                 },
-                "beginLine" : 100,
+                "beginLine" : 101,
                 "beginColumn" : 4,
-                "endLine" : 100,
+                "endLine" : 101,
                 "endColumn" : 30,
-                "offset" : 3704,
+                "offset" : 3750,
                 "length" : 26
               }
             }
@@ -2009,6 +2009,40 @@
               "type" : "Property",
               "name" : {
                 "type" : "Name",
+                "name" : ["top_impl_Instance", "proc", "CASE_Scheduling::Max_Domain"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
+                    },
+                    "beginLine" : 23,
+                    "beginColumn" : 2,
+                    "endLine" : 23,
+                    "endColumn" : 68,
+                    "offset" : 885,
+                    "length" : 66
+                  }
+                }
+              },
+              "propertyValues" : [
+                {
+                  "type" : "UnitProp",
+                  "value" : "3.0",
+                  "unit" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "appliesTo" : [
+              ]
+            },
+            {
+              "type" : "Property",
+              "name" : {
+                "type" : "Name",
                 "name" : ["top_impl_Instance", "proc", "CASE_Scheduling::Schedule_Source_Text"],
                 "pos" : {
                   "type" : "Some",
@@ -2018,11 +2052,11 @@
                       "type" : "Some",
                       "value" : "\/org.sireum.aadl.osate.hamr\/resources\/CASE_Scheduling.aadl"
                     },
-                    "beginLine" : 25,
+                    "beginLine" : 28,
                     "beginColumn" : 2,
-                    "endLine" : 25,
+                    "endLine" : 28,
                     "endColumn" : 77,
-                    "offset" : 984,
+                    "offset" : 1106,
                     "length" : 75
                   }
                 }
@@ -2097,11 +2131,11 @@
                   "type" : "Some",
                   "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
                 },
-                "beginLine" : 104,
+                "beginLine" : 105,
                 "beginColumn" : 4,
-                "endLine" : 104,
+                "endLine" : 105,
                 "endColumn" : 107,
-                "offset" : 3874,
+                "offset" : 3920,
                 "length" : 103
               }
             }
@@ -2120,11 +2154,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 101,
+                    "beginLine" : 102,
                     "beginColumn" : 4,
-                    "endLine" : 101,
+                    "endLine" : 102,
                     "endColumn" : 58,
-                    "offset" : 3734,
+                    "offset" : 3780,
                     "length" : 54
                   }
                 }
@@ -2175,11 +2209,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 102,
+                    "beginLine" : 103,
                     "beginColumn" : 4,
-                    "endLine" : 102,
+                    "endLine" : 103,
                     "endColumn" : 68,
-                    "offset" : 3792,
+                    "offset" : 3838,
                     "length" : 64
                   }
                 }
@@ -2401,11 +2435,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 101,
+                    "beginLine" : 102,
                     "beginColumn" : 4,
-                    "endLine" : 101,
+                    "endLine" : 102,
                     "endColumn" : 58,
-                    "offset" : 3734,
+                    "offset" : 3780,
                     "length" : 54
                   }
                 }
@@ -2425,11 +2459,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 104,
+                    "beginLine" : 105,
                     "beginColumn" : 4,
-                    "endLine" : 104,
+                    "endLine" : 105,
                     "endColumn" : 107,
-                    "offset" : 3874,
+                    "offset" : 3920,
                     "length" : 103
                   }
                 }
@@ -2445,11 +2479,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 98,
+                    "beginLine" : 99,
                     "beginColumn" : 2,
-                    "endLine" : 112,
+                    "endLine" : 113,
                     "endColumn" : 15,
-                    "offset" : 3654,
+                    "offset" : 3700,
                     "length" : 627
                   }
                 }
@@ -2489,11 +2523,11 @@
                       "type" : "Some",
                       "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 102,
+                    "beginLine" : 103,
                     "beginColumn" : 4,
-                    "endLine" : 102,
+                    "endLine" : 103,
                     "endColumn" : 68,
-                    "offset" : 3792,
+                    "offset" : 3838,
                     "length" : 64
                   }
                 }

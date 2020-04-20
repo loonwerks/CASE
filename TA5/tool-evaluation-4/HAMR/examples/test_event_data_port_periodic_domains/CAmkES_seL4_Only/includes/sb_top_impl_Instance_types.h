@@ -1,5 +1,5 @@
-#ifndef __SB_AADL_sb_proc_types__H
-#define __SB_AADL_sb_proc_types__H
+#ifndef __SB_AADL_sb_top_impl_Instance_types__H
+#define __SB_AADL_sb_top_impl_Instance_types__H
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -30,4 +30,4 @@ if((OP) != 0) {\
 #endif // SB_VERIFY
 
 
-#endif // __SB_AADL_sb_proc_types__H
+#endif // __SB_AADL_sb_top_impl_Instance_types__H

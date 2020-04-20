@@ -103,10 +103,8 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_WaypointManager_Impl_initializer(&sb_dummy);
   }
-
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
     while (sb_flight_plan_dequeue((sb_SW__Mission_container *) &sb_flight_plan)) {
       sb_entrypoint_WaypointManager_Impl_flight_plan(&sb_flight_plan);
     }

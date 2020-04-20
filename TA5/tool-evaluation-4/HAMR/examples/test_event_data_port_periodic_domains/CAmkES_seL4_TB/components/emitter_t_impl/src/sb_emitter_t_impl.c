@@ -31,6 +31,10 @@ void sb_periodic_dispatch_notification_callback(void *_ UNUSED) {
 }
 
 
+void sb_entrypoint_emitter_t_impl_periodic_dispatcher(const int64_t * in_arg) {
+  test_event_data_port_emitter_time_triggered_handler((int64_t *) in_arg);
+}
+
 /************************************************************************
  * sb_write_port_enqueue:
  * Invoked from user code in the local thread.
@@ -50,10 +54,6 @@ bool sb_write_port_enqueue(const int8_t * sb_write_port){
   return sb_result;
 }
 
-void sb_entrypoint_emitter_t_impl_periodic_dispatcher(const int64_t * in_arg) {
-  run_emitter((int64_t *) in_arg);
-}
-
 /************************************************************************
  *  sb_entrypoint_emitter_t_impl_initializer:
  *
@@ -65,7 +65,6 @@ void sb_entrypoint_emitter_t_impl_periodic_dispatcher(const int64_t * in_arg) {
 void sb_entrypoint_emitter_t_impl_initializer(const int64_t * in_arg) {
   test_event_data_port_emitter_component_init((int64_t *) in_arg);
 }
-
 
 
 /************************************************************************
@@ -82,7 +81,6 @@ int run(void) {
   MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
     if(sb_occurred_periodic_dispatcher){
       sb_occurred_periodic_dispatcher = false;
       sb_entrypoint_emitter_t_impl_periodic_dispatcher(&sb_time_periodic_dispatcher);

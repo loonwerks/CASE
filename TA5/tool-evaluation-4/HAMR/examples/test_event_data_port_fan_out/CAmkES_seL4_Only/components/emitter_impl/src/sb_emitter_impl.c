@@ -63,12 +63,12 @@ void sb_entrypoint_emitter_impl_initializer(const int64_t * in_arg) {
   test_event_data_port_emitter_component_init((int64_t *) in_arg);
 }
 
-
 void post_init(void){
   sb_queue_int8_t_1_init(sb_enq_queue_1);
   sb_queue_int8_t_2_init(sb_enq_queue_2);
   sb_queue_int8_t_5_init(sb_enq_queue_5);
 }
+
 
 /************************************************************************
  * int run(void)
@@ -84,7 +84,6 @@ int run(void) {
   MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
     if(sb_occurred_periodic_dispatcher){
       sb_occurred_periodic_dispatcher = false;
       sb_entrypoint_emitter_impl_periodic_dispatcher(&sb_time_periodic_dispatcher);

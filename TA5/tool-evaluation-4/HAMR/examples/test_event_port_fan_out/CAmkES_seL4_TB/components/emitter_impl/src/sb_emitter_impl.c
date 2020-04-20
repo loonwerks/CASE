@@ -65,7 +65,6 @@ void sb_entrypoint_emitter_impl_initializer(const int64_t * in_arg) {
 }
 
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.
@@ -80,7 +79,6 @@ int run(void) {
   MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
     if(sb_occurred_periodic_dispatcher){
       sb_occurred_periodic_dispatcher = false;
       sb_entrypoint_emitter_impl_periodic_dispatcher(&sb_time_periodic_dispatcher);

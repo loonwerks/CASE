@@ -31,25 +31,8 @@ void sb_periodic_dispatch_notification_callback(void *_ UNUSED) {
 }
 
 
-static void sb_read_port_notification_handler(void * unused) {
-  MUTEXOP(sb_dispatch_sem_post())
-  CALLBACKOP(sb_read_port_notification_reg_callback(sb_read_port_notification_handler, NULL));
-}
-
-/************************************************************************
- * sb_entrypoint_consumer_t_impl_read_port:
- *
- * This is the function invoked by an active thread dispatcher to
- * call to a user-defined entrypoint function.  It sets up the dispatch
- * context for the user-defined entrypoint, then calls it.
- *
- ************************************************************************/
-void sb_entrypoint_consumer_t_impl_read_port(const int8_t * in_arg) {
-  test_event_data_port_consumer_s_event_handler((int8_t *) in_arg);
-}
-
 void sb_entrypoint_consumer_t_impl_periodic_dispatcher(const int64_t * in_arg) {
-  test_event_data_port_consumer_s_event_handler((int64_t *) in_arg);
+  test_event_data_port_consumer_time_triggered_handler((int64_t *) in_arg);
 }
 
 /************************************************************************
@@ -64,17 +47,12 @@ void sb_entrypoint_consumer_t_impl_initializer(const int64_t * in_arg) {
   test_event_data_port_consumer_component_init((int64_t *) in_arg);
 }
 
-void pre_init(void) {
-  CALLBACKOP(sb_read_port_notification_reg_callback(sb_read_port_notification_handler, NULL));
-}
-
 
 /************************************************************************
  * int run(void)
  * Main active thread function.
  ************************************************************************/
 int run(void) {
-  int8_t sb_read_port;
   CALLBACKOP(sb_periodic_dispatch_notification_reg_callback(sb_periodic_dispatch_notification_callback, NULL));
   {
     int64_t sb_dummy;
@@ -84,10 +62,6 @@ int run(void) {
   MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
-    while (sb_read_port_dequeue((int8_t *) &sb_read_port)) {
-      sb_entrypoint_consumer_t_impl_read_port(&sb_read_port);
-    }
     if(sb_occurred_periodic_dispatcher){
       sb_occurred_periodic_dispatcher = false;
       sb_entrypoint_consumer_t_impl_periodic_dispatcher(&sb_time_periodic_dispatcher);

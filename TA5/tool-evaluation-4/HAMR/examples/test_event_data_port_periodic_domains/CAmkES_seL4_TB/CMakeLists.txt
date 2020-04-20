@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8.2)
 
-project (src_process C)
+project (top_impl_Instance C)
 
 add_definitions(-DCAMKES)
 
@@ -30,4 +30,4 @@ DeclareCAmkESComponent(sb_dst_thread_read_port_Monitor
 
 )
 
-DeclareCAmkESRootserver(src_process.camkes)
+DeclareCAmkESRootserver(top_impl_Instance.camkes)

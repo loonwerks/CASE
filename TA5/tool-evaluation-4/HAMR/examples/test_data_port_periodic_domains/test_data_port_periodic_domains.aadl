@@ -88,6 +88,7 @@ public
 		properties
 			Frame_Period => 1000ms;
             Clock_Period => 2ms;
+            CASE_Scheduling::Max_Domain => 3;
 			CASE_Scheduling::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
 	end proc.impl;
 

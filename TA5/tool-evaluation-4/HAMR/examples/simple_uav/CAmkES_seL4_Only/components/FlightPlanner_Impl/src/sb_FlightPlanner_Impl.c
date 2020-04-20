@@ -14,11 +14,6 @@ bool sb_flight_plan_enqueue(const sb_SW__Mission_container *data) {
   return true;
 }
 
-static void sb_mission_rcv_notification_handler(void * unused) {
-  MUTEXOP(sb_dispatch_sem_post())
-  CALLBACKOP(sb_mission_rcv_notification_reg_callback(sb_mission_rcv_notification_handler, NULL));
-}
-
 sb_queue_bool_1_Recv_t sb_mission_rcv_recv_queue;
 
 /************************************************************************
@@ -36,6 +31,12 @@ bool sb_mission_rcv_dequeue(bool *data) {
   return sb_mission_rcv_dequeue_poll(&numDropped, data);
 }
 
+static void sb_mission_rcv_notification_handler(void * unused) {
+  MUTEXOP(sb_dispatch_sem_post())
+  CALLBACKOP(sb_mission_rcv_notification_reg_callback(sb_mission_rcv_notification_handler, NULL));
+}
+
+
 /************************************************************************
  * sb_entrypoint_FlightPlanner_Impl_mission_rcv:
  *
@@ -48,11 +49,6 @@ void sb_entrypoint_FlightPlanner_Impl_mission_rcv(const bool * in_arg) {
   mission_rcv((bool *) in_arg);
 }
 
-
-static void sb_recv_map_notification_handler(void * unused) {
-  MUTEXOP(sb_dispatch_sem_post())
-  CALLBACKOP(sb_recv_map_notification_reg_callback(sb_recv_map_notification_handler, NULL));
-}
 
 sb_queue_SW__Command_Impl_1_Recv_t sb_recv_map_recv_queue;
 
@@ -70,6 +66,12 @@ bool sb_recv_map_dequeue(SW__Command_Impl *data) {
   sb_event_counter_t numDropped;
   return sb_recv_map_dequeue_poll(&numDropped, data);
 }
+
+static void sb_recv_map_notification_handler(void * unused) {
+  MUTEXOP(sb_dispatch_sem_post())
+  CALLBACKOP(sb_recv_map_notification_reg_callback(sb_recv_map_notification_handler, NULL));
+}
+
 
 /************************************************************************
  * sb_entrypoint_FlightPlanner_Impl_recv_map:
@@ -107,6 +109,7 @@ void post_init(void){
   sb_queue_SW__Command_Impl_1_Recv_init(&sb_recv_map_recv_queue, sb_recv_map_queue);
 }
 
+
 /************************************************************************
  * int run(void)
  * Main active thread function.
@@ -118,10 +121,8 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_FlightPlanner_Impl_initializer(&sb_dummy);
   }
-
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
     {
       bool sb_mission_rcv;
       while (sb_mission_rcv_dequeue((bool *) &sb_mission_rcv)) {

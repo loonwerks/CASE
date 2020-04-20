@@ -12,7 +12,7 @@
         </ownedListElement>
       </ownedValue>
     </ownedValue>
-    <propertyAssociation href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPropertyAssociation.1"/>
+    <propertyAssociation href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPropertyAssociation.2"/>
   </ownedPropertyAssociation>
   <componentInstance name="src_process" category="process">
     <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
@@ -25,7 +25,7 @@
       <propertyAssociation href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPropertyAssociation.0"/>
     </ownedPropertyAssociation>
     <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-      <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling_Properties.aadl#CASE_Scheduling_Properties.Domain"/>
+      <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling.aadl#CASE_Scheduling.Domain"/>
       <ownedValue>
         <ownedValue xsi:type="aadl2:IntegerLiteral" value="2"/>
       </ownedValue>
@@ -122,7 +122,7 @@
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
         <property href="platform:/plugin/org.osate.workspace/resources/properties/Predeclared_Property_Sets/Programming_Properties.aadl#Programming_Properties.Compute_Entrypoint_Source_Text"/>
         <ownedValue>
-          <ownedValue xsi:type="aadl2:StringLiteral" value="run_emitter"/>
+          <ownedValue xsi:type="aadl2:StringLiteral" value="test_event_data_port_emitter_time_triggered_handler"/>
         </ownedValue>
         <propertyAssociation href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.0/@ownedPropertyAssociation.5"/>
       </ownedPropertyAssociation>
@@ -175,7 +175,16 @@
   </componentInstance>
   <componentInstance name="dst_process" category="process">
     <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-      <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling_Properties.aadl#CASE_Scheduling_Properties.Domain"/>
+      <property href="platform:/plugin/org.osate.workspace/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:ListValue">
+          <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="//@componentInstance.2"/>
+        </ownedValue>
+      </ownedValue>
+      <propertyAssociation href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPropertyAssociation.1"/>
+    </ownedPropertyAssociation>
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling.aadl#CASE_Scheduling.Domain"/>
       <ownedValue>
         <ownedValue xsi:type="aadl2:IntegerLiteral" value="3"/>
       </ownedValue>
@@ -212,6 +221,15 @@
       <feature xsi:type="aadl2:EventDataPort" href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.6/@ownedEventDataPort.0"/>
     </featureInstance>
     <componentInstance name="dst_thread" category="thread">
+      <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+        <property href="platform:/plugin/org.osate.workspace/resources/properties/Predeclared_Property_Sets/Deployment_Properties.aadl#Deployment_Properties.Actual_Processor_Binding"/>
+        <ownedValue>
+          <ownedValue xsi:type="aadl2:ListValue">
+            <ownedListElement xsi:type="instance:InstanceReferenceValue" referencedInstanceObject="//@componentInstance.2"/>
+          </ownedValue>
+        </ownedValue>
+        <propertyAssociation href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedPropertyAssociation.1"/>
+      </ownedPropertyAssociation>
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
         <property href="platform:/plugin/org.osate.workspace/resources/properties/Predeclared_Property_Sets/Thread_Properties.aadl#Thread_Properties.Dispatch_Protocol"/>
         <ownedValue>
@@ -263,7 +281,7 @@
       <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
         <property href="platform:/plugin/org.osate.workspace/resources/properties/Predeclared_Property_Sets/Programming_Properties.aadl#Programming_Properties.Compute_Entrypoint_Source_Text"/>
         <ownedValue>
-          <ownedValue xsi:type="aadl2:StringLiteral" value="test_event_data_port_consumer_s_event_handler"/>
+          <ownedValue xsi:type="aadl2:StringLiteral" value="test_event_data_port_consumer_time_triggered_handler"/>
         </ownedValue>
         <propertyAssociation href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedPropertyAssociation.5"/>
       </ownedPropertyAssociation>
@@ -307,7 +325,7 @@
         <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
           <property href="platform:/plugin/org.osate.workspace/resources/properties/Predeclared_Property_Sets/Programming_Properties.aadl#Programming_Properties.Compute_Entrypoint_Source_Text"/>
           <ownedValue>
-            <ownedValue xsi:type="aadl2:StringLiteral" value="test_event_data_port_consumer_s_event_handler"/>
+            <ownedValue xsi:type="aadl2:StringLiteral" value="Periodic_thread_so_should_be_ignored"/>
           </ownedValue>
           <propertyAssociation href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.4/@ownedEventDataPort.0/@ownedPropertyAssociation.0"/>
         </ownedPropertyAssociation>
@@ -341,11 +359,18 @@
       <propertyAssociation href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.1"/>
     </ownedPropertyAssociation>
     <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
-      <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling_Properties.aadl#CASE_Scheduling_Properties.Schedule_Source_Text"/>
+      <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling.aadl#CASE_Scheduling.Max_Domain"/>
+      <ownedValue>
+        <ownedValue xsi:type="aadl2:IntegerLiteral" value="3"/>
+      </ownedValue>
+      <propertyAssociation href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.2"/>
+    </ownedPropertyAssociation>
+    <ownedPropertyAssociation xsi:type="instance:PropertyAssociationInstance">
+      <property href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/CASE_Scheduling.aadl#CASE_Scheduling.Schedule_Source_Text"/>
       <ownedValue>
         <ownedValue xsi:type="aadl2:StringLiteral" value="behavior_code/kernel/domain_schedule.c"/>
       </ownedValue>
-      <propertyAssociation href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.2"/>
+      <propertyAssociation href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.9/@ownedPropertyAssociation.3"/>
     </ownedPropertyAssociation>
     <subcomponent xsi:type="aadl2:ProcessorSubcomponent" href="../test_event_data_port_periodic_domains.aadl#/0/@ownedPublicSection/@ownedClassifier.11/@ownedProcessorSubcomponent.0"/>
     <index>0</index>

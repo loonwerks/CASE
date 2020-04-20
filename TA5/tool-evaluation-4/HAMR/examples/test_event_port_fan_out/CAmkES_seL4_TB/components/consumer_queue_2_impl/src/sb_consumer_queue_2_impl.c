@@ -15,15 +15,16 @@ static void sb_s_handler(void *_ UNUSED){
   MUTEXOP(sb_dispatch_sem_post());
   CALLBACKOP(sb_s_notification_reg_callback(sb_s_handler, NULL));
 }
+
 /************************************************************************
- *  sb_entrypointsb_consumer_queue_2_impl_s
+ *  sb_entrypoint_consumer_queue_2_impl_s
  *
  * This is the function invoked by an active thread dispatcher to
  * call to a user-defined entrypoint function.  It sets up the dispatch
  * context for the user-defined entrypoint, then calls it.
  *
  ************************************************************************/
-void sb_entrypointsb_consumer_queue_2_impl_s(void){
+void sb_entrypoint_consumer_queue_2_impl_s(void){
   test_event_port_consumer_s_event_handler();
 }
 
@@ -54,12 +55,10 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_consumer_queue_2_impl_initializer(&sb_dummy);
   }
-
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
-
     while(sb_s_dequeue()){
-      sb_entrypointsb_consumer_queue_2_impl_s();
+      sb_entrypoint_consumer_queue_2_impl_s();
     }
   }
   return 0;

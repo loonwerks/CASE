@@ -19,7 +19,7 @@ public
 			Compute_Execution_Time => 10ms .. 10ms;
 			Source_Text => ("behavior_code/components/emitter/src/emitter.c");
 			Initialize_Entrypoint_Source_Text => "test_event_data_port_emitter_component_init";
-			Compute_Entrypoint_Source_Text => "run_emitter";
+			Compute_Entrypoint_Source_Text => "test_event_data_port_emitter_time_triggered_handler";
 	end emitter_t;
 
 	thread implementation emitter_t.impl
@@ -43,7 +43,7 @@ public
 	thread consumer_t
 		features
 			read_port: in event data port Base_Types::Integer_8 {
-				Compute_Entrypoint_Source_Text => "test_event_data_port_consumer_s_event_handler";
+				Compute_Entrypoint_Source_Text => "Periodic_thread_so_should_be_ignored";
 			};
 		properties
 			Dispatch_Protocol => Periodic;
@@ -51,7 +51,7 @@ public
 			Compute_Execution_Time => 10ms .. 10ms;
 			Source_Text => ("behavior_code/components/consumer/src/consumer.c");
 			Initialize_Entrypoint_Source_Text => "test_event_data_port_consumer_component_init";
-			Compute_Entrypoint_Source_Text => "test_event_data_port_consumer_s_event_handler";
+			Compute_Entrypoint_Source_Text => "test_event_data_port_consumer_time_triggered_handler";
 	end consumer_t;
 
 	thread implementation consumer_t.impl
@@ -79,6 +79,7 @@ public
 		properties
 			Frame_Period => 1000ms;
             Clock_Period => 2ms;
+            CASE_Scheduling::Max_Domain => 3;
 			CASE_Scheduling::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
 	end proc.impl;
 

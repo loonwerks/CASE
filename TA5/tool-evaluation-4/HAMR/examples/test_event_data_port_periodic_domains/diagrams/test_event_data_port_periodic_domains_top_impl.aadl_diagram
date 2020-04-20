@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="3f296626-5dcd-4d92-ab81-ccba381f76b7" manual="true">
+    <element uuid="91079130-7576-4c91-8609-ba27db4438c9" manual="true">
+      <element uuid="99a76bbe-e4a8-493e-9492-7620193640ed" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>data_interconnect</seg>
+      </bo>
+    </element>
+    <element uuid="0654a45c-1014-4eb3-ad17-d9cca6133999" manual="true">
+      <bo>
+        <seg>realization</seg>
+      </bo>
+    </element>
+    <element uuid="e441609c-5786-494d-888c-9122060c49ec" manual="true">
+      <element uuid="306602ad-3b6d-43b0-9623-052fce39bcaa" manual="true">
+        <element uuid="d8f9f1e4-620c-4d8c-b39b-58ec4b789734" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>read_connection</seg>
+        </bo>
+      </element>
+      <element uuid="81cc7f06-8491-43a7-ba7e-be174af0ce71" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>read_port</seg>
+        </bo>
+        <position y="69.0"/>
+      </element>
+      <element uuid="4db5abf8-8104-4685-ae22-8e16e6fce88e" manual="true">
+        <element uuid="5a25bf1d-44a8-417c-b308-5ffca07ae688" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>read_port</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="aec4adb5-6cbe-43a7-8850-e41f936ed076" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>sc_type</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>dst_thread</seg>
+        </bo>
+        <position x="89.0" y="59.0"/>
+        <size width="317.0" height="60.0"/>
+      </element>
+      <element uuid="69d1a5a9-8f9e-4e98-a353-b486a4527224" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>sc_type</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>dst_process</seg>
+      </bo>
+      <position x="440.0" y="131.0"/>
+      <size width="418.0" height="131.0"/>
+    </element>
+    <element uuid="98568cd9-63cf-4931-9940-7181fef30a32" manual="true">
+      <element uuid="a7c4a342-41e1-4317-8937-db1d3c16fed6" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>sc_type</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>proc</seg>
+      </bo>
+      <position x="12.0" y="59.0"/>
+      <size width="118.0" height="52.0"/>
+    </element>
+    <element uuid="8eec70c6-8250-45b1-9cf5-0c4644b3e6ca" manual="true">
+      <element uuid="b356f5dd-4ba6-4c62-8157-e25376640c79" manual="true">
+        <element uuid="485c323a-1567-43ed-849f-4c3408a0e96e" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>write_connection</seg>
+        </bo>
+      </element>
+      <element uuid="ce971fad-d832-4eb2-8240-7a820a162eaf" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>write_port</seg>
+        </bo>
+        <position x="328.0" y="69.0"/>
+      </element>
+      <element uuid="d4807a8c-264a-48f7-a8e7-4ab62b1f7c42" manual="true">
+        <element uuid="8aa03ca7-4ddc-4470-a62c-8d075b7595a8" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>write_port</seg>
+          </bo>
+          <position x="224.0" y="10.0"/>
+        </element>
+        <element uuid="264cc3b2-adf5-42fc-ad6d-04096a5a97e4" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>sc_type</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>src_thread</seg>
+        </bo>
+        <position x="12.0" y="59.0"/>
+        <size width="304.0" height="60.0"/>
+      </element>
+      <element uuid="e4331318-8a63-40e0-b70b-84d159b53c79" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>sc_type</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>src_process</seg>
+      </bo>
+      <position x="12.0" y="131.0"/>
+      <size width="408.0" height="131.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>top.impl</seg>
+    </bo>
+    <position x="12.0" y="12.0"/>
+    <size width="870.0" height="274.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>test_event_data_port_periodic_domains::top.impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>
