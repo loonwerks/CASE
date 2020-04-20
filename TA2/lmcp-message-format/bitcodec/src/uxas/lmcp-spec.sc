@@ -49,7 +49,7 @@ val MISSIONCOMMAND = 36
 val MUSTFLYTASK = 37
 val OPERATORSIGNAL = 38
 val OPERATINGREGION = u32"39"
-val AUTOMATIONREQUEST = 40
+val AUTOMATIONREQUEST = u32"40"
 val POINTSEARCHTASK = 41
 val POLYGON = 42
 val RECTANGLE = 43
@@ -295,6 +295,30 @@ val PAYLOADSTOWACTION = 60
     UByte("useInertialViewAngles")
   ))
 
+// AutomationRequest (see ./afrl/cmasi/afrlcmasiAutomationRequest.cpp)
+@strictpure def AutomationRequest(name: String): Concat = 
+  Concat(name = name, elements = ISZ(
+    UShort("_entityListSize"),
+    BoundedRepeat[U16](
+      name = "entityList",
+      maxElements = 16, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
+      dependsOn = ISZ("_entityListSize"),
+      size = l => conversions.U16.toZ(l),
+      element = Long("entityId")
+    ),
+    UShort("_taskListSize"),
+    BoundedRepeat[U16](
+      name = "taskList",
+      maxElements = 32, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
+      dependsOn = ISZ("_taskListSize"),
+      size = l => conversions.U16.toZ(l),
+      element = Long("taskId")
+    ),
+    StringType("TaskRelationships"),
+    Long("operatingRegion"),
+    UByte("redoAllTasks")
+  ))
+
 // END Packed Object Definitions
 
 val lmcpObjectDecode = Concat(name = "LMCPObjectDecode", elements = ISZ(
@@ -312,12 +336,15 @@ val lmcpObjectDecode = Concat(name = "LMCPObjectDecode", elements = ISZ(
       case (CMASISeriesID, AIRVEHICLESTATE, CMASISeriesVersion) => 1
       // LineSearchTask (see ./afrl/cmasi/afrlcmasiLineSearchTask.cpp)
       case (CMASISeriesID, LINESEARCHTASK, CMASISeriesVersion) => 2
+      // AutomationRequest (see ./afrl/cmasi/afrlcmasiAutomationRequest.cpp)
+      case (CMASISeriesID, AUTOMATIONREQUEST, CMASISeriesVersion) => 3
       case (_, _, _) => -1
     },
     subs = ISZ(
       OperatingRegion("OperatingRegion"),
       AirVehicleState("AirVehicleState"),
-      LineSearchTask("LineSearchTask")
+      LineSearchTask("LineSearchTask"),
+      AutomationRequest("AutomationRequest")
     )
   )
 ))

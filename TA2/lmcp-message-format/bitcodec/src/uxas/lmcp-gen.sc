@@ -25,6 +25,7 @@ val AIRVEHICLESTATE = u32"15"
 val WEDGE = u32"16"
 val LINESEARCHTASK = u32"31"
 val OPERATINGREGION = u32"39"
+val AUTOMATIONREQUEST = u32"40"
 // END USER CODE: Imports
 
 object BitCodec {
@@ -157,13 +158,27 @@ object BitCodec {
 
   val ERROR_LineSearchTask: Z = 73
 
-  val ERROR_LMCPObject: Z = 74
+  val ERROR_EntityId: Z = 74
 
-  val ERROR_LMCPObjectDecode: Z = 75
+  val ERROR_AutomationRequest_entityList: Z = 75
 
-  val ERROR_LMCPObjectNullCheck: Z = 76
+  val ERROR_TaskId: Z = 76
 
-  val ERROR_LMCPMessage: Z = 77
+  val ERROR_AutomationRequest_taskList: Z = 77
+
+  val ERROR_TaskRelationships_stringChars: Z = 79
+
+  val ERROR_TaskRelationships: Z = 80
+
+  val ERROR_AutomationRequest: Z = 81
+
+  val ERROR_LMCPObject: Z = 82
+
+  val ERROR_LMCPObjectDecode: Z = 83
+
+  val ERROR_LMCPObjectNullCheck: Z = 84
+
+  val ERROR_LMCPMessage: Z = 85
 
   // BEGIN USER CODE: Members
   val CMASISeriesID = s64"4849604199710720000"
@@ -4644,6 +4659,446 @@ object BitCodec {
     }
   }
 
+  object EntityId {
+
+    val maxSize: Z = z"64"
+
+    def empty: MEntityId = {
+      return MEntityId(s64"0")
+    }
+
+    def decode(input: ISZ[B], context: Context): Option[EntityId] = {
+      val r = empty
+      r.decode(input, context)
+      return if (context.hasError) None[EntityId]() else Some(r.toImmutable)
+    }
+
+  }
+
+  @datatype class EntityId(
+    val entityId: S64
+  ) {
+
+    @strictpure def toMutable: MEntityId = MEntityId(entityId)
+
+    def encode(context: Context): Option[ISZ[B]] = {
+      val buffer = MSZ.create(64, F)
+      toMutable.encode(buffer, context)
+      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
+    }
+
+    def wellFormed: Z = {
+      return toMutable.wellFormed
+    }
+  }
+
+  @record class MEntityId(
+    var entityId: S64
+  ) extends Runtime.Composite {
+
+    @strictpure def toImmutable: EntityId = EntityId(entityId)
+
+    def wellFormed: Z = {
+
+
+      // BEGIN USER CODE: EntityId.wellFormed
+
+      // END USER CODE: EntityId.wellFormed
+
+      return 0
+    }
+
+    def decode(input: ISZ[B], context: Context): Unit = {
+      entityId = Reader.IS.beS64(input, context)
+
+      val wf = wellFormed
+      if (wf != 0) {
+        context.signalError(wf)
+      }
+    }
+
+    def encode(output: MSZ[B], context: Context): Unit = {
+      Writer.beS64(output, context, entityId)
+
+      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
+        context.updateErrorCode(ERROR_EntityId)
+      }
+    }
+
+  }
+
+  object TaskId {
+
+    val maxSize: Z = z"64"
+
+    def empty: MTaskId = {
+      return MTaskId(s64"0")
+    }
+
+    def decode(input: ISZ[B], context: Context): Option[TaskId] = {
+      val r = empty
+      r.decode(input, context)
+      return if (context.hasError) None[TaskId]() else Some(r.toImmutable)
+    }
+
+  }
+
+  @datatype class TaskId(
+    val taskId: S64
+  ) {
+
+    @strictpure def toMutable: MTaskId = MTaskId(taskId)
+
+    def encode(context: Context): Option[ISZ[B]] = {
+      val buffer = MSZ.create(64, F)
+      toMutable.encode(buffer, context)
+      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
+    }
+
+    def wellFormed: Z = {
+      return toMutable.wellFormed
+    }
+  }
+
+  @record class MTaskId(
+    var taskId: S64
+  ) extends Runtime.Composite {
+
+    @strictpure def toImmutable: TaskId = TaskId(taskId)
+
+    def wellFormed: Z = {
+
+
+      // BEGIN USER CODE: TaskId.wellFormed
+
+      // END USER CODE: TaskId.wellFormed
+
+      return 0
+    }
+
+    def decode(input: ISZ[B], context: Context): Unit = {
+      taskId = Reader.IS.beS64(input, context)
+
+      val wf = wellFormed
+      if (wf != 0) {
+        context.signalError(wf)
+      }
+    }
+
+    def encode(output: MSZ[B], context: Context): Unit = {
+      Writer.beS64(output, context, taskId)
+
+      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
+        context.updateErrorCode(ERROR_TaskId)
+      }
+    }
+
+  }
+
+  object TaskRelationships {
+
+    val maxSize: Z = z"524296"
+
+    def empty: MTaskRelationships = {
+      return MTaskRelationships(u16"0", MSZ[MC]())
+    }
+
+    def decode(input: ISZ[B], context: Context): Option[TaskRelationships] = {
+      val r = empty
+      r.decode(input, context)
+      return if (context.hasError) None[TaskRelationships]() else Some(r.toImmutable)
+    }
+
+    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
+      var r = MSZ[MC]()
+      for (e <- s) {
+        r = r :+ e.toMutable
+      }
+      return r
+    }
+
+    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
+      var r = ISZ[C]()
+      for (e <- s) {
+        r = r :+ e.toImmutable
+      }
+      return r
+    }
+  }
+
+  @datatype class TaskRelationships(
+    val _stringCharsSize: U16,
+    val stringChars: ISZ[C]
+  ) {
+
+    @strictpure def toMutable: MTaskRelationships = MTaskRelationships(_stringCharsSize, TaskRelationships.toMutableStringChars(stringChars))
+
+    def encode(context: Context): Option[ISZ[B]] = {
+      val buffer = MSZ.create(524296, F)
+      toMutable.encode(buffer, context)
+      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
+    }
+
+    def wellFormed: Z = {
+      return toMutable.wellFormed
+    }
+  }
+
+  @record class MTaskRelationships(
+    var _stringCharsSize: U16,
+    var stringChars: MSZ[MC]
+  ) extends Runtime.Composite {
+
+    @strictpure def toImmutable: TaskRelationships = TaskRelationships(_stringCharsSize, TaskRelationships.toImmutableStringChars(stringChars))
+
+    def wellFormed: Z = {
+
+      if (stringChars.size > 65535) {
+        return ERROR_TaskRelationships_stringChars
+      }
+
+      val stringCharsSize = sizeOfStringChars(_stringCharsSize)
+      if (stringChars.size != stringCharsSize) {
+        return ERROR_TaskRelationships_stringChars
+      }
+
+      // BEGIN USER CODE: TaskRelationships.wellFormed
+
+      // END USER CODE: TaskRelationships.wellFormed
+
+      return 0
+    }
+
+    def decode(input: ISZ[B], context: Context): Unit = {
+      _stringCharsSize = Reader.IS.beU16(input, context)
+      val stringCharsSize = sizeOfStringChars(_stringCharsSize)
+      if (stringCharsSize >= 0) {
+        stringChars = MSZ.create(stringCharsSize, C.empty)
+        for (i <- 0 until stringCharsSize) {
+          stringChars(i).decode(input, context)
+        }
+      } else {
+        context.signalError(ERROR_TaskRelationships_stringChars)
+      }
+
+      val wf = wellFormed
+      if (wf != 0) {
+        context.signalError(wf)
+      }
+    }
+
+    def encode(output: MSZ[B], context: Context): Unit = {
+      Writer.beU16(output, context, _stringCharsSize)
+      val stringCharsSize = sizeOfStringChars(_stringCharsSize)
+      if (stringCharsSize >= 0) {
+        for (i <- 0 until stringCharsSize) {
+          stringChars(i).encode(output, context)
+        }
+      } else {
+        context.signalError(ERROR_TaskRelationships_stringChars)
+      }
+
+      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
+        context.updateErrorCode(ERROR_TaskRelationships)
+      }
+    }
+
+    def sizeOfStringChars(l: U16): Z = {
+      val r: Z = {
+        conversions.U16.toZ(l)
+      }
+      return r
+    }
+  }
+
+  object AutomationRequest {
+
+    val maxSize: Z = z"527472"
+
+    def empty: MAutomationRequest = {
+      return MAutomationRequest(u16"0", MSZ[MEntityId](), u16"0", MSZ[MTaskId](), TaskRelationships.empty, s64"0", u8"0")
+    }
+
+    def decode(input: ISZ[B], context: Context): Option[AutomationRequest] = {
+      val r = empty
+      r.decode(input, context)
+      return if (context.hasError) None[AutomationRequest]() else Some(r.toImmutable)
+    }
+
+    def toMutableEntityList(s: ISZ[EntityId]): MSZ[MEntityId] = {
+      var r = MSZ[MEntityId]()
+      for (e <- s) {
+        r = r :+ e.toMutable
+      }
+      return r
+    }
+
+    def toImmutableEntityList(s: MSZ[MEntityId]): ISZ[EntityId] = {
+      var r = ISZ[EntityId]()
+      for (e <- s) {
+        r = r :+ e.toImmutable
+      }
+      return r
+    }
+
+    def toMutableTaskList(s: ISZ[TaskId]): MSZ[MTaskId] = {
+      var r = MSZ[MTaskId]()
+      for (e <- s) {
+        r = r :+ e.toMutable
+      }
+      return r
+    }
+
+    def toImmutableTaskList(s: MSZ[MTaskId]): ISZ[TaskId] = {
+      var r = ISZ[TaskId]()
+      for (e <- s) {
+        r = r :+ e.toImmutable
+      }
+      return r
+    }
+  }
+
+  @datatype class AutomationRequest(
+    val _entityListSize: U16,
+    val entityList: ISZ[EntityId],
+    val _taskListSize: U16,
+    val taskList: ISZ[TaskId],
+    val taskRelationships: TaskRelationships,
+    val operatingRegion: S64,
+    val redoAllTasks: U8
+  ) extends LMCPObject {
+
+    @strictpure def toMutable: MAutomationRequest = MAutomationRequest(_entityListSize, AutomationRequest.toMutableEntityList(entityList), _taskListSize, AutomationRequest.toMutableTaskList(taskList), taskRelationships.toMutable, operatingRegion, redoAllTasks)
+
+    def encode(context: Context): Option[ISZ[B]] = {
+      val buffer = MSZ.create(527472, F)
+      toMutable.encode(buffer, context)
+      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
+    }
+
+    def wellFormed: Z = {
+      return toMutable.wellFormed
+    }
+  }
+
+  @record class MAutomationRequest(
+    var _entityListSize: U16,
+    var entityList: MSZ[MEntityId],
+    var _taskListSize: U16,
+    var taskList: MSZ[MTaskId],
+    var taskRelationships: MTaskRelationships,
+    var operatingRegion: S64,
+    var redoAllTasks: U8
+  ) extends MLMCPObject {
+
+    @strictpure def toImmutable: AutomationRequest = AutomationRequest(_entityListSize, AutomationRequest.toImmutableEntityList(entityList), _taskListSize, AutomationRequest.toImmutableTaskList(taskList), taskRelationships.toImmutable, operatingRegion, redoAllTasks)
+
+    def wellFormed: Z = {
+
+      if (entityList.size > 16) {
+        return ERROR_AutomationRequest_entityList
+      }
+
+      val entityListSize = sizeOfEntityList(_entityListSize)
+      if (entityList.size != entityListSize) {
+        return ERROR_AutomationRequest_entityList
+      }
+
+      if (taskList.size > 32) {
+        return ERROR_AutomationRequest_taskList
+      }
+
+      val taskListSize = sizeOfTaskList(_taskListSize)
+      if (taskList.size != taskListSize) {
+        return ERROR_AutomationRequest_taskList
+      }
+
+      val wfTaskRelationships = taskRelationships.wellFormed
+      if (wfTaskRelationships != 0) {
+        return wfTaskRelationships
+      }
+
+      // BEGIN USER CODE: AutomationRequest.wellFormed
+
+      // END USER CODE: AutomationRequest.wellFormed
+
+      return 0
+    }
+
+    def decode(input: ISZ[B], context: Context): Unit = {
+      _entityListSize = Reader.IS.beU16(input, context)
+      val entityListSize = sizeOfEntityList(_entityListSize)
+      if (entityListSize >= 0) {
+        entityList = MSZ.create(entityListSize, EntityId.empty)
+        for (i <- 0 until entityListSize) {
+          entityList(i).decode(input, context)
+        }
+      } else {
+        context.signalError(ERROR_AutomationRequest_entityList)
+      }
+      _taskListSize = Reader.IS.beU16(input, context)
+      val taskListSize = sizeOfTaskList(_taskListSize)
+      if (taskListSize >= 0) {
+        taskList = MSZ.create(taskListSize, TaskId.empty)
+        for (i <- 0 until taskListSize) {
+          taskList(i).decode(input, context)
+        }
+      } else {
+        context.signalError(ERROR_AutomationRequest_taskList)
+      }
+      taskRelationships.decode(input, context)
+      operatingRegion = Reader.IS.beS64(input, context)
+      redoAllTasks = Reader.IS.bleU8(input, context)
+
+      val wf = wellFormed
+      if (wf != 0) {
+        context.signalError(wf)
+      }
+    }
+
+    def encode(output: MSZ[B], context: Context): Unit = {
+      Writer.beU16(output, context, _entityListSize)
+      val entityListSize = sizeOfEntityList(_entityListSize)
+      if (entityListSize >= 0) {
+        for (i <- 0 until entityListSize) {
+          entityList(i).encode(output, context)
+        }
+      } else {
+        context.signalError(ERROR_AutomationRequest_entityList)
+      }
+      Writer.beU16(output, context, _taskListSize)
+      val taskListSize = sizeOfTaskList(_taskListSize)
+      if (taskListSize >= 0) {
+        for (i <- 0 until taskListSize) {
+          taskList(i).encode(output, context)
+        }
+      } else {
+        context.signalError(ERROR_AutomationRequest_taskList)
+      }
+      taskRelationships.encode(output, context)
+      Writer.beS64(output, context, operatingRegion)
+      Writer.bleU8(output, context, redoAllTasks)
+
+      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
+        context.updateErrorCode(ERROR_AutomationRequest)
+      }
+    }
+
+    def sizeOfEntityList(l: U16): Z = {
+      val r: Z = {
+        conversions.U16.toZ(l)
+      }
+      return r
+    }
+
+    def sizeOfTaskList(l: U16): Z = {
+      val r: Z = {
+        conversions.U16.toZ(l)
+      }
+      return r
+    }
+  }
+
   @datatype trait LMCPObject {
     @strictpure def toMutable: MLMCPObject
     def encode(context: Context): Option[ISZ[B]]
@@ -4672,6 +5127,7 @@ object BitCodec {
        'OperatingRegion
        'AirVehicleState
        'LineSearchTask
+       'AutomationRequest
        'Error
     }
 
@@ -4684,6 +5140,8 @@ object BitCodec {
         case (CMASISeriesID, AIRVEHICLESTATE, CMASISeriesVersion) => 1
         // LineSearchTask (see ./afrl/cmasi/afrlcmasiLineSearchTask.cpp)
         case (CMASISeriesID, LINESEARCHTASK, CMASISeriesVersion) => 2
+        // AutomationRequest (see ./afrl/cmasi/afrlcmasiAutomationRequest.cpp)
+        case (CMASISeriesID, AUTOMATIONREQUEST, CMASISeriesVersion) => 3
         case (_, _, _) => -1
         }
       }
@@ -4691,6 +5149,7 @@ object BitCodec {
         case z"0" => return Choice.OperatingRegion
         case z"1" => return Choice.AirVehicleState
         case z"2" => return Choice.LineSearchTask
+        case z"3" => return Choice.AutomationRequest
         case _ =>
       }
       return Choice.Error
@@ -4755,6 +5214,7 @@ object BitCodec {
         case (LMCPObject.Choice.OperatingRegion, _: MOperatingRegion) =>
         case (LMCPObject.Choice.AirVehicleState, _: MAirVehicleState) =>
         case (LMCPObject.Choice.LineSearchTask, _: MLineSearchTask) =>
+        case (LMCPObject.Choice.AutomationRequest, _: MAutomationRequest) =>
         case _ => return ERROR_LMCPObject
       }
 
@@ -4779,6 +5239,7 @@ object BitCodec {
         case LMCPObject.Choice.OperatingRegion => lMCPObject = OperatingRegion.empty
         case LMCPObject.Choice.AirVehicleState => lMCPObject = AirVehicleState.empty
         case LMCPObject.Choice.LineSearchTask => lMCPObject = LineSearchTask.empty
+        case LMCPObject.Choice.AutomationRequest => lMCPObject = AutomationRequest.empty
         case _ => context.signalError(ERROR_LMCPObject)
       }
       lMCPObject.decode(input, context)
@@ -4963,7 +5424,7 @@ val expectedOperatingRegionMessage = MLMCPMessage(
       s64"0x0000000000000150",
       u16"0x0001",
       MSZ(MId(u64"0x000000000000014E")),
-      u16"0x00001",
+      u16"0x0001",
       MSZ(MId(u64"0x000000000000014F"))
     )
   ),
@@ -5014,5 +5475,38 @@ assert(lmcpMessageOperatingRegionOutputBitstream.toIS == lmcpMessageOperatingReg
 // println(s"encode(bitstream) = ${lmcpMessageOperatingRegionOutputBitstream}")
 // println(s"input bitstream   = ${lmcpMessageOperatingRegionBitstream}")
 // println(s"encode(bitstream).errorCode = ${lmcpMessageOperatingRegionOutputContext.errorCode}")
+
+val expectedAutomationRequestMessage = MLMCPMessage (
+  s32"0x4c4d4350",
+  u32"0x2E",
+  MLMCPObjectDecode(
+    u8"0x01",
+    s64"0x434D415349000000",
+    u32"0x00000028",
+    u16"0x0003",
+    MAutomationRequest(
+      u16"0x0001",
+      MSZ(MEntityId(s64"0x0000000000000190")),
+      u16"0x0001",
+      MSZ(MTaskId(s64"0x00000000000003E8")),
+      MTaskRelationships(
+        u16"0x0000",
+        MSZ()
+      ),
+      s64"0x0000000000000150",
+      u8"0x00"
+    )
+  ),
+  u32"0x000004C2"
+)
+
+val lmcpMessageAutomationRequestBitstream = ops.Bits.fromHexString("4C4D43500000002E01434D41534900000000000028000300010000000000000190000100000000000003E80000000000000000015000000004C2")
+val lmcpMessageAutomationRequestInputContext = Context.create
+val lmcpMessageAutomationRequestDecoded = LMCPMessage.empty
+lmcpMessageAutomationRequestDecoded.decode(lmcpMessageAutomationRequestBitstream, lmcpMessageAutomationRequestInputContext)
+assert(lmcpMessageAutomationRequestInputContext.offset == lmcpMessageAutomationRequestBitstream.size)
+assert(lmcpMessageAutomationRequestInputContext.errorCode == 0 && lmcpMessageAutomationRequestInputContext.errorOffset == 0)
+assert(lmcpMessageAutomationRequestDecoded == expectedAutomationRequestMessage)
+println(s"lmcpMessageAutomationRequestDecoded(lmcpMessageAutomationRequestBitstream) =\n\t $lmcpMessageAutomationRequestDecoded")
 
 // END USER CODE: Test
