@@ -12,7 +12,19 @@ import org.sireum.ops.Bits.{Context, Reader, Writer}
 import org.sireum.bitcodec.Runtime
 
 // BEGIN USER CODE: Imports
+val CMASISeriesID = s64"4849604199710720000"
+val CMASISeriesVersion : U16 = u16"3"
 
+val KEYVALUEPAIR = u32"2"
+val LOCATION3D = u32"3"
+val PAYLOADSTATE = u32"6"
+val TASK = u32"8"
+val SEARCHTASK = u32"9"
+val ENTITYSTATE = u32"14"
+val AIRVEHICLESTATE = u32"15"
+val WEDGE = u32"16"
+val LINESEARCHTASK = u32"31"
+val OPERATINGREGION = u32"39"
 // END USER CODE: Imports
 
 object BitCodec {
@@ -222,7 +234,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nullValue = Reader.IS.beU8(input, context)
+      nullValue = Reader.IS.bleU8(input, context)
 
       val wf = wellFormed
       if (wf != 0) {
@@ -231,7 +243,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nullValue)
+      Writer.bleU8(output, context, nullValue)
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
         context.updateErrorCode(ERROR_NullValue)
@@ -536,7 +548,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nullValueLMCPLocation3D = Reader.IS.beU8(input, context)
+      nullValueLMCPLocation3D = Reader.IS.bleU8(input, context)
 
       val wf = wellFormed
       if (wf != 0) {
@@ -545,7 +557,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nullValueLMCPLocation3D)
+      Writer.bleU8(output, context, nullValueLMCPLocation3D)
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
         context.updateErrorCode(ERROR_NullValueLMCPLocation3D)
@@ -712,7 +724,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nonNullValue = Reader.IS.beU8(input, context)
+      nonNullValue = Reader.IS.bleU8(input, context)
       seriesID = Reader.IS.beS64(input, context)
       typeID = Reader.IS.beU32(input, context)
       seriesVersion = Reader.IS.beU16(input, context)
@@ -725,7 +737,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nonNullValue)
+      Writer.bleU8(output, context, nonNullValue)
       Writer.beS64(output, context, seriesID)
       Writer.beU32(output, context, typeID)
       Writer.beU16(output, context, seriesVersion)
@@ -846,7 +858,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nullValuePayloadState = Reader.IS.beU8(input, context)
+      nullValuePayloadState = Reader.IS.bleU8(input, context)
 
       val wf = wellFormed
       if (wf != 0) {
@@ -855,7 +867,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nullValuePayloadState)
+      Writer.bleU8(output, context, nullValuePayloadState)
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
         context.updateErrorCode(ERROR_NullValuePayloadState)
@@ -917,7 +929,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nullValuepayloadStateParameter = Reader.IS.beU8(input, context)
+      nullValuepayloadStateParameter = Reader.IS.bleU8(input, context)
 
       val wf = wellFormed
       if (wf != 0) {
@@ -926,7 +938,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nullValuepayloadStateParameter)
+      Writer.bleU8(output, context, nullValuepayloadStateParameter)
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
         context.updateErrorCode(ERROR_NullValuepayloadStateParameter)
@@ -985,7 +997,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      c = Reader.IS.beU8(input, context)
+      c = Reader.IS.bleU8(input, context)
 
       val wf = wellFormed
       if (wf != 0) {
@@ -994,7 +1006,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, c)
+      Writer.bleU8(output, context, c)
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
         context.updateErrorCode(ERROR_C)
@@ -1394,7 +1406,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nonNullValue = Reader.IS.beU8(input, context)
+      nonNullValue = Reader.IS.bleU8(input, context)
       seriesID = Reader.IS.beS64(input, context)
       typeID = Reader.IS.beU32(input, context)
       seriesVersion = Reader.IS.beU16(input, context)
@@ -1407,7 +1419,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nonNullValue)
+      Writer.bleU8(output, context, nonNullValue)
       Writer.beS64(output, context, seriesID)
       Writer.beU32(output, context, typeID)
       Writer.beU16(output, context, seriesVersion)
@@ -1673,7 +1685,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nonNullValue = Reader.IS.beU8(input, context)
+      nonNullValue = Reader.IS.bleU8(input, context)
       seriesID = Reader.IS.beS64(input, context)
       typeID = Reader.IS.beU32(input, context)
       seriesVersion = Reader.IS.beU16(input, context)
@@ -1686,7 +1698,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nonNullValue)
+      Writer.bleU8(output, context, nonNullValue)
       Writer.beS64(output, context, seriesID)
       Writer.beU32(output, context, typeID)
       Writer.beU16(output, context, seriesVersion)
@@ -1807,7 +1819,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nullValueInfo = Reader.IS.beU8(input, context)
+      nullValueInfo = Reader.IS.bleU8(input, context)
 
       val wf = wellFormed
       if (wf != 0) {
@@ -1816,7 +1828,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nullValueInfo)
+      Writer.bleU8(output, context, nullValueInfo)
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
         context.updateErrorCode(ERROR_NullValueInfo)
@@ -2216,7 +2228,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nonNullValue = Reader.IS.beU8(input, context)
+      nonNullValue = Reader.IS.bleU8(input, context)
       seriesID = Reader.IS.beS64(input, context)
       typeID = Reader.IS.beU32(input, context)
       seriesVersion = Reader.IS.beU16(input, context)
@@ -2229,7 +2241,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nonNullValue)
+      Writer.bleU8(output, context, nonNullValue)
       Writer.beS64(output, context, seriesID)
       Writer.beU32(output, context, typeID)
       Writer.beU16(output, context, seriesVersion)
@@ -2941,7 +2953,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nullValuetaskParameter = Reader.IS.beU8(input, context)
+      nullValuetaskParameter = Reader.IS.bleU8(input, context)
 
       val wf = wellFormed
       if (wf != 0) {
@@ -2950,7 +2962,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nullValuetaskParameter)
+      Writer.bleU8(output, context, nullValuetaskParameter)
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
         context.updateErrorCode(ERROR_NullValuetaskParameter)
@@ -3350,7 +3362,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nonNullValue = Reader.IS.beU8(input, context)
+      nonNullValue = Reader.IS.bleU8(input, context)
       seriesID = Reader.IS.beS64(input, context)
       typeID = Reader.IS.beU32(input, context)
       seriesVersion = Reader.IS.beU16(input, context)
@@ -3363,7 +3375,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nonNullValue)
+      Writer.bleU8(output, context, nonNullValue)
       Writer.beS64(output, context, seriesID)
       Writer.beU32(output, context, typeID)
       Writer.beU16(output, context, seriesVersion)
@@ -3573,8 +3585,8 @@ object BitCodec {
       } else {
         context.signalError(ERROR_Task_parameters)
       }
-      priority = Reader.IS.beS8(input, context)
-      required = Reader.IS.beU8(input, context)
+      priority = Reader.IS.bleS8(input, context)
+      required = Reader.IS.bleU8(input, context)
 
       val wf = wellFormed
       if (wf != 0) {
@@ -3604,8 +3616,8 @@ object BitCodec {
       } else {
         context.signalError(ERROR_Task_parameters)
       }
-      Writer.beS8(output, context, priority)
-      Writer.beU8(output, context, required)
+      Writer.bleS8(output, context, priority)
+      Writer.bleU8(output, context, required)
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
         context.updateErrorCode(ERROR_Task)
@@ -3881,7 +3893,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nullValuePoint = Reader.IS.beU8(input, context)
+      nullValuePoint = Reader.IS.bleU8(input, context)
 
       val wf = wellFormed
       if (wf != 0) {
@@ -3890,7 +3902,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nullValuePoint)
+      Writer.bleU8(output, context, nullValuePoint)
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
         context.updateErrorCode(ERROR_NullValuePoint)
@@ -4057,7 +4069,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nonNullValue = Reader.IS.beU8(input, context)
+      nonNullValue = Reader.IS.bleU8(input, context)
       seriesID = Reader.IS.beS64(input, context)
       typeID = Reader.IS.beU32(input, context)
       seriesVersion = Reader.IS.beU16(input, context)
@@ -4070,7 +4082,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nonNullValue)
+      Writer.bleU8(output, context, nonNullValue)
       Writer.beS64(output, context, seriesID)
       Writer.beU32(output, context, typeID)
       Writer.beU16(output, context, seriesVersion)
@@ -4191,7 +4203,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nullValueViewAngle = Reader.IS.beU8(input, context)
+      nullValueViewAngle = Reader.IS.bleU8(input, context)
 
       val wf = wellFormed
       if (wf != 0) {
@@ -4200,7 +4212,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nullValueViewAngle)
+      Writer.bleU8(output, context, nullValueViewAngle)
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
         context.updateErrorCode(ERROR_NullValueViewAngle)
@@ -4367,7 +4379,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nonNullValue = Reader.IS.beU8(input, context)
+      nonNullValue = Reader.IS.bleU8(input, context)
       seriesID = Reader.IS.beS64(input, context)
       typeID = Reader.IS.beU32(input, context)
       seriesVersion = Reader.IS.beU16(input, context)
@@ -4380,7 +4392,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nonNullValue)
+      Writer.bleU8(output, context, nonNullValue)
       Writer.beS64(output, context, seriesID)
       Writer.beU32(output, context, typeID)
       Writer.beU16(output, context, seriesVersion)
@@ -4582,7 +4594,7 @@ object BitCodec {
       } else {
         context.signalError(ERROR_LineSearchTask_viewAngleList)
       }
-      useInertialViewAngles = Reader.IS.beU8(input, context)
+      useInertialViewAngles = Reader.IS.bleU8(input, context)
 
       val wf = wellFormed
       if (wf != 0) {
@@ -4610,7 +4622,7 @@ object BitCodec {
       } else {
         context.signalError(ERROR_LineSearchTask_viewAngleList)
       }
-      Writer.beU8(output, context, useInertialViewAngles)
+      Writer.bleU8(output, context, useInertialViewAngles)
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
         context.updateErrorCode(ERROR_LineSearchTask)
@@ -4759,7 +4771,7 @@ object BitCodec {
     }
 
     def decode(input: ISZ[B], context: Context): Unit = {
-      nonNullValue = Reader.IS.beU8(input, context)
+      nonNullValue = Reader.IS.bleU8(input, context)
       seriesID = Reader.IS.beS64(input, context)
       typeID = Reader.IS.beU32(input, context)
       seriesVersion = Reader.IS.beU16(input, context)
@@ -4778,7 +4790,7 @@ object BitCodec {
     }
 
     def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU8(output, context, nonNullValue)
+      Writer.bleU8(output, context, nonNullValue)
       Writer.beS64(output, context, seriesID)
       Writer.beU32(output, context, typeID)
       Writer.beU16(output, context, seriesVersion)
@@ -4939,32 +4951,68 @@ object BitCodec {
 // BEGIN USER CODE: Test
 import BitCodec._
 
+val expectedOperatingRegionMessage = MLMCPMessage(
+  s32"0x4c4d4350",
+  u32"0x2B",
+  MLMCPObjectDecode(
+    u8"0x01",
+    s64"0x434D415349000000",
+    u32"0x00000027",
+    u16"0x0003",
+    MOperatingRegion(
+      s64"0x0000000000000150",
+      u16"0x0001",
+      MSZ(MId(u64"0x000000000000014E")),
+      u16"0x00001",
+      MSZ(MId(u64"0x000000000000014F"))
+    )
+  ),
+  u32"0x000003E1"
+)
 
-val operatingRegionBitstreamLE = ops.Bits.fromHexString("500100000000000001004E0100000000000001004F01000000000000", T)
-val operatingRegionBitstream = ops.Bits.fromHexString("00000000000001500001000000000000014E0001000000000000014F", T)
+val operatingRegionBitstream = ops.Bits.fromHexString("00000000000001500001000000000000014E0001000000000000014F")
 val operatingRegionContext = Context.create
 val operatingRegionDecoded = OperatingRegion.empty
-operatingRegionDecoded.decode(operatingRegionBitstreamLE, operatingRegionContext)
-println(s"decode(bitstream) = $operatingRegionDecoded")
-println(s"decode(bitstream).offset = ${operatingRegionContext.offset}")
-println(s"decode(bitstream).errorCode = ${operatingRegionContext.errorCode}")
-println(s"decode(bitstream).errorOffset = ${operatingRegionContext.errorOffset}")
+operatingRegionDecoded.decode(operatingRegionBitstream, operatingRegionContext)
+assert(operatingRegionContext.offset == operatingRegionBitstream.size)
+assert(operatingRegionContext.errorCode == 0 && operatingRegionContext.errorOffset == 0)
 
-val lmcpOperatingRegionBitstreamLE = ops.Bits.fromHexString("010000004953414D43270000000300500100000000000001004E0100000000000001004F01000000000000", T)
+// println(s"decode(bitstream).offset = ${operatingRegionContext.offset}")
+// println(s"decode(bitstream).errorCode = ${operatingRegionContext.errorCode}")
+// println(s"decode(bitstream).errorOffset = ${operatingRegionContext.errorOffset}")
+
+val lmcpOperatingRegionBitstream = ops.Bits.fromHexString("01434D41534900000000000027000300000000000001500001000000000000014E0001000000000000014F")
 val lmcpOperatingRegionContext = Context.create
 val lmcpOperatingRegionDecoded = LMCPObjectDecode.empty
-lmcpOperatingRegionDecoded.decode(lmcpOperatingRegionBitstreamLE, lmcpOperatingRegionContext)
-println(s"decode(bitstream) = $lmcpOperatingRegionDecoded")
-println(s"decode(bitstream).offset = ${lmcpOperatingRegionContext.offset}")
-println(s"decode(bitstream).errorCode = ${lmcpOperatingRegionContext.errorCode}")
-println(s"decode(bitstream).errorOffset = ${lmcpOperatingRegionContext.errorOffset}")
+lmcpOperatingRegionDecoded.decode(lmcpOperatingRegionBitstream, lmcpOperatingRegionContext)
+assert(lmcpOperatingRegionContext.offset == lmcpOperatingRegionBitstream.size)
+assert(lmcpOperatingRegionContext.errorCode == 0 && lmcpOperatingRegionContext.errorOffset == 0)
 
-val bitstream = ops.Bits.fromHexString("50434D4C2B000000010000004953414D43270000000300500100000000000001004E0100000000000001004F01000000000000E1030000",T)
-val lmcpMessageInputContext = Context.create
-val lmcpMessageDecoded = LMCPMessage.empty
-lmcpMessageDecoded.decode(bitstream, lmcpMessageInputContext)
-println(s"decode(bitstream) = $lmcpMessageDecoded")
-println(s"decode(bitstream).offset = ${lmcpMessageInputContext.offset}")
-println(s"decode(bitstream).errorCode = ${lmcpMessageInputContext.errorCode}")
-println(s"decode(bitstream).errorOffset = ${lmcpMessageInputContext.errorOffset}")
+// println(s"decode(bitstream) = $lmcpOperatingRegionDecoded")
+// println(s"decode(bitstream).offset = ${lmcpOperatingRegionContext.offset}")
+// println(s"decode(bitstream).errorCode = ${lmcpOperatingRegionContext.errorCode}")
+// println(s"decode(bitstream).errorOffset = ${lmcpOperatingRegionContext.errorOffset}")
+
+val lmcpMessageOperatingRegionBitstream = ops.Bits.fromHexString("4C4D43500000002B01434D41534900000000000027000300000000000001500001000000000000014E0001000000000000014F000003E1")
+val lmcpMessageOperatingRegionInputContext = Context.create
+val lmcpMessageOperatingRegionDecoded = LMCPMessage.empty
+lmcpMessageOperatingRegionDecoded.decode(lmcpMessageOperatingRegionBitstream, lmcpMessageOperatingRegionInputContext)
+assert(lmcpMessageOperatingRegionInputContext.offset == lmcpMessageOperatingRegionBitstream.size)
+assert(lmcpMessageOperatingRegionInputContext.errorCode == 0 && lmcpMessageOperatingRegionInputContext.errorOffset == 0)
+assert(lmcpMessageOperatingRegionDecoded == expectedOperatingRegionMessage)
+println(s"lmcpMessageOperatingRegionDecoded(lmcpMessageOperatingRegionBitstream) =\n\t $lmcpMessageOperatingRegionDecoded")
+
+// println(s"decode(bitstream).offset = ${lmcpMessageOperatingRegionInputContext.offset}")
+// println(s"decode(bitstream).errorCode = ${lmcpMessageOperatingRegionInputContext.errorCode}")
+// println(s"decode(bitstream).errorOffset = ${lmcpMessageOperatingRegionInputContext.errorOffset}")
+
+val lmcpMessageOperatingRegionOutputBitstream = MSZ.create(440,F)
+val lmcpMessageOperatingRegionOutputContext = Context.create
+lmcpMessageOperatingRegionDecoded.encode(lmcpMessageOperatingRegionOutputBitstream, lmcpMessageOperatingRegionOutputContext)
+assert(lmcpMessageOperatingRegionOutputBitstream.toIS == lmcpMessageOperatingRegionBitstream)
+
+// println(s"encode(bitstream) = ${lmcpMessageOperatingRegionOutputBitstream}")
+// println(s"input bitstream   = ${lmcpMessageOperatingRegionBitstream}")
+// println(s"encode(bitstream).errorCode = ${lmcpMessageOperatingRegionOutputContext.errorCode}")
+
 // END USER CODE: Test
