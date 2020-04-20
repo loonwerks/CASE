@@ -71,22 +71,23 @@ val STOPMOVEMENTACTION = 58
 val WAYPOINTTRANSFER = 59
 val PAYLOADSTOWACTION = 60
 
-@strictpure def lmcpObject(name: String, typeID: U32, packedObject: (String) => Concat) : PredUnion =
-  PredUnion(name = s"PredUnion${name}", subs = ISZ(
-    PredSpec(
-      ISZ(bytes(ISZ(0))),
-      UByteConst(s"nullValue${name}", 0)
-    ),
-    PredSpec(
-      ISZ(), // else
-      Concat(name = s"LMCP${name}", elements = ISZ(
-        UByteRange(name = "nonNullValue", min = 1, max = 255),
-        LongConst(name = "seriesID", value = conversions.S64.toZ(CMASISeriesID)),
-        UIntConst(name = "typeID", value = conversions.U32.toZ(typeID)),
-        UShortConst(name = "seriesVersion", value = conversions.U16.toZ(CMASISeriesVersion)),
-        packedObject(s"Packed${name}")
+@strictpure def lmcpObject(name: String, typeID: U32, packedObject: (String) => Concat) : Concat =
+  Concat(name = s"Object${name}", elements = ISZ(
+    PredUnion(name = s"PredUnion${name}", subs = ISZ(
+      PredSpec(
+        ISZ(bytes(ISZ(0))),
+        UByteConst(s"nullValue${name}", 0)
+      ),
+      PredSpec(
+        ISZ(), // else
+        Concat(name = s"LMCP${name}", elements = ISZ(
+          UByteRange(name = "nonNullValue", min = 1, max = 255),
+          LongConst(name = "seriesID", value = conversions.S64.toZ(CMASISeriesID)),
+          UIntConst(name = "typeID", value = conversions.U32.toZ(typeID)),
+          UShortConst(name = "seriesVersion", value = conversions.U16.toZ(CMASISeriesVersion)),
+          packedObject(s"Packed${name}")
     )))  
-  )) 
+  ))))
 
 // Packed Object Definitions
 

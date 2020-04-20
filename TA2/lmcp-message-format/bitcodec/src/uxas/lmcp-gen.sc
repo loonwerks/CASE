@@ -12,20 +12,7 @@ import org.sireum.ops.Bits.{Context, Reader, Writer}
 import org.sireum.bitcodec.Runtime
 
 // BEGIN USER CODE: Imports
-val CMASISeriesID = s64"4849604199710720000"
-val CMASISeriesVersion : U16 = u16"3"
 
-val KEYVALUEPAIR = u32"2"
-val LOCATION3D = u32"3"
-val PAYLOADSTATE = u32"6"
-val TASK = u32"8"
-val SEARCHTASK = u32"9"
-val ENTITYSTATE = u32"14"
-val AIRVEHICLESTATE = u32"15"
-val WEDGE = u32"16"
-val LINESEARCHTASK = u32"31"
-val OPERATINGREGION = u32"39"
-val AUTOMATIONREQUEST = u32"40"
 // END USER CODE: Imports
 
 object BitCodec {
@@ -48,137 +35,151 @@ object BitCodec {
 
   val ERROR_PredUnionLMCPLocation3D: Z = 11
 
-  val ERROR_NullValuePayloadState: Z = 12
+  val ERROR_ObjectLMCPLocation3D: Z = 12
 
-  val ERROR_NullValuepayloadStateParameter: Z = 13
+  val ERROR_NullValuePayloadState: Z = 13
 
-  val ERROR_C: Z = 14
+  val ERROR_NullValuepayloadStateParameter: Z = 14
 
-  val ERROR_PackedpayloadStateParameterKey_stringChars: Z = 15
+  val ERROR_C: Z = 15
 
-  val ERROR_PackedpayloadStateParameterKey: Z = 16
+  val ERROR_PackedpayloadStateParameterKey_stringChars: Z = 16
 
-  val ERROR_PackedpayloadStateParameterValue_stringChars: Z = 18
+  val ERROR_PackedpayloadStateParameterKey: Z = 17
 
-  val ERROR_PackedpayloadStateParameterValue: Z = 19
+  val ERROR_PackedpayloadStateParameterValue_stringChars: Z = 19
 
-  val ERROR_PackedpayloadStateParameter: Z = 20
+  val ERROR_PackedpayloadStateParameterValue: Z = 20
 
-  val ERROR_LMCPpayloadStateParameter: Z = 21
+  val ERROR_PackedpayloadStateParameter: Z = 21
 
-  val ERROR_PredUnionpayloadStateParameter: Z = 22
+  val ERROR_LMCPpayloadStateParameter: Z = 22
 
-  val ERROR_PackedPayloadState_parameters: Z = 23
+  val ERROR_PredUnionpayloadStateParameter: Z = 23
 
-  val ERROR_PackedPayloadState: Z = 24
+  val ERROR_ObjectpayloadStateParameter: Z = 24
 
-  val ERROR_LMCPPayloadState: Z = 25
+  val ERROR_PackedPayloadState_parameters: Z = 25
 
-  val ERROR_PredUnionPayloadState: Z = 26
+  val ERROR_PackedPayloadState: Z = 26
 
-  val ERROR_EntityState_payloadStateList: Z = 27
+  val ERROR_LMCPPayloadState: Z = 27
 
-  val ERROR_EntityState_associatedTasks: Z = 29
+  val ERROR_PredUnionPayloadState: Z = 28
 
-  val ERROR_NullValueInfo: Z = 30
+  val ERROR_ObjectPayloadState: Z = 29
 
-  val ERROR_PackedInfoKey_stringChars: Z = 32
+  val ERROR_EntityState_payloadStateList: Z = 30
 
-  val ERROR_PackedInfoKey: Z = 33
+  val ERROR_EntityState_associatedTasks: Z = 32
 
-  val ERROR_PackedInfoValue_stringChars: Z = 35
+  val ERROR_NullValueInfo: Z = 33
 
-  val ERROR_PackedInfoValue: Z = 36
+  val ERROR_PackedInfoKey_stringChars: Z = 35
 
-  val ERROR_PackedInfo: Z = 37
+  val ERROR_PackedInfoKey: Z = 36
 
-  val ERROR_LMCPInfo: Z = 38
+  val ERROR_PackedInfoValue_stringChars: Z = 38
 
-  val ERROR_PredUnionInfo: Z = 39
+  val ERROR_PackedInfoValue: Z = 39
 
-  val ERROR_EntityState_info: Z = 40
+  val ERROR_PackedInfo: Z = 40
 
-  val ERROR_EntityState: Z = 41
+  val ERROR_LMCPInfo: Z = 41
 
-  val ERROR_AirVehicleState: Z = 42
+  val ERROR_PredUnionInfo: Z = 42
 
-  val ERROR_Label_stringChars: Z = 44
+  val ERROR_ObjectInfo: Z = 43
 
-  val ERROR_Label: Z = 45
+  val ERROR_EntityState_info: Z = 44
 
-  val ERROR_Entity: Z = 46
+  val ERROR_EntityState: Z = 45
 
-  val ERROR_Task_eligibleEntities: Z = 47
+  val ERROR_AirVehicleState: Z = 46
 
-  val ERROR_NullValuetaskParameter: Z = 48
+  val ERROR_Label_stringChars: Z = 48
 
-  val ERROR_PackedtaskParameterKey_stringChars: Z = 50
+  val ERROR_Label: Z = 49
 
-  val ERROR_PackedtaskParameterKey: Z = 51
+  val ERROR_Entity: Z = 50
 
-  val ERROR_PackedtaskParameterValue_stringChars: Z = 53
+  val ERROR_Task_eligibleEntities: Z = 51
 
-  val ERROR_PackedtaskParameterValue: Z = 54
+  val ERROR_NullValuetaskParameter: Z = 52
 
-  val ERROR_PackedtaskParameter: Z = 55
+  val ERROR_PackedtaskParameterKey_stringChars: Z = 54
 
-  val ERROR_LMCPtaskParameter: Z = 56
+  val ERROR_PackedtaskParameterKey: Z = 55
 
-  val ERROR_PredUniontaskParameter: Z = 57
+  val ERROR_PackedtaskParameterValue_stringChars: Z = 57
 
-  val ERROR_Task_parameters: Z = 58
+  val ERROR_PackedtaskParameterValue: Z = 58
 
-  val ERROR_Task: Z = 59
+  val ERROR_PackedtaskParameter: Z = 59
 
-  val ERROR_Band: Z = 60
+  val ERROR_LMCPtaskParameter: Z = 60
 
-  val ERROR_SearchTask_desiredWavelengthBands: Z = 61
+  val ERROR_PredUniontaskParameter: Z = 61
 
-  val ERROR_SearchTask: Z = 62
+  val ERROR_ObjecttaskParameter: Z = 62
 
-  val ERROR_NullValuePoint: Z = 63
+  val ERROR_Task_parameters: Z = 63
 
-  val ERROR_PackedPoint: Z = 64
+  val ERROR_Task: Z = 64
 
-  val ERROR_LMCPPoint: Z = 65
+  val ERROR_Band: Z = 65
 
-  val ERROR_PredUnionPoint: Z = 66
+  val ERROR_SearchTask_desiredWavelengthBands: Z = 66
 
-  val ERROR_LineSearchTask_pointList: Z = 67
+  val ERROR_SearchTask: Z = 67
 
-  val ERROR_NullValueViewAngle: Z = 68
+  val ERROR_NullValuePoint: Z = 68
 
-  val ERROR_PackedViewAngle: Z = 69
+  val ERROR_PackedPoint: Z = 69
 
-  val ERROR_LMCPViewAngle: Z = 70
+  val ERROR_LMCPPoint: Z = 70
 
-  val ERROR_PredUnionViewAngle: Z = 71
+  val ERROR_PredUnionPoint: Z = 71
 
-  val ERROR_LineSearchTask_viewAngleList: Z = 72
+  val ERROR_ObjectPoint: Z = 72
 
-  val ERROR_LineSearchTask: Z = 73
+  val ERROR_LineSearchTask_pointList: Z = 73
 
-  val ERROR_EntityId: Z = 74
+  val ERROR_NullValueViewAngle: Z = 74
 
-  val ERROR_AutomationRequest_entityList: Z = 75
+  val ERROR_PackedViewAngle: Z = 75
 
-  val ERROR_TaskId: Z = 76
+  val ERROR_LMCPViewAngle: Z = 76
 
-  val ERROR_AutomationRequest_taskList: Z = 77
+  val ERROR_PredUnionViewAngle: Z = 77
 
-  val ERROR_TaskRelationships_stringChars: Z = 79
+  val ERROR_ObjectViewAngle: Z = 78
 
-  val ERROR_TaskRelationships: Z = 80
+  val ERROR_LineSearchTask_viewAngleList: Z = 79
 
-  val ERROR_AutomationRequest: Z = 81
+  val ERROR_LineSearchTask: Z = 80
 
-  val ERROR_LMCPObject: Z = 82
+  val ERROR_EntityId: Z = 81
 
-  val ERROR_LMCPObjectDecode: Z = 83
+  val ERROR_AutomationRequest_entityList: Z = 82
 
-  val ERROR_LMCPObjectNullCheck: Z = 84
+  val ERROR_TaskId: Z = 83
 
-  val ERROR_LMCPMessage: Z = 85
+  val ERROR_AutomationRequest_taskList: Z = 84
+
+  val ERROR_TaskRelationships_stringChars: Z = 86
+
+  val ERROR_TaskRelationships: Z = 87
+
+  val ERROR_AutomationRequest: Z = 88
+
+  val ERROR_LMCPObject: Z = 89
+
+  val ERROR_LMCPObjectDecode: Z = 90
+
+  val ERROR_LMCPObjectNullCheck: Z = 91
+
+  val ERROR_LMCPMessage: Z = 92
 
   // BEGIN USER CODE: Members
   val CMASISeriesID = s64"4849604199710720000"
@@ -194,6 +195,7 @@ object BitCodec {
   val WEDGE = u32"16"
   val LINESEARCHTASK = u32"31"
   val OPERATINGREGION = u32"39"
+  val AUTOMATIONREQUEST = u32"40"
   // END USER CODE: Members
 
   object NullValue {
@@ -816,6 +818,79 @@ object BitCodec {
         }
       }
       return Choice.Error
+    }
+
+  }
+
+  object ObjectLMCPLocation3D {
+
+    val maxSize: Z = z"312"
+
+    def empty: MObjectLMCPLocation3D = {
+      return MObjectLMCPLocation3D(NullValueLMCPLocation3D.empty)
+    }
+
+    def decode(input: ISZ[B], context: Context): Option[ObjectLMCPLocation3D] = {
+      val r = empty
+      r.decode(input, context)
+      return if (context.hasError) None[ObjectLMCPLocation3D]() else Some(r.toImmutable)
+    }
+
+  }
+
+  @datatype class ObjectLMCPLocation3D(
+    val predUnionLMCPLocation3D: PredUnionLMCPLocation3D
+  ) {
+
+    @strictpure def toMutable: MObjectLMCPLocation3D = MObjectLMCPLocation3D(predUnionLMCPLocation3D.toMutable)
+
+    def encode(context: Context): Option[ISZ[B]] = {
+      val buffer = MSZ.create(312, F)
+      toMutable.encode(buffer, context)
+      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
+    }
+
+    def wellFormed: Z = {
+      return toMutable.wellFormed
+    }
+  }
+
+  @record class MObjectLMCPLocation3D(
+    var predUnionLMCPLocation3D: MPredUnionLMCPLocation3D
+  ) extends Runtime.Composite {
+
+    @strictpure def toImmutable: ObjectLMCPLocation3D = ObjectLMCPLocation3D(predUnionLMCPLocation3D.toImmutable)
+
+    def wellFormed: Z = {
+
+
+      // BEGIN USER CODE: ObjectLMCPLocation3D.wellFormed
+
+      // END USER CODE: ObjectLMCPLocation3D.wellFormed
+
+      return 0
+    }
+
+    def decode(input: ISZ[B], context: Context): Unit = {
+      PredUnionLMCPLocation3D.choose(input, context) match {
+        case PredUnionLMCPLocation3D.Choice.NullValueLMCPLocation3D => predUnionLMCPLocation3D = NullValueLMCPLocation3D.empty
+        case PredUnionLMCPLocation3D.Choice.LMCPLMCPLocation3D => predUnionLMCPLocation3D = LMCPLMCPLocation3D.empty
+        case _ => context.signalError(ERROR_PredUnionLMCPLocation3D)
+      }
+      predUnionLMCPLocation3D.decode(input, context)
+
+      val wf = wellFormed
+      if (wf != 0) {
+        context.signalError(wf)
+      }
+    }
+
+    def encode(output: MSZ[B], context: Context): Unit = {
+      predUnionLMCPLocation3D.encode(output, context)
+
+      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
+        context.updateErrorCode(ERROR_ObjectLMCPLocation3D)
+      }
     }
 
   }
@@ -1502,12 +1577,85 @@ object BitCodec {
 
   }
 
+  object ObjectpayloadStateParameter {
+
+    val maxSize: Z = z"1048712"
+
+    def empty: MObjectpayloadStateParameter = {
+      return MObjectpayloadStateParameter(NullValuepayloadStateParameter.empty)
+    }
+
+    def decode(input: ISZ[B], context: Context): Option[ObjectpayloadStateParameter] = {
+      val r = empty
+      r.decode(input, context)
+      return if (context.hasError) None[ObjectpayloadStateParameter]() else Some(r.toImmutable)
+    }
+
+  }
+
+  @datatype class ObjectpayloadStateParameter(
+    val predUnionpayloadStateParameter: PredUnionpayloadStateParameter
+  ) {
+
+    @strictpure def toMutable: MObjectpayloadStateParameter = MObjectpayloadStateParameter(predUnionpayloadStateParameter.toMutable)
+
+    def encode(context: Context): Option[ISZ[B]] = {
+      val buffer = MSZ.create(1048712, F)
+      toMutable.encode(buffer, context)
+      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
+    }
+
+    def wellFormed: Z = {
+      return toMutable.wellFormed
+    }
+  }
+
+  @record class MObjectpayloadStateParameter(
+    var predUnionpayloadStateParameter: MPredUnionpayloadStateParameter
+  ) extends Runtime.Composite {
+
+    @strictpure def toImmutable: ObjectpayloadStateParameter = ObjectpayloadStateParameter(predUnionpayloadStateParameter.toImmutable)
+
+    def wellFormed: Z = {
+
+
+      // BEGIN USER CODE: ObjectpayloadStateParameter.wellFormed
+
+      // END USER CODE: ObjectpayloadStateParameter.wellFormed
+
+      return 0
+    }
+
+    def decode(input: ISZ[B], context: Context): Unit = {
+      PredUnionpayloadStateParameter.choose(input, context) match {
+        case PredUnionpayloadStateParameter.Choice.NullValuepayloadStateParameter => predUnionpayloadStateParameter = NullValuepayloadStateParameter.empty
+        case PredUnionpayloadStateParameter.Choice.LMCPpayloadStateParameter => predUnionpayloadStateParameter = LMCPpayloadStateParameter.empty
+        case _ => context.signalError(ERROR_PredUnionpayloadStateParameter)
+      }
+      predUnionpayloadStateParameter.decode(input, context)
+
+      val wf = wellFormed
+      if (wf != 0) {
+        context.signalError(wf)
+      }
+    }
+
+    def encode(output: MSZ[B], context: Context): Unit = {
+      predUnionpayloadStateParameter.encode(output, context)
+
+      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
+        context.updateErrorCode(ERROR_ObjectpayloadStateParameter)
+      }
+    }
+
+  }
+
   object PackedPayloadState {
 
     val maxSize: Z = z"8389776"
 
     def empty: MPackedPayloadState = {
-      return MPackedPayloadState(s64"0", u16"0", MSZ[MPredUnionpayloadStateParameter]())
+      return MPackedPayloadState(s64"0", u16"0", MSZ[MObjectpayloadStateParameter]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedPayloadState] = {
@@ -1516,16 +1664,16 @@ object BitCodec {
       return if (context.hasError) None[PackedPayloadState]() else Some(r.toImmutable)
     }
 
-    def toMutableParameters(s: ISZ[PredUnionpayloadStateParameter]): MSZ[MPredUnionpayloadStateParameter] = {
-      var r = MSZ[MPredUnionpayloadStateParameter]()
+    def toMutableParameters(s: ISZ[ObjectpayloadStateParameter]): MSZ[MObjectpayloadStateParameter] = {
+      var r = MSZ[MObjectpayloadStateParameter]()
       for (e <- s) {
         r = r :+ e.toMutable
       }
       return r
     }
 
-    def toImmutableParameters(s: MSZ[MPredUnionpayloadStateParameter]): ISZ[PredUnionpayloadStateParameter] = {
-      var r = ISZ[PredUnionpayloadStateParameter]()
+    def toImmutableParameters(s: MSZ[MObjectpayloadStateParameter]): ISZ[ObjectpayloadStateParameter] = {
+      var r = ISZ[ObjectpayloadStateParameter]()
       for (e <- s) {
         r = r :+ e.toImmutable
       }
@@ -1536,7 +1684,7 @@ object BitCodec {
   @datatype class PackedPayloadState(
     val payloadID: S64,
     val _parametersSize: U16,
-    val parameters: ISZ[PredUnionpayloadStateParameter]
+    val parameters: ISZ[ObjectpayloadStateParameter]
   ) {
 
     @strictpure def toMutable: MPackedPayloadState = MPackedPayloadState(payloadID, _parametersSize, PackedPayloadState.toMutableParameters(parameters))
@@ -1555,7 +1703,7 @@ object BitCodec {
   @record class MPackedPayloadState(
     var payloadID: S64,
     var _parametersSize: U16,
-    var parameters: MSZ[MPredUnionpayloadStateParameter]
+    var parameters: MSZ[MObjectpayloadStateParameter]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedPayloadState = PackedPayloadState(payloadID, _parametersSize, PackedPayloadState.toImmutableParameters(parameters))
@@ -1583,7 +1731,7 @@ object BitCodec {
       _parametersSize = Reader.IS.beU16(input, context)
       val parametersSize = sizeOfParameters(_parametersSize)
       if (parametersSize >= 0) {
-        parameters = MSZ.create(parametersSize, PredUnionpayloadStateParameter.empty)
+        parameters = MSZ.create(parametersSize, ObjectpayloadStateParameter.empty)
         for (i <- 0 until parametersSize) {
           parameters(i).decode(input, context)
         }
@@ -1777,6 +1925,79 @@ object BitCodec {
         }
       }
       return Choice.Error
+    }
+
+  }
+
+  object ObjectPayloadState {
+
+    val maxSize: Z = z"8389896"
+
+    def empty: MObjectPayloadState = {
+      return MObjectPayloadState(NullValuePayloadState.empty)
+    }
+
+    def decode(input: ISZ[B], context: Context): Option[ObjectPayloadState] = {
+      val r = empty
+      r.decode(input, context)
+      return if (context.hasError) None[ObjectPayloadState]() else Some(r.toImmutable)
+    }
+
+  }
+
+  @datatype class ObjectPayloadState(
+    val predUnionPayloadState: PredUnionPayloadState
+  ) {
+
+    @strictpure def toMutable: MObjectPayloadState = MObjectPayloadState(predUnionPayloadState.toMutable)
+
+    def encode(context: Context): Option[ISZ[B]] = {
+      val buffer = MSZ.create(8389896, F)
+      toMutable.encode(buffer, context)
+      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
+    }
+
+    def wellFormed: Z = {
+      return toMutable.wellFormed
+    }
+  }
+
+  @record class MObjectPayloadState(
+    var predUnionPayloadState: MPredUnionPayloadState
+  ) extends Runtime.Composite {
+
+    @strictpure def toImmutable: ObjectPayloadState = ObjectPayloadState(predUnionPayloadState.toImmutable)
+
+    def wellFormed: Z = {
+
+
+      // BEGIN USER CODE: ObjectPayloadState.wellFormed
+
+      // END USER CODE: ObjectPayloadState.wellFormed
+
+      return 0
+    }
+
+    def decode(input: ISZ[B], context: Context): Unit = {
+      PredUnionPayloadState.choose(input, context) match {
+        case PredUnionPayloadState.Choice.NullValuePayloadState => predUnionPayloadState = NullValuePayloadState.empty
+        case PredUnionPayloadState.Choice.LMCPPayloadState => predUnionPayloadState = LMCPPayloadState.empty
+        case _ => context.signalError(ERROR_PredUnionPayloadState)
+      }
+      predUnionPayloadState.decode(input, context)
+
+      val wf = wellFormed
+      if (wf != 0) {
+        context.signalError(wf)
+      }
+    }
+
+    def encode(output: MSZ[B], context: Context): Unit = {
+      predUnionPayloadState.encode(output, context)
+
+      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
+        context.updateErrorCode(ERROR_ObjectPayloadState)
+      }
     }
 
   }
@@ -2324,12 +2545,85 @@ object BitCodec {
 
   }
 
+  object ObjectInfo {
+
+    val maxSize: Z = z"1048712"
+
+    def empty: MObjectInfo = {
+      return MObjectInfo(NullValueInfo.empty)
+    }
+
+    def decode(input: ISZ[B], context: Context): Option[ObjectInfo] = {
+      val r = empty
+      r.decode(input, context)
+      return if (context.hasError) None[ObjectInfo]() else Some(r.toImmutable)
+    }
+
+  }
+
+  @datatype class ObjectInfo(
+    val predUnionInfo: PredUnionInfo
+  ) {
+
+    @strictpure def toMutable: MObjectInfo = MObjectInfo(predUnionInfo.toMutable)
+
+    def encode(context: Context): Option[ISZ[B]] = {
+      val buffer = MSZ.create(1048712, F)
+      toMutable.encode(buffer, context)
+      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
+    }
+
+    def wellFormed: Z = {
+      return toMutable.wellFormed
+    }
+  }
+
+  @record class MObjectInfo(
+    var predUnionInfo: MPredUnionInfo
+  ) extends Runtime.Composite {
+
+    @strictpure def toImmutable: ObjectInfo = ObjectInfo(predUnionInfo.toImmutable)
+
+    def wellFormed: Z = {
+
+
+      // BEGIN USER CODE: ObjectInfo.wellFormed
+
+      // END USER CODE: ObjectInfo.wellFormed
+
+      return 0
+    }
+
+    def decode(input: ISZ[B], context: Context): Unit = {
+      PredUnionInfo.choose(input, context) match {
+        case PredUnionInfo.Choice.NullValueInfo => predUnionInfo = NullValueInfo.empty
+        case PredUnionInfo.Choice.LMCPInfo => predUnionInfo = LMCPInfo.empty
+        case _ => context.signalError(ERROR_PredUnionInfo)
+      }
+      predUnionInfo.decode(input, context)
+
+      val wf = wellFormed
+      if (wf != 0) {
+        context.signalError(wf)
+      }
+    }
+
+    def encode(output: MSZ[B], context: Context): Unit = {
+      predUnionInfo.encode(output, context)
+
+      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
+        context.updateErrorCode(ERROR_ObjectInfo)
+      }
+    }
+
+  }
+
   object EntityState {
 
     val maxSize: Z = z"100679624"
 
     def empty: MEntityState = {
-      return MEntityState(s64"0", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, NullValueLMCPLocation3D.empty, 0.0f, 0.0f, u16"0", MSZ[MPredUnionPayloadState](), s64"0", s64"0", s32"0", u16"0", MSZ[MId](), s64"0", u16"0", MSZ[MPredUnionInfo]())
+      return MEntityState(s64"0", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ObjectLMCPLocation3D.empty, 0.0f, 0.0f, u16"0", MSZ[MObjectPayloadState](), s64"0", s64"0", s32"0", u16"0", MSZ[MId](), s64"0", u16"0", MSZ[MObjectInfo]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[EntityState] = {
@@ -2338,16 +2632,16 @@ object BitCodec {
       return if (context.hasError) None[EntityState]() else Some(r.toImmutable)
     }
 
-    def toMutablePayloadStateList(s: ISZ[PredUnionPayloadState]): MSZ[MPredUnionPayloadState] = {
-      var r = MSZ[MPredUnionPayloadState]()
+    def toMutablePayloadStateList(s: ISZ[ObjectPayloadState]): MSZ[MObjectPayloadState] = {
+      var r = MSZ[MObjectPayloadState]()
       for (e <- s) {
         r = r :+ e.toMutable
       }
       return r
     }
 
-    def toImmutablePayloadStateList(s: MSZ[MPredUnionPayloadState]): ISZ[PredUnionPayloadState] = {
-      var r = ISZ[PredUnionPayloadState]()
+    def toImmutablePayloadStateList(s: MSZ[MObjectPayloadState]): ISZ[ObjectPayloadState] = {
+      var r = ISZ[ObjectPayloadState]()
       for (e <- s) {
         r = r :+ e.toImmutable
       }
@@ -2370,16 +2664,16 @@ object BitCodec {
       return r
     }
 
-    def toMutableInfo(s: ISZ[PredUnionInfo]): MSZ[MPredUnionInfo] = {
-      var r = MSZ[MPredUnionInfo]()
+    def toMutableInfo(s: ISZ[ObjectInfo]): MSZ[MObjectInfo] = {
+      var r = MSZ[MObjectInfo]()
       for (e <- s) {
         r = r :+ e.toMutable
       }
       return r
     }
 
-    def toImmutableInfo(s: MSZ[MPredUnionInfo]): ISZ[PredUnionInfo] = {
-      var r = ISZ[PredUnionInfo]()
+    def toImmutableInfo(s: MSZ[MObjectInfo]): ISZ[ObjectInfo] = {
+      var r = ISZ[ObjectInfo]()
       for (e <- s) {
         r = r :+ e.toImmutable
       }
@@ -2403,11 +2697,11 @@ object BitCodec {
     val r: F32,
     val course: F32,
     val groundspeed: F32,
-    val predUnionLMCPLocation3D: PredUnionLMCPLocation3D,
+    val objectLMCPLocation3D: ObjectLMCPLocation3D,
     val energyAvailable: F32,
     val actualEnergyRate: F32,
     val _payloadStateListSize: U16,
-    val payloadStateList: ISZ[PredUnionPayloadState],
+    val payloadStateList: ISZ[ObjectPayloadState],
     val currentWaypoint: S64,
     val currentCommand: S64,
     val mode: S32,
@@ -2415,10 +2709,10 @@ object BitCodec {
     val associatedTasks: ISZ[Id],
     val time: S64,
     val _infoSize: U16,
-    val info: ISZ[PredUnionInfo]
+    val info: ISZ[ObjectInfo]
   ) {
 
-    @strictpure def toMutable: MEntityState = MEntityState(id, u, v, w, udot, vdot, wdot, heading, pitch, roll, p, q, r, course, groundspeed, predUnionLMCPLocation3D.toMutable, energyAvailable, actualEnergyRate, _payloadStateListSize, EntityState.toMutablePayloadStateList(payloadStateList), currentWaypoint, currentCommand, mode, _associatedTasksSize, EntityState.toMutableAssociatedTasks(associatedTasks), time, _infoSize, EntityState.toMutableInfo(info))
+    @strictpure def toMutable: MEntityState = MEntityState(id, u, v, w, udot, vdot, wdot, heading, pitch, roll, p, q, r, course, groundspeed, objectLMCPLocation3D.toMutable, energyAvailable, actualEnergyRate, _payloadStateListSize, EntityState.toMutablePayloadStateList(payloadStateList), currentWaypoint, currentCommand, mode, _associatedTasksSize, EntityState.toMutableAssociatedTasks(associatedTasks), time, _infoSize, EntityState.toMutableInfo(info))
 
     def encode(context: Context): Option[ISZ[B]] = {
       val buffer = MSZ.create(100679624, F)
@@ -2447,11 +2741,11 @@ object BitCodec {
     var r: F32,
     var course: F32,
     var groundspeed: F32,
-    var predUnionLMCPLocation3D: MPredUnionLMCPLocation3D,
+    var objectLMCPLocation3D: MObjectLMCPLocation3D,
     var energyAvailable: F32,
     var actualEnergyRate: F32,
     var _payloadStateListSize: U16,
-    var payloadStateList: MSZ[MPredUnionPayloadState],
+    var payloadStateList: MSZ[MObjectPayloadState],
     var currentWaypoint: S64,
     var currentCommand: S64,
     var mode: S32,
@@ -2459,12 +2753,17 @@ object BitCodec {
     var associatedTasks: MSZ[MId],
     var time: S64,
     var _infoSize: U16,
-    var info: MSZ[MPredUnionInfo]
+    var info: MSZ[MObjectInfo]
   ) extends Runtime.Composite {
 
-    @strictpure def toImmutable: EntityState = EntityState(id, u, v, w, udot, vdot, wdot, heading, pitch, roll, p, q, r, course, groundspeed, predUnionLMCPLocation3D.toImmutable, energyAvailable, actualEnergyRate, _payloadStateListSize, EntityState.toImmutablePayloadStateList(payloadStateList), currentWaypoint, currentCommand, mode, _associatedTasksSize, EntityState.toImmutableAssociatedTasks(associatedTasks), time, _infoSize, EntityState.toImmutableInfo(info))
+    @strictpure def toImmutable: EntityState = EntityState(id, u, v, w, udot, vdot, wdot, heading, pitch, roll, p, q, r, course, groundspeed, objectLMCPLocation3D.toImmutable, energyAvailable, actualEnergyRate, _payloadStateListSize, EntityState.toImmutablePayloadStateList(payloadStateList), currentWaypoint, currentCommand, mode, _associatedTasksSize, EntityState.toImmutableAssociatedTasks(associatedTasks), time, _infoSize, EntityState.toImmutableInfo(info))
 
     def wellFormed: Z = {
+
+      val wfObjectLMCPLocation3D = objectLMCPLocation3D.wellFormed
+      if (wfObjectLMCPLocation3D != 0) {
+        return wfObjectLMCPLocation3D
+      }
 
       if (payloadStateList.size > 8) {
         return ERROR_EntityState_payloadStateList
@@ -2516,18 +2815,13 @@ object BitCodec {
       r = Reader.IS.beF32(input, context)
       course = Reader.IS.beF32(input, context)
       groundspeed = Reader.IS.beF32(input, context)
-      PredUnionLMCPLocation3D.choose(input, context) match {
-        case PredUnionLMCPLocation3D.Choice.NullValueLMCPLocation3D => predUnionLMCPLocation3D = NullValueLMCPLocation3D.empty
-        case PredUnionLMCPLocation3D.Choice.LMCPLMCPLocation3D => predUnionLMCPLocation3D = LMCPLMCPLocation3D.empty
-        case _ => context.signalError(ERROR_PredUnionLMCPLocation3D)
-      }
-      predUnionLMCPLocation3D.decode(input, context)
+      objectLMCPLocation3D.decode(input, context)
       energyAvailable = Reader.IS.beF32(input, context)
       actualEnergyRate = Reader.IS.beF32(input, context)
       _payloadStateListSize = Reader.IS.beU16(input, context)
       val payloadStateListSize = sizeOfPayloadStateList(_payloadStateListSize)
       if (payloadStateListSize >= 0) {
-        payloadStateList = MSZ.create(payloadStateListSize, PredUnionPayloadState.empty)
+        payloadStateList = MSZ.create(payloadStateListSize, ObjectPayloadState.empty)
         for (i <- 0 until payloadStateListSize) {
           payloadStateList(i).decode(input, context)
         }
@@ -2551,7 +2845,7 @@ object BitCodec {
       _infoSize = Reader.IS.beU16(input, context)
       val infoSize = sizeOfInfo(_infoSize)
       if (infoSize >= 0) {
-        info = MSZ.create(infoSize, PredUnionInfo.empty)
+        info = MSZ.create(infoSize, ObjectInfo.empty)
         for (i <- 0 until infoSize) {
           info(i).decode(input, context)
         }
@@ -2581,7 +2875,7 @@ object BitCodec {
       Writer.beF32(output, context, r)
       Writer.beF32(output, context, course)
       Writer.beF32(output, context, groundspeed)
-      predUnionLMCPLocation3D.encode(output, context)
+      objectLMCPLocation3D.encode(output, context)
       Writer.beF32(output, context, energyAvailable)
       Writer.beF32(output, context, actualEnergyRate)
       Writer.beU16(output, context, _payloadStateListSize)
@@ -3458,12 +3752,85 @@ object BitCodec {
 
   }
 
+  object ObjecttaskParameter {
+
+    val maxSize: Z = z"1048712"
+
+    def empty: MObjecttaskParameter = {
+      return MObjecttaskParameter(NullValuetaskParameter.empty)
+    }
+
+    def decode(input: ISZ[B], context: Context): Option[ObjecttaskParameter] = {
+      val r = empty
+      r.decode(input, context)
+      return if (context.hasError) None[ObjecttaskParameter]() else Some(r.toImmutable)
+    }
+
+  }
+
+  @datatype class ObjecttaskParameter(
+    val predUniontaskParameter: PredUniontaskParameter
+  ) {
+
+    @strictpure def toMutable: MObjecttaskParameter = MObjecttaskParameter(predUniontaskParameter.toMutable)
+
+    def encode(context: Context): Option[ISZ[B]] = {
+      val buffer = MSZ.create(1048712, F)
+      toMutable.encode(buffer, context)
+      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
+    }
+
+    def wellFormed: Z = {
+      return toMutable.wellFormed
+    }
+  }
+
+  @record class MObjecttaskParameter(
+    var predUniontaskParameter: MPredUniontaskParameter
+  ) extends Runtime.Composite {
+
+    @strictpure def toImmutable: ObjecttaskParameter = ObjecttaskParameter(predUniontaskParameter.toImmutable)
+
+    def wellFormed: Z = {
+
+
+      // BEGIN USER CODE: ObjecttaskParameter.wellFormed
+
+      // END USER CODE: ObjecttaskParameter.wellFormed
+
+      return 0
+    }
+
+    def decode(input: ISZ[B], context: Context): Unit = {
+      PredUniontaskParameter.choose(input, context) match {
+        case PredUniontaskParameter.Choice.NullValuetaskParameter => predUniontaskParameter = NullValuetaskParameter.empty
+        case PredUniontaskParameter.Choice.LMCPtaskParameter => predUniontaskParameter = LMCPtaskParameter.empty
+        case _ => context.signalError(ERROR_PredUniontaskParameter)
+      }
+      predUniontaskParameter.decode(input, context)
+
+      val wf = wellFormed
+      if (wf != 0) {
+        context.signalError(wf)
+      }
+    }
+
+    def encode(output: MSZ[B], context: Context): Unit = {
+      predUniontaskParameter.encode(output, context)
+
+      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
+        context.updateErrorCode(ERROR_ObjecttaskParameter)
+      }
+    }
+
+  }
+
   object Task {
 
     val maxSize: Z = z"8916184"
 
     def empty: MTask = {
-      return MTask(s64"0", Label.empty, u16"0", MSZ[MEntity](), 0.0f, u16"0", MSZ[MPredUniontaskParameter](), s8"0", u8"0")
+      return MTask(s64"0", Label.empty, u16"0", MSZ[MEntity](), 0.0f, u16"0", MSZ[MObjecttaskParameter](), s8"0", u8"0")
     }
 
     def decode(input: ISZ[B], context: Context): Option[Task] = {
@@ -3488,16 +3855,16 @@ object BitCodec {
       return r
     }
 
-    def toMutableParameters(s: ISZ[PredUniontaskParameter]): MSZ[MPredUniontaskParameter] = {
-      var r = MSZ[MPredUniontaskParameter]()
+    def toMutableParameters(s: ISZ[ObjecttaskParameter]): MSZ[MObjecttaskParameter] = {
+      var r = MSZ[MObjecttaskParameter]()
       for (e <- s) {
         r = r :+ e.toMutable
       }
       return r
     }
 
-    def toImmutableParameters(s: MSZ[MPredUniontaskParameter]): ISZ[PredUniontaskParameter] = {
-      var r = ISZ[PredUniontaskParameter]()
+    def toImmutableParameters(s: MSZ[MObjecttaskParameter]): ISZ[ObjecttaskParameter] = {
+      var r = ISZ[ObjecttaskParameter]()
       for (e <- s) {
         r = r :+ e.toImmutable
       }
@@ -3512,7 +3879,7 @@ object BitCodec {
     val eligibleEntities: ISZ[Entity],
     val revisitRate: F32,
     val _parametersSize: U16,
-    val parameters: ISZ[PredUniontaskParameter],
+    val parameters: ISZ[ObjecttaskParameter],
     val priority: S8,
     val required: U8
   ) {
@@ -3537,7 +3904,7 @@ object BitCodec {
     var eligibleEntities: MSZ[MEntity],
     var revisitRate: F32,
     var _parametersSize: U16,
-    var parameters: MSZ[MPredUniontaskParameter],
+    var parameters: MSZ[MObjecttaskParameter],
     var priority: S8,
     var required: U8
   ) extends Runtime.Composite {
@@ -3593,7 +3960,7 @@ object BitCodec {
       _parametersSize = Reader.IS.beU16(input, context)
       val parametersSize = sizeOfParameters(_parametersSize)
       if (parametersSize >= 0) {
-        parameters = MSZ.create(parametersSize, PredUniontaskParameter.empty)
+        parameters = MSZ.create(parametersSize, ObjecttaskParameter.empty)
         for (i <- 0 until parametersSize) {
           parameters(i).decode(input, context)
         }
@@ -4165,6 +4532,79 @@ object BitCodec {
 
   }
 
+  object ObjectPoint {
+
+    val maxSize: Z = z"312"
+
+    def empty: MObjectPoint = {
+      return MObjectPoint(NullValuePoint.empty)
+    }
+
+    def decode(input: ISZ[B], context: Context): Option[ObjectPoint] = {
+      val r = empty
+      r.decode(input, context)
+      return if (context.hasError) None[ObjectPoint]() else Some(r.toImmutable)
+    }
+
+  }
+
+  @datatype class ObjectPoint(
+    val predUnionPoint: PredUnionPoint
+  ) {
+
+    @strictpure def toMutable: MObjectPoint = MObjectPoint(predUnionPoint.toMutable)
+
+    def encode(context: Context): Option[ISZ[B]] = {
+      val buffer = MSZ.create(312, F)
+      toMutable.encode(buffer, context)
+      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
+    }
+
+    def wellFormed: Z = {
+      return toMutable.wellFormed
+    }
+  }
+
+  @record class MObjectPoint(
+    var predUnionPoint: MPredUnionPoint
+  ) extends Runtime.Composite {
+
+    @strictpure def toImmutable: ObjectPoint = ObjectPoint(predUnionPoint.toImmutable)
+
+    def wellFormed: Z = {
+
+
+      // BEGIN USER CODE: ObjectPoint.wellFormed
+
+      // END USER CODE: ObjectPoint.wellFormed
+
+      return 0
+    }
+
+    def decode(input: ISZ[B], context: Context): Unit = {
+      PredUnionPoint.choose(input, context) match {
+        case PredUnionPoint.Choice.NullValuePoint => predUnionPoint = NullValuePoint.empty
+        case PredUnionPoint.Choice.LMCPPoint => predUnionPoint = LMCPPoint.empty
+        case _ => context.signalError(ERROR_PredUnionPoint)
+      }
+      predUnionPoint.decode(input, context)
+
+      val wf = wellFormed
+      if (wf != 0) {
+        context.signalError(wf)
+      }
+    }
+
+    def encode(output: MSZ[B], context: Context): Unit = {
+      predUnionPoint.encode(output, context)
+
+      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
+        context.updateErrorCode(ERROR_ObjectPoint)
+      }
+    }
+
+  }
+
   object NullValueViewAngle {
 
     val maxSize: Z = z"8"
@@ -4475,12 +4915,85 @@ object BitCodec {
 
   }
 
+  object ObjectViewAngle {
+
+    val maxSize: Z = z"248"
+
+    def empty: MObjectViewAngle = {
+      return MObjectViewAngle(NullValueViewAngle.empty)
+    }
+
+    def decode(input: ISZ[B], context: Context): Option[ObjectViewAngle] = {
+      val r = empty
+      r.decode(input, context)
+      return if (context.hasError) None[ObjectViewAngle]() else Some(r.toImmutable)
+    }
+
+  }
+
+  @datatype class ObjectViewAngle(
+    val predUnionViewAngle: PredUnionViewAngle
+  ) {
+
+    @strictpure def toMutable: MObjectViewAngle = MObjectViewAngle(predUnionViewAngle.toMutable)
+
+    def encode(context: Context): Option[ISZ[B]] = {
+      val buffer = MSZ.create(248, F)
+      toMutable.encode(buffer, context)
+      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
+    }
+
+    def wellFormed: Z = {
+      return toMutable.wellFormed
+    }
+  }
+
+  @record class MObjectViewAngle(
+    var predUnionViewAngle: MPredUnionViewAngle
+  ) extends Runtime.Composite {
+
+    @strictpure def toImmutable: ObjectViewAngle = ObjectViewAngle(predUnionViewAngle.toImmutable)
+
+    def wellFormed: Z = {
+
+
+      // BEGIN USER CODE: ObjectViewAngle.wellFormed
+
+      // END USER CODE: ObjectViewAngle.wellFormed
+
+      return 0
+    }
+
+    def decode(input: ISZ[B], context: Context): Unit = {
+      PredUnionViewAngle.choose(input, context) match {
+        case PredUnionViewAngle.Choice.NullValueViewAngle => predUnionViewAngle = NullValueViewAngle.empty
+        case PredUnionViewAngle.Choice.LMCPViewAngle => predUnionViewAngle = LMCPViewAngle.empty
+        case _ => context.signalError(ERROR_PredUnionViewAngle)
+      }
+      predUnionViewAngle.decode(input, context)
+
+      val wf = wellFormed
+      if (wf != 0) {
+        context.signalError(wf)
+      }
+    }
+
+    def encode(output: MSZ[B], context: Context): Unit = {
+      predUnionViewAngle.encode(output, context)
+
+      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
+        context.updateErrorCode(ERROR_ObjectViewAngle)
+      }
+    }
+
+  }
+
   object LineSearchTask {
 
     val maxSize: Z = z"9240048"
 
     def empty: MLineSearchTask = {
-      return MLineSearchTask(SearchTask.empty, u16"0", MSZ[MPredUnionPoint](), u16"0", MSZ[MPredUnionViewAngle](), u8"0")
+      return MLineSearchTask(SearchTask.empty, u16"0", MSZ[MObjectPoint](), u16"0", MSZ[MObjectViewAngle](), u8"0")
     }
 
     def decode(input: ISZ[B], context: Context): Option[LineSearchTask] = {
@@ -4489,32 +5002,32 @@ object BitCodec {
       return if (context.hasError) None[LineSearchTask]() else Some(r.toImmutable)
     }
 
-    def toMutablePointList(s: ISZ[PredUnionPoint]): MSZ[MPredUnionPoint] = {
-      var r = MSZ[MPredUnionPoint]()
+    def toMutablePointList(s: ISZ[ObjectPoint]): MSZ[MObjectPoint] = {
+      var r = MSZ[MObjectPoint]()
       for (e <- s) {
         r = r :+ e.toMutable
       }
       return r
     }
 
-    def toImmutablePointList(s: MSZ[MPredUnionPoint]): ISZ[PredUnionPoint] = {
-      var r = ISZ[PredUnionPoint]()
+    def toImmutablePointList(s: MSZ[MObjectPoint]): ISZ[ObjectPoint] = {
+      var r = ISZ[ObjectPoint]()
       for (e <- s) {
         r = r :+ e.toImmutable
       }
       return r
     }
 
-    def toMutableViewAngleList(s: ISZ[PredUnionViewAngle]): MSZ[MPredUnionViewAngle] = {
-      var r = MSZ[MPredUnionViewAngle]()
+    def toMutableViewAngleList(s: ISZ[ObjectViewAngle]): MSZ[MObjectViewAngle] = {
+      var r = MSZ[MObjectViewAngle]()
       for (e <- s) {
         r = r :+ e.toMutable
       }
       return r
     }
 
-    def toImmutableViewAngleList(s: MSZ[MPredUnionViewAngle]): ISZ[PredUnionViewAngle] = {
-      var r = ISZ[PredUnionViewAngle]()
+    def toImmutableViewAngleList(s: MSZ[MObjectViewAngle]): ISZ[ObjectViewAngle] = {
+      var r = ISZ[ObjectViewAngle]()
       for (e <- s) {
         r = r :+ e.toImmutable
       }
@@ -4525,9 +5038,9 @@ object BitCodec {
   @datatype class LineSearchTask(
     val searchTask: SearchTask,
     val _pointListSize: U16,
-    val pointList: ISZ[PredUnionPoint],
+    val pointList: ISZ[ObjectPoint],
     val _viewAngleListSize: U16,
-    val viewAngleList: ISZ[PredUnionViewAngle],
+    val viewAngleList: ISZ[ObjectViewAngle],
     val useInertialViewAngles: U8
   ) extends LMCPObject {
 
@@ -4547,9 +5060,9 @@ object BitCodec {
   @record class MLineSearchTask(
     var searchTask: MSearchTask,
     var _pointListSize: U16,
-    var pointList: MSZ[MPredUnionPoint],
+    var pointList: MSZ[MObjectPoint],
     var _viewAngleListSize: U16,
-    var viewAngleList: MSZ[MPredUnionViewAngle],
+    var viewAngleList: MSZ[MObjectViewAngle],
     var useInertialViewAngles: U8
   ) extends MLMCPObject {
 
@@ -4592,7 +5105,7 @@ object BitCodec {
       _pointListSize = Reader.IS.beU16(input, context)
       val pointListSize = sizeOfPointList(_pointListSize)
       if (pointListSize >= 0) {
-        pointList = MSZ.create(pointListSize, PredUnionPoint.empty)
+        pointList = MSZ.create(pointListSize, ObjectPoint.empty)
         for (i <- 0 until pointListSize) {
           pointList(i).decode(input, context)
         }
@@ -4602,7 +5115,7 @@ object BitCodec {
       _viewAngleListSize = Reader.IS.beU16(input, context)
       val viewAngleListSize = sizeOfViewAngleList(_viewAngleListSize)
       if (viewAngleListSize >= 0) {
-        viewAngleList = MSZ.create(viewAngleListSize, PredUnionViewAngle.empty)
+        viewAngleList = MSZ.create(viewAngleListSize, ObjectViewAngle.empty)
         for (i <- 0 until viewAngleListSize) {
           viewAngleList(i).decode(input, context)
         }
@@ -5509,4 +6022,21 @@ assert(lmcpMessageAutomationRequestInputContext.errorCode == 0 && lmcpMessageAut
 assert(lmcpMessageAutomationRequestDecoded == expectedAutomationRequestMessage)
 println(s"lmcpMessageAutomationRequestDecoded(lmcpMessageAutomationRequestBitstream) =\n\t $lmcpMessageAutomationRequestDecoded")
 
+val lmcpPointBitstream = ops.Bits.fromHexString("01434D4153490000000000000300034046A7B16B64BB7FC05E4088677920160000000000000001")
+// val lmcpPointBitstream = ops.Bits.fromHexString("4046A7B16B64BB7FC05E4088677920160000000000000001")
+val lmcpPointContext = Context.create
+val lmcpPoint = ObjectPoint.empty
+lmcpPoint.decode(lmcpPointBitstream, lmcpPointContext)
+println(s"Point = ${lmcpPoint}")
+
+val lmcpMessageLineSearchTaskBitstream = ops.Bits.fromHexString("4C4D435000000E2601434D4153490000000000001F000300000000000003E800174C494E455F57617465727761795F446573636875746573000000000000000000010001000000000000000000000000447A0000000601434D4153490000000000000300034046A7B16B64BB7FC05E408867792016000000000000000101434D4153490000000000000300034046A7B2D106358DC05E40783309F5A6000000000000000101434D4153490000000000000300034046A7ABFEFC1685C05E4064B6DD718E000000000000000101434D4153490000000000000300034046A79EB59F8CCFC05E40513EED62A0000000000000000101434D4153490000000000000300034046A7928F582DA4C05E403F033BF933000000000000000101434D4153490000000000000300034046A786746308B6C05E40313C3AE4F90000000000000001000101434D415349000000000000100003420C0000C270000000000000000000000000032E25")
+val lmcpMessageLineSearchTaskInputContext = Context.create
+val lmcpMessageLineSearchTaskDecoded = LMCPMessage.empty
+lmcpMessageLineSearchTaskDecoded.decode(lmcpMessageLineSearchTaskBitstream, lmcpMessageLineSearchTaskInputContext)
+// // assert(lmcpMessageLineSearchTaskInputContext.offset == lmcpMessageLineSearchTaskBitstream.size)
+// // assert(lmcpMessageLineSearchTaskInputContext.errorCode == 0 && lmcpMessageLineSearchTaskInputContext.errorOffset == 0)
+// println(s"decode(bitstream).offset = ${lmcpMessageLineSearchTaskInputContext.offset}")
+// println(s"decode(bitstream).errorCode = ${lmcpMessageLineSearchTaskInputContext.errorCode}")
+// println(s"decode(bitstream).errorOffset = ${lmcpMessageLineSearchTaskInputContext.errorOffset}")
+println(s"lmcpMessageLineSearchTaskDecoded(lmcpMessageLineSearchTaskBitstream) =\n\t $lmcpMessageLineSearchTaskDecoded")
 // END USER CODE: Test
