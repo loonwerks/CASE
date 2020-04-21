@@ -37,7 +37,7 @@
 * Linux:
 
   ```bash
-  ulimit -S -s 262144
+  ulimit -S -s 1048576
   bin/build.cmd run-native
   ```
 

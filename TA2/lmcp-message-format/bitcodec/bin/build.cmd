@@ -144,15 +144,22 @@ def runNative(gen: Os.Path): Unit = {
     seqSizes = s"${seqSizes};MSZ[S64]=32"   // taskId, entityId, entity
     seqSizes = s"${seqSizes};MSZ[U64]=1"    // id
     seqSizes = s"${seqSizes};MSZ[U8]=65535" // c
-    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectInfo]=32"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectAutomationResponseInfo]=8"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectAutomationResponseVehicleCommand]=64"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectEntityStateInfo]=32"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectMissionCommand]=16"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectPayloadState]=8"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectPoint]=1024"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectVehicleActionMissionCommandVehicleActionCommand]=8"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectVehicleActionPackedAutomationResponseVehicleCommand]=64"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectViewAngle]=16"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectWaypointVehicleAction]=8"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectWaypoint]=1024"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectpayloadStateParameter]=8"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjecttaskParameter]=8"
   }
 
-  Os.proc(ISZ(sireum.string, "slang", "transpilers", "c", "--string-size", "2048", "--stack-size", "256*1024*1024",
+  Os.proc(ISZ(sireum.string, "slang", "transpilers", "c", "--string-size", "2048", "--stack-size", "1024*1024*1024",
     "--sequence", seqSizes, "--output-dir", c.string, "--name", gen.name, genPath)).echo.console.runCheck()
   println()
 
