@@ -19,296 +19,282 @@ object BitCodec {
 
   val ERROR_NullValue: Z = 2
 
-  val ERROR_Id: Z = 3
+  val ERROR_OperatingRegion_keepInAreas: Z = 3
 
-  val ERROR_OperatingRegion_keepInAreas: Z = 4
+  val ERROR_OperatingRegion_keepOutAreas: Z = 4
 
-  val ERROR_OperatingRegion_keepOutAreas: Z = 6
+  val ERROR_OperatingRegion: Z = 5
 
-  val ERROR_OperatingRegion: Z = 7
+  val ERROR_NullValueEntityStateLocation3D: Z = 6
 
-  val ERROR_NullValueEntityStateLocation3D: Z = 8
+  val ERROR_PackedEntityStateLocation3D: Z = 7
 
-  val ERROR_PackedEntityStateLocation3D: Z = 9
+  val ERROR_LMCPEntityStateLocation3D: Z = 8
 
-  val ERROR_LMCPEntityStateLocation3D: Z = 10
+  val ERROR_PredUnionEntityStateLocation3D: Z = 9
 
-  val ERROR_PredUnionEntityStateLocation3D: Z = 11
+  val ERROR_ObjectEntityStateLocation3D: Z = 10
 
-  val ERROR_ObjectEntityStateLocation3D: Z = 12
+  val ERROR_NullValuePayloadState: Z = 11
 
-  val ERROR_NullValuePayloadState: Z = 13
+  val ERROR_NullValuepayloadStateParameter: Z = 12
 
-  val ERROR_NullValuepayloadStateParameter: Z = 14
+  val ERROR_PackedpayloadStateParameterKey_stringChars: Z = 13
 
-  val ERROR_C: Z = 15
+  val ERROR_PackedpayloadStateParameterKey: Z = 14
 
-  val ERROR_PackedpayloadStateParameterKey_stringChars: Z = 16
+  val ERROR_PackedpayloadStateParameterValue_stringChars: Z = 15
 
-  val ERROR_PackedpayloadStateParameterKey: Z = 17
+  val ERROR_PackedpayloadStateParameterValue: Z = 16
 
-  val ERROR_PackedpayloadStateParameterValue_stringChars: Z = 19
+  val ERROR_PackedpayloadStateParameter: Z = 17
 
-  val ERROR_PackedpayloadStateParameterValue: Z = 20
+  val ERROR_LMCPpayloadStateParameter: Z = 18
 
-  val ERROR_PackedpayloadStateParameter: Z = 21
+  val ERROR_PredUnionpayloadStateParameter: Z = 19
 
-  val ERROR_LMCPpayloadStateParameter: Z = 22
+  val ERROR_ObjectpayloadStateParameter: Z = 20
 
-  val ERROR_PredUnionpayloadStateParameter: Z = 23
+  val ERROR_PackedPayloadState_parameters: Z = 21
 
-  val ERROR_ObjectpayloadStateParameter: Z = 24
+  val ERROR_PackedPayloadState: Z = 22
 
-  val ERROR_PackedPayloadState_parameters: Z = 25
+  val ERROR_LMCPPayloadState: Z = 23
 
-  val ERROR_PackedPayloadState: Z = 26
+  val ERROR_PredUnionPayloadState: Z = 24
 
-  val ERROR_LMCPPayloadState: Z = 27
+  val ERROR_ObjectPayloadState: Z = 25
 
-  val ERROR_PredUnionPayloadState: Z = 28
+  val ERROR_EntityState_payloadStateList: Z = 26
 
-  val ERROR_ObjectPayloadState: Z = 29
+  val ERROR_EntityState_associatedTasks: Z = 27
 
-  val ERROR_EntityState_payloadStateList: Z = 30
+  val ERROR_NullValueEntityStateInfo: Z = 28
 
-  val ERROR_EntityState_associatedTasks: Z = 32
+  val ERROR_PackedEntityStateInfoKey_stringChars: Z = 29
 
-  val ERROR_NullValueEntityStateInfo: Z = 33
+  val ERROR_PackedEntityStateInfoKey: Z = 30
 
-  val ERROR_PackedEntityStateInfoKey_stringChars: Z = 35
+  val ERROR_PackedEntityStateInfoValue_stringChars: Z = 31
 
-  val ERROR_PackedEntityStateInfoKey: Z = 36
+  val ERROR_PackedEntityStateInfoValue: Z = 32
 
-  val ERROR_PackedEntityStateInfoValue_stringChars: Z = 38
+  val ERROR_PackedEntityStateInfo: Z = 33
 
-  val ERROR_PackedEntityStateInfoValue: Z = 39
+  val ERROR_LMCPEntityStateInfo: Z = 34
 
-  val ERROR_PackedEntityStateInfo: Z = 40
+  val ERROR_PredUnionEntityStateInfo: Z = 35
 
-  val ERROR_LMCPEntityStateInfo: Z = 41
+  val ERROR_ObjectEntityStateInfo: Z = 36
 
-  val ERROR_PredUnionEntityStateInfo: Z = 42
+  val ERROR_EntityState_info: Z = 37
 
-  val ERROR_ObjectEntityStateInfo: Z = 43
+  val ERROR_EntityState: Z = 38
 
-  val ERROR_EntityState_info: Z = 44
+  val ERROR_AirVehicleState: Z = 39
 
-  val ERROR_EntityState: Z = 45
+  val ERROR_Label_stringChars: Z = 40
 
-  val ERROR_AirVehicleState: Z = 46
+  val ERROR_Label: Z = 41
 
-  val ERROR_Label_stringChars: Z = 48
+  val ERROR_Task_eligibleEntities: Z = 42
 
-  val ERROR_Label: Z = 49
+  val ERROR_NullValuetaskParameter: Z = 43
 
-  val ERROR_Entity: Z = 50
+  val ERROR_PackedtaskParameterKey_stringChars: Z = 44
 
-  val ERROR_Task_eligibleEntities: Z = 51
+  val ERROR_PackedtaskParameterKey: Z = 45
 
-  val ERROR_NullValuetaskParameter: Z = 52
+  val ERROR_PackedtaskParameterValue_stringChars: Z = 46
 
-  val ERROR_PackedtaskParameterKey_stringChars: Z = 54
+  val ERROR_PackedtaskParameterValue: Z = 47
 
-  val ERROR_PackedtaskParameterKey: Z = 55
+  val ERROR_PackedtaskParameter: Z = 48
 
-  val ERROR_PackedtaskParameterValue_stringChars: Z = 57
+  val ERROR_LMCPtaskParameter: Z = 49
 
-  val ERROR_PackedtaskParameterValue: Z = 58
+  val ERROR_PredUniontaskParameter: Z = 50
 
-  val ERROR_PackedtaskParameter: Z = 59
+  val ERROR_ObjecttaskParameter: Z = 51
 
-  val ERROR_LMCPtaskParameter: Z = 60
+  val ERROR_Task_parameters: Z = 52
 
-  val ERROR_PredUniontaskParameter: Z = 61
+  val ERROR_Task: Z = 53
 
-  val ERROR_ObjecttaskParameter: Z = 62
+  val ERROR_SearchTask_desiredWavelengthBands: Z = 54
 
-  val ERROR_Task_parameters: Z = 63
+  val ERROR_SearchTask: Z = 55
 
-  val ERROR_Task: Z = 64
+  val ERROR_NullValuePoint: Z = 56
 
-  val ERROR_Band: Z = 65
+  val ERROR_PackedPoint: Z = 57
 
-  val ERROR_SearchTask_desiredWavelengthBands: Z = 66
+  val ERROR_LMCPPoint: Z = 58
 
-  val ERROR_SearchTask: Z = 67
+  val ERROR_PredUnionPoint: Z = 59
 
-  val ERROR_NullValuePoint: Z = 68
+  val ERROR_ObjectPoint: Z = 60
 
-  val ERROR_PackedPoint: Z = 69
+  val ERROR_LineSearchTask_pointList: Z = 61
 
-  val ERROR_LMCPPoint: Z = 70
+  val ERROR_NullValueViewAngle: Z = 62
 
-  val ERROR_PredUnionPoint: Z = 71
+  val ERROR_PackedViewAngle: Z = 63
 
-  val ERROR_ObjectPoint: Z = 72
+  val ERROR_LMCPViewAngle: Z = 64
 
-  val ERROR_LineSearchTask_pointList: Z = 73
+  val ERROR_PredUnionViewAngle: Z = 65
 
-  val ERROR_NullValueViewAngle: Z = 74
+  val ERROR_ObjectViewAngle: Z = 66
 
-  val ERROR_PackedViewAngle: Z = 75
+  val ERROR_LineSearchTask_viewAngleList: Z = 67
 
-  val ERROR_LMCPViewAngle: Z = 76
+  val ERROR_LineSearchTask: Z = 68
 
-  val ERROR_PredUnionViewAngle: Z = 77
+  val ERROR_AutomationRequest_entityList: Z = 69
 
-  val ERROR_ObjectViewAngle: Z = 78
+  val ERROR_AutomationRequest_taskList: Z = 70
 
-  val ERROR_LineSearchTask_viewAngleList: Z = 79
+  val ERROR_TaskRelationships_stringChars: Z = 71
 
-  val ERROR_LineSearchTask: Z = 80
+  val ERROR_TaskRelationships: Z = 72
 
-  val ERROR_EntityId: Z = 81
+  val ERROR_AutomationRequest: Z = 73
 
-  val ERROR_AutomationRequest_entityList: Z = 82
+  val ERROR_NullValueMissionCommand: Z = 74
 
-  val ERROR_TaskId: Z = 83
+  val ERROR_NullValueVehicleActionMissionCommandVehicleActionCommand: Z = 75
 
-  val ERROR_AutomationRequest_taskList: Z = 84
+  val ERROR_PackedVehicleActionMissionCommandVehicleActionCommand_associatedTaskList: Z = 76
 
-  val ERROR_TaskRelationships_stringChars: Z = 86
+  val ERROR_PackedVehicleActionMissionCommandVehicleActionCommand: Z = 77
 
-  val ERROR_TaskRelationships: Z = 87
+  val ERROR_LMCPVehicleActionMissionCommandVehicleActionCommand: Z = 78
 
-  val ERROR_AutomationRequest: Z = 88
+  val ERROR_PredUnionVehicleActionMissionCommandVehicleActionCommand: Z = 79
 
-  val ERROR_NullValueMissionCommand: Z = 89
+  val ERROR_ObjectVehicleActionMissionCommandVehicleActionCommand: Z = 80
 
-  val ERROR_NullValueVehicleActionMissionCommandVehicleActionCommand: Z = 90
+  val ERROR_MissionCommandVehicleActionCommand_vehicleActionList: Z = 81
 
-  val ERROR_AssociatedTaskId: Z = 91
+  val ERROR_MissionCommandVehicleActionCommand: Z = 82
 
-  val ERROR_PackedVehicleActionMissionCommandVehicleActionCommand_associatedTaskList: Z = 92
+  val ERROR_NullValueWaypoint: Z = 83
 
-  val ERROR_PackedVehicleActionMissionCommandVehicleActionCommand: Z = 93
+  val ERROR_WayPointLocation3D: Z = 84
 
-  val ERROR_LMCPVehicleActionMissionCommandVehicleActionCommand: Z = 94
+  val ERROR_NullValueWaypointVehicleAction: Z = 85
 
-  val ERROR_PredUnionVehicleActionMissionCommandVehicleActionCommand: Z = 95
+  val ERROR_PackedWaypointVehicleAction_associatedTaskList: Z = 86
 
-  val ERROR_ObjectVehicleActionMissionCommandVehicleActionCommand: Z = 96
+  val ERROR_PackedWaypointVehicleAction: Z = 87
 
-  val ERROR_MissionCommandVehicleActionCommand_vehicleActionList: Z = 97
+  val ERROR_LMCPWaypointVehicleAction: Z = 88
 
-  val ERROR_MissionCommandVehicleActionCommand: Z = 98
+  val ERROR_PredUnionWaypointVehicleAction: Z = 89
 
-  val ERROR_NullValueWaypoint: Z = 99
+  val ERROR_ObjectWaypointVehicleAction: Z = 90
 
-  val ERROR_WayPointLocation3D: Z = 100
+  val ERROR_PackedWaypoint_vehicleActionList: Z = 91
 
-  val ERROR_NullValueWaypointVehicleAction: Z = 101
+  val ERROR_PackedWaypoint_associatedTaskList: Z = 92
 
-  val ERROR_PackedWaypointVehicleAction_associatedTaskList: Z = 103
+  val ERROR_PackedWaypoint: Z = 93
 
-  val ERROR_PackedWaypointVehicleAction: Z = 104
+  val ERROR_LMCPWaypoint: Z = 94
 
-  val ERROR_LMCPWaypointVehicleAction: Z = 105
+  val ERROR_PredUnionWaypoint: Z = 95
 
-  val ERROR_PredUnionWaypointVehicleAction: Z = 106
+  val ERROR_ObjectWaypoint: Z = 96
 
-  val ERROR_ObjectWaypointVehicleAction: Z = 107
+  val ERROR_PackedMissionCommand_waypointList: Z = 97
 
-  val ERROR_PackedWaypoint_vehicleActionList: Z = 108
+  val ERROR_PackedMissionCommand: Z = 98
 
-  val ERROR_PackedWaypoint_associatedTaskList: Z = 110
+  val ERROR_LMCPMissionCommand: Z = 99
 
-  val ERROR_PackedWaypoint: Z = 111
+  val ERROR_PredUnionMissionCommand: Z = 100
 
-  val ERROR_LMCPWaypoint: Z = 112
+  val ERROR_ObjectMissionCommand: Z = 101
 
-  val ERROR_PredUnionWaypoint: Z = 113
+  val ERROR_AutomationResponse_missionCommandList: Z = 102
 
-  val ERROR_ObjectWaypoint: Z = 114
+  val ERROR_NullValueAutomationResponseVehicleCommand: Z = 103
 
-  val ERROR_PackedMissionCommand_waypointList: Z = 115
+  val ERROR_NullValueVehicleActionPackedAutomationResponseVehicleCommand: Z = 104
 
-  val ERROR_PackedMissionCommand: Z = 116
+  val ERROR_PackedVehicleActionPackedAutomationResponseVehicleCommand_associatedTaskList: Z = 105
 
-  val ERROR_LMCPMissionCommand: Z = 117
+  val ERROR_PackedVehicleActionPackedAutomationResponseVehicleCommand: Z = 106
 
-  val ERROR_PredUnionMissionCommand: Z = 118
+  val ERROR_LMCPVehicleActionPackedAutomationResponseVehicleCommand: Z = 107
 
-  val ERROR_ObjectMissionCommand: Z = 119
+  val ERROR_PredUnionVehicleActionPackedAutomationResponseVehicleCommand: Z = 108
 
-  val ERROR_AutomationResponse_missionCommandList: Z = 120
+  val ERROR_ObjectVehicleActionPackedAutomationResponseVehicleCommand: Z = 109
 
-  val ERROR_NullValueAutomationResponseVehicleCommand: Z = 121
+  val ERROR_PackedAutomationResponseVehicleCommand_vehicleActionList: Z = 110
 
-  val ERROR_NullValueVehicleActionPackedAutomationResponseVehicleCommand: Z = 122
+  val ERROR_PackedAutomationResponseVehicleCommand: Z = 111
 
-  val ERROR_PackedVehicleActionPackedAutomationResponseVehicleCommand_associatedTaskList: Z = 124
+  val ERROR_LMCPAutomationResponseVehicleCommand: Z = 112
 
-  val ERROR_PackedVehicleActionPackedAutomationResponseVehicleCommand: Z = 125
+  val ERROR_PredUnionAutomationResponseVehicleCommand: Z = 113
 
-  val ERROR_LMCPVehicleActionPackedAutomationResponseVehicleCommand: Z = 126
+  val ERROR_ObjectAutomationResponseVehicleCommand: Z = 114
 
-  val ERROR_PredUnionVehicleActionPackedAutomationResponseVehicleCommand: Z = 127
+  val ERROR_AutomationResponse_vehicleCommandList: Z = 115
 
-  val ERROR_ObjectVehicleActionPackedAutomationResponseVehicleCommand: Z = 128
+  val ERROR_NullValueAutomationResponseInfo: Z = 116
 
-  val ERROR_PackedAutomationResponseVehicleCommand_vehicleActionList: Z = 129
+  val ERROR_PackedAutomationResponseInfoKey_stringChars: Z = 117
 
-  val ERROR_PackedAutomationResponseVehicleCommand: Z = 130
+  val ERROR_PackedAutomationResponseInfoKey: Z = 118
 
-  val ERROR_LMCPAutomationResponseVehicleCommand: Z = 131
+  val ERROR_PackedAutomationResponseInfoValue_stringChars: Z = 119
 
-  val ERROR_PredUnionAutomationResponseVehicleCommand: Z = 132
+  val ERROR_PackedAutomationResponseInfoValue: Z = 120
 
-  val ERROR_ObjectAutomationResponseVehicleCommand: Z = 133
+  val ERROR_PackedAutomationResponseInfo: Z = 121
 
-  val ERROR_AutomationResponse_vehicleCommandList: Z = 134
+  val ERROR_LMCPAutomationResponseInfo: Z = 122
 
-  val ERROR_NullValueAutomationResponseInfo: Z = 135
+  val ERROR_PredUnionAutomationResponseInfo: Z = 123
 
-  val ERROR_PackedAutomationResponseInfoKey_stringChars: Z = 137
+  val ERROR_ObjectAutomationResponseInfo: Z = 124
 
-  val ERROR_PackedAutomationResponseInfoKey: Z = 138
+  val ERROR_AutomationResponse_info: Z = 125
 
-  val ERROR_PackedAutomationResponseInfoValue_stringChars: Z = 140
+  val ERROR_AutomationResponse: Z = 126
 
-  val ERROR_PackedAutomationResponseInfoValue: Z = 141
+  val ERROR_LMCPObject: Z = 127
 
-  val ERROR_PackedAutomationResponseInfo: Z = 142
+  val ERROR_LMCPObjectDecode: Z = 128
 
-  val ERROR_LMCPAutomationResponseInfo: Z = 143
+  val ERROR_LMCPObjectNullCheck: Z = 129
 
-  val ERROR_PredUnionAutomationResponseInfo: Z = 144
-
-  val ERROR_ObjectAutomationResponseInfo: Z = 145
-
-  val ERROR_AutomationResponse_info: Z = 146
-
-  val ERROR_AutomationResponse: Z = 147
-
-  val ERROR_LMCPObject: Z = 148
-
-  val ERROR_LMCPObjectDecode: Z = 149
-
-  val ERROR_LMCPObjectNullCheck: Z = 150
-
-  val ERROR_LMCPMessage: Z = 151
+  val ERROR_LMCPMessage: Z = 130
 
   // BEGIN USER CODE: Members
   val CMASISeriesID = s64"4849604199710720000"
-val CMASISeriesVersion : U16 = u16"3"
+  val CMASISeriesVersion : U16 = u16"3"
 
-val KEYVALUEPAIR = u32"2"
-val LOCATION3D = u32"3"
-val PAYLOADSTATE = u32"6"
-val VEHICLEACTION = u32"7"
-val TASK = u32"8"
-val SEARCHTASK = u32"9"
-val ENTITYSTATE = u32"14"
-val AIRVEHICLESTATE = u32"15"
-val WEDGE = u32"16"
-val LINESEARCHTASK = u32"31"
-val WAYPOINT = u32"35"
-val MISSIONCOMMAND = u32"36"
-val OPERATINGREGION = u32"39"
-val AUTOMATIONREQUEST = u32"40"
-val VEHICLEACTIONCOMMAND = u32"47"
-val AUTOMATIONRESPONSE = u32"51"
+  val KEYVALUEPAIR = u32"2"
+  val LOCATION3D = u32"3"
+  val PAYLOADSTATE = u32"6"
+  val VEHICLEACTION = u32"7"
+  val TASK = u32"8"
+  val SEARCHTASK = u32"9"
+  val ENTITYSTATE = u32"14"
+  val AIRVEHICLESTATE = u32"15"
+  val WEDGE = u32"16"
+  val LINESEARCHTASK = u32"31"
+  val WAYPOINT = u32"35"
+  val MISSIONCOMMAND = u32"36"
+  val OPERATINGREGION = u32"39"
+  val AUTOMATIONREQUEST = u32"40"
+  val VEHICLEACTIONCOMMAND = u32"47"
+  val AUTOMATIONRESPONSE = u32"51"
   // END USER CODE: Members
 
   object NullValue {
@@ -382,80 +368,12 @@ val AUTOMATIONRESPONSE = u32"51"
 
   }
 
-  object Id {
-
-    val maxSize: Z = z"64"
-
-    def empty: MId = {
-      return MId(u64"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[Id] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[Id]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class Id(
-    val id: U64
-  ) {
-
-    @strictpure def toMutable: MId = MId(id)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(64, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MId(
-    var id: U64
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: Id = Id(id)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: Id.wellFormed
-
-      // END USER CODE: Id.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      id = Reader.IS.beU64(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU64(output, context, id)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_Id)
-      }
-    }
-
-  }
-
   object OperatingRegion {
 
     val maxSize: Z = z"224"
 
     def empty: MOperatingRegion = {
-      return MOperatingRegion(s64"0", u16"0", MSZ[MId](), u16"0", MSZ[MId]())
+      return MOperatingRegion(s64"0", u16"0", MSZ[U64](), u16"0", MSZ[U64]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[OperatingRegion] = {
@@ -464,34 +382,34 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[OperatingRegion]() else Some(r.toImmutable)
     }
 
-    def toMutableKeepInAreas(s: ISZ[Id]): MSZ[MId] = {
-      var r = MSZ[MId]()
+    def toMutableKeepInAreas(s: ISZ[U64]): MSZ[U64] = {
+      var r = MSZ[U64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableKeepInAreas(s: MSZ[MId]): ISZ[Id] = {
-      var r = ISZ[Id]()
+    def toImmutableKeepInAreas(s: MSZ[U64]): ISZ[U64] = {
+      var r = ISZ[U64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
 
-    def toMutableKeepOutAreas(s: ISZ[Id]): MSZ[MId] = {
-      var r = MSZ[MId]()
+    def toMutableKeepOutAreas(s: ISZ[U64]): MSZ[U64] = {
+      var r = MSZ[U64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableKeepOutAreas(s: MSZ[MId]): ISZ[Id] = {
-      var r = ISZ[Id]()
+    def toImmutableKeepOutAreas(s: MSZ[U64]): ISZ[U64] = {
+      var r = ISZ[U64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -500,9 +418,9 @@ val AUTOMATIONRESPONSE = u32"51"
   @datatype class OperatingRegion(
     val id: S64,
     val _keepInAreasSize: U16,
-    val keepInAreas: ISZ[Id],
+    val keepInAreas: ISZ[U64],
     val _keepOutAreasSize: U16,
-    val keepOutAreas: ISZ[Id]
+    val keepOutAreas: ISZ[U64]
   ) extends LMCPObject {
 
     @strictpure def toMutable: MOperatingRegion = MOperatingRegion(id, _keepInAreasSize, OperatingRegion.toMutableKeepInAreas(keepInAreas), _keepOutAreasSize, OperatingRegion.toMutableKeepOutAreas(keepOutAreas))
@@ -521,9 +439,9 @@ val AUTOMATIONRESPONSE = u32"51"
   @record class MOperatingRegion(
     var id: S64,
     var _keepInAreasSize: U16,
-    var keepInAreas: MSZ[MId],
+    var keepInAreas: MSZ[U64],
     var _keepOutAreasSize: U16,
-    var keepOutAreas: MSZ[MId]
+    var keepOutAreas: MSZ[U64]
   ) extends MLMCPObject {
 
     @strictpure def toImmutable: OperatingRegion = OperatingRegion(id, _keepInAreasSize, OperatingRegion.toImmutableKeepInAreas(keepInAreas), _keepOutAreasSize, OperatingRegion.toImmutableKeepOutAreas(keepOutAreas))
@@ -560,9 +478,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _keepInAreasSize = Reader.IS.beU16(input, context)
       val keepInAreasSize = sizeOfKeepInAreas(_keepInAreasSize)
       if (keepInAreasSize >= 0) {
-        keepInAreas = MSZ.create(keepInAreasSize, Id.empty)
+        keepInAreas = MSZ.create(keepInAreasSize, u64"0")
         for (i <- 0 until keepInAreasSize) {
-          keepInAreas(i).decode(input, context)
+          val id = Reader.IS.beU64(input, context)
+          keepInAreas(i) = id
         }
       } else {
         context.signalError(ERROR_OperatingRegion_keepInAreas)
@@ -570,9 +489,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _keepOutAreasSize = Reader.IS.beU16(input, context)
       val keepOutAreasSize = sizeOfKeepOutAreas(_keepOutAreasSize)
       if (keepOutAreasSize >= 0) {
-        keepOutAreas = MSZ.create(keepOutAreasSize, Id.empty)
+        keepOutAreas = MSZ.create(keepOutAreasSize, u64"0")
         for (i <- 0 until keepOutAreasSize) {
-          keepOutAreas(i).decode(input, context)
+          val id = Reader.IS.beU64(input, context)
+          keepOutAreas(i) = id
         }
       } else {
         context.signalError(ERROR_OperatingRegion_keepOutAreas)
@@ -590,7 +510,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val keepInAreasSize = sizeOfKeepInAreas(_keepInAreasSize)
       if (keepInAreasSize >= 0) {
         for (i <- 0 until keepInAreasSize) {
-          keepInAreas(i).encode(output, context)
+          val id = keepInAreas(i)
+          Writer.beU64(output, context, id)
         }
       } else {
         context.signalError(ERROR_OperatingRegion_keepInAreas)
@@ -599,7 +520,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val keepOutAreasSize = sizeOfKeepOutAreas(_keepOutAreasSize)
       if (keepOutAreasSize >= 0) {
         for (i <- 0 until keepOutAreasSize) {
-          keepOutAreas(i).encode(output, context)
+          val id = keepOutAreas(i)
+          Writer.beU64(output, context, id)
         }
       } else {
         context.signalError(ERROR_OperatingRegion_keepOutAreas)
@@ -1150,80 +1072,12 @@ val AUTOMATIONRESPONSE = u32"51"
 
   }
 
-  object C {
-
-    val maxSize: Z = z"8"
-
-    def empty: MC = {
-      return MC(u8"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[C] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[C]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class C(
-    val c: U8
-  ) {
-
-    @strictpure def toMutable: MC = MC(c)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(8, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MC(
-    var c: U8
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: C = C(c)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: C.wellFormed
-
-      // END USER CODE: C.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      c = Reader.IS.bleU8(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.bleU8(output, context, c)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_C)
-      }
-    }
-
-  }
-
   object PackedpayloadStateParameterKey {
 
     val maxSize: Z = z"524296"
 
     def empty: MPackedpayloadStateParameterKey = {
-      return MPackedpayloadStateParameterKey(u16"0", MSZ[MC]())
+      return MPackedpayloadStateParameterKey(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedpayloadStateParameterKey] = {
@@ -1232,18 +1086,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[PackedpayloadStateParameterKey]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -1251,7 +1105,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class PackedpayloadStateParameterKey(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedpayloadStateParameterKey = MPackedpayloadStateParameterKey(_stringCharsSize, PackedpayloadStateParameterKey.toMutableStringChars(stringChars))
@@ -1269,7 +1123,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MPackedpayloadStateParameterKey(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedpayloadStateParameterKey = PackedpayloadStateParameterKey(_stringCharsSize, PackedpayloadStateParameterKey.toImmutableStringChars(stringChars))
@@ -1296,9 +1150,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedpayloadStateParameterKey_stringChars)
@@ -1315,7 +1170,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedpayloadStateParameterKey_stringChars)
@@ -1339,7 +1195,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"524296"
 
     def empty: MPackedpayloadStateParameterValue = {
-      return MPackedpayloadStateParameterValue(u16"0", MSZ[MC]())
+      return MPackedpayloadStateParameterValue(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedpayloadStateParameterValue] = {
@@ -1348,18 +1204,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[PackedpayloadStateParameterValue]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -1367,7 +1223,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class PackedpayloadStateParameterValue(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedpayloadStateParameterValue = MPackedpayloadStateParameterValue(_stringCharsSize, PackedpayloadStateParameterValue.toMutableStringChars(stringChars))
@@ -1385,7 +1241,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MPackedpayloadStateParameterValue(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedpayloadStateParameterValue = PackedpayloadStateParameterValue(_stringCharsSize, PackedpayloadStateParameterValue.toImmutableStringChars(stringChars))
@@ -1412,9 +1268,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedpayloadStateParameterValue_stringChars)
@@ -1431,7 +1288,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedpayloadStateParameterValue_stringChars)
@@ -2191,7 +2049,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"524296"
 
     def empty: MPackedEntityStateInfoKey = {
-      return MPackedEntityStateInfoKey(u16"0", MSZ[MC]())
+      return MPackedEntityStateInfoKey(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedEntityStateInfoKey] = {
@@ -2200,18 +2058,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[PackedEntityStateInfoKey]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -2219,7 +2077,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class PackedEntityStateInfoKey(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedEntityStateInfoKey = MPackedEntityStateInfoKey(_stringCharsSize, PackedEntityStateInfoKey.toMutableStringChars(stringChars))
@@ -2237,7 +2095,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MPackedEntityStateInfoKey(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedEntityStateInfoKey = PackedEntityStateInfoKey(_stringCharsSize, PackedEntityStateInfoKey.toImmutableStringChars(stringChars))
@@ -2264,9 +2122,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedEntityStateInfoKey_stringChars)
@@ -2283,7 +2142,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedEntityStateInfoKey_stringChars)
@@ -2307,7 +2167,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"524296"
 
     def empty: MPackedEntityStateInfoValue = {
-      return MPackedEntityStateInfoValue(u16"0", MSZ[MC]())
+      return MPackedEntityStateInfoValue(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedEntityStateInfoValue] = {
@@ -2316,18 +2176,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[PackedEntityStateInfoValue]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -2335,7 +2195,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class PackedEntityStateInfoValue(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedEntityStateInfoValue = MPackedEntityStateInfoValue(_stringCharsSize, PackedEntityStateInfoValue.toMutableStringChars(stringChars))
@@ -2353,7 +2213,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MPackedEntityStateInfoValue(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedEntityStateInfoValue = PackedEntityStateInfoValue(_stringCharsSize, PackedEntityStateInfoValue.toImmutableStringChars(stringChars))
@@ -2380,9 +2240,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedEntityStateInfoValue_stringChars)
@@ -2399,7 +2260,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedEntityStateInfoValue_stringChars)
@@ -2736,7 +2598,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"100679624"
 
     def empty: MEntityState = {
-      return MEntityState(s64"0", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ObjectEntityStateLocation3D.empty, 0.0f, 0.0f, u16"0", MSZ[MObjectPayloadState](), s64"0", s64"0", s32"0", u16"0", MSZ[MId](), s64"0", u16"0", MSZ[MObjectEntityStateInfo]())
+      return MEntityState(s64"0", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ObjectEntityStateLocation3D.empty, 0.0f, 0.0f, u16"0", MSZ[MObjectPayloadState](), s64"0", s64"0", s32"0", u16"0", MSZ[S64](), s64"0", u16"0", MSZ[MObjectEntityStateInfo]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[EntityState] = {
@@ -2761,18 +2623,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return r
     }
 
-    def toMutableAssociatedTasks(s: ISZ[Id]): MSZ[MId] = {
-      var r = MSZ[MId]()
+    def toMutableAssociatedTasks(s: ISZ[S64]): MSZ[S64] = {
+      var r = MSZ[S64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableAssociatedTasks(s: MSZ[MId]): ISZ[Id] = {
-      var r = ISZ[Id]()
+    def toImmutableAssociatedTasks(s: MSZ[S64]): ISZ[S64] = {
+      var r = ISZ[S64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -2819,7 +2681,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val currentCommand: S64,
     val mode: S32,
     val _associatedTasksSize: U16,
-    val associatedTasks: ISZ[Id],
+    val associatedTasks: ISZ[S64],
     val time: S64,
     val _infoSize: U16,
     val info: ISZ[ObjectEntityStateInfo]
@@ -2863,7 +2725,7 @@ val AUTOMATIONRESPONSE = u32"51"
     var currentCommand: S64,
     var mode: S32,
     var _associatedTasksSize: U16,
-    var associatedTasks: MSZ[MId],
+    var associatedTasks: MSZ[S64],
     var time: S64,
     var _infoSize: U16,
     var info: MSZ[MObjectEntityStateInfo]
@@ -2947,9 +2809,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _associatedTasksSize = Reader.IS.beU16(input, context)
       val associatedTasksSize = sizeOfAssociatedTasks(_associatedTasksSize)
       if (associatedTasksSize >= 0) {
-        associatedTasks = MSZ.create(associatedTasksSize, Id.empty)
+        associatedTasks = MSZ.create(associatedTasksSize, s64"0")
         for (i <- 0 until associatedTasksSize) {
-          associatedTasks(i).decode(input, context)
+          val id = Reader.IS.beS64(input, context)
+          associatedTasks(i) = id
         }
       } else {
         context.signalError(ERROR_EntityState_associatedTasks)
@@ -3007,7 +2870,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val associatedTasksSize = sizeOfAssociatedTasks(_associatedTasksSize)
       if (associatedTasksSize >= 0) {
         for (i <- 0 until associatedTasksSize) {
-          associatedTasks(i).encode(output, context)
+          val id = associatedTasks(i)
+          Writer.beS64(output, context, id)
         }
       } else {
         context.signalError(ERROR_EntityState_associatedTasks)
@@ -3143,7 +3007,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"524296"
 
     def empty: MLabel = {
-      return MLabel(u16"0", MSZ[MC]())
+      return MLabel(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[Label] = {
@@ -3152,18 +3016,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[Label]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -3171,7 +3035,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class Label(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MLabel = MLabel(_stringCharsSize, Label.toMutableStringChars(stringChars))
@@ -3189,7 +3053,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MLabel(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: Label = Label(_stringCharsSize, Label.toImmutableStringChars(stringChars))
@@ -3216,9 +3080,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_Label_stringChars)
@@ -3235,7 +3100,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_Label_stringChars)
@@ -3252,74 +3118,6 @@ val AUTOMATIONRESPONSE = u32"51"
       }
       return r
     }
-  }
-
-  object Entity {
-
-    val maxSize: Z = z"64"
-
-    def empty: MEntity = {
-      return MEntity(s64"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[Entity] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[Entity]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class Entity(
-    val entity: S64
-  ) {
-
-    @strictpure def toMutable: MEntity = MEntity(entity)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(64, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MEntity(
-    var entity: S64
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: Entity = Entity(entity)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: Entity.wellFormed
-
-      // END USER CODE: Entity.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      entity = Reader.IS.beS64(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beS64(output, context, entity)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_Entity)
-      }
-    }
-
   }
 
   object NullValuetaskParameter {
@@ -3398,7 +3196,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"524296"
 
     def empty: MPackedtaskParameterKey = {
-      return MPackedtaskParameterKey(u16"0", MSZ[MC]())
+      return MPackedtaskParameterKey(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedtaskParameterKey] = {
@@ -3407,18 +3205,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[PackedtaskParameterKey]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -3426,7 +3224,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class PackedtaskParameterKey(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedtaskParameterKey = MPackedtaskParameterKey(_stringCharsSize, PackedtaskParameterKey.toMutableStringChars(stringChars))
@@ -3444,7 +3242,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MPackedtaskParameterKey(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedtaskParameterKey = PackedtaskParameterKey(_stringCharsSize, PackedtaskParameterKey.toImmutableStringChars(stringChars))
@@ -3471,9 +3269,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedtaskParameterKey_stringChars)
@@ -3490,7 +3289,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedtaskParameterKey_stringChars)
@@ -3514,7 +3314,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"524296"
 
     def empty: MPackedtaskParameterValue = {
-      return MPackedtaskParameterValue(u16"0", MSZ[MC]())
+      return MPackedtaskParameterValue(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedtaskParameterValue] = {
@@ -3523,18 +3323,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[PackedtaskParameterValue]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -3542,7 +3342,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class PackedtaskParameterValue(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedtaskParameterValue = MPackedtaskParameterValue(_stringCharsSize, PackedtaskParameterValue.toMutableStringChars(stringChars))
@@ -3560,7 +3360,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MPackedtaskParameterValue(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedtaskParameterValue = PackedtaskParameterValue(_stringCharsSize, PackedtaskParameterValue.toImmutableStringChars(stringChars))
@@ -3587,9 +3387,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedtaskParameterValue_stringChars)
@@ -3606,7 +3407,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedtaskParameterValue_stringChars)
@@ -3943,7 +3745,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"8916184"
 
     def empty: MTask = {
-      return MTask(s64"0", Label.empty, u16"0", MSZ[MEntity](), 0.0f, u16"0", MSZ[MObjecttaskParameter](), s8"0", u8"0")
+      return MTask(s64"0", Label.empty, u16"0", MSZ[S64](), 0.0f, u16"0", MSZ[MObjecttaskParameter](), s8"0", u8"0")
     }
 
     def decode(input: ISZ[B], context: Context): Option[Task] = {
@@ -3952,18 +3754,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[Task]() else Some(r.toImmutable)
     }
 
-    def toMutableEligibleEntities(s: ISZ[Entity]): MSZ[MEntity] = {
-      var r = MSZ[MEntity]()
+    def toMutableEligibleEntities(s: ISZ[S64]): MSZ[S64] = {
+      var r = MSZ[S64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableEligibleEntities(s: MSZ[MEntity]): ISZ[Entity] = {
-      var r = ISZ[Entity]()
+    def toImmutableEligibleEntities(s: MSZ[S64]): ISZ[S64] = {
+      var r = ISZ[S64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -3989,7 +3791,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val taskID: S64,
     val label: Label,
     val _eligibleEntitiesSize: U16,
-    val eligibleEntities: ISZ[Entity],
+    val eligibleEntities: ISZ[S64],
     val revisitRate: F32,
     val _parametersSize: U16,
     val parameters: ISZ[ObjecttaskParameter],
@@ -4014,7 +3816,7 @@ val AUTOMATIONRESPONSE = u32"51"
     var taskID: S64,
     var label: MLabel,
     var _eligibleEntitiesSize: U16,
-    var eligibleEntities: MSZ[MEntity],
+    var eligibleEntities: MSZ[S64],
     var revisitRate: F32,
     var _parametersSize: U16,
     var parameters: MSZ[MObjecttaskParameter],
@@ -4062,9 +3864,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _eligibleEntitiesSize = Reader.IS.beU16(input, context)
       val eligibleEntitiesSize = sizeOfEligibleEntities(_eligibleEntitiesSize)
       if (eligibleEntitiesSize >= 0) {
-        eligibleEntities = MSZ.create(eligibleEntitiesSize, Entity.empty)
+        eligibleEntities = MSZ.create(eligibleEntitiesSize, s64"0")
         for (i <- 0 until eligibleEntitiesSize) {
-          eligibleEntities(i).decode(input, context)
+          val entity = Reader.IS.beS64(input, context)
+          eligibleEntities(i) = entity
         }
       } else {
         context.signalError(ERROR_Task_eligibleEntities)
@@ -4096,7 +3899,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val eligibleEntitiesSize = sizeOfEligibleEntities(_eligibleEntitiesSize)
       if (eligibleEntitiesSize >= 0) {
         for (i <- 0 until eligibleEntitiesSize) {
-          eligibleEntities(i).encode(output, context)
+          val entity = eligibleEntities(i)
+          Writer.beS64(output, context, entity)
         }
       } else {
         context.signalError(ERROR_Task_eligibleEntities)
@@ -4134,80 +3938,12 @@ val AUTOMATIONRESPONSE = u32"51"
     }
   }
 
-  object Band {
-
-    val maxSize: Z = z"32"
-
-    def empty: MBand = {
-      return MBand(s32"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[Band] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[Band]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class Band(
-    val band: S32
-  ) {
-
-    @strictpure def toMutable: MBand = MBand(band)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(32, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MBand(
-    var band: S32
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: Band = Band(band)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: Band.wellFormed
-
-      // END USER CODE: Band.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      band = Reader.IS.beS32(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beS32(output, context, band)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_Band)
-      }
-    }
-
-  }
-
   object SearchTask {
 
     val maxSize: Z = z"8916552"
 
     def empty: MSearchTask = {
-      return MSearchTask(Task.empty, u16"0", MSZ[MBand](), s64"0", 0.0f)
+      return MSearchTask(Task.empty, u16"0", MSZ[S32](), s64"0", 0.0f)
     }
 
     def decode(input: ISZ[B], context: Context): Option[SearchTask] = {
@@ -4216,18 +3952,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[SearchTask]() else Some(r.toImmutable)
     }
 
-    def toMutableDesiredWavelengthBands(s: ISZ[Band]): MSZ[MBand] = {
-      var r = MSZ[MBand]()
+    def toMutableDesiredWavelengthBands(s: ISZ[S32]): MSZ[S32] = {
+      var r = MSZ[S32]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableDesiredWavelengthBands(s: MSZ[MBand]): ISZ[Band] = {
-      var r = ISZ[Band]()
+    def toImmutableDesiredWavelengthBands(s: MSZ[S32]): ISZ[S32] = {
+      var r = ISZ[S32]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -4236,7 +3972,7 @@ val AUTOMATIONRESPONSE = u32"51"
   @datatype class SearchTask(
     val task: Task,
     val _desiredWavelengthBandsSize: U16,
-    val desiredWavelengthBands: ISZ[Band],
+    val desiredWavelengthBands: ISZ[S32],
     val dwellTime: S64,
     val groundSampleDistance: F32
   ) {
@@ -4257,7 +3993,7 @@ val AUTOMATIONRESPONSE = u32"51"
   @record class MSearchTask(
     var task: MTask,
     var _desiredWavelengthBandsSize: U16,
-    var desiredWavelengthBands: MSZ[MBand],
+    var desiredWavelengthBands: MSZ[S32],
     var dwellTime: S64,
     var groundSampleDistance: F32
   ) extends Runtime.Composite {
@@ -4292,9 +4028,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _desiredWavelengthBandsSize = Reader.IS.beU16(input, context)
       val desiredWavelengthBandsSize = sizeOfDesiredWavelengthBands(_desiredWavelengthBandsSize)
       if (desiredWavelengthBandsSize >= 0) {
-        desiredWavelengthBands = MSZ.create(desiredWavelengthBandsSize, Band.empty)
+        desiredWavelengthBands = MSZ.create(desiredWavelengthBandsSize, s32"0")
         for (i <- 0 until desiredWavelengthBandsSize) {
-          desiredWavelengthBands(i).decode(input, context)
+          val band = Reader.IS.beS32(input, context)
+          desiredWavelengthBands(i) = band
         }
       } else {
         context.signalError(ERROR_SearchTask_desiredWavelengthBands)
@@ -4314,7 +4051,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val desiredWavelengthBandsSize = sizeOfDesiredWavelengthBands(_desiredWavelengthBandsSize)
       if (desiredWavelengthBandsSize >= 0) {
         for (i <- 0 until desiredWavelengthBandsSize) {
-          desiredWavelengthBands(i).encode(output, context)
+          val band = desiredWavelengthBands(i)
+          Writer.beS32(output, context, band)
         }
       } else {
         context.signalError(ERROR_SearchTask_desiredWavelengthBands)
@@ -5285,148 +5023,12 @@ val AUTOMATIONRESPONSE = u32"51"
     }
   }
 
-  object EntityId {
-
-    val maxSize: Z = z"64"
-
-    def empty: MEntityId = {
-      return MEntityId(s64"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[EntityId] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[EntityId]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class EntityId(
-    val entityId: S64
-  ) {
-
-    @strictpure def toMutable: MEntityId = MEntityId(entityId)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(64, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MEntityId(
-    var entityId: S64
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: EntityId = EntityId(entityId)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: EntityId.wellFormed
-
-      // END USER CODE: EntityId.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      entityId = Reader.IS.beS64(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beS64(output, context, entityId)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_EntityId)
-      }
-    }
-
-  }
-
-  object TaskId {
-
-    val maxSize: Z = z"64"
-
-    def empty: MTaskId = {
-      return MTaskId(s64"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[TaskId] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[TaskId]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class TaskId(
-    val taskId: S64
-  ) {
-
-    @strictpure def toMutable: MTaskId = MTaskId(taskId)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(64, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MTaskId(
-    var taskId: S64
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: TaskId = TaskId(taskId)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: TaskId.wellFormed
-
-      // END USER CODE: TaskId.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      taskId = Reader.IS.beS64(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beS64(output, context, taskId)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_TaskId)
-      }
-    }
-
-  }
-
   object TaskRelationships {
 
     val maxSize: Z = z"524296"
 
     def empty: MTaskRelationships = {
-      return MTaskRelationships(u16"0", MSZ[MC]())
+      return MTaskRelationships(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[TaskRelationships] = {
@@ -5435,18 +5037,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[TaskRelationships]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -5454,7 +5056,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class TaskRelationships(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MTaskRelationships = MTaskRelationships(_stringCharsSize, TaskRelationships.toMutableStringChars(stringChars))
@@ -5472,7 +5074,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MTaskRelationships(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: TaskRelationships = TaskRelationships(_stringCharsSize, TaskRelationships.toImmutableStringChars(stringChars))
@@ -5499,9 +5101,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_TaskRelationships_stringChars)
@@ -5518,7 +5121,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_TaskRelationships_stringChars)
@@ -5542,7 +5146,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"527472"
 
     def empty: MAutomationRequest = {
-      return MAutomationRequest(u16"0", MSZ[MEntityId](), u16"0", MSZ[MTaskId](), TaskRelationships.empty, s64"0", u8"0")
+      return MAutomationRequest(u16"0", MSZ[S64](), u16"0", MSZ[S64](), TaskRelationships.empty, s64"0", u8"0")
     }
 
     def decode(input: ISZ[B], context: Context): Option[AutomationRequest] = {
@@ -5551,34 +5155,34 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[AutomationRequest]() else Some(r.toImmutable)
     }
 
-    def toMutableEntityList(s: ISZ[EntityId]): MSZ[MEntityId] = {
-      var r = MSZ[MEntityId]()
+    def toMutableEntityList(s: ISZ[S64]): MSZ[S64] = {
+      var r = MSZ[S64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableEntityList(s: MSZ[MEntityId]): ISZ[EntityId] = {
-      var r = ISZ[EntityId]()
+    def toImmutableEntityList(s: MSZ[S64]): ISZ[S64] = {
+      var r = ISZ[S64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
 
-    def toMutableTaskList(s: ISZ[TaskId]): MSZ[MTaskId] = {
-      var r = MSZ[MTaskId]()
+    def toMutableTaskList(s: ISZ[S64]): MSZ[S64] = {
+      var r = MSZ[S64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableTaskList(s: MSZ[MTaskId]): ISZ[TaskId] = {
-      var r = ISZ[TaskId]()
+    def toImmutableTaskList(s: MSZ[S64]): ISZ[S64] = {
+      var r = ISZ[S64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -5586,9 +5190,9 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class AutomationRequest(
     val _entityListSize: U16,
-    val entityList: ISZ[EntityId],
+    val entityList: ISZ[S64],
     val _taskListSize: U16,
-    val taskList: ISZ[TaskId],
+    val taskList: ISZ[S64],
     val taskRelationships: TaskRelationships,
     val operatingRegion: S64,
     val redoAllTasks: U8
@@ -5609,9 +5213,9 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MAutomationRequest(
     var _entityListSize: U16,
-    var entityList: MSZ[MEntityId],
+    var entityList: MSZ[S64],
     var _taskListSize: U16,
-    var taskList: MSZ[MTaskId],
+    var taskList: MSZ[S64],
     var taskRelationships: MTaskRelationships,
     var operatingRegion: S64,
     var redoAllTasks: U8
@@ -5655,9 +5259,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _entityListSize = Reader.IS.beU16(input, context)
       val entityListSize = sizeOfEntityList(_entityListSize)
       if (entityListSize >= 0) {
-        entityList = MSZ.create(entityListSize, EntityId.empty)
+        entityList = MSZ.create(entityListSize, s64"0")
         for (i <- 0 until entityListSize) {
-          entityList(i).decode(input, context)
+          val entityId = Reader.IS.beS64(input, context)
+          entityList(i) = entityId
         }
       } else {
         context.signalError(ERROR_AutomationRequest_entityList)
@@ -5665,9 +5270,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _taskListSize = Reader.IS.beU16(input, context)
       val taskListSize = sizeOfTaskList(_taskListSize)
       if (taskListSize >= 0) {
-        taskList = MSZ.create(taskListSize, TaskId.empty)
+        taskList = MSZ.create(taskListSize, s64"0")
         for (i <- 0 until taskListSize) {
-          taskList(i).decode(input, context)
+          val taskId = Reader.IS.beS64(input, context)
+          taskList(i) = taskId
         }
       } else {
         context.signalError(ERROR_AutomationRequest_taskList)
@@ -5687,7 +5293,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val entityListSize = sizeOfEntityList(_entityListSize)
       if (entityListSize >= 0) {
         for (i <- 0 until entityListSize) {
-          entityList(i).encode(output, context)
+          val entityId = entityList(i)
+          Writer.beS64(output, context, entityId)
         }
       } else {
         context.signalError(ERROR_AutomationRequest_entityList)
@@ -5696,7 +5303,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val taskListSize = sizeOfTaskList(_taskListSize)
       if (taskListSize >= 0) {
         for (i <- 0 until taskListSize) {
-          taskList(i).encode(output, context)
+          val taskId = taskList(i)
+          Writer.beS64(output, context, taskId)
         }
       } else {
         context.signalError(ERROR_AutomationRequest_taskList)
@@ -5867,80 +5475,12 @@ val AUTOMATIONRESPONSE = u32"51"
 
   }
 
-  object AssociatedTaskId {
-
-    val maxSize: Z = z"64"
-
-    def empty: MAssociatedTaskId = {
-      return MAssociatedTaskId(s64"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[AssociatedTaskId] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[AssociatedTaskId]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class AssociatedTaskId(
-    val associatedTaskId: S64
-  ) {
-
-    @strictpure def toMutable: MAssociatedTaskId = MAssociatedTaskId(associatedTaskId)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(64, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MAssociatedTaskId(
-    var associatedTaskId: S64
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: AssociatedTaskId = AssociatedTaskId(associatedTaskId)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: AssociatedTaskId.wellFormed
-
-      // END USER CODE: AssociatedTaskId.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      associatedTaskId = Reader.IS.beS64(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beS64(output, context, associatedTaskId)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_AssociatedTaskId)
-      }
-    }
-
-  }
-
   object PackedVehicleActionMissionCommandVehicleActionCommand {
 
     val maxSize: Z = z"528"
 
     def empty: MPackedVehicleActionMissionCommandVehicleActionCommand = {
-      return MPackedVehicleActionMissionCommandVehicleActionCommand(u16"0", MSZ[MAssociatedTaskId]())
+      return MPackedVehicleActionMissionCommandVehicleActionCommand(u16"0", MSZ[S64]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedVehicleActionMissionCommandVehicleActionCommand] = {
@@ -5949,18 +5489,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[PackedVehicleActionMissionCommandVehicleActionCommand]() else Some(r.toImmutable)
     }
 
-    def toMutableAssociatedTaskList(s: ISZ[AssociatedTaskId]): MSZ[MAssociatedTaskId] = {
-      var r = MSZ[MAssociatedTaskId]()
+    def toMutableAssociatedTaskList(s: ISZ[S64]): MSZ[S64] = {
+      var r = MSZ[S64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableAssociatedTaskList(s: MSZ[MAssociatedTaskId]): ISZ[AssociatedTaskId] = {
-      var r = ISZ[AssociatedTaskId]()
+    def toImmutableAssociatedTaskList(s: MSZ[S64]): ISZ[S64] = {
+      var r = ISZ[S64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -5968,7 +5508,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class PackedVehicleActionMissionCommandVehicleActionCommand(
     val _associatedTaskListSize: U16,
-    val associatedTaskList: ISZ[AssociatedTaskId]
+    val associatedTaskList: ISZ[S64]
   ) {
 
     @strictpure def toMutable: MPackedVehicleActionMissionCommandVehicleActionCommand = MPackedVehicleActionMissionCommandVehicleActionCommand(_associatedTaskListSize, PackedVehicleActionMissionCommandVehicleActionCommand.toMutableAssociatedTaskList(associatedTaskList))
@@ -5986,7 +5526,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MPackedVehicleActionMissionCommandVehicleActionCommand(
     var _associatedTaskListSize: U16,
-    var associatedTaskList: MSZ[MAssociatedTaskId]
+    var associatedTaskList: MSZ[S64]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedVehicleActionMissionCommandVehicleActionCommand = PackedVehicleActionMissionCommandVehicleActionCommand(_associatedTaskListSize, PackedVehicleActionMissionCommandVehicleActionCommand.toImmutableAssociatedTaskList(associatedTaskList))
@@ -6013,9 +5553,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _associatedTaskListSize = Reader.IS.beU16(input, context)
       val associatedTaskListSize = sizeOfAssociatedTaskList(_associatedTaskListSize)
       if (associatedTaskListSize >= 0) {
-        associatedTaskList = MSZ.create(associatedTaskListSize, AssociatedTaskId.empty)
+        associatedTaskList = MSZ.create(associatedTaskListSize, s64"0")
         for (i <- 0 until associatedTaskListSize) {
-          associatedTaskList(i).decode(input, context)
+          val associatedTaskId = Reader.IS.beS64(input, context)
+          associatedTaskList(i) = associatedTaskId
         }
       } else {
         context.signalError(ERROR_PackedVehicleActionMissionCommandVehicleActionCommand_associatedTaskList)
@@ -6032,7 +5573,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val associatedTaskListSize = sizeOfAssociatedTaskList(_associatedTaskListSize)
       if (associatedTaskListSize >= 0) {
         for (i <- 0 until associatedTaskListSize) {
-          associatedTaskList(i).encode(output, context)
+          val associatedTaskId = associatedTaskList(i)
+          Writer.beS64(output, context, associatedTaskId)
         }
       } else {
         context.signalError(ERROR_PackedVehicleActionMissionCommandVehicleActionCommand_associatedTaskList)
@@ -6638,7 +6180,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"528"
 
     def empty: MPackedWaypointVehicleAction = {
-      return MPackedWaypointVehicleAction(u16"0", MSZ[MAssociatedTaskId]())
+      return MPackedWaypointVehicleAction(u16"0", MSZ[S64]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedWaypointVehicleAction] = {
@@ -6647,18 +6189,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[PackedWaypointVehicleAction]() else Some(r.toImmutable)
     }
 
-    def toMutableAssociatedTaskList(s: ISZ[AssociatedTaskId]): MSZ[MAssociatedTaskId] = {
-      var r = MSZ[MAssociatedTaskId]()
+    def toMutableAssociatedTaskList(s: ISZ[S64]): MSZ[S64] = {
+      var r = MSZ[S64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableAssociatedTaskList(s: MSZ[MAssociatedTaskId]): ISZ[AssociatedTaskId] = {
-      var r = ISZ[AssociatedTaskId]()
+    def toImmutableAssociatedTaskList(s: MSZ[S64]): ISZ[S64] = {
+      var r = ISZ[S64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -6666,7 +6208,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class PackedWaypointVehicleAction(
     val _associatedTaskListSize: U16,
-    val associatedTaskList: ISZ[AssociatedTaskId]
+    val associatedTaskList: ISZ[S64]
   ) {
 
     @strictpure def toMutable: MPackedWaypointVehicleAction = MPackedWaypointVehicleAction(_associatedTaskListSize, PackedWaypointVehicleAction.toMutableAssociatedTaskList(associatedTaskList))
@@ -6684,7 +6226,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MPackedWaypointVehicleAction(
     var _associatedTaskListSize: U16,
-    var associatedTaskList: MSZ[MAssociatedTaskId]
+    var associatedTaskList: MSZ[S64]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedWaypointVehicleAction = PackedWaypointVehicleAction(_associatedTaskListSize, PackedWaypointVehicleAction.toImmutableAssociatedTaskList(associatedTaskList))
@@ -6711,9 +6253,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _associatedTaskListSize = Reader.IS.beU16(input, context)
       val associatedTaskListSize = sizeOfAssociatedTaskList(_associatedTaskListSize)
       if (associatedTaskListSize >= 0) {
-        associatedTaskList = MSZ.create(associatedTaskListSize, AssociatedTaskId.empty)
+        associatedTaskList = MSZ.create(associatedTaskListSize, s64"0")
         for (i <- 0 until associatedTaskListSize) {
-          associatedTaskList(i).decode(input, context)
+          val associatedTaskId = Reader.IS.beS64(input, context)
+          associatedTaskList(i) = associatedTaskId
         }
       } else {
         context.signalError(ERROR_PackedWaypointVehicleAction_associatedTaskList)
@@ -6730,7 +6273,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val associatedTaskListSize = sizeOfAssociatedTaskList(_associatedTaskListSize)
       if (associatedTaskListSize >= 0) {
         for (i <- 0 until associatedTaskListSize) {
-          associatedTaskList(i).encode(output, context)
+          val associatedTaskId = associatedTaskList(i)
+          Writer.beS64(output, context, associatedTaskId)
         }
       } else {
         context.signalError(ERROR_PackedWaypointVehicleAction_associatedTaskList)
@@ -6986,7 +6530,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"6304"
 
     def empty: MPackedWaypoint = {
-      return MPackedWaypoint(WayPointLocation3D.empty, s64"0", s64"0", 0.0f, s32"0", 0.0f, s32"0", u16"0", MSZ[MObjectWaypointVehicleAction](), s64"0", s64"0", u16"0", MSZ[MAssociatedTaskId]())
+      return MPackedWaypoint(WayPointLocation3D.empty, s64"0", s64"0", 0.0f, s32"0", 0.0f, s32"0", u16"0", MSZ[MObjectWaypointVehicleAction](), s64"0", s64"0", u16"0", MSZ[S64]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedWaypoint] = {
@@ -7011,18 +6555,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return r
     }
 
-    def toMutableAssociatedTaskList(s: ISZ[AssociatedTaskId]): MSZ[MAssociatedTaskId] = {
-      var r = MSZ[MAssociatedTaskId]()
+    def toMutableAssociatedTaskList(s: ISZ[S64]): MSZ[S64] = {
+      var r = MSZ[S64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableAssociatedTaskList(s: MSZ[MAssociatedTaskId]): ISZ[AssociatedTaskId] = {
-      var r = ISZ[AssociatedTaskId]()
+    def toImmutableAssociatedTaskList(s: MSZ[S64]): ISZ[S64] = {
+      var r = ISZ[S64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -7041,7 +6585,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val contingencyWaypointA: S64,
     val contingencyWaypointB: S64,
     val _associatedTaskListSize: U16,
-    val associatedTaskList: ISZ[AssociatedTaskId]
+    val associatedTaskList: ISZ[S64]
   ) {
 
     @strictpure def toMutable: MPackedWaypoint = MPackedWaypoint(wayPointLocation3D.toMutable, number, nextWaypoint, speed, speedType, climbRate, turnType, _vehicleActionListSize, PackedWaypoint.toMutableVehicleActionList(vehicleActionList), contingencyWaypointA, contingencyWaypointB, _associatedTaskListSize, PackedWaypoint.toMutableAssociatedTaskList(associatedTaskList))
@@ -7070,7 +6614,7 @@ val AUTOMATIONRESPONSE = u32"51"
     var contingencyWaypointA: S64,
     var contingencyWaypointB: S64,
     var _associatedTaskListSize: U16,
-    var associatedTaskList: MSZ[MAssociatedTaskId]
+    var associatedTaskList: MSZ[S64]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedWaypoint = PackedWaypoint(wayPointLocation3D.toImmutable, number, nextWaypoint, speed, speedType, climbRate, turnType, _vehicleActionListSize, PackedWaypoint.toImmutableVehicleActionList(vehicleActionList), contingencyWaypointA, contingencyWaypointB, _associatedTaskListSize, PackedWaypoint.toImmutableAssociatedTaskList(associatedTaskList))
@@ -7130,9 +6674,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _associatedTaskListSize = Reader.IS.beU16(input, context)
       val associatedTaskListSize = sizeOfAssociatedTaskList(_associatedTaskListSize)
       if (associatedTaskListSize >= 0) {
-        associatedTaskList = MSZ.create(associatedTaskListSize, AssociatedTaskId.empty)
+        associatedTaskList = MSZ.create(associatedTaskListSize, s64"0")
         for (i <- 0 until associatedTaskListSize) {
-          associatedTaskList(i).decode(input, context)
+          val associatedTaskId = Reader.IS.beS64(input, context)
+          associatedTaskList(i) = associatedTaskId
         }
       } else {
         context.signalError(ERROR_PackedWaypoint_associatedTaskList)
@@ -7167,7 +6712,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val associatedTaskListSize = sizeOfAssociatedTaskList(_associatedTaskListSize)
       if (associatedTaskListSize >= 0) {
         for (i <- 0 until associatedTaskListSize) {
-          associatedTaskList(i).encode(output, context)
+          val associatedTaskId = associatedTaskList(i)
+          Writer.beS64(output, context, associatedTaskId)
         }
       } else {
         context.signalError(ERROR_PackedWaypoint_associatedTaskList)
@@ -7933,7 +7479,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"528"
 
     def empty: MPackedVehicleActionPackedAutomationResponseVehicleCommand = {
-      return MPackedVehicleActionPackedAutomationResponseVehicleCommand(u16"0", MSZ[MAssociatedTaskId]())
+      return MPackedVehicleActionPackedAutomationResponseVehicleCommand(u16"0", MSZ[S64]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedVehicleActionPackedAutomationResponseVehicleCommand] = {
@@ -7942,18 +7488,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[PackedVehicleActionPackedAutomationResponseVehicleCommand]() else Some(r.toImmutable)
     }
 
-    def toMutableAssociatedTaskList(s: ISZ[AssociatedTaskId]): MSZ[MAssociatedTaskId] = {
-      var r = MSZ[MAssociatedTaskId]()
+    def toMutableAssociatedTaskList(s: ISZ[S64]): MSZ[S64] = {
+      var r = MSZ[S64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableAssociatedTaskList(s: MSZ[MAssociatedTaskId]): ISZ[AssociatedTaskId] = {
-      var r = ISZ[AssociatedTaskId]()
+    def toImmutableAssociatedTaskList(s: MSZ[S64]): ISZ[S64] = {
+      var r = ISZ[S64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -7961,7 +7507,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class PackedVehicleActionPackedAutomationResponseVehicleCommand(
     val _associatedTaskListSize: U16,
-    val associatedTaskList: ISZ[AssociatedTaskId]
+    val associatedTaskList: ISZ[S64]
   ) {
 
     @strictpure def toMutable: MPackedVehicleActionPackedAutomationResponseVehicleCommand = MPackedVehicleActionPackedAutomationResponseVehicleCommand(_associatedTaskListSize, PackedVehicleActionPackedAutomationResponseVehicleCommand.toMutableAssociatedTaskList(associatedTaskList))
@@ -7979,7 +7525,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MPackedVehicleActionPackedAutomationResponseVehicleCommand(
     var _associatedTaskListSize: U16,
-    var associatedTaskList: MSZ[MAssociatedTaskId]
+    var associatedTaskList: MSZ[S64]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedVehicleActionPackedAutomationResponseVehicleCommand = PackedVehicleActionPackedAutomationResponseVehicleCommand(_associatedTaskListSize, PackedVehicleActionPackedAutomationResponseVehicleCommand.toImmutableAssociatedTaskList(associatedTaskList))
@@ -8006,9 +7552,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _associatedTaskListSize = Reader.IS.beU16(input, context)
       val associatedTaskListSize = sizeOfAssociatedTaskList(_associatedTaskListSize)
       if (associatedTaskListSize >= 0) {
-        associatedTaskList = MSZ.create(associatedTaskListSize, AssociatedTaskId.empty)
+        associatedTaskList = MSZ.create(associatedTaskListSize, s64"0")
         for (i <- 0 until associatedTaskListSize) {
-          associatedTaskList(i).decode(input, context)
+          val associatedTaskId = Reader.IS.beS64(input, context)
+          associatedTaskList(i) = associatedTaskId
         }
       } else {
         context.signalError(ERROR_PackedVehicleActionPackedAutomationResponseVehicleCommand_associatedTaskList)
@@ -8025,7 +7572,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val associatedTaskListSize = sizeOfAssociatedTaskList(_associatedTaskListSize)
       if (associatedTaskListSize >= 0) {
         for (i <- 0 until associatedTaskListSize) {
-          associatedTaskList(i).encode(output, context)
+          val associatedTaskId = associatedTaskList(i)
+          Writer.beS64(output, context, associatedTaskId)
         }
       } else {
         context.signalError(ERROR_PackedVehicleActionPackedAutomationResponseVehicleCommand_associatedTaskList)
@@ -8712,7 +8260,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"524296"
 
     def empty: MPackedAutomationResponseInfoKey = {
-      return MPackedAutomationResponseInfoKey(u16"0", MSZ[MC]())
+      return MPackedAutomationResponseInfoKey(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedAutomationResponseInfoKey] = {
@@ -8721,18 +8269,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[PackedAutomationResponseInfoKey]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -8740,7 +8288,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class PackedAutomationResponseInfoKey(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedAutomationResponseInfoKey = MPackedAutomationResponseInfoKey(_stringCharsSize, PackedAutomationResponseInfoKey.toMutableStringChars(stringChars))
@@ -8758,7 +8306,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MPackedAutomationResponseInfoKey(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedAutomationResponseInfoKey = PackedAutomationResponseInfoKey(_stringCharsSize, PackedAutomationResponseInfoKey.toImmutableStringChars(stringChars))
@@ -8785,9 +8333,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedAutomationResponseInfoKey_stringChars)
@@ -8804,7 +8353,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedAutomationResponseInfoKey_stringChars)
@@ -8828,7 +8378,7 @@ val AUTOMATIONRESPONSE = u32"51"
     val maxSize: Z = z"524296"
 
     def empty: MPackedAutomationResponseInfoValue = {
-      return MPackedAutomationResponseInfoValue(u16"0", MSZ[MC]())
+      return MPackedAutomationResponseInfoValue(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedAutomationResponseInfoValue] = {
@@ -8837,18 +8387,18 @@ val AUTOMATIONRESPONSE = u32"51"
       return if (context.hasError) None[PackedAutomationResponseInfoValue]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -8856,7 +8406,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @datatype class PackedAutomationResponseInfoValue(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedAutomationResponseInfoValue = MPackedAutomationResponseInfoValue(_stringCharsSize, PackedAutomationResponseInfoValue.toMutableStringChars(stringChars))
@@ -8874,7 +8424,7 @@ val AUTOMATIONRESPONSE = u32"51"
 
   @record class MPackedAutomationResponseInfoValue(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedAutomationResponseInfoValue = PackedAutomationResponseInfoValue(_stringCharsSize, PackedAutomationResponseInfoValue.toImmutableStringChars(stringChars))
@@ -8901,9 +8451,10 @@ val AUTOMATIONRESPONSE = u32"51"
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedAutomationResponseInfoValue_stringChars)
@@ -8920,7 +8471,8 @@ val AUTOMATIONRESPONSE = u32"51"
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedAutomationResponseInfoValue_stringChars)
@@ -9808,9 +9360,9 @@ val expectedOperatingRegionMessage = MLMCPMessage(
     MOperatingRegion(
       s64"0x0000000000000150",
       u16"0x0001",
-      MSZ(MId(u64"0x000000000000014E")),
+      MSZ(u64"0x000000000000014E"),
       u16"0x0001",
-      MSZ(MId(u64"0x000000000000014F"))
+      MSZ(u64"0x000000000000014F")
     )
   ),
   u32"0x000003E1"
@@ -9871,9 +9423,9 @@ val expectedAutomationRequestMessage = MLMCPMessage (
     u16"0x0003",
     MAutomationRequest(
       u16"0x0001",
-      MSZ(MEntityId(s64"0x0000000000000190")),
+      MSZ(s64"0x0000000000000190"),
       u16"0x0001",
-      MSZ(MTaskId(s64"0x00000000000003E8")),
+      MSZ(s64"0x00000000000003E8"),
       MTaskRelationships(
         u16"0x0000",
         MSZ()
