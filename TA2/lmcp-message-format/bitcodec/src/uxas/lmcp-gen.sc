@@ -182,20 +182,20 @@ object BitCodec {
   val ERROR_LMCPMessage: Z = 92
 
   // BEGIN USER CODE: Members
-  val CMASISeriesID = s64"4849604199710720000"
+  val CMASISeriesID: S64 = s64"4849604199710720000"
   val CMASISeriesVersion : U16 = u16"3"
 
-  val KEYVALUEPAIR = u32"2"
-  val LOCATION3D = u32"3"
-  val PAYLOADSTATE = u32"6"
-  val TASK = u32"8"
-  val SEARCHTASK = u32"9"
-  val ENTITYSTATE = u32"14"
-  val AIRVEHICLESTATE = u32"15"
-  val WEDGE = u32"16"
-  val LINESEARCHTASK = u32"31"
-  val OPERATINGREGION = u32"39"
-  val AUTOMATIONREQUEST = u32"40"
+  val KEYVALUEPAIR: U32 = u32"2"
+  val LOCATION3D: U32 = u32"3"
+  val PAYLOADSTATE: U32 = u32"6"
+  val TASK: U32 = u32"8"
+  val SEARCHTASK: U32 = u32"9"
+  val ENTITYSTATE: U32 = u32"14"
+  val AIRVEHICLESTATE: U32 = u32"15"
+  val WEDGE: U32 = u32"16"
+  val LINESEARCHTASK: U32 = u32"31"
+  val OPERATINGREGION: U32 = u32"39"
+  val AUTOMATIONREQUEST: U32 = u32"40"
   // END USER CODE: Members
 
   object NullValue {

@@ -138,8 +138,25 @@ def runNative(gen: Os.Path): Unit = {
   out.mkdirAll()
 
   println(s"Compiling $genPath to C ...")
+  var seqSizes = "MSZ[B]=63848"
+  if (gen.name == "lmcp-gen") {
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MBand]=8"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MC]=65535"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MEntityId]=16"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MEntity]=32"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MId]=1"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectInfo]=32"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectPayloadState]=8"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectPoint]=1024"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectViewAngle]=16"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectpayloadStateParameter]=8"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjecttaskParameter]=8"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MTaskId]=32"
+    seqSizes = s"${seqSizes};MSZ[U8]=1024"
+  }
+
   Os.proc(ISZ(sireum.string, "slang", "transpilers", "c", "--string-size", "2048",
-    "--sequence", "MSZ[org.sireum.B]=63848", "--output-dir", c.string, "--name", gen.name, genPath)).echo.console.runCheck()
+    "--sequence", seqSizes, "--output-dir", c.string, "--name", gen.name, genPath)).echo.console.runCheck()
   println()
 
   println(s"Compiling executable $x ...")
