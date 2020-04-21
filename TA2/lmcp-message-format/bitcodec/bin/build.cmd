@@ -8,7 +8,7 @@ if [ -f "$0.com" ] && [ "$0.com" -nt "$0" ]; then             #
   exec "$0.com" "$@"                                          #
 else                                                          #
   rm -fR "$0.com"                                             #
-  exec "${SIREUM_HOME}/bin/sireum" slang run -s -n "$0" "$@"  #
+  exec "${SIREUM_HOME}/bin/sireum" slang run -s "$0" "$@"  #
 fi                                                            #
 :BOF
 setlocal
@@ -95,7 +95,7 @@ def dot(): Unit = {
     if (r.exitCode == 0) {
       val sops = ops.StringOps(spec.name)
       val dotFile = spec.up / s"${sops.substring(0, sops.lastIndexOf('.'))}.dot"
-      Os.proc(ISZ("dot", "-O", "-Tpdf", dotFile.string)).echo.console.runCheck()
+      Os.proc(ISZ("dot", "-O", "-Tsvg", dotFile.string)).echo.console.runCheck()
     }
     println()
   }
@@ -140,19 +140,16 @@ def runNative(gen: Os.Path): Unit = {
   println(s"Compiling $genPath to C ...")
   var seqSizes = "MSZ[B]=63848"
   if (gen.name == "lmcp-gen") {
-    seqSizes = s"${seqSizes};MSZ[BitCodec.MBand]=8"
-    seqSizes = s"${seqSizes};MSZ[BitCodec.MC]=65535"
-    seqSizes = s"${seqSizes};MSZ[BitCodec.MEntityId]=16"
-    seqSizes = s"${seqSizes};MSZ[BitCodec.MEntity]=32"
-    seqSizes = s"${seqSizes};MSZ[BitCodec.MId]=1"
+    seqSizes = s"${seqSizes};MSZ[S32]=8"    // band
+    seqSizes = s"${seqSizes};MSZ[S64]=32"   // taskId, entityId, entity
+    seqSizes = s"${seqSizes};MSZ[U64]=1"    // id
+    seqSizes = s"${seqSizes};MSZ[U8]=65535" // c
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectInfo]=32"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectPayloadState]=8"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectPoint]=1024"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectViewAngle]=16"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectpayloadStateParameter]=8"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjecttaskParameter]=8"
-    seqSizes = s"${seqSizes};MSZ[BitCodec.MTaskId]=32"
-    seqSizes = s"${seqSizes};MSZ[U8]=1024"
   }
 
   Os.proc(ISZ(sireum.string, "slang", "transpilers", "c", "--string-size", "2048",
@@ -163,7 +160,7 @@ def runNative(gen: Os.Path): Unit = {
   Os.proc(ISZ("cmake", "-DCMAKE_BUILD_TYPE=Release", s"..${Os.fileSep}c")).at(out).echo.console.runCheck()
   println()
 
-  Os.proc(ISZ("make")).at(out).echo.console.runCheck()
+  Os.proc(ISZ("make", "-j", "4")).at(out).echo.console.runCheck()
   println()
 
   println(s"Running $x ...")
@@ -195,7 +192,7 @@ def all(): Unit = {
     println()
     val sops = ops.StringOps(spec.name)
     val dotFile = spec.up / s"${sops.substring(0, sops.lastIndexOf('.'))}.dot"
-    Os.proc(ISZ("dot", "-O", "-Tpdf", dotFile.string)).echo.console.runCheck()
+    Os.proc(ISZ("dot", "-O", "-Tsvg", dotFile.string)).echo.console.runCheck()
     println()
 
     for (gen <- gens) {

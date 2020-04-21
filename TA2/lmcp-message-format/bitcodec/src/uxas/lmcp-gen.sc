@@ -19,167 +19,155 @@ object BitCodec {
 
   val ERROR_NullValue: Z = 2
 
-  val ERROR_Id: Z = 3
+  val ERROR_OperatingRegion_keepInAreas: Z = 3
 
-  val ERROR_OperatingRegion_keepInAreas: Z = 4
+  val ERROR_OperatingRegion_keepOutAreas: Z = 4
 
-  val ERROR_OperatingRegion_keepOutAreas: Z = 6
+  val ERROR_OperatingRegion: Z = 5
 
-  val ERROR_OperatingRegion: Z = 7
+  val ERROR_NullValueLMCPLocation3D: Z = 6
 
-  val ERROR_NullValueLMCPLocation3D: Z = 8
+  val ERROR_PackedLMCPLocation3D: Z = 7
 
-  val ERROR_PackedLMCPLocation3D: Z = 9
+  val ERROR_LMCPLMCPLocation3D: Z = 8
 
-  val ERROR_LMCPLMCPLocation3D: Z = 10
+  val ERROR_PredUnionLMCPLocation3D: Z = 9
 
-  val ERROR_PredUnionLMCPLocation3D: Z = 11
+  val ERROR_ObjectLMCPLocation3D: Z = 10
 
-  val ERROR_ObjectLMCPLocation3D: Z = 12
+  val ERROR_NullValuePayloadState: Z = 11
 
-  val ERROR_NullValuePayloadState: Z = 13
+  val ERROR_NullValuepayloadStateParameter: Z = 12
 
-  val ERROR_NullValuepayloadStateParameter: Z = 14
+  val ERROR_PackedpayloadStateParameterKey_stringChars: Z = 13
 
-  val ERROR_C: Z = 15
+  val ERROR_PackedpayloadStateParameterKey: Z = 14
 
-  val ERROR_PackedpayloadStateParameterKey_stringChars: Z = 16
+  val ERROR_PackedpayloadStateParameterValue_stringChars: Z = 15
 
-  val ERROR_PackedpayloadStateParameterKey: Z = 17
+  val ERROR_PackedpayloadStateParameterValue: Z = 16
 
-  val ERROR_PackedpayloadStateParameterValue_stringChars: Z = 19
+  val ERROR_PackedpayloadStateParameter: Z = 17
 
-  val ERROR_PackedpayloadStateParameterValue: Z = 20
+  val ERROR_LMCPpayloadStateParameter: Z = 18
 
-  val ERROR_PackedpayloadStateParameter: Z = 21
+  val ERROR_PredUnionpayloadStateParameter: Z = 19
 
-  val ERROR_LMCPpayloadStateParameter: Z = 22
+  val ERROR_ObjectpayloadStateParameter: Z = 20
 
-  val ERROR_PredUnionpayloadStateParameter: Z = 23
+  val ERROR_PackedPayloadState_parameters: Z = 21
 
-  val ERROR_ObjectpayloadStateParameter: Z = 24
+  val ERROR_PackedPayloadState: Z = 22
 
-  val ERROR_PackedPayloadState_parameters: Z = 25
+  val ERROR_LMCPPayloadState: Z = 23
 
-  val ERROR_PackedPayloadState: Z = 26
+  val ERROR_PredUnionPayloadState: Z = 24
 
-  val ERROR_LMCPPayloadState: Z = 27
+  val ERROR_ObjectPayloadState: Z = 25
 
-  val ERROR_PredUnionPayloadState: Z = 28
+  val ERROR_EntityState_payloadStateList: Z = 26
 
-  val ERROR_ObjectPayloadState: Z = 29
+  val ERROR_EntityState_associatedTasks: Z = 27
 
-  val ERROR_EntityState_payloadStateList: Z = 30
+  val ERROR_NullValueInfo: Z = 28
 
-  val ERROR_EntityState_associatedTasks: Z = 32
+  val ERROR_PackedInfoKey_stringChars: Z = 29
 
-  val ERROR_NullValueInfo: Z = 33
+  val ERROR_PackedInfoKey: Z = 30
 
-  val ERROR_PackedInfoKey_stringChars: Z = 35
+  val ERROR_PackedInfoValue_stringChars: Z = 31
 
-  val ERROR_PackedInfoKey: Z = 36
+  val ERROR_PackedInfoValue: Z = 32
 
-  val ERROR_PackedInfoValue_stringChars: Z = 38
+  val ERROR_PackedInfo: Z = 33
 
-  val ERROR_PackedInfoValue: Z = 39
+  val ERROR_LMCPInfo: Z = 34
 
-  val ERROR_PackedInfo: Z = 40
+  val ERROR_PredUnionInfo: Z = 35
 
-  val ERROR_LMCPInfo: Z = 41
+  val ERROR_ObjectInfo: Z = 36
 
-  val ERROR_PredUnionInfo: Z = 42
+  val ERROR_EntityState_info: Z = 37
 
-  val ERROR_ObjectInfo: Z = 43
+  val ERROR_EntityState: Z = 38
 
-  val ERROR_EntityState_info: Z = 44
+  val ERROR_AirVehicleState: Z = 39
 
-  val ERROR_EntityState: Z = 45
+  val ERROR_Label_stringChars: Z = 40
 
-  val ERROR_AirVehicleState: Z = 46
+  val ERROR_Label: Z = 41
 
-  val ERROR_Label_stringChars: Z = 48
+  val ERROR_Task_eligibleEntities: Z = 42
 
-  val ERROR_Label: Z = 49
+  val ERROR_NullValuetaskParameter: Z = 43
 
-  val ERROR_Entity: Z = 50
+  val ERROR_PackedtaskParameterKey_stringChars: Z = 44
 
-  val ERROR_Task_eligibleEntities: Z = 51
+  val ERROR_PackedtaskParameterKey: Z = 45
 
-  val ERROR_NullValuetaskParameter: Z = 52
+  val ERROR_PackedtaskParameterValue_stringChars: Z = 46
 
-  val ERROR_PackedtaskParameterKey_stringChars: Z = 54
+  val ERROR_PackedtaskParameterValue: Z = 47
 
-  val ERROR_PackedtaskParameterKey: Z = 55
+  val ERROR_PackedtaskParameter: Z = 48
 
-  val ERROR_PackedtaskParameterValue_stringChars: Z = 57
+  val ERROR_LMCPtaskParameter: Z = 49
 
-  val ERROR_PackedtaskParameterValue: Z = 58
+  val ERROR_PredUniontaskParameter: Z = 50
 
-  val ERROR_PackedtaskParameter: Z = 59
+  val ERROR_ObjecttaskParameter: Z = 51
 
-  val ERROR_LMCPtaskParameter: Z = 60
+  val ERROR_Task_parameters: Z = 52
 
-  val ERROR_PredUniontaskParameter: Z = 61
+  val ERROR_Task: Z = 53
 
-  val ERROR_ObjecttaskParameter: Z = 62
+  val ERROR_SearchTask_desiredWavelengthBands: Z = 54
 
-  val ERROR_Task_parameters: Z = 63
+  val ERROR_SearchTask: Z = 55
 
-  val ERROR_Task: Z = 64
+  val ERROR_NullValuePoint: Z = 56
 
-  val ERROR_Band: Z = 65
+  val ERROR_PackedPoint: Z = 57
 
-  val ERROR_SearchTask_desiredWavelengthBands: Z = 66
+  val ERROR_LMCPPoint: Z = 58
 
-  val ERROR_SearchTask: Z = 67
+  val ERROR_PredUnionPoint: Z = 59
 
-  val ERROR_NullValuePoint: Z = 68
+  val ERROR_ObjectPoint: Z = 60
 
-  val ERROR_PackedPoint: Z = 69
+  val ERROR_LineSearchTask_pointList: Z = 61
 
-  val ERROR_LMCPPoint: Z = 70
+  val ERROR_NullValueViewAngle: Z = 62
 
-  val ERROR_PredUnionPoint: Z = 71
+  val ERROR_PackedViewAngle: Z = 63
 
-  val ERROR_ObjectPoint: Z = 72
+  val ERROR_LMCPViewAngle: Z = 64
 
-  val ERROR_LineSearchTask_pointList: Z = 73
+  val ERROR_PredUnionViewAngle: Z = 65
 
-  val ERROR_NullValueViewAngle: Z = 74
+  val ERROR_ObjectViewAngle: Z = 66
 
-  val ERROR_PackedViewAngle: Z = 75
+  val ERROR_LineSearchTask_viewAngleList: Z = 67
 
-  val ERROR_LMCPViewAngle: Z = 76
+  val ERROR_LineSearchTask: Z = 68
 
-  val ERROR_PredUnionViewAngle: Z = 77
+  val ERROR_AutomationRequest_entityList: Z = 69
 
-  val ERROR_ObjectViewAngle: Z = 78
+  val ERROR_AutomationRequest_taskList: Z = 70
 
-  val ERROR_LineSearchTask_viewAngleList: Z = 79
+  val ERROR_TaskRelationships_stringChars: Z = 71
 
-  val ERROR_LineSearchTask: Z = 80
+  val ERROR_TaskRelationships: Z = 72
 
-  val ERROR_EntityId: Z = 81
+  val ERROR_AutomationRequest: Z = 73
 
-  val ERROR_AutomationRequest_entityList: Z = 82
+  val ERROR_LMCPObject: Z = 74
 
-  val ERROR_TaskId: Z = 83
+  val ERROR_LMCPObjectDecode: Z = 75
 
-  val ERROR_AutomationRequest_taskList: Z = 84
+  val ERROR_LMCPObjectNullCheck: Z = 76
 
-  val ERROR_TaskRelationships_stringChars: Z = 86
-
-  val ERROR_TaskRelationships: Z = 87
-
-  val ERROR_AutomationRequest: Z = 88
-
-  val ERROR_LMCPObject: Z = 89
-
-  val ERROR_LMCPObjectDecode: Z = 90
-
-  val ERROR_LMCPObjectNullCheck: Z = 91
-
-  val ERROR_LMCPMessage: Z = 92
+  val ERROR_LMCPMessage: Z = 77
 
   // BEGIN USER CODE: Members
   val CMASISeriesID: S64 = s64"4849604199710720000"
@@ -269,80 +257,12 @@ object BitCodec {
 
   }
 
-  object Id {
-
-    val maxSize: Z = z"64"
-
-    def empty: MId = {
-      return MId(u64"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[Id] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[Id]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class Id(
-    val id: U64
-  ) {
-
-    @strictpure def toMutable: MId = MId(id)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(64, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MId(
-    var id: U64
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: Id = Id(id)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: Id.wellFormed
-
-      // END USER CODE: Id.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      id = Reader.IS.beU64(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU64(output, context, id)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_Id)
-      }
-    }
-
-  }
-
   object OperatingRegion {
 
     val maxSize: Z = z"224"
 
     def empty: MOperatingRegion = {
-      return MOperatingRegion(s64"0", u16"0", MSZ[MId](), u16"0", MSZ[MId]())
+      return MOperatingRegion(s64"0", u16"0", MSZ[U64](), u16"0", MSZ[U64]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[OperatingRegion] = {
@@ -351,34 +271,34 @@ object BitCodec {
       return if (context.hasError) None[OperatingRegion]() else Some(r.toImmutable)
     }
 
-    def toMutableKeepInAreas(s: ISZ[Id]): MSZ[MId] = {
-      var r = MSZ[MId]()
+    def toMutableKeepInAreas(s: ISZ[U64]): MSZ[U64] = {
+      var r = MSZ[U64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableKeepInAreas(s: MSZ[MId]): ISZ[Id] = {
-      var r = ISZ[Id]()
+    def toImmutableKeepInAreas(s: MSZ[U64]): ISZ[U64] = {
+      var r = ISZ[U64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
 
-    def toMutableKeepOutAreas(s: ISZ[Id]): MSZ[MId] = {
-      var r = MSZ[MId]()
+    def toMutableKeepOutAreas(s: ISZ[U64]): MSZ[U64] = {
+      var r = MSZ[U64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableKeepOutAreas(s: MSZ[MId]): ISZ[Id] = {
-      var r = ISZ[Id]()
+    def toImmutableKeepOutAreas(s: MSZ[U64]): ISZ[U64] = {
+      var r = ISZ[U64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -387,9 +307,9 @@ object BitCodec {
   @datatype class OperatingRegion(
     val id: S64,
     val _keepInAreasSize: U16,
-    val keepInAreas: ISZ[Id],
+    val keepInAreas: ISZ[U64],
     val _keepOutAreasSize: U16,
-    val keepOutAreas: ISZ[Id]
+    val keepOutAreas: ISZ[U64]
   ) extends LMCPObject {
 
     @strictpure def toMutable: MOperatingRegion = MOperatingRegion(id, _keepInAreasSize, OperatingRegion.toMutableKeepInAreas(keepInAreas), _keepOutAreasSize, OperatingRegion.toMutableKeepOutAreas(keepOutAreas))
@@ -408,9 +328,9 @@ object BitCodec {
   @record class MOperatingRegion(
     var id: S64,
     var _keepInAreasSize: U16,
-    var keepInAreas: MSZ[MId],
+    var keepInAreas: MSZ[U64],
     var _keepOutAreasSize: U16,
-    var keepOutAreas: MSZ[MId]
+    var keepOutAreas: MSZ[U64]
   ) extends MLMCPObject {
 
     @strictpure def toImmutable: OperatingRegion = OperatingRegion(id, _keepInAreasSize, OperatingRegion.toImmutableKeepInAreas(keepInAreas), _keepOutAreasSize, OperatingRegion.toImmutableKeepOutAreas(keepOutAreas))
@@ -447,9 +367,10 @@ object BitCodec {
       _keepInAreasSize = Reader.IS.beU16(input, context)
       val keepInAreasSize = sizeOfKeepInAreas(_keepInAreasSize)
       if (keepInAreasSize >= 0) {
-        keepInAreas = MSZ.create(keepInAreasSize, Id.empty)
+        keepInAreas = MSZ.create(keepInAreasSize, u64"0")
         for (i <- 0 until keepInAreasSize) {
-          keepInAreas(i).decode(input, context)
+          val id = Reader.IS.beU64(input, context)
+          keepInAreas(i) = id
         }
       } else {
         context.signalError(ERROR_OperatingRegion_keepInAreas)
@@ -457,9 +378,10 @@ object BitCodec {
       _keepOutAreasSize = Reader.IS.beU16(input, context)
       val keepOutAreasSize = sizeOfKeepOutAreas(_keepOutAreasSize)
       if (keepOutAreasSize >= 0) {
-        keepOutAreas = MSZ.create(keepOutAreasSize, Id.empty)
+        keepOutAreas = MSZ.create(keepOutAreasSize, u64"0")
         for (i <- 0 until keepOutAreasSize) {
-          keepOutAreas(i).decode(input, context)
+          val id = Reader.IS.beU64(input, context)
+          keepOutAreas(i) = id
         }
       } else {
         context.signalError(ERROR_OperatingRegion_keepOutAreas)
@@ -477,7 +399,8 @@ object BitCodec {
       val keepInAreasSize = sizeOfKeepInAreas(_keepInAreasSize)
       if (keepInAreasSize >= 0) {
         for (i <- 0 until keepInAreasSize) {
-          keepInAreas(i).encode(output, context)
+          val id = keepInAreas(i)
+          Writer.beU64(output, context, id)
         }
       } else {
         context.signalError(ERROR_OperatingRegion_keepInAreas)
@@ -486,7 +409,8 @@ object BitCodec {
       val keepOutAreasSize = sizeOfKeepOutAreas(_keepOutAreasSize)
       if (keepOutAreasSize >= 0) {
         for (i <- 0 until keepOutAreasSize) {
-          keepOutAreas(i).encode(output, context)
+          val id = keepOutAreas(i)
+          Writer.beU64(output, context, id)
         }
       } else {
         context.signalError(ERROR_OperatingRegion_keepOutAreas)
@@ -1037,80 +961,12 @@ object BitCodec {
 
   }
 
-  object C {
-
-    val maxSize: Z = z"8"
-
-    def empty: MC = {
-      return MC(u8"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[C] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[C]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class C(
-    val c: U8
-  ) {
-
-    @strictpure def toMutable: MC = MC(c)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(8, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MC(
-    var c: U8
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: C = C(c)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: C.wellFormed
-
-      // END USER CODE: C.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      c = Reader.IS.bleU8(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.bleU8(output, context, c)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_C)
-      }
-    }
-
-  }
-
   object PackedpayloadStateParameterKey {
 
     val maxSize: Z = z"524296"
 
     def empty: MPackedpayloadStateParameterKey = {
-      return MPackedpayloadStateParameterKey(u16"0", MSZ[MC]())
+      return MPackedpayloadStateParameterKey(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedpayloadStateParameterKey] = {
@@ -1119,18 +975,18 @@ object BitCodec {
       return if (context.hasError) None[PackedpayloadStateParameterKey]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -1138,7 +994,7 @@ object BitCodec {
 
   @datatype class PackedpayloadStateParameterKey(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedpayloadStateParameterKey = MPackedpayloadStateParameterKey(_stringCharsSize, PackedpayloadStateParameterKey.toMutableStringChars(stringChars))
@@ -1156,7 +1012,7 @@ object BitCodec {
 
   @record class MPackedpayloadStateParameterKey(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedpayloadStateParameterKey = PackedpayloadStateParameterKey(_stringCharsSize, PackedpayloadStateParameterKey.toImmutableStringChars(stringChars))
@@ -1183,9 +1039,10 @@ object BitCodec {
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedpayloadStateParameterKey_stringChars)
@@ -1202,7 +1059,8 @@ object BitCodec {
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedpayloadStateParameterKey_stringChars)
@@ -1226,7 +1084,7 @@ object BitCodec {
     val maxSize: Z = z"524296"
 
     def empty: MPackedpayloadStateParameterValue = {
-      return MPackedpayloadStateParameterValue(u16"0", MSZ[MC]())
+      return MPackedpayloadStateParameterValue(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedpayloadStateParameterValue] = {
@@ -1235,18 +1093,18 @@ object BitCodec {
       return if (context.hasError) None[PackedpayloadStateParameterValue]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -1254,7 +1112,7 @@ object BitCodec {
 
   @datatype class PackedpayloadStateParameterValue(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedpayloadStateParameterValue = MPackedpayloadStateParameterValue(_stringCharsSize, PackedpayloadStateParameterValue.toMutableStringChars(stringChars))
@@ -1272,7 +1130,7 @@ object BitCodec {
 
   @record class MPackedpayloadStateParameterValue(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedpayloadStateParameterValue = PackedpayloadStateParameterValue(_stringCharsSize, PackedpayloadStateParameterValue.toImmutableStringChars(stringChars))
@@ -1299,9 +1157,10 @@ object BitCodec {
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedpayloadStateParameterValue_stringChars)
@@ -1318,7 +1177,8 @@ object BitCodec {
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedpayloadStateParameterValue_stringChars)
@@ -2078,7 +1938,7 @@ object BitCodec {
     val maxSize: Z = z"524296"
 
     def empty: MPackedInfoKey = {
-      return MPackedInfoKey(u16"0", MSZ[MC]())
+      return MPackedInfoKey(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedInfoKey] = {
@@ -2087,18 +1947,18 @@ object BitCodec {
       return if (context.hasError) None[PackedInfoKey]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -2106,7 +1966,7 @@ object BitCodec {
 
   @datatype class PackedInfoKey(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedInfoKey = MPackedInfoKey(_stringCharsSize, PackedInfoKey.toMutableStringChars(stringChars))
@@ -2124,7 +1984,7 @@ object BitCodec {
 
   @record class MPackedInfoKey(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedInfoKey = PackedInfoKey(_stringCharsSize, PackedInfoKey.toImmutableStringChars(stringChars))
@@ -2151,9 +2011,10 @@ object BitCodec {
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedInfoKey_stringChars)
@@ -2170,7 +2031,8 @@ object BitCodec {
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedInfoKey_stringChars)
@@ -2194,7 +2056,7 @@ object BitCodec {
     val maxSize: Z = z"524296"
 
     def empty: MPackedInfoValue = {
-      return MPackedInfoValue(u16"0", MSZ[MC]())
+      return MPackedInfoValue(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedInfoValue] = {
@@ -2203,18 +2065,18 @@ object BitCodec {
       return if (context.hasError) None[PackedInfoValue]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -2222,7 +2084,7 @@ object BitCodec {
 
   @datatype class PackedInfoValue(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedInfoValue = MPackedInfoValue(_stringCharsSize, PackedInfoValue.toMutableStringChars(stringChars))
@@ -2240,7 +2102,7 @@ object BitCodec {
 
   @record class MPackedInfoValue(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedInfoValue = PackedInfoValue(_stringCharsSize, PackedInfoValue.toImmutableStringChars(stringChars))
@@ -2267,9 +2129,10 @@ object BitCodec {
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedInfoValue_stringChars)
@@ -2286,7 +2149,8 @@ object BitCodec {
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedInfoValue_stringChars)
@@ -2623,7 +2487,7 @@ object BitCodec {
     val maxSize: Z = z"100679624"
 
     def empty: MEntityState = {
-      return MEntityState(s64"0", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ObjectLMCPLocation3D.empty, 0.0f, 0.0f, u16"0", MSZ[MObjectPayloadState](), s64"0", s64"0", s32"0", u16"0", MSZ[MId](), s64"0", u16"0", MSZ[MObjectInfo]())
+      return MEntityState(s64"0", 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, ObjectLMCPLocation3D.empty, 0.0f, 0.0f, u16"0", MSZ[MObjectPayloadState](), s64"0", s64"0", s32"0", u16"0", MSZ[S64](), s64"0", u16"0", MSZ[MObjectInfo]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[EntityState] = {
@@ -2648,18 +2512,18 @@ object BitCodec {
       return r
     }
 
-    def toMutableAssociatedTasks(s: ISZ[Id]): MSZ[MId] = {
-      var r = MSZ[MId]()
+    def toMutableAssociatedTasks(s: ISZ[S64]): MSZ[S64] = {
+      var r = MSZ[S64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableAssociatedTasks(s: MSZ[MId]): ISZ[Id] = {
-      var r = ISZ[Id]()
+    def toImmutableAssociatedTasks(s: MSZ[S64]): ISZ[S64] = {
+      var r = ISZ[S64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -2706,7 +2570,7 @@ object BitCodec {
     val currentCommand: S64,
     val mode: S32,
     val _associatedTasksSize: U16,
-    val associatedTasks: ISZ[Id],
+    val associatedTasks: ISZ[S64],
     val time: S64,
     val _infoSize: U16,
     val info: ISZ[ObjectInfo]
@@ -2750,7 +2614,7 @@ object BitCodec {
     var currentCommand: S64,
     var mode: S32,
     var _associatedTasksSize: U16,
-    var associatedTasks: MSZ[MId],
+    var associatedTasks: MSZ[S64],
     var time: S64,
     var _infoSize: U16,
     var info: MSZ[MObjectInfo]
@@ -2834,9 +2698,10 @@ object BitCodec {
       _associatedTasksSize = Reader.IS.beU16(input, context)
       val associatedTasksSize = sizeOfAssociatedTasks(_associatedTasksSize)
       if (associatedTasksSize >= 0) {
-        associatedTasks = MSZ.create(associatedTasksSize, Id.empty)
+        associatedTasks = MSZ.create(associatedTasksSize, s64"0")
         for (i <- 0 until associatedTasksSize) {
-          associatedTasks(i).decode(input, context)
+          val id = Reader.IS.beS64(input, context)
+          associatedTasks(i) = id
         }
       } else {
         context.signalError(ERROR_EntityState_associatedTasks)
@@ -2894,7 +2759,8 @@ object BitCodec {
       val associatedTasksSize = sizeOfAssociatedTasks(_associatedTasksSize)
       if (associatedTasksSize >= 0) {
         for (i <- 0 until associatedTasksSize) {
-          associatedTasks(i).encode(output, context)
+          val id = associatedTasks(i)
+          Writer.beS64(output, context, id)
         }
       } else {
         context.signalError(ERROR_EntityState_associatedTasks)
@@ -3030,7 +2896,7 @@ object BitCodec {
     val maxSize: Z = z"524296"
 
     def empty: MLabel = {
-      return MLabel(u16"0", MSZ[MC]())
+      return MLabel(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[Label] = {
@@ -3039,18 +2905,18 @@ object BitCodec {
       return if (context.hasError) None[Label]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -3058,7 +2924,7 @@ object BitCodec {
 
   @datatype class Label(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MLabel = MLabel(_stringCharsSize, Label.toMutableStringChars(stringChars))
@@ -3076,7 +2942,7 @@ object BitCodec {
 
   @record class MLabel(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: Label = Label(_stringCharsSize, Label.toImmutableStringChars(stringChars))
@@ -3103,9 +2969,10 @@ object BitCodec {
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_Label_stringChars)
@@ -3122,7 +2989,8 @@ object BitCodec {
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_Label_stringChars)
@@ -3139,74 +3007,6 @@ object BitCodec {
       }
       return r
     }
-  }
-
-  object Entity {
-
-    val maxSize: Z = z"64"
-
-    def empty: MEntity = {
-      return MEntity(s64"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[Entity] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[Entity]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class Entity(
-    val entity: S64
-  ) {
-
-    @strictpure def toMutable: MEntity = MEntity(entity)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(64, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MEntity(
-    var entity: S64
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: Entity = Entity(entity)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: Entity.wellFormed
-
-      // END USER CODE: Entity.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      entity = Reader.IS.beS64(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beS64(output, context, entity)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_Entity)
-      }
-    }
-
   }
 
   object NullValuetaskParameter {
@@ -3285,7 +3085,7 @@ object BitCodec {
     val maxSize: Z = z"524296"
 
     def empty: MPackedtaskParameterKey = {
-      return MPackedtaskParameterKey(u16"0", MSZ[MC]())
+      return MPackedtaskParameterKey(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedtaskParameterKey] = {
@@ -3294,18 +3094,18 @@ object BitCodec {
       return if (context.hasError) None[PackedtaskParameterKey]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -3313,7 +3113,7 @@ object BitCodec {
 
   @datatype class PackedtaskParameterKey(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedtaskParameterKey = MPackedtaskParameterKey(_stringCharsSize, PackedtaskParameterKey.toMutableStringChars(stringChars))
@@ -3331,7 +3131,7 @@ object BitCodec {
 
   @record class MPackedtaskParameterKey(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedtaskParameterKey = PackedtaskParameterKey(_stringCharsSize, PackedtaskParameterKey.toImmutableStringChars(stringChars))
@@ -3358,9 +3158,10 @@ object BitCodec {
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedtaskParameterKey_stringChars)
@@ -3377,7 +3178,8 @@ object BitCodec {
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedtaskParameterKey_stringChars)
@@ -3401,7 +3203,7 @@ object BitCodec {
     val maxSize: Z = z"524296"
 
     def empty: MPackedtaskParameterValue = {
-      return MPackedtaskParameterValue(u16"0", MSZ[MC]())
+      return MPackedtaskParameterValue(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[PackedtaskParameterValue] = {
@@ -3410,18 +3212,18 @@ object BitCodec {
       return if (context.hasError) None[PackedtaskParameterValue]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -3429,7 +3231,7 @@ object BitCodec {
 
   @datatype class PackedtaskParameterValue(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MPackedtaskParameterValue = MPackedtaskParameterValue(_stringCharsSize, PackedtaskParameterValue.toMutableStringChars(stringChars))
@@ -3447,7 +3249,7 @@ object BitCodec {
 
   @record class MPackedtaskParameterValue(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: PackedtaskParameterValue = PackedtaskParameterValue(_stringCharsSize, PackedtaskParameterValue.toImmutableStringChars(stringChars))
@@ -3474,9 +3276,10 @@ object BitCodec {
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_PackedtaskParameterValue_stringChars)
@@ -3493,7 +3296,8 @@ object BitCodec {
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_PackedtaskParameterValue_stringChars)
@@ -3830,7 +3634,7 @@ object BitCodec {
     val maxSize: Z = z"8916184"
 
     def empty: MTask = {
-      return MTask(s64"0", Label.empty, u16"0", MSZ[MEntity](), 0.0f, u16"0", MSZ[MObjecttaskParameter](), s8"0", u8"0")
+      return MTask(s64"0", Label.empty, u16"0", MSZ[S64](), 0.0f, u16"0", MSZ[MObjecttaskParameter](), s8"0", u8"0")
     }
 
     def decode(input: ISZ[B], context: Context): Option[Task] = {
@@ -3839,18 +3643,18 @@ object BitCodec {
       return if (context.hasError) None[Task]() else Some(r.toImmutable)
     }
 
-    def toMutableEligibleEntities(s: ISZ[Entity]): MSZ[MEntity] = {
-      var r = MSZ[MEntity]()
+    def toMutableEligibleEntities(s: ISZ[S64]): MSZ[S64] = {
+      var r = MSZ[S64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableEligibleEntities(s: MSZ[MEntity]): ISZ[Entity] = {
-      var r = ISZ[Entity]()
+    def toImmutableEligibleEntities(s: MSZ[S64]): ISZ[S64] = {
+      var r = ISZ[S64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -3876,7 +3680,7 @@ object BitCodec {
     val taskID: S64,
     val label: Label,
     val _eligibleEntitiesSize: U16,
-    val eligibleEntities: ISZ[Entity],
+    val eligibleEntities: ISZ[S64],
     val revisitRate: F32,
     val _parametersSize: U16,
     val parameters: ISZ[ObjecttaskParameter],
@@ -3901,7 +3705,7 @@ object BitCodec {
     var taskID: S64,
     var label: MLabel,
     var _eligibleEntitiesSize: U16,
-    var eligibleEntities: MSZ[MEntity],
+    var eligibleEntities: MSZ[S64],
     var revisitRate: F32,
     var _parametersSize: U16,
     var parameters: MSZ[MObjecttaskParameter],
@@ -3949,9 +3753,10 @@ object BitCodec {
       _eligibleEntitiesSize = Reader.IS.beU16(input, context)
       val eligibleEntitiesSize = sizeOfEligibleEntities(_eligibleEntitiesSize)
       if (eligibleEntitiesSize >= 0) {
-        eligibleEntities = MSZ.create(eligibleEntitiesSize, Entity.empty)
+        eligibleEntities = MSZ.create(eligibleEntitiesSize, s64"0")
         for (i <- 0 until eligibleEntitiesSize) {
-          eligibleEntities(i).decode(input, context)
+          val entity = Reader.IS.beS64(input, context)
+          eligibleEntities(i) = entity
         }
       } else {
         context.signalError(ERROR_Task_eligibleEntities)
@@ -3983,7 +3788,8 @@ object BitCodec {
       val eligibleEntitiesSize = sizeOfEligibleEntities(_eligibleEntitiesSize)
       if (eligibleEntitiesSize >= 0) {
         for (i <- 0 until eligibleEntitiesSize) {
-          eligibleEntities(i).encode(output, context)
+          val entity = eligibleEntities(i)
+          Writer.beS64(output, context, entity)
         }
       } else {
         context.signalError(ERROR_Task_eligibleEntities)
@@ -4021,80 +3827,12 @@ object BitCodec {
     }
   }
 
-  object Band {
-
-    val maxSize: Z = z"32"
-
-    def empty: MBand = {
-      return MBand(s32"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[Band] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[Band]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class Band(
-    val band: S32
-  ) {
-
-    @strictpure def toMutable: MBand = MBand(band)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(32, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MBand(
-    var band: S32
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: Band = Band(band)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: Band.wellFormed
-
-      // END USER CODE: Band.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      band = Reader.IS.beS32(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beS32(output, context, band)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_Band)
-      }
-    }
-
-  }
-
   object SearchTask {
 
     val maxSize: Z = z"8916552"
 
     def empty: MSearchTask = {
-      return MSearchTask(Task.empty, u16"0", MSZ[MBand](), s64"0", 0.0f)
+      return MSearchTask(Task.empty, u16"0", MSZ[S32](), s64"0", 0.0f)
     }
 
     def decode(input: ISZ[B], context: Context): Option[SearchTask] = {
@@ -4103,18 +3841,18 @@ object BitCodec {
       return if (context.hasError) None[SearchTask]() else Some(r.toImmutable)
     }
 
-    def toMutableDesiredWavelengthBands(s: ISZ[Band]): MSZ[MBand] = {
-      var r = MSZ[MBand]()
+    def toMutableDesiredWavelengthBands(s: ISZ[S32]): MSZ[S32] = {
+      var r = MSZ[S32]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableDesiredWavelengthBands(s: MSZ[MBand]): ISZ[Band] = {
-      var r = ISZ[Band]()
+    def toImmutableDesiredWavelengthBands(s: MSZ[S32]): ISZ[S32] = {
+      var r = ISZ[S32]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -4123,7 +3861,7 @@ object BitCodec {
   @datatype class SearchTask(
     val task: Task,
     val _desiredWavelengthBandsSize: U16,
-    val desiredWavelengthBands: ISZ[Band],
+    val desiredWavelengthBands: ISZ[S32],
     val dwellTime: S64,
     val groundSampleDistance: F32
   ) {
@@ -4144,7 +3882,7 @@ object BitCodec {
   @record class MSearchTask(
     var task: MTask,
     var _desiredWavelengthBandsSize: U16,
-    var desiredWavelengthBands: MSZ[MBand],
+    var desiredWavelengthBands: MSZ[S32],
     var dwellTime: S64,
     var groundSampleDistance: F32
   ) extends Runtime.Composite {
@@ -4179,9 +3917,10 @@ object BitCodec {
       _desiredWavelengthBandsSize = Reader.IS.beU16(input, context)
       val desiredWavelengthBandsSize = sizeOfDesiredWavelengthBands(_desiredWavelengthBandsSize)
       if (desiredWavelengthBandsSize >= 0) {
-        desiredWavelengthBands = MSZ.create(desiredWavelengthBandsSize, Band.empty)
+        desiredWavelengthBands = MSZ.create(desiredWavelengthBandsSize, s32"0")
         for (i <- 0 until desiredWavelengthBandsSize) {
-          desiredWavelengthBands(i).decode(input, context)
+          val band = Reader.IS.beS32(input, context)
+          desiredWavelengthBands(i) = band
         }
       } else {
         context.signalError(ERROR_SearchTask_desiredWavelengthBands)
@@ -4201,7 +3940,8 @@ object BitCodec {
       val desiredWavelengthBandsSize = sizeOfDesiredWavelengthBands(_desiredWavelengthBandsSize)
       if (desiredWavelengthBandsSize >= 0) {
         for (i <- 0 until desiredWavelengthBandsSize) {
-          desiredWavelengthBands(i).encode(output, context)
+          val band = desiredWavelengthBands(i)
+          Writer.beS32(output, context, band)
         }
       } else {
         context.signalError(ERROR_SearchTask_desiredWavelengthBands)
@@ -5172,148 +4912,12 @@ object BitCodec {
     }
   }
 
-  object EntityId {
-
-    val maxSize: Z = z"64"
-
-    def empty: MEntityId = {
-      return MEntityId(s64"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[EntityId] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[EntityId]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class EntityId(
-    val entityId: S64
-  ) {
-
-    @strictpure def toMutable: MEntityId = MEntityId(entityId)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(64, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MEntityId(
-    var entityId: S64
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: EntityId = EntityId(entityId)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: EntityId.wellFormed
-
-      // END USER CODE: EntityId.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      entityId = Reader.IS.beS64(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beS64(output, context, entityId)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_EntityId)
-      }
-    }
-
-  }
-
-  object TaskId {
-
-    val maxSize: Z = z"64"
-
-    def empty: MTaskId = {
-      return MTaskId(s64"0")
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[TaskId] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[TaskId]() else Some(r.toImmutable)
-    }
-
-  }
-
-  @datatype class TaskId(
-    val taskId: S64
-  ) {
-
-    @strictpure def toMutable: MTaskId = MTaskId(taskId)
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(64, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MTaskId(
-    var taskId: S64
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: TaskId = TaskId(taskId)
-
-    def wellFormed: Z = {
-
-
-      // BEGIN USER CODE: TaskId.wellFormed
-
-      // END USER CODE: TaskId.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      taskId = Reader.IS.beS64(input, context)
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beS64(output, context, taskId)
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_TaskId)
-      }
-    }
-
-  }
-
   object TaskRelationships {
 
     val maxSize: Z = z"524296"
 
     def empty: MTaskRelationships = {
-      return MTaskRelationships(u16"0", MSZ[MC]())
+      return MTaskRelationships(u16"0", MSZ[U8]())
     }
 
     def decode(input: ISZ[B], context: Context): Option[TaskRelationships] = {
@@ -5322,18 +4926,18 @@ object BitCodec {
       return if (context.hasError) None[TaskRelationships]() else Some(r.toImmutable)
     }
 
-    def toMutableStringChars(s: ISZ[C]): MSZ[MC] = {
-      var r = MSZ[MC]()
+    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
+      var r = MSZ[U8]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableStringChars(s: MSZ[MC]): ISZ[C] = {
-      var r = ISZ[C]()
+    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
+      var r = ISZ[U8]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -5341,7 +4945,7 @@ object BitCodec {
 
   @datatype class TaskRelationships(
     val _stringCharsSize: U16,
-    val stringChars: ISZ[C]
+    val stringChars: ISZ[U8]
   ) {
 
     @strictpure def toMutable: MTaskRelationships = MTaskRelationships(_stringCharsSize, TaskRelationships.toMutableStringChars(stringChars))
@@ -5359,7 +4963,7 @@ object BitCodec {
 
   @record class MTaskRelationships(
     var _stringCharsSize: U16,
-    var stringChars: MSZ[MC]
+    var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: TaskRelationships = TaskRelationships(_stringCharsSize, TaskRelationships.toImmutableStringChars(stringChars))
@@ -5386,9 +4990,10 @@ object BitCodec {
       _stringCharsSize = Reader.IS.beU16(input, context)
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
-        stringChars = MSZ.create(stringCharsSize, C.empty)
+        stringChars = MSZ.create(stringCharsSize, u8"0")
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).decode(input, context)
+          val c = Reader.IS.bleU8(input, context)
+          stringChars(i) = c
         }
       } else {
         context.signalError(ERROR_TaskRelationships_stringChars)
@@ -5405,7 +5010,8 @@ object BitCodec {
       val stringCharsSize = sizeOfStringChars(_stringCharsSize)
       if (stringCharsSize >= 0) {
         for (i <- 0 until stringCharsSize) {
-          stringChars(i).encode(output, context)
+          val c = stringChars(i)
+          Writer.bleU8(output, context, c)
         }
       } else {
         context.signalError(ERROR_TaskRelationships_stringChars)
@@ -5429,7 +5035,7 @@ object BitCodec {
     val maxSize: Z = z"527472"
 
     def empty: MAutomationRequest = {
-      return MAutomationRequest(u16"0", MSZ[MEntityId](), u16"0", MSZ[MTaskId](), TaskRelationships.empty, s64"0", u8"0")
+      return MAutomationRequest(u16"0", MSZ[S64](), u16"0", MSZ[S64](), TaskRelationships.empty, s64"0", u8"0")
     }
 
     def decode(input: ISZ[B], context: Context): Option[AutomationRequest] = {
@@ -5438,34 +5044,34 @@ object BitCodec {
       return if (context.hasError) None[AutomationRequest]() else Some(r.toImmutable)
     }
 
-    def toMutableEntityList(s: ISZ[EntityId]): MSZ[MEntityId] = {
-      var r = MSZ[MEntityId]()
+    def toMutableEntityList(s: ISZ[S64]): MSZ[S64] = {
+      var r = MSZ[S64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableEntityList(s: MSZ[MEntityId]): ISZ[EntityId] = {
-      var r = ISZ[EntityId]()
+    def toImmutableEntityList(s: MSZ[S64]): ISZ[S64] = {
+      var r = ISZ[S64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
 
-    def toMutableTaskList(s: ISZ[TaskId]): MSZ[MTaskId] = {
-      var r = MSZ[MTaskId]()
+    def toMutableTaskList(s: ISZ[S64]): MSZ[S64] = {
+      var r = MSZ[S64]()
       for (e <- s) {
-        r = r :+ e.toMutable
+        r = r :+ e
       }
       return r
     }
 
-    def toImmutableTaskList(s: MSZ[MTaskId]): ISZ[TaskId] = {
-      var r = ISZ[TaskId]()
+    def toImmutableTaskList(s: MSZ[S64]): ISZ[S64] = {
+      var r = ISZ[S64]()
       for (e <- s) {
-        r = r :+ e.toImmutable
+        r = r :+ e
       }
       return r
     }
@@ -5473,9 +5079,9 @@ object BitCodec {
 
   @datatype class AutomationRequest(
     val _entityListSize: U16,
-    val entityList: ISZ[EntityId],
+    val entityList: ISZ[S64],
     val _taskListSize: U16,
-    val taskList: ISZ[TaskId],
+    val taskList: ISZ[S64],
     val taskRelationships: TaskRelationships,
     val operatingRegion: S64,
     val redoAllTasks: U8
@@ -5496,9 +5102,9 @@ object BitCodec {
 
   @record class MAutomationRequest(
     var _entityListSize: U16,
-    var entityList: MSZ[MEntityId],
+    var entityList: MSZ[S64],
     var _taskListSize: U16,
-    var taskList: MSZ[MTaskId],
+    var taskList: MSZ[S64],
     var taskRelationships: MTaskRelationships,
     var operatingRegion: S64,
     var redoAllTasks: U8
@@ -5542,9 +5148,10 @@ object BitCodec {
       _entityListSize = Reader.IS.beU16(input, context)
       val entityListSize = sizeOfEntityList(_entityListSize)
       if (entityListSize >= 0) {
-        entityList = MSZ.create(entityListSize, EntityId.empty)
+        entityList = MSZ.create(entityListSize, s64"0")
         for (i <- 0 until entityListSize) {
-          entityList(i).decode(input, context)
+          val entityId = Reader.IS.beS64(input, context)
+          entityList(i) = entityId
         }
       } else {
         context.signalError(ERROR_AutomationRequest_entityList)
@@ -5552,9 +5159,10 @@ object BitCodec {
       _taskListSize = Reader.IS.beU16(input, context)
       val taskListSize = sizeOfTaskList(_taskListSize)
       if (taskListSize >= 0) {
-        taskList = MSZ.create(taskListSize, TaskId.empty)
+        taskList = MSZ.create(taskListSize, s64"0")
         for (i <- 0 until taskListSize) {
-          taskList(i).decode(input, context)
+          val taskId = Reader.IS.beS64(input, context)
+          taskList(i) = taskId
         }
       } else {
         context.signalError(ERROR_AutomationRequest_taskList)
@@ -5574,7 +5182,8 @@ object BitCodec {
       val entityListSize = sizeOfEntityList(_entityListSize)
       if (entityListSize >= 0) {
         for (i <- 0 until entityListSize) {
-          entityList(i).encode(output, context)
+          val entityId = entityList(i)
+          Writer.beS64(output, context, entityId)
         }
       } else {
         context.signalError(ERROR_AutomationRequest_entityList)
@@ -5583,7 +5192,8 @@ object BitCodec {
       val taskListSize = sizeOfTaskList(_taskListSize)
       if (taskListSize >= 0) {
         for (i <- 0 until taskListSize) {
-          taskList(i).encode(output, context)
+          val taskId = taskList(i)
+          Writer.beS64(output, context, taskId)
         }
       } else {
         context.signalError(ERROR_AutomationRequest_taskList)
@@ -5936,9 +5546,9 @@ val expectedOperatingRegionMessage = MLMCPMessage(
     MOperatingRegion(
       s64"0x0000000000000150",
       u16"0x0001",
-      MSZ(MId(u64"0x000000000000014E")),
+      MSZ(u64"0x000000000000014E"),
       u16"0x0001",
-      MSZ(MId(u64"0x000000000000014F"))
+      MSZ(u64"0x000000000000014F")
     )
   ),
   u32"0x000003E1"
@@ -5999,9 +5609,9 @@ val expectedAutomationRequestMessage = MLMCPMessage (
     u16"0x0003",
     MAutomationRequest(
       u16"0x0001",
-      MSZ(MEntityId(s64"0x0000000000000190")),
+      MSZ(s64"0x0000000000000190"),
       u16"0x0001",
-      MSZ(MTaskId(s64"0x00000000000003E8")),
+      MSZ(s64"0x00000000000003E8"),
       MTaskRelationships(
         u16"0x0000",
         MSZ()
