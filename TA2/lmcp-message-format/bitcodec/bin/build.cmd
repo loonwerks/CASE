@@ -152,7 +152,7 @@ def runNative(gen: Os.Path): Unit = {
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjecttaskParameter]=8"
   }
 
-  Os.proc(ISZ(sireum.string, "slang", "transpilers", "c", "--string-size", "2048",
+  Os.proc(ISZ(sireum.string, "slang", "transpilers", "c", "--string-size", "2048", "--stack-size", "256*1024*1024",
     "--sequence", seqSizes, "--output-dir", c.string, "--name", gen.name, genPath)).echo.console.runCheck()
   println()
 
