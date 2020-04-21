@@ -277,7 +277,7 @@ object BitCodec {
 
   // BEGIN USER CODE: Members
   val CMASISeriesID: S64 = s64"4849604199710720000"
-  val CMASISeriesVersion : U16 = u16"3"
+  val CMASISeriesVersion: U16 = u16"3"
 
   val KEYVALUEPAIR: U32 = u32"2"
   val LOCATION3D: U32 = u32"3"
