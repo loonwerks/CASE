@@ -8,10 +8,9 @@ set -exuo pipefail
 : "${GIT_EMAIL:=<>}"
 
 : "${SIREUM_V:=5e00c74}"
-: "${SEL4_SCRIPTS_V:=ade4e6a4062f214009fde5fee385e3ae999af56c}"
+: "${SEL4_SCRIPTS_V:=ae83bb5a919dab780b03f74b525626f335f30666}"
 : "${SEL4_V:=28831f579e3560bd3aa18a3898505f091d66b076}"
 : "${CAMKES_V:=e7f5c6da03fc8a71a5a2e503de9f9004acf3ef2a}"
-: "${QEMU_VERSION:=v4.2.0}"
 
 export DESKTOP_MACHINE=no
 export MAKE_CACHES=no
@@ -55,6 +54,7 @@ as_root() {
 
 mkdir -p $BASE_DIR
 
+as_root apt-get update
 as_root apt install -y curl wget git p7zip-full zip unzip libgomp1 xz-utils build-essential automake cmake python \
                        locales bc libc6-dev libgmp-dev libsodium-dev nano software-properties-common zlib1g-dev gcc g++
 
