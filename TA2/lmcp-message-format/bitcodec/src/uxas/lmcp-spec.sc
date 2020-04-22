@@ -71,7 +71,7 @@ val STOPMOVEMENTACTION = 58
 val WAYPOINTTRANSFER = 59
 val PAYLOADSTOWACTION = 60
 
-@strictpure def lmcpObject(name: String, typeID: U32, packedObject: Concat) : Concat =
+@strictpure def lmcpObject(name: String, typeID: U32, packedObject: Concat): Concat =
   Concat(name = s"Object${name}", elements = ISZ(
     PredUnion(name = s"PredUnion${name}", subs = ISZ(
       PredSpec(
@@ -92,7 +92,7 @@ val PAYLOADSTOWACTION = 60
 // Packed Object Definitions
 
 // OperatingRegion (see ./afrl/cmasi/afrlcmasiOperatingRegion.cpp)
-val OperatingRegion: Concat = 
+val OperatingRegion = 
   Concat(name = "OperatingRegion", elements = ISZ(
     Long(name = "id"),
     UShort(name = "keepInAreasSize"),
@@ -114,7 +114,7 @@ val OperatingRegion: Concat =
   ))
 
 // Location3D (see ./afrl/cmasi/afrlcmasiLocation3D.cpp)
-val Location3D: Concat = 
+val Location3D = 
   Concat(name = "Location3D", elements = ISZ(
     Double("latitude"),
     Double("longitude"),
@@ -123,8 +123,8 @@ val Location3D: Concat =
   ))
 
 // See ByteBuffer.putString(string)
-@strictpure def StringType(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
+val StringType = 
+  Concat(name = "StringType", elements = ISZ(
     UShort(name = "stringCharsSize"),
     BoundedRepeat[U16](
       name = "stringChars",
@@ -136,14 +136,14 @@ val Location3D: Concat =
   ))
 
 // KeyValuePair (see  ./afrl/cmasi/afrlcmasiKeyValuePair.cpp)
-val KeyValuePair: Concat = 
+val KeyValuePair = 
   Concat(name = "KeyValuePair", elements = ISZ(
-    StringType(name = "Key"),
-    StringType(name = "Value")
+    StringType.as("Key"),
+    StringType.as("Value")
   ))
 
 // PayloadState (see ./afrl/cmasi/afrlcmasiPayloadState.cpp)
-val PayloadState: Concat = 
+val PayloadState = 
   Concat(name = "PayloadState", elements = ISZ(
     Long(name = "payloadID"),
     UShort(name = "parametersSize"),
@@ -157,7 +157,7 @@ val PayloadState: Concat =
   ))
 
 // EntitiyState (see ./afrl/cmasi/afrlcmasiEntityState.cpp)
-val EntityState: Concat = 
+val EntityState = 
   Concat(name = "EntityState", elements = ISZ(
     Long(name = "id"),
     Float(name = "u"),
@@ -209,7 +209,7 @@ val EntityState: Concat =
   ))
 
 // AirVehicleState (see ./afrl/cmasi/afrlcmasiAirVehicleState.cpp)
-val AirVehicleState: Concat = 
+val AirVehicleState = 
   Concat(name = "AirVehicleState", elements = ISZ(
     EntityState,
     Float(name = "airspeed"),
@@ -219,7 +219,7 @@ val AirVehicleState: Concat =
   ))
 
 // Wedge (see ./afrl/cmasi/afrlcmasiWedge.cpp)
-val Wedge: Concat = 
+val Wedge = 
   Concat(name = "Wedge", elements = ISZ(
     Float("azimuthCenterline"),
     Float("verticalCenterline"),
@@ -228,10 +228,10 @@ val Wedge: Concat =
   ))
 
 // SearchTask (see ./afrl/cmasi/afrlcmasiSearchTask.cpp)
-val Task: Concat = 
+val Task = 
   Concat(name = "Task", elements = ISZ(
     Long("taskID"),
-    StringType("Label"),
+    StringType.as("Label"),
     UShort("eligibleEntitiesSize"),
     BoundedRepeat[U16](
       name = "eligibleEntities",
@@ -254,7 +254,7 @@ val Task: Concat =
   ))
 
 // SearchTask (see ./afrl/cmasi/afrlcmasiSearchTask.cpp)
-val SearchTask: Concat = 
+val SearchTask = 
   Concat(name = "SearchTask", elements = ISZ(
     Task,
     UShort("desiredWavelengthBandsSize"),
@@ -270,7 +270,7 @@ val SearchTask: Concat =
   ))
 
 // LineSearchTask (see ./afrl/cmasi/afrlcmasiLineSearchTask.cpp)
-val LineSearchTask: Concat = 
+val LineSearchTask = 
   Concat(name = "LineSearchTask", elements = ISZ(
     SearchTask,
     UShort("pointListSize"),
@@ -293,7 +293,7 @@ val LineSearchTask: Concat =
   ))
 
 // AutomationRequest (see ./afrl/cmasi/afrlcmasiAutomationRequest.cpp)
-val AutomationRequest: Concat = 
+val AutomationRequest = 
   Concat(name = "AutomationRequest", elements = ISZ(
     UShort("entityListSize"),
     BoundedRepeat[U16](
@@ -311,12 +311,12 @@ val AutomationRequest: Concat =
       size = l => conversions.U16.toZ(l),
       element = Long("taskId")
     ),
-    StringType("TaskRelationships"),
+    StringType.as("TaskRelationships"),
     Long("operatingRegion"),
     UByte("redoAllTasks")
   ))
 
-val VehicleAction: Concat = 
+val VehicleAction = 
   Concat(name = "VehicleAction", elements = ISZ(
     UShort("associatedTaskListSize"),
     BoundedRepeat[U16](
@@ -328,7 +328,7 @@ val VehicleAction: Concat =
     )
   ))
 
-val VehicleActionCommand: Concat = 
+val VehicleActionCommand = 
   Concat(name = "VehicleActionCommand", elements = ISZ(
     Long("commandID"),
     Long("vehicleID"),
@@ -343,7 +343,7 @@ val VehicleActionCommand: Concat =
     Int("status")
   ))
 
-val Waypoint: Concat = 
+val Waypoint = 
   Concat(name = "Waypoint", elements = ISZ(
     Location3D,
     Long("number"),
@@ -372,7 +372,7 @@ val Waypoint: Concat =
     )
   ))
 
-val MissionCommand: Concat = 
+val MissionCommand = 
   Concat(name = "MissionCommand", elements = ISZ(
     VehicleActionCommand,
     UShort("waypointListSize"),
@@ -386,7 +386,7 @@ val MissionCommand: Concat =
     Long("firstWaypoint")
   ))
 
-val AutomationResponse: Concat = 
+val AutomationResponse = 
   Concat(name = "AutomationResponse", elements = ISZ(
     UShort("missionCommandListSize"),
     BoundedRepeat[U16](
@@ -415,40 +415,40 @@ val AutomationResponse: Concat =
   ))
 // END Packed Object Definitions
 
-val lmcpObjectDecode = Concat(name = "LMCPObjectDecode", elements = ISZ(
-  UByteRange(name = "nonNullValue", min = 1, max = 255),
-  Long("seriesID"),
-  UInt("typeID"),
-  UShort("seriesVersion"),
-  Union[(S64, U32, U16)](
-    name = "LMCPObject",
-    dependsOn = ISZ("seriesID", "typeID", "seriesVersion"),
-    choice = n => n match {
-      // OperatingRegion (see ./afrl/cmasi/afrlcmasiOperatingRegion.cpp)
-      case (CMASISeriesID, OPERATINGREGION, CMASISeriesVersion) => 0
-      // AirVehicleState (see ./afrl/cmasi/afrlcmasiAirVehicleState.cpp)
-      case (CMASISeriesID, AIRVEHICLESTATE, CMASISeriesVersion) => 1
-      // LineSearchTask (see ./afrl/cmasi/afrlcmasiLineSearchTask.cpp)
-      case (CMASISeriesID, LINESEARCHTASK, CMASISeriesVersion) => 2
-      // AutomationRequest (see ./afrl/cmasi/afrlcmasiAutomationRequest.cpp)
-      case (CMASISeriesID, AUTOMATIONREQUEST, CMASISeriesVersion) => 3
-      // AutomationResponse (see ./afrl/cmasi/afrlcmasiAutomationResponse.cpp)
-      case (CMASISeriesID, AUTOMATIONRESPONSE, CMASISeriesVersion) => 4
-      case (_, _, _) => -1
-    },
-    subs = ISZ(
-      OperatingRegion,
-      AirVehicleState,
-      LineSearchTask,
-      AutomationRequest,
-      AutomationResponse
+val lmcpObjectDecode =
+  Concat(name = "LMCPObjectDecode", elements = ISZ(
+    UByteRange(name = "nonNullValue", min = 1, max = 255),
+    Long("seriesID"),
+    UInt("typeID"),
+    UShort("seriesVersion"),
+    Union[(S64, U32, U16)](
+      name = "LMCPObject",
+      dependsOn = ISZ("seriesID", "typeID", "seriesVersion"),
+      choice = n => n match {
+        // OperatingRegion (see ./afrl/cmasi/afrlcmasiOperatingRegion.cpp)
+        case (CMASISeriesID, OPERATINGREGION, CMASISeriesVersion) => 0
+        // AirVehicleState (see ./afrl/cmasi/afrlcmasiAirVehicleState.cpp)
+        case (CMASISeriesID, AIRVEHICLESTATE, CMASISeriesVersion) => 1
+        // LineSearchTask (see ./afrl/cmasi/afrlcmasiLineSearchTask.cpp)
+        case (CMASISeriesID, LINESEARCHTASK, CMASISeriesVersion) => 2
+        // AutomationRequest (see ./afrl/cmasi/afrlcmasiAutomationRequest.cpp)
+        case (CMASISeriesID, AUTOMATIONREQUEST, CMASISeriesVersion) => 3
+        // AutomationResponse (see ./afrl/cmasi/afrlcmasiAutomationResponse.cpp)
+        case (CMASISeriesID, AUTOMATIONRESPONSE, CMASISeriesVersion) => 4
+        case (_, _, _) => -1
+      },
+      subs = ISZ(
+        OperatingRegion,
+        AirVehicleState,
+        LineSearchTask,
+        AutomationRequest,
+        AutomationResponse
+      )
     )
-  )
-))
+  ))
 
-val lmcpObjectNullCheck = PredUnion(
-  name = "LMCPObjectNullCheck",
-  subs = ISZ(
+val lmcpObjectNullCheck = 
+  PredUnion(name = "LMCPObjectNullCheck", subs = ISZ(
     PredSpec(
       ISZ(bytes(ISZ(0))),
       UByteConst("nullValue", 0)
@@ -457,14 +457,14 @@ val lmcpObjectNullCheck = PredUnion(
       ISZ(),
       lmcpObjectDecode
     )
-  )
-)
-
-val lmcpMessage = Concat(name = "LMCPMessage", elements = ISZ(
-  IntConst(name = "controlString", value = 0x4c4d4350),
-  UInt(name = "messageSize"),
-  lmcpObjectNullCheck,
-  UInt(name = "checksum")
-))
+  ))
+  
+val lmcpMessage = 
+  Concat(name = "LMCPMessage", elements = ISZ(
+    IntConst(name = "controlString", value = 0x4c4d4350),
+    UInt(name = "messageSize"),
+    lmcpObjectNullCheck,
+    UInt(name = "checksum")
+  ))
 
 println(lmcpMessage.toJSON(T))
