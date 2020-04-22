@@ -1,10 +1,8 @@
 cmake_minimum_required(VERSION 3.8.2)
 
-project (source_process_component C)
+project (top_impl_Instance C)
 
 add_definitions(-DCAMKES)
-
-includeGlobalComponents()
 
 DeclareCAmkESComponent(source_thread_impl
   SOURCES components/source_thread_impl//src/source.c components/source_thread_impl/src/sb_source_thread_impl.c sampling_ports/sp_int8_t.c
@@ -20,7 +18,8 @@ DeclareCAmkESComponent(destination_thread_impl
 
 DeclareCAmkESComponent(Pacer
   SOURCES components/Pacer/src/Pacer.c
-)  
+  INCLUDES includes
 
-DeclareCAmkESRootserver(source_process_component.camkes)
+)
 
+DeclareCAmkESRootserver(top_impl_Instance.camkes)

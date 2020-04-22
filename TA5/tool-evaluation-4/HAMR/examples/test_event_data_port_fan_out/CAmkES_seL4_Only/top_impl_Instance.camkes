@@ -1,0 +1,45 @@
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <TimeServer/TimeServer.camkes>;;
+import "components/emitter_impl/emitter_impl.camkes";
+import "components/consumer_queue_default_impl/consumer_queue_default_impl.camkes";
+import "components/consumer_queue_2_impl/consumer_queue_2_impl.camkes";
+import "components/consumer_queue_5_impl/consumer_queue_5_impl.camkes";
+import "components/dispatch_periodic/dispatch_periodic.camkes";
+
+assembly {
+  composition {
+    component emitter_impl src;
+    component consumer_queue_default_impl snk_default;
+    component consumer_queue_2_impl snk_2_A;
+    component consumer_queue_2_impl snk_2_B;
+    component consumer_queue_5_impl snk_5;
+    component dispatch_periodic dispatch_periodic_inst;
+    component TimeServer time_server;
+
+    connection seL4Notification conn1(from src.sb_enq_1_notification, to snk_default.sb_deq_notification);
+    connection seL4SharedData conn2(from src.sb_enq_queue_1, to snk_default.sb_deq_queue);
+    connection seL4Notification conn3(from src.sb_enq_2_notification, to snk_2_A.sb_deq_notification);
+    connection seL4SharedData conn4(from src.sb_enq_queue_2, to snk_2_A.sb_deq_queue);
+    connection seL4Notification conn5(from src.sb_enq_2_notification, to snk_2_B.sb_deq_notification);
+    connection seL4SharedData conn6(from src.sb_enq_queue_2, to snk_2_B.sb_deq_queue);
+    connection seL4Notification conn7(from src.sb_enq_5_notification, to snk_5.sb_deq_notification);
+    connection seL4SharedData conn8(from src.sb_enq_queue_5, to snk_5.sb_deq_queue);
+    connection seL4Notification conn9(from dispatch_periodic_inst.sb_src_periodic_dispatch_notification, to src.sb_periodic_dispatch_notification);
+    connection seL4TimeServer conn10(from dispatch_periodic_inst.timer, to time_server.the_timer);
+    connection seL4GlobalAsynchCallback conn11(from time_server.timer_notification, to dispatch_periodic_inst.timer_complete);
+  }
+
+  configuration {
+    src.sb_enq_queue_1_access = "W";
+    snk_default.sb_deq_queue_access = "R";
+    src.sb_enq_queue_2_access = "W";
+    snk_2_A.sb_deq_queue_access = "R";
+    snk_2_B.sb_deq_queue_access = "R";
+    src.sb_enq_queue_5_access = "W";
+    snk_5.sb_deq_queue_access = "R";
+    time_server.timers_per_client = 1;
+    dispatch_periodic_inst.timer_attributes = 1;
+    dispatch_periodic_inst.priority = 201;
+  }
+}

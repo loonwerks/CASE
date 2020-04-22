@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.8.2)
 
-project (test_event_data_port C)
+project (top_impl_Instance C)
 
 add_definitions(-DCAMKES)
 
 includeGlobalComponents()
 
 DeclareCAmkESComponent(emitter_impl
-  SOURCES components/emitter_impl//src/emitter.c components/emitter_impl/src/sb_emitter_impl.c includes/sb_queue_int8_t_5.c includes/sb_queue_int8_t_1.c includes/sb_queue_int8_t_2.c
+  SOURCES components/emitter_impl//src/emitter.c components/emitter_impl/src/sb_emitter_impl.c includes/sb_queue_int8_t_1.c includes/sb_queue_int8_t_2.c includes/sb_queue_int8_t_5.c
   INCLUDES components/emitter_impl/includes/ includes
 
 )
@@ -42,4 +42,4 @@ DeclareCAmkESComponent(dispatch_periodic
 
 )
 
-DeclareCAmkESRootserver(test_event_data_port.camkes)
+DeclareCAmkESRootserver(top_impl_Instance.camkes)

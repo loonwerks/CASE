@@ -1,6 +1,6 @@
 #include <camkes.h>
 #include <stdio.h>
-#include <sb_proc_types.h>
+#include <sb_top_impl_Instance_types.h>
 #include <sb_emitter_impl.h>
 
 int8_t counter = 0;

@@ -26,7 +26,7 @@
 #pragma once
 
 #include <sb_event_counter.h> 
-#include <sb_PROC_HW_types.h>
+#include <sb_UAV_Impl_Instance_types.h>
 #include <stdbool.h>
 
 // Queue size must be an integer factor of the size for sb_event_counter_t (an unsigned
@@ -55,7 +55,7 @@ typedef struct sb_queue_bool_1 {
   _Atomic sb_event_counter_t numSent;
 
   // Queue of elements of type bool 
-  // (see sb_PROC_HW_types.h) implemented as a ring buffer. 
+  // (see sb_UAV_Impl_Instance_types.h) implemented as a ring buffer. 
   // No initialization necessary.
   bool elt[SB_QUEUE_BOOL_1_SIZE];
 

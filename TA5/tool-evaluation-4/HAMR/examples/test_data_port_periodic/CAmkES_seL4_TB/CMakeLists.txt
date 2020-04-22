@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8.2)
 
-project (test_data_port_periodic C)
+project (top_impl_Instance C)
 
 add_definitions(-DCAMKES)
 
@@ -30,4 +30,4 @@ DeclareCAmkESComponent(sb_dest_read_port_Monitor
 
 )
 
-DeclareCAmkESRootserver(test_data_port_periodic.camkes)
+DeclareCAmkESRootserver(top_impl_Instance.camkes)

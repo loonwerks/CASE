@@ -8,7 +8,7 @@ package test_event_data_port_periodic_domains
 public
 	with HAMR;
 	with Base_Types;
-	with seL4_Properties;
+	with CASE_Scheduling;
 
 	thread emitter_t
 		features
@@ -29,7 +29,7 @@ public
 		features 
 			write_port : out event data port Base_Types::Integer_8;
 		properties
-			seL4_Properties::Domain => 2; -- pacer 1, source 2, destination 3
+			CASE_Scheduling::Domain => 2; -- pacer 1, source 2, destination 3
 	end emitter_p;
 	
     -- process specifies boundary of spatial isolation
@@ -61,7 +61,7 @@ public
 		features
 			read_port : in event data port Base_Types::Integer_8;
 		properties
-			seL4_Properties::Domain => 3; -- pacer 1, source 2, destination 3
+			CASE_Scheduling::Domain => 3; -- pacer 1, source 2, destination 3
 	end consumer_p;
 	
     -- process specifies boundary of spatial isolation
@@ -79,7 +79,7 @@ public
 		properties
 			Frame_Period => 1000ms;
             Clock_Period => 2ms;
-			seL4_Properties::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
+			CASE_Scheduling::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
 	end proc.impl;
 
 	system top
@@ -94,7 +94,7 @@ public
 			data_interconnect: port src_process.write_port -> dst_process.read_port;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to src_process;
-			--Actual_Processor_Binding => (reference (proc)) applies to dst_process;
+			Actual_Processor_Binding => (reference (proc)) applies to dst_process;
 			HAMR::Platform => (seL4_TB, seL4_Only);
 		--annex resolute {**
 		--	check CASE_Tools

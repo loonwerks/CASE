@@ -507,6 +507,17 @@
                     "properties" : [
                     ]
                   }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
+                    ]
+                  }
                 }
               ]
             },
@@ -948,6 +959,17 @@
                     "properties" : [
                     ]
                   }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
+                    ]
+                  }
                 }
               ]
             },
@@ -1387,6 +1409,17 @@
                       }
                     },
                     "properties" : [
+                    ]
+                  }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
                     ]
                   }
                 }
@@ -2127,6 +2160,17 @@
                 "properties" : [
                 ]
               }
+            },
+            {
+              "type" : "Annex",
+              "name" : "smf",
+              "clause" : {
+                "type" : "SmfClause",
+                "classification" : [
+                ],
+                "declass" : [
+                ]
+              }
             }
           ]
         },
@@ -2202,6 +2246,17 @@
                   }
                 },
                 "properties" : [
+                ]
+              }
+            },
+            {
+              "type" : "Annex",
+              "name" : "smf",
+              "clause" : {
+                "type" : "SmfClause",
+                "classification" : [
+                ],
+                "declass" : [
                 ]
               }
             }
@@ -2280,11 +2335,22 @@
             "properties" : [
             ]
           }
+        },
+        {
+          "type" : "Annex",
+          "name" : "smf",
+          "clause" : {
+            "type" : "SmfClause",
+            "classification" : [
+            ],
+            "declass" : [
+            ]
+          }
         }
       ]
     }
   ],
-  "errorLib" : [
+  "annexLib" : [
   ],
   "dataComponents" : [
     {

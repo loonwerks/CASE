@@ -73,21 +73,21 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
-  color="blue"
-  //label = "seL4Notification"
+"src":sb_write_port -> "dest":sb_read_port [
+  color="red"
+  //label = "seL4SharedData"
   id = conn1
 ];
 
-"dispatch_periodic_inst":sb_dest_periodic_dispatch_notification -> "dest":sb_periodic_dispatch_notification [
+"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn2
 ];
 
-"src":sb_write_port -> "dest":sb_read_port [
-  color="red"
-  //label = "seL4SharedData"
+"dispatch_periodic_inst":sb_dest_periodic_dispatch_notification -> "dest":sb_periodic_dispatch_notification [
+  color="blue"
+  //label = "seL4Notification"
   id = conn3
 ];
 

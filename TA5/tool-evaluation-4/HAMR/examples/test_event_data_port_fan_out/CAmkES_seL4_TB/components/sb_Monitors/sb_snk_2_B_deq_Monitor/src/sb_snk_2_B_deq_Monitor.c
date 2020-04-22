@@ -2,7 +2,7 @@
 #include <stdio.h>
 #endif // SB_VERIFY
 
-#include <sb_proc_types.h>
+#include <sb_top_impl_Instance_types.h>
 #include "../includes/sb_snk_2_B_deq_Monitor.h"
 
 int mon_get_sender_id(void);
@@ -16,12 +16,12 @@ static bool is_full(void) {
   return length == 2;
 }
 
-static bool is_empty(void) {
+bool mon_is_empty(void) {
   return length == 0;
 }
 
 bool mon_dequeue(int8_t * m) {
-  if (is_empty()) {
+  if (mon_is_empty()) {
     return false;
   } else {
     *m = contents[front];

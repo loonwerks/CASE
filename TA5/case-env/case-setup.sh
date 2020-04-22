@@ -101,3 +101,8 @@ bash $SEL4_SCRIPTS/camkes.sh
 
 bash ~/bin/camkes-cache.sh $CAMKES_V
 echo "export PATH=\$PATH:$BASE_DIR/camkes/build/capDL-tool" >> "$HOME/.bashrc"
+
+# Install required Qemu version and add it to the front of the path
+git clone https://github.com/qemu/qemu.git -b $QEMU_VERSION --depth=1 "$BASE_DIR/qemu"
+(cd "$BASE_DIR/qemu" && ./configure --target-list=aarch64-softmmu --prefix=$BASE_DIR/qemu/install && make -j 4 && make install)
+echo "export PATH=$BASE_DIR/qemu/install/bin:\$PATH" >> "$HOME/.bashrc"

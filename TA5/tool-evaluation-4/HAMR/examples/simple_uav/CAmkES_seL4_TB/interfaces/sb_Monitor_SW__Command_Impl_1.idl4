@@ -1,5 +1,6 @@
 procedure sb_Monitor_SW__Command_Impl_1 {
-  include <sb_PROC_HW_types.h>;
+  include <sb_UAV_Impl_Instance_types.h>;
+  bool is_empty();
   bool enqueue(refin SW__Command_Impl m);
   bool dequeue(out SW__Command_Impl m);
 };

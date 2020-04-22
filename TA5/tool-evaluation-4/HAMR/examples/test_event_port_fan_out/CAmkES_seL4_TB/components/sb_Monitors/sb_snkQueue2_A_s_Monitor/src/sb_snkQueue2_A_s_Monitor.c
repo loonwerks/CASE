@@ -6,7 +6,8 @@ int32_t num_events = 0;
 
 static inline void ignore_result(long long int unused_result) { (void) unused_result; }
 
-void mon_send_raise(void) {
+// Send interfaces
+bool mon_send_enqueue(void) {
   int do_emit = 0;
   ignore_result(m_lock());
   if (num_events < 2) {
@@ -17,12 +18,21 @@ void mon_send_raise(void) {
   if (do_emit) {
     monsig_emit();
   }
+  return true;
 }
 
-int32_t mon_receive_get_events(void) {
+// Receive interfaces 
+bool mon_receive_is_empty(void) {
+  return num_events == 0;
+}
+
+bool mon_receive_dequeue(void) {
   ignore_result(m_lock());
-  int ne = num_events;
-  num_events = 0;
+  bool ret = false;
+  if(num_events > 0){
+    num_events--;
+    ret = true;
+  }
   ignore_result(m_unlock());
-  return ne;
+  return ret;
 }

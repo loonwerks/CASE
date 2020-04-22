@@ -1,5 +1,5 @@
 component emitter_impl {
-  include <sb_proc_types.h>;
+  include <sb_top_impl_Instance_types.h>;
   include <sb_event_counter.h>;
   control;
   emits ReceiveEvent sb_e;

@@ -156,79 +156,79 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn1
-];
-
 "src":sb_e0 -> "sb_snkdefault_s_monitor":mon_send [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn2
+  id = conn1
 ];
 
 "snkDefault":sb_s -> "sb_snkdefault_s_monitor":mon_receive [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn3
+  id = conn2
 ];
 
 "sb_snkdefault_s_monitor":monsig -> "snkDefault":sb_s_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn4
+  id = conn3
 ];
 
 "src":sb_e1 -> "sb_snkqueue2_a_s_monitor":mon_send [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn5
+  id = conn4
 ];
 
 "snkQueue2_A":sb_s -> "sb_snkqueue2_a_s_monitor":mon_receive [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn6
+  id = conn5
 ];
 
 "sb_snkqueue2_a_s_monitor":monsig -> "snkQueue2_A":sb_s_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn7
+  id = conn6
 ];
 
 "src":sb_e2 -> "sb_snkqueue2_b_s_monitor":mon_send [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn8
+  id = conn7
 ];
 
 "snkQueue2_B":sb_s -> "sb_snkqueue2_b_s_monitor":mon_receive [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn9
+  id = conn8
 ];
 
 "sb_snkqueue2_b_s_monitor":monsig -> "snkQueue2_B":sb_s_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn10
+  id = conn9
 ];
 
 "src":sb_e3 -> "sb_snkqueue5_s_monitor":mon_send [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn11
+  id = conn10
 ];
 
 "snkQueue5":sb_s -> "sb_snkqueue5_s_monitor":mon_receive [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn12
+  id = conn11
 ];
 
 "sb_snkqueue5_s_monitor":monsig -> "snkQueue5":sb_s_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn12
+];
+
+"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn13

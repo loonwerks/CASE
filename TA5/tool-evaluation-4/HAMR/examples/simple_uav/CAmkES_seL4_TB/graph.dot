@@ -61,34 +61,34 @@ UART [
   shape=plaintext
 ];
 
-sb_fpln_mission_rcv_monitor [
-  label=<
-    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>sb_fpln_mission_rcv_monitor</B></TD></TR>
-      <TR><TD PORT="monsig"><FONT COLOR="blue">emits QueuedData <B>monsig</B></FONT></TD></TR>
-      <TR><TD PORT="mon"><FONT COLOR="orange">provides sb_Monitor_bool_1 <B>mon</B></FONT></TD></TR>"
-    </TABLE>
-  >
-  shape=plaintext
-];
-
-sb_wpm_tracking_id_monitor [
-  label=<
-    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>sb_wpm_tracking_id_monitor</B></TD></TR>
-      <TR><TD PORT="monsig"><FONT COLOR="blue">emits QueuedData <B>monsig</B></FONT></TD></TR>
-      <TR><TD PORT="mon"><FONT COLOR="orange">provides sb_Monitor_int64_t_1 <B>mon</B></FONT></TD></TR>"
-    </TABLE>
-  >
-  shape=plaintext
-];
-
 sb_fpln_recv_map_monitor [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>sb_fpln_recv_map_monitor</B></TD></TR>
       <TR><TD PORT="monsig"><FONT COLOR="blue">emits QueuedData <B>monsig</B></FONT></TD></TR>
       <TR><TD PORT="mon"><FONT COLOR="orange">provides sb_Monitor_SW__Command_Impl_1 <B>mon</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+sb_wpm_flight_plan_monitor [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>sb_wpm_flight_plan_monitor</B></TD></TR>
+      <TR><TD PORT="monsig"><FONT COLOR="blue">emits QueuedData <B>monsig</B></FONT></TD></TR>
+      <TR><TD PORT="mon"><FONT COLOR="orange">provides sb_Monitor_SW__Mission_1 <B>mon</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+sb_fpln_mission_rcv_monitor [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>sb_fpln_mission_rcv_monitor</B></TD></TR>
+      <TR><TD PORT="monsig"><FONT COLOR="blue">emits QueuedData <B>monsig</B></FONT></TD></TR>
+      <TR><TD PORT="mon"><FONT COLOR="orange">provides sb_Monitor_bool_1 <B>mon</B></FONT></TD></TR>"
     </TABLE>
   >
   shape=plaintext
@@ -105,12 +105,12 @@ sb_uart_mission_window_monitor [
   shape=plaintext
 ];
 
-sb_wpm_flight_plan_monitor [
+sb_wpm_tracking_id_monitor [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>sb_wpm_flight_plan_monitor</B></TD></TR>
+      <TR><TD><B>sb_wpm_tracking_id_monitor</B></TD></TR>
       <TR><TD PORT="monsig"><FONT COLOR="blue">emits QueuedData <B>monsig</B></FONT></TD></TR>
-      <TR><TD PORT="mon"><FONT COLOR="orange">provides sb_Monitor_SW__Mission_1 <B>mon</B></FONT></TD></TR>"
+      <TR><TD PORT="mon"><FONT COLOR="orange">provides sb_Monitor_int64_t_1 <B>mon</B></FONT></TD></TR>"
     </TABLE>
   >
   shape=plaintext

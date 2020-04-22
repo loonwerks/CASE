@@ -152,79 +152,79 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn1
-];
-
 "src":sb_enq0 -> "sb_snk_default_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn2
+  id = conn1
 ];
 
 "snk_default":sb_deq -> "sb_snk_default_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn3
+  id = conn2
 ];
 
 "sb_snk_default_deq_monitor":monsig -> "snk_default":sb_deq_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn4
+  id = conn3
 ];
 
 "src":sb_enq1 -> "sb_snk_2_a_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn5
+  id = conn4
 ];
 
 "snk_2_A":sb_deq -> "sb_snk_2_a_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn6
+  id = conn5
 ];
 
 "sb_snk_2_a_deq_monitor":monsig -> "snk_2_A":sb_deq_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn7
+  id = conn6
 ];
 
 "src":sb_enq2 -> "sb_snk_2_b_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn8
+  id = conn7
 ];
 
 "snk_2_B":sb_deq -> "sb_snk_2_b_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn9
+  id = conn8
 ];
 
 "sb_snk_2_b_deq_monitor":monsig -> "snk_2_B":sb_deq_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn10
+  id = conn9
 ];
 
 "src":sb_enq3 -> "sb_snk_5_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn11
+  id = conn10
 ];
 
 "snk_5":sb_deq -> "sb_snk_5_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
-  id = conn12
+  id = conn11
 ];
 
 "sb_snk_5_deq_monitor":monsig -> "snk_5":sb_deq_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn12
+];
+
+"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn13

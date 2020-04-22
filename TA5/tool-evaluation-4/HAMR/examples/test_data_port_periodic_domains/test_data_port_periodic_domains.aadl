@@ -8,7 +8,7 @@ package test_data_port_periodic_domains
 public
 	with Base_Types;
 	with HAMR;
-	with seL4_Properties;
+	with CASE_Scheduling;
 
     ----------------------------------------------------------------------
     -- no inputs, one output, periodically places a value on the dataport
@@ -35,7 +35,7 @@ public
 		features
 			write_port: out data port Base_Types::Integer_8;
 		properties
-			seL4_Properties::Domain => 2; -- pacer 1, source 2, destination 3
+			CASE_Scheduling::Domain => 2; -- pacer 1, source 2, destination 3
 	end source_process;
 
 	process implementation source_process.impl
@@ -70,7 +70,7 @@ public
 		features
 			read_port: in data port Base_Types::Integer_8;
 		properties
-			seL4_Properties::Domain => 3; -- pacer 1, source 2, destination 3
+			CASE_Scheduling::Domain => 3; -- pacer 1, source 2, destination 3
 	end destination_process;
 
 	process implementation destination_process.impl
@@ -88,7 +88,7 @@ public
 		properties
 			Frame_Period => 1000ms;
             Clock_Period => 2ms;
-			seL4_Properties::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
+			CASE_Scheduling::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
 	end proc.impl;
 
     ----------------------------------------------------------------------
@@ -104,7 +104,7 @@ public
 			data_interconnect: port source_process_component.write_port -> destination_process_component.read_port;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to source_process_component;
-			--Actual_Processor_Binding => (reference (proc)) applies to destination_process_component;
+			Actual_Processor_Binding => (reference (proc)) applies to destination_process_component;
 			HAMR::Platform => (seL4_TB, seL4_Only);
 		--annex resolute {**
 		--	check CASE_Tools

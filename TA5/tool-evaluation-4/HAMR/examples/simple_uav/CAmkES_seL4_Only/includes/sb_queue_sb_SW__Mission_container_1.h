@@ -26,7 +26,7 @@
 #pragma once
 
 #include <sb_event_counter.h> 
-#include <sb_PROC_HW_types.h>
+#include <sb_UAV_Impl_Instance_types.h>
 #include <stdbool.h>
 
 // Queue size must be an integer factor of the size for sb_event_counter_t (an unsigned
@@ -55,7 +55,7 @@ typedef struct sb_queue_sb_SW__Mission_container_1 {
   _Atomic sb_event_counter_t numSent;
 
   // Queue of elements of type sb_SW__Mission_container 
-  // (see sb_PROC_HW_types.h) implemented as a ring buffer. 
+  // (see sb_UAV_Impl_Instance_types.h) implemented as a ring buffer. 
   // No initialization necessary.
   sb_SW__Mission_container elt[SB_QUEUE_SB_SW__MISSION_CONTAINER_1_SIZE];
 

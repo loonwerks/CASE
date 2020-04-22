@@ -3,14 +3,6 @@
 #include <camkes.h>
 
 /************************************************************************
- *
- * Static variables and queue management functions for event port:
- *     s
- *
- ************************************************************************/
-static int32_t sb_s_index = 0;
-
-/************************************************************************
  * sb_s_handler:
  * Invoked by: seL4 notification callback
  *
@@ -23,24 +15,6 @@ static void sb_s_handler(void *_ UNUSED){
   MUTEXOP(sb_dispatch_sem_post());
   CALLBACKOP(sb_s_notification_reg_callback(sb_s_handler, NULL));
 }
-
-/************************************************************************
- * sb_s_read:
- * Invoked from local active thread.
- *
- * This is the function invoked by the active thread to decrement the
- * input event index.
- *
- ************************************************************************/
-bool sb_s_read(){
-  if(sb_s_index > 0) {
-    sb_s_index--;
-    return true;
-  } else {
-    return false;
-  }
-}
-
 /************************************************************************
  *  sb_entrypointsb_consumer_queue_5_impl_s
  *
@@ -84,8 +58,7 @@ int run(void) {
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
 
-    sb_s_index = sb_s_get_events();
-    if(sb_s_index > 0){
+    while(sb_s_dequeue()){
       sb_entrypointsb_consumer_queue_5_impl_s();
     }
   }

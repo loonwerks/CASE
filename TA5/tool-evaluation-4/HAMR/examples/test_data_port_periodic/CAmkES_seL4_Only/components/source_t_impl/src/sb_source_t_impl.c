@@ -31,14 +31,14 @@ void sb_periodic_dispatch_notification_callback(void *_ UNUSED) {
 }
 
 
+void sb_entrypoint_source_t_impl_periodic_dispatcher(const int64_t * in_arg) {
+  test_data_port_periodic_source_component_time_triggered((int64_t *) in_arg);
+}
+
 seqNum_t sb_write_port_seqNum;
 
 bool sb_write_port_write(const int8_t * value) {
   return write_sp_int8_t(sb_write_port, value, &sb_write_port_seqNum);
-}
-
-void sb_entrypoint_source_t_impl_periodic_dispatcher(const int64_t * in_arg) {
-  test_data_port_periodic_source_component_time_triggered((int64_t *) in_arg);
 }
 
 /************************************************************************

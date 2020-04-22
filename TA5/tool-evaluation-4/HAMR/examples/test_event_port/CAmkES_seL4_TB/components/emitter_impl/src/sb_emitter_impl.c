@@ -3,15 +3,15 @@
 #include <camkes.h>
 
 /************************************************************************
- * sb_e_write
+ * sb_e_enqueue
  * Invoked from user code in the local thread.
  *
  * This is the function invoked by the local thread to make a
  * call to send to a remote event port.
  *
  ************************************************************************/
-bool sb_e_write(void) {
-  sb_e0_raise();
+bool sb_e_enqueue(void) {
+  sb_e0_enqueue();
   return true;
 }
 

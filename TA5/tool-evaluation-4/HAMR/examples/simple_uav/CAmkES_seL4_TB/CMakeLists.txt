@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.8.2)
 
-project (PROC_SW C)
+project (UAV_Impl_Instance C)
 
 add_definitions(-DCAMKES)
 
@@ -28,27 +28,9 @@ DeclareCAmkESComponent(UARTDriver_Impl
 
 )
 
-DeclareCAmkESComponent(sb_FPLN_mission_rcv_Monitor
-  SOURCES components/sb_Monitors/sb_FPLN_mission_rcv_Monitor/src/sb_FPLN_mission_rcv_Monitor.c
-  INCLUDES components/sb_Monitors/sb_FPLN_mission_rcv_Monitor/includes/ includes
-
-)
-
-DeclareCAmkESComponent(sb_WPM_tracking_id_Monitor
-  SOURCES components/sb_Monitors/sb_WPM_tracking_id_Monitor/src/sb_WPM_tracking_id_Monitor.c
-  INCLUDES components/sb_Monitors/sb_WPM_tracking_id_Monitor/includes/ includes
-
-)
-
 DeclareCAmkESComponent(sb_FPLN_recv_map_Monitor
   SOURCES components/sb_Monitors/sb_FPLN_recv_map_Monitor/src/sb_FPLN_recv_map_Monitor.c
   INCLUDES components/sb_Monitors/sb_FPLN_recv_map_Monitor/includes/ includes
-
-)
-
-DeclareCAmkESComponent(sb_UART_mission_window_Monitor
-  SOURCES components/sb_Monitors/sb_UART_mission_window_Monitor/src/sb_UART_mission_window_Monitor.c
-  INCLUDES components/sb_Monitors/sb_UART_mission_window_Monitor/includes/ includes
 
 )
 
@@ -58,4 +40,22 @@ DeclareCAmkESComponent(sb_WPM_flight_plan_Monitor
 
 )
 
-DeclareCAmkESRootserver(PROC_SW.camkes)
+DeclareCAmkESComponent(sb_FPLN_mission_rcv_Monitor
+  SOURCES components/sb_Monitors/sb_FPLN_mission_rcv_Monitor/src/sb_FPLN_mission_rcv_Monitor.c
+  INCLUDES components/sb_Monitors/sb_FPLN_mission_rcv_Monitor/includes/ includes
+
+)
+
+DeclareCAmkESComponent(sb_UART_mission_window_Monitor
+  SOURCES components/sb_Monitors/sb_UART_mission_window_Monitor/src/sb_UART_mission_window_Monitor.c
+  INCLUDES components/sb_Monitors/sb_UART_mission_window_Monitor/includes/ includes
+
+)
+
+DeclareCAmkESComponent(sb_WPM_tracking_id_Monitor
+  SOURCES components/sb_Monitors/sb_WPM_tracking_id_Monitor/src/sb_WPM_tracking_id_Monitor.c
+  INCLUDES components/sb_Monitors/sb_WPM_tracking_id_Monitor/includes/ includes
+
+)
+
+DeclareCAmkESRootserver(UAV_Impl_Instance.camkes)

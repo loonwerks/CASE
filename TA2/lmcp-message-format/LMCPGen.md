@@ -20,15 +20,15 @@ The sources creates directories for each of the namespaces and in those it place
 
   * `bool`: `true` (this entry is not `null`)
   * `int64_t`: Series ID
-  * `uint32_t`: Message type
-  * `uint16_t`: Version
+  * `uint32_t`: Type ID
+  * `uint16_t`: Series version
   *  Packed object (see below)
  
 **NULL Object**
 
   * `bool`: `false` (this entry is `null`)
 
-The ID, type, and version are defined in the source for the individual messages. There are corresponding string versions for the ID and type in that same file. 
+The ID, type, and version are defined in the source for the individual messages (e.g., `afrlcmasiOperatingRegion.cp`). There are corresponding string versions for the ID and type in that same file. 
 
 **Beware**: the actual representation of a boolean depends on that used in the LMCP source language (C++) and that language doesn't say what bit patterns are used for true and false. See [https://stackoverflow.com/questions/19351483/how-is-a-bool-represented-in-memory](https://stackoverflow.com/questions/19351483/how-is-a-bool-represented-in-memory)
 
