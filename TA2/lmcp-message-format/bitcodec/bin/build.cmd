@@ -150,13 +150,11 @@ def runNative(gen: Os.Path): Unit = {
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectMissionCommand]=16"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectPayloadState]=8"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectPoint]=1024"
-    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectVehicleActionMissionCommandVehicleActionCommand]=8"
-    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectVehicleActionPackedAutomationResponseVehicleCommand]=64"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectViewAngle]=16"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectWaypointVehicleAction]=8"
     seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectWaypoint]=1024"
-    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectpayloadStateParameter]=8"
-    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjecttaskParameter]=8"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectPayloadStateParameter]=8"
+    seqSizes = s"${seqSizes};MSZ[BitCodec.MObjectTaskParameter]=8"
   }
 
   Os.proc(ISZ(sireum.string, "slang", "transpilers", "c", "--string-size", "2048", "--stack-size", "1024*1024*1024",

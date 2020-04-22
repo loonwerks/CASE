@@ -71,7 +71,7 @@ val STOPMOVEMENTACTION = 58
 val WAYPOINTTRANSFER = 59
 val PAYLOADSTOWACTION = 60
 
-@strictpure def lmcpObject(name: String, typeID: U32, packedObject: (String) => Concat) : Concat =
+@strictpure def lmcpObject(name: String, typeID: U32, packedObject: Concat) : Concat =
   Concat(name = s"Object${name}", elements = ISZ(
     PredUnion(name = s"PredUnion${name}", subs = ISZ(
       PredSpec(
@@ -85,41 +85,37 @@ val PAYLOADSTOWACTION = 60
           LongConst(name = "seriesID", value = conversions.S64.toZ(CMASISeriesID)),
           UIntConst(name = "typeID", value = conversions.U32.toZ(typeID)),
           UShortConst(name = "seriesVersion", value = conversions.U16.toZ(CMASISeriesVersion)),
-          packedObject(s"Packed${name}")
+          packedObject
     )))  
   ))))
 
 // Packed Object Definitions
 
-// EGM: the underscore on list size definitions is to avoid name clash with
-//      internally generated variables by bitcodec that use the same name 
-//      to track the size of the array internally.
-
 // OperatingRegion (see ./afrl/cmasi/afrlcmasiOperatingRegion.cpp)
-@strictpure def OperatingRegion(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
+val OperatingRegion: Concat = 
+  Concat(name = "OperatingRegion", elements = ISZ(
     Long(name = "id"),
-    UShort(name = "_keepInAreasSize"),
+    UShort(name = "keepInAreasSize"),
     BoundedRepeat[U16](
       name = "keepInAreas",
       maxElements = 1,
-      dependsOn = ISZ("_keepInAreasSize"),
+      dependsOn = ISZ("keepInAreasSize"),
       size = l => conversions.U16.toZ(l),
       element = ULong("id")
     ),
-    UShort(name = "_keepOutAreasSize"),
+    UShort(name = "keepOutAreasSize"),
     BoundedRepeat[U16](
       name = "keepOutAreas",
       maxElements = 1,
-      dependsOn = ISZ("_keepOutAreasSize"),
+      dependsOn = ISZ("keepOutAreasSize"),
       size = l => conversions.U16.toZ(l),
       element = ULong("id")
     )
   ))
 
 // Location3D (see ./afrl/cmasi/afrlcmasiLocation3D.cpp)
-@strictpure def Location3D(name: String) : Concat = 
-  Concat(name = name, elements = ISZ(
+val Location3D: Concat = 
+  Concat(name = "Location3D", elements = ISZ(
     Double("latitude"),
     Double("longitude"),
     Float(name = "altitude"),
@@ -129,40 +125,40 @@ val PAYLOADSTOWACTION = 60
 // See ByteBuffer.putString(string)
 @strictpure def StringType(name: String): Concat = 
   Concat(name = name, elements = ISZ(
-    UShort(name = "_stringCharsSize"),
+    UShort(name = "stringCharsSize"),
     BoundedRepeat[U16](
       name = "stringChars",
       maxElements = 65535,
-      dependsOn = ISZ("_stringCharsSize"),
+      dependsOn = ISZ("stringCharsSize"),
       size = l => conversions.U16.toZ(l),
       element = UByte("c"),
     )
   ))
 
 // KeyValuePair (see  ./afrl/cmasi/afrlcmasiKeyValuePair.cpp)
-@strictpure def KeyValuePair(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
-    StringType(name = s"${name}Key"),
-    StringType(name = s"${name}Value")
+val KeyValuePair: Concat = 
+  Concat(name = "KeyValuePair", elements = ISZ(
+    StringType(name = "Key"),
+    StringType(name = "Value")
   ))
 
 // PayloadState (see ./afrl/cmasi/afrlcmasiPayloadState.cpp)
-@strictpure def PayloadState(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
+val PayloadState: Concat = 
+  Concat(name = "PayloadState", elements = ISZ(
     Long(name = "payloadID"),
-    UShort(name = "_parametersSize"),
+    UShort(name = "parametersSize"),
     BoundedRepeat[U16](
       name = "parameters",
       maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_parametersSize"),
+      dependsOn = ISZ("parametersSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("payloadStateParameter", KEYVALUEPAIR, KeyValuePair _)
+      element = lmcpObject("PayloadStateParameter", KEYVALUEPAIR, KeyValuePair)
     )
   ))
 
 // EntitiyState (see ./afrl/cmasi/afrlcmasiEntityState.cpp)
-@strictpure def EntityState(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
+val EntityState: Concat = 
+  Concat(name = "EntityState", elements = ISZ(
     Long(name = "id"),
     Float(name = "u"),
     Float(name = "v"),
@@ -178,44 +174,44 @@ val PAYLOADSTOWACTION = 60
     Float(name = "r"),
     Float(name = "course"),
     Float(name = "groundspeed"),
-    lmcpObject("EntityStateLocation3D", LOCATION3D, Location3D _),
+    lmcpObject("EntityStateLocation3D", LOCATION3D, Location3D),
     Float(name = "energyAvailable"),
     Float(name = "actualEnergyRate"),
     // PayloadStateList (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml for max size)
-    UShort(name = "_payloadStateListSize"),
+    UShort(name = "payloadStateListSize"),
     BoundedRepeat[U16](
       name = "payloadStateList",
       maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_payloadStateListSize"),
+      dependsOn = ISZ("payloadStateListSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("PayloadState", PAYLOADSTATE, PayloadState _)
+      element = lmcpObject("PayloadState", PAYLOADSTATE, PayloadState)
     ),
     Long(name = "currentWaypoint"),
     Long(name = "currentCommand"),
     Int(name = "mode"),
-    UShort(name = "_associatedTasksSize"),
+    UShort(name = "associatedTasksSize"),
     BoundedRepeat[U16](
       name = "associatedTasks",
       maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_associatedTasksSize"),
+      dependsOn = ISZ("associatedTasksSize"),
       size = l => conversions.U16.toZ(l),
       element = Long("id"),
     ),
     Long(name = "time"),
-    UShort(name = "_infoSize"),
+    UShort(name = "infoSize"),
     BoundedRepeat[U16](
       name = "info",
       maxElements = 32, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_infoSize"),
+      dependsOn = ISZ("infoSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("EntityStateInfo", KEYVALUEPAIR, KeyValuePair _)
+      element = lmcpObject("EntityStateInfo", KEYVALUEPAIR, KeyValuePair)
     )
   ))
 
 // AirVehicleState (see ./afrl/cmasi/afrlcmasiAirVehicleState.cpp)
-@strictpure def AirVehicleState(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
-    EntityState("EntityState"),
+val AirVehicleState: Concat = 
+  Concat(name = "AirVehicleState", elements = ISZ(
+    EntityState,
     Float(name = "airspeed"),
     Float(name = "verticalSpeed"),
     Float(name = "windSpeed"),
@@ -223,8 +219,8 @@ val PAYLOADSTOWACTION = 60
   ))
 
 // Wedge (see ./afrl/cmasi/afrlcmasiWedge.cpp)
-@strictpure def Wedge(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
+val Wedge: Concat = 
+  Concat(name = "Wedge", elements = ISZ(
     Float("azimuthCenterline"),
     Float("verticalCenterline"),
     Float("azimuthExtent"),
@@ -232,40 +228,40 @@ val PAYLOADSTOWACTION = 60
   ))
 
 // SearchTask (see ./afrl/cmasi/afrlcmasiSearchTask.cpp)
-@strictpure def Task(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
+val Task: Concat = 
+  Concat(name = "Task", elements = ISZ(
     Long("taskID"),
     StringType("Label"),
-    UShort("_eligibleEntitiesSize"),
+    UShort("eligibleEntitiesSize"),
     BoundedRepeat[U16](
       name = "eligibleEntities",
       maxElements = 32, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_eligibleEntitiesSize"),
+      dependsOn = ISZ("eligibleEntitiesSize"),
       size = l => conversions.U16.toZ(l), 
       element = Long("entity")
     ),
     Float("revisitRate"),
-    UShort("_parametersSize"),
+    UShort("parametersSize"),
     BoundedRepeat[U16](
       name = "parameters",
       maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_parametersSize"),
+      dependsOn = ISZ("parametersSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("taskParameter", KEYVALUEPAIR, KeyValuePair _)
+      element = lmcpObject("TaskParameter", KEYVALUEPAIR, KeyValuePair)
     ),
     Byte("priority"),
     UByte("required")
   ))
 
 // SearchTask (see ./afrl/cmasi/afrlcmasiSearchTask.cpp)
-@strictpure def SearchTask(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
-    Task("Task"),
-    UShort("_desiredWavelengthBandsSize"),
+val SearchTask: Concat = 
+  Concat(name = "SearchTask", elements = ISZ(
+    Task,
+    UShort("desiredWavelengthBandsSize"),
     BoundedRepeat[U16](
       name = "desiredWavelengthBands",
       maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_desiredWavelengthBandsSize"),
+      dependsOn = ISZ("desiredWavelengthBandsSize"),
       size = l => conversions.U16.toZ(l),
       element = Int("band")
     ),
@@ -274,44 +270,44 @@ val PAYLOADSTOWACTION = 60
   ))
 
 // LineSearchTask (see ./afrl/cmasi/afrlcmasiLineSearchTask.cpp)
-@strictpure def LineSearchTask(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
-    SearchTask("SearchTask"),
-    UShort("_pointListSize"),
+val LineSearchTask: Concat = 
+  Concat(name = "LineSearchTask", elements = ISZ(
+    SearchTask,
+    UShort("pointListSize"),
     BoundedRepeat[U16](
       name = "pointList",
       maxElements = 1024, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_pointListSize"),
+      dependsOn = ISZ("pointListSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("Point", LOCATION3D, Location3D _)
+      element = lmcpObject("Point", LOCATION3D, Location3D)
     ),
-    UShort("_viewAngleListSize"),
+    UShort("viewAngleListSize"),
     BoundedRepeat[U16](
       name = "viewAngleList",
       maxElements = 16, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_viewAngleListSize"),
+      dependsOn = ISZ("viewAngleListSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("ViewAngle", WEDGE, Wedge _)
+      element = lmcpObject("ViewAngle", WEDGE, Wedge)
     ),
     UByte("useInertialViewAngles")
   ))
 
 // AutomationRequest (see ./afrl/cmasi/afrlcmasiAutomationRequest.cpp)
-@strictpure def AutomationRequest(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
-    UShort("_entityListSize"),
+val AutomationRequest: Concat = 
+  Concat(name = "AutomationRequest", elements = ISZ(
+    UShort("entityListSize"),
     BoundedRepeat[U16](
       name = "entityList",
       maxElements = 16, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_entityListSize"),
+      dependsOn = ISZ("entityListSize"),
       size = l => conversions.U16.toZ(l),
       element = Long("entityId")
     ),
-    UShort("_taskListSize"),
+    UShort("taskListSize"),
     BoundedRepeat[U16](
       name = "taskList",
       maxElements = 32, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_taskListSize"),
+      dependsOn = ISZ("taskListSize"),
       size = l => conversions.U16.toZ(l),
       element = Long("taskId")
     ),
@@ -320,102 +316,101 @@ val PAYLOADSTOWACTION = 60
     UByte("redoAllTasks")
   ))
 
-// EGM: base class definition --- uses polymorphism over the actual actions
-@strictpure def VehicleAction(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
-    UShort("_associatedTaskListSize"),
+val VehicleAction: Concat = 
+  Concat(name = "VehicleAction", elements = ISZ(
+    UShort("associatedTaskListSize"),
     BoundedRepeat[U16](
       name = "associatedTaskList",
       maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_associatedTaskListSize"),
+      dependsOn = ISZ("associatedTaskListSize"),
       size = l => conversions.U16.toZ(l),
       element = Long("associatedTaskId")
     )
   ))
 
-@strictpure def VehicleActionCommand(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
+val VehicleActionCommand: Concat = 
+  Concat(name = "VehicleActionCommand", elements = ISZ(
     Long("commandID"),
     Long("vehicleID"),
-    UShort("_vehicleActionListSize"),
+    UShort("vehicleActionListSize"),
     BoundedRepeat[U16](
       name = "vehicleActionList",
       maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_vehicleActionListSize"),
+      dependsOn = ISZ("vehicleActionListSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject(s"VehicleAction${name}", VEHICLEACTION, VehicleAction _)
+      element = lmcpObject(s"VehicleActionVehicleActionCommand", VEHICLEACTION, VehicleAction)
     ),
     Int("status")
   ))
 
-@strictpure def Waypoint(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
-    Location3D("WayPointLocation3D"),
+val Waypoint: Concat = 
+  Concat(name = "Waypoint", elements = ISZ(
+    Location3D,
     Long("number"),
     Long("nextWaypoint"),
     Float("speed"),
     Int("speedType"),
     Float("climbRate"),
     Int("turnType"),
-    UShort("_vehicleActionListSize"),
+    UShort("vehicleActionListSize"),
      BoundedRepeat[U16](
       name = "vehicleActionList",
       maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_vehicleActionListSize"),
+      dependsOn = ISZ("vehicleActionListSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("WaypointVehicleAction", VEHICLEACTION, VehicleAction _)
+      element = lmcpObject("WaypointVehicleAction", VEHICLEACTION, VehicleAction)
     ),
     Long("contingencyWaypointA"),
     Long("contingencyWaypointB"),
-    UShort("_associatedTaskListSize"),
+    UShort("associatedTaskListSize"),
     BoundedRepeat[U16](
       name = "associatedTaskList",
       maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_associatedTaskListSize"),
+      dependsOn = ISZ("associatedTaskListSize"),
       size = l => conversions.U16.toZ(l),
       element = Long("associatedTaskId")
     )
   ))
 
-@strictpure def MissionCommand(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
-    VehicleActionCommand("MissionCommandVehicleActionCommand"),
-    UShort("_waypointListSize"),
+val MissionCommand: Concat = 
+  Concat(name = "MissionCommand", elements = ISZ(
+    VehicleActionCommand,
+    UShort("waypointListSize"),
     BoundedRepeat[U16](
       name = "waypointList",
       maxElements = 1024, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_waypointListSize"),
+      dependsOn = ISZ("waypointListSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("Waypoint", WAYPOINT, Waypoint _)
+      element = lmcpObject("Waypoint", WAYPOINT, Waypoint)
     ),
     Long("firstWaypoint")
   ))
 
-@strictpure def AutomationResponse(name: String): Concat = 
-  Concat(name = name, elements = ISZ(
-    UShort("_missionCommandListSize"),
+val AutomationResponse: Concat = 
+  Concat(name = "AutomationResponse", elements = ISZ(
+    UShort("missionCommandListSize"),
     BoundedRepeat[U16](
       name = "missionCommandList",
       maxElements = 16, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_missionCommandListSize"),
+      dependsOn = ISZ("missionCommandListSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("MissionCommand", MISSIONCOMMAND, MissionCommand _)
+      element = lmcpObject("MissionCommand", MISSIONCOMMAND, MissionCommand)
     ),
-    UShort("_vehicleCommandListSize"),
+    UShort("vehicleCommandListSize"),
     BoundedRepeat[U16](
       name = "vehicleCommandList",
       maxElements = 64, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_vehicleCommandListSize"),
+      dependsOn = ISZ("vehicleCommandListSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("AutomationResponseVehicleCommand", VEHICLEACTIONCOMMAND, VehicleActionCommand _)
+      element = lmcpObject("AutomationResponseVehicleCommand", VEHICLEACTIONCOMMAND, VehicleActionCommand)
     ),
-    UShort("_infoSize"),
+    UShort("infoSize"),
     BoundedRepeat[U16](
       name = "info",
       maxElements = 8, // (see case-ta6-experimental-platform-OpenUxAS/mdms/CMASI.xml)
-      dependsOn = ISZ("_infoSize"),
+      dependsOn = ISZ("infoSize"),
       size = l => conversions.U16.toZ(l),
-      element = lmcpObject("AutomationResponseInfo", KEYVALUEPAIR, KeyValuePair _)
+      element = lmcpObject("AutomationResponseInfo", KEYVALUEPAIR, KeyValuePair)
     )
   ))
 // END Packed Object Definitions
@@ -442,11 +437,11 @@ val lmcpObjectDecode = Concat(name = "LMCPObjectDecode", elements = ISZ(
       case (_, _, _) => -1
     },
     subs = ISZ(
-      OperatingRegion("OperatingRegion"),
-      AirVehicleState("AirVehicleState"),
-      LineSearchTask("LineSearchTask"),
-      AutomationRequest("AutomationRequest"),
-      AutomationResponse("AutomationResponse")
+      OperatingRegion,
+      AirVehicleState,
+      LineSearchTask,
+      AutomationRequest,
+      AutomationResponse
     )
   )
 ))
