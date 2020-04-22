@@ -39,13 +39,9 @@ object BitCodec {
 
   val ERROR_NullValuePayloadStateParameter: Z = 12
 
-  val ERROR_Key_stringChars: Z = 13
+  val ERROR_StringType_stringChars: Z = 13
 
-  val ERROR_Key: Z = 14
-
-  val ERROR_Value_stringChars: Z = 15
-
-  val ERROR_Value: Z = 16
+  val ERROR_StringType: Z = 14
 
   val ERROR_KeyValuePair: Z = 17
 
@@ -82,10 +78,6 @@ object BitCodec {
   val ERROR_EntityState: Z = 38
 
   val ERROR_AirVehicleState: Z = 39
-
-  val ERROR_Label_stringChars: Z = 40
-
-  val ERROR_Label: Z = 41
 
   val ERROR_Task_eligibleEntities: Z = 42
 
@@ -132,10 +124,6 @@ object BitCodec {
   val ERROR_AutomationRequest_entityList: Z = 69
 
   val ERROR_AutomationRequest_taskList: Z = 70
-
-  val ERROR_TaskRelationships_stringChars: Z = 71
-
-  val ERROR_TaskRelationships: Z = 72
 
   val ERROR_AutomationRequest: Z = 73
 
@@ -1018,18 +1006,18 @@ object BitCodec {
 
   }
 
-  object Key {
+  object StringType {
 
     val maxSize: Z = z"524296"
 
-    def empty: MKey = {
-      return MKey(u16"0", MSZ[U8]())
+    def empty: MStringType = {
+      return MStringType(u16"0", MSZ[U8]())
     }
 
-    def decode(input: ISZ[B], context: Context): Option[Key] = {
+    def decode(input: ISZ[B], context: Context): Option[StringType] = {
       val r = empty
       r.decode(input, context)
-      return if (context.hasError) None[Key]() else Some(r.toImmutable)
+      return if (context.hasError) None[StringType]() else Some(r.toImmutable)
     }
 
     def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
@@ -1049,12 +1037,12 @@ object BitCodec {
     }
   }
 
-  @datatype class Key(
+  @datatype class StringType(
     val stringCharsSize: U16,
     val stringChars: ISZ[U8]
   ) {
 
-    @strictpure def toMutable: MKey = MKey(stringCharsSize, Key.toMutableStringChars(stringChars))
+    @strictpure def toMutable: MStringType = MStringType(stringCharsSize, StringType.toMutableStringChars(stringChars))
 
     def encode(context: Context): Option[ISZ[B]] = {
       val buffer = MSZ.create(524296, F)
@@ -1067,27 +1055,27 @@ object BitCodec {
     }
   }
 
-  @record class MKey(
+  @record class MStringType(
     var stringCharsSize: U16,
     var stringChars: MSZ[U8]
   ) extends Runtime.Composite {
 
-    @strictpure def toImmutable: Key = Key(stringCharsSize, Key.toImmutableStringChars(stringChars))
+    @strictpure def toImmutable: StringType = StringType(stringCharsSize, StringType.toImmutableStringChars(stringChars))
 
     def wellFormed: Z = {
 
       if (stringChars.size > 65535) {
-        return ERROR_Key_stringChars
+        return ERROR_StringType_stringChars
       }
 
       val stringCharsSz = sizeOfStringChars(stringCharsSize)
       if (stringChars.size != stringCharsSz) {
-        return ERROR_Key_stringChars
+        return ERROR_StringType_stringChars
       }
 
-      // BEGIN USER CODE: Key.wellFormed
+      // BEGIN USER CODE: StringType.wellFormed
 
-      // END USER CODE: Key.wellFormed
+      // END USER CODE: StringType.wellFormed
 
       return 0
     }
@@ -1102,7 +1090,7 @@ object BitCodec {
           stringChars(i) = c
         }
       } else {
-        context.signalError(ERROR_Key_stringChars)
+        context.signalError(ERROR_StringType_stringChars)
       }
 
       val wf = wellFormed
@@ -1120,129 +1108,11 @@ object BitCodec {
           Writer.bleU8(output, context, c)
         }
       } else {
-        context.signalError(ERROR_Key_stringChars)
+        context.signalError(ERROR_StringType_stringChars)
       }
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_Key)
-      }
-    }
-
-    def sizeOfStringChars(l: U16): Z = {
-      val r: Z = {
-        conversions.U16.toZ(l)
-      }
-      return r
-    }
-  }
-
-  object Value {
-
-    val maxSize: Z = z"524296"
-
-    def empty: MValue = {
-      return MValue(u16"0", MSZ[U8]())
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[Value] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[Value]() else Some(r.toImmutable)
-    }
-
-    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
-      var r = MSZ[U8]()
-      for (e <- s) {
-        r = r :+ e
-      }
-      return r
-    }
-
-    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
-      var r = ISZ[U8]()
-      for (e <- s) {
-        r = r :+ e
-      }
-      return r
-    }
-  }
-
-  @datatype class Value(
-    val stringCharsSize: U16,
-    val stringChars: ISZ[U8]
-  ) {
-
-    @strictpure def toMutable: MValue = MValue(stringCharsSize, Value.toMutableStringChars(stringChars))
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(524296, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MValue(
-    var stringCharsSize: U16,
-    var stringChars: MSZ[U8]
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: Value = Value(stringCharsSize, Value.toImmutableStringChars(stringChars))
-
-    def wellFormed: Z = {
-
-      if (stringChars.size > 65535) {
-        return ERROR_Value_stringChars
-      }
-
-      val stringCharsSz = sizeOfStringChars(stringCharsSize)
-      if (stringChars.size != stringCharsSz) {
-        return ERROR_Value_stringChars
-      }
-
-      // BEGIN USER CODE: Value.wellFormed
-
-      // END USER CODE: Value.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      stringCharsSize = Reader.IS.beU16(input, context)
-      val stringCharsSz = sizeOfStringChars(stringCharsSize)
-      if (stringCharsSz >= 0) {
-        stringChars = MSZ.create(stringCharsSz, u8"0")
-        for (i <- 0 until stringCharsSz) {
-          val c = Reader.IS.bleU8(input, context)
-          stringChars(i) = c
-        }
-      } else {
-        context.signalError(ERROR_Value_stringChars)
-      }
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU16(output, context, stringCharsSize)
-      val stringCharsSz = sizeOfStringChars(stringCharsSize)
-      if (stringCharsSz >= 0) {
-        for (i <- 0 until stringCharsSz) {
-          val c = stringChars(i)
-          Writer.bleU8(output, context, c)
-        }
-      } else {
-        context.signalError(ERROR_Value_stringChars)
-      }
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_Value)
+        context.updateErrorCode(ERROR_StringType)
       }
     }
 
@@ -1259,7 +1129,7 @@ object BitCodec {
     val maxSize: Z = z"1048592"
 
     def empty: MKeyValuePair = {
-      return MKeyValuePair(Key.empty, Value.empty)
+      return MKeyValuePair(StringType.empty, StringType.empty)
     }
 
     def decode(input: ISZ[B], context: Context): Option[KeyValuePair] = {
@@ -1271,8 +1141,8 @@ object BitCodec {
   }
 
   @datatype class KeyValuePair(
-    val key: Key,
-    val value: Value
+    val key: StringType,
+    val value: StringType
   ) {
 
     @strictpure def toMutable: MKeyValuePair = MKeyValuePair(key.toMutable, value.toMutable)
@@ -1289,8 +1159,8 @@ object BitCodec {
   }
 
   @record class MKeyValuePair(
-    var key: MKey,
-    var value: MValue
+    var key: MStringType,
+    var value: MStringType
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: KeyValuePair = KeyValuePair(key.toImmutable, value.toImmutable)
@@ -2631,124 +2501,6 @@ object BitCodec {
 
   }
 
-  object Label {
-
-    val maxSize: Z = z"524296"
-
-    def empty: MLabel = {
-      return MLabel(u16"0", MSZ[U8]())
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[Label] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[Label]() else Some(r.toImmutable)
-    }
-
-    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
-      var r = MSZ[U8]()
-      for (e <- s) {
-        r = r :+ e
-      }
-      return r
-    }
-
-    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
-      var r = ISZ[U8]()
-      for (e <- s) {
-        r = r :+ e
-      }
-      return r
-    }
-  }
-
-  @datatype class Label(
-    val stringCharsSize: U16,
-    val stringChars: ISZ[U8]
-  ) {
-
-    @strictpure def toMutable: MLabel = MLabel(stringCharsSize, Label.toMutableStringChars(stringChars))
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(524296, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MLabel(
-    var stringCharsSize: U16,
-    var stringChars: MSZ[U8]
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: Label = Label(stringCharsSize, Label.toImmutableStringChars(stringChars))
-
-    def wellFormed: Z = {
-
-      if (stringChars.size > 65535) {
-        return ERROR_Label_stringChars
-      }
-
-      val stringCharsSz = sizeOfStringChars(stringCharsSize)
-      if (stringChars.size != stringCharsSz) {
-        return ERROR_Label_stringChars
-      }
-
-      // BEGIN USER CODE: Label.wellFormed
-
-      // END USER CODE: Label.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      stringCharsSize = Reader.IS.beU16(input, context)
-      val stringCharsSz = sizeOfStringChars(stringCharsSize)
-      if (stringCharsSz >= 0) {
-        stringChars = MSZ.create(stringCharsSz, u8"0")
-        for (i <- 0 until stringCharsSz) {
-          val c = Reader.IS.bleU8(input, context)
-          stringChars(i) = c
-        }
-      } else {
-        context.signalError(ERROR_Label_stringChars)
-      }
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU16(output, context, stringCharsSize)
-      val stringCharsSz = sizeOfStringChars(stringCharsSize)
-      if (stringCharsSz >= 0) {
-        for (i <- 0 until stringCharsSz) {
-          val c = stringChars(i)
-          Writer.bleU8(output, context, c)
-        }
-      } else {
-        context.signalError(ERROR_Label_stringChars)
-      }
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_Label)
-      }
-    }
-
-    def sizeOfStringChars(l: U16): Z = {
-      val r: Z = {
-        conversions.U16.toZ(l)
-      }
-      return r
-    }
-  }
-
   object NullValueTaskParameter {
 
     val maxSize: Z = z"8"
@@ -3057,7 +2809,7 @@ object BitCodec {
     val maxSize: Z = z"8916184"
 
     def empty: MTask = {
-      return MTask(s64"0", Label.empty, u16"0", MSZ[S64](), 0.0f, u16"0", MSZ[MObjectTaskParameter](), s8"0", u8"0")
+      return MTask(s64"0", StringType.empty, u16"0", MSZ[S64](), 0.0f, u16"0", MSZ[MObjectTaskParameter](), s8"0", u8"0")
     }
 
     def decode(input: ISZ[B], context: Context): Option[Task] = {
@@ -3101,7 +2853,7 @@ object BitCodec {
 
   @datatype class Task(
     val taskID: S64,
-    val label: Label,
+    val label: StringType,
     val eligibleEntitiesSize: U16,
     val eligibleEntities: ISZ[S64],
     val revisitRate: F32,
@@ -3126,7 +2878,7 @@ object BitCodec {
 
   @record class MTask(
     var taskID: S64,
-    var label: MLabel,
+    var label: MStringType,
     var eligibleEntitiesSize: U16,
     var eligibleEntities: MSZ[S64],
     var revisitRate: F32,
@@ -4255,130 +4007,12 @@ object BitCodec {
     }
   }
 
-  object TaskRelationships {
-
-    val maxSize: Z = z"524296"
-
-    def empty: MTaskRelationships = {
-      return MTaskRelationships(u16"0", MSZ[U8]())
-    }
-
-    def decode(input: ISZ[B], context: Context): Option[TaskRelationships] = {
-      val r = empty
-      r.decode(input, context)
-      return if (context.hasError) None[TaskRelationships]() else Some(r.toImmutable)
-    }
-
-    def toMutableStringChars(s: ISZ[U8]): MSZ[U8] = {
-      var r = MSZ[U8]()
-      for (e <- s) {
-        r = r :+ e
-      }
-      return r
-    }
-
-    def toImmutableStringChars(s: MSZ[U8]): ISZ[U8] = {
-      var r = ISZ[U8]()
-      for (e <- s) {
-        r = r :+ e
-      }
-      return r
-    }
-  }
-
-  @datatype class TaskRelationships(
-    val stringCharsSize: U16,
-    val stringChars: ISZ[U8]
-  ) {
-
-    @strictpure def toMutable: MTaskRelationships = MTaskRelationships(stringCharsSize, TaskRelationships.toMutableStringChars(stringChars))
-
-    def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(524296, F)
-      toMutable.encode(buffer, context)
-      return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
-    }
-
-    def wellFormed: Z = {
-      return toMutable.wellFormed
-    }
-  }
-
-  @record class MTaskRelationships(
-    var stringCharsSize: U16,
-    var stringChars: MSZ[U8]
-  ) extends Runtime.Composite {
-
-    @strictpure def toImmutable: TaskRelationships = TaskRelationships(stringCharsSize, TaskRelationships.toImmutableStringChars(stringChars))
-
-    def wellFormed: Z = {
-
-      if (stringChars.size > 65535) {
-        return ERROR_TaskRelationships_stringChars
-      }
-
-      val stringCharsSz = sizeOfStringChars(stringCharsSize)
-      if (stringChars.size != stringCharsSz) {
-        return ERROR_TaskRelationships_stringChars
-      }
-
-      // BEGIN USER CODE: TaskRelationships.wellFormed
-
-      // END USER CODE: TaskRelationships.wellFormed
-
-      return 0
-    }
-
-    def decode(input: ISZ[B], context: Context): Unit = {
-      stringCharsSize = Reader.IS.beU16(input, context)
-      val stringCharsSz = sizeOfStringChars(stringCharsSize)
-      if (stringCharsSz >= 0) {
-        stringChars = MSZ.create(stringCharsSz, u8"0")
-        for (i <- 0 until stringCharsSz) {
-          val c = Reader.IS.bleU8(input, context)
-          stringChars(i) = c
-        }
-      } else {
-        context.signalError(ERROR_TaskRelationships_stringChars)
-      }
-
-      val wf = wellFormed
-      if (wf != 0) {
-        context.signalError(wf)
-      }
-    }
-
-    def encode(output: MSZ[B], context: Context): Unit = {
-      Writer.beU16(output, context, stringCharsSize)
-      val stringCharsSz = sizeOfStringChars(stringCharsSize)
-      if (stringCharsSz >= 0) {
-        for (i <- 0 until stringCharsSz) {
-          val c = stringChars(i)
-          Writer.bleU8(output, context, c)
-        }
-      } else {
-        context.signalError(ERROR_TaskRelationships_stringChars)
-      }
-
-      if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
-        context.updateErrorCode(ERROR_TaskRelationships)
-      }
-    }
-
-    def sizeOfStringChars(l: U16): Z = {
-      val r: Z = {
-        conversions.U16.toZ(l)
-      }
-      return r
-    }
-  }
-
   object AutomationRequest {
 
     val maxSize: Z = z"527472"
 
     def empty: MAutomationRequest = {
-      return MAutomationRequest(u16"0", MSZ[S64](), u16"0", MSZ[S64](), TaskRelationships.empty, s64"0", u8"0")
+      return MAutomationRequest(u16"0", MSZ[S64](), u16"0", MSZ[S64](), StringType.empty, s64"0", u8"0")
     }
 
     def decode(input: ISZ[B], context: Context): Option[AutomationRequest] = {
@@ -4425,7 +4059,7 @@ object BitCodec {
     val entityList: ISZ[S64],
     val taskListSize: U16,
     val taskList: ISZ[S64],
-    val taskRelationships: TaskRelationships,
+    val taskRelationships: StringType,
     val operatingRegion: S64,
     val redoAllTasks: U8
   ) extends LMCPObject {
@@ -4448,7 +4082,7 @@ object BitCodec {
     var entityList: MSZ[S64],
     var taskListSize: U16,
     var taskList: MSZ[S64],
-    var taskRelationships: MTaskRelationships,
+    var taskRelationships: MStringType,
     var operatingRegion: S64,
     var redoAllTasks: U8
   ) extends MLMCPObject {
@@ -7594,7 +7228,7 @@ val expectedAutomationRequestMessage = MLMCPMessage (
       MSZ(s64"0x0000000000000190"),
       u16"0x0001",
       MSZ(s64"0x00000000000003E8"),
-      MTaskRelationships(
+      MStringType(
         u16"0x0000",
         MSZ()
       ),
