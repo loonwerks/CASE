@@ -20,13 +20,15 @@ public
 			B: thread Comp_B.Impl;
 			C: thread Comp_C.Impl;
 		connections
-			c1: port A.output -> B.input;
-			c2: port B.output -> C.input;
+			c1: port A.output -> B.input {CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 0;};
+			c2: port B.output -> C.input {CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 0;};
 	end SW.Impl;
 	
 	thread Comp_A
 		features
 			output: out event data port;
+		properties
+			CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 0;
 	end Comp_A;
 	
 	thread implementation Comp_A.Impl
@@ -39,6 +41,8 @@ public
 		features
 			input: in event data port;
 			output: out event data port;
+		properties
+			CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;
 	end Comp_B;
 	
 	thread implementation Comp_B.Impl
@@ -50,6 +54,8 @@ public
 	thread Comp_C
 		features
 			input: in event data port;
+		properties
+			CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 0;
 	end Comp_C;
 	
 	thread implementation Comp_C.Impl

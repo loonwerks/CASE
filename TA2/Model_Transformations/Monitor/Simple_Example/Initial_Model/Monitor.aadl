@@ -13,6 +13,7 @@ public
 			other_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 		properties
 			CASE_Properties::Component_Type => COMM_DRIVER;
+			CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 0;
 	end RadioDriver;
 
 	thread implementation RadioDriver.Impl
@@ -25,7 +26,7 @@ public
 			recv_command: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			status: out event data port Base_types::Boolean;
 		properties
-			CASE_Properties::Boundary => (UNCONTROLLED);
+			CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;
 		annex agree {**
 			guarantee "Component status shall never be false" : status;
 		**};
@@ -39,6 +40,8 @@ public
 	thread Component_B
 		features
 			recv_message: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+		properties
+			CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 0;
 	end Component_B;
 
 	thread implementation Component_B.Impl
@@ -50,6 +53,8 @@ public
 		features
 			input: in event data port;
 			output: out event data port Base_Types::Boolean;
+		properties
+			CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 100;
 		annex agree {**
 			guarantee "Output status shall never be false" : output;
 		**};
@@ -61,24 +66,26 @@ public
 			COMP_A: thread Component_A.Impl;
 			COMP_B: thread Component_B.Impl;
 		connections
-			c1: port input -> RADIO.recv_message;
-			c2: port RADIO.command_message -> COMP_A.recv_command;
-			c3: port RADIO.other_message -> COMP_B.recv_message;
-			c4: port COMP_A.status -> output;
+			c1: port input -> RADIO.recv_message {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;};
+			c2: port RADIO.command_message -> COMP_A.recv_command {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;};
+			c3: port RADIO.other_message -> COMP_B.recv_message {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;};
+			c4: port COMP_A.status -> output {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;};
 	end SW.Impl;
 	
 	system Sys
 		features
 			input: in event data port;
 			output: out event data port Base_Types::Boolean;
+		properties
+			CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 100;
 	end Sys;
 	
 	system implementation Sys.Impl
 		subcomponents
 			SW: process SW.Impl;
 		connections
-			c1: port input -> SW.input;
-			c2: port SW.output -> output;
+			c1: port input -> SW.input {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;};
+			c2: port SW.output -> output {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;};
 	end Sys.Impl;
 	
 end Monitor;
