@@ -39,6 +39,8 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "file", source: "bin", destination: "bin"
 
+  config.vm.provision "file", source: "vm-version.txt", destination: "vm-version.txt"
+
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
     bash case-setup.sh
     rm -R case-setup.sh addons

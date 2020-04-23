@@ -7,7 +7,7 @@ set -exuo pipefail
 : "${GIT_USER:=Snail Mail}"
 : "${GIT_EMAIL:=<>}"
 
-: "${SIREUM_V:=5e00c74}"
+: "${SIREUM_V:=b337d9d}"
 : "${SEL4_SCRIPTS_V:=ae83bb5a919dab780b03f74b525626f335f30666}"
 : "${SEL4_V:=28831f579e3560bd3aa18a3898505f091d66b076}"
 : "${CAMKES_V:=e7f5c6da03fc8a71a5a2e503de9f9004acf3ef2a}"
@@ -102,7 +102,5 @@ bash $SEL4_SCRIPTS/camkes.sh
 bash ~/bin/camkes-cache.sh $CAMKES_V
 echo "export PATH=\$PATH:$BASE_DIR/camkes/build/capDL-tool" >> "$HOME/.bashrc"
 
-# Install required Qemu version and add it to the front of the path
-git clone https://github.com/qemu/qemu.git -b $QEMU_VERSION --depth=1 "$BASE_DIR/qemu"
-(cd "$BASE_DIR/qemu" && ./configure --target-list=aarch64-softmmu --prefix=$BASE_DIR/qemu/install && make -j 4 && make install)
-echo "export PATH=$BASE_DIR/qemu/install/bin:\$PATH" >> "$HOME/.bashrc"
+git config --global --unset user.name
+git config --global --unset user.email
