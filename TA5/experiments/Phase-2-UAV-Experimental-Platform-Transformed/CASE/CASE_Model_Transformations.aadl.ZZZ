@@ -1,0 +1,103 @@
+package CASE_Model_Transformations
+public
+	
+	with Base_Types;
+	with CASE_Properties;
+	
+	-- COMMUNICATIONS
+	
+	-- CASE message header
+	data CASE_MsgHeader
+	end CASE_MsgHeader;
+	data implementation CASE_MsgHeader.Impl
+		subcomponents
+			src: data Base_Types::Integer_32;
+			dst: data Base_Types::Integer_32;
+			trusted: data Base_Types::Boolean;
+			HMAC: data Base_Types::Boolean;
+	end CASE_MsgHeader.Impl;
+
+	-- CASE RF Message structure
+	data CASE_RF_Msg
+	end CASE_RF_Msg;
+	
+	data implementation CASE_RF_Msg.Impl
+		subcomponents
+			header: data CASE_MsgHeader.Impl;
+			payload: data;
+	end CASE_RF_Msg.Impl;
+	
+	-- UART Message structure
+	data CASE_UART_Msg
+	end CASE_UART_Msg;
+	
+	data implementation CASE_UART_Msg.Impl
+		subcomponents
+			crc: data Base_Types::Boolean;
+			message: data Base_Types::String;
+	end CASE_UART_Msg.Impl;
+	
+	-- WIFI Message structure
+	data CASE_WIFI_Msg
+	end CASE_WIFI_Msg;
+	
+	data implementation CASE_WIFI_Msg.Impl
+		subcomponents
+			crc: data Base_Types::Boolean;
+			message: data Base_Types::String;
+	end CASE_WIFI_Msg.Impl;
+	
+	-- ATTESTATION MANAGER
+		
+	-- This is the structure of an Attestation Request message
+	-- that the Attestation Manager sends to the comm driver
+	data CASE_AttestationRequestMsg
+	end CASE_AttestationRequestMsg;
+
+	data implementation CASE_AttestationRequestMsg.Impl
+		subcomponents
+			header: data CASE_MsgHeader.Impl;
+	end CASE_AttestationRequestMsg.Impl;
+
+	-- This is the structure of an Attestation Response message
+	-- that the comm driver returns to the Attestation Manager
+	-- when it gets a response from the Ground Station
+	data CASE_AttestationResponseMsg
+	end CASE_AttestationResponseMsg;
+
+	data implementation CASE_AttestationResponseMsg.Impl
+		subcomponents
+			header: data CASE_MsgHeader.Impl;
+			status: data Base_Types::Boolean;
+	end CASE_AttestationResponseMsg.Impl;
+	
+	-- This is the structure of a single entry in the attestation manager cache
+	data CASE_AttestationCacheRecord
+	end CASE_AttestationCacheRecord;
+	
+	data implementation CASE_AttestationCacheRecord.Impl
+		subcomponents
+			src: data Base_Types::Integer_32;
+			trusted: data Base_Types::Integer_32;
+			timeout: data Base_Types::Integer_32;
+	end CASE_AttestationCacheRecord.Impl;
+	
+	
+	-- This is the structure of the Attestation Cache
+	-- It currently has a maximum size of 6, but we expect to 
+	-- replace with a sizeable array in the future
+	data CASE_AttestationCache
+	end CASE_AttestationCache;
+	
+	data implementation CASE_AttestationCache.Impl
+		subcomponents
+			src1: data CASE_AttestationCacheRecord.Impl;
+			src2: data CASE_AttestationCacheRecord.Impl;
+			src3: data CASE_AttestationCacheRecord.Impl;
+			src4: data CASE_AttestationCacheRecord.Impl;
+			src5: data CASE_AttestationCacheRecord.Impl;
+			src6: data CASE_AttestationCacheRecord.Impl;
+	end CASE_AttestationCache.Impl;
+
+	
+end CASE_Model_Transformations;

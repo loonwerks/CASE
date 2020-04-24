@@ -1,0 +1,13 @@
+import "../../interfaces/sb_Monitor_CMASI__AirVehicleState_i_1.idl4";
+import "../../interfaces/sb_Monitor_CMASI__MissionCommand_i_1.idl4";
+import "../../interfaces/sb_Monitor_CMASI__AutomationResponse_i_1.idl4";
+
+component Waterways_i {
+  include <sb_PROC_HW_types.h>;
+  control;
+  uses sb_Monitor_CMASI__AirVehicleState_i_1 sb_AirVehicleState;
+  uses sb_Monitor_CMASI__MissionCommand_i_1 sb_MissionCommand0;
+  uses sb_Monitor_CMASI__AutomationResponse_i_1 sb_AutomationResponse0;
+  consumes QueuedData sb_AirVehicleState_notification;
+  has semaphore sb_dispatch_sem;
+}

@@ -1,0 +1,6 @@
+procedure sb_Monitor_CMASI__AirVehicleState_i_1 {
+  include <sb_PROC_HW_types.h>;
+  bool is_empty();
+  bool enqueue(refin CMASI__AirVehicleState_i m);
+  bool dequeue(out CMASI__AirVehicleState_i m);
+};

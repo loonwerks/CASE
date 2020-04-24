@@ -1,0 +1,68 @@
+package Drivers
+public
+	with CASE_Model_Transformations;
+	with CMASI;
+	with CASEAgree;
+	with CASE_Properties;
+
+	thread RadioDriver
+		-- The RadioDriver is the software that enables other SW components to communicate to other systems over RF
+		features
+			recv_data: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl {
+				Compute_Entrypoint_Source_Text => "recv_data_event_handler";
+			};
+			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+
+			-- UxAS
+			AutomationResponse: in event data port CMASI::AutomationResponse.i  {
+				Compute_Entrypoint_Source_Text => "automation_response_handler";
+			};
+			AirVehicleState: in event data port CMASI::AirVehicleState.i {
+				Compute_Entrypoint_Source_Text => "air_vehicle_state_handler";
+			};
+
+			AutomationRequest: out event data port CMASI::AddressAttributedMessage.i;
+			OperatingRegion: out event data port CMASI::AddressAttributedMessage.i;
+			LineSearchTask: out event data port CMASI::AddressAttributedMessage.i;
+
+		properties
+			Dispatch_Protocol => Sporadic;
+	end RadioDriver;
+
+	thread implementation RadioDriver.Impl
+		properties
+			Dispatch_Protocol => Sporadic;			
+			Initialize_Entrypoint_Source_Text => "initialize_radio";
+			Compute_Entrypoint_Source_Text => "run_radio";
+	end RadioDriver.Impl;
+
+	thread UARTDriver
+		-- The UARTDriver is the software that enables other SW components to communicate to other systems over the serial connection
+		features
+			recv_data: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl {
+				Compute_Entrypoint_Source_Text => "recv_data_event_handler";
+			};
+			MissionCommand: in event data port CMASI::MissionCommand.i {
+				Compute_Entrypoint_Source_Text => "mission_command_event_handler";
+			};
+
+			send_data: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			AirVehicleState: out event data port CMASI::AirVehicleState.i;
+		properties
+			Dispatch_Protocol => Sporadic;
+		annex agree {**
+			assume Req001_UARTDriver "Assumes recv_data only gets well formed CASE_UART_Msg.Impl types" : 
+					        CASEAgree::WellformedCASE_UART_Msg(recv_data);
+			guarantee Req003_UARTDRiver "The send_data outputs only well formed CASE_UART_Msg.Impl types" : 
+			                CASEAgree::WellformedCASE_UART_Msg(send_data);
+		**};
+	end UARTDriver;
+
+	thread implementation UARTDriver.Impl
+		properties
+			Dispatch_Protocol => Sporadic;			
+			Initialize_Entrypoint_Source_Text => "initialize_uart";
+			Compute_Entrypoint_Source_Text => "run_uart";
+	end UARTDriver.Impl;
+
+end Drivers;

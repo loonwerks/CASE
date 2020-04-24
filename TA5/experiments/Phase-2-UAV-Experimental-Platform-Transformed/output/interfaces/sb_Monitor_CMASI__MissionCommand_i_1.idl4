@@ -1,0 +1,6 @@
+procedure sb_Monitor_CMASI__MissionCommand_i_1 {
+  include <sb_PROC_HW_types.h>;
+  bool is_empty();
+  bool enqueue(refin CMASI__MissionCommand_i m);
+  bool dequeue(out CMASI__MissionCommand_i m);
+};

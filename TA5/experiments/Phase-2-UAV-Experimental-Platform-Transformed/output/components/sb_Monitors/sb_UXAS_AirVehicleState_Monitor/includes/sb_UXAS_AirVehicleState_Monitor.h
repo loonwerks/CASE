@@ -1,0 +1,4 @@
+#ifdef __sb_UXAS_AirVehicleState_Monitor_H__
+#define __sb_UXAS_AirVehicleState_Monitor_H__
+
+#endif // __sb_UXAS_AirVehicleState_Monitor_H__

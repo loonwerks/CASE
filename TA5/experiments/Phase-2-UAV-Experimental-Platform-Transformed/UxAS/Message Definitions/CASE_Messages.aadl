@@ -1,0 +1,35 @@
+------------------------------------------------------------------------------
+-- Define messages create in support of CASE specific modifications/additions
+-- to UxAS.
+------------------------------------------------------------------------------
+package CASE_Messages
+public
+	with Base_Types;
+
+	---------------------------------------------------------
+	-- Command to zeroize specific types of sensitive data.
+	---------------------------------------------------------
+	data ZeroizeCommand
+	end ZeroizeCommand;
+
+	data implementation ZeroizeCommand.i
+		subcomponents
+			ZeroizeKeys: data Base_Types::Boolean;
+			ZeroizeLogs: data Base_Types::Boolean;
+			ZeroizeData: data Base_Types::Boolean;
+			ZeroizeTasks: data Base_Types::Boolean;
+	end ZeroizeCommand.i;
+
+	--------------------------------------------------------------
+	-- Sets the conditions for the automatic zeroization trigger.
+	--------------------------------------------------------------
+	data ZeroizeCondition
+	end ZeroizeCondition;
+
+	data implementation ZeroizeCondition.i
+		subcomponents
+			ZeroizeOnLanding: data Base_Types::Boolean;
+			ZeroizeOnExitingOperatingArea: data Base_Types::Boolean;
+	end ZeroizeCondition.i;
+	
+end CASE_Messages;

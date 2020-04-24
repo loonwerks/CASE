@@ -1,0 +1,14 @@
+import "../../interfaces/sb_Monitor_CMASI__AirVehicleState_i_1.idl4";
+import "../../interfaces/sb_Monitor_CMASI__MissionCommand_i_1.idl4";
+import "../../interfaces/AADLEvent_Receiver.idl4";
+
+component WaypointPlanManagerService_i {
+  include <sb_PROC_HW_types.h>;
+  control;
+  uses sb_Monitor_CMASI__AirVehicleState_i_1 sb_AirVehicleState;
+  uses sb_Monitor_CMASI__MissionCommand_i_1 sb_MissionCommand0;
+  uses AADLEvent_Receiver sb_ReturnHome;
+  consumes QueuedData sb_AirVehicleState_notification;
+  consumes ReceiveEvent sb_ReturnHome_notification;
+  has semaphore sb_dispatch_sem;
+}

@@ -1,0 +1,12 @@
+import "../../interfaces/sb_Monitor_CMASI__MissionCommand_i_1.idl4";
+import "../../interfaces/sb_Monitor_CMASI__AirVehicleState_i_1.idl4";
+
+component UARTDriver_Impl {
+  include <sb_PROC_HW_types.h>;
+  control;
+  uses sb_Monitor_CMASI__MissionCommand_i_1 sb_MissionCommand;
+  uses sb_Monitor_CMASI__AirVehicleState_i_1 sb_AirVehicleState0;
+  uses sb_Monitor_CMASI__AirVehicleState_i_1 sb_AirVehicleState1;
+  consumes QueuedData sb_MissionCommand_notification;
+  has semaphore sb_dispatch_sem;
+}

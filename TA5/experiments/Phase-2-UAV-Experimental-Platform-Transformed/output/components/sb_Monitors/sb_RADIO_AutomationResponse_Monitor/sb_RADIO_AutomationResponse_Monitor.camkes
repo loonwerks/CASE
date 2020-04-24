@@ -1,0 +1,7 @@
+import "../../../interfaces/sb_Monitor_CMASI__AutomationResponse_i_1.idl4";
+
+component sb_RADIO_AutomationResponse_Monitor {
+
+  provides sb_Monitor_CMASI__AutomationResponse_i_1 mon;
+  emits QueuedData monsig;
+}

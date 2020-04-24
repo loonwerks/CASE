@@ -1,0 +1,7 @@
+import "../../../interfaces/sb_Monitor_CMASI__MissionCommand_i_1.idl4";
+
+component sb_FC_UART_MissionCommand_Monitor {
+
+  provides sb_Monitor_CMASI__MissionCommand_i_1 mon;
+  emits QueuedData monsig;
+}

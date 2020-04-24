@@ -1,0 +1,11 @@
+base.package.name=
+bit.width=64
+c.src.directory=
+camkes.aux.src.dir=
+camkes.output.directory=/Users/jshackleton/Projects/CASE/github/case-ta6-experimental-platform-models/Phase-2-UAV-Experimental-Platform-Transformed/output
+eclipse.preferences.version=1
+exclude.slang.impl=false
+max.sequence.size=16
+max.string.size=256
+platform=seL4_TB
+slang.output.directory=/Users/jshackleton/Projects/CASE/github/case-ta6-experimental-platform-models/Phase-2-UAV-Experimental-Platform-Transformed

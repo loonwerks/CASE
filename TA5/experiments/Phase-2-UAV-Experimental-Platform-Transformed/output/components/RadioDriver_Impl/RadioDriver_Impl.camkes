@@ -1,0 +1,9 @@
+import "../../interfaces/sb_Monitor_CMASI__AutomationResponse_i_1.idl4";
+
+component RadioDriver_Impl {
+  include <sb_PROC_HW_types.h>;
+  control;
+  uses sb_Monitor_CMASI__AutomationResponse_i_1 sb_AutomationResponse;
+  consumes QueuedData sb_AutomationResponse_notification;
+  has semaphore sb_dispatch_sem;
+}

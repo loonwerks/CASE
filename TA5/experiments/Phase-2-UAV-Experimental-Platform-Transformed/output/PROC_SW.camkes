@@ -1,0 +1,43 @@
+import <std_connector.camkes>;
+import "components/UARTDriver_Impl/UARTDriver_Impl.camkes";
+import "components/RadioDriver_Impl/RadioDriver_Impl.camkes";
+import "components/Waterways_i/Waterways_i.camkes";
+import "components/FlyZonesDatabase_thr_Impl/FlyZonesDatabase_thr_Impl.camkes";
+import "components/WaypointPlanManagerService_i/WaypointPlanManagerService_i.camkes";
+import "components/sb_Monitors/sb_FC_UART_MissionCommand_Monitor/sb_FC_UART_MissionCommand_Monitor.camkes";
+import "components/sb_Monitors/sb_RADIO_AutomationResponse_Monitor/sb_RADIO_AutomationResponse_Monitor.camkes";
+import "components/sb_Monitors/sb_UXAS_AirVehicleState_Monitor/sb_UXAS_AirVehicleState_Monitor.camkes";
+import "components/sb_Monitors/sb_WPM_AirVehicleState_Monitor/sb_WPM_AirVehicleState_Monitor.camkes";
+
+assembly {
+  composition {
+    component UARTDriver_Impl FC_UART;
+    component RadioDriver_Impl RADIO;
+    component Waterways_i UXAS;
+    component FlyZonesDatabase_thr_Impl FlyZones;
+    component WaypointPlanManagerService_i WPM;
+    component sb_FC_UART_MissionCommand_Monitor sb_fc_uart_missioncommand_monitor;
+    component sb_RADIO_AutomationResponse_Monitor sb_radio_automationresponse_monitor;
+    component sb_UXAS_AirVehicleState_Monitor sb_uxas_airvehiclestate_monitor;
+    component sb_WPM_AirVehicleState_Monitor sb_wpm_airvehiclestate_monitor;
+
+    connection seL4RPCCall conn1(from FC_UART.sb_AirVehicleState0, to sb_uxas_airvehiclestate_monitor.mon);
+    connection seL4RPCCall conn2(from UXAS.sb_AirVehicleState, to sb_uxas_airvehiclestate_monitor.mon);
+    connection seL4Notification conn3(from sb_uxas_airvehiclestate_monitor.monsig, to UXAS.sb_AirVehicleState_notification);
+    connection seL4RPCCall conn4(from FC_UART.sb_AirVehicleState1, to sb_wpm_airvehiclestate_monitor.mon);
+    connection seL4RPCCall conn5(from WPM.sb_AirVehicleState, to sb_wpm_airvehiclestate_monitor.mon);
+    connection seL4Notification conn6(from sb_wpm_airvehiclestate_monitor.monsig, to WPM.sb_AirVehicleState_notification);
+    connection seL4RPCCall conn7(from UXAS.sb_MissionCommand0, to sb_fc_uart_missioncommand_monitor.mon);
+    connection seL4RPCCall conn8(from FC_UART.sb_MissionCommand, to sb_fc_uart_missioncommand_monitor.mon);
+    connection seL4Notification conn9(from sb_fc_uart_missioncommand_monitor.monsig, to FC_UART.sb_MissionCommand_notification);
+    connection seL4RPCCall conn10(from UXAS.sb_AutomationResponse0, to sb_radio_automationresponse_monitor.mon);
+    connection seL4RPCCall conn11(from RADIO.sb_AutomationResponse, to sb_radio_automationresponse_monitor.mon);
+    connection seL4Notification conn12(from sb_radio_automationresponse_monitor.monsig, to RADIO.sb_AutomationResponse_notification);
+    connection seL4RPCCall conn13(from WPM.sb_MissionCommand0, to sb_fc_uart_missioncommand_monitor.mon);
+    connection seL4RPCCall conn14(from FC_UART.sb_MissionCommand, to sb_fc_uart_missioncommand_monitor.mon);
+    connection seL4Notification conn15(from sb_fc_uart_missioncommand_monitor.monsig, to FC_UART.sb_MissionCommand_notification);
+  }
+
+  configuration {
+  }
+}

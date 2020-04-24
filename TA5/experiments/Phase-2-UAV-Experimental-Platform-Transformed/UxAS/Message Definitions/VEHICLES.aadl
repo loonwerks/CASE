@@ -1,0 +1,67 @@
+--------------------------------------------------------
+-- Message definitions for ground and surface vehicles.
+--------------------------------------------------------
+package VEHICLES
+public
+	with CMASI;
+	with Base_Types;
+
+	--Provides information regarding a vehicle's configuration items.
+	data GroundVehicleConfiguration extends CMASI::EntityConfiguration
+	end GroundVehicleConfiguration;
+
+	data implementation GroundVehicleConfiguration.i extends CMASI::EntityConfiguration.i
+		subcomponents
+			--Valid operational road network. UGV adheres to positions defined in
+			--this graph. Indicated by previously sent GraphRegion's ID
+			RoadGraphID: data Base_Types::Integer_64;
+			--The minimum speed that should be commanded for this vehicle
+			MinimumSpeed: data Base_Types::Float_32;
+			--The maximum speed that should be commanded for this vehicle
+			MaximumSpeed: data Base_Types::Float_32;
+			--The consumption rate of available energy at nominal speed, expressed
+			--in terms of the percentage of maximum capacity used per second.
+			EnergyRate: data Base_Types::Float_32;
+	end GroundVehicleConfiguration.i;
+
+	--Provides basic state information regarding entity position, orientation, and velocity.	
+	data GroundVehicleState extends CMASI::EntityState
+	end GroundVehicleState;
+
+	data implementation GroundVehicleState.i extends CMASI::EntityState.i
+	end GroundVehicleState.i;
+
+	-- Provides information regarding a vehicle's configuration items.
+	data SurfaceVehicleConfiguration extends CMASI::EntityConfiguration
+	end SurfaceVehicleConfiguration;
+
+	data implementation SurfaceVehicleConfiguration.i extends CMASI::EntityConfiguration.i
+		subcomponents
+			--Valid operational water zone (by ID). USV adheres to this area
+			WaterArea: data Base_Types::Integer_64;
+			--The minimum speed that should be commanded for this vehicle
+			MinimumSpeed: data Base_Types::Float_32;
+			--The maximum speed that should be commanded for this vehicle
+			MaximumSpeed: data Base_Types::Float_32;
+			--The consumption rate of available energy at nominal speed, expressed
+			--in terms of the percentage of maximum capacity used per second.
+			EnergyRate: data Base_Types::Float_32;
+			--The maximum angle that this vehicle will bank
+			MaxBankAngle: data Base_Types::Float_32;
+			--The maximum angular rate that this vehicle will bank
+			MaxBankRate: data Base_Types::Float_32;
+	end SurfaceVehicleConfiguration.i;
+
+	-- Provides basic state information regarding entity position, orientation, and velocity.
+	data SurfaceVehicleState extends CMASI::EntityState
+	end SurfaceVehicleState;
+
+	data implementation SurfaceVehicleState.i extends CMASI::EntityState.i
+		subcomponents
+			--Current bank angle of the surface vehicle
+			BankAngle: data Base_Types::Float_32;
+			--Forward speed of the vehicle relative to the mass of water
+			Speed: data Base_Types::Float_32;
+	end SurfaceVehicleState.i;
+	
+end VEHICLES;

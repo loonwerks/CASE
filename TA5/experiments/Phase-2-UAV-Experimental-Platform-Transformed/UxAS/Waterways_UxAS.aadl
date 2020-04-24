@@ -1,0 +1,33 @@
+package Waterways_UxAS
+public
+	with CMASI;
+	
+	with UxAS;
+		
+	thread Waterways extends UxAS::UxAS
+		features
+			AutomationRequest : in event data port CMASI::AutomationRequest.i {
+				Compute_Entrypoint_Source_Text => "automation_request_event_handler";
+			};
+			AirVehicleState : in event data port CMASI::AirVehicleState.i {
+				Compute_Entrypoint_Source_Text => "air_vehicle_state_event_handler";
+			};
+			OperatingRegion : in event data port CMASI::OperatingRegion.i {
+				Compute_Entrypoint_Source_Text => "operation_region_event_handler";
+			};
+			LineSearchTask: in event data port CMASI::LineSearchTask.i {
+				Compute_Entrypoint_Source_Text => "line_search_task_event_handler";
+			};
+			MissionCommand : out event data port CMASI::MissionCommand.i;
+			VehicleActionCommand : out event data port CMASI::VehicleActionCommand.i;
+			AutomationResponse : out event data port CMASI::AutomationResponse.i;
+	end Waterways;
+	
+	thread implementation Waterways.i 
+		properties
+			Dispatch_Protocol => Sporadic;			
+			Initialize_Entrypoint_Source_Text => "initialize_uxas";
+			Compute_Entrypoint_Source_Text => "run_uxas";
+	end Waterways.i;
+	
+end Waterways_UxAS;
