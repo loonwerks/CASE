@@ -1,0 +1,22 @@
+import <std_connector.camkes>;
+import "components/source_thread_impl/source_thread_impl.camkes";
+import "components/destination_thread_impl/destination_thread_impl.camkes";
+
+assembly {
+  composition {
+    component source_thread_impl source_thread_component;
+    component destination_thread_impl destination_thread_component;
+
+    connection seL4SharedData conn1(from source_thread_component.sb_write_port, to destination_thread_component.sb_read_port);
+
+    connection seL4Notification source_thread_pace(from source_thread_component.tick, to source_thread_component.tock);
+    connection seL4Notification destination_thread_pace(from destination_thread_component.tick, to destination_thread_component.tock);
+  }
+
+  configuration {
+    source_thread_component.write_port_access = "W";
+    destination_thread_component.read_port_access = "R";
+    source_thread_component._domain = 1;
+    destination_thread_component._domain = 2;
+  }
+}

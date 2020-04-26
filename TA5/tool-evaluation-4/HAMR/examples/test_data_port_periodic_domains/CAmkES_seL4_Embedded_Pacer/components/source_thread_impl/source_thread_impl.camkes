@@ -1,0 +1,8 @@
+component source_thread_impl {
+  include <sb_top_impl_Instance_types.h>;
+  include <sp_int8_t.h>;
+  control;
+  emits TickTock tick;
+  consumes TickTock tock;
+  dataport sp_int8_t_t sb_write_port;
+}
