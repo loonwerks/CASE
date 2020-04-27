@@ -38,18 +38,26 @@ void sb_entrypoint_emitter_impl_initializer(const int64_t * in_arg) {
   test_event_port_emitter_component_init((int64_t *) in_arg);
 }
 
+void pre_init(void) {
+  // initialise shared counter for event port e
+  *sb_e_counter = 0;
+}
+
 
 /************************************************************************
  * int run(void)
  * Main active thread function.
  ************************************************************************/
 int run(void) {
+
   {
     int64_t sb_dummy;
     sb_entrypoint_emitter_impl_initializer(&sb_dummy);
   }
+  MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
+
   }
   return 0;
 }

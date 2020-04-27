@@ -26,6 +26,16 @@ bool sb_read_port_dequeue(int8_t *data) {
 }
 
 /************************************************************************
+ * sb_read_port_is_empty:
+ *
+ * Helper method to determine if infrastructure port has received new
+ * events
+ ************************************************************************/
+bool sb_read_port_is_empty(){
+  return sb_queue_int8_t_1_is_empty(&sb_read_port_recv_queue);
+}
+
+/************************************************************************
  *  sb_entrypoint_consumer_t_impl_initializer:
  *
  * This is the function invoked by an active thread dispatcher to
@@ -37,7 +47,8 @@ void sb_entrypoint_consumer_t_impl_initializer(const int64_t * in_arg) {
   test_event_data_port_consumer_component_init((int64_t *) in_arg);
 }
 
-void post_init(void){
+void pre_init(void) {
+  // initialise data structure for incoming event data port read_port
   sb_queue_int8_t_1_Recv_init(&sb_read_port_recv_queue, sb_read_port_queue);
 }
 

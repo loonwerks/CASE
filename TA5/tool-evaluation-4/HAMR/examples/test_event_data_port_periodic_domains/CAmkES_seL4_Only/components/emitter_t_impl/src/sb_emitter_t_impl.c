@@ -26,7 +26,8 @@ void sb_entrypoint_emitter_t_impl_initializer(const int64_t * in_arg) {
   test_event_data_port_emitter_component_init((int64_t *) in_arg);
 }
 
-void post_init(void){
+void pre_init(void) {
+  // initialise data structure for outgoing event data port write_port
   sb_queue_int8_t_1_init(sb_write_port_queue_1);
 }
 

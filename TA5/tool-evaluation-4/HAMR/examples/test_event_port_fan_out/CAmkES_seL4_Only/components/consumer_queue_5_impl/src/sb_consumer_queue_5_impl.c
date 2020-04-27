@@ -29,6 +29,17 @@ bool sb_s_dequeue() {
   }
 }
 
+/************************************************************************
+ * sb_s_is_empty;
+ * 
+ * Helper method to determine if infrastructure port has received 
+ * new events
+ *
+ ************************************************************************/
+bool sb_s_is_empty() {
+  return *sb_s_counter == sb_s_last_counter;
+}
+
 void sb_freeze_event_port_s() {
   sb_event_counter_t current_sb_s_counter;
 
@@ -67,8 +78,8 @@ void sb_freeze_event_port_s() {
  * s
  *
  ************************************************************************/
-static void sb_s_handler(void *_ UNUSED){
-  MUTEXOP(sb_dispatch_sem_post());
+static void sb_s_handler(void * unused) {
+  MUTEXOP(sb_dispatch_sem_post())
   CALLBACKOP(sb_s_reg_callback(sb_s_handler, NULL));
 }
 
@@ -97,7 +108,8 @@ void sb_entrypoint_consumer_queue_5_impl_initializer(const int64_t * in_arg) {
   test_event_port_consumer_component_init((int64_t *) in_arg);
 }
 
-void pre_init(void) {
+void post_init(void){
+  // register callback for EventPort port s
   CALLBACKOP(sb_s_reg_callback(sb_s_handler, NULL));
 }
 
@@ -112,6 +124,7 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_consumer_queue_5_impl_initializer(&sb_dummy);
   }
+  MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
     sb_freeze_event_port_s();

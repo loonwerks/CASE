@@ -33,6 +33,17 @@ bool sb_consume_dequeue() {
   }
 }
 
+/************************************************************************
+ * sb_consume_is_empty;
+ * 
+ * Helper method to determine if infrastructure port has received 
+ * new events
+ *
+ ************************************************************************/
+bool sb_consume_is_empty() {
+  return *sb_consume_counter == sb_consume_last_counter;
+}
+
 void sb_freeze_event_port_consume() {
   sb_event_counter_t current_sb_consume_counter;
 

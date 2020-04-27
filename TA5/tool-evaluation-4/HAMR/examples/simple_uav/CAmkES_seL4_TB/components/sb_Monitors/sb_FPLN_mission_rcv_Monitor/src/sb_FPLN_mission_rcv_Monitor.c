@@ -2,7 +2,7 @@
 #include <stdio.h>
 #endif // SB_VERIFY
 
-#include <sb_UAV_Impl_Instance_types.h>
+#include <sb_types.h>
 #include "../includes/sb_FPLN_mission_rcv_Monitor.h"
 
 int mon_get_sender_id(void);

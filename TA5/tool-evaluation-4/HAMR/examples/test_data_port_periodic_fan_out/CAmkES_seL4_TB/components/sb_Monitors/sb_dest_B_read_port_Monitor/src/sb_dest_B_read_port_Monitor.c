@@ -1,4 +1,4 @@
-#include <sb_top_impl_Instance_types.h>
+#include <sb_types.h>
 #include "../includes/sb_dest_B_read_port_Monitor.h"
 
 int monsig_emit(void);

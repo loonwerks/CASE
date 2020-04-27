@@ -1,7 +1,7 @@
 #ifndef __sb_AADL_WaypointManager_Impl_types__H
 #define __sb_AADL_WaypointManager_Impl_types__H
 
-#include <sb_UAV_Impl_Instance_types.h>
+#include <sb_types.h>
 
 bool sb_flight_plan_dequeue(sb_SW__Mission_container * sb_flight_plan);
 

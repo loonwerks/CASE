@@ -22,7 +22,8 @@ void sb_entrypoint_emitter_t_impl_initializer(const int64_t * in_arg) {
   test_event_data_port_emitter_component_init((int64_t *) in_arg);
 }
 
-void post_init(void){
+void pre_init(void) {
+  // initialise data structure for outgoing event data port enq
   sb_queue_int8_t_1_init(sb_enq_queue_1);
 }
 
@@ -36,6 +37,7 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_emitter_t_impl_initializer(&sb_dummy);
   }
+  MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
   }

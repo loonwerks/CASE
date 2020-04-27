@@ -21,6 +21,15 @@ bool sb_flight_plan_enqueue(const sb_SW__Mission_container * sb_flight_plan){
   return sb_result;
 }
 
+/************************************************************************
+ * sb_mission_rcv_notification_handler:
+ * Invoked by: seL4 notification callback
+ *
+ * This is the function invoked by an seL4 notification callback to 
+ * dispatch the component due to the arrival of an event on port
+ * mission_rcv
+ *
+ ************************************************************************/
 static void sb_mission_rcv_notification_handler(void * unused) {
   MUTEXOP(sb_dispatch_sem_post())
   CALLBACKOP(sb_mission_rcv_notification_reg_callback(sb_mission_rcv_notification_handler, NULL));
@@ -38,6 +47,15 @@ void sb_entrypoint_FlightPlanner_Impl_mission_rcv(const bool * in_arg) {
   mission_rcv((bool *) in_arg);
 }
 
+/************************************************************************
+ * sb_recv_map_notification_handler:
+ * Invoked by: seL4 notification callback
+ *
+ * This is the function invoked by an seL4 notification callback to 
+ * dispatch the component due to the arrival of an event on port
+ * recv_map
+ *
+ ************************************************************************/
 static void sb_recv_map_notification_handler(void * unused) {
   MUTEXOP(sb_dispatch_sem_post())
   CALLBACKOP(sb_recv_map_notification_reg_callback(sb_recv_map_notification_handler, NULL));
@@ -67,8 +85,11 @@ void sb_entrypoint_FlightPlanner_Impl_initializer(const int64_t * in_arg) {
   init((int64_t *) in_arg);
 }
 
-void pre_init(void) {
+void post_init(void){
+  // register callback for EventDataPort port mission_rcv
   CALLBACKOP(sb_mission_rcv_notification_reg_callback(sb_mission_rcv_notification_handler, NULL));
+
+  // register callback for EventDataPort port recv_map
   CALLBACKOP(sb_recv_map_notification_reg_callback(sb_recv_map_notification_handler, NULL));
 }
 
@@ -84,6 +105,7 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_FlightPlanner_Impl_initializer(&sb_dummy);
   }
+  MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
     while (sb_mission_rcv_dequeue((bool *) &sb_mission_rcv)) {

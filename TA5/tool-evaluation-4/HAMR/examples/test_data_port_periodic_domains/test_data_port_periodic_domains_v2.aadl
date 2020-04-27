@@ -1,0 +1,115 @@
+----------------------------------------------------------------------
+-- Copyright 2020 DARPA CASE
+--
+-- Micro example AADL to show single AADL dataport communications for
+-- a periodic process running under the seL4 domain scheduler
+----------------------------------------------------------------------
+package test_data_port_periodic_domains_v2
+public
+	with Base_Types;
+	with HAMR;
+	with CASE_Scheduling;
+
+    ----------------------------------------------------------------------
+    -- no inputs, one output, periodically places a value on the dataport
+    ----------------------------------------------------------------------
+    -- thread specifies unit of temporal execution; depending on scheduling
+    -- model this can provide temporal isolation.
+	thread source_thread
+		features
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 2ms .. 2ms;
+			Source_Text => ("behavior_code/components/source/src/source.c");
+			Initialize_Entrypoint_Source_Text => "test_data_port_periodic_domains_source_component_init";
+			Compute_Entrypoint_Source_Text => "test_data_port_periodic_domains_source_component_time_triggered";
+	end source_thread;
+
+	thread implementation source_thread.impl
+	end source_thread.impl;
+
+    -- process specifies boundary of spatial isolation
+	process source_process
+		features
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			CASE_Scheduling::Domain => 1; -- source 1, destination 2
+	end source_process;
+
+	process implementation source_process.impl
+		subcomponents
+			source_thread_component: thread source_thread.impl;
+		connections
+			write_connection: port source_thread_component.write_port -> write_port;
+	end source_process.impl;
+
+    ----------------------------------------------------------------------
+    -- one input, no outputs, periodically reads a value from the dataport
+    ----------------------------------------------------------------------
+    -- thread specifies unit of temporal execution; depending on scheduling
+    -- model this can provide temporal isolation.
+	thread destination_thread
+		features
+			read_port: in data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 2ms .. 2ms;
+			Source_Text => ("behavior_code/components/destination/src/destination.c");
+			Initialize_Entrypoint_Source_Text => "test_data_port_periodic_domains_destination_component_init";
+			Compute_Entrypoint_Source_Text => "test_data_port_periodic_domains_destination_component_time_triggered";
+	end destination_thread;
+
+	thread implementation destination_thread.impl
+	end destination_thread.impl;
+
+    -- process specifies boundary of spatial isolation
+	process destination_process
+		features
+			read_port: in data port Base_Types::Integer_8;
+		properties
+			CASE_Scheduling::Domain => 2; -- source 1, destination 2
+	end destination_process;
+
+	process implementation destination_process.impl
+		subcomponents
+			destination_thread_component: thread destination_thread.impl;
+		connections
+			read_connection: port read_port -> destination_thread_component.read_port;
+	end destination_process.impl;
+
+    ----------------------------------------------------------------------
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+		properties
+			Frame_Period => 1000ms;
+            Clock_Period => 2ms;
+            CASE_Scheduling::Max_Domain => 3;
+			CASE_Scheduling::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
+	end proc.impl;
+
+    ----------------------------------------------------------------------
+	system top
+	end top;
+
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			source_process_component: process source_process.impl;
+			destination_process_component: process destination_process.impl;
+		connections
+			data_interconnect: port source_process_component.write_port -> destination_process_component.read_port;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to source_process_component;
+			Actual_Processor_Binding => (reference (proc)) applies to destination_process_component;
+			HAMR::Platform => (seL4_TB, seL4_Only);
+		--annex resolute {**
+		--	check CASE_Tools
+		--**};
+	end top.impl;
+	
+end test_data_port_periodic_domains_v2;

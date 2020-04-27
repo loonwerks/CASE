@@ -25,11 +25,29 @@ bool sb_flight_plan_dequeue(sb_SW__Mission_container *data) {
   return sb_flight_plan_dequeue_poll(&numDropped, data);
 }
 
+/************************************************************************
+ * sb_flight_plan_is_empty:
+ *
+ * Helper method to determine if infrastructure port has received new
+ * events
+ ************************************************************************/
+bool sb_flight_plan_is_empty(){
+  return sb_queue_sb_SW__Mission_container_1_is_empty(&sb_flight_plan_recv_queue);
+}
+
+/************************************************************************
+ * sb_flight_plan_notification_handler:
+ * Invoked by: seL4 notification callback
+ *
+ * This is the function invoked by an seL4 notification callback to 
+ * dispatch the component due to the arrival of an event on port
+ * sb_flight_plan
+ *
+ ************************************************************************/
 static void sb_flight_plan_notification_handler(void * unused) {
   MUTEXOP(sb_dispatch_sem_post())
   CALLBACKOP(sb_flight_plan_notification_reg_callback(sb_flight_plan_notification_handler, NULL));
 }
-
 
 /************************************************************************
  * sb_entrypoint_WaypointManager_Impl_flight_plan:
@@ -75,11 +93,29 @@ bool sb_tracking_id_dequeue(int64_t *data) {
   return sb_tracking_id_dequeue_poll(&numDropped, data);
 }
 
+/************************************************************************
+ * sb_tracking_id_is_empty:
+ *
+ * Helper method to determine if infrastructure port has received new
+ * events
+ ************************************************************************/
+bool sb_tracking_id_is_empty(){
+  return sb_queue_int64_t_1_is_empty(&sb_tracking_id_recv_queue);
+}
+
+/************************************************************************
+ * sb_tracking_id_notification_handler:
+ * Invoked by: seL4 notification callback
+ *
+ * This is the function invoked by an seL4 notification callback to 
+ * dispatch the component due to the arrival of an event on port
+ * sb_tracking_id
+ *
+ ************************************************************************/
 static void sb_tracking_id_notification_handler(void * unused) {
   MUTEXOP(sb_dispatch_sem_post())
   CALLBACKOP(sb_tracking_id_notification_reg_callback(sb_tracking_id_notification_handler, NULL));
 }
-
 
 /************************************************************************
  * sb_entrypoint_WaypointManager_Impl_tracking_id:
@@ -107,15 +143,25 @@ void sb_entrypoint_WaypointManager_Impl_initializer(const int64_t * in_arg) {
 }
 
 void pre_init(void) {
-  CALLBACKOP(sb_flight_plan_notification_reg_callback(sb_flight_plan_notification_handler, NULL));
-  CALLBACKOP(sb_tracking_id_notification_reg_callback(sb_tracking_id_notification_handler, NULL));
+  // initialise data structure for incoming event data port flight_plan
+  sb_queue_sb_SW__Mission_container_1_Recv_init(&sb_flight_plan_recv_queue, sb_flight_plan_queue);
+
+  // initialise data structure for outgoing event data port mission_rcv
+  sb_queue_bool_1_init(sb_mission_rcv_queue_1);
+
+  // initialise data structure for outgoing event data port mission_window
+  sb_queue_sb_SW__MissionWindow_container_1_init(sb_mission_window_queue_1);
+
+  // initialise data structure for incoming event data port tracking_id
+  sb_queue_int64_t_1_Recv_init(&sb_tracking_id_recv_queue, sb_tracking_id_queue);
 }
 
 void post_init(void){
-  sb_queue_sb_SW__Mission_container_1_Recv_init(&sb_flight_plan_recv_queue, sb_flight_plan_queue);
-  sb_queue_bool_1_init(sb_mission_rcv_queue_1);
-  sb_queue_sb_SW__MissionWindow_container_1_init(sb_mission_window_queue_1);
-  sb_queue_int64_t_1_Recv_init(&sb_tracking_id_recv_queue, sb_tracking_id_queue);
+  // register callback for EventDataPort port flight_plan
+  CALLBACKOP(sb_flight_plan_notification_reg_callback(sb_flight_plan_notification_handler, NULL));
+
+  // register callback for EventDataPort port tracking_id
+  CALLBACKOP(sb_tracking_id_notification_reg_callback(sb_tracking_id_notification_handler, NULL));
 }
 
 
@@ -130,6 +176,7 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_WaypointManager_Impl_initializer(&sb_dummy);
   }
+  MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
     {

@@ -8,6 +8,17 @@ void sb_entrypoint_period_destination_thread_impl(int64_t *in_arg) {
 
 seqNum_t sb_read_port_seqNum;
 
+/*****************************************************************
+ * sb_read_port_is_empty:
+ *
+ * Helper method to determine if the data infrastructure port has
+ * received data
+ *
+ ****************************************************************/
+bool sb_read_port_is_empty() {
+  return is_empty_sp_int8_t(sb_read_port);
+}
+
 bool sb_read_port_read(int8_t * value) {
   seqNum_t new_seqNum;
   if ( read_sp_int8_t(sb_read_port, value, &new_seqNum) ) {
@@ -28,6 +39,11 @@ bool sb_read_port_read(int8_t * value) {
  ************************************************************************/
 void sb_entrypoint_destination_thread_impl_initializer(const int64_t * in_arg) {
   test_data_port_periodic_domains_destination_component_init((int64_t *) in_arg);
+}
+
+void pre_init(void) {
+  // initialise data structure for data port read_port
+  init_sp_int8_t(sb_read_port, &sb_read_port_seqNum);
 }
 
 

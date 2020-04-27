@@ -1,6 +1,6 @@
 #include <camkes.h>
 #include <stdio.h>
-#include <sb_top_impl_Instance_types.h>
+#include <sb_types.h>
 #include <sb_source_thread_impl.h>
 
 static int8_t _value;

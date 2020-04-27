@@ -1,5 +1,5 @@
 #include <camkes.h>
-#include <sb_UAV_Impl_Instance_types.h>
+#include <sb_types.h>
 #include <sb_WaypointManager_Impl.h>
 #include <assert.h>
 #include <string.h>

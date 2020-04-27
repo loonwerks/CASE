@@ -1,5 +1,5 @@
 #include <camkes.h>
-#include <sb_UAV_Impl_Instance_types.h>
+#include <sb_types.h>
 #include <sb_UARTDriver_Impl.h>
 #include <assert.h>
 

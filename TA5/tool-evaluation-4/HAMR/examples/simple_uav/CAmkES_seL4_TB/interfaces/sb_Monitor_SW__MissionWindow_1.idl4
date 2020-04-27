@@ -1,5 +1,5 @@
 procedure sb_Monitor_SW__MissionWindow_1 {
-  include <sb_UAV_Impl_Instance_types.h>;
+  include <sb_types.h>;
   bool is_empty();
   bool enqueue(refin sb_SW__MissionWindow_container m);
   bool dequeue(out sb_SW__MissionWindow_container m);

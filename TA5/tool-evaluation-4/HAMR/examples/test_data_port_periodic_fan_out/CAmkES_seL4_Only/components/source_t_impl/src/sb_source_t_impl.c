@@ -53,6 +53,11 @@ void sb_entrypoint_source_t_impl_initializer(const int64_t * in_arg) {
   test_data_port_periodic_source_component_init((int64_t *) in_arg);
 }
 
+void pre_init(void) {
+  // initialise data structure for data port write_port
+  init_sp_int8_t(sb_write_port, &sb_write_port_seqNum);
+}
+
 
 /************************************************************************
  * int run(void)
@@ -64,7 +69,6 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_source_t_impl_initializer(&sb_dummy);
   }
-  // Initial lock to await dispatch input.
   MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())

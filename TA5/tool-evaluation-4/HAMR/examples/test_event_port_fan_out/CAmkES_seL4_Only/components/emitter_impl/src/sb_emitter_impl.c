@@ -71,21 +71,27 @@ void sb_entrypoint_emitter_impl_initializer(const int64_t * in_arg) {
   test_event_port_emitter_component_init((int64_t *) in_arg);
 }
 
+void pre_init(void) {
+  // initialise shared counter for event port e
+  *sb_e_counter = 0;
+}
+
 
 /************************************************************************
  * int run(void)
  * Main active thread function.
  ************************************************************************/
 int run(void) {
+
   CALLBACKOP(sb_periodic_dispatch_notification_reg_callback(sb_periodic_dispatch_notification_callback, NULL));
   {
     int64_t sb_dummy;
     sb_entrypoint_emitter_impl_initializer(&sb_dummy);
   }
-  // Initial lock to await dispatch input.
   MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
+
     if(sb_occurred_periodic_dispatcher){
       sb_occurred_periodic_dispatcher = false;
       sb_entrypoint_emitter_impl_periodic_dispatcher(&sb_time_periodic_dispatcher);

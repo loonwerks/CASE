@@ -26,7 +26,7 @@
 #pragma once
 
 #include <sb_event_counter.h> 
-#include <sb_top_impl_Instance_types.h>
+#include <sb_types.h>
 #include <stdbool.h>
 
 // Queue size must be an integer factor of the size for sb_event_counter_t (an unsigned
@@ -55,7 +55,7 @@ typedef struct sb_queue_int8_t_5 {
   _Atomic sb_event_counter_t numSent;
 
   // Queue of elements of type int8_t 
-  // (see sb_top_impl_Instance_types.h) implemented as a ring buffer. 
+  // (see sb_types.h) implemented as a ring buffer. 
   // No initialization necessary.
   int8_t elt[SB_QUEUE_INT8_T_5_SIZE];
 

@@ -1,6 +1,6 @@
 #include <camkes.h>
 #include <stdio.h>
-#include <sb_top_impl_Instance_types.h>
+#include <sb_types.h>
 #include <sb_consumer_queue_default_impl.h>
 
 void test_event_data_port_consumer_component_init(const int64_t *in_arg)

@@ -2,6 +2,15 @@
 #include <string.h>
 #include <camkes.h>
 
+/************************************************************************
+ * sb_flight_plan_notification_handler:
+ * Invoked by: seL4 notification callback
+ *
+ * This is the function invoked by an seL4 notification callback to 
+ * dispatch the component due to the arrival of an event on port
+ * flight_plan
+ *
+ ************************************************************************/
 static void sb_flight_plan_notification_handler(void * unused) {
   MUTEXOP(sb_dispatch_sem_post())
   CALLBACKOP(sb_flight_plan_notification_reg_callback(sb_flight_plan_notification_handler, NULL));
@@ -57,6 +66,15 @@ bool sb_mission_window_enqueue(const sb_SW__MissionWindow_container * sb_mission
   return sb_result;
 }
 
+/************************************************************************
+ * sb_tracking_id_notification_handler:
+ * Invoked by: seL4 notification callback
+ *
+ * This is the function invoked by an seL4 notification callback to 
+ * dispatch the component due to the arrival of an event on port
+ * tracking_id
+ *
+ ************************************************************************/
 static void sb_tracking_id_notification_handler(void * unused) {
   MUTEXOP(sb_dispatch_sem_post())
   CALLBACKOP(sb_tracking_id_notification_reg_callback(sb_tracking_id_notification_handler, NULL));
@@ -86,8 +104,11 @@ void sb_entrypoint_WaypointManager_Impl_initializer(const int64_t * in_arg) {
   init((int64_t *) in_arg);
 }
 
-void pre_init(void) {
+void post_init(void){
+  // register callback for EventDataPort port flight_plan
   CALLBACKOP(sb_flight_plan_notification_reg_callback(sb_flight_plan_notification_handler, NULL));
+
+  // register callback for EventDataPort port tracking_id
   CALLBACKOP(sb_tracking_id_notification_reg_callback(sb_tracking_id_notification_handler, NULL));
 }
 
@@ -103,6 +124,7 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_WaypointManager_Impl_initializer(&sb_dummy);
   }
+  MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
     while (sb_flight_plan_dequeue((sb_SW__Mission_container *) &sb_flight_plan)) {

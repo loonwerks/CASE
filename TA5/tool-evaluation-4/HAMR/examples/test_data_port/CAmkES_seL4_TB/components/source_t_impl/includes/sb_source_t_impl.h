@@ -1,7 +1,7 @@
 #ifndef __sb_AADL_source_t_impl_types__H
 #define __sb_AADL_source_t_impl_types__H
 
-#include <sb_top_impl_Instance_types.h>
+#include <sb_types.h>
 
 bool sb_write_port_write(const int8_t * sb_write_port);
 

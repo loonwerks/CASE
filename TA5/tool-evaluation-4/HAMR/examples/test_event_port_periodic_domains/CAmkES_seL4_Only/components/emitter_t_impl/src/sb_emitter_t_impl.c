@@ -42,12 +42,18 @@ void sb_entrypoint_emitter_t_impl_initializer(const int64_t * in_arg) {
   test_event_port_emitter_component_init((int64_t *) in_arg);
 }
 
+void pre_init(void) {
+  // initialise shared counter for event port emit
+  *sb_emit_counter = 0;
+}
+
 
 /************************************************************************
  * int run(void)
  * Main active thread function.
  ************************************************************************/
 int run(void) {
+
   sb_pacer_notification_wait();
   {
     int64_t sb_dummy;
@@ -55,6 +61,7 @@ int run(void) {
   }
   for(;;) {
     sb_pacer_notification_wait();
+
     { 
       int64_t sb_dummy = 0;
       sb_entrypoint_period_emitter_t_impl(&sb_dummy);

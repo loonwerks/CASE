@@ -1,6 +1,6 @@
 #include <camkes.h>
 #include <stdio.h>
-#include <sb_top_impl_Instance_types.h>
+#include <sb_types.h>
 #include <sb_destination_thread_impl.h>
 
 void test_data_port_periodic_domains_destination_component_init(const int64_t *arg) {

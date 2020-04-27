@@ -1,0 +1,6 @@
+component Pacer {
+  control;
+  emits Period period;
+  emits TickTock tick;
+  consumes TickTock tock;
+}

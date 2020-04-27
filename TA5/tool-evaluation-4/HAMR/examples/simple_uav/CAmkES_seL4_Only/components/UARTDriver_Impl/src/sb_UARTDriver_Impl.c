@@ -22,11 +22,29 @@ bool sb_mission_window_dequeue(sb_SW__MissionWindow_container *data) {
   return sb_mission_window_dequeue_poll(&numDropped, data);
 }
 
+/************************************************************************
+ * sb_mission_window_is_empty:
+ *
+ * Helper method to determine if infrastructure port has received new
+ * events
+ ************************************************************************/
+bool sb_mission_window_is_empty(){
+  return sb_queue_sb_SW__MissionWindow_container_1_is_empty(&sb_mission_window_recv_queue);
+}
+
+/************************************************************************
+ * sb_mission_window_notification_handler:
+ * Invoked by: seL4 notification callback
+ *
+ * This is the function invoked by an seL4 notification callback to 
+ * dispatch the component due to the arrival of an event on port
+ * sb_mission_window
+ *
+ ************************************************************************/
 static void sb_mission_window_notification_handler(void * unused) {
   MUTEXOP(sb_dispatch_sem_post())
   CALLBACKOP(sb_mission_window_notification_reg_callback(sb_mission_window_notification_handler, NULL));
 }
-
 
 /************************************************************************
  * sb_entrypoint_UARTDriver_Impl_mission_window:
@@ -61,12 +79,16 @@ void sb_entrypoint_UARTDriver_Impl_initializer(const int64_t * in_arg) {
 }
 
 void pre_init(void) {
-  CALLBACKOP(sb_mission_window_notification_reg_callback(sb_mission_window_notification_handler, NULL));
+  // initialise data structure for incoming event data port mission_window
+  sb_queue_sb_SW__MissionWindow_container_1_Recv_init(&sb_mission_window_recv_queue, sb_mission_window_queue);
+
+  // initialise data structure for outgoing event data port tracking_id
+  sb_queue_int64_t_1_init(sb_tracking_id_queue_1);
 }
 
 void post_init(void){
-  sb_queue_sb_SW__MissionWindow_container_1_Recv_init(&sb_mission_window_recv_queue, sb_mission_window_queue);
-  sb_queue_int64_t_1_init(sb_tracking_id_queue_1);
+  // register callback for EventDataPort port mission_window
+  CALLBACKOP(sb_mission_window_notification_reg_callback(sb_mission_window_notification_handler, NULL));
 }
 
 
@@ -80,6 +102,7 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_UARTDriver_Impl_initializer(&sb_dummy);
   }
+  MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
     {

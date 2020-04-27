@@ -2,6 +2,15 @@
 #include <string.h>
 #include <camkes.h>
 
+/************************************************************************
+ * sb_mission_window_notification_handler:
+ * Invoked by: seL4 notification callback
+ *
+ * This is the function invoked by an seL4 notification callback to 
+ * dispatch the component due to the arrival of an event on port
+ * mission_window
+ *
+ ************************************************************************/
 static void sb_mission_window_notification_handler(void * unused) {
   MUTEXOP(sb_dispatch_sem_post())
   CALLBACKOP(sb_mission_window_notification_reg_callback(sb_mission_window_notification_handler, NULL));
@@ -50,7 +59,8 @@ void sb_entrypoint_UARTDriver_Impl_initializer(const int64_t * in_arg) {
   init((int64_t *) in_arg);
 }
 
-void pre_init(void) {
+void post_init(void){
+  // register callback for EventDataPort port mission_window
   CALLBACKOP(sb_mission_window_notification_reg_callback(sb_mission_window_notification_handler, NULL));
 }
 
@@ -65,6 +75,7 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_UARTDriver_Impl_initializer(&sb_dummy);
   }
+  MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
     while (sb_mission_window_dequeue((sb_SW__MissionWindow_container *) &sb_mission_window)) {

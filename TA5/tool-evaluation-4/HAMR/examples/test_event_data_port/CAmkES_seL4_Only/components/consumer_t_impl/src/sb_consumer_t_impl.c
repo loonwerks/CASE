@@ -21,11 +21,29 @@ bool sb_deq_dequeue(int8_t *data) {
   return sb_deq_dequeue_poll(&numDropped, data);
 }
 
+/************************************************************************
+ * sb_deq_is_empty:
+ *
+ * Helper method to determine if infrastructure port has received new
+ * events
+ ************************************************************************/
+bool sb_deq_is_empty(){
+  return sb_queue_int8_t_1_is_empty(&sb_deq_recv_queue);
+}
+
+/************************************************************************
+ * sb_deq_notification_handler:
+ * Invoked by: seL4 notification callback
+ *
+ * This is the function invoked by an seL4 notification callback to 
+ * dispatch the component due to the arrival of an event on port
+ * sb_deq
+ *
+ ************************************************************************/
 static void sb_deq_notification_handler(void * unused) {
   MUTEXOP(sb_dispatch_sem_post())
   CALLBACKOP(sb_deq_notification_reg_callback(sb_deq_notification_handler, NULL));
 }
-
 
 /************************************************************************
  * sb_entrypoint_consumer_t_impl_deq:
@@ -53,11 +71,13 @@ void sb_entrypoint_consumer_t_impl_initializer(const int64_t * in_arg) {
 }
 
 void pre_init(void) {
-  CALLBACKOP(sb_deq_notification_reg_callback(sb_deq_notification_handler, NULL));
+  // initialise data structure for incoming event data port deq
+  sb_queue_int8_t_1_Recv_init(&sb_deq_recv_queue, sb_deq_queue);
 }
 
 void post_init(void){
-  sb_queue_int8_t_1_Recv_init(&sb_deq_recv_queue, sb_deq_queue);
+  // register callback for EventDataPort port deq
+  CALLBACKOP(sb_deq_notification_reg_callback(sb_deq_notification_handler, NULL));
 }
 
 
@@ -71,6 +91,7 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_consumer_t_impl_initializer(&sb_dummy);
   }
+  MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
     {

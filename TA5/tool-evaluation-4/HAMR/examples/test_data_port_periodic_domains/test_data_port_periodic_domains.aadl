@@ -21,7 +21,7 @@ public
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ms;
-			Compute_Execution_Time => 2ms .. 2ms;
+			Compute_Execution_Time => 10ms .. 10ms;
 			Source_Text => ("behavior_code/components/source/src/source.c");
 			Initialize_Entrypoint_Source_Text => "test_data_port_periodic_domains_source_component_init";
 			Compute_Entrypoint_Source_Text => "test_data_port_periodic_domains_source_component_time_triggered";
@@ -35,7 +35,7 @@ public
 		features
 			write_port: out data port Base_Types::Integer_8;
 		properties
-			CASE_Scheduling::Domain => 1; -- source 1, destination 2
+			CASE_Scheduling::Domain => 2; -- pacer 1, source 2, destination 3
 	end source_process;
 
 	process implementation source_process.impl
@@ -56,7 +56,7 @@ public
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 1000ms;
-			Compute_Execution_Time => 2ms .. 2ms;
+			Compute_Execution_Time => 10ms .. 10ms;
 			Source_Text => ("behavior_code/components/destination/src/destination.c");
 			Initialize_Entrypoint_Source_Text => "test_data_port_periodic_domains_destination_component_init";
 			Compute_Entrypoint_Source_Text => "test_data_port_periodic_domains_destination_component_time_triggered";
@@ -70,7 +70,7 @@ public
 		features
 			read_port: in data port Base_Types::Integer_8;
 		properties
-			CASE_Scheduling::Domain => 2; -- source 1, destination 2
+			CASE_Scheduling::Domain => 3; -- pacer 1, source 2, destination 3
 	end destination_process;
 
 	process implementation destination_process.impl

@@ -2,7 +2,7 @@
 #include <stdio.h>
 #endif // SB_VERIFY
 
-#include <sb_top_impl_Instance_types.h>
+#include <sb_types.h>
 #include "../includes/sb_snk_2_B_deq_Monitor.h"
 
 int mon_get_sender_id(void);

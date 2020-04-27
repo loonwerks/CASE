@@ -7,27 +7,17 @@
 typedef struct sp_int8_t {
 
   // The sampling port message data.
-  ///
-  // TODO: How do we handle differnet data types?  Possible options:
-  //
-  //   - HAMR could generate a dedicated struct for each data port type. In
-  //     the long run this may be the best options since AADL can specify the
-  //     message type.
-  //
-  //   - Generalize this struct with some C wizardry. Would it help to split
-  //     this into two data parts, one for the data and one for the sequence
-  //     number?
   //
   int8_t data;
 
   // Sequence number incremented by the writer every time the sampling port is
-  // written. Read by the reciever to detect dropped messages and incoherant
-  // message reads.  An incoherant message is one that is formed of parts of
-  // more than one message.  An incoherent message can occure when writing
-  // happens durring read. If the component runs long enough, this counter
-  // will wrap back to zero.  This causes no problems unless the reciever is
-  // delayed for the wrap time. In that case the reciever may not detect
-  // dropped or incoherent messags. But if the reciver is delayed for that
+  // written. Read by the receiver to detect dropped messages and incoherent
+  // message reads.  An incoherent message is one that is formed of parts of
+  // more than one message.  An incoherent message can occur when writing
+  // happens during read. If the component runs long enough, this counter
+  // will wrap back to zero.  This causes no problems unless the receiver is
+  // delayed for the wrap time. In that case the receiver may not detect
+  // dropped or incoherent message. But if the receiver is delayed for that
   // long the system is probably in a very bad state. Also see DIRTY_SEQ_NUM
   // above.
   //
@@ -42,5 +32,7 @@ void init_sp_int8_t(sp_int8_t_t *port, seqNum_t *seqNum);
 bool write_sp_int8_t(sp_int8_t_t *port, const int8_t *data, seqNum_t *seqNum);
 
 bool read_sp_int8_t(sp_int8_t_t *port, int8_t *data, seqNum_t *seqNum);
+
+bool is_empty_sp_int8_t(sp_int8_t_t *port);
 
 #endif

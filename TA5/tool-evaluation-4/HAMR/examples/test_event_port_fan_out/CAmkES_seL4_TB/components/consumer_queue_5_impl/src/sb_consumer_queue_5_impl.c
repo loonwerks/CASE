@@ -55,6 +55,7 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_consumer_queue_5_impl_initializer(&sb_dummy);
   }
+  MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
     while(sb_s_dequeue()){

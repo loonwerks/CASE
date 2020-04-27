@@ -43,6 +43,7 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_emitter_t_impl_initializer(&sb_dummy);
   }
+  MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
   }

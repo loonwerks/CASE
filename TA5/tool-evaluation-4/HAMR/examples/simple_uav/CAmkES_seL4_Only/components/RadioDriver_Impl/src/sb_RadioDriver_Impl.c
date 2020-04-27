@@ -22,7 +22,8 @@ void sb_entrypoint_RadioDriver_Impl_initializer(const int64_t * in_arg) {
   init((int64_t *) in_arg);
 }
 
-void post_init(void){
+void pre_init(void) {
+  // initialise data structure for outgoing event data port recv_map_out
   sb_queue_SW__Command_Impl_1_init(sb_recv_map_out_queue_1);
 }
 
@@ -36,6 +37,7 @@ int run(void) {
     int64_t sb_dummy;
     sb_entrypoint_RadioDriver_Impl_initializer(&sb_dummy);
   }
+  MUTEXOP(sb_dispatch_sem_wait())
   for(;;) {
     MUTEXOP(sb_dispatch_sem_wait())
   }

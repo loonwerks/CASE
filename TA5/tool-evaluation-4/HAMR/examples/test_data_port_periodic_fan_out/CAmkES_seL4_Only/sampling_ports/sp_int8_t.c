@@ -14,12 +14,12 @@ void init_sp_int8_t(sp_int8_t_t *port, seqNum_t *seqNum) {
 
 // Write message to a sampling port (data type: int)
 //
-// Returns true when sucessful. Otherwise returns false. Currently there is no
-// way to fail and true is alwasy returned. But this may change in the
-// future. seqNum is incremented when a message is succefully sent. seqNum
+// Returns true when successful. Otherwise returns false. Currently there is no
+// way to fail and true is always returned. But this may change in the
+// future. seqNum is incremented when a message is successfully sent. seqNum
 // should not be modified otherwise.
 //
-// TODO: Encapsulate this better. seqNum state should be maintained internaly. Possible solutions:
+// TODO: Encapsulate this better. seqNum state should be maintained internally. Possible solutions:
 //
 //    - Allow write to have read access to dataport. Then seqNum is simply in the data port.
 //
@@ -29,7 +29,7 @@ void init_sp_int8_t(sp_int8_t_t *port, seqNum_t *seqNum) {
 // Would like to use c11 std, but have not figured out how to do this int the
 // seL4 cmake build environment.
 bool write_sp_int8_t(sp_int8_t_t *port, const int8_t *data, seqNum_t *seqNum) {
-  // Mark the message dirty BEFORE we start writting.
+  // Mark the message dirty BEFORE we start writing.
   port->seqNum = DIRTY_SEQ_NUM;
   // Release memory fence - ensure write above to seqNum happens BEFORE reading data
   __atomic_thread_fence(__ATOMIC_RELEASE);
@@ -48,12 +48,12 @@ bool write_sp_int8_t(sp_int8_t_t *port, const int8_t *data, seqNum_t *seqNum) {
 // Read a message from a sampling port (data type: int)
 //
 // Return true upon successful read. Data is updated with the read
-// message. The sequence number of the message is also returned. The messaage,
+// message. The sequence number of the message is also returned. The message,
 // might be tha same previously read. The sequences number can be used to
 // detect rereading the same message or dropped messages.
 //
 // Return false if we fail to read a message. For now the only way to fail is
-// when we detect the possibliliy of a write durring read. In this case data
+// when we detect the possibility of a write during read. In this case data
 // may be incoherent and should not be used. Sequence number is set to
 // DIRTY_SEQ_NUM;
 //
@@ -72,7 +72,7 @@ bool read_sp_int8_t(sp_int8_t_t *port, int8_t *data, seqNum_t *seqNum) {
   // sequence numbers since our last read. For this to happen, this reader
   // would have to be delayed for the entire time to wrap. 
   if (newSeqNum != DIRTY_SEQ_NUM && newSeqNum == port->seqNum) {
-    // Message data is good.  Write did not occure durring read. 
+    // Message data is good.  Write did not occur during read. 
     *seqNum = newSeqNum;
     return true;
   } else {
@@ -80,4 +80,8 @@ bool read_sp_int8_t(sp_int8_t_t *port, int8_t *data, seqNum_t *seqNum) {
     *seqNum = DIRTY_SEQ_NUM;
     return false;
   }
+}
+
+bool is_empty_sp_int8_t(sp_int8_t_t *port) {
+  return port->seqNum == DIRTY_SEQ_NUM;
 }
