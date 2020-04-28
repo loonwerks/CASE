@@ -6,7 +6,6 @@ S8 _emitter_value = 0;
 Unit hamr_test_event_data_port_periodic_domains_emitter_t_impl_Impl_initialise_(
   STACK_FRAME
   hamr_test_event_data_port_periodic_domains_emitter_t_impl_Impl this) {
-  // example api usage
 
   api_logInfo__hamr_test_event_data_port_periodic_domains_emitter_t_impl_Impl(this, 
     string("Emitter's initialise method called"));

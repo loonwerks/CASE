@@ -4,7 +4,6 @@
 Unit hamr_test_event_data_port_periodic_domains_consumer_t_impl_Impl_initialise_(
   STACK_FRAME
   hamr_test_event_data_port_periodic_domains_consumer_t_impl_Impl this) {
-  // example api usage
 
   api_logInfo__hamr_test_event_data_port_periodic_domains_consumer_t_impl_Impl(this, 
     string("Consumer's initialise method called"));
