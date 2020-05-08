@@ -1,43 +1,3 @@
-(* This structure is populated with HAMR-generated code *)
-structure API =
-struct
-
-  (* Used to make FFI calls where no response from the outside world is expected *)
-  val empty_byte_array = Word8Array.array 0 (Word8.fromInt 0);
-  val singleton_byte_array = Word8Array.array 1 (Word8.fromInt 0);  
-
-  (**********************************
-   * begin generic API functions    *
-   **********************************)
-
-  fun logInfo s = (#(loginfo) s empty_byte_array);
-  fun logDebug s = (#(logdebug) s empty_byte_array);
-  fun logError s = (#(logerror) s empty_byte_array);
-
-  fun initialise() = (#(initialise) "" empty_byte_array);
-
-  fun wait() =
-      (#(wait) "" singleton_byte_array;
-       Word8Array.sub singleton_byte_array 0 <> Word8.fromInt 0);
-
-  (**********************************
-   * begin component-specific API   *
-   **********************************)
-
-  (* sb_read_port_read : in data port sb_read_port_readType; *)
-  val sb_read_port_read_data_size = 2 (* knowable from AADL type annotations *)
-
-  (* TODO:
-     we might want these buffers to be top-level declarations to prevent needless
-     memory allocation *)
-  fun sb_read_port_read() =
-    let val buffer = Word8Array.array sb_read_port_read_data_size (Word8.fromInt 0)
-    in
-      #(sb_read_port_read) "" buffer;
-      Word8Array.substring buffer 0 sb_read_port_read_data_size
-    end;
-end;
-
 (* This structure is populated with developer-written code *)
 structure Client =
 struct
@@ -64,19 +24,3 @@ struct
 
   fun recover() = ();
 end;
-
-(* This structure is populated with HAMR-generated code *)
-structure Control =
-struct
-  fun loop () =
-      if API.wait() then
-        (Client.timeTriggered();
-         loop())
-      else
-        loop();
-end;
-
-(* Startup: client initalisation, then enter main loop *)
-val _ = API.initialise();
-val _ = Client.initialise();
-val _ = Control.loop();
