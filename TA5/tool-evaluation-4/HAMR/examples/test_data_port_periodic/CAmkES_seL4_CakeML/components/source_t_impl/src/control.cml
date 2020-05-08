@@ -1,0 +1,23 @@
+(* Type 3 code *)
+(* This structure is populated with HAMR-generated code *)
+structure Control =
+struct
+  fun wait() =
+      (#(wait) "" API.singleton_byte_array;
+       Word8Array.sub API.singleton_byte_array 0 <> Word8.fromInt 0);
+
+  (* ToDo: Need to develop an approach for implementing the AADL Initialize Entry point *)
+  fun initialise() = (#(initialise) "" API.empty_byte_array);
+
+  fun loop () =
+      if wait() then
+        (Client.timeTriggered();
+         loop())
+      else
+        loop();
+end;
+
+(* Startup: client initalisation, then enter main loop *)
+val _ = Control.initialise();
+val _ = Client.initialise();
+val _ = Control.loop();
