@@ -11,6 +11,8 @@ public
 			recv_message: in event data port;
 			command_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			other_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+		flows
+			flow_1: flow path recv_message -> command_message;
 		properties
 			CASE_Properties::Component_Type => COMM_DRIVER;
 			CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 0;
@@ -26,6 +28,8 @@ public
 		features
 			recv_command: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			status: out event data port Base_types::Boolean;
+		flows
+			flow_1: flow path recv_command -> status;
 		properties
 			 CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;
 		annex agree {**
@@ -57,6 +61,10 @@ public
 		features
 			input: in event data port;
 			output: out event data port Base_Types::Boolean;
+		flows
+--			sink_1: flow sink input;
+--			source_1: flow source output;
+			flow_1: flow path input -> output;
 		properties
 			 CASE_Properties::Trust_Level => 0; -- would prefer to say "unknown"
 			 CASE_Properties::Control_Level => 100;
@@ -75,6 +83,8 @@ public
 			c2: port RADIO.command_message -> CRIT_A.recv_command {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 100;};
 			c3: port RADIO.other_message -> CRIT_B.recv_message {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 100;};
 			c4: port CRIT_A.status -> output {CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;};
+		flows
+			flow_1: flow path input -> c1 -> RADIO.flow_1 -> c2 -> CRIT_A.flow_1 -> c4 -> output;
 	end SW.Impl;
 	
 	processor Proc
@@ -91,6 +101,8 @@ public
 		features
 			input: in event data port;
 			output: out event data port Base_Types::Boolean;
+		flows
+			flow_1: flow path input -> output;
 		properties
 			 CASE_Properties::Trust_Level => 0; -- would prefer to say "unknown"
 			 CASE_Properties::Control_Level => 100;
@@ -103,6 +115,8 @@ public
 		connections
 			c1: port input -> SW.input {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;};
 			c2: port SW.output -> output {CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;};
+		flows
+			flow_1: flow path input -> c1 -> SW.flow_1 -> c2 -> output;
 		properties
 			Actual_Processor_Binding => (reference (PROC)) applies to SW;
 	end Sys.Impl;
