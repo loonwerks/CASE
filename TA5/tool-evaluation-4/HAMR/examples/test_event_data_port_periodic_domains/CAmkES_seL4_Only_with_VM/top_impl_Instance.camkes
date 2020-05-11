@@ -1,0 +1,75 @@
+#include <configurations/vm.h>
+
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <seL4VMDTBPassthrough.idl4>;
+import <FileServerInterface.camkes>;
+import <FileServer/FileServer.camkes>;
+import <SerialServer/SerialServer.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <vm-connectors.camkes>;
+import <devices.camkes>;
+
+//import "components/Pacer/Pacer.camkes";
+//import "components/emitter_t_impl/emitter_t_impl.camkes";
+import "components/consumer_t_impl/consumer_t_impl.camkes";
+
+component VM {
+  VM_INIT_DEF()
+  include <sb_types.h>;
+  include <sb_queue_int8_t_1.h>;
+  dataport sb_queue_int8_t_1_t crossvm_dp_0;
+  emits ReceiveEvent ready;
+  maybe consumes ReceiveEvent done;
+}
+
+assembly {
+  composition {
+    //component emitter_t_impl src_thread;
+    component consumer_t_impl dst_thread;
+    //component Pacer pacer;
+
+    VM_GENERAL_COMPOSITION_DEF()
+    component VM vmSender;
+    VM_COMPONENT_CONNECTIONS_DEF(Sender)
+    VM_VIRTUAL_SERIAL_COMPOSITION_DEF(Sender)
+
+    //connection seL4Notification conn1(from src_thread.sb_write_port_1_notification, to dst_thread.sb_read_port_notification);
+    //connection seL4SharedData conn2(from src_thread.sb_write_port_queue_1, to dst_thread.sb_read_port_queue);
+    //connection seL4Notification conn3(from pacer.tick, to pacer.tock);
+    //connection seL4Notification conn4(from pacer.period, to src_thread.sb_pacer_notification);
+    //connection seL4Notification conn5(from pacer.period, to dst_thread.sb_pacer_notification);
+
+    connection seL4Notification event_conn_1(from vmSender.ready, to dst_thread.sb_read_port_notification);
+    connection seL4SharedDataWithCaps cross_vm_conn_1(from vmSender.crossvm_dp_0,  to dst_thread.sb_read_port_queue);
+    connection seL4VMDTBPassthrough vm_dtb1(from vmSender.dtb_self, to vmSender.dtb);
+  }
+
+  configuration {
+    //src_thread.sb_write_port_queue_1_access = "W";
+    dst_thread.sb_read_port_queue_access = "R";
+    //pacer._domain = 1;
+    //src_thread._domain = 1;
+    dst_thread._priority = 50;
+    dst_thread._domain = 1;
+
+    vmReceiver.crossvm_dp_0 = "R";
+    vmSender.crossvm_dp_0 = "W";
+    VM_GENERAL_CONFIGURATION_DEF()
+    VM_CONFIGURATION_DEF(Receiver)
+    VM_CONFIGURATION_DEF(Sender)
+    VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(Receiver,Sender)
+
+    vmReceiver.cnode_size_bits = 18;
+    vmReceiver.simple_untyped21_pool = 12;
+    vmReceiver.simple_untyped12_pool = 12;
+    vmReceiver.num_extra_frame_caps = 0;
+    vmReceiver.extra_frame_map_address = 0;
+
+    vmSender.cnode_size_bits = 18;
+    vmSender.simple_untyped21_pool = 12;
+    vmSender.simple_untyped12_pool = 12;
+    vmSender.num_extra_frame_caps = 0;
+    vmSender.extra_frame_map_address = 0;
+  }
+}
