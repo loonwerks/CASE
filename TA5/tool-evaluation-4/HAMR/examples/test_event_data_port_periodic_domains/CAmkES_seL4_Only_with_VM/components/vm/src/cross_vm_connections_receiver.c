@@ -28,7 +28,7 @@
 // The following device definitions correspond to the following camkes interfaces.
 
 // maybe dataport sb_queue_int8_t_1 crossvm_dp_0;
-// maybe consumes ReceiveEvent done;
+// maybe consumes SendEvent done;
 
 #define NUM_CONNECTIONS 1
 static struct camkes_crossvm_connection connections[NUM_CONNECTIONS];

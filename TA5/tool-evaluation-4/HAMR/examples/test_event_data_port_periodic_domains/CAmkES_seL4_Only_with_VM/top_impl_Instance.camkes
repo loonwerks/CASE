@@ -19,8 +19,8 @@ component VM {
   include <sb_types.h>;
   include <sb_queue_int8_t_1.h>;
   dataport sb_queue_int8_t_1_t crossvm_dp_0;
-  emits ReceiveEvent ready;
-  maybe consumes ReceiveEvent done;
+  emits SendEvent ready;
+  maybe consumes SendEvent done;
 }
 
 assembly {
@@ -52,6 +52,7 @@ assembly {
     //src_thread._domain = 1;
     dst_thread._priority = 50;
     dst_thread._domain = 1;
+    dst_thread.sb_read_port_notification_domain = 1;
 
     vmReceiver.crossvm_dp_0 = "R";
     vmSender.crossvm_dp_0 = "W";

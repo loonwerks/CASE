@@ -36,9 +36,9 @@
 // NOTE: If we only need polling style receivers, we can get rid of the SendEvent
 
 // Assumption: only one thread is calling this and/or reading p1_in_recv_counter.
-void p1_out_aadl_event_data_send(sb_queue_int8_t_1_t *q, int8_t *data, sb_event_counter_t *emit) {
+void p1_out_aadl_event_data_send(sb_queue_int8_t_1_t *q, int8_t *data, int *emit) {
     sb_queue_int8_t_1_enqueue(q, data);
-    //emit[0] = 1;
+    emit[0] = 1;
 }
 
 //------------------------------------------------------------------------------
@@ -63,19 +63,19 @@ int main(int argc, char *argv[])
     int fd = open(dataport_name, O_RDWR);
     assert(fd >= 0);
 
-    sb_queue_int8_t_1_t *dataport;
+    char *dataport;
     if ((dataport = mmap(NULL, length, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 1 * getpagesize())) == (void *) -1) {
         printf("mmap failed\n");
         close(fd);
     }
 
-    sb_event_counter_t *emit;
+    char *emit;
     if ((emit = mmap(NULL, 0x1000, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0 * getpagesize())) == (void *) -1) {
         printf("mmap failed\n");
         close(fd);
     }
 
-    sb_queue_int8_t_1_init(dataport);
+    sb_queue_int8_t_1_init((sb_queue_int8_t_1_t *)dataport);
     int i = 0;
     int err = 0;
     int8_t data;
@@ -94,7 +94,7 @@ int main(int argc, char *argv[])
             // if (i%100 == 0)
             printf("%s: sending: %d\n", "sender", data);
             // Send the data
-            p1_out_aadl_event_data_send(dataport, &data, emit);          
+            p1_out_aadl_event_data_send((sb_queue_int8_t_1_t *)dataport, &data, (int *)emit);          
         }
     }
 

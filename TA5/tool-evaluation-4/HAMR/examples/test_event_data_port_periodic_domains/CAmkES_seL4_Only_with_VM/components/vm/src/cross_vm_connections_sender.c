@@ -28,14 +28,14 @@
 // The following device definitions correspond to the following camkes interfaces.
 
 // maybe dataport queue_t crossvm_dp_0;
-// emits ReceiveEvent ready;
+// emits SendEvent ready;
 
 #define NUM_CONNECTIONS 1
 static struct camkes_crossvm_connection connections[NUM_CONNECTIONS];
 
 // these are defined in the dataport's glue code
 extern dataport_caps_handle_t crossvm_dp_0_handle;
-void done_emit_underlying(void);
+void ready_emit_underlying(void);
 
 static int consume_callback(vm_t *vm, void *cookie)
 {
@@ -44,13 +44,11 @@ static int consume_callback(vm_t *vm, void *cookie)
 }
 
 
-void done_emit_underlying(void) WEAK;
-
 void init_cross_vm_connections(vm_t *vm, void *cookie)
 {
     connections[0] = (struct camkes_crossvm_connection) {
         .handle = &crossvm_dp_0_handle,
-        .emit_fn = done_emit_underlying,
+        .emit_fn = ready_emit_underlying,
         .consume_badge = -1
     };
 
@@ -58,7 +56,6 @@ void init_cross_vm_connections(vm_t *vm, void *cookie)
         if (connections[i].consume_badge != -1) {
             int err = register_async_event_handler(connections[i].consume_badge, consume_callback, (void *)connections[i].consume_badge);
             ZF_LOGF_IF(err, "Failed to register_async_event_handler for init_cross_vm_connections.");
-
         }
     }
 
