@@ -20,7 +20,7 @@ DeclareCAmkESComponent(consumer_t_impl
 )
 
 DeclareCAmkESComponent(Pacer
-  SOURCES components/Pacer/src/Pacer.c
+  SOURCES components/Pacer/src/Pacer.c components/sb_queue_int8_t_1/sb_queue_int8_t_1.c
   INCLUDES includes
 
 )

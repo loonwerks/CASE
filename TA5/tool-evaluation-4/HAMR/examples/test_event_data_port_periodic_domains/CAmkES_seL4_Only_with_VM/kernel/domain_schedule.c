@@ -34,15 +34,15 @@ const dschedule_t ksDomSchedule[] = { // (1 tick == 2ms)
 //    { .domain = 3, .length =   5 }, // destination  10ms
 //    { .domain = 0, .length = 195 }, // domain0     390ms
 
-//    { .domain = 0, .length = 100 }, // all other seL4 threads, init, 200ms
-//    { .domain = 1, .length =  10 }, // destination+pacer  20ms
-//    { .domain = 0, .length =  90 }, // domain0     180ms
-//    { .domain = 1, .length =  10 }, // destination+pacer  20ms
-//    { .domain = 0, .length =  90 }, // domain0     180ms
-//    { .domain = 1, .length =  10 }, // destination+pacer  20ms
-//    { .domain = 0, .length = 190 }, // domain0     380ms
+    { .domain = 0, .length =   1 }, // all other seL4 threads, init, 200ms
+    { .domain = 1, .length =   1 }, // pacer        10ms
+    { .domain = 0, .length =   1 }, // domain0     190ms
+    { .domain = 2, .length =   5 }, // source       10ms
+    { .domain = 0, .length =   1 }, // domain0     190ms
+    { .domain = 3, .length =   1 }, // destination  10ms
+//    { .domain = 0, .length = 195 }, // domain0     390ms
 
-/* Default schedule. */
+/* Default schedule. 
     { .domain = 0, .length = 1 },
 #if CONFIG_NUM_DOMAINS > 1
     { .domain = 1, .length = 1 },
@@ -92,6 +92,7 @@ const dschedule_t ksDomSchedule[] = { // (1 tick == 2ms)
 #if CONFIG_NUM_DOMAINS > 16
 #error Unsupportd number of domains set
 #endif
+*/
 
 };
 

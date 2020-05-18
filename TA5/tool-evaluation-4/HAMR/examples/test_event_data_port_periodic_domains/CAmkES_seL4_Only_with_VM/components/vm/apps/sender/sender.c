@@ -30,6 +30,8 @@
 #include <sb_event_counter.h>
 #include <sb_queue_int8_t_1.h>
 
+sb_queue_int8_t_1_Recv_t periodQueue;
+
 //------------------------------------------------------------------------------
 // Implementation of AADL Input Event Data Port (out) named "p1_out"
 //
@@ -44,13 +46,25 @@ void p1_out_aadl_event_data_send(sb_queue_int8_t_1_t *q, int8_t *data, int *emit
 //------------------------------------------------------------------------------
 // Testing
 
-
+void period_wait(int port_fd, sb_queue_int8_t_1_Recv_t *q, sb_event_counter_t *numDropped) {
+    int8_t data;
+    while (!sb_queue_int8_t_1_dequeue(q, numDropped, &data)) {
+    	int val;
+    	/* Blocking read */
+    	int result = read(port_fd, &val, sizeof(val));
+		if (result < 0) {
+		    printf("Error reading period.\n");
+		    //return -1;
+		}
+		return;
+    }
+}
 
 int main(int argc, char *argv[])
 {
 
-    if (argc != 3) {
-        printf("Usage: %s file dataport_size\n\n"
+    if (argc != 4) {
+        printf("Usage: %s dataport dataport_size eventport\n\n"
                "Reads the c string contents of a specified dataport file to stdout",
                argv[0]);
         return 1;
@@ -59,9 +73,14 @@ int main(int argc, char *argv[])
     char *dataport_name = argv[1];
     int length = atoi(argv[2]);
     assert(length > 0);
-
+    
+    char *eventport_name = argv[3];
+    
     int fd = open(dataport_name, O_RDWR);
     assert(fd >= 0);
+    
+    int fd2 = open(eventport_name, O_RDWR);
+    assert(fd2 >= 0);
 
     char *dataport;
     if ((dataport = mmap(NULL, length, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 1 * getpagesize())) == (void *) -1) {
@@ -75,15 +94,25 @@ int main(int argc, char *argv[])
         close(fd);
     }
 
+    char *period;
+    if ((period = mmap(NULL, length, PROT_READ | PROT_WRITE, MAP_SHARED, fd2, 0 * getpagesize())) == (void *) -1) {
+        printf("mmap failed\n");
+        close(fd);
+    }
+
     sb_queue_int8_t_1_init((sb_queue_int8_t_1_t *)dataport);
+    sb_queue_int8_t_1_Recv_init(&periodQueue, (sb_queue_int8_t_1_t *)period);
+
     int i = 0;
     int err = 0;
+    sb_event_counter_t numDropped = 0;
     int8_t data;
 
     while (1) {
 
         // wait a bit and slow things down
-        usleep(500 * 1000);
+        //usleep(500 * 1000);
+        period_wait(fd2, &periodQueue, &numDropped);
 
         // Send a random number of data elements
         int n = (random() % 10);
@@ -99,7 +128,9 @@ int main(int argc, char *argv[])
     }
 
     munmap(dataport, length);
+    munmap(period, length);
     close(fd);
+    close(fd2);
 
     return 0;
 }

@@ -30,12 +30,16 @@
 // maybe dataport queue_t crossvm_dp_0;
 // emits SendEvent ready;
 
-#define NUM_CONNECTIONS 1
+#define NUM_CONNECTIONS 2
 static struct camkes_crossvm_connection connections[NUM_CONNECTIONS];
 
 // these are defined in the dataport's glue code
 extern dataport_caps_handle_t crossvm_dp_0_handle;
 void ready_emit_underlying(void);
+
+extern dataport_caps_handle_t period_handle;
+seL4_Word period_ready_notification_badge(void);
+
 
 static int consume_callback(vm_t *vm, void *cookie)
 {
@@ -43,13 +47,18 @@ static int consume_callback(vm_t *vm, void *cookie)
     return 0;
 }
 
-
 void init_cross_vm_connections(vm_t *vm, void *cookie)
 {
     connections[0] = (struct camkes_crossvm_connection) {
         .handle = &crossvm_dp_0_handle,
         .emit_fn = ready_emit_underlying,
         .consume_badge = -1
+    };
+
+    connections[1] = (struct camkes_crossvm_connection) {
+        .handle = &period_handle,
+        .emit_fn = NULL,
+        .consume_badge = period_ready_notification_badge()
     };
 
     for (int i = 0; i < NUM_CONNECTIONS; i++) {
