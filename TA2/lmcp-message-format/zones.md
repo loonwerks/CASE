@@ -42,7 +42,9 @@ Computed the hypotenuse using pythagoreans theorem and basic trigonometry to get
 
 [HamsterMap.com](http://www.hamstermap.com/) to plot the coordinates for visual verification
 
-** Keep Out Zone
+Encoded value (see [bitcodec/src/polygon](bitcodec/src/polygon)): `[4046A7BCD35A8588C05E415D80E496EE447A0000014046AAE9B38D60A6C05E39FA97E132B5447A000001]`
+
+# Keep Out Zone
 
 Keep-out-zone Definition: [KeepOutZone Initialization](https://github.com/loonwerks/case-ta6-experimental-platform-OpenUxAS/blob/develop-case-ta6-ph2-example01/examples/CASE-TA6-Challenge-Problems/ph2_02_WaterwaySearch/InitializationMessages/KeepInZone_334.xml)
 
@@ -108,3 +110,5 @@ val Polygon =
     )))
   ))
 ```
+
+Encoded value (see [bitcodec/src/polygon](bitcodec/src/polygon)): `[4046AAA1AD6451B9C05E3C09A2403148447A0000014046AAFA0D77B7C8C05E3BCAA7589EFE447A000001]`
