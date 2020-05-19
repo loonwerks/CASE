@@ -1,8 +1,7 @@
 == Overview ==
-Notes on the integration of the "test_event_data_port" example of the "seL4_Only" HAMR with the virtual machine (VM) component. It is a simple producer/consumer example, with the producer implemented as a Linux VM sending regular (although randomized) messages
-to the consumer, implemented as a native CAmkES component.
+This document is a collection of notes on the integration of the "test_event_data_port" example of the "seL4_Only" HAMR with the virtual machine (VM) component. It is a simple producer/consumer example, with the producer implemented as a Linux VM sending regular messages to the consumer, implemented as a native CAmkES component.
 
-I attempt to keep the pacer component in the build as a placeholder, but eventually I commented it out to simplify debugging. I put the VM in domain 0 and the consumer in domain 1 with the default domain schedule.
+This example now includes the (original) pacer component, where the components are assigned to domain one (pacer), domain two (VM sender), and domain three (CAmkES consumer).
 
 Essentially, I ripped out the "queue" implementation in Kent's example and replaced in with the HAMR connections glue-code. Kent's version was very similar, except for data types, and how it's managed in the CAmkES cmake build infrastructure. Integrating the VM build support in Kent's version with the structure of HAMR was a bit of work too.
 
@@ -12,7 +11,7 @@ The following is a walk-through of each artifact of the generated HAMR build.
 Added subdirectories for "sb_queue_int8_t_1" and "vm" components. The VM component uses the connections glue-code, in this example sb_queue_int8_t_1, so consequently these artifacts must be built into their own library to facilitate re-use and clean integration with the VM component. Also a couple cmake includes are added for the VM component build
 
 == settings.cmake ==
-Lots of added support for the VM component, appended to the end of the existing settings file.
+Lots of added support for the VM component, appended to the end of the existing settings file. All of this new content for this file is static, and does not depend on details within the AADL.
 
 == top_impl_Instance.camkes ==
 In summary, added VM component. Several new "import" statements. New component declaration for the VM component-- I maintained the original names of the connection ports, but I believe these adopt the names from the AADL. In this example, there is one outgoing set of connections (the data port and its associated event port), but for other examples, the VM component will have all the input/output ports it needs.
@@ -23,20 +22,22 @@ The "cross_vm_connections" layer in the build (captured under components/vm/src)
 
 The assembly part of the top CAmkES specification is slightly different for the VM component. Event notifications are the same, but data ports use the "seL4SharedDataWithCaps" connection type. Also the VM component has a passthrough callback that specified here (e.g., "connection seL4VMDTBPassthrough vm_dtb1(from vmSender.dtb_self, to vmSender.dtb);"). This is the only place where this special internal callback connection is referenced in any HAMR related build files (it's handled in the background by various build macros).
 
+To accommodate communications with the VM, the pacer component has changed slightly as well. In this current development iteration, the pacer communicates with the VM through a dedicated point-to-point integer data port, of kind seL4SharedDataWithCaps. Currently, this is the most straight forward way to integrate event-like communications to the VM internals. Out of convenience, I re-used the HAMR glue-code queueing infrastructure for this ports as well, so the events are actually queued in this version.
+
 == includes ==
 The topmost HAMR generated includes file is the same, except that the generated connection glue-code C file (in this example sb_queue_int8_t_1.c) is moved to its own library.
 
 == kernel ==
-The kernel file is the same as before, holding the domain_schedule.c file. For this example, I switched to the default CAmkES domain schedule, as noted in the overview above.
+The kernel file is the same as before, holding the domain_schedule.c file. For this example, I used a modified schedule that shortens the intervals, mainly to streamline debugging and quicken the time to bootstrap the VM.
 
 == components/consumer_t_impl ==
-This component is the same as the original HAMR, except that for this example I temporarily removed the Pacer component.
+This component is the same as the original HAMR. It interacts with the pacer component as before.
 
 == components/emitter_t_impl ==
-Similarly, this component is unchanged. It is not used in this example, replaced by the VM component.
+Similarly, this component is unchanged. It interacts with the pacer component as before.
 
 == components/Pacer ==
-Also unchanged.
+As stated above, a dedicated port was added to represent the timing notification from the pacer to the VM. This port is implemented as integer data port (re-using the HAMR glue-code queueing infrastructure) because currently that is the most readily available mechanism to represent the timing notification on the VM. If there are multiple VMs in the system, then the pacer will require a separate dedicate notification port for each. Although, when we update to use the newer pacer approach, where a pacer resides in each scheduling domain, then this issue will simplify on its own.
 
 == components/sb_queue_int8_t_1 ==
 As stated above, this C artifact was pulled out into its own library so that it can be build and linked against both the CAmkES components that utilize it and the VM component. This subdirectory is brand new, not generated by the current HAMR. The VM build needs to accomondate the CAmkES infrastructure as well as build the Linux VM itself, so its cmake infrastructure is more complicated than for native CAmkES components.
@@ -62,9 +63,11 @@ A special detail of note: the CMakeLists.txt file for each application identifie
 The artifacts defined here are local to the internals of the linux VM, and do not require customization by HAMR generation.
 
 == components/vm/src ==
-There are two files here, *_receiver and *_sender. These source files represent the glue-code that maps the HAMR generate connection glue-code to the platform specific device/memory configurations. They will have to be generated by HAMR as well, since they include references to the connection artifacts derived from the AADL models. Kent has done some work to generalize this code so that it can be more easily customized for VM's with multiple inputs/outputs.
+These source files represent the glue-code that maps the HAMR generated connection glue-code to the platform specific device/memory configurations. In practice, there will be one of these files per each VM in the system. They will have to be generated by HAMR, since they include references to the connection artifacts derived from the AADL models. Kent has done some work to generalize this code so that it can be more easily customized for VM's with multiple inputs/outputs. These artifacts get built directly into the VM components. 
 
-These artifacts get build directly into the VM components.
+In the source code, the "connections" data structure represents the collection of incoming and outgoing AADL ports on the VM. For the time being, every AADL port is associated with a data port type. Incoming ports define the "handle" and "consume_badge" fields and outgoing ports define the "handle" and "emit_fn" fields. Both the "consume_badge" and "emit_fn" fields are optional, if no event port accompanies the data port. The intention is that if an event port accompanies the data port, then the component employs a busy wait to retrieve the data, while if no event port accompanies the data port, then the component employs polling to retrieve the data.
+
+The handle name is derived automatically by the CAmkES infrastructure: <dataport name>_handle. Incoming consume badge names are derived as: <event port name>_badge. Outgoing emit function names are also derived by CAmkES: <event port name>_emit_underlying.
 
 == components/vm/[exynos5422|qemu-arm-virt] ==
 Under these platform specific subdirectories is a devices.camkes file for their respective platforms. Eventually, these files will have to be specially customized by HAMR as well, because an example can have more than one VM defined in its system, and the platform specific configuration must reserve memory and onboard resources for each VM individually.
