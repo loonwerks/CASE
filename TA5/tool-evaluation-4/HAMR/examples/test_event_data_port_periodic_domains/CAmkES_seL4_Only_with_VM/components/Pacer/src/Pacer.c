@@ -7,11 +7,9 @@
 
 void send_period_to_vm(int8_t *data) {
   sb_queue_int8_t_1_enqueue(period_to_vm, data);
-  period_to_vm_ready_emit();
 }
 
 void pre_init(void) {
-  // initialise data structure for outgoing event data port write_port
   sb_queue_int8_t_1_init(period_to_vm);
 }
 

@@ -19,8 +19,6 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/mman.h>
-//#include <inttypes.h>
-//#include <queue.h>
 #include <stdint.h>
 
 //#include <counter.h>
@@ -84,19 +82,19 @@ int main(int argc, char *argv[])
 
     char *dataport;
     if ((dataport = mmap(NULL, length, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 1 * getpagesize())) == (void *) -1) {
-        printf("mmap failed\n");
+        printf("mmap dataport failed\n");
         close(fd);
     }
 
     char *emit;
     if ((emit = mmap(NULL, 0x1000, PROT_READ | PROT_WRITE, MAP_SHARED, fd, 0 * getpagesize())) == (void *) -1) {
-        printf("mmap failed\n");
+        printf("mmap emit failed\n");
         close(fd);
     }
 
     char *period;
-    if ((period = mmap(NULL, length, PROT_READ | PROT_WRITE, MAP_SHARED, fd2, 0 * getpagesize())) == (void *) -1) {
-        printf("mmap failed\n");
+    if ((period = mmap(NULL, length, PROT_READ | PROT_WRITE, MAP_SHARED, fd2, 1 * getpagesize())) == (void *) -1) {
+        printf("mmap period failed\n");
         close(fd);
     }
 

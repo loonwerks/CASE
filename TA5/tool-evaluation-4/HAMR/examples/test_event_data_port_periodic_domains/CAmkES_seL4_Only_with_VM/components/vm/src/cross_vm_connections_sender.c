@@ -27,8 +27,9 @@
 
 // The following device definitions correspond to the following camkes interfaces.
 
-// maybe dataport queue_t crossvm_dp_0;
+// dataport queue_t crossvm_dp_0;
 // emits SendEvent ready;
+// dataport queue_t period
 
 #define NUM_CONNECTIONS 2
 static struct camkes_crossvm_connection connections[NUM_CONNECTIONS];
@@ -38,7 +39,6 @@ extern dataport_caps_handle_t crossvm_dp_0_handle;
 void ready_emit_underlying(void);
 
 extern dataport_caps_handle_t period_handle;
-seL4_Word period_ready_notification_badge(void);
 
 
 static int consume_callback(vm_t *vm, void *cookie)
@@ -58,7 +58,7 @@ void init_cross_vm_connections(vm_t *vm, void *cookie)
     connections[1] = (struct camkes_crossvm_connection) {
         .handle = &period_handle,
         .emit_fn = NULL,
-        .consume_badge = period_ready_notification_badge()
+        .consume_badge = -1
     };
 
     for (int i = 0; i < NUM_CONNECTIONS; i++) {

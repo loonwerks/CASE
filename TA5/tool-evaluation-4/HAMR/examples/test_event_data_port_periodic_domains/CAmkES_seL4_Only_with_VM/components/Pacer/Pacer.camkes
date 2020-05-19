@@ -3,9 +3,7 @@ component Pacer {
   include <sb_queue_int8_t_1.h>;
   control;
   emits Period period;
-
   dataport sb_queue_int8_t_1_t period_to_vm;
-  emits SendEvent period_to_vm_ready;
 
   emits TickTock tick;
   consumes TickTock tock;
