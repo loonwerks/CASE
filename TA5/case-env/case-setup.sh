@@ -7,10 +7,11 @@ set -exuo pipefail
 : "${GIT_USER:=Snail Mail}"
 : "${GIT_EMAIL:=<>}"
 
-: "${SIREUM_V:=901430d}"
-: "${SEL4_SCRIPTS_V:=ae83bb5a919dab780b03f74b525626f335f30666}"
+: "${SIREUM_V:=8900744}"
+: "${SEL4_SCRIPTS_V:=e9cd963c46e7c188b825a908abf6ad4344d349da}"
 : "${SEL4_V:=28831f579e3560bd3aa18a3898505f091d66b076}"
 : "${CAMKES_V:=e7f5c6da03fc8a71a5a2e503de9f9004acf3ef2a}"
+: "${FMIDE_V:=nightly}" # use nightly release by default
 
 export SCRIPT_DIR=$(cd -P $(dirname "$0") && pwd -P)
 export DESKTOP_MACHINE=no
@@ -60,16 +61,6 @@ as_root apt install -y curl wget git p7zip-full zip unzip libgomp1 xz-utils buil
                        locales bc libc6-dev libgmp-dev libsodium-dev nano software-properties-common zlib1g-dev gcc g++
 
 
-# Sireum
-bash $SCRIPT_DIR/bin/sireum-install.sh $SIREUM_V 
-echo "export SIREUM_HOME=$SIREUM_HOME" >> "$HOME/.bashrc"
-echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
-echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
-
-
-# FMIDE (latest nightly/release)
-$SIREUM_HOME/bin/install/fmide.cmd # optionally, add a release tag name as an argument
-echo "export PATH=\$PATH:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
 # seL4 and friends
 cd $BASE_DIR
 git clone https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles
@@ -103,3 +94,15 @@ echo "export PATH=\$PATH:$BASE_DIR/camkes/build/capDL-tool" >> "$HOME/.bashrc"
 
 git config --global --unset user.name
 git config --global --unset user.email
+
+
+# Sireum
+bash $SCRIPT_DIR/bin/sireum-install.sh $SIREUM_V 
+echo "export SIREUM_HOME=$SIREUM_HOME" >> "$HOME/.bashrc"
+echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
+echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
+
+
+# FMIDE (latest nightly/release)
+$SIREUM_HOME/bin/install/fmide.cmd $FMIDE_V
+echo "export PATH=\$PATH:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
