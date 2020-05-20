@@ -91,15 +91,15 @@ bash $SEL4_SCRIPTS/camkes.sh
 bash $SCRIPT_DIR/bin/camkes-cache.sh $CAMKES_V
 echo "export PATH=\$PATH:$BASE_DIR/camkes/build/capDL-tool" >> "$HOME/.bashrc"
 
-git config --global --unset user.name
-git config --global --unset user.email
+git config --global --unset-all user.name
+git config --global --unset-all user.email
 
 
 # Sireum
 bash $SCRIPT_DIR/bin/sireum-install.sh $SIREUM_V 
 echo "export SIREUM_HOME=$SIREUM_HOME" >> "$HOME/.bashrc"
 echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
-echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
+echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin" >> "$HOME/.bashrc"
 
 
 # FMIDE (latest nightly/release)
