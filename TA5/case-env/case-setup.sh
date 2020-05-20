@@ -91,8 +91,8 @@ bash $SEL4_SCRIPTS/camkes.sh
 bash $SCRIPT_DIR/bin/camkes-cache.sh $CAMKES_V
 echo "export PATH=\$PATH:$BASE_DIR/camkes/build/capDL-tool" >> "$HOME/.bashrc"
 
-git config --global --unset-all user.name
-git config --global --unset-all user.email
+git config --global --unset user.name $GIT_USER
+git config --global --unset user.email $GIT_EMAIL
 
 
 # Sireum
