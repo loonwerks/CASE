@@ -8,7 +8,7 @@ This folder contains scripts and Vagrantfile to setup environment for CASE tools
 
 Once setup (instructions below), all CASE tools/artifacts are installed in ``~/CASE`` 
 (can be overriden by specifying ``BASE_DIR`` env var; pease see [case-setup.sh](case-setup.sh)).
-Additional tools and scripts are installed in ``~/bin``.  To run FMIDE:
+In the Vagrant provisioned VM, additional tools and scripts are installed in ``~/bin``.  To run FMIDE:
 
 ```bash
 fmide&
@@ -26,14 +26,15 @@ If you are interested to also setup FMIDE and HAMR directly in your machine runn
 
 ### Steps
 
-Run the following (and subsequent commands) in your local repo's case-env directory 
+Run the following (and subsequent commands) in your local repo's ``case-env`` directory 
 (or download the folder [here](https://downgit.github.io/#/home?url=https://github.com/loonwerks/CASE/tree/master/TA5/case-env)):
 
 ```bash
 bash case-setup.sh
 ```
 
-See [Post Setup](#post-setup) below for additional instructions.
+See [Post Setup](#post-setup) below for additional instructions (note: replace ``~/bin`` with the path to the ``bin`` directory
+in your local repo/folder ``case-env``).
 
 
 ## Setting Up A VirtualBox VM Using Vagrant
