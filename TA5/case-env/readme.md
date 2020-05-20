@@ -88,7 +88,7 @@ See [Post Setup](#post-setup) below for additional instructions.
 To install CakeML dependencies using seL4 setup scripts:
 
 ```bash
-bash CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh
+bash ~/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh
 ```
 
 ### Updating Installed CASE Tools & Artifacts
