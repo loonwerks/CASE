@@ -8,7 +8,7 @@ This folder contains scripts and Vagrantfile to setup environment for CASE tools
 
 Once setup (instructions below), all CASE tools/artifacts are installed in ``~/CASE`` 
 (can be overriden by specifying ``BASE_DIR`` env var; pease see [case-setup.sh](case-setup.sh)).
-Additional tools and scripts are installed in ``~/bin``.  To run FMIDE:
+In the Vagrant provisioned VM, additional tools and scripts are installed in ``~/bin``.  To run FMIDE:
 
 ```bash
 fmide&
@@ -22,17 +22,19 @@ If you are interested to also setup FMIDE and HAMR directly in your machine runn
 
 ### Requirement
 
-* Debian [10 (buster)](https://cdimage.debian.org/debian-cd/current-live/amd64/bt-hybrid/)
+* Debian 10.2 [[.iso](https://cdimage.debian.org/mirror/cdimage/archive/10.2.0/amd64/iso-cd/debian-10.2.0-amd64-xfce-CD-1.iso)]
 
 ### Steps
 
-Run the following (and subsequent commands) in your local repo's case-env directory:
+Run the following (and subsequent commands) in your local repo's ``case-env`` directory 
+(or download the folder [here](https://downgit.github.io/#/home?url=https://github.com/loonwerks/CASE/tree/master/TA5/case-env)):
 
 ```bash
 bash case-setup.sh
 ```
 
-See [Post Setup](#post-setup) below for additional instructions.
+See [Post Setup](#post-setup) below for additional instructions (note: replace ``~/bin`` with the path to the ``bin`` directory
+in your local repo/folder ``case-env``).
 
 
 ## Setting Up A VirtualBox VM Using Vagrant
@@ -51,7 +53,8 @@ The VM disk size is derived from the base box [bento/debian-10](https://app.vagr
 
 ### Setup
 
-Run the following (and subsequent commands) in your local repo's ``case-env`` directory:
+Run the following (and subsequent commands) in your local repo's ``case-env`` directory
+(or download the folder [here](https://downgit.github.io/#/home?url=https://github.com/loonwerks/CASE/tree/master/TA5/case-env)):
 
 * Windows
 
@@ -85,7 +88,7 @@ See [Post Setup](#post-setup) below for additional instructions.
 To install CakeML dependencies using seL4 setup scripts:
 
 ```bash
-bash CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh
+bash ~/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh
 ```
 
 ### Updating Installed CASE Tools & Artifacts

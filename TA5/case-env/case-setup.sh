@@ -1,17 +1,19 @@
 #!/bin/bash
-# Requirement: Debian 10 (buster)
+# Requirement: Debian 10.2 (buster)
 
-set -exuo pipefail
+set -Eeuxo pipefail
 
 : "${BASE_DIR:=$HOME/CASE}"
-: "${GIT_USER:=Snail Mail}"
+: "${GIT_USER:=Snail}"
 : "${GIT_EMAIL:=<>}"
 
-: "${SIREUM_V:=901430d}"
-: "${SEL4_SCRIPTS_V:=ae83bb5a919dab780b03f74b525626f335f30666}"
+: "${SEL4_SCRIPTS_V:=e9cd963c46e7c188b825a908abf6ad4344d349da}"
 : "${SEL4_V:=28831f579e3560bd3aa18a3898505f091d66b076}"
 : "${CAMKES_V:=e7f5c6da03fc8a71a5a2e503de9f9004acf3ef2a}"
+: "${SIREUM_V:=8900744}"
+: "${FMIDE_V:=nightly}" # use nightly release by default
 
+export SCRIPT_DIR=$(cd -P $(dirname "$0") && pwd -P)
 export DESKTOP_MACHINE=no
 export MAKE_CACHES=no
 export DEBIAN_FRONTEND=noninteractive
@@ -55,20 +57,7 @@ as_root() {
 mkdir -p $BASE_DIR
 
 as_root apt-get update
-as_root apt install -y curl wget git p7zip-full zip unzip libgomp1 xz-utils build-essential automake cmake python \
-                       locales bc libc6-dev libgmp-dev libsodium-dev nano software-properties-common zlib1g-dev gcc g++
-
-
-# Sireum
-bash ~/bin/sireum-install.sh $SIREUM_V 
-echo "export SIREUM_HOME=$SIREUM_HOME" >> "$HOME/.bashrc"
-echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
-echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
-
-
-# FMIDE (latest nightly/release)
-$SIREUM_HOME/bin/install/fmide.cmd # optionally, add a release tag name as an argument
-echo "export PATH=\$PATH:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
+as_root apt install -y git
 
 
 # seL4 and friends
@@ -95,12 +84,24 @@ echo "LANG=en_US.UTF-8" | as_root tee -a /etc/default/locale > /dev/null
 echo "export LANG=en_US.UTF-8" >> "$HOME/.bashrc"
 export LANG=en_US.UTF-8
 
-bash ~/bin/sel4-cache.sh $SEL4_V
+bash $SCRIPT_DIR/bin/sel4-cache.sh $SEL4_V
 
 bash $SEL4_SCRIPTS/camkes.sh
 
-bash ~/bin/camkes-cache.sh $CAMKES_V
+bash $SCRIPT_DIR/bin/camkes-cache.sh $CAMKES_V
 echo "export PATH=\$PATH:$BASE_DIR/camkes/build/capDL-tool" >> "$HOME/.bashrc"
 
-git config --global --unset user.name
-git config --global --unset user.email
+git config --global --unset user.name $GIT_USER
+git config --global --unset user.email $GIT_EMAIL
+
+
+# Sireum
+bash $SCRIPT_DIR/bin/sireum-install.sh $SIREUM_V 
+echo "export SIREUM_HOME=$SIREUM_HOME" >> "$HOME/.bashrc"
+echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
+echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin" >> "$HOME/.bashrc"
+
+
+# FMIDE (latest nightly/release)
+$SIREUM_HOME/bin/install/fmide.cmd $FMIDE_V
+echo "export PATH=\$PATH:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
