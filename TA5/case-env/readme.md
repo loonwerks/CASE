@@ -26,7 +26,8 @@ If you are interested to also setup FMIDE and HAMR directly in your machine runn
 
 ### Steps
 
-Run the following (and subsequent commands) in your local repo's case-env directory:
+Run the following (and subsequent commands) in your local repo's case-env directory 
+(or download the folder [here](https://downgit.github.io/#/home?url=https://github.com/loonwerks/CASE/tree/master/TA5/case-env)):
 
 ```bash
 bash case-setup.sh
@@ -51,7 +52,8 @@ The VM disk size is derived from the base box [bento/debian-10](https://app.vagr
 
 ### Setup
 
-Run the following (and subsequent commands) in your local repo's ``case-env`` directory:
+Run the following (and subsequent commands) in your local repo's ``case-env`` directory
+(or download the folder [here](https://downgit.github.io/#/home?url=https://github.com/loonwerks/CASE/tree/master/TA5/case-env)):
 
 * Windows
 

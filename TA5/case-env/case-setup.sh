@@ -12,6 +12,7 @@ set -exuo pipefail
 : "${SEL4_V:=28831f579e3560bd3aa18a3898505f091d66b076}"
 : "${CAMKES_V:=e7f5c6da03fc8a71a5a2e503de9f9004acf3ef2a}"
 
+export SCRIPT_DIR=$(cd -P $(dirname "$0") && pwd -P)
 export DESKTOP_MACHINE=no
 export MAKE_CACHES=no
 export DEBIAN_FRONTEND=noninteractive
@@ -60,7 +61,7 @@ as_root apt install -y curl wget git p7zip-full zip unzip libgomp1 xz-utils buil
 
 
 # Sireum
-bash ~/bin/sireum-install.sh $SIREUM_V 
+bash $SCRIPT_DIR/bin/sireum-install.sh $SIREUM_V 
 echo "export SIREUM_HOME=$SIREUM_HOME" >> "$HOME/.bashrc"
 echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
 echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
@@ -69,8 +70,6 @@ echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin:\$SIREUM_HOME/bin/lin
 # FMIDE (latest nightly/release)
 $SIREUM_HOME/bin/install/fmide.cmd # optionally, add a release tag name as an argument
 echo "export PATH=\$PATH:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
-
-
 # seL4 and friends
 cd $BASE_DIR
 git clone https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles
