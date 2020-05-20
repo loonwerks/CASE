@@ -63,7 +63,6 @@ void p1_in_aadl_event_data_wait(sb_event_counter_t *numDropped, int8_t *data) {
 		    printf("Error: %s\n", strerror(errno));
 		    //return -1;
 		}
-		return;
     }
 }
 
@@ -86,7 +85,6 @@ void period_wait(int port_fd, sb_queue_int8_t_1_Recv_t *q, sb_event_counter_t *n
 		    printf("Error reading period.\n");
 		    //return -1;
 		}
-		return;
     }
 }
 

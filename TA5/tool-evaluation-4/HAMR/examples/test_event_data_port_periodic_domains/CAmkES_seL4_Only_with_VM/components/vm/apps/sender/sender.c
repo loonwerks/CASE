@@ -54,7 +54,6 @@ void period_wait(int port_fd, sb_queue_int8_t_1_Recv_t *q, sb_event_counter_t *n
 		    printf("Error reading period.\n");
 		    //return -1;
 		}
-		return;
     }
 }
 
