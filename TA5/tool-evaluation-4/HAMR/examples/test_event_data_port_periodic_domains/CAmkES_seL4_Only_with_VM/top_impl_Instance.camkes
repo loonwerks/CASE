@@ -11,7 +11,6 @@ import <vm-connectors.camkes>;
 import <devices.camkes>;
 
 import "components/Pacer/Pacer.camkes";
-//import "components/emitter_t_impl/emitter_t_impl.camkes";
 import "components/consumer_t_impl/consumer_t_impl.camkes";
 
 component VM {
@@ -26,7 +25,6 @@ component VM {
 
 assembly {
   composition {
-    //component emitter_t_impl src_thread;
     component consumer_t_impl dst_thread;
     component Pacer pacer;
 
@@ -35,11 +33,8 @@ assembly {
     VM_COMPONENT_CONNECTIONS_DEF(Sender)
     VM_VIRTUAL_SERIAL_COMPOSITION_DEF(Sender)
 
-    //connection seL4Notification conn1(from src_thread.sb_write_port_1_notification, to dst_thread.sb_read_port_notification);
-    //connection seL4SharedData conn2(from src_thread.sb_write_port_queue_1, to dst_thread.sb_read_port_queue);
     connection seL4Notification conn3(from pacer.tick, to pacer.tock);
 
-    //connection seL4Notification conn4(from pacer.period, to src_thread.sb_pacer_notification);
     connection seL4SharedDataWithCaps conn4(from pacer.period_to_vm, to vmSender.period);
     connection seL4Notification conn5(from pacer.period, to dst_thread.sb_pacer_notification);
 
@@ -49,8 +44,6 @@ assembly {
   }
 
   configuration {
-    //src_thread.sb_write_port_queue_1_access = "W";
-    //src_thread._domain = 1;
     dst_thread.sb_read_port_queue_access = "R";
     pacer.period_to_vm_access = "W";
     dst_thread._priority = 50;
@@ -66,15 +59,8 @@ assembly {
     vmSender.crossvm_dp_0 = "W";
     vmSender.period = "R";
     VM_GENERAL_CONFIGURATION_DEF()
-    VM_CONFIGURATION_DEF(Receiver)
     VM_CONFIGURATION_DEF(Sender)
-    VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(Receiver,Sender)
-
-    vmReceiver.cnode_size_bits = 18;
-    vmReceiver.simple_untyped21_pool = 12;
-    vmReceiver.simple_untyped12_pool = 12;
-    vmReceiver.num_extra_frame_caps = 0;
-    vmReceiver.extra_frame_map_address = 0;
+    VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(Sender)
 
     vmSender.cnode_size_bits = 18;
     vmSender.simple_untyped21_pool = 12;

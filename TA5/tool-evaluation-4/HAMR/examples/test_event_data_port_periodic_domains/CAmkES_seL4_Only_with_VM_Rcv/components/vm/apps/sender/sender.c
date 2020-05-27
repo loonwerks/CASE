@@ -44,7 +44,7 @@ void p1_out_aadl_event_data_send(sb_queue_int8_t_1_t *q, int8_t *data, int *emit
 void period_wait(int port_fd, sb_queue_int8_t_1_Recv_t *q, sb_event_counter_t *numDropped) {
     int8_t data;
     while (!sb_queue_int8_t_1_dequeue(q, numDropped, &data)) {
-    	int val;
+    	int8_t val;
     	/* Blocking read */
     	int result = read(port_fd, &val, sizeof(val));
 		if (result < 0) {
