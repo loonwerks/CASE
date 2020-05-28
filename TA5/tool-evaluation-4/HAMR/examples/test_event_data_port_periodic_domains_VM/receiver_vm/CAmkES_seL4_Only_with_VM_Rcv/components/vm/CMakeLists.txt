@@ -1,4 +1,3 @@
-
 cmake_minimum_required(VERSION 3.8.2)
 
 project(arm-vm C)
@@ -104,8 +103,8 @@ else()
     set(rootfs_file "${CAMKES_VM_IMAGES_DIR}/${KernelARMPlatform}/rootfs_crossvm.cpio.gz")
 endif()
 
-# Complile CrossVM Event Apps receiver and sender
-foreach(item IN ITEMS receiver sender)
+# Complile CrossVM Event Apps vmdst_process
+foreach(item IN ITEMS vmdst_process)
     ExternalProject_Add(
         ${item}
         SOURCE_DIR
@@ -118,7 +117,9 @@ foreach(item IN ITEMS receiver sender)
         ON
         EXCLUDE_FROM_ALL
         CMAKE_ARGS
-        -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} -DQUEUE_LIB=${CMAKE_CURRENT_SOURCE_DIR}/../sb_queue_int8_t_1 -DCMAKE_C_FLAGS=${BASE_C_FLAGS}
+        -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER} 
+        -DQUEUE_LIB=${CMAKE_CURRENT_SOURCE_DIR}/../../types
+        -DCMAKE_C_FLAGS=${BASE_C_FLAGS}
     )
 
     AddExternalProjFilesToOverlay(
@@ -163,10 +164,14 @@ DefineCAmkESVMFileServer()
 CAmkESAddImportPath(${CMAKE_CURRENT_SOURCE_DIR}/${KernelARMPlatform}/)
 
 # Define our VM Component with out cross vm dataports glue code
-ExtendCAmkESComponentInstance(VM vmdst_process SOURCES src/cross_vm_connections_receiver.c)
+ExtendCAmkESComponentInstance(VM vmdst_process 
+  SOURCES src/cross_vm_connections_vmdst_process.c
+)
 
 # Link the vm component against the queue library.
-DeclareCAmkESComponent(VM LIBS sb_queue_int8_t_1)
+DeclareCAmkESComponent(VM 
+  LIBS SB_Type_Library
+)
 
 CAmkESAddCPPInclude(${CAMKES_ARM_VM_DIR}/components/VM)
 

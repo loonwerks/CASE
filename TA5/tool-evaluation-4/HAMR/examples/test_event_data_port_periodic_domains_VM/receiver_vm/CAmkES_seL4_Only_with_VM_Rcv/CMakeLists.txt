@@ -7,19 +7,19 @@ include(external-project-helpers)
 
 add_definitions(-DCAMKES)
 
-DeclareCAmkESComponent(emitter_t_impl
-  SOURCES components/emitter_t_impl/src/emitter.c components/emitter_t_impl/src/sb_emitter_t_impl.c components/sb_queue_int8_t_1/sb_queue_int8_t_1.c
-  INCLUDES includes components/emitter_t_impl/includes
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/types)
 
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/components/vm)
+
+DeclareCAmkESComponent(emitter_t_impl
+  SOURCES components/emitter_t_impl/src/emitter.c components/emitter_t_impl/src/sb_emitter_t_impl.c 
+  INCLUDES components/emitter_t_impl/includes
+  LIBS SB_Type_Library
 )
 
 DeclareCAmkESComponent(Pacer
-  SOURCES components/Pacer/src/Pacer.c components/sb_queue_int8_t_1/sb_queue_int8_t_1.c
-  INCLUDES includes
-
+  SOURCES components/Pacer/src/Pacer.c 
+  LIBS SB_Type_Library
 )
-
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/components/sb_queue_int8_t_1)
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/components/vm)
 
 DeclareCAmkESRootserver(top_impl_Instance.camkes)

@@ -11,9 +11,11 @@ void test_event_data_port_emitter_component_init(const int64_t *in_arg) {
 }
 
 void test_event_data_port_emitter_time_triggered_handler(const int64_t *in_arg) {
-  printf("---------------------------------------\n");
   if (sb_write_port_enqueue( &_value ) ) {
-    printf("[%s] Sent %d\n", get_instance_name(), _value);
+    if(_value == 0){
+      // don't send to much to console, because ?????????
+      printf("[%s] Heartbeat %d\n", get_instance_name(), _value);
+    }
     _value = (_value + 1) % 500;
   } else {
     printf("[%s] Unable to send\n", get_instance_name());

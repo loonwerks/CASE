@@ -17,7 +17,7 @@ elif [ -d "${HOME}/CASE/camkes-arm-vm" ]; then
 fi
 
 if [[ -z "$CAMKES_DIR" || ! -d "${CAMKES_DIR}" ]]; then
-    echo "Directory '${CAMKES_DIR}' does not exist.  Please specify the location of your CAmkES project directory"
+    echo "Directory '${CAMKES_DIR}' does not exist.  Please specify the location of your CAmkES ARM VM project directory"
     exit -1
 fi
 
@@ -62,6 +62,7 @@ cd $BUILD_DIR
     -DCAMKES_APP=$HAMR_CAMKES_PROJ
 
 #../init-build.sh \
+#    -DUSE_CACHED_LINUX_VM=blah \
 #    -DPLATFORM=qemu-arm-virt \
 #    -DARM_HYP=ON \
 #    -DCAMKES_APP=$HAMR_CAMKES_PROJ

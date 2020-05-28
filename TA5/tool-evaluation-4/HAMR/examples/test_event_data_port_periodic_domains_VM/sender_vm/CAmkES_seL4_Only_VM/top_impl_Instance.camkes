@@ -1,0 +1,52 @@
+// This file will be regenerated, do not edit
+
+#include <configurations/vm.h>
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <seL4VMDTBPassthrough.idl4>;
+import <FileServerInterface.camkes>;
+import <FileServer/FileServer.camkes>;
+import <SerialServer/SerialServer.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <vm-connectors.camkes>;
+import <devices.camkes>;
+import "components/Pacer/Pacer.camkes";
+import "components/VM/VM.camkes";
+import "components/consumer_t_impl/consumer_t_impl.camkes";
+
+assembly {
+  composition {
+    component VM vmsrc_process;
+    component consumer_t_impl dst_thread;
+    component Pacer pacer;
+
+    connection seL4VMDTBPassthrough conn1(from vmsrc_process.dtb_self, to vmsrc_process.dtb);
+    connection seL4Notification conn2(from vmsrc_process.sb_write_port_1_notification, to dst_thread.sb_read_port_notification);
+    connection seL4SharedDataWithCaps conn3(from vmsrc_process.sb_write_port_read_port_queue_1, to dst_thread.sb_read_port_queue);
+    connection seL4Notification conn4(from pacer.tick, to pacer.tock);
+    connection seL4SharedDataWithCaps conn5(from pacer.period_to_vmsrc_process, to vmsrc_process.sb_pacer_period_queue);
+    connection seL4Notification conn6(from pacer.period, to dst_thread.sb_pacer_notification);
+    VM_GENERAL_COMPOSITION_DEF()
+    VM_COMPONENT_CONNECTIONS_DEF(src_process)
+    VM_VIRTUAL_SERIAL_COMPONENTS_DEF()
+    PER_VM_VIRTUAL_SERIAL_CONNECTIONS_DEF(src_process)
+  }
+
+  configuration {
+    vmsrc_process.cnode_size_bits = 18;
+    vmsrc_process.simple_untyped21_pool = 12;
+    vmsrc_process.simple_untyped12_pool = 12;
+    vmsrc_process.num_extra_frame_caps = 0;
+    vmsrc_process.extra_frame_map_address = 0;
+    vmsrc_process.sb_write_port_read_port_queue_1_access = "W";
+    dst_thread.sb_read_port_queue_access = "R";
+    pacer._domain = 1;
+    vmsrc_process._domain = 2;
+    dst_thread._domain = 3;
+
+    VM_GENERAL_CONFIGURATION_DEF()
+    VM_CONFIGURATION_DEF(src_process)
+    VM_VIRTUAL_SERIAL_GENERAL_CONFIGURATION_DEF()
+    PER_VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(src_process)
+  }
+}

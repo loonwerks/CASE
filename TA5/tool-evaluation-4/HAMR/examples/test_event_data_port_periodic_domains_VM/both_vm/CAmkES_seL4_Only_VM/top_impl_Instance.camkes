@@ -1,0 +1,61 @@
+// This file will be regenerated, do not edit
+
+#include <configurations/vm.h>
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <seL4VMDTBPassthrough.idl4>;
+import <FileServerInterface.camkes>;
+import <FileServer/FileServer.camkes>;
+import <SerialServer/SerialServer.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <vm-connectors.camkes>;
+import <devices.camkes>;
+import "components/Pacer/Pacer.camkes";
+import "components/VM/VM.camkes";
+
+assembly {
+  composition {
+    component VM vmsrc_process;
+    component VM vmdst_process;
+    component Pacer pacer;
+
+    connection seL4VMDTBPassthrough conn1(from vmsrc_process.dtb_self, to vmsrc_process.dtb);
+    connection seL4VMDTBPassthrough conn2(from vmdst_process.dtb_self, to vmdst_process.dtb);
+    connection seL4GlobalAsynch conn3(from vmsrc_process.sb_write_port_1_notification, to vmdst_process.sb_read_port_notification);
+    connection seL4SharedDataWithCaps conn4(from vmsrc_process.sb_write_port_read_port_queue_1, to vmdst_process.sb_write_port_read_port_queue_1);
+    connection seL4Notification conn5(from pacer.tick, to pacer.tock);
+    connection seL4SharedDataWithCaps conn6(from pacer.period_to_vmsrc_process, to vmsrc_process.sb_pacer_period_queue);
+    connection seL4SharedDataWithCaps conn7(from pacer.period_to_vmdst_process, to vmdst_process.sb_pacer_period_queue);
+    VM_GENERAL_COMPOSITION_DEF()
+    VM_COMPONENT_CONNECTIONS_DEF(src_process)
+    VM_VIRTUAL_SERIAL_COMPONENTS_DEF()
+    PER_VM_VIRTUAL_SERIAL_CONNECTIONS_DEF(src_process)
+    VM_COMPONENT_CONNECTIONS_DEF(dst_process)
+    PER_VM_VIRTUAL_SERIAL_CONNECTIONS_DEF(dst_process)
+  }
+
+  configuration {
+    vmsrc_process.cnode_size_bits = 18;
+    vmsrc_process.simple_untyped21_pool = 12;
+    vmsrc_process.simple_untyped12_pool = 12;
+    vmsrc_process.num_extra_frame_caps = 0;
+    vmsrc_process.extra_frame_map_address = 0;
+    vmdst_process.cnode_size_bits = 18;
+    vmdst_process.simple_untyped21_pool = 12;
+    vmdst_process.simple_untyped12_pool = 12;
+    vmdst_process.num_extra_frame_caps = 0;
+    vmdst_process.extra_frame_map_address = 0;
+    vmsrc_process.sb_write_port_read_port_queue_1_access = "W";
+    vmdst_process.sb_write_port_read_port_queue_1_access = "R";
+    pacer._domain = 1;
+    vmsrc_process._domain = 2;
+    vmdst_process._domain = 3;
+
+    VM_GENERAL_CONFIGURATION_DEF()
+    VM_CONFIGURATION_DEF(src_process)
+    VM_VIRTUAL_SERIAL_GENERAL_CONFIGURATION_DEF()
+    PER_VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(src_process)
+    VM_CONFIGURATION_DEF(dst_process)
+    PER_VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(dst_process)
+  }
+}

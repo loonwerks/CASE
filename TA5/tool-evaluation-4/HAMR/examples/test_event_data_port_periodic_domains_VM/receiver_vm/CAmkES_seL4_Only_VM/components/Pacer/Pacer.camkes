@@ -4,5 +4,5 @@ component Pacer {
   emits Period period;
   emits TickTock tick;
   consumes TickTock tock;
-  dataport sb_queue_int8_t_1_t period_to_vm;
+  dataport sb_queue_int8_t_1_t period_to_vmdst_process;
 }
