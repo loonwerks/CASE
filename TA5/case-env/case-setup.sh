@@ -7,7 +7,7 @@ set -Eeuxo pipefail
 : "${GIT_USER:=Snail}"
 : "${GIT_EMAIL:=<>}"
 
-: "${SEL4_SCRIPTS_V:=e9cd963c46e7c188b825a908abf6ad4344d349da}"
+: "${SEL4_SCRIPTS_V:=728539476ada9263a3ce57370bf842fd32f6987c}"
 : "${SEL4_V:=28831f579e3560bd3aa18a3898505f091d66b076}"
 : "${CAMKES_V:=e7f5c6da03fc8a71a5a2e503de9f9004acf3ef2a}"
 : "${SIREUM_V:=8900744}"
