@@ -56,7 +56,7 @@ bool p1_in_aadl_event_data_poll(sb_event_counter_t *numDropped, int8_t *data) {
 
 void p1_in_aadl_event_data_wait(sb_event_counter_t *numDropped, int8_t *data) {
     while (!p1_in_aadl_event_data_poll(numDropped, data)) {
-    	int val;
+    	int8_t val;
     	/* Blocking read */
     	int result = read(dataport_fd, &val, sizeof(val));
 		if (result < 0) {
@@ -78,7 +78,7 @@ void p1_in_aadl_event_data_wait(sb_event_counter_t *numDropped, int8_t *data) {
 void period_wait(int port_fd, sb_queue_int8_t_1_Recv_t *q, sb_event_counter_t *numDropped) {
     int8_t data;
     while (!sb_queue_int8_t_1_dequeue(q, numDropped, &data)) {
-    	int val;
+    	int8_t val;
     	/* Blocking read */
     	int result = read(port_fd, &val, sizeof(val));
 		if (result < 0) {
@@ -99,8 +99,6 @@ void run_poll(void) {
         period_wait(eventport_fd, &periodQueue, &numDropped);
         
         // Random number of polls for testing
-        //int n = (random() % 10);
-        //for (unsigned int j = 0; j < 10; ++j) {
         notfound = 1;
         while (notfound) {
             bool dataReceived = p1_in_aadl_event_data_poll(&numDropped, &data);

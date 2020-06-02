@@ -57,7 +57,7 @@ bool p1_in_aadl_event_data_poll(sb_event_counter_t *numDropped, int8_t *data) {
 
 void p1_in_aadl_event_data_wait(sb_event_counter_t *numDropped, int8_t *data) {
     while (!p1_in_aadl_event_data_poll(numDropped, data)) {
-    	int val;
+    	int8_t val;
     	/* Blocking read */
     	int result = read(dataport_fd, &val, sizeof(val));
 		if (result < 0) {

@@ -29,13 +29,15 @@
 
 // maybe dataport sb_queue_int8_t_1 crossvm_dp_0;
 // maybe consumes SendEvent done;
+// dataport queue_t period
 
-#define NUM_CONNECTIONS 1
+#define NUM_CONNECTIONS 2
 static struct camkes_crossvm_connection connections[NUM_CONNECTIONS];
 
 // these are defined in the dataport's glue code
 extern dataport_caps_handle_t crossvm_dp_0_handle;
 seL4_Word done_notification_badge(void);
+extern dataport_caps_handle_t period_handle;
 
 static int consume_callback(vm_t *vm, void *cookie)
 {
@@ -52,11 +54,16 @@ void init_cross_vm_connections(vm_t *vm, void *cookie)
         .consume_badge = done_notification_badge()
     };
 
+    connections[1] = (struct camkes_crossvm_connection) {
+        .handle = &period_handle,
+        .emit_fn = NULL,
+        .consume_badge = -1
+    };
+
     for (int i = 0; i < NUM_CONNECTIONS; i++) {
         if (connections[i].consume_badge != -1) {
             int err = register_async_event_handler(connections[i].consume_badge, consume_callback, (void *)connections[i].consume_badge);
             ZF_LOGF_IF(err, "Failed to register_async_event_handler for init_cross_vm_connections.");
-
         }
     }
 

@@ -34,11 +34,11 @@ const dschedule_t ksDomSchedule[] = { // (1 tick == 2ms)
 //    { .domain = 3, .length =   5 }, // destination  10ms
 //    { .domain = 0, .length = 195 }, // domain0     390ms
 
-    { .domain = 0, .length =   5 }, // all other seL4 threads, init, 200ms
-    { .domain = 1, .length =   5 }, // pacer        10ms
-    { .domain = 0, .length =   5 }, // domain0     190ms
-    { .domain = 2, .length =   5 }, // source       10ms
-    { .domain = 0, .length =   5 }, // domain0     190ms
+    { .domain = 0, .length =   1 }, // all other seL4 threads, init, 200ms
+    { .domain = 1, .length =   1 }, // pacer        10ms
+    { .domain = 0, .length =   1 }, // domain0     190ms
+    { .domain = 2, .length =   1 }, // source       10ms
+    { .domain = 0, .length =   1 }, // domain0     190ms
     { .domain = 3, .length =   5 }, // destination  10ms
 
 };
