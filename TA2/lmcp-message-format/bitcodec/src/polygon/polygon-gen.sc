@@ -205,16 +205,36 @@ import BitCodec._
 // **Center:** 45.322869, -120.963645
 // **Top Right:** 45.345344, -120.912451
 
+// val keepInZoneLowerLeft: Location3D = Location3D(
+//   f64"45.300394",
+//   f64"-121.014809",
+//   f32"1000.0",
+//   u8"0x01"
+// )
+   
+// val keepInZoneUpperRight: Location3D = Location3D(
+//   f64"45.345344",
+//   f64"-120.912451",
+//   f32"1000.0",
+//   u8"0x01"
+// )
+
+// From Isaac's Javascript
+// Keep-In Zone:
+
+// Bottom left: (45.30039972874535, -121.01472992576784)
+// Top right: (45.34531548097283, -120.91251955738149)
+
 val keepInZoneLowerLeft: Location3D = Location3D(
-  f64"45.300394",
-  f64"-121.014809",
+  f64"45.30039972874535",
+  f64"-121.01472992576784",
   f32"1000.0",
   u8"0x01"
 )
    
 val keepInZoneUpperRight: Location3D = Location3D(
-  f64"45.345344",
-  f64"-120.912451",
+  f64"45.34531548097283",
+  f64"-120.91251955738149",
   f32"1000.0",
   u8"0x01"
 )
@@ -233,16 +253,36 @@ println(keepInZoneEncoded);
 // **Center:** 45.334407, -120.936179 
 // **Top Right:** 45.335756, -120.934244
 
+// val keepOutZoneLowerLeft: Location3D = Location3D(
+//   f64"45.333059",
+//   f64"-120.938088",
+//   f32"1000.0",
+//   u8"0x01"
+// )
+   
+// val keepOutZoneUpperRight: Location3D = Location3D(
+//   f64"45.335756",
+//   f64"-120.934244",
+//   f32"1000.0",
+//   u8"0x01"
+// )
+
+// From Isaac's Java Script
+// Keep-Out Zone:
+
+// Bottom left: (45.33305951104345, -120.93809578907548)
+// Top right: (45.3357544568948, -120.93426211970625)
+
 val keepOutZoneLowerLeft: Location3D = Location3D(
-  f64"45.333059",
-  f64"-120.938088",
+  f64"45.33305951104345",
+  f64"-120.93809578907548",
   f32"1000.0",
   u8"0x01"
 )
    
 val keepOutZoneUpperRight: Location3D = Location3D(
-  f64"45.335756",
-  f64"-120.934244",
+  f64"45.3357544568948",
+  f64"-120.93426211970625",
   f32"1000.0",
   u8"0x01"
 )

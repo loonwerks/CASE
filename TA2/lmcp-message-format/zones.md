@@ -112,3 +112,16 @@ val Polygon =
 ```
 
 Encoded value (see [bitcodec/src/polygon](bitcodec/src/polygon)): `[4046AAA1AD6451B9C05E3C09A2403148447A0000014046AAFA0D77B7C8C05E3BCAA7589EFE447A000001]`
+
+# Computed from Isaac's Java Script Pulled from UxAS code Computation
+
+Keep-In Zone:
+
+Bottom left: (45.30039972874535, -121.01472992576784)
+Top right: (45.34531548097283, -120.91251955738149)
+
+
+Keep-Out Zone:
+
+Bottom left: (45.33305951104345, -120.93809578907548)
+Top right: (45.3357544568948, -120.93426211970625)
