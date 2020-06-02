@@ -42,7 +42,8 @@ Computed the hypotenuse using pythagoreans theorem and basic trigonometry to get
 
 [HamsterMap.com](http://www.hamstermap.com/) to plot the coordinates for visual verification
 
-Encoded value (see [bitcodec/src/polygon](bitcodec/src/polygon)): `[4046A7BCD35A8588C05E415D80E496EE447A0000014046AAE9B38D60A6C05E39FA97E132B5447A000001]`
+Encoded value (see [bitcodec/src/polygon](bitcodec/src/polygon)): 
+`[4046A6734F82F512C05E40F2A172ABEF447A0000000000014046AC343B70EF56C05E3A6598E10CF6447A000000000001]`
 
 # Keep Out Zone
 
@@ -106,12 +107,13 @@ val Polygon =
       Double("latitude"),
       Double("longitude"),
       Float("altitude"),
-      UByte("altitudeType")
+      UInt("altitudeType")
     )))
   ))
 ```
 
-Encoded value (see [bitcodec/src/polygon](bitcodec/src/polygon)): `[4046AAA1AD6451B9C05E3C09A2403148447A0000014046AAFA0D77B7C8C05E3BCAA7589EFE447A000001]`
+Encoded value (see [bitcodec/src/polygon](bitcodec/src/polygon)): 
+`[4046AAA1AD6451B9C05E3C09A2403148447A0000000000014046AAFA0D77B7C8C05E3BCAA7589EFE447A000000000001]`
 
 # Computed from Isaac's Java Script Pulled from UxAS code Computation
 
@@ -120,8 +122,11 @@ Keep-In Zone:
 Bottom left: (45.30039972874535, -121.01472992576784)
 Top right: (45.34531548097283, -120.91251955738149)
 
+`[4046A6737F915822C05E40F155C95C81447A0000000000014046AC334C34CA58C05E3A66B86DFA7D447A000000000001]`
 
 Keep-Out Zone:
 
 Bottom left: (45.33305951104345, -120.93809578907548)
 Top right: (45.3357544568948, -120.93426211970625)
+
+`[4046AAA1B1ADC6D5C05E3C09C2EBA60C447A0000000000014046AAFA0085ECB9C05E3BCAF35881EB447A000000000001]`

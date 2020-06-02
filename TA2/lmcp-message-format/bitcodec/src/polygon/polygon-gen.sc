@@ -1,8 +1,7 @@
 // #Sireum
 
 import org.sireum._
-import org.sireum.U8._
-import org.sireum.F64._
+import org.sireum.U32._
 import org.sireum.ops.Bits.{Context, Reader, Writer}
 import org.sireum.bitcodec.Runtime
 
@@ -24,10 +23,10 @@ object BitCodec {
 
   object Location3D {
 
-    val maxSize: Z = z"168"
+    val maxSize: Z = z"192"
 
     def empty: MLocation3D = {
-      return MLocation3D(0.0d, 0.0d, 0.0f, u8"0")
+      return MLocation3D(0.0d, 0.0d, 0.0f, u32"0")
     }
 
     def decode(input: ISZ[B], context: Context): Option[Location3D] = {
@@ -42,13 +41,13 @@ object BitCodec {
     val latitude: F64,
     val longitude: F64,
     val altitude: F32,
-    val altitudeType: U8
+    val altitudeType: U32
   ) {
 
     @strictpure def toMutable: MLocation3D = MLocation3D(latitude, longitude, altitude, altitudeType)
 
     def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(168, F)
+      val buffer = MSZ.create(192, F)
       toMutable.encode(buffer, context)
       return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
     }
@@ -62,7 +61,7 @@ object BitCodec {
     var latitude: F64,
     var longitude: F64,
     var altitude: F32,
-    var altitudeType: U8
+    var altitudeType: U32
   ) extends Runtime.Composite {
 
     @strictpure def toImmutable: Location3D = Location3D(latitude, longitude, altitude, altitudeType)
@@ -81,7 +80,7 @@ object BitCodec {
       latitude = Reader.IS.beF64(input, context)
       longitude = Reader.IS.beF64(input, context)
       altitude = Reader.IS.beF32(input, context)
-      altitudeType = Reader.IS.bleU8(input, context)
+      altitudeType = Reader.IS.beU32(input, context)
 
       val wf = wellFormed
       if (wf != 0) {
@@ -93,7 +92,7 @@ object BitCodec {
       Writer.beF64(output, context, latitude)
       Writer.beF64(output, context, longitude)
       Writer.beF32(output, context, altitude)
-      Writer.bleU8(output, context, altitudeType)
+      Writer.beU32(output, context, altitudeType)
 
       if (context.errorCode == Writer.INSUFFICIENT_BUFFER_SIZE) {
         context.updateErrorCode(ERROR_Location3D)
@@ -104,7 +103,7 @@ object BitCodec {
 
   object Polygon {
 
-    val maxSize: Z = z"336"
+    val maxSize: Z = z"384"
 
     def empty: MPolygon = {
       return MPolygon(MSZ[MLocation3D]())
@@ -140,7 +139,7 @@ object BitCodec {
     @strictpure def toMutable: MPolygon = MPolygon(Polygon.toMutableBondaryPointList(bondaryPointList))
 
     def encode(context: Context): Option[ISZ[B]] = {
-      val buffer = MSZ.create(336, F)
+      val buffer = MSZ.create(384, F)
       toMutable.encode(buffer, context)
       return if (context.hasError) None[ISZ[B]]() else Some(buffer.toIS)
     }
@@ -201,23 +200,23 @@ import BitCodec._
 
 // keepInZone
 // **Altitude**: 1000
-// **Bottom Left:** 45.300394, -121.014809 
+// **Bottom Left:** 45.300394, -121.014809
 // **Center:** 45.322869, -120.963645
 // **Top Right:** 45.345344, -120.912451
 
-// val keepInZoneLowerLeft: Location3D = Location3D(
-//   f64"45.300394",
-//   f64"-121.014809",
-//   f32"1000.0",
-//   u8"0x01"
-// )
-   
-// val keepInZoneUpperRight: Location3D = Location3D(
-//   f64"45.345344",
-//   f64"-120.912451",
-//   f32"1000.0",
-//   u8"0x01"
-// )
+val keepInZoneLowerLeft: Location3D = Location3D(
+  f64"45.300394",
+  f64"-121.014809",
+  f32"1000.0",
+  u32"0x01"
+)
+
+val keepInZoneUpperRight: Location3D = Location3D(
+  f64"45.345344",
+  f64"-120.912451",
+  f32"1000.0",
+  u32"0x01"
+)
 
 // From Isaac's Javascript
 // Keep-In Zone:
@@ -225,19 +224,19 @@ import BitCodec._
 // Bottom left: (45.30039972874535, -121.01472992576784)
 // Top right: (45.34531548097283, -120.91251955738149)
 
-val keepInZoneLowerLeft: Location3D = Location3D(
-  f64"45.30039972874535",
-  f64"-121.01472992576784",
-  f32"1000.0",
-  u8"0x01"
-)
-   
-val keepInZoneUpperRight: Location3D = Location3D(
-  f64"45.34531548097283",
-  f64"-120.91251955738149",
-  f32"1000.0",
-  u8"0x01"
-)
+// val keepInZoneLowerLeft: Location3D = Location3D(
+//   f64"45.30039972874535",
+//   f64"-121.01472992576784",
+//   f32"1000.0",
+//   u32"0x01"
+// )
+
+// val keepInZoneUpperRight: Location3D = Location3D(
+//   f64"45.34531548097283",
+//   f64"-120.91251955738149",
+//   f32"1000.0",
+//   u32"0x01"
+// )
 
 val keepInZone : Polygon = Polygon(ISZ(keepInZoneLowerLeft, keepInZoneUpperRight))
 
@@ -250,22 +249,22 @@ println(keepInZoneEncoded);
 // keepOutZone
 // **Altitude:** 1000
 // **Bottom Left:** 45.333059, -120.938088
-// **Center:** 45.334407, -120.936179 
+// **Center:** 45.334407, -120.936179
 // **Top Right:** 45.335756, -120.934244
 
-// val keepOutZoneLowerLeft: Location3D = Location3D(
-//   f64"45.333059",
-//   f64"-120.938088",
-//   f32"1000.0",
-//   u8"0x01"
-// )
-   
-// val keepOutZoneUpperRight: Location3D = Location3D(
-//   f64"45.335756",
-//   f64"-120.934244",
-//   f32"1000.0",
-//   u8"0x01"
-// )
+val keepOutZoneLowerLeft: Location3D = Location3D(
+  f64"45.333059",
+  f64"-120.938088",
+  f32"1000.0",
+  u32"0x01"
+)
+
+val keepOutZoneUpperRight: Location3D = Location3D(
+  f64"45.335756",
+  f64"-120.934244",
+  f32"1000.0",
+  u32"0x01"
+)
 
 // From Isaac's Java Script
 // Keep-Out Zone:
@@ -273,19 +272,19 @@ println(keepInZoneEncoded);
 // Bottom left: (45.33305951104345, -120.93809578907548)
 // Top right: (45.3357544568948, -120.93426211970625)
 
-val keepOutZoneLowerLeft: Location3D = Location3D(
-  f64"45.33305951104345",
-  f64"-120.93809578907548",
-  f32"1000.0",
-  u8"0x01"
-)
-   
-val keepOutZoneUpperRight: Location3D = Location3D(
-  f64"45.3357544568948",
-  f64"-120.93426211970625",
-  f32"1000.0",
-  u8"0x01"
-)
+// val keepOutZoneLowerLeft: Location3D = Location3D(
+//   f64"45.33305951104345",
+//   f64"-120.93809578907548",
+//   f32"1000.0",
+//   u32"0x01"
+// )
+
+// val keepOutZoneUpperRight: Location3D = Location3D(
+//   f64"45.3357544568948",
+//   f64"-120.93426211970625",
+//   f32"1000.0",
+//   u32"0x01"
+// )
 
 val keepOutZone : Polygon = Polygon(ISZ(keepOutZoneLowerLeft, keepOutZoneUpperRight))
 
@@ -294,6 +293,5 @@ val keepOutZoneEncoded: ISZ[B] = keepOutZone.encode(keepOutZoneContext).get
 
 println(s"keepOutZoneContext.errorCode = ${keepOutZoneContext.errorCode}")
 println(keepOutZoneEncoded);
-
 
 // END USER CODE: Test
