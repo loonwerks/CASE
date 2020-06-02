@@ -201,20 +201,20 @@ import BitCodec._
 
 // keepInZone
 // **Altitude**: 1000
-// **Bottom Left:** 45.310450, -121.021332
+// **Bottom Left:** 45.300394, -121.014809 
 // **Center:** 45.322869, -120.963645
-// **Top Right:** 45.335257, -120.905920
+// **Top Right:** 45.345344, -120.912451
 
 val keepInZoneLowerLeft: Location3D = Location3D(
-  f64"45.310450",
-  f64"-121.021332",
+  f64"45.300394",
+  f64"-121.014809",
   f32"1000.0",
   u8"0x01"
 )
    
 val keepInZoneUpperRight: Location3D = Location3D(
-  f64"45.335257",
-  f64"-120.905920",
+  f64"45.345344",
+  f64"-120.912451",
   f32"1000.0",
   u8"0x01"
 )

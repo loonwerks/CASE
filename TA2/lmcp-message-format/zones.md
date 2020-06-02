@@ -36,9 +36,9 @@ The rectangle is given by a center point with a width and height. Computed botto
 Computed the hypotenuse using pythagoreans theorem and basic trigonometry to get the azimuth. Moved to the bottom left corner, and then used the reverse azimuth to move twice the distance to the top-right corner (shown as latitude, longitude pairs)
 
 **Altitude**: 1000
-**Bottom Left:** 45.310450, -121.021332
+**Bottom Left:** 45.300394, -121.014809 
 **Center:** 45.322869, -120.963645
-**Top Right:** 45.335257, -120.905920
+**Top Right:** 45.345344, -120.912451
 
 [HamsterMap.com](http://www.hamstermap.com/) to plot the coordinates for visual verification
 
