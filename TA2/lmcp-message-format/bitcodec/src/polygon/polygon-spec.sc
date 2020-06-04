@@ -24,7 +24,7 @@ val Polygon =
       Double("latitude"),
       Double("longitude"),
       Float("altitude"),
-      UByte("altitudeType")
+      UInt("altitudeType")
     )))
   ))
 
