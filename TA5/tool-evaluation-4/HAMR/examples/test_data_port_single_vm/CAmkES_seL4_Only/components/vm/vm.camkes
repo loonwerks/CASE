@@ -1,0 +1,19 @@
+#include <configurations/vm.h>
+
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <seL4VMDTBPassthrough.idl4>;
+import <FileServerInterface.camkes>;
+import <FileServer/FileServer.camkes>;
+import <SerialServer/SerialServer.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <vm-connectors.camkes>;
+import <devices.camkes>;
+
+component VM {
+  VM_INIT_DEF()
+  include <sb_types.h>;
+  include <sp_int8_t.h>;
+  dataport sp_int8_t_t sb_write_port;
+  dataport sp_int8_t_t sb_pacer_notification;
+}

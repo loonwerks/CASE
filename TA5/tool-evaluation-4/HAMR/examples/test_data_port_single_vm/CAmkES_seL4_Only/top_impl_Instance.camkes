@@ -1,0 +1,56 @@
+#include <configurations/vm.h>
+
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <seL4VMDTBPassthrough.idl4>;
+import <FileServerInterface.camkes>;
+import <FileServer/FileServer.camkes>;
+import <SerialServer/SerialServer.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <vm-connectors.camkes>;
+import <devices.camkes>;
+
+import "components/Pacer/Pacer.camkes";
+import "components/vm/vm.camkes";
+import "components/consumer_t_impl/consumer_t_impl.camkes";
+
+assembly {
+  composition {
+    component consumer_t_impl dst_thread;
+    component Pacer pacer;
+
+    VM_GENERAL_COMPOSITION_DEF()
+    component VM vmsrc_thread;
+    VM_COMPONENT_CONNECTIONS_DEF(src_thread)
+    VM_VIRTUAL_SERIAL_COMPOSITION_DEF(src_thread)
+
+    connection seL4SharedDataWithCaps conn1(from vmsrc_thread.sb_write_port, to dst_thread.sb_read_port);
+    connection seL4Notification conn2(from pacer.tick, to pacer.tock);
+
+    connection seL4SharedDataWithCaps conn3(from pacer.period_to_vm, to vmsrc_thread.sb_pacer_notification);
+    connection seL4Notification conn4(from pacer.period, to dst_thread.sb_pacer_notification);
+
+    connection seL4VMDTBPassthrough vm_dtb1(from vmsrc_thread.dtb_self, to vmsrc_thread.dtb);
+  }
+
+  configuration {
+    vmsrc_thread.write_port_access = "W";
+    dst_thread.read_port_access = "R";
+    pacer.period_to_vm_access = "W";
+    vmsrc_thread.period = "R";
+
+    pacer._domain = 1;
+    vmsrc_thread._domain = 2;
+    dst_thread._domain = 3;
+
+    VM_GENERAL_CONFIGURATION_DEF()
+    VM_CONFIGURATION_DEF(src_thread)
+    VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(src_thread)
+
+    vmsrc_thread.cnode_size_bits = 18;
+    vmsrc_thread.simple_untyped21_pool = 12;
+    vmsrc_thread.simple_untyped12_pool = 12;
+    vmsrc_thread.num_extra_frame_caps = 0;
+    vmsrc_thread.extra_frame_map_address = 0;
+  }
+}

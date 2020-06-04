@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>test_event_data_port</name>
+	<name>test_data_port</name>
 	<comment></comment>
 	<projects>
 		<project>Plugin_Resources</project>
