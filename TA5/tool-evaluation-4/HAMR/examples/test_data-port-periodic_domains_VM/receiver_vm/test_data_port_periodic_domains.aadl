@@ -1,0 +1,107 @@
+----------------------------------------------------------------------
+-- Copyright 2020 DARPA CASE
+--
+-- Micro example AADL to show single AADL dataport communications for
+-- a periodic process running under the seL4 domain scheduler
+----------------------------------------------------------------------
+package test_event_data_port_periodic_domains
+public
+	with HAMR;
+	with Base_Types;
+	with CASE_Scheduling;
+
+	thread emitter_t
+		features
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Source_Text => ("behavior_code/components/emitter/src/emitter.c");
+			Initialize_Entrypoint_Source_Text => "test_event_data_port_emitter_component_init";
+			Compute_Entrypoint_Source_Text => "test_event_data_port_emitter_time_triggered_handler";
+	end emitter_t;
+
+	thread implementation emitter_t.impl
+	end emitter_t.impl;
+
+	process emitter_p
+		features
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			CASE_Scheduling::Domain => 2; -- pacer 1, source 2, destination 3
+	end emitter_p;
+
+	-- process specifies boundary of spatial isolation
+	process implementation emitter_p.impl
+		subcomponents
+			src_thread: thread emitter_t.impl;
+		connections
+			write_connection: port src_thread.write_port -> write_port;
+	end emitter_p.impl;
+
+	--------------------------------------------------------------------------
+	thread consumer_t
+		features
+			read_port: in data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Source_Text => ("behavior_code/components/consumer/src/consumer.c");
+			Initialize_Entrypoint_Source_Text => "test_event_data_port_consumer_component_init";
+			Compute_Entrypoint_Source_Text => "test_event_data_port_consumer_time_triggered_handler";
+	end consumer_t;
+
+	thread implementation consumer_t.impl
+	end consumer_t.impl;
+
+	process consumer_p
+		features
+			read_port: in data port Base_Types::Integer_8;
+		properties
+			CASE_Scheduling::Domain => 3; -- pacer 1, source 2, destination 3
+			HAMR::Component_Type => VIRTUAL_MACHINE;
+	end consumer_p;
+
+	-- process specifies boundary of spatial isolation
+	process implementation consumer_p.impl
+		subcomponents
+			dst_thread: thread consumer_t.impl;
+		connections
+			read_connection: port read_port -> dst_thread.read_port;
+	end consumer_p.impl;
+
+	--------------------------------------------------------------------------
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+		properties
+			Frame_Period => 1000ms;
+			Clock_Period => 2ms;
+			CASE_Scheduling::Max_Domain => 3;
+			CASE_Scheduling::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
+	end proc.impl;
+
+	--------------------------------------------------------------------------
+	system top
+	end top;
+
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			src_process: process emitter_p.impl; -- {
+			dst_process: process consumer_p.impl;
+		connections
+			data_interconnect: port src_process.write_port -> dst_process.read_port;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to src_process;
+			Actual_Processor_Binding => (reference (proc)) applies to dst_process;
+			HAMR::Platform => (seL4_TB, seL4_Only);
+	--annex resolute {**
+	--	check CASE_Tools
+	--**};
+	end top.impl;
+
+end test_event_data_port_periodic_domains;
