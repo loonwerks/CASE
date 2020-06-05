@@ -1,0 +1,11 @@
+#include <configurations/vm.h>
+component VM {
+  include <sb_types.h>;
+  include <sb_queue_union_art_DataContent_1.h>;
+  include <sb_queue_int8_t_1.h>;
+
+  maybe consumes ReceiveEvent sb_read_port_notification;
+  maybe dataport sb_queue_union_art_DataContent_1_t sb_write_port_read_port_queue_1;
+  dataport sb_queue_int8_t_1_t sb_pacer_period_queue;
+  VM_INIT_DEF()
+}

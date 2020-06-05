@@ -1,6 +1,7 @@
 #ifndef SB_TYPES_H
 #define SB_TYPES_H
 
+#include <stdio.h>
 #include <stdbool.h>
 #include <stdint.h>
 

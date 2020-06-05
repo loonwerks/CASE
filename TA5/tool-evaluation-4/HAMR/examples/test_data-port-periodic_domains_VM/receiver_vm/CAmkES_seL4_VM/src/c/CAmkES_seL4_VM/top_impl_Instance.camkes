@@ -1,0 +1,50 @@
+// This file will be regenerated, do not edit
+
+#include <configurations/vm.h>
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <seL4VMDTBPassthrough.idl4>;
+import <FileServerInterface.camkes>;
+import <FileServer/FileServer.camkes>;
+import <SerialServer/SerialServer.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <vm-connectors.camkes>;
+import <devices.camkes>;
+import "components/Pacer/Pacer.camkes";
+import "components/emitter_t_impl/emitter_t_impl.camkes";
+import "components/VM/VM.camkes";
+
+assembly {
+  composition {
+    component emitter_t_impl src_thread;
+    component VM vmdst_process;
+    component Pacer pacer;
+
+    connection seL4VMDTBPassthrough conn1(from vmdst_process.dtb_self, to vmdst_process.dtb);
+    connection seL4SharedDataWithCaps conn2(from src_thread.sb_write_port, to vmdst_process.sb_write_port_read_port);
+    connection seL4Notification conn3(from pacer.tick, to pacer.tock);
+    connection seL4Notification conn4(from pacer.period, to src_thread.sb_pacer_notification);
+    connection seL4SharedDataWithCaps conn5(from pacer.period_to_vmdst_process, to vmdst_process.sb_pacer_period_queue);
+    VM_GENERAL_COMPOSITION_DEF()
+    VM_COMPONENT_CONNECTIONS_DEF(dst_process)
+    VM_VIRTUAL_SERIAL_COMPONENTS_DEF()
+    PER_VM_VIRTUAL_SERIAL_CONNECTIONS_DEF(dst_process)
+  }
+
+  configuration {
+    src_thread.write_port_access = "W";
+    vmdst_process.cnode_size_bits = 18;
+    vmdst_process.simple_untyped21_pool = 12;
+    vmdst_process.simple_untyped12_pool = 12;
+    vmdst_process.num_extra_frame_caps = 0;
+    vmdst_process.extra_frame_map_address = 0;
+    pacer._domain = 1;
+    src_thread._domain = 2;
+    vmdst_process._domain = 3;
+
+    VM_GENERAL_CONFIGURATION_DEF()
+    VM_CONFIGURATION_DEF(dst_process)
+    VM_VIRTUAL_SERIAL_GENERAL_CONFIGURATION_DEF()
+    PER_VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(dst_process)
+  }
+}

@@ -5,7 +5,7 @@ component VM {
 
   emits ReceiveEvent sb_write_port_1_notification;
   maybe consumes ReceiveEvent sb_read_port_notification;
-  dataport sb_queue_int8_t_1_t sb_write_port_read_port_queue_1;
+  maybe dataport sb_queue_int8_t_1_t sb_write_port_read_port_queue_1;
   dataport sb_queue_int8_t_1_t sb_pacer_period_queue;
   VM_INIT_DEF()
 }
