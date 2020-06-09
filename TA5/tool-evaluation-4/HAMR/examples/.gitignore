@@ -1,0 +1,8 @@
+/.aadlbin-gen/
+instances
+**/src/c/nix
+instances/
+**/*-build/
+**/CAmkES_seL4/hamr/
+**/CAmkES_seL4_VM/hamr/
+**/sel4-build/
