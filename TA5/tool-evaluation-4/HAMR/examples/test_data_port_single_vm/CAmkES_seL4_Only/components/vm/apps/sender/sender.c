@@ -83,7 +83,7 @@ int main(int argc, char *argv[])
     }
 
     char *period;
-    if ((period = mmap(NULL, length, PROT_READ | PROT_WRITE, MAP_SHARED, fd2, 1 * getpagesize())) == (void *) -1) {
+    if ((period = mmap(NULL, length2, PROT_READ | PROT_WRITE, MAP_SHARED, fd2, 1 * getpagesize())) == (void *) -1) {
         printf("mmap period failed\n");
         close(fd2);
     }
@@ -117,7 +117,7 @@ int main(int argc, char *argv[])
     }
 
     munmap(dataport, length);
-    munmap(period, length);
+    munmap(period, length2);
     close(fd);
     close(fd2);
 
