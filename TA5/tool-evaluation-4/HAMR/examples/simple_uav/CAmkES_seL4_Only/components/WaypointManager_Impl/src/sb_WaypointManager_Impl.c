@@ -1,4 +1,4 @@
-#include "../includes/sb_WaypointManager_Impl.h"
+#include <sb_WaypointManager_Impl.h>
 #include <sb_queue_sb_SW__Mission_container_1.h>
 #include <sb_event_counter.h>
 #include <sb_queue_bool_1.h>

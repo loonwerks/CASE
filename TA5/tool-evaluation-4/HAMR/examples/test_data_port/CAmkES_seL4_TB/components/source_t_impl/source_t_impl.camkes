@@ -1,5 +1,4 @@
 import "../../interfaces/sb_Monitor_int8_t.idl4";
-
 component source_t_impl {
   include <sb_types.h>;
   control;

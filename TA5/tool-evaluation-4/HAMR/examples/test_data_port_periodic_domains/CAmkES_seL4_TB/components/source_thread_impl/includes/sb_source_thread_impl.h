@@ -1,5 +1,5 @@
-#ifndef __sb_AADL_source_thread_impl_types__H
-#define __sb_AADL_source_thread_impl_types__H
+#ifndef SB_SOURCE_THREAD_IMPL_H
+#define SB_SOURCE_THREAD_IMPL_H
 
 #include <sb_types.h>
 
@@ -9,4 +9,4 @@ void test_data_port_periodic_domains_source_component_time_triggered(const int64
 
 void test_data_port_periodic_domains_source_component_init(const int64_t *arg);
 
-#endif // __sb_AADL_source_thread_impl_types__H
+#endif // SB_SOURCE_THREAD_IMPL_H

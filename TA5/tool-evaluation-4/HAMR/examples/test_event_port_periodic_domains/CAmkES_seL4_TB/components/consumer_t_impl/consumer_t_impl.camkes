@@ -1,6 +1,5 @@
 import "../../interfaces/AADLEvent_Receiver.idl4";
 import <std_connector.camkes>;
-
 component consumer_t_impl {
   include <sb_types.h>;
   control;

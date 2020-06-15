@@ -1,5 +1,5 @@
 #include <sb_types.h>
-#include "../includes/sb_destination_thread_component_read_port_Monitor.h"
+#include <sb_destination_thread_component_read_port_Monitor.h>
 
 int monsig_emit(void);
 

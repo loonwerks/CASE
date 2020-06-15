@@ -17,22 +17,30 @@ elif [ -d "${HOME}/CASE/camkes" ]; then
 fi
 
 if [[ -z "$CAMKES_DIR" || ! -d "${CAMKES_DIR}" ]]; then
-    echo "Directory '${CAMKES_DIR}' does not exist.  Please specify the location of your CAmkES project directory"
+    echo "Directory '${CAMKES_DIR}' does not exist.  Please specify the location of your camkes project directory."
+    echo "See https://docs.sel4.systems/projects/camkes"
     exit -1
 fi
 
 
-# use the directory name for the CAmkES apps directory name 
+# use the directory name for the CAmkES apps directory name
 HAMR_CAMKES_PROJ=${PWD##*/}
 
 
 CAMKES_APPS_DIR=$CAMKES_DIR/projects/camkes/apps/$HAMR_CAMKES_PROJ
 
 # create a sym-link to the project in the CAmkES app directory
-if [ ! -e "${CAMKES_APPS_DIR}" ]; then
-    ln -sv $PROJECT_HOME $CAMKES_APPS_DIR
+
+if [ -e "${CAMKES_APPS_DIR}" ]; then
+  read -p "The following directory already exists, replace ${CAMKES_APPS_DIR} [Y|y]? " -n 1 -r; echo
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    rm -rf ${CAMKES_APPS_DIR}
+  else
+    exit -1
+  fi
 fi
 
+ln -sv $PROJECT_HOME $CAMKES_APPS_DIR
 
 ########################
 # run CAmkES/seL4 build
@@ -42,14 +50,19 @@ cd $CAMKES_DIR
 
 BUILD_DIR=build_$HAMR_CAMKES_PROJ
 
-rm -rf $BUILD_DIR
-mkdir $BUILD_DIR
-cd $BUILD_DIR
+# rm -rf ${BUILD_DIR}
+if [ ! -e "${BUILD_DIR}" ]; then
+  mkdir ${BUILD_DIR}
+fi
 
-../init-build.sh -DCAMKES_APP=$HAMR_CAMKES_PROJ && ninja
+cd ${BUILD_DIR}
+
+../init-build.sh -DCAMKES_APP=$HAMR_CAMKES_PROJ
+
+ninja
 
 ########################
 # simulate via QEMU
 ########################
 
-./simulate                   
+./simulate

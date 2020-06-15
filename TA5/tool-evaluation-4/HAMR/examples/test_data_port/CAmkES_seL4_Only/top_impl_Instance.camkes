@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 import <std_connector.camkes>;
 import "components/source_t_impl/source_t_impl.camkes";
 import "components/destination_t_impl/destination_t_impl.camkes";
@@ -13,5 +15,6 @@ assembly {
   configuration {
     src.write_port_access = "W";
     dest.read_port_access = "R";
+
   }
 }

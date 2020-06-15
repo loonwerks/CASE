@@ -1,7 +1,6 @@
 import "../../interfaces/sb_Monitor_SW__Mission_1.idl4";
 import "../../interfaces/sb_Monitor_bool_1.idl4";
 import "../../interfaces/sb_Monitor_SW__Command_Impl_1.idl4";
-
 component FlightPlanner_Impl {
   include <sb_types.h>;
   control;

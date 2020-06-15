@@ -1,5 +1,5 @@
-#ifndef __sb_AADL_FlightPlanner_Impl_types__H
-#define __sb_AADL_FlightPlanner_Impl_types__H
+#ifndef SB_FLIGHTPLANNER_IMPL_H
+#define SB_FLIGHTPLANNER_IMPL_H
 
 #include <sb_types.h>
 
@@ -15,4 +15,4 @@ void recv_map(const SW__Command_Impl *);
 
 void init(const int64_t *arg);
 
-#endif // __sb_AADL_FlightPlanner_Impl_types__H
+#endif // SB_FLIGHTPLANNER_IMPL_H

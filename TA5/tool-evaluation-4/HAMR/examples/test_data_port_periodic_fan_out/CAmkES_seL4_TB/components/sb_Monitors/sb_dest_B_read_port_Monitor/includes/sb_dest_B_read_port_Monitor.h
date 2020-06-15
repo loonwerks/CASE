@@ -1,4 +1,5 @@
-#ifdef __sb_dest_B_read_port_Monitor_H__
-#define __sb_dest_B_read_port_Monitor_H__
+#ifndef SB_DEST_B_READ_PORT_MONITOR_H
+#define SB_DEST_B_READ_PORT_MONITOR_H
 
-#endif // __sb_dest_B_read_port_Monitor_H__
+
+#endif // SB_DEST_B_READ_PORT_MONITOR_H

@@ -1,4 +1,4 @@
-#include "../includes/sb_consumer_queue_5_impl.h"
+#include <sb_consumer_queue_5_impl.h>
 #include <sb_event_counter.h>
 #include <string.h>
 #include <camkes.h>

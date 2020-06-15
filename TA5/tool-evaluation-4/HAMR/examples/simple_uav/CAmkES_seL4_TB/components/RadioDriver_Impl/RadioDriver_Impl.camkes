@@ -1,5 +1,4 @@
 import "../../interfaces/sb_Monitor_SW__Command_Impl_1.idl4";
-
 component RadioDriver_Impl {
   include <sb_types.h>;
   control;

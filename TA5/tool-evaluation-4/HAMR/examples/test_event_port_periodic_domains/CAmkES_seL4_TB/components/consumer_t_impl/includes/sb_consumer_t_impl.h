@@ -1,5 +1,5 @@
-#ifndef __sb_AADL_consumer_t_impl_types__H
-#define __sb_AADL_consumer_t_impl_types__H
+#ifndef SB_CONSUMER_T_IMPL_H
+#define SB_CONSUMER_T_IMPL_H
 
 #include <sb_types.h>
 
@@ -9,4 +9,4 @@ void test_event_port_consumer_time_triggered_handler(const int64_t *);
 
 void test_event_port_consumer_component_init(const int64_t *arg);
 
-#endif // __sb_AADL_consumer_t_impl_types__H
+#endif // SB_CONSUMER_T_IMPL_H

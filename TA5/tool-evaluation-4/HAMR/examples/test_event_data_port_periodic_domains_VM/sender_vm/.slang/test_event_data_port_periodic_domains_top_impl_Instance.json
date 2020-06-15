@@ -16,10 +16,10 @@
             },
             "beginLine" : 93,
             "beginColumn" : 2,
-            "endLine" : 109,
+            "endLine" : 107,
             "endColumn" : 15,
             "offset" : 2978,
-            "length" : 577
+            "length" : 514
           }
         }
       },
@@ -998,11 +998,11 @@
                   "type" : "Some",
                   "value" : "\/test_event_data_port_periodic_domains_sender_vm\/test_event_data_port_periodic_domains.aadl"
                 },
-                "beginLine" : 99,
+                "beginLine" : 97,
                 "beginColumn" : 4,
-                "endLine" : 99,
+                "endLine" : 97,
                 "endColumn" : 41,
-                "offset" : 3158,
+                "offset" : 3098,
                 "length" : 37
               }
             }
@@ -1714,11 +1714,11 @@
                           "type" : "Some",
                           "value" : "\/test_event_data_port_periodic_domains_sender_vm\/test_event_data_port_periodic_domains.aadl"
                         },
-                        "beginLine" : 99,
+                        "beginLine" : 97,
                         "beginColumn" : 4,
-                        "endLine" : 99,
+                        "endLine" : 97,
                         "endColumn" : 41,
-                        "offset" : 3158,
+                        "offset" : 3098,
                         "length" : 37
                       }
                     }
@@ -2164,11 +2164,11 @@
                   "type" : "Some",
                   "value" : "\/test_event_data_port_periodic_domains_sender_vm\/test_event_data_port_periodic_domains.aadl"
                 },
-                "beginLine" : 101,
+                "beginLine" : 99,
                 "beginColumn" : 4,
-                "endLine" : 101,
+                "endLine" : 99,
                 "endColumn" : 76,
-                "offset" : 3213,
+                "offset" : 3153,
                 "length" : 72
               }
             }
@@ -2242,11 +2242,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_data_port_periodic_domains_sender_vm\/test_event_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 99,
+                    "beginLine" : 97,
                     "beginColumn" : 4,
-                    "endLine" : 99,
+                    "endLine" : 97,
                     "endColumn" : 41,
-                    "offset" : 3158,
+                    "offset" : 3098,
                     "length" : 37
                   }
                 }
@@ -2492,11 +2492,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_data_port_periodic_domains_sender_vm\/test_event_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 101,
+                    "beginLine" : 99,
                     "beginColumn" : 4,
-                    "endLine" : 101,
+                    "endLine" : 99,
                     "endColumn" : 76,
-                    "offset" : 3213,
+                    "offset" : 3153,
                     "length" : 72
                   }
                 }
@@ -2514,10 +2514,10 @@
                     },
                     "beginLine" : 93,
                     "beginColumn" : 2,
-                    "endLine" : 109,
+                    "endLine" : 107,
                     "endColumn" : 15,
                     "offset" : 2978,
-                    "length" : 577
+                    "length" : 514
                   }
                 }
               },
@@ -2556,11 +2556,11 @@
                       "type" : "Some",
                       "value" : "\/test_event_data_port_periodic_domains_sender_vm\/test_event_data_port_periodic_domains.aadl"
                     },
-                    "beginLine" : 99,
+                    "beginLine" : 97,
                     "beginColumn" : 4,
-                    "endLine" : 99,
+                    "endLine" : 97,
                     "endColumn" : 41,
-                    "offset" : 3158,
+                    "offset" : 3098,
                     "length" : 37
                   }
                 }
@@ -2598,7 +2598,7 @@
           "propertyValues" : [
             {
               "type" : "ValueProp",
-              "value" : "seL4_TB"
+              "value" : "seL4"
             },
             {
               "type" : "ValueProp",

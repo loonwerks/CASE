@@ -488,17 +488,6 @@
                     "properties" : [
                     ]
                   }
-                },
-                {
-                  "type" : "Annex",
-                  "name" : "smf",
-                  "clause" : {
-                    "type" : "SmfClause",
-                    "classification" : [
-                    ],
-                    "declass" : [
-                    ]
-                  }
                 }
               ]
             }
@@ -588,7 +577,20 @@
                     "type" : "Name",
                     "name" : ["top_impl_Instance", "src_process"],
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
+                        },
+                        "beginLine" : 89,
+                        "beginColumn" : 4,
+                        "endLine" : 89,
+                        "endColumn" : 41,
+                        "offset" : 2489,
+                        "length" : 37
+                      }
                     }
                   },
                   "feature" : {
@@ -745,17 +747,6 @@
                   }
                 },
                 "properties" : [
-                ]
-              }
-            },
-            {
-              "type" : "Annex",
-              "name" : "smf",
-              "clause" : {
-                "type" : "SmfClause",
-                "classification" : [
-                ],
-                "declass" : [
                 ]
               }
             }
@@ -1247,17 +1238,6 @@
                     "properties" : [
                     ]
                   }
-                },
-                {
-                  "type" : "Annex",
-                  "name" : "smf",
-                  "clause" : {
-                    "type" : "SmfClause",
-                    "classification" : [
-                    ],
-                    "declass" : [
-                    ]
-                  }
                 }
               ]
             }
@@ -1292,7 +1272,20 @@
                     "type" : "Name",
                     "name" : ["top_impl_Instance", "dst_process"],
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_event_port_periodic_domains\/test_event_port_periodic_domains.aadl"
+                        },
+                        "beginLine" : 90,
+                        "beginColumn" : 4,
+                        "endLine" : 90,
+                        "endColumn" : 42,
+                        "offset" : 2530,
+                        "length" : 38
+                      }
                     }
                   },
                   "feature" : {
@@ -1506,17 +1499,6 @@
                 "properties" : [
                 ]
               }
-            },
-            {
-              "type" : "Annex",
-              "name" : "smf",
-              "clause" : {
-                "type" : "SmfClause",
-                "classification" : [
-                ],
-                "declass" : [
-                ]
-              }
             }
           ]
         },
@@ -1727,17 +1709,6 @@
                   }
                 },
                 "properties" : [
-                ]
-              }
-            },
-            {
-              "type" : "Annex",
-              "name" : "smf",
-              "clause" : {
-                "type" : "SmfClause",
-                "classification" : [
-                ],
-                "declass" : [
                 ]
               }
             }
@@ -2232,17 +2203,6 @@
               }
             },
             "properties" : [
-            ]
-          }
-        },
-        {
-          "type" : "Annex",
-          "name" : "smf",
-          "clause" : {
-            "type" : "SmfClause",
-            "classification" : [
-            ],
-            "declass" : [
             ]
           }
         }

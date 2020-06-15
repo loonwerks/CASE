@@ -1,5 +1,4 @@
 import "../../interfaces/AADLEvent_Receiver.idl4";
-
 component consumer_queue_2_impl {
   include <sb_types.h>;
   control;

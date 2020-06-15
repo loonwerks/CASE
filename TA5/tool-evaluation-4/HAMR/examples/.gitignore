@@ -4,5 +4,6 @@ instances
 instances/
 **/*-build/
 **/CAmkES_seL4/hamr/
+**/CAmkES_seL4/slang_libraries/
 **/CAmkES_seL4_VM/hamr/
 **/sel4-build/

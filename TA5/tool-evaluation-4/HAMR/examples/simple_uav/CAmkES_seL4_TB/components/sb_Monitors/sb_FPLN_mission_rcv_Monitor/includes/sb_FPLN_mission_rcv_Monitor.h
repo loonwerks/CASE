@@ -1,4 +1,5 @@
-#ifdef __sb_FPLN_mission_rcv_Monitor_H__
-#define __sb_FPLN_mission_rcv_Monitor_H__
+#ifndef SB_FPLN_MISSION_RCV_MONITOR_H
+#define SB_FPLN_MISSION_RCV_MONITOR_H
 
-#endif // __sb_FPLN_mission_rcv_Monitor_H__
+
+#endif // SB_FPLN_MISSION_RCV_MONITOR_H

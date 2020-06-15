@@ -5,7 +5,7 @@
     <ownedValue>
       <ownedValue xsi:type="aadl2:ListValue">
         <ownedListElement xsi:type="aadl2:NamedValue">
-          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.0/@ownedPropertyType/@ownedElementType/@ownedLiteral.6"/>
+          <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.0/@ownedPropertyType/@ownedElementType/@ownedLiteral.4"/>
         </ownedListElement>
         <ownedListElement xsi:type="aadl2:NamedValue">
           <namedValue xsi:type="aadl2:EnumerationLiteral" href="platform:/plugin/org.sireum.aadl.osate.hamr/resources/HAMR.aadl#/0/@ownedProperty.0/@ownedPropertyType/@ownedElementType/@ownedLiteral.5"/>

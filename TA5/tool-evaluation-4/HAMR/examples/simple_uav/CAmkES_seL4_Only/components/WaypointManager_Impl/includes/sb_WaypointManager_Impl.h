@@ -1,5 +1,5 @@
-#ifndef __sb_AADL_WaypointManager_Impl_types__H
-#define __sb_AADL_WaypointManager_Impl_types__H
+#ifndef SB_WAYPOINTMANAGER_IMPL_H
+#define SB_WAYPOINTMANAGER_IMPL_H
 
 #include <sb_types.h>
 
@@ -17,4 +17,4 @@ void tracking_id(const int64_t *);
 
 void init(const int64_t *arg);
 
-#endif // __sb_AADL_WaypointManager_Impl_types__H
+#endif // SB_WAYPOINTMANAGER_IMPL_H

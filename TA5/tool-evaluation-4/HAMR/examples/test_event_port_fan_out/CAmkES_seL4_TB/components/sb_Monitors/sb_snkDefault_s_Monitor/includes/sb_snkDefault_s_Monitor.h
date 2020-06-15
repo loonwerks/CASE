@@ -1,4 +1,5 @@
-#ifdef __sb_snkDefault_s_Monitor_H__
-#define __sb_snkDefault_s_Monitor_H__
+#ifndef SB_SNKDEFAULT_S_MONITOR_H
+#define SB_SNKDEFAULT_S_MONITOR_H
 
-#endif // __sb_snkDefault_s_Monitor_H__
+
+#endif // SB_SNKDEFAULT_S_MONITOR_H

@@ -1,6 +1,5 @@
 import "../../interfaces/sb_Monitor_SW__MissionWindow_1.idl4";
 import "../../interfaces/sb_Monitor_int64_t_1.idl4";
-
 component UARTDriver_Impl {
   include <sb_types.h>;
   control;

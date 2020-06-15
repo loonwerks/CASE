@@ -1,4 +1,5 @@
-#ifdef __sb_WPM_tracking_id_Monitor_H__
-#define __sb_WPM_tracking_id_Monitor_H__
+#ifndef SB_WPM_TRACKING_ID_MONITOR_H
+#define SB_WPM_TRACKING_ID_MONITOR_H
 
-#endif // __sb_WPM_tracking_id_Monitor_H__
+
+#endif // SB_WPM_TRACKING_ID_MONITOR_H

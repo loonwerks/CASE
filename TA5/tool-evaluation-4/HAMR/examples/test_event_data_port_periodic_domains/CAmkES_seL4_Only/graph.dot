@@ -55,6 +55,8 @@ connectiontypekey [
      <TR><TD><FONT COLOR="orange">seL4RPCCall</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
      <TR><TD><FONT COLOR="green">seL4TimeServer</FONT></TD><TD BGCOLOR="green">green</TD></TR>
      <TR><TD><FONT COLOR="brown">seL4GlobalAsynchCallback</FONT></TD><TD BGCOLOR="brown">brown</TD></TR>
+     <TR><TD><FONT COLOR="yellow">seL4VMDTBPassthrough</FONT></TD><TD BGCOLOR="yellow">yellow</TD></TR>
+     <TR><TD><FONT COLOR="pink">seL4SharedDataWithCaps</FONT></TD><TD BGCOLOR="pink">pink</TD></TR>
    </TABLE>
   >
   shape=plaintext

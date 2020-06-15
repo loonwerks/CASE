@@ -1,6 +1,5 @@
 import "../../../interfaces/AADLEvent_Receiver.idl4";
 import "../../../interfaces/AADLEvent_Sender.idl4";
-
 component sb_snkQueue2_A_s_Monitor {
 
   provides AADLEvent_Receiver mon_receive;

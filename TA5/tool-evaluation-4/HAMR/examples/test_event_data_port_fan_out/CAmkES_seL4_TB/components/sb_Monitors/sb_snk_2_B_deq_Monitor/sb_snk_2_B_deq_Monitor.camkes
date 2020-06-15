@@ -1,5 +1,4 @@
 import "../../../interfaces/sb_Monitor_int8_t_2.idl4";
-
 component sb_snk_2_B_deq_Monitor {
 
   provides sb_Monitor_int8_t_2 mon;

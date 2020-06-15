@@ -94,16 +94,14 @@ public
 	system implementation top.impl
 		subcomponents
 			proc: processor proc.impl;
-			src_process: process emitter_p.impl; -- {
-			--	HAMR::Component_Type => VIRTUAL_MACHINE;
-			--};
+			src_process: process emitter_p.impl;
 			dst_process: process consumer_p.impl;
 		connections
 			data_interconnect: port src_process.write_port -> dst_process.read_port;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to src_process;
 			Actual_Processor_Binding => (reference (proc)) applies to dst_process;
-			HAMR::Platform => (seL4_TB, seL4_Only);
+			HAMR::Platform => (seL4, seL4_Only);
 	--annex resolute {**
 	--	check CASE_Tools
 	--**};

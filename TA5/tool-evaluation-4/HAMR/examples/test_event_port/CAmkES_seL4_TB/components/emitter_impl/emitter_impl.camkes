@@ -1,5 +1,4 @@
 import "../../interfaces/AADLEvent_Sender.idl4";
-
 component emitter_impl {
   include <sb_types.h>;
   control;

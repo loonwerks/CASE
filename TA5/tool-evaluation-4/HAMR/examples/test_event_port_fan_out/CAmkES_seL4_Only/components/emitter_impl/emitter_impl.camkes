@@ -1,5 +1,4 @@
 import <std_connector.camkes>;
-
 component emitter_impl {
   include <sb_types.h>;
   include <sb_event_counter.h>;

@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 import <std_connector.camkes>;
 import "components/RadioDriver_Impl/RadioDriver_Impl.camkes";
 import "components/FlightPlanner_Impl/FlightPlanner_Impl.camkes";
@@ -34,5 +36,6 @@ assembly {
     UART.sb_mission_window_queue_access = "R";
     UART.sb_tracking_id_queue_1_access = "W";
     WPM.sb_tracking_id_queue_access = "R";
+
   }
 }

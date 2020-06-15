@@ -1,4 +1,4 @@
-#include "../includes/sb_consumer_t_impl.h"
+#include <sb_consumer_t_impl.h>
 #include <sb_queue_int8_t_1.h>
 #include <sb_event_counter.h>
 #include <string.h>

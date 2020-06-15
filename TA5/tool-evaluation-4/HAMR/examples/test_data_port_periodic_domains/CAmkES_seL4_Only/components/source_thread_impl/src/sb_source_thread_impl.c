@@ -1,4 +1,4 @@
-#include "../includes/sb_source_thread_impl.h"
+#include <sb_source_thread_impl.h>
 #include <string.h>
 #include <camkes.h>
 

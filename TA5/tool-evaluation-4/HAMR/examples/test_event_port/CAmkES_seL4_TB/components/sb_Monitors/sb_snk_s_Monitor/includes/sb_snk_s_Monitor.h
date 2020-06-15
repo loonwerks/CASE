@@ -1,4 +1,5 @@
-#ifdef __sb_snk_s_Monitor_H__
-#define __sb_snk_s_Monitor_H__
+#ifndef SB_SNK_S_MONITOR_H
+#define SB_SNK_S_MONITOR_H
 
-#endif // __sb_snk_s_Monitor_H__
+
+#endif // SB_SNK_S_MONITOR_H

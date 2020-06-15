@@ -18,8 +18,8 @@
             "beginColumn" : 2,
             "endLine" : 113,
             "endColumn" : 15,
-            "offset" : 3700,
-            "length" : 627
+            "offset" : 3640,
+            "length" : 630
           }
         }
       },
@@ -50,7 +50,7 @@
                 "beginColumn" : 4,
                 "endLine" : 102,
                 "endColumn" : 58,
-                "offset" : 3780,
+                "offset" : 3720,
                 "length" : 54
               }
             }
@@ -84,7 +84,7 @@
                     "beginColumn" : 4,
                     "endLine" : 36,
                     "endColumn" : 52,
-                    "offset" : 1404,
+                    "offset" : 1386,
                     "length" : 48
                   }
                 }
@@ -223,7 +223,7 @@
                     "beginColumn" : 4,
                     "endLine" : 43,
                     "endColumn" : 55,
-                    "offset" : 1620,
+                    "offset" : 1602,
                     "length" : 51
                   }
                 }
@@ -257,7 +257,7 @@
                         "beginColumn" : 4,
                         "endLine" : 20,
                         "endColumn" : 52,
-                        "offset" : 793,
+                        "offset" : 778,
                         "length" : 48
                       }
                     }
@@ -690,17 +690,6 @@
                     "properties" : [
                     ]
                   }
-                },
-                {
-                  "type" : "Annex",
-                  "name" : "smf",
-                  "clause" : {
-                    "type" : "SmfClause",
-                    "classification" : [
-                    ],
-                    "declass" : [
-                    ]
-                  }
                 }
               ]
             }
@@ -723,7 +712,7 @@
                     "beginColumn" : 4,
                     "endLine" : 45,
                     "endColumn" : 76,
-                    "offset" : 1689,
+                    "offset" : 1671,
                     "length" : 72
                   }
                 }
@@ -746,7 +735,7 @@
                         "beginColumn" : 4,
                         "endLine" : 43,
                         "endColumn" : 55,
-                        "offset" : 1620,
+                        "offset" : 1602,
                         "length" : 51
                       }
                     }
@@ -768,7 +757,7 @@
                           "beginColumn" : 4,
                           "endLine" : 20,
                           "endColumn" : 52,
-                          "offset" : 793,
+                          "offset" : 778,
                           "length" : 48
                         }
                       }
@@ -790,7 +779,20 @@
                     "type" : "Name",
                     "name" : ["top_impl_Instance", "source_process_component"],
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
+                        },
+                        "beginLine" : 102,
+                        "beginColumn" : 4,
+                        "endLine" : 102,
+                        "endColumn" : 58,
+                        "offset" : 3720,
+                        "length" : 54
+                      }
                     }
                   },
                   "feature" : {
@@ -810,7 +812,7 @@
                           "beginColumn" : 4,
                           "endLine" : 36,
                           "endColumn" : 52,
-                          "offset" : 1404,
+                          "offset" : 1386,
                           "length" : 48
                         }
                       }
@@ -949,17 +951,6 @@
                 "properties" : [
                 ]
               }
-            },
-            {
-              "type" : "Annex",
-              "name" : "smf",
-              "clause" : {
-                "type" : "SmfClause",
-                "classification" : [
-                ],
-                "declass" : [
-                ]
-              }
             }
           ]
         },
@@ -980,7 +971,7 @@
                 "beginColumn" : 4,
                 "endLine" : 103,
                 "endColumn" : 68,
-                "offset" : 3838,
+                "offset" : 3778,
                 "length" : 64
               }
             }
@@ -1014,7 +1005,7 @@
                     "beginColumn" : 4,
                     "endLine" : 71,
                     "endColumn" : 50,
-                    "offset" : 2830,
+                    "offset" : 2794,
                     "length" : 46
                   }
                 }
@@ -1153,7 +1144,7 @@
                     "beginColumn" : 4,
                     "endLine" : 78,
                     "endColumn" : 65,
-                    "offset" : 3054,
+                    "offset" : 3018,
                     "length" : 61
                   }
                 }
@@ -1187,7 +1178,7 @@
                         "beginColumn" : 4,
                         "endLine" : 55,
                         "endColumn" : 50,
-                        "offset" : 2181,
+                        "offset" : 2148,
                         "length" : 46
                       }
                     }
@@ -1620,17 +1611,6 @@
                     "properties" : [
                     ]
                   }
-                },
-                {
-                  "type" : "Annex",
-                  "name" : "smf",
-                  "clause" : {
-                    "type" : "SmfClause",
-                    "classification" : [
-                    ],
-                    "declass" : [
-                    ]
-                  }
                 }
               ]
             }
@@ -1653,7 +1633,7 @@
                     "beginColumn" : 4,
                     "endLine" : 80,
                     "endColumn" : 78,
-                    "offset" : 3133,
+                    "offset" : 3097,
                     "length" : 74
                   }
                 }
@@ -1665,7 +1645,20 @@
                     "type" : "Name",
                     "name" : ["top_impl_Instance", "destination_process_component"],
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/test_data_port_periodic_domains\/test_data_port_periodic_domains.aadl"
+                        },
+                        "beginLine" : 103,
+                        "beginColumn" : 4,
+                        "endLine" : 103,
+                        "endColumn" : 68,
+                        "offset" : 3778,
+                        "length" : 64
+                      }
                     }
                   },
                   "feature" : {
@@ -1685,7 +1678,7 @@
                           "beginColumn" : 4,
                           "endLine" : 71,
                           "endColumn" : 50,
-                          "offset" : 2830,
+                          "offset" : 2794,
                           "length" : 46
                         }
                       }
@@ -1718,7 +1711,7 @@
                         "beginColumn" : 4,
                         "endLine" : 78,
                         "endColumn" : 65,
-                        "offset" : 3054,
+                        "offset" : 3018,
                         "length" : 61
                       }
                     }
@@ -1740,7 +1733,7 @@
                           "beginColumn" : 4,
                           "endLine" : 55,
                           "endColumn" : 50,
-                          "offset" : 2181,
+                          "offset" : 2148,
                           "length" : 46
                         }
                       }
@@ -1879,17 +1872,6 @@
                 "properties" : [
                 ]
               }
-            },
-            {
-              "type" : "Annex",
-              "name" : "smf",
-              "clause" : {
-                "type" : "SmfClause",
-                "classification" : [
-                ],
-                "declass" : [
-                ]
-              }
             }
           ]
         },
@@ -1910,7 +1892,7 @@
                 "beginColumn" : 4,
                 "endLine" : 101,
                 "endColumn" : 30,
-                "offset" : 3750,
+                "offset" : 3690,
                 "length" : 26
               }
             }
@@ -2102,17 +2084,6 @@
                 "properties" : [
                 ]
               }
-            },
-            {
-              "type" : "Annex",
-              "name" : "smf",
-              "clause" : {
-                "type" : "SmfClause",
-                "classification" : [
-                ],
-                "declass" : [
-                ]
-              }
             }
           ]
         }
@@ -2135,7 +2106,7 @@
                 "beginColumn" : 4,
                 "endLine" : 105,
                 "endColumn" : 107,
-                "offset" : 3920,
+                "offset" : 3860,
                 "length" : 103
               }
             }
@@ -2158,7 +2129,7 @@
                     "beginColumn" : 4,
                     "endLine" : 102,
                     "endColumn" : 58,
-                    "offset" : 3780,
+                    "offset" : 3720,
                     "length" : 54
                   }
                 }
@@ -2180,7 +2151,7 @@
                       "beginColumn" : 4,
                       "endLine" : 36,
                       "endColumn" : 52,
-                      "offset" : 1404,
+                      "offset" : 1386,
                       "length" : 48
                     }
                   }
@@ -2213,7 +2184,7 @@
                     "beginColumn" : 4,
                     "endLine" : 103,
                     "endColumn" : 68,
-                    "offset" : 3838,
+                    "offset" : 3778,
                     "length" : 64
                   }
                 }
@@ -2235,7 +2206,7 @@
                       "beginColumn" : 4,
                       "endLine" : 71,
                       "endColumn" : 50,
-                      "offset" : 2830,
+                      "offset" : 2794,
                       "length" : 46
                     }
                   }
@@ -2286,7 +2257,7 @@
                 "beginColumn" : 4,
                 "endLine" : 45,
                 "endColumn" : 76,
-                "offset" : 1689,
+                "offset" : 1671,
                 "length" : 72
               }
             }
@@ -2308,7 +2279,7 @@
                   "beginColumn" : 4,
                   "endLine" : 43,
                   "endColumn" : 55,
-                  "offset" : 1620,
+                  "offset" : 1602,
                   "length" : 51
                 }
               }
@@ -2330,7 +2301,7 @@
                     "beginColumn" : 4,
                     "endLine" : 20,
                     "endColumn" : 52,
-                    "offset" : 793,
+                    "offset" : 778,
                     "length" : 48
                   }
                 }
@@ -2361,7 +2332,7 @@
                   "beginColumn" : 4,
                   "endLine" : 78,
                   "endColumn" : 65,
-                  "offset" : 3054,
+                  "offset" : 3018,
                   "length" : 61
                 }
               }
@@ -2383,7 +2354,7 @@
                     "beginColumn" : 4,
                     "endLine" : 55,
                     "endColumn" : 50,
-                    "offset" : 2181,
+                    "offset" : 2148,
                     "length" : 46
                   }
                 }
@@ -2419,7 +2390,7 @@
                     "beginColumn" : 4,
                     "endLine" : 45,
                     "endColumn" : 76,
-                    "offset" : 1689,
+                    "offset" : 1671,
                     "length" : 72
                   }
                 }
@@ -2439,7 +2410,7 @@
                     "beginColumn" : 4,
                     "endLine" : 102,
                     "endColumn" : 58,
-                    "offset" : 3780,
+                    "offset" : 3720,
                     "length" : 54
                   }
                 }
@@ -2463,7 +2434,7 @@
                     "beginColumn" : 4,
                     "endLine" : 105,
                     "endColumn" : 107,
-                    "offset" : 3920,
+                    "offset" : 3860,
                     "length" : 103
                   }
                 }
@@ -2483,8 +2454,8 @@
                     "beginColumn" : 2,
                     "endLine" : 113,
                     "endColumn" : 15,
-                    "offset" : 3700,
-                    "length" : 627
+                    "offset" : 3640,
+                    "length" : 630
                   }
                 }
               },
@@ -2507,7 +2478,7 @@
                     "beginColumn" : 4,
                     "endLine" : 80,
                     "endColumn" : 78,
-                    "offset" : 3133,
+                    "offset" : 3097,
                     "length" : 74
                   }
                 }
@@ -2527,7 +2498,7 @@
                     "beginColumn" : 4,
                     "endLine" : 103,
                     "endColumn" : 68,
-                    "offset" : 3838,
+                    "offset" : 3778,
                     "length" : 64
                   }
                 }
@@ -2570,6 +2541,10 @@
             {
               "type" : "ValueProp",
               "value" : "seL4_Only"
+            },
+            {
+              "type" : "ValueProp",
+              "value" : "seL4"
             }
           ],
           "appliesTo" : [
@@ -2605,17 +2580,6 @@
               }
             },
             "properties" : [
-            ]
-          }
-        },
-        {
-          "type" : "Annex",
-          "name" : "smf",
-          "clause" : {
-            "type" : "SmfClause",
-            "classification" : [
-            ],
-            "declass" : [
             ]
           }
         }

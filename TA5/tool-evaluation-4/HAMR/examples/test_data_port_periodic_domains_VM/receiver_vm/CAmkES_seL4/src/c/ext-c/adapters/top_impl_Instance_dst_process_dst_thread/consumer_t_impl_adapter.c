@@ -1,0 +1,13 @@
+#include <consumer_t_impl_adapter.h>
+
+Unit receiver_vm_test_event_data_port_periodic_domains_consumer_t_impl_adapter_initialiseArchitecture() {
+  receiver_vm_top_impl_Instance_dst_process_dst_thread_dst_thread_initialiseArchitecture(SF_LAST);
+}
+
+Unit receiver_vm_test_event_data_port_periodic_domains_consumer_t_impl_adapter_initialiseEntryPoint() {
+  receiver_vm_top_impl_Instance_dst_process_dst_thread_dst_thread_initialiseEntryPoint(SF_LAST);
+}
+
+Unit receiver_vm_test_event_data_port_periodic_domains_consumer_t_impl_adapter_computeEntryPoint() {
+  receiver_vm_top_impl_Instance_dst_process_dst_thread_dst_thread_computeEntryPoint(SF_LAST);
+}

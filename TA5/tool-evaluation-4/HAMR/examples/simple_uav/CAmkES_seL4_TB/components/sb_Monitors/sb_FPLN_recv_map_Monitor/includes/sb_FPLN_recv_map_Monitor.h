@@ -1,4 +1,5 @@
-#ifdef __sb_FPLN_recv_map_Monitor_H__
-#define __sb_FPLN_recv_map_Monitor_H__
+#ifndef SB_FPLN_RECV_MAP_MONITOR_H
+#define SB_FPLN_RECV_MAP_MONITOR_H
 
-#endif // __sb_FPLN_recv_map_Monitor_H__
+
+#endif // SB_FPLN_RECV_MAP_MONITOR_H

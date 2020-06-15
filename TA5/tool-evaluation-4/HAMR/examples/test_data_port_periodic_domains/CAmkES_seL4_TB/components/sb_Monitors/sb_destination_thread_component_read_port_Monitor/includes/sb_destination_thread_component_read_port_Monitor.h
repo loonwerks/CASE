@@ -1,4 +1,5 @@
-#ifdef __sb_destination_thread_component_read_port_Monitor_H__
-#define __sb_destination_thread_component_read_port_Monitor_H__
+#ifndef SB_DESTINATION_THREAD_COMPONENT_READ_PORT_MONITOR_H
+#define SB_DESTINATION_THREAD_COMPONENT_READ_PORT_MONITOR_H
 
-#endif // __sb_destination_thread_component_read_port_Monitor_H__
+
+#endif // SB_DESTINATION_THREAD_COMPONENT_READ_PORT_MONITOR_H

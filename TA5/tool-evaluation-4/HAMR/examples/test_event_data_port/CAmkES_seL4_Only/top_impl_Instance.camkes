@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 import <std_connector.camkes>;
 import "components/emitter_t_impl/emitter_t_impl.camkes";
 import "components/consumer_t_impl/consumer_t_impl.camkes";
@@ -14,5 +16,6 @@ assembly {
   configuration {
     src.sb_enq_queue_1_access = "W";
     dest.sb_deq_queue_access = "R";
+
   }
 }

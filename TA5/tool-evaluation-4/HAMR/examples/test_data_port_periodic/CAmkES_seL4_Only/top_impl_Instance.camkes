@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 import <std_connector.camkes>;
 import <global-connectors.camkes>;
 import <TimeServer/TimeServer.camkes>;;
@@ -25,5 +27,6 @@ assembly {
     time_server.timers_per_client = 1;
     dispatch_periodic_inst.timer_attributes = 1;
     dispatch_periodic_inst.priority = 201;
+
   }
 }

@@ -1,4 +1,5 @@
-#ifdef __sb_WPM_flight_plan_Monitor_H__
-#define __sb_WPM_flight_plan_Monitor_H__
+#ifndef SB_WPM_FLIGHT_PLAN_MONITOR_H
+#define SB_WPM_FLIGHT_PLAN_MONITOR_H
 
-#endif // __sb_WPM_flight_plan_Monitor_H__
+
+#endif // SB_WPM_FLIGHT_PLAN_MONITOR_H

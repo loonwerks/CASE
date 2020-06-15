@@ -1,4 +1,5 @@
-#ifdef __sb_UART_mission_window_Monitor_H__
-#define __sb_UART_mission_window_Monitor_H__
+#ifndef SB_UART_MISSION_WINDOW_MONITOR_H
+#define SB_UART_MISSION_WINDOW_MONITOR_H
 
-#endif // __sb_UART_mission_window_Monitor_H__
+
+#endif // SB_UART_MISSION_WINDOW_MONITOR_H

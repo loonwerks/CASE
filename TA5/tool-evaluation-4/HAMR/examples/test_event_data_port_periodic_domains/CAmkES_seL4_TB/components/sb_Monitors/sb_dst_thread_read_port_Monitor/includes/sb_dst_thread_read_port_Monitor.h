@@ -1,4 +1,5 @@
-#ifdef __sb_dst_thread_read_port_Monitor_H__
-#define __sb_dst_thread_read_port_Monitor_H__
+#ifndef SB_DST_THREAD_READ_PORT_MONITOR_H
+#define SB_DST_THREAD_READ_PORT_MONITOR_H
 
-#endif // __sb_dst_thread_read_port_Monitor_H__
+
+#endif // SB_DST_THREAD_READ_PORT_MONITOR_H

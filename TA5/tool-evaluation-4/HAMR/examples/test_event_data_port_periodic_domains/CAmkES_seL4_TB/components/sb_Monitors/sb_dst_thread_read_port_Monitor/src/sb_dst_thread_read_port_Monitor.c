@@ -3,7 +3,7 @@
 #endif // SB_VERIFY
 
 #include <sb_types.h>
-#include "../includes/sb_dst_thread_read_port_Monitor.h"
+#include <sb_dst_thread_read_port_Monitor.h>
 
 int mon_get_sender_id(void);
 int monsig_emit(void);

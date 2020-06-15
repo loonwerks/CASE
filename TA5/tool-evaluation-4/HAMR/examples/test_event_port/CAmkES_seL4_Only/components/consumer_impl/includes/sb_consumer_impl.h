@@ -1,5 +1,5 @@
-#ifndef __sb_AADL_consumer_impl_types__H
-#define __sb_AADL_consumer_impl_types__H
+#ifndef SB_CONSUMER_IMPL_H
+#define SB_CONSUMER_IMPL_H
 
 #include <sb_types.h>
 
@@ -9,4 +9,4 @@ void test_event_port_consumer_s_event_handler(void);
 
 void test_event_port_consumer_component_init(const int64_t *arg);
 
-#endif // __sb_AADL_consumer_impl_types__H
+#endif // SB_CONSUMER_IMPL_H

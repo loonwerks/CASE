@@ -1,5 +1,5 @@
-#ifndef __sb_AADL_UARTDriver_Impl_types__H
-#define __sb_AADL_UARTDriver_Impl_types__H
+#ifndef SB_UARTDRIVER_IMPL_H
+#define SB_UARTDRIVER_IMPL_H
 
 #include <sb_types.h>
 
@@ -11,4 +11,4 @@ bool sb_tracking_id_enqueue(const int64_t *);
 
 void init(const int64_t *arg);
 
-#endif // __sb_AADL_UARTDriver_Impl_types__H
+#endif // SB_UARTDRIVER_IMPL_H

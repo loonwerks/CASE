@@ -1,6 +1,5 @@
 import "../../interfaces/sb_Monitor_int8_t.idl4";
 import <std_connector.camkes>;
-
 component destination_thread_impl {
   include <sb_types.h>;
   control;

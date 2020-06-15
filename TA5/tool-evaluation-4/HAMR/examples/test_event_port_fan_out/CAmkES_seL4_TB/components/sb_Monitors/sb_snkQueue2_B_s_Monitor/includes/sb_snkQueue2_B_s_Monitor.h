@@ -1,4 +1,5 @@
-#ifdef __sb_snkQueue2_B_s_Monitor_H__
-#define __sb_snkQueue2_B_s_Monitor_H__
+#ifndef SB_SNKQUEUE2_B_S_MONITOR_H
+#define SB_SNKQUEUE2_B_S_MONITOR_H
 
-#endif // __sb_snkQueue2_B_s_Monitor_H__
+
+#endif // SB_SNKQUEUE2_B_S_MONITOR_H

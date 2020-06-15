@@ -10,11 +10,11 @@ public
 	with HAMR;
 	with CASE_Scheduling;
 
-    ----------------------------------------------------------------------
-    -- no inputs, one output, periodically places a value on the dataport
-    ----------------------------------------------------------------------
-    -- thread specifies unit of temporal execution; depending on scheduling
-    -- model this can provide temporal isolation.
+	----------------------------------------------------------------------
+	-- no inputs, one output, periodically places a value on the dataport
+	----------------------------------------------------------------------
+	-- thread specifies unit of temporal execution; depending on scheduling
+	-- model this can provide temporal isolation.
 	thread source_thread
 		features
 			write_port: out data port Base_Types::Integer_8;
@@ -30,7 +30,7 @@ public
 	thread implementation source_thread.impl
 	end source_thread.impl;
 
-    -- process specifies boundary of spatial isolation
+	-- process specifies boundary of spatial isolation
 	process source_process
 		features
 			write_port: out data port Base_Types::Integer_8;
@@ -45,11 +45,11 @@ public
 			write_connection: port source_thread_component.write_port -> write_port;
 	end source_process.impl;
 
-    ----------------------------------------------------------------------
-    -- one input, no outputs, periodically reads a value from the dataport
-    ----------------------------------------------------------------------
-    -- thread specifies unit of temporal execution; depending on scheduling
-    -- model this can provide temporal isolation.
+	----------------------------------------------------------------------
+	-- one input, no outputs, periodically reads a value from the dataport
+	----------------------------------------------------------------------
+	-- thread specifies unit of temporal execution; depending on scheduling
+	-- model this can provide temporal isolation.
 	thread destination_thread
 		features
 			read_port: in data port Base_Types::Integer_8;
@@ -65,7 +65,7 @@ public
 	thread implementation destination_thread.impl
 	end destination_thread.impl;
 
-    -- process specifies boundary of spatial isolation
+	-- process specifies boundary of spatial isolation
 	process destination_process
 		features
 			read_port: in data port Base_Types::Integer_8;
@@ -80,19 +80,19 @@ public
 			read_connection: port read_port -> destination_thread_component.read_port;
 	end destination_process.impl;
 
-    ----------------------------------------------------------------------
+	----------------------------------------------------------------------
 	processor proc
 	end proc;
 
 	processor implementation proc.impl
 		properties
 			Frame_Period => 1000ms;
-            Clock_Period => 2ms;
-            CASE_Scheduling::Max_Domain => 3;
+			Clock_Period => 2ms;
+			CASE_Scheduling::Max_Domain => 3;
 			CASE_Scheduling::Schedule_Source_Text => "behavior_code/kernel/domain_schedule.c";
 	end proc.impl;
 
-    ----------------------------------------------------------------------
+	----------------------------------------------------------------------
 	system top
 	end top;
 
@@ -106,10 +106,10 @@ public
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to source_process_component;
 			Actual_Processor_Binding => (reference (proc)) applies to destination_process_component;
-			HAMR::Platform => (seL4_TB, seL4_Only);
-		--annex resolute {**
-		--	check CASE_Tools
-		--**};
+			HAMR::Platform => (seL4_TB, seL4_Only, seL4);
+	--annex resolute {**
+	--	check CASE_Tools
+	--**};
 	end top.impl;
-	
+
 end test_data_port_periodic_domains;

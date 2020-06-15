@@ -1,4 +1,4 @@
-#include "../includes/sb_WaypointManager_Impl.h"
+#include <sb_WaypointManager_Impl.h>
 #include <string.h>
 #include <camkes.h>
 
