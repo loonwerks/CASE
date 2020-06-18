@@ -28,7 +28,7 @@
 #define NUM_CONNECTIONS 2
 static struct camkes_crossvm_connection connections[NUM_CONNECTIONS];
 
-extern dataport_caps_handle_t sb_write_port_read_port_queue_1_handle;
+extern dataport_caps_handle_t sb_write_port_queue_1_handle;
 void sb_write_port_1_notification_emit_underlying(void);
 extern dataport_caps_handle_t sb_pacer_period_queue_handle;
 
@@ -39,7 +39,7 @@ static int consume_callback(vm_t *vm, void *cookie) {
 
 void init_cross_vm_connections(vm_t *vm, void *cookie) {
     connections[0] = (struct camkes_crossvm_connection) {
-      .handle = &sb_write_port_read_port_queue_1_handle,
+      .handle = &sb_write_port_queue_1_handle,
       .emit_fn = sb_write_port_1_notification_emit_underlying,
       .consume_badge = -1
     };

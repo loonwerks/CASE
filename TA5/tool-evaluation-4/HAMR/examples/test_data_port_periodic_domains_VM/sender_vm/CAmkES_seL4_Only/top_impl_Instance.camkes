@@ -11,17 +11,17 @@ import <TimeServer/TimeServer.camkes>;
 import <vm-connectors.camkes>;
 import <devices.camkes>;
 import "components/Pacer/Pacer.camkes";
-import "components/VM/VM.camkes";
+import "components/VM_emitter_t_impl/VM_emitter_t_impl.camkes";
 import "components/consumer_t_impl/consumer_t_impl.camkes";
 
 assembly {
   composition {
-    component VM vmsrc_process;
+    component VM_emitter_t_impl vmsrc_process;
     component consumer_t_impl dst_thread;
     component Pacer pacer;
 
     connection seL4VMDTBPassthrough conn1(from vmsrc_process.dtb_self, to vmsrc_process.dtb);
-    connection seL4SharedDataWithCaps conn2(from vmsrc_process.sb_write_port_read_port, to dst_thread.sb_read_port);
+    connection seL4SharedDataWithCaps conn2(from vmsrc_process.sb_write_port, to dst_thread.sb_read_port);
     connection seL4Notification conn3(from pacer.tick, to pacer.tock);
     connection seL4SharedDataWithCaps conn4(from pacer.period_to_vmsrc_process, to vmsrc_process.sb_pacer_period_queue);
     connection seL4Notification conn5(from pacer.period, to dst_thread.sb_pacer_notification);

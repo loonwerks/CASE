@@ -14,10 +14,9 @@ vmsrc_process [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>vmsrc_process</B></TD></TR>
-      <TR><TD PORT="sb_write_port_read_port_queue_1"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_write_port_read_port_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_write_port_queue_1"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_write_port_queue_1</B></FONT></TD></TR>
       <TR><TD PORT="sb_pacer_period_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_pacer_period_queue</B></FONT></TD></TR>
-      <TR><TD PORT="sb_write_port_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_write_port_1_notification</B></FONT></TD></TR>
-      <TR><TD PORT="sb_read_port_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_read_port_notification</B></FONT></TD></TR>"
+      <TR><TD PORT="sb_write_port_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_write_port_1_notification</B></FONT></TD></TR>"
     </TABLE>
   >
   shape=plaintext
@@ -27,9 +26,8 @@ vmdst_process [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>vmdst_process</B></TD></TR>
-      <TR><TD PORT="sb_write_port_read_port_queue_1"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_write_port_read_port_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_read_port_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_read_port_queue</B></FONT></TD></TR>
       <TR><TD PORT="sb_pacer_period_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_pacer_period_queue</B></FONT></TD></TR>
-      <TR><TD PORT="sb_write_port_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_write_port_1_notification</B></FONT></TD></TR>
       <TR><TD PORT="sb_read_port_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_read_port_notification</B></FONT></TD></TR>"
     </TABLE>
   >
@@ -97,7 +95,7 @@ interfacetypekey [
   id = conn3
 ];
 
-"vmsrc_process":sb_write_port_read_port_queue_1 -> "vmdst_process":sb_write_port_read_port_queue_1 [
+"vmsrc_process":sb_write_port_queue_1 -> "vmdst_process":sb_read_port_queue [
   color="pink"
   //label = "seL4SharedDataWithCaps"
   id = conn4

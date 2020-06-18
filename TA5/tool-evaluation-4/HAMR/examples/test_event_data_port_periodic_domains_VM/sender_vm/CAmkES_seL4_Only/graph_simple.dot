@@ -14,7 +14,7 @@ vmsrc_process [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>vmsrc_process</B></TD></TR>
-      <TR><TD PORT="sb_write_port_read_port_queue_1"><FONT COLOR="red"><B>sb_write_port_read_port_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_write_port_queue_1"><FONT COLOR="red"><B>sb_write_port_queue_1</B></FONT></TD></TR>
       <TR><TD PORT="sb_pacer_period_queue"><FONT COLOR="red"><B>sb_pacer_period_queue</B></FONT></TD></TR>
       <TR><TD PORT="sb_write_port_1_notification"><FONT COLOR="blue"><B>sb_write_port_1_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -89,7 +89,7 @@ interfacetypekey [
   id = conn2
 ];
 
-"vmsrc_process":sb_write_port_read_port_queue_1 -> "dst_thread":sb_read_port_queue [
+"vmsrc_process":sb_write_port_queue_1 -> "dst_thread":sb_read_port_queue [
   color="pink"
   //label = "seL4SharedDataWithCaps"
   id = conn3

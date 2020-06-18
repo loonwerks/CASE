@@ -38,9 +38,6 @@ ${SIREUM_HOME}/bin/sireum slang transpilers c \
   --lib-only \
   --verbose
 
-FILE=${OUTPUT_DIR}/CMakeLists.txt
-echo -e "\n\nadd_definitions(-DCAMKES)" >> $FILE
-
 OUTPUT_DIR="${SCRIPT_HOME}/../src/c/CAmkES_seL4/slang_libraries/top_impl_Instance_destination_process_component_destination_thread_component"
 
 ${SIREUM_HOME}/bin/sireum slang transpilers c \
@@ -63,9 +60,6 @@ ${SIREUM_HOME}/bin/sireum slang transpilers c \
   --lib-only \
   --verbose
 
-FILE=${OUTPUT_DIR}/CMakeLists.txt
-echo -e "\n\nadd_definitions(-DCAMKES)" >> $FILE
-
 OUTPUT_DIR="${SCRIPT_HOME}/../src/c/CAmkES_seL4/slang_libraries/SlangTypeLibrary"
 
 ${SIREUM_HOME}/bin/sireum slang transpilers c \
@@ -83,6 +77,3 @@ ${SIREUM_HOME}/bin/sireum slang transpilers c \
   --stable-type-id \
   --lib-only \
   --verbose
-
-FILE=${OUTPUT_DIR}/CMakeLists.txt
-echo -e "\n\nadd_definitions(-DCAMKES)" >> $FILE
