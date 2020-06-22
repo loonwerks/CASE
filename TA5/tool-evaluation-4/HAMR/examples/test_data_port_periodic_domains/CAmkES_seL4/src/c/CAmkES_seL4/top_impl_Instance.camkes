@@ -1,7 +1,6 @@
 // This file will be regenerated, do not edit
 
 import <std_connector.camkes>;
-import "components/Pacer/Pacer.camkes";
 import "components/source_thread_impl/source_thread_impl.camkes";
 import "components/destination_thread_impl/destination_thread_impl.camkes";
 
@@ -9,18 +8,15 @@ assembly {
   composition {
     component source_thread_impl source_thread_component;
     component destination_thread_impl destination_thread_component;
-    component Pacer pacer;
 
     connection seL4SharedData conn1(from source_thread_component.sb_write_port, to destination_thread_component.sb_read_port);
-    connection seL4Notification conn2(from pacer.tick, to pacer.tock);
-    connection seL4Notification conn3(from pacer.period, to source_thread_component.sb_pacer_notification);
-    connection seL4Notification conn4(from pacer.period, to destination_thread_component.sb_pacer_notification);
+    connection seL4Notification conn2(from source_thread_component.sb_self_pacer_tick, to source_thread_component.sb_self_pacer_tock);
+    connection seL4Notification conn3(from destination_thread_component.sb_self_pacer_tick, to destination_thread_component.sb_self_pacer_tock);
   }
 
   configuration {
     source_thread_component.write_port_access = "W";
     destination_thread_component.read_port_access = "R";
-    pacer._domain = 1;
     source_thread_component._domain = 2;
     destination_thread_component._domain = 3;
 

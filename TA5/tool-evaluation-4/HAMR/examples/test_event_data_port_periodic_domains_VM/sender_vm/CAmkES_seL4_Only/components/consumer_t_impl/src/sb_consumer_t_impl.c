@@ -58,11 +58,11 @@ void pre_init(void) {
  * Main active thread function.
  ************************************************************************/
 int run(void) {
-  sb_pacer_notification_wait();
   {
     int64_t sb_dummy;
     sb_entrypoint_consumer_t_impl_initializer(&sb_dummy);
   }
+  sb_pacer_notification_wait();
   for(;;) {
     sb_pacer_notification_wait();
     { 

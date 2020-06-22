@@ -4,7 +4,7 @@
 #include <camkes.h>
 
 void sb_entrypoint_period_consumer_t_impl(int64_t *in_arg) {
-  test_event_port_consumer_time_triggered_handler((int64_t *) in_arg); 
+  test_event_port_consumer_time_triggered_handler((int64_t *) in_arg);
 }
 
 /************************************************************************
@@ -92,18 +92,19 @@ void sb_entrypoint_consumer_t_impl_initializer(const int64_t * in_arg) {
  ************************************************************************/
 int run(void) {
 
-  sb_pacer_notification_wait();
   {
     int64_t sb_dummy;
     sb_entrypoint_consumer_t_impl_initializer(&sb_dummy);
   }
+  sb_self_pacer_tick_emit();
   for(;;) {
-    sb_pacer_notification_wait();
+    sb_self_pacer_tock_wait();
     sb_freeze_event_port_consume();
-    { 
+    {
       int64_t sb_dummy = 0;
       sb_entrypoint_period_consumer_t_impl(&sb_dummy);
     }
+    sb_self_pacer_tick_emit();
   }
   return 0;
 }

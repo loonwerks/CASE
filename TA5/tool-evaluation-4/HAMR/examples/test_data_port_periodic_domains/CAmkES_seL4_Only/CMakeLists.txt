@@ -25,9 +25,4 @@ DeclareCAmkESComponent(destination_thread_impl
   INCLUDES components/destination_thread_impl/includes/ types/includes types/includes
 )
 
-DeclareCAmkESComponent(Pacer
-  SOURCES components/Pacer/src/Pacer.c
-  LIBS SB_Type_Library
-)
-
 DeclareCAmkESRootserver(top_impl_Instance.camkes)

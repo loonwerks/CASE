@@ -4,7 +4,7 @@
 #include <camkes.h>
 
 void sb_entrypoint_period_emitter_t_impl(int64_t *in_arg) {
-  run_emitter((int64_t *) in_arg); 
+  run_emitter((int64_t *) in_arg);
 }
 
 /************************************************************************
@@ -54,18 +54,19 @@ void pre_init(void) {
  ************************************************************************/
 int run(void) {
 
-  sb_pacer_notification_wait();
   {
     int64_t sb_dummy;
     sb_entrypoint_emitter_t_impl_initializer(&sb_dummy);
   }
+  sb_self_pacer_tick_emit();
   for(;;) {
-    sb_pacer_notification_wait();
+    sb_self_pacer_tock_wait();
 
-    { 
+    {
       int64_t sb_dummy = 0;
       sb_entrypoint_period_emitter_t_impl(&sb_dummy);
     }
+    sb_self_pacer_tick_emit();
   }
   return 0;
 }

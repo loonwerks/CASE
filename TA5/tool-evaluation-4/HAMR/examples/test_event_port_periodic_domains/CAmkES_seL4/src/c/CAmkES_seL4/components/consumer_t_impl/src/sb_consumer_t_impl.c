@@ -112,12 +112,13 @@ void pre_init(void) {
  ************************************************************************/
 int run(void) {
 
-  sb_pacer_notification_wait();
+  sb_self_pacer_tick_emit();
   for(;;) {
-    sb_pacer_notification_wait();
+    sb_self_pacer_tock_wait();
     sb_freeze_event_port_consume();
     // call the component's compute entrypoint
     test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_t_impl_adapter_computeEntryPoint(SF_LAST);
+    sb_self_pacer_tick_emit();
   }
   return 0;
 }

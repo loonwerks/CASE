@@ -16,7 +16,8 @@ src_thread [
       <TR><TD><B>src_thread</B></TD></TR>
       <TR><TD PORT="sb_write_port_queue_1"><FONT COLOR="red"><B>sb_write_port_queue_1</B></FONT></TD></TR>
       <TR><TD PORT="sb_write_port_1_notification"><FONT COLOR="blue"><B>sb_write_port_1_notification</B></FONT></TD></TR>
-      <TR><TD PORT="sb_pacer_notification"><FONT COLOR="blue"><B>sb_pacer_notification</B></FONT></TD></TR>"
+      <TR><TD PORT="sb_self_pacer_tick"><FONT COLOR="blue"><B>sb_self_pacer_tick</B></FONT></TD></TR>
+      <TR><TD PORT="sb_self_pacer_tock"><FONT COLOR="blue"><B>sb_self_pacer_tock</B></FONT></TD></TR>"
     </TABLE>
   >
   shape=plaintext
@@ -27,20 +28,9 @@ dst_thread [
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>dst_thread</B></TD></TR>
       <TR><TD PORT="sb_read_port_queue"><FONT COLOR="red"><B>sb_read_port_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_self_pacer_tick"><FONT COLOR="blue"><B>sb_self_pacer_tick</B></FONT></TD></TR>
       <TR><TD PORT="sb_read_port_notification"><FONT COLOR="blue"><B>sb_read_port_notification</B></FONT></TD></TR>
-      <TR><TD PORT="sb_pacer_notification"><FONT COLOR="blue"><B>sb_pacer_notification</B></FONT></TD></TR>"
-    </TABLE>
-  >
-  shape=plaintext
-];
-
-pacer [
-  label=<
-    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>pacer</B></TD></TR>
-      <TR><TD PORT="period"><FONT COLOR="blue"><B>period</B></FONT></TD></TR>
-      <TR><TD PORT="tick"><FONT COLOR="blue"><B>tick</B></FONT></TD></TR>
-      <TR><TD PORT="tock"><FONT COLOR="blue"><B>tock</B></FONT></TD></TR>"
+      <TR><TD PORT="sb_self_pacer_tock"><FONT COLOR="blue"><B>sb_self_pacer_tock</B></FONT></TD></TR>"
     </TABLE>
   >
   shape=plaintext
@@ -88,22 +78,16 @@ interfacetypekey [
   id = conn2
 ];
 
-"pacer":tick -> "pacer":tock [
+"src_thread":sb_self_pacer_tick -> "src_thread":sb_self_pacer_tock [
   color="blue"
   //label = "seL4Notification"
   id = conn3
 ];
 
-"pacer":period -> "src_thread":sb_pacer_notification [
+"dst_thread":sb_self_pacer_tick -> "dst_thread":sb_self_pacer_tock [
   color="blue"
   //label = "seL4Notification"
   id = conn4
-];
-
-"pacer":period -> "dst_thread":sb_pacer_notification [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn5
 ];
 
 }

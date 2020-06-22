@@ -69,11 +69,12 @@ void pre_init(void) {
  * Main active thread function.
  ************************************************************************/
 int run(void) {
-  sb_pacer_notification_wait();
+  sb_self_pacer_tick_emit();
   for(;;) {
-    sb_pacer_notification_wait();
+    sb_self_pacer_tock_wait();
     // call the component's compute entrypoint
     test_data_port_periodic_domains_test_data_port_periodic_domains_destination_thread_impl_adapter_computeEntryPoint(SF_LAST);
+    sb_self_pacer_tick_emit();
   }
   return 0;
 }

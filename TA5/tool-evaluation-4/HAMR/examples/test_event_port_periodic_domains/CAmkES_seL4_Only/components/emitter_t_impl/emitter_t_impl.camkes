@@ -3,6 +3,7 @@ component emitter_t_impl {
   include <sb_event_counter.h>;
   control;
   emits ReceiveEvent sb_emit;
-  consumes Period sb_pacer_notification;
+  emits TickTock sb_self_pacer_tick;
+  consumes TickTock sb_self_pacer_tock;
   dataport sb_event_counter_t sb_emit_counter;
 }

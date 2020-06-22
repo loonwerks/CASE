@@ -33,9 +33,4 @@ DeclareCAmkESComponent(consumer_t_impl
   LIBS top_impl_Instance_dst_process_dst_thread
 )
 
-DeclareCAmkESComponent(Pacer
-  SOURCES components/Pacer/src/Pacer.c
-  LIBS SB_Type_Library SlangTypeLibrary
-)
-
 DeclareCAmkESRootserver(top_impl_Instance.camkes)

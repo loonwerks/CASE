@@ -3,7 +3,7 @@
 #include <camkes.h>
 
 void sb_entrypoint_period_destination_thread_impl(int64_t *in_arg) {
-  test_data_port_periodic_domains_destination_component_time_triggered((int64_t *) in_arg); 
+  test_data_port_periodic_domains_destination_component_time_triggered((int64_t *) in_arg);
 }
 
 seqNum_t sb_read_port_seqNum;
@@ -52,17 +52,18 @@ void pre_init(void) {
  * Main active thread function.
  ************************************************************************/
 int run(void) {
-  sb_pacer_notification_wait();
   {
     int64_t sb_dummy;
     sb_entrypoint_destination_thread_impl_initializer(&sb_dummy);
   }
+  sb_self_pacer_tick_emit();
   for(;;) {
-    sb_pacer_notification_wait();
-    { 
+    sb_self_pacer_tock_wait();
+    {
       int64_t sb_dummy = 0;
       sb_entrypoint_period_destination_thread_impl(&sb_dummy);
     }
+    sb_self_pacer_tick_emit();
   }
   return 0;
 }

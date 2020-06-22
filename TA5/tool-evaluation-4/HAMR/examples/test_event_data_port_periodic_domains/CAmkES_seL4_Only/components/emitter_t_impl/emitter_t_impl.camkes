@@ -3,6 +3,7 @@ component emitter_t_impl {
   include <sb_queue_int8_t_1.h>;
   control;
   emits ReceiveEvent sb_write_port_1_notification;
-  consumes Period sb_pacer_notification;
+  emits TickTock sb_self_pacer_tick;
+  consumes TickTock sb_self_pacer_tock;
   dataport sb_queue_int8_t_1_t sb_write_port_queue_1;
 }
