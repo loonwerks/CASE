@@ -7,6 +7,7 @@
 
 void send_period_to_vmdst_process(int8_t *data) {
   sb_queue_int8_t_1_enqueue(period_to_vmdst_process, data);
+  period_for_VMs_emit();
 }
 
 void pre_init(void) {
