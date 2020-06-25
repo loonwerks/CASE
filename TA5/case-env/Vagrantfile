@@ -42,15 +42,13 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: "vm-version.txt", destination: "vm-version.txt"
 
   config.vm.provision "shell", privileged: false, inline: <<-SHELL
-    bash case-setup.sh
+    bash case-setup.sh || exit -1
     rm -R case-setup.sh addons
+    export DEBIAN_FRONTEND=noninteractive
+    sudo adduser vagrant vboxsf
+    echo "Installing xfce-desktop ..."
+    sudo tasksel install xfce-desktop
+    #sudo apt install -y materia-gtk-theme papirus-icon-theme
   SHELL
 
-  config.vm.provision "shell", inline: <<-SHELL
-    export DEBIAN_FRONTEND=noninteractive
-    adduser vagrant vboxsf
-    echo "Installing xfce-desktop ..."
-    tasksel install xfce-desktop
-    #apt install -y materia-gtk-theme papirus-icon-theme
-  SHELL
 end

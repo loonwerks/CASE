@@ -84,12 +84,11 @@ echo "LANG=en_US.UTF-8" | as_root tee -a /etc/default/locale > /dev/null
 echo "export LANG=en_US.UTF-8" >> "$HOME/.bashrc"
 export LANG=en_US.UTF-8
 
-bash $SCRIPT_DIR/bin/sel4-cache.sh $SEL4_V
-
 bash $SEL4_SCRIPTS/camkes.sh
-
-bash $SCRIPT_DIR/bin/camkes-cache.sh $CAMKES_V
 echo "export PATH=\$PATH:$BASE_DIR/camkes/build/capDL-tool" >> "$HOME/.bashrc"
+
+bash $SCRIPT_DIR/bin/sel4-cache.sh $SEL4_V
+bash $SCRIPT_DIR/bin/camkes-cache.sh $CAMKES_V
 
 git config --global --unset user.name $GIT_USER
 git config --global --unset user.email $GIT_EMAIL
