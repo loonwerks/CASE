@@ -30,7 +30,6 @@ static struct camkes_crossvm_connection connections[NUM_CONNECTIONS];
 
 extern dataport_caps_handle_t sb_read_port_queue_handle;
 seL4_Word sb_read_port_notification_notification_badge(void);
-
 extern dataport_caps_handle_t sb_pacer_period_queue_handle;
 seL4_Word sb_pacer_period_notification_notification_badge(void);
 
@@ -54,9 +53,7 @@ void init_cross_vm_connections(vm_t *vm, void *cookie) {
 
     for (int i = 0; i < NUM_CONNECTIONS; i++) {
         if (connections[i].consume_badge != -1) {
-            int err = register_async_event_handler(connections[i].consume_badge, 
-                                                   consume_callback, 
-                                                   (void *)connections[i].consume_badge);
+            int err = register_async_event_handler(connections[i].consume_badge, consume_callback, (void *)connections[i].consume_badge);
             ZF_LOGF_IF(err, "Failed to register_async_event_handler for init_cross_vm_connections.");
         }
     }

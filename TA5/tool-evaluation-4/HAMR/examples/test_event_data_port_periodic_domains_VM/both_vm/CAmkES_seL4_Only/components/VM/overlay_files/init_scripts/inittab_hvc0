@@ -38,3 +38,8 @@ hvc0:2345:respawn:/sbin/getty -L 9600 hvc0
 ::shutdown:/etc/init.d/rcK
 ::shutdown:/sbin/swapoff -a
 ::shutdown:/bin/umount -a -r
+
+#::once:vmsrc_process /dev/uio0 4096 /dev/uio1 4096
+#::once:sleep 3
+#::once:vmdst_process /dev/uio0 4096 /dev/uio1 4096
+

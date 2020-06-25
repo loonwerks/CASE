@@ -151,17 +151,6 @@
                 "properties" : [
                 ]
               }
-            },
-            {
-              "type" : "Annex",
-              "name" : "smf",
-              "clause" : {
-                "type" : "SmfClause",
-                "classification" : [
-                ],
-                "declass" : [
-                ]
-              }
             }
           ]
         },
@@ -523,17 +512,6 @@
                     "properties" : [
                     ]
                   }
-                },
-                {
-                  "type" : "Annex",
-                  "name" : "smf",
-                  "clause" : {
-                    "type" : "SmfClause",
-                    "classification" : [
-                    ],
-                    "declass" : [
-                    ]
-                  }
                 }
               ]
             },
@@ -859,17 +837,6 @@
                     "properties" : [
                     ]
                   }
-                },
-                {
-                  "type" : "Annex",
-                  "name" : "smf",
-                  "clause" : {
-                    "type" : "SmfClause",
-                    "classification" : [
-                    ],
-                    "declass" : [
-                    ]
-                  }
                 }
               ]
             },
@@ -1155,17 +1122,6 @@
                     "properties" : [
                     ]
                   }
-                },
-                {
-                  "type" : "Annex",
-                  "name" : "smf",
-                  "clause" : {
-                    "type" : "SmfClause",
-                    "classification" : [
-                    ],
-                    "declass" : [
-                    ]
-                  }
                 }
               ]
             },
@@ -1285,17 +1241,6 @@
                       }
                     },
                     "properties" : [
-                    ]
-                  }
-                },
-                {
-                  "type" : "Annex",
-                  "name" : "smf",
-                  "clause" : {
-                    "type" : "SmfClause",
-                    "classification" : [
-                    ],
-                    "declass" : [
                     ]
                   }
                 }
@@ -1684,17 +1629,6 @@
                           }
                         },
                         "properties" : [
-                        ]
-                      }
-                    },
-                    {
-                      "type" : "Annex",
-                      "name" : "smf",
-                      "clause" : {
-                        "type" : "SmfClause",
-                        "classification" : [
-                        ],
-                        "declass" : [
                         ]
                       }
                     }
@@ -2452,17 +2386,6 @@
                           }
                         },
                         "properties" : [
-                        ]
-                      }
-                    },
-                    {
-                      "type" : "Annex",
-                      "name" : "smf",
-                      "clause" : {
-                        "type" : "SmfClause",
-                        "classification" : [
-                        ],
-                        "declass" : [
                         ]
                       }
                     }
@@ -3523,17 +3446,6 @@
                         "properties" : [
                         ]
                       }
-                    },
-                    {
-                      "type" : "Annex",
-                      "name" : "smf",
-                      "clause" : {
-                        "type" : "SmfClause",
-                        "classification" : [
-                        ],
-                        "declass" : [
-                        ]
-                      }
                     }
                   ]
                 },
@@ -4216,17 +4128,6 @@
                           }
                         },
                         "properties" : [
-                        ]
-                      }
-                    },
-                    {
-                      "type" : "Annex",
-                      "name" : "smf",
-                      "clause" : {
-                        "type" : "SmfClause",
-                        "classification" : [
-                        ],
-                        "declass" : [
                         ]
                       }
                     }
@@ -5994,17 +5895,6 @@
                     "properties" : [
                     ]
                   }
-                },
-                {
-                  "type" : "Annex",
-                  "name" : "smf",
-                  "clause" : {
-                    "type" : "SmfClause",
-                    "classification" : [
-                    ],
-                    "declass" : [
-                    ]
-                  }
                 }
               ]
             },
@@ -6219,17 +6109,6 @@
                     "properties" : [
                     ]
                   }
-                },
-                {
-                  "type" : "Annex",
-                  "name" : "smf",
-                  "clause" : {
-                    "type" : "SmfClause",
-                    "classification" : [
-                    ],
-                    "declass" : [
-                    ]
-                  }
                 }
               ]
             }
@@ -6258,6 +6137,61 @@
                 }
               },
               "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["UAV_Impl_Instance", "MCMP"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/Simple_UAV\/UAV.aadl"
+                        },
+                        "beginLine" : 21,
+                        "beginColumn" : 4,
+                        "endLine" : 21,
+                        "endColumn" : 42,
+                        "offset" : 267,
+                        "length" : 38
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["UAV_Impl_Instance", "MCMP", "RFA"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/Simple_UAV\/MC.aadl"
+                          },
+                          "beginLine" : 75,
+                          "beginColumn" : 4,
+                          "endLine" : 75,
+                          "endColumn" : 42,
+                          "offset" : 1768,
+                          "length" : 38
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "InOut"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
                 {
                   "type" : "EndPoint",
                   "component" : {
@@ -6312,21 +6246,73 @@
                   }
                 }
               ],
-              "dst" : [
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Access"
+              },
+              "isBiDirectional" : true,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["UAV_Impl_Instance", "RFA -> MCMP", "RADIO_HW", "RFA"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ]
+            },
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["UAV_Impl_Instance", "MCMP", "bac6"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/Simple_UAV\/MC.aadl"
+                    },
+                    "beginLine" : 92,
+                    "beginColumn" : 4,
+                    "endLine" : 92,
+                    "endColumn" : 45,
+                    "offset" : 2318,
+                    "length" : 41
+                  }
+                }
+              },
+              "src" : [
                 {
                   "type" : "EndPoint",
                   "component" : {
                     "type" : "Name",
                     "name" : ["UAV_Impl_Instance", "MCMP"],
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/Simple_UAV\/UAV.aadl"
+                        },
+                        "beginLine" : 21,
+                        "beginColumn" : 4,
+                        "endLine" : 21,
+                        "endColumn" : 42,
+                        "offset" : 267,
+                        "length" : 38
+                      }
                     }
                   },
                   "feature" : {
                     "type" : "Some",
                     "value" : {
                       "type" : "Name",
-                      "name" : ["UAV_Impl_Instance", "MCMP", "RFA"],
+                      "name" : ["UAV_Impl_Instance", "MCMP", "UARTA"],
                       "pos" : {
                         "type" : "Some",
                         "value" : {
@@ -6335,12 +6321,67 @@
                             "type" : "Some",
                             "value" : "\/Simple_UAV\/MC.aadl"
                           },
-                          "beginLine" : 75,
+                          "beginLine" : 74,
                           "beginColumn" : 4,
-                          "endLine" : 75,
-                          "endColumn" : 42,
-                          "offset" : 1768,
-                          "length" : 38
+                          "endLine" : 74,
+                          "endColumn" : 48,
+                          "offset" : 1720,
+                          "length" : 44
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "InOut"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["UAV_Impl_Instance", "MCMP", "UART_HW"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/Simple_UAV\/MC.aadl"
+                        },
+                        "beginLine" : 81,
+                        "beginColumn" : 4,
+                        "endLine" : 81,
+                        "endColumn" : 30,
+                        "offset" : 1925,
+                        "length" : 26
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["UAV_Impl_Instance", "MCMP", "UART_HW", "UARTA"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/Simple_UAV\/MC.aadl"
+                          },
+                          "beginLine" : 33,
+                          "beginColumn" : 4,
+                          "endLine" : 33,
+                          "endColumn" : 48,
+                          "offset" : 713,
+                          "length" : 44
                         }
                       }
                     }
@@ -6362,7 +6403,14 @@
               "connectionInstances" : [
                 {
                   "type" : "Name",
-                  "name" : ["UAV_Impl_Instance", "RFA -> MCMP", "RADIO_HW", "RFA"],
+                  "name" : ["UAV_Impl_Instance", "SBUS -> MCMP", "UART_HW", "UARTA"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                },
+                {
+                  "type" : "Name",
+                  "name" : ["UAV_Impl_Instance", "MCMP", "UART_HW", "UARTA -> SBUS"],
                   "pos" : {
                     "type" : "None"
                   }
@@ -6455,7 +6503,20 @@
                     "type" : "Name",
                     "name" : ["UAV_Impl_Instance", "MCMP"],
                     "pos" : {
-                      "type" : "None"
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/Simple_UAV\/UAV.aadl"
+                        },
+                        "beginLine" : 21,
+                        "beginColumn" : 4,
+                        "endLine" : 21,
+                        "endColumn" : 42,
+                        "offset" : 267,
+                        "length" : 38
+                      }
                     }
                   },
                   "feature" : {
@@ -7050,6 +7111,550 @@
                 {
                   "type" : "Name",
                   "name" : ["UAV_Impl_Instance", "MCMP", "MEM_HW", "MCA -> BUS_HW"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ]
+            },
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["UAV_Impl_Instance", "MCMP", "bac1"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/Simple_UAV\/MC.aadl"
+                    },
+                    "beginLine" : 87,
+                    "beginColumn" : 4,
+                    "endLine" : 87,
+                    "endColumn" : 45,
+                    "offset" : 2100,
+                    "length" : 41
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["UAV_Impl_Instance", "MCMP", "RADIO_HW"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/Simple_UAV\/MC.aadl"
+                        },
+                        "beginLine" : 80,
+                        "beginColumn" : 4,
+                        "endLine" : 80,
+                        "endColumn" : 32,
+                        "offset" : 1893,
+                        "length" : 28
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["UAV_Impl_Instance", "MCMP", "RADIO_HW", "MCA"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/Simple_UAV\/MC.aadl"
+                          },
+                          "beginLine" : 19,
+                          "beginColumn" : 4,
+                          "endLine" : 19,
+                          "endColumn" : 41,
+                          "offset" : 271,
+                          "length" : 37
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "InOut"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/Simple_UAV\/MC.aadl"
+                        },
+                        "beginLine" : 84,
+                        "beginColumn" : 4,
+                        "endLine" : 84,
+                        "endColumn" : 28,
+                        "offset" : 2022,
+                        "length" : 24
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "None"
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "InOut"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Access"
+              },
+              "isBiDirectional" : true,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW -> RADIO_HW", "MCA"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                },
+                {
+                  "type" : "Name",
+                  "name" : ["UAV_Impl_Instance", "MCMP", "RADIO_HW", "MCA -> BUS_HW"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ]
+            },
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["UAV_Impl_Instance", "MCMP", "bac2"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/Simple_UAV\/MC.aadl"
+                    },
+                    "beginLine" : 88,
+                    "beginColumn" : 4,
+                    "endLine" : 88,
+                    "endColumn" : 44,
+                    "offset" : 2145,
+                    "length" : 40
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["UAV_Impl_Instance", "MCMP", "UART_HW"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/Simple_UAV\/MC.aadl"
+                        },
+                        "beginLine" : 81,
+                        "beginColumn" : 4,
+                        "endLine" : 81,
+                        "endColumn" : 30,
+                        "offset" : 1925,
+                        "length" : 26
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["UAV_Impl_Instance", "MCMP", "UART_HW", "MCA"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/Simple_UAV\/MC.aadl"
+                          },
+                          "beginLine" : 32,
+                          "beginColumn" : 4,
+                          "endLine" : 32,
+                          "endColumn" : 41,
+                          "offset" : 672,
+                          "length" : 37
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "InOut"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/Simple_UAV\/MC.aadl"
+                        },
+                        "beginLine" : 84,
+                        "beginColumn" : 4,
+                        "endLine" : 84,
+                        "endColumn" : 28,
+                        "offset" : 2022,
+                        "length" : 24
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "None"
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "InOut"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Access"
+              },
+              "isBiDirectional" : true,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW -> UART_HW", "MCA"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                },
+                {
+                  "type" : "Name",
+                  "name" : ["UAV_Impl_Instance", "MCMP", "UART_HW", "MCA -> BUS_HW"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ]
+            },
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["UAV_Impl_Instance", "MCMP", "bac4"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/Simple_UAV\/MC.aadl"
+                    },
+                    "beginLine" : 90,
+                    "beginColumn" : 4,
+                    "endLine" : 90,
+                    "endColumn" : 43,
+                    "offset" : 2233,
+                    "length" : 39
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["UAV_Impl_Instance", "MCMP", "MEM_HW"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/Simple_UAV\/MC.aadl"
+                        },
+                        "beginLine" : 83,
+                        "beginColumn" : 4,
+                        "endLine" : 83,
+                        "endColumn" : 31,
+                        "offset" : 1991,
+                        "length" : 27
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["UAV_Impl_Instance", "MCMP", "MEM_HW", "MCA"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/Simple_UAV\/MC.aadl"
+                          },
+                          "beginLine" : 56,
+                          "beginColumn" : 4,
+                          "endLine" : 56,
+                          "endColumn" : 41,
+                          "offset" : 1283,
+                          "length" : 37
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "InOut"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/Simple_UAV\/MC.aadl"
+                        },
+                        "beginLine" : 84,
+                        "beginColumn" : 4,
+                        "endLine" : 84,
+                        "endColumn" : 28,
+                        "offset" : 2022,
+                        "length" : 24
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "None"
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "InOut"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Access"
+              },
+              "isBiDirectional" : true,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW -> MEM_HW", "MCA"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                },
+                {
+                  "type" : "Name",
+                  "name" : ["UAV_Impl_Instance", "MCMP", "MEM_HW", "MCA -> BUS_HW"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                }
+              ],
+              "properties" : [
+              ]
+            },
+            {
+              "type" : "Connection",
+              "name" : {
+                "type" : "Name",
+                "name" : ["UAV_Impl_Instance", "MCMP", "bac3"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/Simple_UAV\/MC.aadl"
+                    },
+                    "beginLine" : 89,
+                    "beginColumn" : 4,
+                    "endLine" : 89,
+                    "endColumn" : 44,
+                    "offset" : 2189,
+                    "length" : 40
+                  }
+                }
+              },
+              "src" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["UAV_Impl_Instance", "MCMP", "PROC_HW"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/Simple_UAV\/MC.aadl"
+                        },
+                        "beginLine" : 82,
+                        "beginColumn" : 4,
+                        "endLine" : 82,
+                        "endColumn" : 36,
+                        "offset" : 1955,
+                        "length" : 32
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Name",
+                      "name" : ["UAV_Impl_Instance", "MCMP", "PROC_HW", "MCA"],
+                      "pos" : {
+                        "type" : "Some",
+                        "value" : {
+                          "type" : "Position",
+                          "uriOpt" : {
+                            "type" : "Some",
+                            "value" : "\/Simple_UAV\/MC.aadl"
+                          },
+                          "beginLine" : 44,
+                          "beginColumn" : 4,
+                          "endLine" : 44,
+                          "endColumn" : 41,
+                          "offset" : 1036,
+                          "length" : 37
+                        }
+                      }
+                    }
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "InOut"
+                    }
+                  }
+                }
+              ],
+              "dst" : [
+                {
+                  "type" : "EndPoint",
+                  "component" : {
+                    "type" : "Name",
+                    "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW"],
+                    "pos" : {
+                      "type" : "Some",
+                      "value" : {
+                        "type" : "Position",
+                        "uriOpt" : {
+                          "type" : "Some",
+                          "value" : "\/Simple_UAV\/MC.aadl"
+                        },
+                        "beginLine" : 84,
+                        "beginColumn" : 4,
+                        "endLine" : 84,
+                        "endColumn" : 28,
+                        "offset" : 2022,
+                        "length" : 24
+                      }
+                    }
+                  },
+                  "feature" : {
+                    "type" : "None"
+                  },
+                  "direction" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Direction",
+                      "value" : "InOut"
+                    }
+                  }
+                }
+              ],
+              "kind" : {
+                "type" : "ConnectionKind",
+                "value" : "Access"
+              },
+              "isBiDirectional" : true,
+              "connectionInstances" : [
+                {
+                  "type" : "Name",
+                  "name" : ["UAV_Impl_Instance", "MCMP", "BUS_HW -> PROC_HW", "MCA"],
+                  "pos" : {
+                    "type" : "None"
+                  }
+                },
+                {
+                  "type" : "Name",
+                  "name" : ["UAV_Impl_Instance", "MCMP", "PROC_HW", "MCA -> BUS_HW"],
                   "pos" : {
                     "type" : "None"
                   }
@@ -8350,17 +8955,6 @@
                 "properties" : [
                 ]
               }
-            },
-            {
-              "type" : "Annex",
-              "name" : "smf",
-              "clause" : {
-                "type" : "SmfClause",
-                "classification" : [
-                ],
-                "declass" : [
-                ]
-              }
             }
           ]
         },
@@ -8482,17 +9076,6 @@
                 "properties" : [
                 ]
               }
-            },
-            {
-              "type" : "Annex",
-              "name" : "smf",
-              "clause" : {
-                "type" : "SmfClause",
-                "classification" : [
-                ],
-                "declass" : [
-                ]
-              }
             }
           ]
         }
@@ -8527,7 +9110,20 @@
                 "type" : "Name",
                 "name" : ["UAV_Impl_Instance"],
                 "pos" : {
-                  "type" : "None"
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/Simple_UAV\/UAV.aadl"
+                    },
+                    "beginLine" : 19,
+                    "beginColumn" : 2,
+                    "endLine" : 30,
+                    "endColumn" : 15,
+                    "offset" : 217,
+                    "length" : 361
+                  }
                 }
               },
               "feature" : {
@@ -8626,6 +9222,278 @@
             {
               "type" : "Name",
               "name" : ["UAV_Impl_Instance", "RFA -> MCMP", "RADIO_HW", "RFA"],
+              "pos" : {
+                "type" : "None"
+              }
+            }
+          ],
+          "properties" : [
+          ]
+        },
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["UAV_Impl_Instance", "bac1"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/Simple_UAV\/UAV.aadl"
+                },
+                "beginLine" : 25,
+                "beginColumn" : 4,
+                "endLine" : 25,
+                "endColumn" : 41,
+                "offset" : 392,
+                "length" : 37
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["UAV_Impl_Instance", "SBUS"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/Simple_UAV\/UAV.aadl"
+                    },
+                    "beginLine" : 23,
+                    "beginColumn" : 4,
+                    "endLine" : 23,
+                    "endColumn" : 26,
+                    "offset" : 352,
+                    "length" : 22
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "None"
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "InOut"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["UAV_Impl_Instance", "MCMP"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/Simple_UAV\/UAV.aadl"
+                    },
+                    "beginLine" : 21,
+                    "beginColumn" : 4,
+                    "endLine" : 21,
+                    "endColumn" : 42,
+                    "offset" : 267,
+                    "length" : 38
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["UAV_Impl_Instance", "MCMP", "UARTA"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/Simple_UAV\/MC.aadl"
+                      },
+                      "beginLine" : 74,
+                      "beginColumn" : 4,
+                      "endLine" : 74,
+                      "endColumn" : 48,
+                      "offset" : 1720,
+                      "length" : 44
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "InOut"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Access"
+          },
+          "isBiDirectional" : true,
+          "connectionInstances" : [
+            {
+              "type" : "Name",
+              "name" : ["UAV_Impl_Instance", "SBUS -> MCMP", "UART_HW", "UARTA"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["UAV_Impl_Instance", "MCMP", "UART_HW", "UARTA -> SBUS"],
+              "pos" : {
+                "type" : "None"
+              }
+            }
+          ],
+          "properties" : [
+          ]
+        },
+        {
+          "type" : "Connection",
+          "name" : {
+            "type" : "Name",
+            "name" : ["UAV_Impl_Instance", "bac2"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/Simple_UAV\/UAV.aadl"
+                },
+                "beginLine" : 26,
+                "beginColumn" : 4,
+                "endLine" : 26,
+                "endColumn" : 41,
+                "offset" : 433,
+                "length" : 37
+              }
+            }
+          },
+          "src" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["UAV_Impl_Instance", "SBUS"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/Simple_UAV\/UAV.aadl"
+                    },
+                    "beginLine" : 23,
+                    "beginColumn" : 4,
+                    "endLine" : 23,
+                    "endColumn" : 26,
+                    "offset" : 352,
+                    "length" : 22
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "None"
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "InOut"
+                }
+              }
+            }
+          ],
+          "dst" : [
+            {
+              "type" : "EndPoint",
+              "component" : {
+                "type" : "Name",
+                "name" : ["UAV_Impl_Instance", "FCTL"],
+                "pos" : {
+                  "type" : "Some",
+                  "value" : {
+                    "type" : "Position",
+                    "uriOpt" : {
+                      "type" : "Some",
+                      "value" : "\/Simple_UAV\/UAV.aadl"
+                    },
+                    "beginLine" : 22,
+                    "beginColumn" : 4,
+                    "endLine" : 22,
+                    "endColumn" : 43,
+                    "offset" : 309,
+                    "length" : 39
+                  }
+                }
+              },
+              "feature" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Name",
+                  "name" : ["UAV_Impl_Instance", "FCTL", "UARTA"],
+                  "pos" : {
+                    "type" : "Some",
+                    "value" : {
+                      "type" : "Position",
+                      "uriOpt" : {
+                        "type" : "Some",
+                        "value" : "\/Simple_UAV\/FC.aadl"
+                      },
+                      "beginLine" : 7,
+                      "beginColumn" : 4,
+                      "endLine" : 7,
+                      "endColumn" : 48,
+                      "offset" : 69,
+                      "length" : 44
+                    }
+                  }
+                }
+              },
+              "direction" : {
+                "type" : "Some",
+                "value" : {
+                  "type" : "Direction",
+                  "value" : "InOut"
+                }
+              }
+            }
+          ],
+          "kind" : {
+            "type" : "ConnectionKind",
+            "value" : "Access"
+          },
+          "isBiDirectional" : true,
+          "connectionInstances" : [
+            {
+              "type" : "Name",
+              "name" : ["UAV_Impl_Instance", "SBUS -> FCTL", "UARTA"],
+              "pos" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Name",
+              "name" : ["UAV_Impl_Instance", "FCTL", "UARTA -> SBUS"],
               "pos" : {
                 "type" : "None"
               }
@@ -9916,17 +10784,6 @@
               }
             },
             "properties" : [
-            ]
-          }
-        },
-        {
-          "type" : "Annex",
-          "name" : "smf",
-          "clause" : {
-            "type" : "SmfClause",
-            "classification" : [
-            ],
-            "declass" : [
             ]
           }
         }

@@ -16,7 +16,8 @@ vmsrc_process [
       <TR><TD><B>vmsrc_process</B></TD></TR>
       <TR><TD PORT="sb_write_port_queue_1"><FONT COLOR="red"><B>sb_write_port_queue_1</B></FONT></TD></TR>
       <TR><TD PORT="sb_pacer_period_queue"><FONT COLOR="red"><B>sb_pacer_period_queue</B></FONT></TD></TR>
-      <TR><TD PORT="sb_write_port_1_notification"><FONT COLOR="blue"><B>sb_write_port_1_notification</B></FONT></TD></TR>"
+      <TR><TD PORT="sb_write_port_1_notification"><FONT COLOR="blue"><B>sb_write_port_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_period_notification"><FONT COLOR="blue"><B>sb_pacer_period_notification</B></FONT></TD></TR>"
     </TABLE>
   >
   shape=plaintext
@@ -38,7 +39,8 @@ pacer [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>pacer</B></TD></TR>
-      <TR><TD PORT="period_to_vmsrc_process"><FONT COLOR="red"><B>period_to_vmsrc_process</B></FONT></TD></TR>
+      <TR><TD PORT="period_to_vmsrc_process_queue"><FONT COLOR="red"><B>period_to_vmsrc_process_queue</B></FONT></TD></TR>
+      <TR><TD PORT="period_to_vmsrc_process_notification"><FONT COLOR="blue"><B>period_to_vmsrc_process_notification</B></FONT></TD></TR>
       <TR><TD PORT="period"><FONT COLOR="blue"><B>period</B></FONT></TD></TR>
       <TR><TD PORT="tick"><FONT COLOR="blue"><B>tick</B></FONT></TD></TR>
       <TR><TD PORT="tock"><FONT COLOR="blue"><B>tock</B></FONT></TD></TR>"
@@ -101,16 +103,22 @@ interfacetypekey [
   id = conn4
 ];
 
-"pacer":period_to_vmsrc_process -> "vmsrc_process":sb_pacer_period_queue [
+"pacer":period_to_vmsrc_process_notification -> "vmsrc_process":sb_pacer_period_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn5
+];
+
+"pacer":period_to_vmsrc_process_queue -> "vmsrc_process":sb_pacer_period_queue [
   color="pink"
   //label = "seL4SharedDataWithCaps"
-  id = conn5
+  id = conn6
 ];
 
 "pacer":period -> "dst_thread":sb_pacer_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn6
+  id = conn7
 ];
 
 }

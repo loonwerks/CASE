@@ -31,6 +31,7 @@ static struct camkes_crossvm_connection connections[NUM_CONNECTIONS];
 extern dataport_caps_handle_t sb_write_port_queue_1_handle;
 void sb_write_port_1_notification_emit_underlying(void);
 extern dataport_caps_handle_t sb_pacer_period_queue_handle;
+seL4_Word sb_pacer_period_notification_notification_badge(void);
 
 static int consume_callback(vm_t *vm, void *cookie) {
     consume_connection_event(vm, (seL4_Word) cookie, true);
@@ -47,7 +48,7 @@ void init_cross_vm_connections(vm_t *vm, void *cookie) {
     connections[1] = (struct camkes_crossvm_connection) {
       .handle = &sb_pacer_period_queue_handle,
       .emit_fn = NULL,
-      .consume_badge = -1
+      .consume_badge = sb_pacer_period_notification_notification_badge()
     };
 
     for (int i = 0; i < NUM_CONNECTIONS; i++) {

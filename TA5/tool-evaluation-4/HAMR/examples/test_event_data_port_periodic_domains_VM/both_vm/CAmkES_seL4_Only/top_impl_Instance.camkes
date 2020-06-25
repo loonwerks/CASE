@@ -25,8 +25,10 @@ assembly {
     connection seL4GlobalAsynch conn3(from vmsrc_process.sb_write_port_1_notification, to vmdst_process.sb_read_port_notification);
     connection seL4SharedDataWithCaps conn4(from vmsrc_process.sb_write_port_queue_1, to vmdst_process.sb_read_port_queue);
     connection seL4Notification conn5(from pacer.tick, to pacer.tock);
-    connection seL4SharedDataWithCaps conn6(from pacer.period_to_vmsrc_process, to vmsrc_process.sb_pacer_period_queue);
-    connection seL4SharedDataWithCaps conn7(from pacer.period_to_vmdst_process, to vmdst_process.sb_pacer_period_queue);
+    connection seL4GlobalAsynch conn6(from pacer.period_to_vmsrc_process_notification, to vmsrc_process.sb_pacer_period_notification);
+    connection seL4SharedDataWithCaps conn7(from pacer.period_to_vmsrc_process_queue, to vmsrc_process.sb_pacer_period_queue);
+    connection seL4GlobalAsynch conn8(from pacer.period_to_vmdst_process_notification, to vmdst_process.sb_pacer_period_notification);
+    connection seL4SharedDataWithCaps conn9(from pacer.period_to_vmdst_process_queue, to vmdst_process.sb_pacer_period_queue);
     VM_GENERAL_COMPOSITION_DEF()
     VM_COMPONENT_CONNECTIONS_DEF(src_process)
     VM_VIRTUAL_SERIAL_COMPONENTS_DEF()
@@ -46,11 +48,21 @@ assembly {
     vmdst_process.simple_untyped12_pool = 12;
     vmdst_process.num_extra_frame_caps = 0;
     vmdst_process.extra_frame_map_address = 0;
-    vmsrc_process.sb_write_port_queue_1_access = "W";
-    vmdst_process.sb_read_port_queue_access = "R";
+    
+    // the following causes
+    // default_error_fault_callback@guest_memory_helpers.c:19 Failed to handle fault addr: 0xdf001000
+    // --------
+    // Pagefault from [Linux]: write fault @ PC: 0x4008a4 IPA: 0xdf001000, FSR: 
+    //vmsrc_process.sb_write_port_queue_1_access = "W";
+    //vmdst_process.sb_read_port_queue_access = "R";
+    
     pacer._domain = 1;
     vmsrc_process._domain = 2;
     vmdst_process._domain = 3;
+
+    // possibly need the following or get 
+    // handle_event_bar_fault@cross_vm_connection.c:126 Connection is not configured with an emit function
+    vmdst_process.sb_read_port_notification_domain = 3;
 
     VM_GENERAL_CONFIGURATION_DEF()
     VM_CONFIGURATION_DEF(src_process)

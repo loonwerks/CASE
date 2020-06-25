@@ -24,8 +24,9 @@ assembly {
     connection seL4Notification conn2(from vmsrc_process.sb_write_port_1_notification, to dst_thread.sb_read_port_notification);
     connection seL4SharedDataWithCaps conn3(from vmsrc_process.sb_write_port_queue_1, to dst_thread.sb_read_port_queue);
     connection seL4Notification conn4(from pacer.tick, to pacer.tock);
-    connection seL4SharedDataWithCaps conn5(from pacer.period_to_vmsrc_process, to vmsrc_process.sb_pacer_period_queue);
-    connection seL4Notification conn6(from pacer.period, to dst_thread.sb_pacer_notification);
+    connection seL4GlobalAsynch conn5(from pacer.period_to_vmsrc_process_notification, to vmsrc_process.sb_pacer_period_notification);
+    connection seL4SharedDataWithCaps conn6(from pacer.period_to_vmsrc_process_queue, to vmsrc_process.sb_pacer_period_queue);
+    connection seL4Notification conn7(from pacer.period, to dst_thread.sb_pacer_notification);
     VM_GENERAL_COMPOSITION_DEF()
     VM_COMPONENT_CONNECTIONS_DEF(src_process)
     VM_VIRTUAL_SERIAL_COMPONENTS_DEF()
@@ -38,7 +39,7 @@ assembly {
     vmsrc_process.simple_untyped12_pool = 12;
     vmsrc_process.num_extra_frame_caps = 0;
     vmsrc_process.extra_frame_map_address = 0;
-    vmsrc_process.sb_write_port_queue_1_access = "W";
+    //vmsrc_process.sb_write_port_queue_1_access = "W";
     dst_thread.sb_read_port_queue_access = "R";
     pacer._domain = 1;
     vmsrc_process._domain = 2;

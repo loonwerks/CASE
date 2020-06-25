@@ -10,171 +10,176 @@
 #include <sys/mman.h>
 #include <errno.h>
 
+#include <sb_consumer_t_impl.h>
+
 #include <sb_types.h>
 #include <sb_event_counter.h>
 #include <sb_queue_int8_t_1.h>
 
 // This file will not be overwritten so is safe to edit
 
+void sb_pacer_notification_wait();
 
-sb_queue_int8_t_1_Recv_t sb_read_port_queue;
+int sb_pacer_period_queue_fd;
 sb_queue_int8_t_1_Recv_t sb_pacer_period_queue;
 
 int sb_read_port_queue_fd;
-int sb_pacer_period_queue_fd;
+sb_queue_int8_t_1_t *sb_read_port_queue; 
 
-//------------------------------------------------------------------------------
-// User specified input data receive handler for AADL Input Event Data Port (in) named
-// "p1_in".
 
-void sb_read_port_in_aadl_event_data_receive(sb_event_counter_t *numDropped, int8_t *data) {
-    printf("Receiver: received: %d  numDropped: %d\n", *data, *numDropped);
+sb_queue_int8_t_1_Recv_t sb_read_port_recv_queue;
+
+
+void sb_entrypoint_period_consumer_t_impl(int64_t *in_arg) {
+  test_event_data_port_consumer_time_triggered_handler((int64_t *) in_arg);
 }
 
-// Assumption: only one thread is calling this and/or reading p1_in_recv_counter.
-bool sb_read_port_in_aadl_event_data_poll(sb_event_counter_t *numDropped, int8_t *data) {
-    return sb_queue_int8_t_1_dequeue(&sb_read_port_queue, numDropped, data);
+/************************************************************************
+ * sb_read_port_dequeue_poll:
+ ************************************************************************/
+bool sb_read_port_dequeue_poll(sb_event_counter_t *numDropped, int8_t *data) {
+  return sb_queue_int8_t_1_dequeue(&sb_read_port_recv_queue, numDropped, data);
 }
 
-void sb_read_port_in_aadl_event_data_wait(sb_event_counter_t *numDropped, int8_t *data) {
-    while (!sb_read_port_in_aadl_event_data_poll(numDropped, data)) {
-    	int val;
-    	/* Blocking read */
-    	int result = read(sb_read_port_queue_fd, &val, sizeof(val));
-		if (result < 0) {
-		    printf("Error: %s\n", strerror(errno));
-		    //return -1;
-		}
+/************************************************************************
+ * sb_read_port_dequeue:
+ ************************************************************************/
+bool sb_read_port_dequeue(int8_t *data) {
+  sb_event_counter_t numDropped;
+  return sb_read_port_dequeue_poll(&numDropped, data);
+}
+
+/************************************************************************
+ * sb_read_port_is_empty:
+ *
+ * Helper method to determine if infrastructure port has received new
+ * events
+ ************************************************************************/
+bool sb_read_port_is_empty(){
+  return sb_queue_int8_t_1_is_empty(&sb_read_port_recv_queue);
+}
+
+/************************************************************************
+ *  sb_entrypoint_consumer_t_impl_initializer:
+ *
+ * This is the function invoked by an active thread dispatcher to
+ * call to a user-defined entrypoint function.  It sets up the dispatch
+ * context for the user-defined entrypoint, then calls it.
+ *
+ ************************************************************************/
+void sb_entrypoint_consumer_t_impl_initializer(const int64_t * in_arg) {
+  test_event_data_port_consumer_component_init((int64_t *) in_arg);
+}
+
+void pre_init(void) {
+  // initialise data structure for incoming event data port read_port
+  sb_queue_int8_t_1_Recv_init(&sb_read_port_recv_queue, sb_read_port_queue);
+}
+
+
+/************************************************************************
+ * int run(void)
+ * Main active thread function.
+ ************************************************************************/
+int run(void) {
+  {
+    int64_t sb_dummy;
+    sb_entrypoint_consumer_t_impl_initializer(&sb_dummy);
+  }
+  sb_pacer_notification_wait();
+  for(;;) {
+    sb_pacer_notification_wait();
+    {
+      int64_t sb_dummy = 0;
+      sb_entrypoint_period_consumer_t_impl(&sb_dummy);
     }
+  }
+  return 0;
 }
 
+int main(int argc, char *argv[]) {
 
-//------------------------------------------------------------------------------
-// Testing - Three tests for the different styles: poll, wait and callback.
-//
-// NOTE: The constants in the tests were chosen to cause a variety of
-// situations at runtime including dropped packets and no data
-// available. These numbers may not cause the same variety of behaviour in
-// different test environments.
+  if (argc != 5) {
+    printf("Usage: %s <fd of sb_read_port_queue> <size of sb_read_port_queue> <fd of sb_pacer_period_queue> <size of sb_pacer_period_queue> \n\n",
+           argv[0]);
+    return 1;
+  }
 
-void sb_pacer_period_wait(int port_fd, sb_queue_int8_t_1_Recv_t *q, sb_event_counter_t *numDropped) {
-    int8_t data;
-    while (!sb_queue_int8_t_1_dequeue(q, numDropped, &data)) {
-    	int val;
+  char *sb_read_port_queue_name = argv[1];
+
+  int sb_read_port_queue_length = atoi(argv[2]);
+  assert(sb_read_port_queue_length > 0);
+
+  sb_read_port_queue_fd = open(sb_read_port_queue_name, O_RDWR);
+  assert(sb_read_port_queue_fd >= 0);
+
+  char *sb_read_port_queue_char;
+  if ((sb_read_port_queue_char = mmap(NULL, 
+                                      sb_read_port_queue_length, 
+                                      PROT_READ | PROT_WRITE, 
+                                      MAP_SHARED, 
+                                      sb_read_port_queue_fd, 
+                                      1 * getpagesize())) == (void *) -1) {
+      printf("mmap sb_read_port_queue_char failed\n");
+      close(sb_read_port_queue_fd);
+      return 1;
+  }
+
+  sb_read_port_queue = (sb_queue_int8_t_1_t *) sb_read_port_queue_char;
+
+
+  char *sb_pacer_period_queue_name = argv[3];
+
+  int sb_pacer_period_queue_length = atoi(argv[4]);
+  assert(sb_pacer_period_queue_length > 0);
+
+  sb_pacer_period_queue_fd = open(sb_pacer_period_queue_name, O_RDWR);
+  assert(sb_pacer_period_queue_fd >= 0);
+
+
+  char *sb_pacer_period_queue_char;
+  if ((sb_pacer_period_queue_char = mmap(NULL, 
+                                         sb_pacer_period_queue_length, 
+                                         PROT_READ | PROT_WRITE, MAP_SHARED, 
+                                         sb_pacer_period_queue_fd, 
+                                         1 * getpagesize())) == (void *) -1) {
+      printf("mmap sb_pacer_period_queue_char failed\n");
+      close(sb_pacer_period_queue_fd);
+      return 1;
+  }
+
+  sb_queue_int8_t_1_Recv_init(&sb_pacer_period_queue, (sb_queue_int8_t_1_t *)sb_pacer_period_queue_char);
+
+  pre_init();
+
+  run();
+
+  munmap(sb_read_port_queue_char, sb_read_port_queue_length);
+  close(sb_read_port_queue_fd);
+
+  munmap(sb_pacer_period_queue_char, sb_pacer_period_queue_length);
+  close(sb_pacer_period_queue_fd);
+
+  return 0;
+}
+
+void sb_pacer_notification_wait() {
+  sb_event_counter_t numDropped = 0;
+  int8_t data;
+    
+  while (!sb_queue_int8_t_1_dequeue(&sb_pacer_period_queue, &numDropped, &data)) {
+    int val;
     	
-    	/* Blocking read */
-
-    	int result = read(port_fd, &val, sizeof(val));
-
-		if (result < 0) {
-		    printf("Error reading period. %i\n", result);
-		    //return -1;
-		}
+    /* Blocking read */
+    int result = read(sb_pacer_period_queue_fd, &val, sizeof(val));
+    if (result < 0) {
+      printf("Error reading period. %i\n", result);
+      //return -1;
     }
-    
-    //printf("Leaving period wait %i\n", data);
-}	
-
-void run_poll(void) {
-    sb_event_counter_t numDropped = 0;
-    int8_t data = 0;
-    int notfound = 1;
-
-    while (true) {
-        sb_pacer_period_wait(sb_pacer_period_queue_fd, &sb_pacer_period_queue, &numDropped);
-        
-        notfound = 1;
-        while (notfound) {
-            bool dataReceived = sb_read_port_in_aadl_event_data_poll(&numDropped, &data);
-            if (dataReceived) {
-                sb_read_port_in_aadl_event_data_receive(&numDropped, &data);
-                notfound = 0;
-                
-            } else {
-                printf("%s: received nothing\n", "Receiver");
-            }
-        }
-    }
-
+  }
 }
 
-void run_wait(void) {
-    sb_event_counter_t numDropped = 0;
-    int8_t data = 0;
-
-    while (true) {
-        sb_pacer_period_wait(sb_pacer_period_queue_fd, &sb_pacer_period_queue, &numDropped);
-
-        sb_read_port_in_aadl_event_data_wait(&numDropped, &data);
-        sb_read_port_in_aadl_event_data_receive(&numDropped, &data);
-    }
-}
-
-
-int main(int argc, char *argv[])
-{
-
-    if (argc != 5) {
-        printf("Usage: %s <fd of sb_read_port_queue> <size of sb_read_port_queue> <fd of sb_pacer_period_queue> <size of sb_pacer_period_queue> \n\n"
-               "Reads the c string contents of a specified dataport file to stdout",
-               argv[0]);
-        return 1;
-    }
-
-    char *sb_read_port_queue_name = argv[1];
-
-    int sb_read_port_queue_length = atoi(argv[2]);
-    assert(sb_read_port_queue_length > 0);
-    
-    sb_read_port_queue_fd = open(sb_read_port_queue_name, O_RDWR);
-    assert(sb_read_port_queue_fd >= 0);
-
-    char *sb_read_port_queue_char;
-    if ((sb_read_port_queue_char = mmap(NULL, 
-                                        sb_read_port_queue_length, 
-                                        PROT_READ | PROT_WRITE, 
-                                        MAP_SHARED, 
-                                        sb_read_port_queue_fd, 
-                                        1 * getpagesize())) == (void *) -1) {
-        printf("mmap sb_read_port_queue_char failed\n");
-        close(sb_read_port_queue_fd);
-        return 1;
-    }
-    
-    sb_queue_int8_t_1_Recv_init(&sb_read_port_queue, (sb_queue_int8_t_1_t *)sb_read_port_queue_char);
-    
-            
-    char *sb_pacer_period_queue_name = argv[3];
-    
-    int sb_pacer_period_queue_length = atoi(argv[4]);
-    assert(sb_pacer_period_queue_length > 0);
-    
-    sb_pacer_period_queue_fd = open(sb_pacer_period_queue_name, O_RDWR);
-    assert(sb_pacer_period_queue_fd >= 0);
-
-
-    char *sb_pacer_period_queue_char;
-    if ((sb_pacer_period_queue_char = mmap(NULL, 
-                                           sb_pacer_period_queue_length, 
-                                           PROT_READ | PROT_WRITE, MAP_SHARED, 
-                                           sb_pacer_period_queue_fd, 
-                                           1 * getpagesize())) == (void *) -1) {
-        printf("mmap sb_pacer_period_queue_char failed\n");
-        close(sb_pacer_period_queue_fd);
-        return 1;
-    }
-
-    sb_queue_int8_t_1_Recv_init(&sb_pacer_period_queue, (sb_queue_int8_t_1_t *)sb_pacer_period_queue_char);
-
-
-    run_poll();
-    //run_wait();
-
-    munmap(sb_read_port_queue_char, sb_read_port_queue_length);
-    close(sb_read_port_queue_fd);
-    
-    munmap(sb_pacer_period_queue_char, sb_pacer_period_queue_length);
-    close(sb_pacer_period_queue_fd);
-
-    return 0;
+const char *get_instance_name(void) {
+    static const char name[] = "vmdst_process";
+    return name;
 }
