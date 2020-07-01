@@ -5,5 +5,5 @@ vagrant ssh -c 'sudo DEBIAN_FRONTEND=noninteractive apt upgrade -y'
 vagrant ssh -c 'sudo DEBIAN_FRONTEND=noninteractive apt install -y build-essential linux-headers-amd64 linux-image-amd64 python-pip'
 vagrant halt
 set FIRST_RUN=false
-vagrant up
+vagrant up || exit /b
 vagrant reload
