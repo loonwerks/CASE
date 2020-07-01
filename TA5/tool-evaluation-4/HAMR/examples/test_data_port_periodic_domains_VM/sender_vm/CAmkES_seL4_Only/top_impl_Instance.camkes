@@ -23,8 +23,9 @@ assembly {
     connection seL4VMDTBPassthrough conn1(from vmsrc_process.dtb_self, to vmsrc_process.dtb);
     connection seL4SharedDataWithCaps conn2(from vmsrc_process.sb_write_port, to dst_thread.sb_read_port);
     connection seL4Notification conn3(from pacer.tick, to pacer.tock);
-    connection seL4SharedDataWithCaps conn4(from pacer.period_to_vmsrc_process, to vmsrc_process.sb_pacer_period_queue);
-    connection seL4Notification conn5(from pacer.period, to dst_thread.sb_pacer_notification);
+    connection seL4GlobalAsynch conn4(from pacer.period_to_vmsrc_process_notification, to vmsrc_process.sb_pacer_period_notification);
+    connection seL4SharedDataWithCaps conn5(from pacer.period_to_vmsrc_process_queue, to vmsrc_process.sb_pacer_period_queue);
+    connection seL4Notification conn6(from pacer.period, to dst_thread.sb_pacer_notification);
     VM_GENERAL_COMPOSITION_DEF()
     VM_COMPONENT_CONNECTIONS_DEF(src_process)
     VM_VIRTUAL_SERIAL_COMPONENTS_DEF()

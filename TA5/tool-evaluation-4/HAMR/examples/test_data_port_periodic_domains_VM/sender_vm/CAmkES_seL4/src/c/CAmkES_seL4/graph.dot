@@ -15,7 +15,8 @@ vmsrc_process [
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>vmsrc_process</B></TD></TR>
       <TR><TD PORT="sb_write_port"><FONT COLOR="red">dataport sp_union_art_DataContent_t <B>sb_write_port</B></FONT></TD></TR>
-      <TR><TD PORT="sb_pacer_period_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_pacer_period_queue</B></FONT></TD></TR>"
+      <TR><TD PORT="sb_pacer_period_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_pacer_period_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_period_notification"><FONT COLOR="blue">consumes Period_VM <B>sb_pacer_period_notification</B></FONT></TD></TR>"
     </TABLE>
   >
   shape=plaintext
@@ -36,7 +37,8 @@ pacer [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>pacer</B></TD></TR>
-      <TR><TD PORT="period_to_vmsrc_process"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>period_to_vmsrc_process</B></FONT></TD></TR>
+      <TR><TD PORT="period_to_vmsrc_process_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>period_to_vmsrc_process_queue</B></FONT></TD></TR>
+      <TR><TD PORT="period_to_vmsrc_process_notification"><FONT COLOR="blue">emits Period_VM <B>period_to_vmsrc_process_notification</B></FONT></TD></TR>
       <TR><TD PORT="period"><FONT COLOR="blue">emits Period <B>period</B></FONT></TD></TR>
       <TR><TD PORT="tick"><FONT COLOR="blue">emits TickTock <B>tick</B></FONT></TD></TR>
       <TR><TD PORT="tock"><FONT COLOR="blue">consumes TickTock <B>tock</B></FONT></TD></TR>"
@@ -93,16 +95,22 @@ interfacetypekey [
   id = conn3
 ];
 
-"pacer":period_to_vmsrc_process -> "vmsrc_process":sb_pacer_period_queue [
+"pacer":period_to_vmsrc_process_notification -> "vmsrc_process":sb_pacer_period_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn4
+];
+
+"pacer":period_to_vmsrc_process_queue -> "vmsrc_process":sb_pacer_period_queue [
   color="pink"
   //label = "seL4SharedDataWithCaps"
-  id = conn4
+  id = conn5
 ];
 
 "pacer":period -> "dst_thread":sb_pacer_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn5
+  id = conn6
 ];
 
 }

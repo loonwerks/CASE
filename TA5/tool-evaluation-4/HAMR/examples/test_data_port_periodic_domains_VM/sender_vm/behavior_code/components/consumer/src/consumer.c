@@ -1,4 +1,3 @@
-#include <camkes.h>
 #include <stdio.h>
 #include <sb_types.h>
 #include <sb_consumer_t_impl.h>

@@ -38,3 +38,8 @@ hvc0:2345:respawn:/sbin/getty -L 9600 hvc0
 ::shutdown:/etc/init.d/rcK
 ::shutdown:/sbin/swapoff -a
 ::shutdown:/bin/umount -a -r
+
+#vmsrc_process /dev/uio0 4096 /dev/uio1 4096
+# now @1 to switch to the other vm
+#vmdst_process /dev/uio0 4096 /dev/uio1 4096
+

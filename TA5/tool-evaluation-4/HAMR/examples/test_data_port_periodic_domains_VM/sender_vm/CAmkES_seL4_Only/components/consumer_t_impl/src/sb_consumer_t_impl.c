@@ -3,7 +3,7 @@
 #include <camkes.h>
 
 void sb_entrypoint_period_consumer_t_impl(int64_t *in_arg) {
-  test_event_data_port_consumer_time_triggered_handler((int64_t *) in_arg); 
+  test_event_data_port_consumer_time_triggered_handler((int64_t *) in_arg);
 }
 
 seqNum_t sb_read_port_seqNum;
@@ -59,7 +59,7 @@ int run(void) {
   sb_pacer_notification_wait();
   for(;;) {
     sb_pacer_notification_wait();
-    { 
+    {
       int64_t sb_dummy = 0;
       sb_entrypoint_period_consumer_t_impl(&sb_dummy);
     }
