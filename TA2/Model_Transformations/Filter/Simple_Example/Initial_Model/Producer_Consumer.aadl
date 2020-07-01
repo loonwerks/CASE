@@ -18,8 +18,6 @@ public
 		features
 			trigger: in event data port Base_Types::Integer;
 			msg_out: out event data port Coordinate.Impl;
-		properties
-			CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;
 	end Producer;
 
 	thread implementation Producer.Impl
@@ -32,8 +30,6 @@ public
 		features
 			msg_in: in event data port Coordinate.Impl;
 			status: out event data port Base_types::Boolean;
-		properties
-			CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;
 		annex agree {**
 			-- This is the formalized version of the well-formed requirement from the TA1 tool
 			assume Req_Wellformed_LatLong "The Consumer shall only receive well-formed lat-long values" : WELL_FORMED_LAT_LONG(msg_in);
@@ -52,8 +48,6 @@ public
 		features
 			input: in event data port Base_Types::Integer;
 			output: out event data port Base_Types::Boolean;
-		properties
-			CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 100;
 		annex agree {**
 			guarantee "Consumer status is never false" : output;
 		**};
@@ -65,7 +59,7 @@ public
 			Consumer: thread Consumer.Impl;
 		connections
 			c0: port input -> Producer.trigger {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;};
-			c1: port Producer.msg_out -> Consumer.msg_in {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 100;};
+			c1: port Producer.msg_out -> Consumer.msg_in {CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;};
 			c2: port Consumer.status -> output {CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;};
 		annex resolute {**
 			prove(Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong"))
@@ -74,8 +68,6 @@ public
 	end SW.Impl;
 
 	processor Proc
-		properties
-			CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 0;
 	end Proc;
 
 	processor implementation Proc.Impl
@@ -87,8 +79,6 @@ public
 		features
 			input: in event data port Base_Types::Integer;
 			output: out event data port Base_Types::Boolean;
-		properties
-			CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 100;
 	end Sys;
 
 	system implementation Sys.Impl
@@ -96,8 +86,8 @@ public
 			SW: process SW.Impl;
 			PROC: processor Proc.Impl;
 		connections
-			c1: port input -> SW.input {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;};
-			c2: port SW.output -> output {CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;};
+			c1: port input -> SW.input ;-- {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;};
+			c2: port SW.output -> output ; --{CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;};
 		properties
 			Actual_Processor_Binding => (reference (PROC)) applies to SW;
 	end Sys.Impl;
