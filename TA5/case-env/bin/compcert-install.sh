@@ -2,8 +2,8 @@
 set -exuo pipefail
 bash ~/bin/coq-install.sh
 : "${BASE_DIR:=$HOME/CASE}"
-: "${MENHIR_V:=20190626}"
-: "${COMPCERT_V:=v3.6}"
+: "${MENHIR_V:=20200211}"
+: "${COMPCERT_V:=v3.7}"
 . $BASE_DIR/seL4-CAmkES-L4v-dockerfiles/scripts/utils/common.sh
 cd $BASE_DIR
 eval `opam env`
