@@ -146,15 +146,7 @@ bash ~/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh
 * To install [CompCert](http://compcert.inria.fr/) (including [Coq](https://coq.inria.fr/)):
 
   ```bash
-  bash ~/bin/compcert-install.sh
-  ```
-
-  Note that CompCert "can be used for evaluation, research and education purposes, but not for commercial purposes".
-
-  To only install [Coq](https://coq.inria.fr/) (without CompCert):
-
-  ```bash
-  bash ~/bin/coq-install.sh
+  $SIREUM_HOME/bin/install/compcert.cmd
   ```
  
 ## Setting Up FMIDE and HAMR Only
