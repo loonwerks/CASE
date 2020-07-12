@@ -3,8 +3,14 @@
 ## AADL Arch
   ![aadl](diagrams/aadl-arch.png)
 
-## SeL4_Only Arch
-  ![SeL4_Only](diagrams/CAmkES-arch-SeL4_Only.png)
+## CAmkES HAMR SeL4_Only Arch
+  ![SeL4_Only](diagrams/CAmkES-HAMR-arch-SeL4_Only.svg)
 
-## SeL4 Arch
-  ![SeL4](diagrams/CAmkES-arch-SeL4.png)
+## CAmkES SeL4_Only Arch
+  ![SeL4_Only](diagrams/CAmkES-arch-SeL4_Only.svg)
+
+## CAmkES HAMR SeL4 Arch
+  ![SeL4](diagrams/CAmkES-HAMR-arch-SeL4.svg)
+
+## CAmkES SeL4 Arch
+  ![SeL4](diagrams/CAmkES-arch-SeL4.svg)

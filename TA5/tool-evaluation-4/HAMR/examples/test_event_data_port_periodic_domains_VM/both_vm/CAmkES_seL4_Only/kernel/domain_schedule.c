@@ -26,12 +26,13 @@
 // Major frame is 1 seconds, since destination has 1 second period
 //
 const dschedule_t ksDomSchedule[] = { // (1 tick == 2ms)
-    { .domain = 0, .length = 200 }, // all other seL4 threads, init, 200ms
-    { .domain = 1, .length =   1 },   // pacer        
-    { .domain = 0, .length =   1 },  // domain0     
-    { .domain = 2, .length = 100 },   // source      
-    { .domain = 0, .length = 100 },  // domain0     
-    { .domain = 3, .length = 100 }, // destination 
+    { .domain = 0, .length = 100 }, // all other seL4 threads, init, 200ms
+    { .domain = 1, .length =  50 },   // pacer        
+    { .domain = 0, .length =   5 },  // domain0     
+    { .domain = 2, .length = 400 },   // source      
+    { .domain = 0, .length =   5 },  // domain0     
+    { .domain = 3, .length = 400 }, // destination 
+    { .domain = 0, .length =   5 },   // domain0 
 };
 
 const word_t ksDomScheduleLength = sizeof(ksDomSchedule) / sizeof(dschedule_t);

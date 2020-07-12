@@ -116,66 +116,77 @@ interfacetypekey [
   color="blue"
   //label = "seL4Notification"
   id = conn1
+
 ];
 
 "src":sb_enq_queue_1 -> "snk_default":sb_deq_queue [
   color="red"
   //label = "seL4SharedData"
   id = conn2
+
 ];
 
 "src":sb_enq_2_notification -> "snk_2_A":sb_deq_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3
+
+];
+
+"src":sb_enq_2_notification -> "snk_2_B":sb_deq_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn3
+
 ];
 
 "src":sb_enq_queue_2 -> "snk_2_A":sb_deq_queue [
   color="red"
   //label = "seL4SharedData"
   id = conn4
-];
 
-"src":sb_enq_2_notification -> "snk_2_B":sb_deq_notification [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn5
 ];
 
 "src":sb_enq_queue_2 -> "snk_2_B":sb_deq_queue [
   color="red"
   //label = "seL4SharedData"
-  id = conn6
+  id = conn4
+
 ];
 
 "src":sb_enq_5_notification -> "snk_5":sb_deq_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn7
+  id = conn5
+
 ];
 
 "src":sb_enq_queue_5 -> "snk_5":sb_deq_queue [
   color="red"
   //label = "seL4SharedData"
-  id = conn8
+  id = conn6
+
 ];
 
 "dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn9
+  id = conn7
+
 ];
 
 "dispatch_periodic_inst":timer -> "time_server":the_timer [
   color="green"
   //label = "seL4TimeServer"
-  id = conn10
+  id = conn8
+
 ];
 
 "time_server":timer_notification -> "dispatch_periodic_inst":timer_complete [
   color="brown"
   //label = "seL4GlobalAsynchCallback"
-  id = conn11
+  id = conn9
+
 ];
 
 }

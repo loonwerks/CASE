@@ -40,11 +40,10 @@ void sb_entrypoint_consumer_queue_default_impl_initializer(const int64_t * in_ar
   test_event_data_port_consumer_component_init((int64_t *) in_arg);
 }
 
-void post_init(void){
+void post_init(void) {
   // register callback for EventDataPort port deq
   CALLBACKOP(sb_deq_notification_reg_callback(sb_deq_notification_handler, NULL));
 }
-
 
 /************************************************************************
  * int run(void)

@@ -27,7 +27,6 @@ void pre_init(void) {
   sb_queue_int8_t_1_init(sb_enq_queue_1);
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.

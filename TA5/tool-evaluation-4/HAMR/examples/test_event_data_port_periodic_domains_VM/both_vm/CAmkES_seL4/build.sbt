@@ -11,7 +11,7 @@ val scalaVer = "2.12.11"
 
 val sireumScalacVersion = "4.20200603.47564a7" // https://github.com/sireum/scalac-plugin/tree/4.20200603.47564a7
 
-val runtimeVersion = "07533cc0f8" // https://github.com/sireum/kekinian/tree/07533cc0f8
+val runtimeVersion = "0b83a7bcaf" // https://github.com/sireum/kekinian/tree/0b83a7bcaf
 
 val scalaTestVersion = "3.1.2"
 

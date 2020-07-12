@@ -150,90 +150,105 @@ interfacetypekey [
   color="orange"
   //label = "seL4RPCCall"
   id = conn1
+
 ];
 
 "FPLN":sb_recv_map -> "sb_fpln_recv_map_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn2
+
 ];
 
 "sb_fpln_recv_map_monitor":monsig -> "FPLN":sb_recv_map_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3
+
 ];
 
 "FPLN":sb_flight_plan0 -> "sb_wpm_flight_plan_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn4
+
 ];
 
 "WPM":sb_flight_plan -> "sb_wpm_flight_plan_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn5
+
 ];
 
 "sb_wpm_flight_plan_monitor":monsig -> "WPM":sb_flight_plan_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn6
+
 ];
 
 "WPM":sb_mission_rcv0 -> "sb_fpln_mission_rcv_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn7
+
 ];
 
 "FPLN":sb_mission_rcv -> "sb_fpln_mission_rcv_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn8
+
 ];
 
 "sb_fpln_mission_rcv_monitor":monsig -> "FPLN":sb_mission_rcv_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn9
+
 ];
 
 "WPM":sb_mission_window0 -> "sb_uart_mission_window_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn10
+
 ];
 
 "UART":sb_mission_window -> "sb_uart_mission_window_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn11
+
 ];
 
 "sb_uart_mission_window_monitor":monsig -> "UART":sb_mission_window_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn12
+
 ];
 
 "UART":sb_tracking_id0 -> "sb_wpm_tracking_id_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn13
+
 ];
 
 "WPM":sb_tracking_id -> "sb_wpm_tracking_id_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn14
+
 ];
 
 "sb_wpm_tracking_id_monitor":monsig -> "WPM":sb_tracking_id_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn15
+
 ];
 
 }

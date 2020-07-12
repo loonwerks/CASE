@@ -83,48 +83,56 @@ interfacetypekey [
   color="yellow"
   //label = "seL4VMDTBPassthrough"
   id = conn1
+
 ];
 
 "vmdst_process":dtb_self -> "vmdst_process":dtb [
   color="yellow"
   //label = "seL4VMDTBPassthrough"
   id = conn2
+
 ];
 
 "vmsrc_process":sb_write_port -> "vmdst_process":sb_read_port [
   color="pink"
   //label = "seL4SharedDataWithCaps"
   id = conn3
+
 ];
 
 "pacer":tick -> "pacer":tock [
   color="blue"
   //label = "seL4Notification"
   id = conn4
+
 ];
 
 "pacer":period_to_vmsrc_process_notification -> "vmsrc_process":sb_pacer_period_notification [
   color="grey"
   //label = "seL4GlobalAsynch"
   id = conn5
+
 ];
 
 "pacer":period_to_vmsrc_process_queue -> "vmsrc_process":sb_pacer_period_queue [
   color="pink"
   //label = "seL4SharedDataWithCaps"
   id = conn6
+
 ];
 
 "pacer":period_to_vmdst_process_notification -> "vmdst_process":sb_pacer_period_notification [
   color="grey"
   //label = "seL4GlobalAsynch"
   id = conn7
+
 ];
 
 "pacer":period_to_vmdst_process_queue -> "vmdst_process":sb_pacer_period_queue [
   color="pink"
   //label = "seL4SharedDataWithCaps"
   id = conn8
+
 ];
 
 }

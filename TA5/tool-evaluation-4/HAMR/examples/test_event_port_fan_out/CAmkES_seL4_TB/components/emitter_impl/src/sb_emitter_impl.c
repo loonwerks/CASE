@@ -64,7 +64,6 @@ void sb_entrypoint_emitter_impl_initializer(const int64_t * in_arg) {
   test_event_port_emitter_component_init((int64_t *) in_arg);
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.

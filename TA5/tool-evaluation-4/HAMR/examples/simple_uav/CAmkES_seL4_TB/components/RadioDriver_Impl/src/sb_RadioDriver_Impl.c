@@ -33,7 +33,6 @@ void sb_entrypoint_RadioDriver_Impl_initializer(const int64_t * in_arg) {
   init((int64_t *) in_arg);
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.

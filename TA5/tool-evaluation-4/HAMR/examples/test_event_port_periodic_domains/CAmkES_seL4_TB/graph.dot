@@ -92,42 +92,49 @@ interfacetypekey [
   color="orange"
   //label = "seL4RPCCall"
   id = conn1
+
 ];
 
 "dst_thread":sb_consume -> "sb_dst_thread_consume_monitor":mon_receive [
   color="orange"
   //label = "seL4RPCCall"
   id = conn2
+
 ];
 
 "sb_dst_thread_consume_monitor":monsig -> "dst_thread":sb_consume_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3
+
 ];
 
 "dispatch_periodic_inst":sb_src_thread_periodic_dispatch_notification -> "src_thread":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn4
+
 ];
 
 "dispatch_periodic_inst":sb_dst_thread_periodic_dispatch_notification -> "dst_thread":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn5
+
 ];
 
 "dispatch_periodic_inst":timer -> "time_server":the_timer [
   color="green"
   //label = "seL4TimeServer"
   id = conn6
+
 ];
 
 "time_server":timer_notification -> "dispatch_periodic_inst":timer_complete [
   color="brown"
   //label = "seL4GlobalAsynchCallback"
   id = conn7
+
 ];
 
 }

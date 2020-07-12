@@ -15,16 +15,20 @@ include(${CAMKES_VM_LINUX_SOURCE_HELPERS_PATH})
 include(ExternalProject)
 include(external-project-helpers)
 
-MESSAGE("KernelARMPlatform = ${KernelARMPlatform}")
-MESSAGE("CAMKES_ARM_VM_DIR = ${CAMKES_ARM_VM_DIR}")
-MESSAGE("CAMKES_VM_IMAGES_DIR = ${CAMKES_VM_IMAGES_DIR}")
-MESSAGE("CAMKES_VM_LINUX_DIR = ${CAMKES_VM_LINUX_DIR}")
-MESSAGE("CMAKE_CURRENT_BINARY_DIR = ${CMAKE_CURRENT_BINARY_DIR}")
-MESSAGE("CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
-MESSAGE("CMAKE_C_COMPILER = ${CMAKE_C_COMPILER}")
-MESSAGE("BASE_C_FLAGS = ${BASE_C_FLAGS}")
+option(USE_PRECONFIGURED_ROOTFS
+       "Use preconfigured rootfs"
+       OFF)
 
-if("${KernelARMPlatform}" STREQUAL "qemu-arm-virt" AND (NOT USE_CACHED_LINUX_VM))
+#MESSAGE("KernelARMPlatform = ${KernelARMPlatform}")
+#MESSAGE("CAMKES_ARM_VM_DIR = ${CAMKES_ARM_VM_DIR}")
+#MESSAGE("CAMKES_VM_IMAGES_DIR = ${CAMKES_VM_IMAGES_DIR}")
+#MESSAGE("CAMKES_VM_LINUX_DIR = ${CAMKES_VM_LINUX_DIR}")
+#MESSAGE("CMAKE_CURRENT_BINARY_DIR = ${CMAKE_CURRENT_BINARY_DIR}")
+#MESSAGE("CMAKE_CURRENT_SOURCE_DIR = ${CMAKE_CURRENT_SOURCE_DIR}")
+#MESSAGE("CMAKE_C_COMPILER = ${CMAKE_C_COMPILER}")
+#MESSAGE("BASE_C_FLAGS = ${BASE_C_FLAGS}")
+
+if("${KernelARMPlatform}" STREQUAL "qemu-arm-virt" AND (NOT USE_PRECONFIGURED_ROOTFS))
     MESSAGE("Downloading VM")
 
     set(cpp_flags "-DKERNELARMPLATFORM_QEMU-ARM-VIRT")
@@ -107,7 +111,7 @@ if("${KernelARMPlatform}" STREQUAL "qemu-arm-virt" AND (NOT USE_CACHED_LINUX_VM)
 else()
     MESSAGE("Using pre-configured rootfs")
 
-    # User pre-configured rootfs file with crossvm modules and apps installed
+    # Use pre-configured rootfs file with crossvm modules and apps installed
     set(rootfs_file "${CAMKES_VM_IMAGES_DIR}/${KernelARMPlatform}/rootfs_crossvm.cpio.gz")
 endif()
 

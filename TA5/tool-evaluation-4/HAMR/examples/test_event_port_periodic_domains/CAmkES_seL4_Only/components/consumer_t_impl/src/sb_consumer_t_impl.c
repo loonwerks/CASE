@@ -35,8 +35,8 @@ bool sb_consume_dequeue() {
 
 /************************************************************************
  * sb_consume_is_empty;
- * 
- * Helper method to determine if infrastructure port has received 
+ *
+ * Helper method to determine if infrastructure port has received
  * new events
  *
  ************************************************************************/
@@ -84,7 +84,6 @@ void sb_freeze_event_port_consume() {
 void sb_entrypoint_consumer_t_impl_initializer(const int64_t * in_arg) {
   test_event_port_consumer_component_init((int64_t *) in_arg);
 }
-
 
 /************************************************************************
  * int run(void)

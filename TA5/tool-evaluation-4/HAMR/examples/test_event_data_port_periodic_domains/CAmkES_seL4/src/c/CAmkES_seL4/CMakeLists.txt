@@ -6,6 +6,8 @@ project (top_impl_Instance C)
 
 add_definitions(-DCAMKES)
 
+include(${CMAKE_CURRENT_LIST_DIR}/CMake_TranspilerOptions.cmake)
+
 if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "(C|c?)lang")
   add_compile_options("$<$<CONFIG:Release>:-Oz>")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")

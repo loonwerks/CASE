@@ -77,18 +77,21 @@ interfacetypekey [
   color="orange"
   //label = "seL4RPCCall"
   id = conn1
+
 ];
 
 "snk":sb_s -> "sb_snk_s_monitor":mon_receive [
   color="orange"
   //label = "seL4RPCCall"
   id = conn2
+
 ];
 
 "sb_snk_s_monitor":monsig -> "snk":sb_s_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3
+
 ];
 
 }

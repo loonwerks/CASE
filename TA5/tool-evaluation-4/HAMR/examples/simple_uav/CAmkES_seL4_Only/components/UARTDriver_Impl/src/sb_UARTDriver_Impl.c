@@ -86,11 +86,10 @@ void pre_init(void) {
   sb_queue_int64_t_1_init(sb_tracking_id_queue_1);
 }
 
-void post_init(void){
+void post_init(void) {
   // register callback for EventDataPort port mission_window
   CALLBACKOP(sb_mission_window_notification_reg_callback(sb_mission_window_notification_handler, NULL));
 }
-
 
 /************************************************************************
  * int run(void)

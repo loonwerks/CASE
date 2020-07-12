@@ -104,14 +104,13 @@ void sb_entrypoint_WaypointManager_Impl_initializer(const int64_t * in_arg) {
   init((int64_t *) in_arg);
 }
 
-void post_init(void){
+void post_init(void) {
   // register callback for EventDataPort port flight_plan
   CALLBACKOP(sb_flight_plan_notification_reg_callback(sb_flight_plan_notification_handler, NULL));
 
   // register callback for EventDataPort port tracking_id
   CALLBACKOP(sb_tracking_id_notification_reg_callback(sb_tracking_id_notification_handler, NULL));
 }
-
 
 /************************************************************************
  * int run(void)

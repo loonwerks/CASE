@@ -145,14 +145,13 @@ void pre_init(void) {
   sb_queue_SW__Command_Impl_1_Recv_init(&sb_recv_map_recv_queue, sb_recv_map_queue);
 }
 
-void post_init(void){
+void post_init(void) {
   // register callback for EventDataPort port mission_rcv
   CALLBACKOP(sb_mission_rcv_notification_reg_callback(sb_mission_rcv_notification_handler, NULL));
 
   // register callback for EventDataPort port recv_map
   CALLBACKOP(sb_recv_map_notification_reg_callback(sb_recv_map_notification_handler, NULL));
 }
-
 
 /************************************************************************
  * int run(void)

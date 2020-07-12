@@ -85,14 +85,13 @@ void sb_entrypoint_FlightPlanner_Impl_initializer(const int64_t * in_arg) {
   init((int64_t *) in_arg);
 }
 
-void post_init(void){
+void post_init(void) {
   // register callback for EventDataPort port mission_rcv
   CALLBACKOP(sb_mission_rcv_notification_reg_callback(sb_mission_rcv_notification_handler, NULL));
 
   // register callback for EventDataPort port recv_map
   CALLBACKOP(sb_recv_map_notification_reg_callback(sb_recv_map_notification_handler, NULL));
 }
-
 
 /************************************************************************
  * int run(void)

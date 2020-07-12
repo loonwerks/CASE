@@ -1,6 +1,8 @@
 # @TAG(CUSTOM)
 # /etc/inittab
 #
+# This file will not be overwritten so is safe to edit
+#
 # Copyright (C) 2001 Erik Andersen <andersen@codepoet.org>
 #
 # Note: BusyBox init doesn't support runlevels.  The runlevels field is

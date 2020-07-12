@@ -52,7 +52,6 @@ void pre_init(void) {
   sb_queue_int8_t_1_Recv_init(&sb_read_port_recv_queue, sb_read_port_queue);
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.

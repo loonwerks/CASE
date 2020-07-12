@@ -66,7 +66,6 @@ void sb_entrypoint_source_thread_impl_initializer(const int64_t * in_arg) {
   test_data_port_periodic_domains_source_component_init((int64_t *) in_arg);
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.

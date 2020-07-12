@@ -156,14 +156,13 @@ void pre_init(void) {
   sb_queue_int64_t_1_Recv_init(&sb_tracking_id_recv_queue, sb_tracking_id_queue);
 }
 
-void post_init(void){
+void post_init(void) {
   // register callback for EventDataPort port flight_plan
   CALLBACKOP(sb_flight_plan_notification_reg_callback(sb_flight_plan_notification_handler, NULL));
 
   // register callback for EventDataPort port tracking_id
   CALLBACKOP(sb_tracking_id_notification_reg_callback(sb_tracking_id_notification_handler, NULL));
 }
-
 
 /************************************************************************
  * int run(void)

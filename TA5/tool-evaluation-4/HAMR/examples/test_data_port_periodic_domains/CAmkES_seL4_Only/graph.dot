@@ -68,18 +68,21 @@ interfacetypekey [
   color="red"
   //label = "seL4SharedData"
   id = conn1
+
 ];
 
 "source_thread_component":sb_self_pacer_tick -> "source_thread_component":sb_self_pacer_tock [
   color="blue"
   //label = "seL4Notification"
   id = conn2
+
 ];
 
 "destination_thread_component":sb_self_pacer_tick -> "destination_thread_component":sb_self_pacer_tock [
   color="blue"
   //label = "seL4Notification"
   id = conn3
+
 ];
 
 }

@@ -75,11 +75,10 @@ void pre_init(void) {
   sb_queue_int8_t_5_Recv_init(&sb_deq_recv_queue, sb_deq_queue);
 }
 
-void post_init(void){
+void post_init(void) {
   // register callback for EventDataPort port deq
   CALLBACKOP(sb_deq_notification_reg_callback(sb_deq_notification_handler, NULL));
 }
-
 
 /************************************************************************
  * int run(void)

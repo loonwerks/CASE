@@ -66,12 +66,14 @@ interfacetypekey [
   color="blue"
   //label = "seL4Notification"
   id = conn1
+
 ];
 
 "src":sb_enq_queue_1 -> "dest":sb_deq_queue [
   color="red"
   //label = "seL4SharedData"
   id = conn2
+
 ];
 
 }

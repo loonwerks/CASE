@@ -31,8 +31,8 @@ bool sb_s_dequeue() {
 
 /************************************************************************
  * sb_s_is_empty;
- * 
- * Helper method to determine if infrastructure port has received 
+ *
+ * Helper method to determine if infrastructure port has received
  * new events
  *
  ************************************************************************/
@@ -108,11 +108,10 @@ void sb_entrypoint_consumer_queue_default_impl_initializer(const int64_t * in_ar
   test_event_port_consumer_component_init((int64_t *) in_arg);
 }
 
-void post_init(void){
+void post_init(void) {
   // register callback for EventPort port s
   CALLBACKOP(sb_s_reg_callback(sb_s_handler, NULL));
 }
-
 
 /************************************************************************
  * int run(void)
@@ -129,7 +128,7 @@ int run(void) {
     MUTEXOP(sb_dispatch_sem_wait())
     sb_freeze_event_port_s();
 
-    { 
+    {
       if(sb_s_received_events > 0) {
         // dequeue one event and call the event handler
         sb_s_dequeue();

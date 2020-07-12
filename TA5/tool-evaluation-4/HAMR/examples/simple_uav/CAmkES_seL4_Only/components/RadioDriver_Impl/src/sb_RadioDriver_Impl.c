@@ -27,7 +27,6 @@ void pre_init(void) {
   sb_queue_SW__Command_Impl_1_init(sb_recv_map_out_queue_1);
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.

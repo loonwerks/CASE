@@ -32,8 +32,8 @@ bool sb_consume_dequeue() {
 
 /************************************************************************
  * sb_consume_is_empty;
- * 
- * Helper method to determine if infrastructure port has received 
+ *
+ * Helper method to determine if infrastructure port has received
  * new events
  *
  ************************************************************************/
@@ -78,13 +78,15 @@ B test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_t_i
 // receive consume: In EventPort
 Unit test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_t_impl_seL4Nix_consume_Receive(STACK_FRAME
   Option_8E9F45 result) {
+  DeclNewStackFrame(caller, "sb_consumer_t_impl.c", "", "test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_t_impl_seL4Nix_consume_Receive", 0);
+
   if(sb_consume_dequeue()) {
     // event port - ART requires an Empty payload be sent
     DeclNewart_Empty(payload);
 
     // wrap it in Some and place in result
     DeclNewSome_D29615(some);
-    Some_D29615_apply(STACK_FRAME &some, (art_DataContent) &payload);
+    Some_D29615_apply(SF &some, (art_DataContent) &payload);
     Type_assign(result, &some, sizeof(union Option_8E9F45));
   } else {
     // put None in result
@@ -94,6 +96,8 @@ Unit test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_
 } 
 
 void pre_init(void) {
+  DeclNewStackFrame(NULL, "sb_consumer_t_impl.c", "", "pre_init", 0);
+
   printf("Entering pre-init of consumer_t_impl\n");
 
   // initialise slang-embedded components/ports
@@ -105,12 +109,13 @@ void pre_init(void) {
   printf("Leaving pre-init of consumer_t_impl\n");
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.
  ************************************************************************/
 int run(void) {
+  DeclNewStackFrame(NULL, "sb_consumer_t_impl.c", "", "run", 0);
+
 
   sb_self_pacer_tick_emit();
   for(;;) {

@@ -58,7 +58,6 @@ void pre_init(void) {
   init_sp_int8_t(sb_write_port, &sb_write_port_seqNum);
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.

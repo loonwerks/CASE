@@ -32,13 +32,16 @@ B sender_vm_test_event_data_port_periodic_domains_consumer_t_impl_seL4Nix_read_p
 }
 
 // receive read_port: In DataPort union_art_DataContent
-Unit sender_vm_test_event_data_port_periodic_domains_consumer_t_impl_seL4Nix_read_port_Receive(STACK_FRAME
+Unit sender_vm_test_event_data_port_periodic_domains_consumer_t_impl_seL4Nix_read_port_Receive(
+  STACK_FRAME
   Option_8E9F45 result) {
+  DeclNewStackFrame(caller, "sb_consumer_t_impl.c", "", "sender_vm_test_event_data_port_periodic_domains_consumer_t_impl_seL4Nix_read_port_Receive", 0);
+
   union_art_DataContent val;
   if(sb_read_port_read((union_art_DataContent *) &val)) {
     // wrap payload in Some and place in result
     DeclNewSome_D29615(some);
-    Some_D29615_apply(STACK_FRAME &some, (art_DataContent) &val);
+    Some_D29615_apply(SF &some, (art_DataContent) &val);
     Type_assign(result, &some, sizeof(union Option_8E9F45));
   } else {
     // put None in result
@@ -49,6 +52,8 @@ Unit sender_vm_test_event_data_port_periodic_domains_consumer_t_impl_seL4Nix_rea
 
 
 void pre_init(void) {
+  DeclNewStackFrame(NULL, "sb_consumer_t_impl.c", "", "pre_init", 0);
+
   printf("Entering pre-init of consumer_t_impl\n");
 
   // initialise data structure for data port read_port
@@ -63,12 +68,13 @@ void pre_init(void) {
   printf("Leaving pre-init of consumer_t_impl\n");
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.
  ************************************************************************/
 int run(void) {
+  DeclNewStackFrame(NULL, "sb_consumer_t_impl.c", "", "run", 0);
+
   sb_pacer_notification_wait();
   for(;;) {
     sb_pacer_notification_wait();

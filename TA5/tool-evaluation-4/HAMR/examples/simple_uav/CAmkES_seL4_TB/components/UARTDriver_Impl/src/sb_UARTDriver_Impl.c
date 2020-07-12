@@ -59,11 +59,10 @@ void sb_entrypoint_UARTDriver_Impl_initializer(const int64_t * in_arg) {
   init((int64_t *) in_arg);
 }
 
-void post_init(void){
+void post_init(void) {
   // register callback for EventDataPort port mission_window
   CALLBACKOP(sb_mission_window_notification_reg_callback(sb_mission_window_notification_handler, NULL));
 }
-
 
 /************************************************************************
  * int run(void)

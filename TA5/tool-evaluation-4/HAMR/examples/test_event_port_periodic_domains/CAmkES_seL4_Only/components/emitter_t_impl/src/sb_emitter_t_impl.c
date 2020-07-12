@@ -16,8 +16,8 @@ void sb_entrypoint_period_emitter_t_impl(int64_t *in_arg) {
  *
  ************************************************************************/
 bool sb_emit_enqueue(void) {
-  // sb_emit_counter is a dataport (shared memory) that is written by the sender 
-  // and read by the receiver(s). This counter is monotonicly increasing, 
+  // sb_emit_counter is a dataport (shared memory) that is written by the sender
+  // and read by the receiver(s). This counter is monotonicly increasing,
   // but can wrap.
   (*sb_emit_counter)++;
 
@@ -46,7 +46,6 @@ void pre_init(void) {
   // initialise shared counter for event port emit
   *sb_emit_counter = 0;
 }
-
 
 /************************************************************************
  * int run(void)

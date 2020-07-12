@@ -10,12 +10,17 @@ bool sb_write_port_write(const union_art_DataContent * value) {
 }
 
 // send write_port: Out DataPort int8_t
-Unit test_data_port_periodic_domains_test_data_port_periodic_domains_source_thread_impl_seL4Nix_write_port_Send(STACK_FRAME 
+Unit test_data_port_periodic_domains_test_data_port_periodic_domains_source_thread_impl_seL4Nix_write_port_Send(
+  STACK_FRAME
   art_DataContent d) {
+  DeclNewStackFrame(caller, "sb_source_thread_impl.c", "", "test_data_port_periodic_domains_test_data_port_periodic_domains_source_thread_impl_seL4Nix_write_port_Send", 0);
+
   sb_write_port_write(d);
 }
 
 void pre_init(void) {
+  DeclNewStackFrame(NULL, "sb_source_thread_impl.c", "", "pre_init", 0);
+
   printf("Entering pre-init of source_thread_impl\n");
 
   // initialise data structure for data port write_port
@@ -30,12 +35,13 @@ void pre_init(void) {
   printf("Leaving pre-init of source_thread_impl\n");
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.
  ************************************************************************/
 int run(void) {
+  DeclNewStackFrame(NULL, "sb_source_thread_impl.c", "", "run", 0);
+
   sb_self_pacer_tick_emit();
   for(;;) {
     sb_self_pacer_tock_wait();

@@ -76,18 +76,21 @@ interfacetypekey [
   color="orange"
   //label = "seL4RPCCall"
   id = conn1
+
 ];
 
 "dest":sb_deq -> "sb_dest_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn2
+
 ];
 
 "sb_dest_deq_monitor":monsig -> "dest":sb_deq_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3
+
 ];
 
 }

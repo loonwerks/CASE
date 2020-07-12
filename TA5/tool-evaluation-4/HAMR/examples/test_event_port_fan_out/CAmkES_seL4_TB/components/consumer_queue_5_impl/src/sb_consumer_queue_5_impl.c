@@ -6,8 +6,8 @@
  * sb_s_handler:
  * Invoked by: seL4 notification callback
  *
- * This is the function invoked by an seL4 notification callback that  
- * dispatches the active-thread due to the arrival of an event on 
+ * This is the function invoked by an seL4 notification callback that
+ * dispatches the active-thread due to the arrival of an event on
  * its s event port
  *
  ************************************************************************/
@@ -43,7 +43,6 @@ void sb_entrypoint_consumer_queue_5_impl_initializer(const int64_t * in_arg) {
 void pre_init(void) {
   CALLBACKOP(sb_s_notification_reg_callback(sb_s_handler, NULL));
 }
-
 
 /************************************************************************
  * int run(void)

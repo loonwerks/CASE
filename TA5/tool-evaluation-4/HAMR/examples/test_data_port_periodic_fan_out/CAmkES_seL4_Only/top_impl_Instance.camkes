@@ -15,13 +15,12 @@ assembly {
     component dispatch_periodic dispatch_periodic_inst;
     component TimeServer time_server;
 
-    connection seL4SharedData conn1(from src.sb_write_port, to dest_A.sb_read_port);
-    connection seL4SharedData conn2(from src.sb_write_port, to dest_B.sb_read_port);
-    connection seL4Notification conn3(from dispatch_periodic_inst.sb_src_periodic_dispatch_notification, to src.sb_periodic_dispatch_notification);
-    connection seL4Notification conn4(from dispatch_periodic_inst.sb_dest_A_periodic_dispatch_notification, to dest_A.sb_periodic_dispatch_notification);
-    connection seL4Notification conn5(from dispatch_periodic_inst.sb_dest_B_periodic_dispatch_notification, to dest_B.sb_periodic_dispatch_notification);
-    connection seL4TimeServer conn6(from dispatch_periodic_inst.timer, to time_server.the_timer);
-    connection seL4GlobalAsynchCallback conn7(from time_server.timer_notification, to dispatch_periodic_inst.timer_complete);
+    connection seL4SharedData conn1(from src.sb_write_port, to dest_A.sb_read_port, to dest_B.sb_read_port);
+    connection seL4Notification conn2(from dispatch_periodic_inst.sb_src_periodic_dispatch_notification, to src.sb_periodic_dispatch_notification);
+    connection seL4Notification conn3(from dispatch_periodic_inst.sb_dest_A_periodic_dispatch_notification, to dest_A.sb_periodic_dispatch_notification);
+    connection seL4Notification conn4(from dispatch_periodic_inst.sb_dest_B_periodic_dispatch_notification, to dest_B.sb_periodic_dispatch_notification);
+    connection seL4TimeServer conn5(from dispatch_periodic_inst.timer, to time_server.the_timer);
+    connection seL4GlobalAsynchCallback conn6(from time_server.timer_notification, to dispatch_periodic_inst.timer_complete);
   }
 
   configuration {

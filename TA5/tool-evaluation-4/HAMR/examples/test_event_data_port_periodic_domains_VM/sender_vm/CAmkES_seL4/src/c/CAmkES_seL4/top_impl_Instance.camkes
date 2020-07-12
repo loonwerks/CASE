@@ -39,7 +39,7 @@ assembly {
     vmsrc_process.simple_untyped12_pool = 12;
     vmsrc_process.num_extra_frame_caps = 0;
     vmsrc_process.extra_frame_map_address = 0;
-    //vmsrc_process.sb_write_port_queue_1_access = "W";
+    vmsrc_process.sb_write_port_queue_1_access = "W";
     dst_thread.sb_read_port_queue_access = "R";
     pacer._domain = 1;
     vmsrc_process._domain = 2;

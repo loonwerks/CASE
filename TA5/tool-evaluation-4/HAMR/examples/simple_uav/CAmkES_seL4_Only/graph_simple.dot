@@ -100,60 +100,70 @@ interfacetypekey [
   color="blue"
   //label = "seL4Notification"
   id = conn1
+
 ];
 
 "RADIO":sb_recv_map_out_queue_1 -> "FPLN":sb_recv_map_queue [
   color="red"
   //label = "seL4SharedData"
   id = conn2
+
 ];
 
 "FPLN":sb_flight_plan_1_notification -> "WPM":sb_flight_plan_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3
+
 ];
 
 "FPLN":sb_flight_plan_queue_1 -> "WPM":sb_flight_plan_queue [
   color="red"
   //label = "seL4SharedData"
   id = conn4
+
 ];
 
 "WPM":sb_mission_rcv_1_notification -> "FPLN":sb_mission_rcv_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn5
+
 ];
 
 "WPM":sb_mission_rcv_queue_1 -> "FPLN":sb_mission_rcv_queue [
   color="red"
   //label = "seL4SharedData"
   id = conn6
+
 ];
 
 "WPM":sb_mission_window_1_notification -> "UART":sb_mission_window_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn7
+
 ];
 
 "WPM":sb_mission_window_queue_1 -> "UART":sb_mission_window_queue [
   color="red"
   //label = "seL4SharedData"
   id = conn8
+
 ];
 
 "UART":sb_tracking_id_1_notification -> "WPM":sb_tracking_id_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn9
+
 ];
 
 "UART":sb_tracking_id_queue_1 -> "WPM":sb_tracking_id_queue [
   color="red"
   //label = "seL4SharedData"
   id = conn10
+
 ];
 
 }

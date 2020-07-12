@@ -12,12 +12,17 @@ bool sb_write_port_enqueue(const union_art_DataContent *data) {
 }
 
 // send write_port: Out EventDataPort int8_t
-Unit receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_seL4Nix_write_port_Send(STACK_FRAME 
+Unit receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_seL4Nix_write_port_Send(
+  STACK_FRAME
   art_DataContent d) {
+  DeclNewStackFrame(caller, "sb_emitter_t_impl.c", "", "receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_seL4Nix_write_port_Send", 0);
+
   sb_write_port_enqueue(d);
 }
 
 void pre_init(void) {
+  DeclNewStackFrame(NULL, "sb_emitter_t_impl.c", "", "pre_init", 0);
+
   printf("Entering pre-init of emitter_t_impl\n");
 
   // initialise data structure for outgoing event data port write_port
@@ -32,12 +37,13 @@ void pre_init(void) {
   printf("Leaving pre-init of emitter_t_impl\n");
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.
  ************************************************************************/
 int run(void) {
+  DeclNewStackFrame(NULL, "sb_emitter_t_impl.c", "", "run", 0);
+
   sb_pacer_notification_wait();
   for(;;) {
     sb_pacer_notification_wait();

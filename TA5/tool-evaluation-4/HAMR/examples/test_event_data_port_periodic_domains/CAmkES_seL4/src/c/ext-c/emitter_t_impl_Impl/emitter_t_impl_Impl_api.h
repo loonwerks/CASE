@@ -6,18 +6,22 @@
 // This file was auto-generated.  Do not edit
 
 void api_send_write_port__test_event_data_port_periodic_domains_test_event_data_port_periodic_domains_emitter_t_impl_Impl(
+  STACK_FRAME
   test_event_data_port_periodic_domains_test_event_data_port_periodic_domains_emitter_t_impl_Impl this,
   S8 value);
 
 void api_logInfo__test_event_data_port_periodic_domains_test_event_data_port_periodic_domains_emitter_t_impl_Impl(
+  STACK_FRAME
   test_event_data_port_periodic_domains_test_event_data_port_periodic_domains_emitter_t_impl_Impl this,
   String str);
 
 void api_logDebug__test_event_data_port_periodic_domains_test_event_data_port_periodic_domains_emitter_t_impl_Impl(
+  STACK_FRAME
   test_event_data_port_periodic_domains_test_event_data_port_periodic_domains_emitter_t_impl_Impl this,
   String str);
 
 void api_logError__test_event_data_port_periodic_domains_test_event_data_port_periodic_domains_emitter_t_impl_Impl(
+  STACK_FRAME
   test_event_data_port_periodic_domains_test_event_data_port_periodic_domains_emitter_t_impl_Impl this,
   String str);
 

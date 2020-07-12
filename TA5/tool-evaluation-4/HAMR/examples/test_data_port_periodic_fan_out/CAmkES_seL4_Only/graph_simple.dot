@@ -91,42 +91,49 @@ interfacetypekey [
   color="red"
   //label = "seL4SharedData"
   id = conn1
+
 ];
 
 "src":sb_write_port -> "dest_B":sb_read_port [
   color="red"
   //label = "seL4SharedData"
-  id = conn2
+  id = conn1
+
 ];
 
 "dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn3
+  id = conn2
+
 ];
 
 "dispatch_periodic_inst":sb_dest_A_periodic_dispatch_notification -> "dest_A":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn4
+  id = conn3
+
 ];
 
 "dispatch_periodic_inst":sb_dest_B_periodic_dispatch_notification -> "dest_B":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn5
+  id = conn4
+
 ];
 
 "dispatch_periodic_inst":timer -> "time_server":the_timer [
   color="green"
   //label = "seL4TimeServer"
-  id = conn6
+  id = conn5
+
 ];
 
 "time_server":timer_notification -> "dispatch_periodic_inst":timer_complete [
   color="brown"
   //label = "seL4GlobalAsynchCallback"
-  id = conn7
+  id = conn6
+
 ];
 
 }

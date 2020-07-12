@@ -13,8 +13,8 @@
  *
  ************************************************************************/
 bool sb_emit_enqueue(void) {
-  // sb_emit_counter is a dataport (shared memory) that is written by the sender 
-  // and read by the receiver(s). This counter is monotonicly increasing, 
+  // sb_emit_counter is a dataport (shared memory) that is written by the sender
+  // and read by the receiver(s). This counter is monotonicly increasing,
   // but can wrap.
   (*sb_emit_counter)++;
 
@@ -28,8 +28,10 @@ bool sb_emit_enqueue(void) {
 
 
 // send emit: Out EventPort
-Unit test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_seL4Nix_emit_Send(STACK_FRAME 
+Unit test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_seL4Nix_emit_Send(
+  STACK_FRAME
   art_DataContent d) {
+  DeclNewStackFrame(caller, "sb_emitter_t_impl.c", "", "test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_seL4Nix_emit_Send", 0);
 
   // event port - can ignore the Slang Empty payload
   art_Empty payload = (art_Empty) d;
@@ -39,6 +41,8 @@ Unit test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t
 }
 
 void pre_init(void) {
+  DeclNewStackFrame(NULL, "sb_emitter_t_impl.c", "", "pre_init", 0);
+
   printf("Entering pre-init of emitter_t_impl\n");
 
   // initialise shared counter for event port emit
@@ -53,12 +57,13 @@ void pre_init(void) {
   printf("Leaving pre-init of emitter_t_impl\n");
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.
  ************************************************************************/
 int run(void) {
+  DeclNewStackFrame(NULL, "sb_emitter_t_impl.c", "", "run", 0);
+
 
   sb_self_pacer_tick_emit();
   for(;;) {

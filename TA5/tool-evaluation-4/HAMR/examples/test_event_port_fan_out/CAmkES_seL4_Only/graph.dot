@@ -112,66 +112,77 @@ interfacetypekey [
   color="blue"
   //label = "seL4Notification"
   id = conn1
+
+];
+
+"src":sb_e -> "snkQueue2_A":sb_s [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn1
+
+];
+
+"src":sb_e -> "snkQueue2_B":sb_s [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn1
+
+];
+
+"src":sb_e -> "snkQueue5":sb_s [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn1
+
 ];
 
 "src":sb_e_counter -> "snkDefault":sb_s_counter [
   color="red"
   //label = "seL4SharedData"
   id = conn2
-];
 
-"src":sb_e -> "snkQueue2_A":sb_s [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn3
 ];
 
 "src":sb_e_counter -> "snkQueue2_A":sb_s_counter [
   color="red"
   //label = "seL4SharedData"
-  id = conn4
-];
+  id = conn2
 
-"src":sb_e -> "snkQueue2_B":sb_s [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn5
 ];
 
 "src":sb_e_counter -> "snkQueue2_B":sb_s_counter [
   color="red"
   //label = "seL4SharedData"
-  id = conn6
-];
+  id = conn2
 
-"src":sb_e -> "snkQueue5":sb_s [
-  color="blue"
-  //label = "seL4Notification"
-  id = conn7
 ];
 
 "src":sb_e_counter -> "snkQueue5":sb_s_counter [
   color="red"
   //label = "seL4SharedData"
-  id = conn8
+  id = conn2
+
 ];
 
 "dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
-  id = conn9
+  id = conn3
+
 ];
 
 "dispatch_periodic_inst":timer -> "time_server":the_timer [
   color="green"
   //label = "seL4TimeServer"
-  id = conn10
+  id = conn4
+
 ];
 
 "time_server":timer_notification -> "dispatch_periodic_inst":timer_complete [
   color="brown"
   //label = "seL4GlobalAsynchCallback"
-  id = conn11
+  id = conn5
+
 ];
 
 }

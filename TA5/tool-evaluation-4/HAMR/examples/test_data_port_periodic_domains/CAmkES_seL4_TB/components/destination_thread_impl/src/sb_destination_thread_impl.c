@@ -47,7 +47,6 @@ void sb_entrypoint_destination_thread_impl_initializer(const int64_t * in_arg) {
   test_data_port_periodic_domains_destination_component_init((int64_t *) in_arg);
 }
 
-
 /************************************************************************
  * int run(void)
  * Main active thread function.

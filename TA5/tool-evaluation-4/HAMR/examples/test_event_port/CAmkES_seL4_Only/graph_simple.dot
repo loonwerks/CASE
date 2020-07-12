@@ -66,12 +66,14 @@ interfacetypekey [
   color="blue"
   //label = "seL4Notification"
   id = conn1
+
 ];
 
 "src":sb_e_counter -> "snk":sb_s_counter [
   color="red"
   //label = "seL4SharedData"
   id = conn2
+
 ];
 
 }
