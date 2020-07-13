@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.box = "bento/debian-10"
-  config.vm.box_version = "202002.04.0"
+  config.vm.box_version = "202005.21.0"
   config.vm.provider :virtualbox do |vb|
     vb.cpus = 4
     vb.memory = 8092
