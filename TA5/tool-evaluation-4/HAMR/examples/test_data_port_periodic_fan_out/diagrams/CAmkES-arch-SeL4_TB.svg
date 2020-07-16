@@ -34,7 +34,7 @@
 <text text-anchor="middle" x="686" y="-316.9407" font-family="Times,serif" font-size="14.00" fill="#000000">conn4.conn5</text>
 </g>
 <!-- src&#45;&gt;conn4.conn5 -->
-<g id="edge25" class="edge">
+<g id="edge24" class="edge">
 <title>src&#45;&gt;conn4.conn5</title>
 <path fill="none" stroke="#000000" d="M686,-461.0833C686,-442.8973 686,-413.8347 686,-386.8532"/>
 <polygon fill="#000000" stroke="#000000" points="689.5001,-386.6412 686,-376.6412 682.5001,-386.6413 689.5001,-386.6412"/>
@@ -58,7 +58,7 @@
 <text text-anchor="middle" x="863" y="-14.3" font-family="Times,serif" font-size="14.00" fill="#000000">dest_B::destination_t_impl</text>
 </g>
 <!-- dest_B&#45;&gt;conn4.conn5 -->
-<g id="edge24" class="edge">
+<g id="edge25" class="edge">
 <title>dest_B&#45;&gt;conn4.conn5</title>
 <path fill="none" stroke="#000000" d="M864.8952,-36.2235C867.3097,-67.5474 868.5889,-132.7813 844,-180 820.917,-224.3269 777.7252,-261.2703 742.3275,-286.1537"/>
 <polygon fill="#000000" stroke="#000000" points="740.2294,-283.3488 733.9788,-291.9033 744.1998,-289.1139 740.2294,-283.3488"/>

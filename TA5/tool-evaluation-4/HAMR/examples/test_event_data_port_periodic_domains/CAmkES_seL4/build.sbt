@@ -7,13 +7,13 @@
 lazy val top_impl_Instance = slangEmbeddedTestProject("top_impl_Instance", ".")
 
 
-val scalaVer = "2.12.11"
+val scalaVer = "2.12.12"
 
-val sireumScalacVersion = "4.20200603.47564a7" // https://github.com/sireum/scalac-plugin/tree/4.20200603.47564a7
+val sireumScalacVersion = "4.20200713.0b7fce8" // https://github.com/sireum/scalac-plugin/tree/4.20200713.0b7fce8
 
-val runtimeVersion = "0b83a7bcaf" // https://github.com/sireum/kekinian/tree/0b83a7bcaf
+val runtimeVersion = "10807437d4" // https://github.com/sireum/kekinian/tree/10807437d4
 
-val scalaTestVersion = "3.1.2"
+val scalaTestVersion = "3.2.0"
 
 
 val commonSettings = Seq(
