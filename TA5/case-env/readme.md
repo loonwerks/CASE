@@ -156,10 +156,10 @@ bash ~/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh
   ```batch
   git clone https://github.com/sireum/kekinian Sireum
   cd Sireum
-  git checkout <commit> # SHA commit of https://github.com/sireum/kekinian, see SIREUM_V in case-setup.sh; optional step
+  git checkout <commit> & REM^; SHA commit of https://github.com/sireum/kekinian, see SIREUM_V in case-setup.sh; optional step
   git submodule update --init --recursive
   bin\build.cmd setup
-  bin\install\fmide.cmd [<tag-name>] # Optional release tag name; latest nightly release is used if unspecified
+  bin\install\fmide.cmd [<tag-name>] & REM^; Optional release tag name; latest nightly release is used if unspecified
   start /B bin\win\fmide\fmide.exe
   ```
 
