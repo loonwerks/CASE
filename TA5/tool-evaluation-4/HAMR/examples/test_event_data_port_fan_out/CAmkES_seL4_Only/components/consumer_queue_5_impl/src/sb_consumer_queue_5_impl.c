@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #include <sb_consumer_queue_5_impl.h>
 #include <sb_queue_int8_t_5.h>
 #include <sb_event_counter.h>

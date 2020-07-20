@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #include <sb_emitter_t_impl.h>
 #include <sb_event_counter.h>
 #include <emitter_t_impl_adapter.h>

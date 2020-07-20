@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #include <sb_consumer_t_impl.h>
 #include <sb_queue_union_art_DataContent_1.h>
 #include <sb_event_counter.h>

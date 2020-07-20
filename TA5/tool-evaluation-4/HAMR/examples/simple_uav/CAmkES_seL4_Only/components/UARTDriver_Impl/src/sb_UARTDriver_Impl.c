@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #include <sb_UARTDriver_Impl.h>
 #include <sb_queue_sb_SW__MissionWindow_container_1.h>
 #include <sb_event_counter.h>

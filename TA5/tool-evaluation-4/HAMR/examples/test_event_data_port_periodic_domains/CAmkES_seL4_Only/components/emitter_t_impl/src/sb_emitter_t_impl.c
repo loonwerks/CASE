@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #include <sb_emitter_t_impl.h>
 #include <sb_queue_int8_t_1.h>
 #include <string.h>

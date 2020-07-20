@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #ifndef SB_FLIGHTPLANNER_IMPL_H
 #define SB_FLIGHTPLANNER_IMPL_H
 

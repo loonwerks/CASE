@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #include <sb_destination_thread_impl.h>
 #include <destination_thread_impl_adapter.h>
 #include <string.h>

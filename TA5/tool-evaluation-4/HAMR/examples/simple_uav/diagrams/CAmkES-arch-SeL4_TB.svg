@@ -58,7 +58,7 @@
 <text text-anchor="middle" x="726" y="-587.2827" font-family="Times,serif" font-size="14.00" fill="#000000">conn7.conn8</text>
 </g>
 <!-- FPLN&#45;&gt;conn7.conn8 -->
-<g id="edge18" class="edge">
+<g id="edge17" class="edge">
 <title>FPLN&#45;&gt;conn7.conn8</title>
 <path fill="none" stroke="#000000" d="M860,-1055.5311C860,-1017.8715 860,-928.7666 860,-853.9769 860,-853.9769 860,-853.9769 860,-781.9769 860,-722.1678 815.4212,-667.8128 777.6881,-632.5174"/>
 <polygon fill="#000000" stroke="#000000" points="779.9904,-629.8801 770.248,-625.7165 775.2676,-635.0468 779.9904,-629.8801"/>
@@ -76,7 +76,7 @@
 <polygon fill="#000000" stroke="#000000" points="587.4858,-953.9853 598.0579,-953.2913 589.3606,-947.241 587.4858,-953.9853"/>
 </g>
 <!-- WPM&#45;&gt;conn7.conn8 -->
-<g id="edge17" class="edge">
+<g id="edge18" class="edge">
 <title>WPM&#45;&gt;conn7.conn8</title>
 <path fill="none" stroke="#000000" d="M502.0959,-691.9043C545.5496,-672.3182 615.3821,-640.8421 665.5087,-618.2483"/>
 <polygon fill="#000000" stroke="#000000" points="666.9499,-621.4379 674.6284,-614.1377 664.0734,-615.0562 666.9499,-621.4379"/>
@@ -100,7 +100,7 @@
 <text text-anchor="middle" x="264" y="-205.2942" font-family="Times,serif" font-size="14.00" fill="#000000">conn13.conn14</text>
 </g>
 <!-- WPM&#45;&gt;conn13.conn14 -->
-<g id="edge23" class="edge">
+<g id="edge24" class="edge">
 <title>WPM&#45;&gt;conn13.conn14</title>
 <path fill="none" stroke="#000000" d="M364.8681,-702.548C229.3584,-686.2889 0,-634.7314 0,-471.9885 0,-471.9885 0,-471.9885 0,-399.9885 0,-305.3222 112.8075,-252.8073 190.9419,-227.7875"/>
 <polygon fill="#000000" stroke="#000000" points="192.2591,-231.0431 200.7654,-224.727 190.1769,-224.36 192.2591,-231.0431"/>
@@ -118,7 +118,7 @@
 <polygon fill="#000000" stroke="#000000" points="455.7286,-523.7359 455.55,-534.3292 462.2957,-526.1594 455.7286,-523.7359"/>
 </g>
 <!-- UART&#45;&gt;conn13.conn14 -->
-<g id="edge24" class="edge">
+<g id="edge23" class="edge">
 <title>UART&#45;&gt;conn13.conn14</title>
 <path fill="none" stroke="#000000" d="M264,-309.9158C264,-302.6294 264,-293.6975 264,-284.1896"/>
 <polygon fill="#000000" stroke="#000000" points="267.5001,-284.1175 264,-274.1176 260.5001,-284.1176 267.5001,-284.1175"/>

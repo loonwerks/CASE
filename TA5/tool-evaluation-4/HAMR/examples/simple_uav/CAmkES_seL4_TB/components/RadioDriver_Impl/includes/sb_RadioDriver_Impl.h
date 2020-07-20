@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #ifndef SB_RADIODRIVER_IMPL_H
 #define SB_RADIODRIVER_IMPL_H
 

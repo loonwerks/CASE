@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #include <sb_WaypointManager_Impl.h>
 #include <sb_queue_sb_SW__Mission_container_1.h>
 #include <sb_event_counter.h>

@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #ifndef SB_CONSUMER_QUEUE_5_IMPL_H
 #define SB_CONSUMER_QUEUE_5_IMPL_H
 

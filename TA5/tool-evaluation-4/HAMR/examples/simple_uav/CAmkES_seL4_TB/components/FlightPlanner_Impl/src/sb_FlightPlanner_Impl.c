@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #include <sb_FlightPlanner_Impl.h>
 #include <string.h>
 #include <camkes.h>

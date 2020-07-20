@@ -22,7 +22,7 @@
 <text text-anchor="middle" x="132" y="-268.195" font-family="Times,serif" font-size="14.00" fill="#000000">conn1.conn2</text>
 </g>
 <!-- src&#45;&gt;conn1.conn2 -->
-<g id="edge4" class="edge">
+<g id="edge3" class="edge">
 <title>src&#45;&gt;conn1.conn2</title>
 <path fill="none" stroke="#000000" d="M132,-363.6431C132,-356.3904 132,-347.5545 132,-338.2629"/>
 <polygon fill="#000000" stroke="#000000" points="135.5001,-338.0548 132,-328.0548 128.5001,-338.0549 135.5001,-338.0548"/>
@@ -34,7 +34,7 @@
 <text text-anchor="middle" x="74" y="-14.3" font-family="Times,serif" font-size="14.00" fill="#000000">dest::destination_t_impl</text>
 </g>
 <!-- dest&#45;&gt;conn1.conn2 -->
-<g id="edge3" class="edge">
+<g id="edge4" class="edge">
 <title>dest&#45;&gt;conn1.conn2</title>
 <path fill="none" stroke="#000000" d="M66.8761,-36.111C55.9437,-66.7192 38.0784,-130.2097 56,-180 62.0371,-196.7724 72.6104,-212.6577 83.9856,-226.3555"/>
 <polygon fill="#000000" stroke="#000000" points="81.5534,-228.8931 90.7476,-234.1578 86.8432,-224.3086 81.5534,-228.8931"/>

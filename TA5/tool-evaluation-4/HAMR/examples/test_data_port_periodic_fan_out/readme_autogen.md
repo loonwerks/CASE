@@ -1,88 +1,140 @@
 # test_data_port_periodic_fan_out
 
+ Table of Contents
+  * [Diagrams](#diagrams)
+    * [AADL Arch](#aadl-arch)
+    * [SeL4_TB](#sel4_tb)
+      * [SeL4_TB CAmkES Arch](#sel4_tb-camkes-arch)
+      * [SeL4_TB CAmkES HAMR Arch](#sel4_tb-camkes-hamr-arch)
+    * [SeL4_Only](#sel4_only)
+      * [SeL4_Only CAmkES Arch](#sel4_only-camkes-arch)
+      * [SeL4_Only CAmkES HAMR Arch](#sel4_only-camkes-hamr-arch)
+  * [Example Output](#example-output)
+    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4_tb-expected-output:-timeout-=-15-seconds)
+    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4_only-expected-output:-timeout-=-15-seconds)
+
 ## Diagrams
-
 ### AADL Arch
-  ![aadl](diagrams/aadl-arch.png)
+![AADL Arch](diagrams/aadl-arch.png)
 
-### CAmkES HAMR SeL4_TB Arch
-  ![SeL4_TB](diagrams/CAmkES-HAMR-arch-SeL4_TB.svg)
+### SeL4_TB
+#### SeL4_TB CAmkES Arch
+![SeL4_TB CAmkES Arch](diagrams/CAmkES-arch-SeL4_TB.svg)
 
-### CAmkES SeL4_TB Arch
-  ![SeL4_TB](diagrams/CAmkES-arch-SeL4_TB.svg)
+#### SeL4_TB CAmkES HAMR Arch
+![SeL4_TB CAmkES HAMR Arch](diagrams/CAmkES-HAMR-arch-SeL4_TB.svg)
 
-### CAmkES HAMR SeL4_Only Arch
-  ![SeL4_Only](diagrams/CAmkES-HAMR-arch-SeL4_Only.svg)
+### SeL4_Only
+#### SeL4_Only CAmkES Arch
+![SeL4_Only CAmkES Arch](diagrams/CAmkES-arch-SeL4_Only.svg)
 
-### CAmkES SeL4_Only Arch
-  ![SeL4_Only](diagrams/CAmkES-arch-SeL4_Only.svg)
+#### SeL4_Only CAmkES HAMR Arch
+![SeL4_Only CAmkES HAMR Arch](diagrams/CAmkES-HAMR-arch-SeL4_Only.svg)
 
-## Expected Output : Timeout = 15 seconds
+## Example Output
+*NOTE:* actual output may differ due to issues related to thread interleaving
+### SeL4_TB Expected Output: Timeout = 15 seconds
 
-  ### CAmkES SeL4_TB Expected Output
-    Booting all finished, dropped to user space
-    [src] test_data_port_periodic_source_component_init called
-    [dest_B] test_data_port_periodic_destination_component_init called
-    [dest_A] test_data_port_periodic_destination_component_init called
-    ---------------------------------------
-    [src] Sent 0
-    [dest_A] value {0}
-    [dest_B] value {0}
-    ---------------------------------------
-    [src] Sent 1
-    ---------------------------------------
-    [src] Sent 2
-    [dest_A] value {2}
-    [dest_B] value {2}
-    ---------------------------------------
-    [src] Sent 3
-    ---------------------------------------
-    [src] Sent 4
-    [dest_A] value {4}
-    [dest_B] value {4}
-    ---------------------------------------
-    [src] Sent 5
-    ---------------------------------------
-    [src] Sent 6
-    [dest_A] value {6}
-    [dest_B] value {6}
-    ---------------------------------------
-    [src] Sent 7
-    ---------------------------------------
-    [src] Sent 8
-    [dest_A] value {8}
-    [dest_B] value {8}
-    ---------------------------------------
-    [src] Sent 9
+  |HAMR Codegen Configuration| |
+  |--|--|
+  |Exclude Component Implementation | true |
+  |bitWidth | 32 |
+  |maxStringSize | 256 |
+  |maxArraySize | 1 |
 
 
-  ### CAmkES SeL4_Only Expected Output
-    Booting all finished, dropped to user space
-    [src] test_data_port_periodic_source_component_init called
-    [dest_B] test_data_port_periodic_destination_component_init called
-    [dest_A] test_data_port_periodic_destination_component_init called
-    ---------------------------------------
-    [src] Sent 0
-    [dest_A] value {0}
-    [dest_B] value {0}
-    ---------------------------------------
-    [src] Sent 1
-    ---------------------------------------
-    [src] Sent 2
-    [dest_A] value {2}
-    [dest_B] value {2}
-    ---------------------------------------
-    [src] Sent 3
-    ---------------------------------------
-    [src] Sent 4
-    [dest_A] value {4}
-    [dest_B] value {4}
-    ---------------------------------------
-    [src] Sent 5
-    ---------------------------------------
-    [src] Sent 6
-    [dest_A] value {6}
-    [dest_B] value {6}
-    ---------------------------------------
-    [src] Sent 7
+  **How To Run**
+  ```
+  test_data_port_periodic_fan_out/CAmkES_seL4_TB/bin/run-camkes.sh
+  ```
 
+  ```
+  Booting all finished, dropped to user space
+  [src] test_data_port_periodic_source_component_init called
+  [dest_B] test_data_port_periodic_destination_component_init called
+  [dest_A] test_data_port_periodic_destination_component_init called
+  ---------------------------------------
+  [src] Sent 0
+  [dest_A] value {0}
+  [dest_B] value {0}
+  ---------------------------------------
+  [src] Sent 1
+  ---------------------------------------
+  [src] Sent 2
+  [dest_A] value {2}
+  [dest_B] value {2}
+  ---------------------------------------
+  [src] Sent 3
+  ---------------------------------------
+  [src] Sent 4
+  [dest_A] value {4}
+  [dest_B] value {4}
+  ---------------------------------------
+  [src] Sent 5
+  ---------------------------------------
+  [src] Sent 6
+  [dest_A] value {6}
+  [dest_B] value {6}
+  ---------------------------------------
+  [src] Sent 7
+  ---------------------------------------
+  [src] Sent 8
+  [dest_A] value {8}
+  [dest_B] value {8}
+  ---------------------------------------
+  [src] Sent 9
+
+  ```
+
+### SeL4_Only Expected Output: Timeout = 15 seconds
+
+  |HAMR Codegen Configuration| |
+  |--|--|
+  |Exclude Component Implementation | true |
+  |bitWidth | 32 |
+  |maxStringSize | 256 |
+  |maxArraySize | 1 |
+
+
+  **How To Run**
+  ```
+  test_data_port_periodic_fan_out/CAmkES_seL4_Only/bin/run-camkes.sh
+  ```
+
+  ```
+  Booting all finished, dropped to user space
+  [src] test_data_port_periodic_source_component_init called
+  [dest_B] test_data_port_periodic_destination_component_init called
+  [dest_A] test_data_port_periodic_destination_component_init called
+  ---------------------------------------
+  [src] Sent 0
+  [dest_A] value {0}
+  [dest_B] value {0}
+  ---------------------------------------
+  [src] Sent 1
+  ---------------------------------------
+  [src] Sent 2
+  [dest_A] value {2}
+  [dest_B] value {2}
+  ---------------------------------------
+  [src] Sent 3
+  ---------------------------------------
+  [src] Sent 4
+  [dest_A] value {4}
+  [dest_B] value {4}
+  ---------------------------------------
+  [src] Sent 5
+  ---------------------------------------
+  [src] Sent 6
+  [dest_A] value {6}
+  [dest_B] value {6}
+  ---------------------------------------
+  [src] Sent 7
+  ---------------------------------------
+  [src] Sent 8
+  [dest_A] value {8}
+  [dest_B] value {8}
+  ---------------------------------------
+  [src] Sent 9
+
+  ```

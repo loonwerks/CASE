@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #ifndef SB_DESTINATION_THREAD_COMPONENT_READ_PORT_MONITOR_H
 #define SB_DESTINATION_THREAD_COMPONENT_READ_PORT_MONITOR_H
 

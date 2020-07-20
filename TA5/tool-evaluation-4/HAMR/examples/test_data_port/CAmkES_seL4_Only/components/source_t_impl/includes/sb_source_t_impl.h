@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #ifndef SB_SOURCE_T_IMPL_H
 #define SB_SOURCE_T_IMPL_H
 

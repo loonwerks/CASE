@@ -1,3 +1,5 @@
+// This file will be regenerated, do not edit
+
 #include <sb_emitter_impl.h>
 #include <string.h>
 #include <camkes.h>
