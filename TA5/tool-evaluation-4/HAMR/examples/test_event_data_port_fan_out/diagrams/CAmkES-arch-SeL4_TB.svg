@@ -46,7 +46,7 @@
 <text text-anchor="middle" x="847" y="-316.9407" font-family="Times,serif" font-size="14.00" fill="#000000">conn7.conn8</text>
 </g>
 <!-- src&#45;&gt;conn7.conn8 -->
-<g id="edge28" class="edge">
+<g id="edge27" class="edge">
 <title>src&#45;&gt;conn7.conn8</title>
 <path fill="none" stroke="#000000" d="M847,-461.0833C847,-442.8973 847,-413.8347 847,-386.8532"/>
 <polygon fill="#000000" stroke="#000000" points="850.5001,-386.6412 847,-376.6412 843.5001,-386.6413 850.5001,-386.6412"/>
@@ -94,7 +94,7 @@
 <text text-anchor="middle" x="834" y="-14.3" font-family="Times,serif" font-size="14.00" fill="#000000">snk_2_B::consumer_queue_2_impl</text>
 </g>
 <!-- snk_2_B&#45;&gt;conn7.conn8 -->
-<g id="edge27" class="edge">
+<g id="edge28" class="edge">
 <title>snk_2_B&#45;&gt;conn7.conn8</title>
 <path fill="none" stroke="#000000" d="M822.8852,-36.235C806.1032,-65.9861 777.3283,-126.975 788,-180 793.6284,-207.966 804.9689,-237.3022 816.2169,-261.9023"/>
 <polygon fill="#000000" stroke="#000000" points="813.1048,-263.5099 820.5112,-271.0859 819.4458,-260.5448 813.1048,-263.5099"/>

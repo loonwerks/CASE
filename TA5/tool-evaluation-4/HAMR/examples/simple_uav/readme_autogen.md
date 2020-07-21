@@ -3,15 +3,15 @@
  Table of Contents
   * [Diagrams](#diagrams)
     * [AADL Arch](#aadl-arch)
-    * [SeL4_TB](#sel4_tb)
-      * [SeL4_TB CAmkES Arch](#sel4_tb-camkes-arch)
-      * [SeL4_TB CAmkES HAMR Arch](#sel4_tb-camkes-hamr-arch)
-    * [SeL4_Only](#sel4_only)
-      * [SeL4_Only CAmkES Arch](#sel4_only-camkes-arch)
-      * [SeL4_Only CAmkES HAMR Arch](#sel4_only-camkes-hamr-arch)
+    * [SeL4_TB](#sel4tb)
+      * [SeL4_TB CAmkES Arch](#sel4tb-camkes-arch)
+      * [SeL4_TB CAmkES HAMR Arch](#sel4tb-camkes-hamr-arch)
+    * [SeL4_Only](#sel4only)
+      * [SeL4_Only CAmkES Arch](#sel4only-camkes-arch)
+      * [SeL4_Only CAmkES HAMR Arch](#sel4only-camkes-hamr-arch)
   * [Example Output](#example-output)
-    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4_tb-expected-output:-timeout-=-15-seconds)
-    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4_only-expected-output:-timeout-=-15-seconds)
+    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4tb-expected-output-timeout--15-seconds)
+    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4only-expected-output-timeout--15-seconds)
 
 ## Diagrams
 ### AADL Arch
@@ -37,15 +37,16 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  |Exclude Component Implementation | true |
-  |bitWidth | 32 |
-  |maxStringSize | 256 |
-  |maxArraySize | 1 |
+  | package-name | simple_uav |
+  | exclude-component-impl | true |
+  | bit-width | 32 |
+  | max-string-size | 256 |
+  | max-array-size | 1 |
 
 
   **How To Run**
   ```
-  simple_uav/CAmkES_seL4_TB/bin/run-camkes.sh
+  simple_uav/CAmkES_seL4_TB/bin/run-camkes.sh -s
   ```
 
   ```
@@ -77,10 +78,10 @@
   WM:> Sent mission window
   UART:< Received mission window
     MissionWindow:
+  FPLN:< Received mission receipt confirmation: 1.
       0: {0, 1, 2}
       1: {1, 2, 3}
-      2: {2, 3, FPLN:< Received mission receipt confirmation: 1.
-  4}
+      2: {2, 3, 4}
       3: {3, 4, 5}
   UART:> Sending 1 as the next id.
   WM:< Received 1 as the next id.
@@ -260,15 +261,16 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  |Exclude Component Implementation | true |
-  |bitWidth | 32 |
-  |maxStringSize | 256 |
-  |maxArraySize | 1 |
+  | package-name | simple_uav |
+  | exclude-component-impl | true |
+  | bit-width | 32 |
+  | max-string-size | 256 |
+  | max-array-size | 1 |
 
 
   **How To Run**
   ```
-  simple_uav/CAmkES_seL4_Only/bin/run-camkes.sh
+  simple_uav/CAmkES_seL4_Only/bin/run-camkes.sh -s
   ```
 
   ```
@@ -302,9 +304,9 @@
     MissionWindow:
       0: {0, 1, 2}
       1: {1, 2, 3}
-      2: {2, 3FPLN:< Received mission receipt confirmation: 1.
-  , 4}
+      2: {2, 3, 4}
       3: {3, 4, 5}
+  FPLN:< Received mission receipt confirmation: 1.
   UART:> Sending 1 as the next id.
   WM:< Received 1 as the next id.
   WM:> Sent mission window
@@ -476,5 +478,14 @@
       1: {0, 1, 2}
       2: {1, 2, 3}
       3: {2, 3, 4}
+  UART:> Sending 20 as the next id.
+  WM:< Received 20 as the next id.
+  WM:> Sent mission window
+  UART:< Received mission window
+    MissionWindow:
+      0: {0, 1, 2}
+      1: {1, 2, 3}
+      2: {2, 3, 4}
+      3: {3, 4, 5}
 
   ```

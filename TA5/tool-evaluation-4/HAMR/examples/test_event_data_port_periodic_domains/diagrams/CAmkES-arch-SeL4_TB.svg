@@ -22,7 +22,7 @@
 <text text-anchor="middle" x="215.0776" y="-316.9407" font-family="Times,serif" font-size="14.00" fill="#000000">conn1.conn2</text>
 </g>
 <!-- src_thread&#45;&gt;conn1.conn2 -->
-<g id="edge17" class="edge">
+<g id="edge18" class="edge">
 <title>src_thread&#45;&gt;conn1.conn2</title>
 <path fill="none" stroke="#000000" d="M250.4891,-461.0833C245.7921,-442.4548 238.2175,-412.4138 231.2769,-384.8874"/>
 <polygon fill="#000000" stroke="#000000" points="234.5938,-383.7265 228.7551,-374.8857 227.8063,-385.4379 234.5938,-383.7265"/>
@@ -52,7 +52,7 @@
 <text text-anchor="middle" x="215.0776" y="-14.3" font-family="Times,serif" font-size="14.00" fill="#000000">dst_thread::consumer_t_impl</text>
 </g>
 <!-- dst_thread&#45;&gt;conn1.conn2 -->
-<g id="edge18" class="edge">
+<g id="edge17" class="edge">
 <title>dst_thread&#45;&gt;conn1.conn2</title>
 <path fill="none" stroke="#000000" d="M155.6495,-36.1501C106.5792,-54.6407 40.1351,-88.5973 9.0776,-144 -30.8276,-215.186 77.5895,-270.912 151.8748,-299.507"/>
 <polygon fill="#000000" stroke="#000000" points="151.0658,-302.9424 161.6577,-303.1935 153.5342,-296.392 151.0658,-302.9424"/>

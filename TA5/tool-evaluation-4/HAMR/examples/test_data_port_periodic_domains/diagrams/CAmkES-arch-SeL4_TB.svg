@@ -22,7 +22,7 @@
 <text text-anchor="middle" x="330.3423" y="-316.9407" font-family="Times,serif" font-size="14.00" fill="#000000">conn1.conn2</text>
 </g>
 <!-- source_thread_component&#45;&gt;conn1.conn2 -->
-<g id="edge17" class="edge">
+<g id="edge18" class="edge">
 <title>source_thread_component&#45;&gt;conn1.conn2</title>
 <path fill="none" stroke="#000000" d="M390.5418,-461.0833C382.2361,-441.7064 368.6376,-409.9817 356.4647,-381.583"/>
 <polygon fill="#000000" stroke="#000000" points="359.5576,-379.9146 352.4009,-372.1023 353.1237,-382.6724 359.5576,-379.9146"/>
@@ -52,7 +52,7 @@
 <text text-anchor="middle" x="330.3423" y="-14.3" font-family="Times,serif" font-size="14.00" fill="#000000">destination_thread_component::destination_thread_impl</text>
 </g>
 <!-- destination_thread_component&#45;&gt;conn1.conn2 -->
-<g id="edge18" class="edge">
+<g id="edge17" class="edge">
 <title>destination_thread_component&#45;&gt;conn1.conn2</title>
 <path fill="none" stroke="#000000" d="M194.8682,-36.0831C128.4163,-52.5392 54.0801,-83.9698 13.3423,-144 -53.8986,-243.0845 153.4452,-292.4083 264.7096,-311.2426"/>
 <polygon fill="#000000" stroke="#000000" points="264.4008,-314.739 274.8379,-312.918 265.5432,-307.8328 264.4008,-314.739"/>

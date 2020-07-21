@@ -22,7 +22,7 @@
 <text text-anchor="middle" x="922" y="-1323.9621" font-family="Times,serif" font-size="14.00" fill="#000000">conn1.conn2</text>
 </g>
 <!-- RADIO&#45;&gt;conn1.conn2 -->
-<g id="edge12" class="edge">
+<g id="edge11" class="edge">
 <title>RADIO&#45;&gt;conn1.conn2</title>
 <path fill="none" stroke="#000000" d="M922,-1419.4102C922,-1412.1574 922,-1403.3216 922,-1394.0299"/>
 <polygon fill="#000000" stroke="#000000" points="925.5001,-1393.8218 922,-1383.8219 918.5001,-1393.8219 925.5001,-1393.8218"/>
@@ -34,7 +34,7 @@
 <text text-anchor="middle" x="860" y="-1070.067" font-family="Times,serif" font-size="14.00" fill="#000000">FPLN::FlightPlanner_Impl</text>
 </g>
 <!-- FPLN&#45;&gt;conn1.conn2 -->
-<g id="edge11" class="edge">
+<g id="edge12" class="edge">
 <title>FPLN&#45;&gt;conn1.conn2</title>
 <path fill="none" stroke="#000000" d="M852.7391,-1091.9283C841.6049,-1122.6106 823.45,-1186.2075 842,-1235.767 848.5692,-1253.3177 860.1727,-1269.7266 872.5393,-1283.6821"/>
 <polygon fill="#000000" stroke="#000000" points="870.1044,-1286.2042 879.4611,-1291.1744 875.246,-1281.4541 870.1044,-1286.2042"/>
@@ -46,7 +46,7 @@
 <text text-anchor="middle" x="653" y="-960.172" font-family="Times,serif" font-size="14.00" fill="#000000">conn4.conn5</text>
 </g>
 <!-- FPLN&#45;&gt;conn4.conn5 -->
-<g id="edge14" class="edge">
+<g id="edge15" class="edge">
 <title>FPLN&#45;&gt;conn4.conn5</title>
 <path fill="none" stroke="#000000" d="M825.8182,-1055.6201C794.9069,-1039.2095 748.7288,-1014.6938 711.8817,-995.1319"/>
 <polygon fill="#000000" stroke="#000000" points="713.2035,-991.871 702.7298,-990.2732 709.921,-998.0537 713.2035,-991.871"/>
@@ -58,7 +58,7 @@
 <text text-anchor="middle" x="726" y="-587.2827" font-family="Times,serif" font-size="14.00" fill="#000000">conn7.conn8</text>
 </g>
 <!-- FPLN&#45;&gt;conn7.conn8 -->
-<g id="edge17" class="edge">
+<g id="edge18" class="edge">
 <title>FPLN&#45;&gt;conn7.conn8</title>
 <path fill="none" stroke="#000000" d="M860,-1055.5311C860,-1017.8715 860,-928.7666 860,-853.9769 860,-853.9769 860,-853.9769 860,-781.9769 860,-722.1678 815.4212,-667.8128 777.6881,-632.5174"/>
 <polygon fill="#000000" stroke="#000000" points="779.9904,-629.8801 770.248,-625.7165 775.2676,-635.0468 779.9904,-629.8801"/>
@@ -70,13 +70,13 @@
 <text text-anchor="middle" x="462" y="-706.2769" font-family="Times,serif" font-size="14.00" fill="#000000">WPM::WaypointManager_Impl</text>
 </g>
 <!-- WPM&#45;&gt;conn4.conn5 -->
-<g id="edge15" class="edge">
+<g id="edge14" class="edge">
 <title>WPM&#45;&gt;conn4.conn5</title>
 <path fill="none" stroke="#000000" d="M456.7032,-727.9916C448.4738,-759.854 436.3542,-827.0219 465,-871.9769 492.168,-914.6128 545.3523,-938.0499 588.2402,-950.5623"/>
 <polygon fill="#000000" stroke="#000000" points="587.4858,-953.9853 598.0579,-953.2913 589.3606,-947.241 587.4858,-953.9853"/>
 </g>
 <!-- WPM&#45;&gt;conn7.conn8 -->
-<g id="edge18" class="edge">
+<g id="edge17" class="edge">
 <title>WPM&#45;&gt;conn7.conn8</title>
 <path fill="none" stroke="#000000" d="M502.0959,-691.9043C545.5496,-672.3182 615.3821,-640.8421 665.5087,-618.2483"/>
 <polygon fill="#000000" stroke="#000000" points="666.9499,-621.4379 674.6284,-614.1377 664.0734,-615.0562 666.9499,-621.4379"/>
@@ -100,7 +100,7 @@
 <text text-anchor="middle" x="264" y="-205.2942" font-family="Times,serif" font-size="14.00" fill="#000000">conn13.conn14</text>
 </g>
 <!-- WPM&#45;&gt;conn13.conn14 -->
-<g id="edge24" class="edge">
+<g id="edge23" class="edge">
 <title>WPM&#45;&gt;conn13.conn14</title>
 <path fill="none" stroke="#000000" d="M364.8681,-702.548C229.3584,-686.2889 0,-634.7314 0,-471.9885 0,-471.9885 0,-471.9885 0,-399.9885 0,-305.3222 112.8075,-252.8073 190.9419,-227.7875"/>
 <polygon fill="#000000" stroke="#000000" points="192.2591,-231.0431 200.7654,-224.727 190.1769,-224.36 192.2591,-231.0431"/>
@@ -118,7 +118,7 @@
 <polygon fill="#000000" stroke="#000000" points="455.7286,-523.7359 455.55,-534.3292 462.2957,-526.1594 455.7286,-523.7359"/>
 </g>
 <!-- UART&#45;&gt;conn13.conn14 -->
-<g id="edge23" class="edge">
+<g id="edge24" class="edge">
 <title>UART&#45;&gt;conn13.conn14</title>
 <path fill="none" stroke="#000000" d="M264,-309.9158C264,-302.6294 264,-293.6975 264,-284.1896"/>
 <polygon fill="#000000" stroke="#000000" points="267.5001,-284.1175 264,-274.1176 260.5001,-284.1176 267.5001,-284.1175"/>
