@@ -1,0 +1,74 @@
+// This file will be regenerated, do not edit
+
+#include <configurations/vm.h>
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <seL4VMDTBPassthrough.idl4>;
+import <FileServerInterface.camkes>;
+import <FileServer/FileServer.camkes>;
+import <SerialServer/SerialServer.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <vm-connectors.camkes>;
+import <devices.camkes>;
+import "components/Pacer/Pacer.camkes";
+import "components/VM_emitter_t_impl/VM_emitter_t_impl.camkes";
+import "components/VM_consumer_t_impl/VM_consumer_t_impl.camkes";
+import "components/consumer_native_t_impl/consumer_native_t_impl.camkes";
+
+connector CASE_AADL_EventDataport {
+  from Dataport with 0 threads;
+  to Dataports;
+  attribute bool to_global_endpoint = True;
+}
+
+assembly {
+  composition {
+    component VM_emitter_t_impl vmsrc_vm_process;
+    component VM_consumer_t_impl vmdst_vm_process;
+    component consumer_native_t_impl dst_thread;
+    component Pacer pacer;
+
+    connection seL4VMDTBPassthrough conn1(from vmsrc_vm_process.dtb_self, to vmsrc_vm_process.dtb);
+    connection seL4VMDTBPassthrough conn2(from vmdst_vm_process.dtb_self, to vmdst_vm_process.dtb);
+    connection CASE_AADL_EventDataport conn3(from vmsrc_vm_process.sb_write_port_queue_1, to vmdst_vm_process.sb_read_port_queue, to dst_thread.sb_read_port_queue);
+    connection seL4Notification conn4(from pacer.tick, to pacer.tock);
+    connection CASE_AADL_EventDataport conn5(from pacer.period_to_vm_queue, to vmsrc_vm_process.sb_pacer_period_queue, to vmdst_vm_process.sb_pacer_period_queue);
+    VM_GENERAL_COMPOSITION_DEF()
+    VM_COMPONENT_CONNECTIONS_DEF(src_vm_process)
+    VM_VIRTUAL_SERIAL_COMPONENTS_DEF()
+    PER_VM_VIRTUAL_SERIAL_CONNECTIONS_DEF(src_vm_process)
+    VM_COMPONENT_CONNECTIONS_DEF(dst_vm_process)
+    PER_VM_VIRTUAL_SERIAL_CONNECTIONS_DEF(dst_vm_process)
+  }
+
+  configuration {
+    vmsrc_vm_process.cnode_size_bits = 18;
+    vmsrc_vm_process.simple_untyped21_pool = 12;
+    vmsrc_vm_process.simple_untyped12_pool = 12;
+    vmsrc_vm_process.num_extra_frame_caps = 0;
+    vmsrc_vm_process.extra_frame_map_address = 0;
+    vmdst_vm_process.cnode_size_bits = 18;
+    vmdst_vm_process.simple_untyped21_pool = 12;
+    vmdst_vm_process.simple_untyped12_pool = 12;
+    vmdst_vm_process.num_extra_frame_caps = 0;
+    vmdst_vm_process.extra_frame_map_address = 0;
+    conn3.with_signalling = true;
+    vmsrc_vm_process.sb_write_port_queue_1_type = "vm";
+    vmdst_vm_process.sb_read_port_queue_type = "vm";
+    dst_thread.sb_read_port_queue_type = "native";
+    pacer._domain = 1;
+    vmsrc_vm_process._domain = 2;
+    vmdst_vm_process._domain = 3;
+    conn5.with_signalling = true;
+    pacer.period_to_vm_queue_type = "native";
+    vmsrc_vm_process.sb_pacer_period_queue_type = "vm";
+    vmdst_vm_process.sb_pacer_period_queue_type = "vm";
+
+    VM_GENERAL_CONFIGURATION_DEF()
+    VM_CONFIGURATION_DEF(src_vm_process)
+    VM_VIRTUAL_SERIAL_GENERAL_CONFIGURATION_DEF()
+    PER_VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(src_vm_process)
+    VM_CONFIGURATION_DEF(dst_vm_process)
+    PER_VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(dst_vm_process)
+  }
+}

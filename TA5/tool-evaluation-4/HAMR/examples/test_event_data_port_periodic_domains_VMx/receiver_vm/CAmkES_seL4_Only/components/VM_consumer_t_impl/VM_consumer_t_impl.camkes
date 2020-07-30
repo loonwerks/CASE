@@ -1,0 +1,9 @@
+#include <configurations/vm.h>
+component VM_consumer_t_impl {
+  include <sb_types.h>;
+  include <sb_queue_int8_t_1.h>;
+
+  dataport sb_queue_int8_t_1_t sb_read_port_queue;
+  dataport sb_queue_int8_t_1_t sb_pacer_period_queue;
+  VM_INIT_DEF()
+}

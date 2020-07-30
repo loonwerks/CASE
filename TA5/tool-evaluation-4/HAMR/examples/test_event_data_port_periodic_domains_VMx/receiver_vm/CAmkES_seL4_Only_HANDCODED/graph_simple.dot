@@ -1,0 +1,131 @@
+digraph g {
+graph [
+  overlap = false,
+  rankdir = "LR"
+];
+node [
+  fontsize = "16",
+  shape = "ellipse"
+];
+edge [
+];
+
+src_thread [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>src_thread</B></TD></TR>
+      <TR><TD PORT="sb_write_port_queue_1"><FONT COLOR="red"><B>sb_write_port_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_write_port_1_notification"><FONT COLOR="blue"><B>sb_write_port_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_notification"><FONT COLOR="blue"><B>sb_pacer_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+vmdst_process [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>vmdst_process</B></TD></TR>
+      <TR><TD PORT="sb_read_port_queue"><FONT COLOR="red"><B>sb_read_port_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_period_queue"><FONT COLOR="red"><B>sb_pacer_period_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_read_port_notification"><FONT COLOR="blue"><B>sb_read_port_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_period_notification"><FONT COLOR="blue"><B>sb_pacer_period_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+pacer [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>pacer</B></TD></TR>
+      <TR><TD PORT="period_to_vmdst_process_queue"><FONT COLOR="red"><B>period_to_vmdst_process_queue</B></FONT></TD></TR>
+      <TR><TD PORT="period_to_vmdst_process_notification"><FONT COLOR="blue"><B>period_to_vmdst_process_notification</B></FONT></TD></TR>
+      <TR><TD PORT="period"><FONT COLOR="blue"><B>period</B></FONT></TD></TR>
+      <TR><TD PORT="tick"><FONT COLOR="blue"><B>tick</B></FONT></TD></TR>
+      <TR><TD PORT="tock"><FONT COLOR="blue"><B>tock</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+connectiontypekey [
+  label=<
+   <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+     <TR><TD COLSPAN="2"><B>Key: Connection Types</B></TD></TR>
+     <TR><TD><FONT COLOR="red">seL4SharedData</FONT></TD><TD BGCOLOR="red">red</TD></TR>
+     <TR><TD><FONT COLOR="blue">seL4Notification</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="orange">seL4RPCCall</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+     <TR><TD><FONT COLOR="green">seL4TimeServer</FONT></TD><TD BGCOLOR="green">green</TD></TR>
+     <TR><TD><FONT COLOR="brown">seL4GlobalAsynchCallback</FONT></TD><TD BGCOLOR="brown">brown</TD></TR>
+     <TR><TD><FONT COLOR="yellow">seL4VMDTBPassthrough</FONT></TD><TD BGCOLOR="yellow">yellow</TD></TR>
+     <TR><TD><FONT COLOR="pink">seL4SharedDataWithCaps</FONT></TD><TD BGCOLOR="pink">pink</TD></TR>
+   </TABLE>
+  >
+  shape=plaintext
+];
+
+interfacetypekey [
+  label=<
+   <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+     <TR><TD COLSPAN="2"><B>Key: Interface Types</B></TD></TR>
+     <TR><TD><FONT COLOR="red">dataport</FONT></TD><TD BGCOLOR="red">red</TD></TR>
+     <TR><TD><FONT COLOR="blue">emits</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="blue">consumes</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="orange">provides</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+     <TR><TD><FONT COLOR="orange">uses</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+   </TABLE>
+  >
+  shape=plaintext
+];
+
+"vmdst_process":dtb_self -> "vmdst_process":dtb [
+  color="yellow"
+  //label = "seL4VMDTBPassthrough"
+  id = conn1
+
+];
+
+"src_thread":sb_write_port_1_notification -> "vmdst_process":sb_read_port_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn2
+
+];
+
+"src_thread":sb_write_port_queue_1 -> "vmdst_process":sb_read_port_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn3
+
+];
+
+"pacer":tick -> "pacer":tock [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn4
+
+];
+
+"pacer":period -> "src_thread":sb_pacer_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn5
+
+];
+
+"pacer":period_to_vmdst_process_notification -> "vmdst_process":sb_pacer_period_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn6
+
+];
+
+"pacer":period_to_vmdst_process_queue -> "vmdst_process":sb_pacer_period_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn7
+
+];
+
+}
