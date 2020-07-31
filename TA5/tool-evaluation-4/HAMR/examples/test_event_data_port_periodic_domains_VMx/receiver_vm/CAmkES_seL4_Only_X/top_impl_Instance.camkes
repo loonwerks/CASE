@@ -57,6 +57,9 @@ assembly {
     pacer.period_to_vm_queue_type = "native";
     vmdst_process.sb_pacer_period_queue_type = "vm";
 
+    conn2.create_connections = true;
+    conn5.create_connections = true;
+    
     VM_GENERAL_CONFIGURATION_DEF()
     VM_CONFIGURATION_DEF(dst_process)
     VM_VIRTUAL_SERIAL_GENERAL_CONFIGURATION_DEF()

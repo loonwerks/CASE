@@ -15,25 +15,21 @@
 // This schedule is single-rate, 1Hz, run each thread at 200ms ticks for simplicity.
 // Fill space in with domain 0.
 //
-//         +
-// 3 dest  |        -              -              -              -      
-// 2 src   |     -              -              -              -         
-// 1 pacer |  -              -              -              -            
-// 0 dom0  |-- -- -- -------- -- -- -------- -- -- -------- -- -- ------
-//         |______________|______________________________________________\time
-//           seconds      1              2              3              4 /
-//
 // Major frame is 1 seconds, since destination has 1 second period
 //
 const dschedule_t ksDomSchedule[] = { // (1 tick == 2ms)
     { .domain = 0, .length =   100 }, // all other seL4 threads, init, 200ms
     { .domain = 1, .length =     5 }, // pacer
-    { .domain = 0, .length =     5 }, // domain0
-    { .domain = 2, .length =   300 }, // vm src
-    { .domain = 0, .length =     5 }, // domain0
-    { .domain = 3, .length =   300 }, // vm dst
-    { .domain = 0, .length =     5 }, // domain0
+    { .domain = 0, .length =     1 }, // 
+    { .domain = 2, .length =   150 }, // vm src
+    { .domain = 0, .length =     1 }, // 
+    { .domain = 3, .length =   150 }, // vm dst
+    { .domain = 0, .length =     1 }, // 
     { .domain = 4, .length =     5 }, // native dst
+    { .domain = 0, .length =    87 }, //
 };
+//                           +
+//                           -----
+//                             500 * 2 = 1000
 
 const word_t ksDomScheduleLength = sizeof(ksDomSchedule) / sizeof(dschedule_t);
