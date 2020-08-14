@@ -22,7 +22,7 @@ If you are interested to also setup FMIDE and HAMR directly in your machine runn
 
 ### Requirement
 
-* Debian 10.2 [[.iso](https://cdimage.debian.org/mirror/cdimage/archive/10.2.0/amd64/iso-cd/debian-10.2.0-amd64-xfce-CD-1.iso)]
+* Debian 10.2 [[.iso]](https://cdimage.debian.org/mirror/cdimage/archive/10.2.0/amd64/iso-cd/debian-10.2.0-amd64-xfce-CD-1.iso)]
 
 ### Steps
 
@@ -30,6 +30,7 @@ Run the following (and subsequent commands) in your local repo's ``case-env`` di
 (or download the folder [here](https://downgit.github.io/#/home?url=https://github.com/loonwerks/CASE/tree/master/TA5/case-env)):
 
 ```bash
+bash snapshot.sh
 bash case-setup.sh
 ```
 

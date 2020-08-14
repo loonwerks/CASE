@@ -58,8 +58,6 @@ mkdir -p $BASE_DIR
 
 as_root apt-get update
 as_root apt install -y git
-as_root apt remove -y python*
-as_root apt autoremove -y
 
 # seL4 and friends
 cd $BASE_DIR
