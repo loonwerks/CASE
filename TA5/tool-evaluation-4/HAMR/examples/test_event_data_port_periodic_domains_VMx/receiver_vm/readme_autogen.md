@@ -42,21 +42,21 @@
   ```
   Booting all finished, dropped to user space
   <<seL4(CPU 0) [decodeUntypedInvocation/212 T0xff807fc17400 "rootserver" @4006d8]: Untyped Retype: Insufficient memory (1 * 2097152 bytes needed, 0 bytes available).>>
-  [dst_thread] test_event_data_port_consumer_component_init called
+  [src_thread] test_event_data_port_emitter_component_init called
   _utspace_split_alloc@split.c:272 Failed to find any untyped capable of creating an object at address 0x8040000
   Loading Linux: 'linux' dtb: ''
-  [src_thread] test_event_data_port_emitter_component_init called
+  [dst_thread] test_event_data_port_consumer_component_init called
   -----------------------
   [src_thread] sending 0
   [dst_thread] received {0}
   -----------------------
   [src_thread] sending 1
   [dst_thread] received {1}
+  -----------------------
+  [src_thread] sending 2
   install_linux_devices@main.c:628 module name: map_frame_hack
   install_linux_devices@main.c:628 module name: virtio_con
   install_linux_devices@main.c:628 module name: cross_vm_connections
-  -----------------------
-  [src_thread] sending 2
   [dst_thread] received {2}
   -----------------------
   [src_thread] sending 3
@@ -118,9 +118,9 @@
   -----------------------
   [src_thread] sending 22
   [dst_thread] received {22}
-  libsel4muslcsys: Error attempting syscall 215
   -----------------------
   [src_thread] sending 23
+  libsel4muslcsys: Error attempting syscall 215
   [dst_thread] received {23}
   -----------------------
   [src_thread] sending 24
@@ -149,119 +149,94 @@
   -----------------------
   [src_thread] sending 32
   [dst_thread] received {32}
-  libsel4muslcsys: Error attempting syscall 215
   -----------------------
   [src_thread] sending 33
+  libsel4muslcsys: Error attempting syscall 215
   [dst_thread] received {33}
+  -----------------------
+  [src_thread] sending 34
   clean_up@fdtgen.c:370 Non-existing node None specified to be kept
   consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
   consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
   _utspace_split_alloc@split.c:272 Failed to find any untyped capable of creating an object at address 0x8020000
-  -----------------------
-  [src_thread] sending 34
   [dst_thread] received {34}
-  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
-  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
   -----------------------
   [src_thread] sending 35
+  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
+  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
   [dst_thread] received {35}
-  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
-  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
-  [    3.449283] Unable to detect cache hierarchy for CPU 0
-  [    3.470558] e1000: Intel(R) PRO/1000 Network Driver - version 7.3.21-k8-NAPI
-  [    3.484529] e1000: Copyright (c) 1999-2006 Intel Corporation.
-  [    3.497206] e1000e: Intel(R) PRO/1000 Network Driver - 3.2.6-k
-  [    3.509537] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
-  [    3.527054] mousedev: PS/2 mouse device common for all mice
-  [    3.546696] ledtrig-cpu: registered to indicate activity on CPUs
-  [    3.559280] dmi-sysfs: dmi entry is absent.
-  [    3.569635] ipip: IPv4 and MPLS over IPv4 tunneling driver
-  [    3.588412] NET: Registered protocol family 10
-  [    3.616954] mip6: Mobile IPv6
-  [    3.632602] NET: Registered protocol family 17
-  [    3.643258] mpls_gso: MPLS GSO support
-  [    3.652549] Registered cp15_barrier emulation handler
-  [    3.661771] Registered setend emulation handler
-  [    3.678155] registered taskstats version 1
-  [    3.689594] zswap: loaded using pool lzo/zbud
-  [    3.705581] ima: No TPM chip found, activating TPM-bypass!
-  [    3.717261] ima: Allocated hash algorithm: sha256
-  [    3.737939] hctosys: unable to open rtc device (rtc0)
-  [    3.750038] PM: Hibernation image not present or could not be loaded.
-  [    3.761893] initcall clk_disable_unused blacklisted
   -----------------------
   [src_thread] sending 36
+  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
+  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
+  [    2.316904] Unable to detect cache hierarchy for CPU 0
+  [    2.332915] e1000: Intel(R) PRO/1000 Network Driver - version 7.3.21-k8-NAPI
+  [    2.344433] e1000: Copyright (c) 1999-2006 Intel Corporation.
+  [    2.355461] e1000e: Intel(R) PRO/1000 Network Driver - 3.2.6-k
+  [    2.366165] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+  [    2.381840] mousedev: PS/2 mouse device common for all mice
+  [    2.400087] ledtrig-cpu: registered to indicate activity on CPUs
+  [    2.412263] dmi-sysfs: dmi entry is absent.
+  [    2.422421] ipip: IPv4 and MPLS over IPv4 tunneling driver
+  [    2.439380] NET: Registered protocol family 10
+  [    2.463366] mip6: Mobile IPv6
+  [    2.476667] NET: Registered protocol family 17
+  [    2.487041] mpls_gso: MPLS GSO support
+  [    2.494708] Registered cp15_barrier emulation handler
+  [    2.505167] Registered setend emulation handler
+  [    2.520271] registered taskstats version 1
+  [    2.529882] zswap: loaded using pool lzo/zbud
+  [    2.543844] ima: No TPM chip found, activating TPM-bypass!
+  [    2.553913] ima: Allocated hash algorithm: sha256
+  [    2.574425] hctosys: unable to open rtc device (rtc0)
+  [    2.584422] PM: Hibernation image not present or could not be loaded.
+  [    2.596626] initcall clk_disable_unused blacklisted
   [dst_thread] received {36}
-  [    5.116466] Freeing unused kernel memory: 3776K
   -----------------------
   [src_thread] sending 37
+  [    3.494340] Freeing unused kernel memory: 3776K
   [dst_thread] received {37}
+  -----------------------
+  [src_thread] sending 38
   Starting syslogd: OK
   Starting klogd: OK
-  Running sysctl: -----------------------
-  [src_thread] sending 38
-  [dst_thread] received {38}
-  OK
-  Initializing random number generator... [    9.021495] random: dd: uninitialized urandom read (512 bytes read)
-  done.
-  Starting network: -----------------------
+  Running sysctl: [dst_thread] received {38}
+  -----------------------
   [src_thread] sending 39
-  [dst_thread] received {39}
   OK
-  [   10.630111] connection: loading out-of-tree module taints kernel.
-  [   10.674095] Event Bar (dev-0) initalised
-  [   10.691391] 2 Dataports (dev-0) initalised
-  [   10.709761] Event Bar (dev-1) initalised
-  [   10.719417] 2 Dataports (dev-1) initalised
+  Initializing random number generator... [    6.701549] random: dd: uninitialized urandom read (512 bytes read)
+  done.
+  Starting network: [dst_thread] received {39}
+  -----------------------
+  [src_thread] sending 40
+  OK
+  [    8.194731] connection: loading out-of-tree module taints kernel.
+  [    8.234433] Event Bar (dev-0) initalised
+  [    8.244874] 2 Dataports (dev-0) initalised
+  [    8.264854] Event Bar (dev-1) initalised
+  [    8.283279] 2 Dataports (dev-1) initalised
   [vmdst_process] test_event_data_port_consumer_component_init called
 
   Welcome to Buildroot
-  buildroot login: -----------------------
-  [src_thread] sending 40
-  [dst_thread] received {40}
-  [vmdst_process] received {40}
+  buildroot login: [dst_thread] received {40}
   -----------------------
   [src_thread] sending 41
-  [dst_thread] received {41}
   [vmdst_process] received {41}
+  [dst_thread] received {41}
   -----------------------
   [src_thread] sending 42
-  [dst_thread] received {42}
   [vmdst_process] received {42}
+  [dst_thread] received {42}
   -----------------------
   [src_thread] sending 43
-  [dst_thread] received {43}
   [vmdst_process] received {43}
+  [dst_thread] received {43}
   -----------------------
   [src_thread] sending 44
-  [dst_thread] received {44}
   [vmdst_process] received {44}
+  [dst_thread] received {44}
   -----------------------
   [src_thread] sending 45
-  [dst_thread] received {45}
   [vmdst_process] received {45}
-  -----------------------
-  [src_thread] sending 46
-  [dst_thread] received {46}
-  [vmdst_process] received {46}
-  -----------------------
-  [src_thread] sending 47
-  [dst_thread] received {47}
-  [vmdst_process] received {47}
-  -----------------------
-  [src_thread] sending 48
-  [dst_thread] received {48}
-  [vmdst_process] received {48}
-  -----------------------
-  [src_thread] sending 49
-  [dst_thread] received {49}
-  [vmdst_process] received {49}
-  -----------------------
-  [src_thread] sending 50
-  [dst_thread] received {50}
-  [vmdst_process] received {50}
-  -----------------------
-  [src_thread] sending 51
-  [dst_thread] received {51}
-  [vmdst_process] received {51}
+[dst_thread] received {45}
   ```

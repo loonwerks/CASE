@@ -42,13 +42,15 @@ void init_cross_vm_connections(vm_t *vm, void *cookie) {
     connections[0] = (struct camkes_crossvm_connection) {
       .handle = &sb_read_port_queue_handle,
       .emit_fn = NULL,
-      .consume_badge = sb_read_port_notification_notification_badge()
+      .consume_badge = sb_read_port_notification_notification_badge(),
+      .connection_name = "sb_read_port_queue"
     };
 
     connections[1] = (struct camkes_crossvm_connection) {
       .handle = &sb_pacer_period_queue_handle,
       .emit_fn = NULL,
-      .consume_badge = sb_pacer_period_notification_notification_badge()
+      .consume_badge = sb_pacer_period_notification_notification_badge(),
+      .connection_name = "sb_pacer_period_queue"
     };
 
     for (int i = 0; i < NUM_CONNECTIONS; i++) {

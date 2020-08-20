@@ -14,7 +14,7 @@ import receiver_vm._
   val dispatchProtocol: DispatchPropertyProtocol,
   val dispatchTriggers: Option[ISZ[Art.PortId]],
 
-  write_port: Port[S8]
+  write_port: Port[Base_Types.Integer_8]
   ) extends Bridge {
 
   val ports : Bridge.Ports = Bridge.Ports(
@@ -53,7 +53,7 @@ object emitter_t_impl_Bridge {
     id : Art.BridgeId,
     write_port_Id : Art.PortId) {
 
-    def sendwrite_port(value : S8) : Unit = {
+    def sendwrite_port(value : Base_Types.Integer_8) : Unit = {
       Art.putValue(write_port_Id, Base_Types.Integer_8_Payload(value))
     }
 

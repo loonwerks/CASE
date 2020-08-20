@@ -15,7 +15,7 @@ import both_vm._
     api.logDebug("Example debug logging")
     api.logError("Example error logging")
 
-    val apiUsage_read_port: Option[S8] = api.getread_port()
+    val apiUsage_read_port: Option[Base_Types.Integer_8] = api.getread_port()
   }
 
   override def timeTriggered(): Unit = {

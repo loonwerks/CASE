@@ -14,7 +14,7 @@ import test_data_port_periodic_domains._
   val dispatchProtocol: DispatchPropertyProtocol,
   val dispatchTriggers: Option[ISZ[Art.PortId]],
 
-  read_port: Port[S8]
+  read_port: Port[Base_Types.Integer_8]
   ) extends Bridge {
 
   val ports : Bridge.Ports = Bridge.Ports(
@@ -54,13 +54,13 @@ object destination_thread_impl_Bridge {
     read_port_Id : Art.PortId) {
 
 
-    def getread_port() : Option[S8] = {
-      val value : Option[S8] = Art.getValue(read_port_Id) match {
+    def getread_port() : Option[Base_Types.Integer_8] = {
+      val value : Option[Base_Types.Integer_8] = Art.getValue(read_port_Id) match {
         case Some(Base_Types.Integer_8_Payload(v)) => Some(v)
         case Some(v) =>
           Art.logError(id, s"Unexpected payload on port read_port.  Expecting 'Base_Types.Integer_8_Payload' but received ${v}")
-          None[S8]()
-        case _ => None[S8]()
+          None[Base_Types.Integer_8]()
+        case _ => None[Base_Types.Integer_8]()
       }
       return value
     }

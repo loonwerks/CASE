@@ -3,15 +3,15 @@
  Table of Contents
   * [Diagrams](#diagrams)
     * [AADL Arch](#aadl-arch)
-    * [SeL4_TB](#sel4tb)
-      * [SeL4_TB CAmkES Arch](#sel4tb-camkes-arch)
-      * [SeL4_TB CAmkES HAMR Arch](#sel4tb-camkes-hamr-arch)
-    * [SeL4_Only](#sel4only)
-      * [SeL4_Only CAmkES Arch](#sel4only-camkes-arch)
-      * [SeL4_Only CAmkES HAMR Arch](#sel4only-camkes-hamr-arch)
+    * [SeL4_TB](#sel4_tb)
+      * [SeL4_TB CAmkES Arch](#sel4_tb-camkes-arch)
+      * [SeL4_TB CAmkES HAMR Arch](#sel4_tb-camkes-hamr-arch)
+    * [SeL4_Only](#sel4_only)
+      * [SeL4_Only CAmkES Arch](#sel4_only-camkes-arch)
+      * [SeL4_Only CAmkES HAMR Arch](#sel4_only-camkes-hamr-arch)
   * [Example Output](#example-output)
-    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4tb-expected-output-timeout--15-seconds)
-    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4only-expected-output-timeout--15-seconds)
+    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4_tb-expected-output-timeout--15-seconds)
+    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4_only-expected-output-timeout--15-seconds)
 
 ## Diagrams
 ### AADL Arch
@@ -78,9 +78,9 @@
   WM:> Sent mission window
   UART:< Received mission window
     MissionWindow:
-  FPLN:< Received mission receipt confirmation: 1.
       0: {0, 1, 2}
-      1: {1, 2, 3}
+    FPLN:< Received mission receipt confirmation: 1.
+    1: {1, 2, 3}
       2: {2, 3, 4}
       3: {3, 4, 5}
   UART:> Sending 1 as the next id.
@@ -236,24 +236,6 @@
       1: {8, 9, 10}
       2: {9, 10, 11}
       3: {0, 1, 2}
-  UART:> Sending 18 as the next id.
-  WM:< Received 18 as the next id.
-  WM:> Sent mission window
-  UART:< Received mission window
-    MissionWindow:
-      0: {8, 9, 10}
-      1: {9, 10, 11}
-      2: {0, 1, 2}
-      3: {1, 2, 3}
-  UART:> Sending 19 as the next id.
-  WM:< Received 19 as the next id.
-  WM:> Sent mission window
-  UART:< Received mission window
-    MissionWindow:
-      0: {9, 10, 11}
-      1: {0, 1, 2}
-      2: {1, 2, 3}
-      3: {2, 3, 4}
 
   ```
 

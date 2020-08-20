@@ -12,7 +12,7 @@ import test_data_port_periodic_domains.test_data_port_periodic_domains.source_th
 object source_thread_component extends App {
 
   val source_thread_componentBridge : test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_Bridge = {
-    val write_port = Port[S8] (id = 0, name = "top_impl_Instance_source_process_component_source_thread_component_write_port", mode = DataOut)
+    val write_port = Port[Base_Types.Integer_8] (id = 0, name = "top_impl_Instance_source_process_component_source_thread_component_write_port", mode = DataOut)
 
     test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_Bridge(
       id = 0,
@@ -89,6 +89,8 @@ object source_thread_component extends App {
 
     printDataContent(Base_Types.Integer_8_Payload(Base_Types.Integer_8_empty()))
     printDataContent(art.Empty())
+
+    TranspilerToucher.touch()
 
     return 0
   }

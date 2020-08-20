@@ -3,15 +3,15 @@
  Table of Contents
   * [Diagrams](#diagrams)
     * [AADL Arch](#aadl-arch)
-    * [SeL4_TB](#sel4tb)
-      * [SeL4_TB CAmkES Arch](#sel4tb-camkes-arch)
-      * [SeL4_TB CAmkES HAMR Arch](#sel4tb-camkes-hamr-arch)
-    * [SeL4_Only](#sel4only)
-      * [SeL4_Only CAmkES Arch](#sel4only-camkes-arch)
-      * [SeL4_Only CAmkES HAMR Arch](#sel4only-camkes-hamr-arch)
+    * [SeL4_TB](#sel4_tb)
+      * [SeL4_TB CAmkES Arch](#sel4_tb-camkes-arch)
+      * [SeL4_TB CAmkES HAMR Arch](#sel4_tb-camkes-hamr-arch)
+    * [SeL4_Only](#sel4_only)
+      * [SeL4_Only CAmkES Arch](#sel4_only-camkes-arch)
+      * [SeL4_Only CAmkES HAMR Arch](#sel4_only-camkes-hamr-arch)
   * [Example Output](#example-output)
-    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4tb-expected-output-timeout--15-seconds)
-    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4only-expected-output-timeout--15-seconds)
+    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4_tb-expected-output-timeout--15-seconds)
+    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4_only-expected-output-timeout--15-seconds)
 
 ## Diagrams
 ### AADL Arch
@@ -78,12 +78,6 @@
   [dest_B] value {6}
   ---------------------------------------
   [src] Sent 7
-  ---------------------------------------
-  [src] Sent 8
-  [dest_A] value {8}
-  [dest_B] value {8}
-  ---------------------------------------
-  [src] Sent 9
 
   ```
 
@@ -132,5 +126,11 @@
   [dest_B] value {6}
   ---------------------------------------
   [src] Sent 7
+  ---------------------------------------
+  [src] Sent 8
+  [dest_A] value {8}
+  [dest_B] value {8}
+  ---------------------------------------
+  [src] Sent 9
 
   ```

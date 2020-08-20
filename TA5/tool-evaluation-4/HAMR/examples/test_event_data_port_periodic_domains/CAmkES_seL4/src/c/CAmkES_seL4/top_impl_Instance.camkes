@@ -16,10 +16,10 @@ assembly {
   }
 
   configuration {
-    src_thread.sb_write_port_queue_1_access = "W";
-    dst_thread.sb_read_port_queue_access = "R";
     src_thread._domain = 2;
     dst_thread._domain = 3;
+    src_thread.sb_write_port_queue_1_access = "W";
+    dst_thread.sb_read_port_queue_access = "R";
 
   }
 }

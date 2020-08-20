@@ -11,7 +11,7 @@ import art.DispatchPropertyProtocol._
 
 object Arch {
   val top_impl_Instance_src_process_src_thread : test_event_data_port_periodic_domains.test_event_data_port_periodic_domains.emitter_t_impl_Bridge = {
-    val write_port = Port[S8] (id = 0, name = "top_impl_Instance_src_process_src_thread_write_port", mode = EventOut)
+    val write_port = Port[Base_Types.Integer_8] (id = 0, name = "top_impl_Instance_src_process_src_thread_write_port", mode = EventOut)
 
     test_event_data_port_periodic_domains.test_event_data_port_periodic_domains.emitter_t_impl_Bridge(
       id = 0,
@@ -23,7 +23,7 @@ object Arch {
     )
   }
   val top_impl_Instance_dst_process_dst_thread : test_event_data_port_periodic_domains.test_event_data_port_periodic_domains.consumer_t_impl_Bridge = {
-    val read_port = Port[S8] (id = 1, name = "top_impl_Instance_dst_process_dst_thread_read_port", mode = EventIn)
+    val read_port = Port[Base_Types.Integer_8] (id = 1, name = "top_impl_Instance_dst_process_dst_thread_read_port", mode = EventIn)
 
     test_event_data_port_periodic_domains.test_event_data_port_periodic_domains.consumer_t_impl_Bridge(
       id = 1,

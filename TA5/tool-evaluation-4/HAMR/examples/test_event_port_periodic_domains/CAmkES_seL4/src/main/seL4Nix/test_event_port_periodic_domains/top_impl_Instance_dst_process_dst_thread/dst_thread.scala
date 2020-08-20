@@ -86,6 +86,8 @@ object dst_thread extends App {
 
     printDataContent(art.Empty())
 
+    TranspilerToucher.touch()
+
     return 0
   }
 

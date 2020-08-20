@@ -42,14 +42,14 @@ assembly {
     vmsrc_process.simple_untyped12_pool = 12;
     vmsrc_process.num_extra_frame_caps = 0;
     vmsrc_process.extra_frame_map_address = 0;
+    vmsrc_process._domain = 2;
     vmdst_process.cnode_size_bits = 18;
     vmdst_process.simple_untyped21_pool = 12;
     vmdst_process.simple_untyped12_pool = 12;
     vmdst_process.num_extra_frame_caps = 0;
     vmdst_process.extra_frame_map_address = 0;
-    pacer._domain = 1;
-    vmsrc_process._domain = 2;
     vmdst_process._domain = 3;
+    pacer._domain = 1;
 
     VM_GENERAL_CONFIGURATION_DEF()
     VM_CONFIGURATION_DEF(src_process)

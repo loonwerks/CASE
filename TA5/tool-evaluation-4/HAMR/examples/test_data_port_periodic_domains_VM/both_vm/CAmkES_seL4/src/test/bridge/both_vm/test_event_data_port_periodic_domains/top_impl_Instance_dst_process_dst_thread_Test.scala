@@ -15,7 +15,7 @@ class top_impl_Instance_dst_process_dst_thread_Test extends BridgeTestSuite[cons
   //////////////////////
 
   // setter for in DataPort
-  def put_read_port(value : S8): Unit = {
+  def put_read_port(value : Base_Types.Integer_8): Unit = {
     ArtNative_Ext.insertInPortValue(bridge.api.read_port_Id, Base_Types.Integer_8_Payload(value))
   }
 

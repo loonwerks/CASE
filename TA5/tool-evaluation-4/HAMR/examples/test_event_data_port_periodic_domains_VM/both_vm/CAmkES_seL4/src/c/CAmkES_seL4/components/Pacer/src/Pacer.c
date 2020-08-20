@@ -5,6 +5,8 @@
 #include <sel4/sel4.h>
 #include <sb_queue_int8_t_1.h>
 
+extern const char *get_instance_name(void);
+
 void send_period_to_vmsrc_process(int8_t *data) {
   sb_queue_int8_t_1_enqueue(period_to_vmsrc_process_queue, data);
   period_to_vmsrc_process_notification_emit();

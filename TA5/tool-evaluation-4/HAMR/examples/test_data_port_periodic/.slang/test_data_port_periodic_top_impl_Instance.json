@@ -269,7 +269,8 @@
                       "appliesTo" : [
                       ]
                     }
-                  ]
+                  ],
+                  "uriFrag" : "test_data_port_periodic\/instances\/test_data_port_periodic_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
                 }
               ],
               "subComponents" : [
@@ -507,8 +508,20 @@
                     "properties" : [
                     ]
                   }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
+                    ]
+                  }
                 }
-              ]
+              ],
+              "uriFrag" : "test_data_port_periodic\/instances\/test_data_port_periodic_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0"
             },
             {
               "type" : "Component",
@@ -710,7 +723,8 @@
                       "appliesTo" : [
                       ]
                     }
-                  ]
+                  ],
+                  "uriFrag" : "test_data_port_periodic\/instances\/test_data_port_periodic_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1\/@featureInstance.0"
                 }
               ],
               "subComponents" : [
@@ -948,8 +962,20 @@
                     "properties" : [
                     ]
                   }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
+                    ]
+                  }
                 }
-              ]
+              ],
+              "uriFrag" : "test_data_port_periodic\/instances\/test_data_port_periodic_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.1"
             }
           ],
           "connections" : [
@@ -1100,7 +1126,8 @@
                 }
               ],
               "properties" : [
-              ]
+              ],
+              "uriFrag" : "test_data_port_periodic\/instances\/test_data_port_periodic_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@connectionInstance.0\/@connectionReference.0"
             }
           ],
           "connectionInstances" : [
@@ -1356,8 +1383,20 @@
                 "properties" : [
                 ]
               }
+            },
+            {
+              "type" : "Annex",
+              "name" : "smf",
+              "clause" : {
+                "type" : "SmfClause",
+                "classification" : [
+                ],
+                "declass" : [
+                ]
+              }
             }
-          ]
+          ],
+          "uriFrag" : "test_data_port_periodic\/instances\/test_data_port_periodic_top_impl_Instance.aaxl2#\/\/@componentInstance.0"
         },
         {
           "type" : "Component",
@@ -1433,8 +1472,20 @@
                 "properties" : [
                 ]
               }
+            },
+            {
+              "type" : "Annex",
+              "name" : "smf",
+              "clause" : {
+                "type" : "SmfClause",
+                "classification" : [
+                ],
+                "declass" : [
+                ]
+              }
             }
-          ]
+          ],
+          "uriFrag" : "test_data_port_periodic\/instances\/test_data_port_periodic_top_impl_Instance.aaxl2#\/\/@componentInstance.1"
         }
       ],
       "connections" : [
@@ -1509,8 +1560,20 @@
             "properties" : [
             ]
           }
+        },
+        {
+          "type" : "Annex",
+          "name" : "smf",
+          "clause" : {
+            "type" : "SmfClause",
+            "classification" : [
+            ],
+            "declass" : [
+            ]
+          }
         }
-      ]
+      ],
+      "uriFrag" : "test_data_port_periodic\/instances\/test_data_port_periodic_top_impl_Instance.aaxl2#\/"
     }
   ],
   "annexLib" : [
@@ -1617,7 +1680,8 @@
       "modes" : [
       ],
       "annexes" : [
-      ]
+      ],
+      "uriFrag" : ""
     }
   ]
 }

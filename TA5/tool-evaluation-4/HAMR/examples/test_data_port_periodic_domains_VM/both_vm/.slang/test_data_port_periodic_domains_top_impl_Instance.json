@@ -202,7 +202,8 @@
                   "appliesTo" : [
                   ]
                 }
-              ]
+              ],
+              "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@featureInstance.0"
             }
           ],
           "subComponents" : [
@@ -406,7 +407,8 @@
                       "appliesTo" : [
                       ]
                     }
-                  ]
+                  ],
+                  "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
                 }
               ],
               "subComponents" : [
@@ -690,8 +692,20 @@
                     "properties" : [
                     ]
                   }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
+                    ]
+                  }
                 }
-              ]
+              ],
+              "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0"
             }
           ],
           "connections" : [
@@ -842,7 +856,8 @@
                 }
               ],
               "properties" : [
-              ]
+              ],
+              "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.0"
             }
           ],
           "connectionInstances" : [
@@ -982,8 +997,20 @@
                 "properties" : [
                 ]
               }
+            },
+            {
+              "type" : "Annex",
+              "name" : "smf",
+              "clause" : {
+                "type" : "SmfClause",
+                "classification" : [
+                ],
+                "declass" : [
+                ]
+              }
             }
-          ]
+          ],
+          "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0"
         },
         {
           "type" : "Component",
@@ -1154,7 +1181,8 @@
                   "appliesTo" : [
                   ]
                 }
-              ]
+              ],
+              "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1\/@featureInstance.0"
             }
           ],
           "subComponents" : [
@@ -1358,7 +1386,8 @@
                       "appliesTo" : [
                       ]
                     }
-                  ]
+                  ],
+                  "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1\/@componentInstance.0\/@featureInstance.0"
                 }
               ],
               "subComponents" : [
@@ -1642,8 +1671,20 @@
                     "properties" : [
                     ]
                   }
+                },
+                {
+                  "type" : "Annex",
+                  "name" : "smf",
+                  "clause" : {
+                    "type" : "SmfClause",
+                    "classification" : [
+                    ],
+                    "declass" : [
+                    ]
+                  }
                 }
-              ]
+              ],
+              "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1\/@componentInstance.0"
             }
           ],
           "connections" : [
@@ -1794,7 +1835,8 @@
                 }
               ],
               "properties" : [
-              ]
+              ],
+              "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.2"
             }
           ],
           "connectionInstances" : [
@@ -1934,8 +1976,20 @@
                 "properties" : [
                 ]
               }
+            },
+            {
+              "type" : "Annex",
+              "name" : "smf",
+              "clause" : {
+                "type" : "SmfClause",
+                "classification" : [
+                ],
+                "declass" : [
+                ]
+              }
             }
-          ]
+          ],
+          "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1"
         },
         {
           "type" : "Component",
@@ -2146,8 +2200,20 @@
                 "properties" : [
                 ]
               }
+            },
+            {
+              "type" : "Annex",
+              "name" : "smf",
+              "clause" : {
+                "type" : "SmfClause",
+                "classification" : [
+                ],
+                "declass" : [
+                ]
+              }
             }
-          ]
+          ],
+          "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.2"
         }
       ],
       "connections" : [
@@ -2298,7 +2364,8 @@
             }
           ],
           "properties" : [
-          ]
+          ],
+          "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.1"
         }
       ],
       "connectionInstances" : [
@@ -2640,8 +2707,20 @@
             "properties" : [
             ]
           }
+        },
+        {
+          "type" : "Annex",
+          "name" : "smf",
+          "clause" : {
+            "type" : "SmfClause",
+            "classification" : [
+            ],
+            "declass" : [
+            ]
+          }
         }
-      ]
+      ],
+      "uriFrag" : "test_data_port_periodic_domains_both_vm\/instances\/test_data_port_periodic_domains_top_impl_Instance.aaxl2#\/"
     }
   ],
   "annexLib" : [
@@ -2748,7 +2827,8 @@
       "modes" : [
       ],
       "annexes" : [
-      ]
+      ],
+      "uriFrag" : ""
     }
   ]
 }

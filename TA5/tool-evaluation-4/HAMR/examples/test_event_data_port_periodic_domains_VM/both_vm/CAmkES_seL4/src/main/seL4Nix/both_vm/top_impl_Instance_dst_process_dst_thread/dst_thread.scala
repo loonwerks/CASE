@@ -12,7 +12,7 @@ import both_vm.test_event_data_port_periodic_domains.consumer_t_impl_seL4Nix
 object dst_thread extends App {
 
   val dst_threadBridge : both_vm.test_event_data_port_periodic_domains.consumer_t_impl_Bridge = {
-    val read_port = Port[S8] (id = 0, name = "top_impl_Instance_dst_process_dst_thread_read_port", mode = EventIn)
+    val read_port = Port[Base_Types.Integer_8] (id = 0, name = "top_impl_Instance_dst_process_dst_thread_read_port", mode = EventIn)
 
     both_vm.test_event_data_port_periodic_domains.consumer_t_impl_Bridge(
       id = 0,
@@ -86,6 +86,8 @@ object dst_thread extends App {
 
     printDataContent(Base_Types.Integer_8_Payload(Base_Types.Integer_8_empty()))
     printDataContent(art.Empty())
+
+    TranspilerToucher.touch()
 
     return 0
   }

@@ -38,10 +38,10 @@ assembly {
     vmsrc_process.simple_untyped12_pool = 12;
     vmsrc_process.num_extra_frame_caps = 0;
     vmsrc_process.extra_frame_map_address = 0;
-    dst_thread.read_port_access = "R";
-    pacer._domain = 1;
     vmsrc_process._domain = 2;
+    dst_thread.read_port_access = "R";
     dst_thread._domain = 3;
+    pacer._domain = 1;
 
     VM_GENERAL_CONFIGURATION_DEF()
     VM_CONFIGURATION_DEF(src_process)

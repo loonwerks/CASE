@@ -15,11 +15,11 @@ class top_impl_Instance_src_process_src_thread_Test extends BridgeTestSuite[emit
   //////////////////////
 
   // getter for out EventDataPort
-  def get_write_port(): Option[S8] = {
-    val value: Option[S8] = get_write_port_payload() match {
+  def get_write_port(): Option[Base_Types.Integer_8] = {
+    val value: Option[Base_Types.Integer_8] = get_write_port_payload() match {
       case Some(Base_Types.Integer_8_Payload(v)) => Some(v)
       case Some(v) => fail(s"Unexpected payload on port write_port.  Expecting 'Base_Types.Integer_8_Payload' but received ${v}")
-      case _ => None[S8]()
+      case _ => None[Base_Types.Integer_8]()
     }
     return value
   }

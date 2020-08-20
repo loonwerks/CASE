@@ -12,7 +12,7 @@ import receiver_vm.test_event_data_port_periodic_domains.emitter_t_impl_seL4Nix
 object src_thread extends App {
 
   val src_threadBridge : receiver_vm.test_event_data_port_periodic_domains.emitter_t_impl_Bridge = {
-    val write_port = Port[S8] (id = 0, name = "top_impl_Instance_src_process_src_thread_write_port", mode = DataOut)
+    val write_port = Port[Base_Types.Integer_8] (id = 0, name = "top_impl_Instance_src_process_src_thread_write_port", mode = DataOut)
 
     receiver_vm.test_event_data_port_periodic_domains.emitter_t_impl_Bridge(
       id = 0,
@@ -89,6 +89,8 @@ object src_thread extends App {
 
     printDataContent(Base_Types.Integer_8_Payload(Base_Types.Integer_8_empty()))
     printDataContent(art.Empty())
+
+    TranspilerToucher.touch()
 
     return 0
   }

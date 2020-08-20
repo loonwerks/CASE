@@ -16,10 +16,10 @@ assembly {
   }
 
   configuration {
-    src_thread.sb_emit_counter_access = "W";
-    dst_thread.sb_consume_counter_access = "R";
     src_thread._domain = 2;
     dst_thread._domain = 3;
+    src_thread.sb_emit_counter_access = "W";
+    dst_thread.sb_consume_counter_access = "R";
 
   }
 }

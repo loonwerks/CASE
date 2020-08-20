@@ -3,18 +3,18 @@
  Table of Contents
   * [Diagrams](#diagrams)
     * [AADL Arch](#aadl-arch)
-    * [SeL4_TB](#sel4tb)
-      * [SeL4_TB CAmkES Arch](#sel4tb-camkes-arch)
-      * [SeL4_TB CAmkES HAMR Arch](#sel4tb-camkes-hamr-arch)
-    * [SeL4_Only](#sel4only)
-      * [SeL4_Only CAmkES Arch](#sel4only-camkes-arch)
-      * [SeL4_Only CAmkES HAMR Arch](#sel4only-camkes-hamr-arch)
+    * [SeL4_TB](#sel4_tb)
+      * [SeL4_TB CAmkES Arch](#sel4_tb-camkes-arch)
+      * [SeL4_TB CAmkES HAMR Arch](#sel4_tb-camkes-hamr-arch)
+    * [SeL4_Only](#sel4_only)
+      * [SeL4_Only CAmkES Arch](#sel4_only-camkes-arch)
+      * [SeL4_Only CAmkES HAMR Arch](#sel4_only-camkes-hamr-arch)
     * [SeL4](#sel4)
       * [SeL4 CAmkES Arch](#sel4-camkes-arch)
       * [SeL4 CAmkES HAMR Arch](#sel4-camkes-hamr-arch)
   * [Example Output](#example-output)
-    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4tb-expected-output-timeout--15-seconds)
-    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4only-expected-output-timeout--15-seconds)
+    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4_tb-expected-output-timeout--15-seconds)
+    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4_only-expected-output-timeout--15-seconds)
     * [SeL4 Expected Output: Timeout = 15 seconds](#sel4-expected-output-timeout--15-seconds)
 
 ## Diagrams
@@ -115,8 +115,8 @@
 
   ```
   Booting all finished, dropped to user space
-  [src_thread] test_event_data_port_emitter_component_init called
   [dst_thread] test_event_data_port_consumer_component_init called
+  [src_thread] test_event_data_port_emitter_component_init called
   ---------------------------------------
   [src_thread] Sent 0
   [dst_thread] value {0}
@@ -166,19 +166,19 @@
 
   ```
   Booting all finished, dropped to user space
-  Entering pre-init of consumer_t_impl
-  Art: Registered component: top_impl_Entering pre-init of emitter_t_impl
-  Art: RegisInstance_dst_process_dst_thread (periodic: 1000)
+  Entering pre-init of emitter_t_impl
+  Art: Registered component: top_impl_Instance_src_Entering pre-init of consumer_t_impl
+  Art: Registered component: top_impl_Instance_dst_process_dst_tprocess_src_thread (periodic: 1000)
+  Art: - Registered port: top_impl_Instance_src_process_src_thread_write_port (event out)
+  top_impl_Instance_src_process_src_thread: Example logInfo
+  top_impl_Instance_src_process_src_thread: Example logDebug
+  top_impl_Instance_src_process_src_thread: Example logError
+  hread (periodic: 1000)
   Art: - Registered port: top_impl_Instance_dst_process_dst_thread_read_port (event in)
   top_impl_Instance_dst_process_dst_thread: Example logInfo
   top_impl_Instance_dst_process_dst_thread: Example logDebug
   top_impl_Instance_dst_process_dst_thread: Example logError
-  tered component: top_impl_Instance_src_process_src_thread (periodic: 1000)
-  Art: - Registered port: top_impl_Instance_src_process_src_thread_write_port (event out)
-  top_impl_Instance_src_process_src_thread: Example logInfo
-  top_impl_Instance_src_process_src_thread: Example logDebug
-  top_impl_Instance_src_process_srLeaving pre-init of consumer_t_impl
-  c_thread: Example logError
-  Leaving pre-init of emitter_t_impl
+  Leaving pre-init of coLeaving pre-init of emitter_t_impl
+  nsumer_t_impl
 
   ```
