@@ -16,6 +16,9 @@ fmide&
 
 The above will launch ``fmide`` installed in ``~/CASE/Sireum/bin/linux/fmide``.
 
+:warning: | The CASE env setup scripts freeze all Linux packages to a certain time/snapshot (as part of seL4 dependency requirements); thus, any OS security update after the freeze time/snapshot will not be installed (see `SNAPSHOT_DATE` in [snapshot.sh](snapshot.sh)).
+:---: | :---
+
 If you are interested to also setup FMIDE and HAMR directly in your machine running either Windows, Linux, or macOS, please see the instructions at [the bottom of this page](#setting-up-fmide-and-hamr-only).
 
 ## Setting Up A Dedicated Linux Machine
