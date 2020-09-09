@@ -10,7 +10,7 @@ set -Eeuxo pipefail
 : "${SEL4_SCRIPTS_V:=759234c023b09fef9d7a1ea655c3a2ce8ede3a82}"
 : "${SEL4_V:=28831f579e3560bd3aa18a3898505f091d66b076}"
 : "${CAMKES_V:=e7f5c6da03fc8a71a5a2e503de9f9004acf3ef2a}"
-: "${SIREUM_V:=b502d4d274018aae1de18a4ddec9312343de5a06}"
+: "${SIREUM_V:=5fc1be98e9406327101dd464bfee8ef22a37253f}"
 : "${FMIDE_V:=nightly}" # use nightly release by default
 
 export SCRIPT_DIR=$(cd -P $(dirname "$0") && pwd -P)
