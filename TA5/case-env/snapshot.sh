@@ -4,6 +4,10 @@ set -exuo pipefail
 
 : "${SNAPSHOT_DATE:=20200717T204551Z}"
 
+sudo tee -a /etc/apt/apt.conf.d/80ratelimit << EOF
+APT::Acquire::http::Dl-Limit "800";
+EOF
+
 sudo tee /etc/apt/sources.list << EOF
 deb http://snapshot.debian.org/archive/debian/$SNAPSHOT_DATE buster main
 deb http://snapshot.debian.org/archive/debian-security/$SNAPSHOT_DATE buster/updates main
