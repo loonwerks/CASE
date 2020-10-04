@@ -3,24 +3,24 @@
 import <std_connector.camkes>;
 import <global-connectors.camkes>;
 import <TimeServer/TimeServer.camkes>;;
-import "components/source_t_impl/source_t_impl.camkes";
-import "components/destination_t_impl/destination_t_impl.camkes";
+import "components/source_t_impl_test_data_port_periodic_src/source_t_impl_test_data_port_periodic_src.camkes";
+import "components/destination_t_impl_test_data_port_periodic_dest/destination_t_impl_test_data_port_periodic_dest.camkes";
 import "components/sb_Monitors/sb_dest_read_port_Monitor/sb_dest_read_port_Monitor.camkes";
 import "components/dispatch_periodic/dispatch_periodic.camkes";
 
 assembly {
   composition {
-    component source_t_impl src;
-    component destination_t_impl dest;
+    component source_t_impl_test_data_port_periodic_src test_data_port_periodic_src;
+    component destination_t_impl_test_data_port_periodic_dest test_data_port_periodic_dest;
     component sb_dest_read_port_Monitor sb_dest_read_port_monitor;
     component dispatch_periodic dispatch_periodic_inst;
     component TimeServer time_server;
 
-    connection seL4RPCCall conn1(from src.sb_write_port0, to sb_dest_read_port_monitor.mon);
-    connection seL4RPCCall conn2(from dest.sb_read_port, to sb_dest_read_port_monitor.mon);
-    connection seL4Notification conn3(from sb_dest_read_port_monitor.monsig, to dest.sb_read_port_notification);
-    connection seL4Notification conn4(from dispatch_periodic_inst.sb_src_periodic_dispatch_notification, to src.sb_periodic_dispatch_notification);
-    connection seL4Notification conn5(from dispatch_periodic_inst.sb_dest_periodic_dispatch_notification, to dest.sb_periodic_dispatch_notification);
+    connection seL4RPCCall conn1(from test_data_port_periodic_src.sb_write_port0, to sb_dest_read_port_monitor.mon);
+    connection seL4RPCCall conn2(from test_data_port_periodic_dest.sb_read_port, to sb_dest_read_port_monitor.mon);
+    connection seL4Notification conn3(from sb_dest_read_port_monitor.monsig, to test_data_port_periodic_dest.sb_read_port_notification);
+    connection seL4Notification conn4(from dispatch_periodic_inst.sb_test_data_port_periodic_src_periodic_dispatch_notification, to test_data_port_periodic_src.sb_periodic_dispatch_notification);
+    connection seL4Notification conn5(from dispatch_periodic_inst.sb_test_data_port_periodic_dest_periodic_dispatch_notification, to test_data_port_periodic_dest.sb_periodic_dispatch_notification);
     connection seL4TimeServer conn6(from dispatch_periodic_inst.timer, to time_server.the_timer);
     connection seL4GlobalAsynchCallback conn7(from time_server.timer_notification, to dispatch_periodic_inst.timer_complete);
   }

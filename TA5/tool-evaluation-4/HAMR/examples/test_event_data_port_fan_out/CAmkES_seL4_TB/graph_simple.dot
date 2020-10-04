@@ -10,10 +10,10 @@ node [
 edge [
 ];
 
-src [
+test_event_data_port_src [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>src</B></TD></TR>
+      <TR><TD><B>test_event_data_port_src</B></TD></TR>
       <TR><TD PORT="sb_enq0"><FONT COLOR="orange"><B>sb_enq0</B></FONT></TD></TR>
       <TR><TD PORT="sb_enq1"><FONT COLOR="orange"><B>sb_enq1</B></FONT></TD></TR>
       <TR><TD PORT="sb_enq2"><FONT COLOR="orange"><B>sb_enq2</B></FONT></TD></TR>
@@ -24,10 +24,10 @@ src [
   shape=plaintext
 ];
 
-snk_default [
+test_event_data_port_snk_default [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>snk_default</B></TD></TR>
+      <TR><TD><B>test_event_data_port_snk_default</B></TD></TR>
       <TR><TD PORT="sb_deq"><FONT COLOR="orange"><B>sb_deq</B></FONT></TD></TR>
       <TR><TD PORT="sb_deq_notification"><FONT COLOR="blue"><B>sb_deq_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -35,10 +35,10 @@ snk_default [
   shape=plaintext
 ];
 
-snk_2_A [
+test_event_data_port_snk_2_A [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>snk_2_A</B></TD></TR>
+      <TR><TD><B>test_event_data_port_snk_2_A</B></TD></TR>
       <TR><TD PORT="sb_deq"><FONT COLOR="orange"><B>sb_deq</B></FONT></TD></TR>
       <TR><TD PORT="sb_deq_notification"><FONT COLOR="blue"><B>sb_deq_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -46,10 +46,10 @@ snk_2_A [
   shape=plaintext
 ];
 
-snk_2_B [
+test_event_data_port_snk_2_B [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>snk_2_B</B></TD></TR>
+      <TR><TD><B>test_event_data_port_snk_2_B</B></TD></TR>
       <TR><TD PORT="sb_deq"><FONT COLOR="orange"><B>sb_deq</B></FONT></TD></TR>
       <TR><TD PORT="sb_deq_notification"><FONT COLOR="blue"><B>sb_deq_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -57,10 +57,10 @@ snk_2_B [
   shape=plaintext
 ];
 
-snk_5 [
+test_event_data_port_snk_5 [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>snk_5</B></TD></TR>
+      <TR><TD><B>test_event_data_port_snk_5</B></TD></TR>
       <TR><TD PORT="sb_deq"><FONT COLOR="orange"><B>sb_deq</B></FONT></TD></TR>
       <TR><TD PORT="sb_deq_notification"><FONT COLOR="blue"><B>sb_deq_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -116,7 +116,7 @@ dispatch_periodic_inst [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>dispatch_periodic_inst</B></TD></TR>
-      <TR><TD PORT="sb_src_periodic_dispatch_notification"><FONT COLOR="blue"><B>sb_src_periodic_dispatch_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_test_event_data_port_src_periodic_dispatch_notification"><FONT COLOR="blue"><B>sb_test_event_data_port_src_periodic_dispatch_notification</B></FONT></TD></TR>
       <TR><TD PORT="timer"><FONT COLOR="orange"><B>timer</B></FONT></TD></TR>
       <TR><TD PORT="timer_complete"><FONT COLOR="blue"><B>timer_complete</B></FONT></TD></TR>"
     </TABLE>
@@ -154,91 +154,91 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"src":sb_enq0 -> "sb_snk_default_deq_monitor":mon [
+"test_event_data_port_src":sb_enq0 -> "sb_snk_default_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn1
 
 ];
 
-"snk_default":sb_deq -> "sb_snk_default_deq_monitor":mon [
+"test_event_data_port_snk_default":sb_deq -> "sb_snk_default_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn2
 
 ];
 
-"sb_snk_default_deq_monitor":monsig -> "snk_default":sb_deq_notification [
+"sb_snk_default_deq_monitor":monsig -> "test_event_data_port_snk_default":sb_deq_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3
 
 ];
 
-"src":sb_enq1 -> "sb_snk_2_a_deq_monitor":mon [
+"test_event_data_port_src":sb_enq1 -> "sb_snk_2_a_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn4
 
 ];
 
-"snk_2_A":sb_deq -> "sb_snk_2_a_deq_monitor":mon [
+"test_event_data_port_snk_2_A":sb_deq -> "sb_snk_2_a_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn5
 
 ];
 
-"sb_snk_2_a_deq_monitor":monsig -> "snk_2_A":sb_deq_notification [
+"sb_snk_2_a_deq_monitor":monsig -> "test_event_data_port_snk_2_A":sb_deq_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn6
 
 ];
 
-"src":sb_enq2 -> "sb_snk_2_b_deq_monitor":mon [
+"test_event_data_port_src":sb_enq2 -> "sb_snk_2_b_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn7
 
 ];
 
-"snk_2_B":sb_deq -> "sb_snk_2_b_deq_monitor":mon [
+"test_event_data_port_snk_2_B":sb_deq -> "sb_snk_2_b_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn8
 
 ];
 
-"sb_snk_2_b_deq_monitor":monsig -> "snk_2_B":sb_deq_notification [
+"sb_snk_2_b_deq_monitor":monsig -> "test_event_data_port_snk_2_B":sb_deq_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn9
 
 ];
 
-"src":sb_enq3 -> "sb_snk_5_deq_monitor":mon [
+"test_event_data_port_src":sb_enq3 -> "sb_snk_5_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn10
 
 ];
 
-"snk_5":sb_deq -> "sb_snk_5_deq_monitor":mon [
+"test_event_data_port_snk_5":sb_deq -> "sb_snk_5_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn11
 
 ];
 
-"sb_snk_5_deq_monitor":monsig -> "snk_5":sb_deq_notification [
+"sb_snk_5_deq_monitor":monsig -> "test_event_data_port_snk_5":sb_deq_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn12
 
 ];
 
-"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
+"dispatch_periodic_inst":sb_test_event_data_port_src_periodic_dispatch_notification -> "test_event_data_port_src":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn13

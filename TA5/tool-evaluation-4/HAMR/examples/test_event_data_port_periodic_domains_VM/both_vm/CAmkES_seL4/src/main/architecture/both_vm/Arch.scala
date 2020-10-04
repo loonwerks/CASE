@@ -10,10 +10,10 @@ import art.DispatchPropertyProtocol._
 // This file was auto-generated.  Do not edit
 
 object Arch {
-  val top_impl_Instance_src_process_src_thread : both_vm.test_event_data_port_periodic_domains.emitter_t_impl_Bridge = {
+  val top_impl_Instance_src_process_src_thread : both_vm.test_event_data_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge = {
     val write_port = Port[Base_Types.Integer_8] (id = 0, name = "top_impl_Instance_src_process_src_thread_write_port", mode = EventOut)
 
-    both_vm.test_event_data_port_periodic_domains.emitter_t_impl_Bridge(
+    both_vm.test_event_data_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge(
       id = 0,
       name = "top_impl_Instance_src_process_src_thread",
       dispatchProtocol = Periodic(period = 1000),
@@ -22,10 +22,10 @@ object Arch {
       write_port = write_port
     )
   }
-  val top_impl_Instance_dst_process_dst_thread : both_vm.test_event_data_port_periodic_domains.consumer_t_impl_Bridge = {
+  val top_impl_Instance_dst_process_dst_thread : both_vm.test_event_data_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge = {
     val read_port = Port[Base_Types.Integer_8] (id = 1, name = "top_impl_Instance_dst_process_dst_thread_read_port", mode = EventIn)
 
-    both_vm.test_event_data_port_periodic_domains.consumer_t_impl_Bridge(
+    both_vm.test_event_data_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge(
       id = 1,
       name = "top_impl_Instance_dst_process_dst_thread",
       dispatchProtocol = Periodic(period = 1000),

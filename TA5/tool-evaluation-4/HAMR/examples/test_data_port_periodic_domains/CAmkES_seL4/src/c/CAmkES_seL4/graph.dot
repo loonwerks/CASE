@@ -10,10 +10,10 @@ node [
 edge [
 ];
 
-source_thread_component [
+source_process_component_source_thread_component [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>source_thread_component</B></TD></TR>
+      <TR><TD><B>source_process_component_source_thread_component</B></TD></TR>
       <TR><TD PORT="sb_write_port"><FONT COLOR="red">dataport sp_union_art_DataContent_t <B>sb_write_port</B></FONT></TD></TR>
       <TR><TD PORT="sb_self_pacer_tick"><FONT COLOR="blue">emits TickTock <B>sb_self_pacer_tick</B></FONT></TD></TR>
       <TR><TD PORT="sb_self_pacer_tock"><FONT COLOR="blue">consumes TickTock <B>sb_self_pacer_tock</B></FONT></TD></TR>"
@@ -22,10 +22,10 @@ source_thread_component [
   shape=plaintext
 ];
 
-destination_thread_component [
+destination_process_component_destination_thread_component [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>destination_thread_component</B></TD></TR>
+      <TR><TD><B>destination_process_component_destination_thread_component</B></TD></TR>
       <TR><TD PORT="sb_read_port"><FONT COLOR="red">dataport sp_union_art_DataContent_t <B>sb_read_port</B></FONT></TD></TR>
       <TR><TD PORT="sb_self_pacer_tick"><FONT COLOR="blue">emits TickTock <B>sb_self_pacer_tick</B></FONT></TD></TR>
       <TR><TD PORT="sb_self_pacer_tock"><FONT COLOR="blue">consumes TickTock <B>sb_self_pacer_tock</B></FONT></TD></TR>"
@@ -64,21 +64,21 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"source_thread_component":sb_write_port -> "destination_thread_component":sb_read_port [
+"source_process_component_source_thread_component":sb_write_port -> "destination_process_component_destination_thread_component":sb_read_port [
   color="red"
   //label = "seL4SharedData"
   id = conn1
 
 ];
 
-"source_thread_component":sb_self_pacer_tick -> "source_thread_component":sb_self_pacer_tock [
+"source_process_component_source_thread_component":sb_self_pacer_tick -> "source_process_component_source_thread_component":sb_self_pacer_tock [
   color="blue"
   //label = "seL4Notification"
   id = conn2
 
 ];
 
-"destination_thread_component":sb_self_pacer_tick -> "destination_thread_component":sb_self_pacer_tock [
+"destination_process_component_destination_thread_component":sb_self_pacer_tick -> "destination_process_component_destination_thread_component":sb_self_pacer_tock [
   color="blue"
   //label = "seL4Notification"
   id = conn3

@@ -16,47 +16,47 @@ if [ -n "$COMSPEC" -a -x "$COMSPEC" ]; then
   PATH_SEP=";"
 fi
 
-OUTPUT_DIR="${SCRIPT_HOME}/../src/c/CAmkES_seL4/slang_libraries/top_impl_Instance_src_process_src_thread"
+OUTPUT_DIR="${SCRIPT_HOME}/../src/c/CAmkES_seL4/slang_libraries/emitter_t_impl_src_process_src_thread"
 
 ${SIREUM_HOME}/bin/sireum slang transpilers c \
-  --sourcepath "${SCRIPT_HOME}/../src/main/bridge${PATH_SEP}${SCRIPT_HOME}/../src/main/component${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/sender_vm/test_event_data_port_periodic_domains${PATH_SEP}${SCRIPT_HOME}/../src/main/art${PATH_SEP}${SCRIPT_HOME}/../src/main/data${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/sender_vm/top_impl_Instance_src_process_src_thread" \
+  --sourcepath "${SCRIPT_HOME}/../src/main/bridge${PATH_SEP}${SCRIPT_HOME}/../src/main/component${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/sender_vm/test_event_data_port_periodic_domains${PATH_SEP}${SCRIPT_HOME}/../src/main/art${PATH_SEP}${SCRIPT_HOME}/../src/main/data${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/sender_vm/emitter_t_impl_src_process_src_thread" \
   --output-dir "${OUTPUT_DIR}" \
-  --name "top_impl_Instance_src_process_src_thread" \
-  --apps "sender_vm.top_impl_Instance_src_process_src_thread.src_thread" \
+  --name "emitter_t_impl_src_process_src_thread" \
+  --apps "sender_vm.emitter_t_impl_src_process_src_thread.src_thread" \
   --fingerprint 3 \
   --bits 32 \
   --string-size 256 \
   --sequence-size 1 \
   --sequence "MS[Z,art.Bridge]=1;MS[Z,MOption[art.Bridge]]=1;IS[Z,art.UPort]=1;IS[Z,art.UConnection]=1" \
   --constants "art.Art.maxComponents=1;art.Art.maxPorts=1" \
-  --cmake-includes "+${SCRIPT_HOME}/settings_top_impl_Instance_src_process_src_thread.cmake" \
-  --forward "art.ArtNative=sender_vm.top_impl_Instance_src_process_src_thread.src_thread" \
+  --cmake-includes "+${SCRIPT_HOME}/settings_emitter_t_impl_src_process_src_thread.cmake" \
+  --forward "art.ArtNative=sender_vm.emitter_t_impl_src_process_src_thread.src_thread" \
   --stack-size "16777216" \
   --stable-type-id \
-  --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/emitter_t_impl_Impl/emitter_t_impl_Impl_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/emitter_t_impl_Impl/emitter_t_impl_Impl_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/emitter_t_impl_Impl/emitter_t_impl_Impl.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/top_impl_Instance_src_process_src_thread/emitter_t_impl_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/top_impl_Instance_src_process_src_thread/emitter_t_impl_adapter.c" \
-  --exclude-build "sender_vm.test_event_data_port_periodic_domains.emitter_t_impl_Impl,sender_vm.test_event_data_port_periodic_domains.consumer_t_impl_Impl" \
+  --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/emitter_t_impl_src_process_src_thread/emitter_t_impl_src_process_src_thread.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/emitter_t_impl_src_process_src_thread/emitter_t_impl_src_process_src_thread.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/emitter_t_impl_src_process_src_thread/emitter_t_impl_src_process_src_thread_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/emitter_t_impl_src_process_src_thread/emitter_t_impl_src_process_src_thread_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/emitter_t_impl_src_process_src_thread/emitter_t_impl_src_process_src_thread_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/emitter_t_impl_src_process_src_thread/emitter_t_impl_src_process_src_thread_adapter.c" \
+  --exclude-build "sender_vm.test_event_data_port_periodic_domains.emitter_t_impl_src_process_src_thread,sender_vm.test_event_data_port_periodic_domains.consumer_t_impl_dst_process_dst_thread" \
   --lib-only \
   --verbose
 
-OUTPUT_DIR="${SCRIPT_HOME}/../src/c/CAmkES_seL4/slang_libraries/top_impl_Instance_dst_process_dst_thread"
+OUTPUT_DIR="${SCRIPT_HOME}/../src/c/CAmkES_seL4/slang_libraries/consumer_t_impl_dst_process_dst_thread"
 
 ${SIREUM_HOME}/bin/sireum slang transpilers c \
-  --sourcepath "${SCRIPT_HOME}/../src/main/bridge${PATH_SEP}${SCRIPT_HOME}/../src/main/component${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/sender_vm/test_event_data_port_periodic_domains${PATH_SEP}${SCRIPT_HOME}/../src/main/art${PATH_SEP}${SCRIPT_HOME}/../src/main/data${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/sender_vm/top_impl_Instance_dst_process_dst_thread" \
+  --sourcepath "${SCRIPT_HOME}/../src/main/bridge${PATH_SEP}${SCRIPT_HOME}/../src/main/component${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/sender_vm/test_event_data_port_periodic_domains${PATH_SEP}${SCRIPT_HOME}/../src/main/art${PATH_SEP}${SCRIPT_HOME}/../src/main/data${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/sender_vm/consumer_t_impl_dst_process_dst_thread" \
   --output-dir "${OUTPUT_DIR}" \
-  --name "top_impl_Instance_dst_process_dst_thread" \
-  --apps "sender_vm.top_impl_Instance_dst_process_dst_thread.dst_thread" \
+  --name "consumer_t_impl_dst_process_dst_thread" \
+  --apps "sender_vm.consumer_t_impl_dst_process_dst_thread.dst_thread" \
   --fingerprint 3 \
   --bits 32 \
   --string-size 256 \
   --sequence-size 1 \
   --sequence "MS[Z,art.Bridge]=1;MS[Z,MOption[art.Bridge]]=1;IS[Z,art.UPort]=1;IS[Z,art.UConnection]=1" \
   --constants "art.Art.maxComponents=1;art.Art.maxPorts=1" \
-  --cmake-includes "+${SCRIPT_HOME}/settings_top_impl_Instance_dst_process_dst_thread.cmake" \
-  --forward "art.ArtNative=sender_vm.top_impl_Instance_dst_process_dst_thread.dst_thread" \
+  --cmake-includes "+${SCRIPT_HOME}/settings_consumer_t_impl_dst_process_dst_thread.cmake" \
+  --forward "art.ArtNative=sender_vm.consumer_t_impl_dst_process_dst_thread.dst_thread" \
   --stack-size "16777216" \
   --stable-type-id \
-  --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/consumer_t_impl_Impl/consumer_t_impl_Impl_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/consumer_t_impl_Impl/consumer_t_impl_Impl_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/consumer_t_impl_Impl/consumer_t_impl_Impl.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/top_impl_Instance_dst_process_dst_thread/consumer_t_impl_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/top_impl_Instance_dst_process_dst_thread/consumer_t_impl_adapter.c" \
-  --exclude-build "sender_vm.test_event_data_port_periodic_domains.emitter_t_impl_Impl,sender_vm.test_event_data_port_periodic_domains.consumer_t_impl_Impl" \
+  --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/consumer_t_impl_dst_process_dst_thread/consumer_t_impl_dst_process_dst_thread.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/consumer_t_impl_dst_process_dst_thread/consumer_t_impl_dst_process_dst_thread.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/consumer_t_impl_dst_process_dst_thread/consumer_t_impl_dst_process_dst_thread_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/consumer_t_impl_dst_process_dst_thread/consumer_t_impl_dst_process_dst_thread_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/consumer_t_impl_dst_process_dst_thread/consumer_t_impl_dst_process_dst_thread_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/consumer_t_impl_dst_process_dst_thread/consumer_t_impl_dst_process_dst_thread_adapter.c" \
+  --exclude-build "sender_vm.test_event_data_port_periodic_domains.emitter_t_impl_src_process_src_thread,sender_vm.test_event_data_port_periodic_domains.consumer_t_impl_dst_process_dst_thread" \
   --lib-only \
   --verbose
 

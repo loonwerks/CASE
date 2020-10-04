@@ -10,10 +10,10 @@ node [
 edge [
 ];
 
-src_thread [
+src_process_src_thread [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>src_thread</B></TD></TR>
+      <TR><TD><B>src_process_src_thread</B></TD></TR>
       <TR><TD PORT="sb_emit0"><FONT COLOR="orange">uses AADLEvent_Sender <B>sb_emit0</B></FONT></TD></TR>
       <TR><TD PORT="sb_periodic_dispatch_notification"><FONT COLOR="blue">consumes Notification <B>sb_periodic_dispatch_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -33,10 +33,10 @@ sb_dst_thread_consume_monitor [
   shape=plaintext
 ];
 
-dst_thread [
+dst_process_dst_thread [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>dst_thread</B></TD></TR>
+      <TR><TD><B>dst_process_dst_thread</B></TD></TR>
       <TR><TD PORT="sb_consume"><FONT COLOR="orange">uses AADLEvent_Receiver <B>sb_consume</B></FONT></TD></TR>
       <TR><TD PORT="sb_consume_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_consume_notification</B></FONT></TD></TR>
       <TR><TD PORT="sb_periodic_dispatch_notification"><FONT COLOR="blue">consumes Notification <B>sb_periodic_dispatch_notification</B></FONT></TD></TR>"
@@ -49,8 +49,8 @@ dispatch_periodic_inst [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>dispatch_periodic_inst</B></TD></TR>
-      <TR><TD PORT="sb_src_thread_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_src_thread_periodic_dispatch_notification</B></FONT></TD></TR>
-      <TR><TD PORT="sb_dst_thread_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_dst_thread_periodic_dispatch_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_src_process_src_thread_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_src_process_src_thread_periodic_dispatch_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_dst_process_dst_thread_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_dst_process_dst_thread_periodic_dispatch_notification</B></FONT></TD></TR>
       <TR><TD PORT="timer"><FONT COLOR="orange">uses Timer <B>timer</B></FONT></TD></TR>
       <TR><TD PORT="timer_complete"><FONT COLOR="blue">consumes Notification <B>timer_complete</B></FONT></TD></TR>"
     </TABLE>
@@ -88,35 +88,35 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"src_thread":sb_emit0 -> "sb_dst_thread_consume_monitor":mon_send [
+"src_process_src_thread":sb_emit0 -> "sb_dst_thread_consume_monitor":mon_send [
   color="orange"
   //label = "seL4RPCCall"
   id = conn1
 
 ];
 
-"dst_thread":sb_consume -> "sb_dst_thread_consume_monitor":mon_receive [
+"dst_process_dst_thread":sb_consume -> "sb_dst_thread_consume_monitor":mon_receive [
   color="orange"
   //label = "seL4RPCCall"
   id = conn2
 
 ];
 
-"sb_dst_thread_consume_monitor":monsig -> "dst_thread":sb_consume_notification [
+"sb_dst_thread_consume_monitor":monsig -> "dst_process_dst_thread":sb_consume_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3
 
 ];
 
-"dispatch_periodic_inst":sb_src_thread_periodic_dispatch_notification -> "src_thread":sb_periodic_dispatch_notification [
+"dispatch_periodic_inst":sb_src_process_src_thread_periodic_dispatch_notification -> "src_process_src_thread":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn4
 
 ];
 
-"dispatch_periodic_inst":sb_dst_thread_periodic_dispatch_notification -> "dst_thread":sb_periodic_dispatch_notification [
+"dispatch_periodic_inst":sb_dst_process_dst_thread_periodic_dispatch_notification -> "dst_process_dst_thread":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn5

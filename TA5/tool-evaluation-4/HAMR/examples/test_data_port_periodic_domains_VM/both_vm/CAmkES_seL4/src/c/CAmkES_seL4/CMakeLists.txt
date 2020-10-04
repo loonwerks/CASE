@@ -15,9 +15,9 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   add_compile_options("$<$<CONFIG:Release>:-Os>")
 endif()
 
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/top_impl_Instance_src_process_src_thread)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/emitter_t_impl_src_process_src_thread)
 
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/top_impl_Instance_dst_process_dst_thread)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/consumer_t_impl_dst_process_dst_thread)
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/SlangTypeLibrary)
 

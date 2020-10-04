@@ -46,9 +46,9 @@ hvc0:2345:respawn:/sbin/getty -L 9600 hvc0
 
 # @0
 # root
-# vmdst_vm_process /dev/uio0 4096 /dev/uio1 4096
+# vmsrc_vm_process /dev/uio0 4096 /dev/uio1 4096
 # @1
 # root
-# vmsrc_vm_process /dev/uio0 4096 /dev/uio1 4096
+# vmdst_vm_process /dev/uio0 4096 /dev/uio1 4096
 
 

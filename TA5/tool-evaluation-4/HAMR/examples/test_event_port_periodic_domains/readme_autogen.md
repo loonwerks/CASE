@@ -62,38 +62,38 @@
 
   ```
   Booting all finished, dropped to user space
-  [src_thread] test_event_port_emitter_component_init called
-  [dst_thread] test_event_port_consumer_component_init called
+  [src_process_src_thread] test_event_port_emitter_component_init called
+  [dst_process_dst_thread] test_event_port_consumer_component_init called
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 1 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 1 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 2 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 2 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 3 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 3 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 4 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 4 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 5 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 5 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 6 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 6 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 7 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 7 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 8 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 8 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 9 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 9 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 10 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 10 total
 
   ```
 
@@ -115,38 +115,38 @@
 
   ```
   Booting all finished, dropped to user space
-  [src_thread] test_event_port_emitter_component_init called
-  [dst_thread] test_event_port_consumer_component_init called
+  [dst_process_dst_thread] test_event_port_consumer_component_init called
+  [src_process_src_thread] test_event_port_emitter_component_init called
+  [dst_process_dst_thread] Callback fired.  Received 0 events this dispatch, 0 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 1 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 1 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 2 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 2 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 3 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 3 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 4 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 4 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 5 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 5 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 6 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 6 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 7 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 7 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 8 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 8 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 9 total
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 9 total
   ---------------------------------------
-  [src_thread] Sent event.
-  [dst_thread] Callback fired.  Received 1 events this dispatch, 10 total
+  [src_process_src_thread] Sent event.
 
   ```
 
@@ -169,19 +169,19 @@
 
   ```
   Booting all finished, dropped to user space
-  Entering pre-init of consumer_t_impl
-  Art: Registered component: top_impl_Instance_dst_process_dst_thrEntering pre-init of emitter_t_impl
-  Art: Registered componenead (periodic: 1000)
+  Entering pre-init of consumer_t_impl_dst_process_dst_thread
+  Entering pre-init of emitter_t_impl_src_process_src_thread
+  Art: Registered coArt: Registered component: top_impl_Instance_dst_process_dst_thread (periodic: 1000)
   Art: - Registered port: top_impl_Instance_dst_process_dst_thread_consume (event in)
   top_impl_Instance_dst_process_dst_thread: Example logInfo
   top_impl_Instance_dst_process_dst_thread: Example logDebug
-  top_impl_Instance_dst_process_dst_thread: Examplet: top_impl_Instance_src_process_src_thread (periodic: 1000)
+  mponent: top_impl_Instance_src_process_src_thread (periodic: 1000)
   Art: - Registered port: top_impl_Instance_src_process_src_thread_emit (event out)
   top_impl_Instance_src_process_src_thread: Example logInfo
   top_impl_Instance_src_process_src_thread: Example logDebug
-  top_impl_Instance_src_process_src_thread: Example logError logError
-  Leaving pre-init of consumer_t_impl
-
-  Leaving pre-init of emitter_t_impl
+  top_impl_Instance_src_process_src_thread: Extop_impl_Instance_dst_process_dst_thread: Example logError
+  Leaving pre-init of consumer_t_impl_dst_process_dst_thread
+  ample logError
+  Leaving pre-init of emitter_t_impl_src_process_src_thread
 
   ```

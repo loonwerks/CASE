@@ -16,47 +16,47 @@ if [ -n "$COMSPEC" -a -x "$COMSPEC" ]; then
   PATH_SEP=";"
 fi
 
-OUTPUT_DIR="${SCRIPT_HOME}/../src/c/CAmkES_seL4/slang_libraries/top_impl_Instance_source_process_component_source_thread_component"
+OUTPUT_DIR="${SCRIPT_HOME}/../src/c/CAmkES_seL4/slang_libraries/source_thread_impl_source_process_component_source_thread_component"
 
 ${SIREUM_HOME}/bin/sireum slang transpilers c \
-  --sourcepath "${SCRIPT_HOME}/../src/main/bridge${PATH_SEP}${SCRIPT_HOME}/../src/main/component${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/test_data_port_periodic_domains/test_data_port_periodic_domains${PATH_SEP}${SCRIPT_HOME}/../src/main/art${PATH_SEP}${SCRIPT_HOME}/../src/main/data${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/test_data_port_periodic_domains/top_impl_Instance_source_process_component_source_thread_component" \
+  --sourcepath "${SCRIPT_HOME}/../src/main/bridge${PATH_SEP}${SCRIPT_HOME}/../src/main/component${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/test_data_port_periodic_domains/test_data_port_periodic_domains${PATH_SEP}${SCRIPT_HOME}/../src/main/art${PATH_SEP}${SCRIPT_HOME}/../src/main/data${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/test_data_port_periodic_domains/source_thread_impl_source_process_component_source_thread_component" \
   --output-dir "${OUTPUT_DIR}" \
-  --name "top_impl_Instance_source_process_component_source_thread_component" \
-  --apps "test_data_port_periodic_domains.top_impl_Instance_source_process_component_source_thread_component.source_thread_component" \
+  --name "source_thread_impl_source_process_component_source_thread_component" \
+  --apps "test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component.source_thread_component" \
   --fingerprint 3 \
   --bits 32 \
   --string-size 256 \
   --sequence-size 1 \
   --sequence "MS[Z,art.Bridge]=1;MS[Z,MOption[art.Bridge]]=1;IS[Z,art.UPort]=1;IS[Z,art.UConnection]=1" \
   --constants "art.Art.maxComponents=1;art.Art.maxPorts=1" \
-  --cmake-includes "+${SCRIPT_HOME}/settings_top_impl_Instance_source_process_component_source_thread_component.cmake" \
-  --forward "art.ArtNative=test_data_port_periodic_domains.top_impl_Instance_source_process_component_source_thread_component.source_thread_component" \
+  --cmake-includes "+${SCRIPT_HOME}/settings_source_thread_impl_source_process_component_source_thread_component.cmake" \
+  --forward "art.ArtNative=test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component.source_thread_component" \
   --stack-size "16777216" \
   --stable-type-id \
-  --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/source_thread_impl_Impl/source_thread_impl_Impl_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/source_thread_impl_Impl/source_thread_impl_Impl_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/source_thread_impl_Impl/source_thread_impl_Impl.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/top_impl_Instance_source_process_component_source_thread_component/source_thread_impl_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/top_impl_Instance_source_process_component_source_thread_component/source_thread_impl_adapter.c" \
-  --exclude-build "test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_Impl,test_data_port_periodic_domains.test_data_port_periodic_domains.destination_thread_impl_Impl" \
+  --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/source_thread_impl_source_process_component_source_thread_component/source_thread_impl_source_process_component_source_thread_component.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/source_thread_impl_source_process_component_source_thread_component/source_thread_impl_source_process_component_source_thread_component.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/source_thread_impl_source_process_component_source_thread_component/source_thread_impl_source_process_component_source_thread_component_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/source_thread_impl_source_process_component_source_thread_component/source_thread_impl_source_process_component_source_thread_component_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/source_thread_impl_source_process_component_source_thread_component/source_thread_impl_source_process_component_source_thread_component_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/source_thread_impl_source_process_component_source_thread_component/source_thread_impl_source_process_component_source_thread_component_adapter.c" \
+  --exclude-build "test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component,test_data_port_periodic_domains.test_data_port_periodic_domains.destination_thread_impl_destination_process_component_destination_thread_component" \
   --lib-only \
   --verbose
 
-OUTPUT_DIR="${SCRIPT_HOME}/../src/c/CAmkES_seL4/slang_libraries/top_impl_Instance_destination_process_component_destination_thread_component"
+OUTPUT_DIR="${SCRIPT_HOME}/../src/c/CAmkES_seL4/slang_libraries/destination_thread_impl_destination_process_component_destination_thread_component"
 
 ${SIREUM_HOME}/bin/sireum slang transpilers c \
-  --sourcepath "${SCRIPT_HOME}/../src/main/bridge${PATH_SEP}${SCRIPT_HOME}/../src/main/component${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/test_data_port_periodic_domains/test_data_port_periodic_domains${PATH_SEP}${SCRIPT_HOME}/../src/main/art${PATH_SEP}${SCRIPT_HOME}/../src/main/data${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/test_data_port_periodic_domains/top_impl_Instance_destination_process_component_destination_thread_component" \
+  --sourcepath "${SCRIPT_HOME}/../src/main/bridge${PATH_SEP}${SCRIPT_HOME}/../src/main/component${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/test_data_port_periodic_domains/test_data_port_periodic_domains${PATH_SEP}${SCRIPT_HOME}/../src/main/art${PATH_SEP}${SCRIPT_HOME}/../src/main/data${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/test_data_port_periodic_domains/destination_thread_impl_destination_process_component_destination_thread_component" \
   --output-dir "${OUTPUT_DIR}" \
-  --name "top_impl_Instance_destination_process_component_destination_thread_component" \
-  --apps "test_data_port_periodic_domains.top_impl_Instance_destination_process_component_destination_thread_component.destination_thread_component" \
+  --name "destination_thread_impl_destination_process_component_destination_thread_component" \
+  --apps "test_data_port_periodic_domains.destination_thread_impl_destination_process_component_destination_thread_component.destination_thread_component" \
   --fingerprint 3 \
   --bits 32 \
   --string-size 256 \
   --sequence-size 1 \
   --sequence "MS[Z,art.Bridge]=1;MS[Z,MOption[art.Bridge]]=1;IS[Z,art.UPort]=1;IS[Z,art.UConnection]=1" \
   --constants "art.Art.maxComponents=1;art.Art.maxPorts=1" \
-  --cmake-includes "+${SCRIPT_HOME}/settings_top_impl_Instance_destination_process_component_destination_thread_component.cmake" \
-  --forward "art.ArtNative=test_data_port_periodic_domains.top_impl_Instance_destination_process_component_destination_thread_component.destination_thread_component" \
+  --cmake-includes "+${SCRIPT_HOME}/settings_destination_thread_impl_destination_process_component_destination_thread_component.cmake" \
+  --forward "art.ArtNative=test_data_port_periodic_domains.destination_thread_impl_destination_process_component_destination_thread_component.destination_thread_component" \
   --stack-size "16777216" \
   --stable-type-id \
-  --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/destination_thread_impl_Impl/destination_thread_impl_Impl_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/destination_thread_impl_Impl/destination_thread_impl_Impl_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/destination_thread_impl_Impl/destination_thread_impl_Impl.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/top_impl_Instance_destination_process_component_destination_thread_component/destination_thread_impl_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/top_impl_Instance_destination_process_component_destination_thread_component/destination_thread_impl_adapter.c" \
-  --exclude-build "test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_Impl,test_data_port_periodic_domains.test_data_port_periodic_domains.destination_thread_impl_Impl" \
+  --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/destination_thread_impl_destination_process_component_destination_thread_component/destination_thread_impl_destination_process_component_destination_thread_component.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/destination_thread_impl_destination_process_component_destination_thread_component/destination_thread_impl_destination_process_component_destination_thread_component.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/destination_thread_impl_destination_process_component_destination_thread_component/destination_thread_impl_destination_process_component_destination_thread_component_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/destination_thread_impl_destination_process_component_destination_thread_component/destination_thread_impl_destination_process_component_destination_thread_component_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/destination_thread_impl_destination_process_component_destination_thread_component/destination_thread_impl_destination_process_component_destination_thread_component_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/adapters/destination_thread_impl_destination_process_component_destination_thread_component/destination_thread_impl_destination_process_component_destination_thread_component_adapter.c" \
+  --exclude-build "test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component,test_data_port_periodic_domains.test_data_port_periodic_domains.destination_thread_impl_destination_process_component_destination_thread_component" \
   --lib-only \
   --verbose
 

@@ -15,7 +15,7 @@ uint32_t aadl_calendar_counter = 0;
 
 void sb_thread_calendar() {
   if ((aadl_calendar_counter % (2000 / aadl_tick_interval)) == 0) {
-    sb_src_periodic_dispatch_notification_emit();
+    sb_test_event_port_src_periodic_dispatch_notification_emit();
   }
 
   aadl_calendar_counter++;

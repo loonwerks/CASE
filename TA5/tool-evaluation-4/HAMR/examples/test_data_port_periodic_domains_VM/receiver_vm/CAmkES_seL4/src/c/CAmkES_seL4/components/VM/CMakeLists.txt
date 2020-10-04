@@ -179,7 +179,7 @@ CAmkESAddImportPath(${CMAKE_CURRENT_SOURCE_DIR}/${KernelARMPlatform}/)
 
 # Define our VM Component with our cross vm dataports glue code
 DeclareCamkesARMVM(
-  VM_consumer_t_impl
+  VM_consumer_t_impl_dst_process_dst_thread
   EXTRA_SOURCES src/cross_vm_connections_vmdst_process.c
   EXTRA_LIBS SB_Type_Library
              SlangTypeLibrary)

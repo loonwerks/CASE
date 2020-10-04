@@ -51,33 +51,39 @@
 
   ```
   Booting all finished, dropped to user space
-  [src] test_data_port_periodic_source_component_init called
-  [dest_B] test_data_port_periodic_destination_component_init called
-  [dest_A] test_data_port_periodic_destination_component_init called
+  [test_data_port_periodic_src] test_data_port_periodic_source_component_init called
+  [test_data_port_periodic_dest_B] test_data_port_periodic_destination_component_init called
+  [test_data_port_periodic_dest_A] test_data_port_periodic_destination_component_init called
   ---------------------------------------
-  [src] Sent 0
-  [dest_A] value {0}
-  [dest_B] value {0}
+  [test_data_port_periodic_src] Sent 0
+  [test_data_port_periodic_dest_A] value {0}
+  [test_data_port_periodic_dest_B] value {0}
   ---------------------------------------
-  [src] Sent 1
+  [test_data_port_periodic_src] Sent 1
   ---------------------------------------
-  [src] Sent 2
-  [dest_A] value {2}
-  [dest_B] value {2}
+  [test_data_port_periodic_src] Sent 2
+  [test_data_port_periodic_dest_A] value {2}
+  [test_data_port_periodic_dest_B] value {2}
   ---------------------------------------
-  [src] Sent 3
+  [test_data_port_periodic_src] Sent 3
   ---------------------------------------
-  [src] Sent 4
-  [dest_A] value {4}
-  [dest_B] value {4}
+  [test_data_port_periodic_src] Sent 4
+  [test_data_port_periodic_dest_A] value {4}
+  [test_data_port_periodic_dest_B] value {4}
   ---------------------------------------
-  [src] Sent 5
+  [test_data_port_periodic_src] Sent 5
   ---------------------------------------
-  [src] Sent 6
-  [dest_A] value {6}
-  [dest_B] value {6}
+  [test_data_port_periodic_src] Sent 6
+  [test_data_port_periodic_dest_A] value {6}
+  [test_data_port_periodic_dest_B] value {6}
   ---------------------------------------
-  [src] Sent 7
+  [test_data_port_periodic_src] Sent 7
+  ---------------------------------------
+  [test_data_port_periodic_src] Sent 8
+  [test_data_port_periodic_dest_A] value {8}
+  [test_data_port_periodic_dest_B] value {8}
+  ---------------------------------------
+  [test_data_port_periodic_src] Sent 9
 
   ```
 
@@ -99,38 +105,38 @@
 
   ```
   Booting all finished, dropped to user space
-  [src] test_data_port_periodic_source_component_init called
-  [dest_B] test_data_port_periodic_destination_component_init called
-  [dest_A] test_data_port_periodic_destination_component_init called
+  [test_data_port_periodic_src] test_data_port_periodic_source_component_init called
+  [test_data_port_periodic_dest_B] test_data_port_periodic_destination_component_init called
+  [test_data_port_periodic_dest_A] test_data_port_periodic_destination_component_init called
   ---------------------------------------
-  [src] Sent 0
-  [dest_A] value {0}
-  [dest_B] value {0}
+  [test_data_port_periodic_src] Sent 0
+  [test_data_port_periodic_dest_A] value {0}
+  [test_data_port_periodic_dest_B] value {0}
   ---------------------------------------
-  [src] Sent 1
+  [test_data_port_periodic_src] Sent 1
   ---------------------------------------
-  [src] Sent 2
-  [dest_A] value {2}
-  [dest_B] value {2}
+  [test_data_port_periodic_src] Sent 2
+  [test_data_port_periodic_dest_A] value {2}
+  [test_data_port_periodic_dest_B] value {2}
   ---------------------------------------
-  [src] Sent 3
+  [test_data_port_periodic_src] Sent 3
   ---------------------------------------
-  [src] Sent 4
-  [dest_A] value {4}
-  [dest_B] value {4}
+  [test_data_port_periodic_src] Sent 4
+  [test_data_port_periodic_dest_A] value {4}
+  [test_data_port_periodic_dest_B] value {4}
   ---------------------------------------
-  [src] Sent 5
+  [test_data_port_periodic_src] Sent 5
   ---------------------------------------
-  [src] Sent 6
-  [dest_A] value {6}
-  [dest_B] value {6}
+  [test_data_port_periodic_src] Sent 6
+  [test_data_port_periodic_dest_A] value {6}
+  [test_data_port_periodic_dest_B] value {6}
   ---------------------------------------
-  [src] Sent 7
+  [test_data_port_periodic_src] Sent 7
   ---------------------------------------
-  [src] Sent 8
-  [dest_A] value {8}
-  [dest_B] value {8}
+  [test_data_port_periodic_src] Sent 8
+  [test_data_port_periodic_dest_A] value {8}
+  [test_data_port_periodic_dest_B] value {8}
   ---------------------------------------
-  [src] Sent 9
+  [test_data_port_periodic_src] Sent 9
 
   ```

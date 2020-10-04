@@ -10,10 +10,10 @@ node [
 edge [
 ];
 
-src_thread [
+src_process_src_thread [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>src_thread</B></TD></TR>
+      <TR><TD><B>src_process_src_thread</B></TD></TR>
       <TR><TD PORT="sb_emit_counter"><FONT COLOR="red"><B>sb_emit_counter</B></FONT></TD></TR>
       <TR><TD PORT="sb_emit"><FONT COLOR="blue"><B>sb_emit</B></FONT></TD></TR>
       <TR><TD PORT="sb_self_pacer_tick"><FONT COLOR="blue"><B>sb_self_pacer_tick</B></FONT></TD></TR>
@@ -23,10 +23,10 @@ src_thread [
   shape=plaintext
 ];
 
-dst_thread [
+dst_process_dst_thread [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>dst_thread</B></TD></TR>
+      <TR><TD><B>dst_process_dst_thread</B></TD></TR>
       <TR><TD PORT="sb_consume_counter"><FONT COLOR="red"><B>sb_consume_counter</B></FONT></TD></TR>
       <TR><TD PORT="sb_self_pacer_tick"><FONT COLOR="blue"><B>sb_self_pacer_tick</B></FONT></TD></TR>
       <TR><TD PORT="sb_consume"><FONT COLOR="blue"><B>sb_consume</B></FONT></TD></TR>
@@ -66,28 +66,28 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"src_thread":sb_emit -> "dst_thread":sb_consume [
+"src_process_src_thread":sb_emit -> "dst_process_dst_thread":sb_consume [
   color="blue"
   //label = "seL4Notification"
   id = conn1
 
 ];
 
-"src_thread":sb_emit_counter -> "dst_thread":sb_consume_counter [
+"src_process_src_thread":sb_emit_counter -> "dst_process_dst_thread":sb_consume_counter [
   color="red"
   //label = "seL4SharedData"
   id = conn2
 
 ];
 
-"src_thread":sb_self_pacer_tick -> "src_thread":sb_self_pacer_tock [
+"src_process_src_thread":sb_self_pacer_tick -> "src_process_src_thread":sb_self_pacer_tock [
   color="blue"
   //label = "seL4Notification"
   id = conn3
 
 ];
 
-"dst_thread":sb_self_pacer_tick -> "dst_thread":sb_self_pacer_tock [
+"dst_process_dst_thread":sb_self_pacer_tick -> "dst_process_dst_thread":sb_self_pacer_tock [
   color="blue"
   //label = "seL4Notification"
   id = conn4

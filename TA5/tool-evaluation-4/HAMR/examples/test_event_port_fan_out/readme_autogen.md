@@ -51,37 +51,37 @@
 
   ```
   Booting all finished, dropped to user space
-  [src] test_event_port_emitter_com[snkQueue5] test_event_port_consumer_component_init called
-  [snkQueue2_B] test_event_port_consumer_component_init called
-  [snkQueue2_A] test_event_port_consumer_component_init called
-  [snkDefault] test_event_port_consumer_component_init called
-  ponent_init called
+  [test_event_port_src] test_event_port_emitter_component_init called
+  [test_event_port_snkQueue5] test_event_po[test_event_port_snkQueue2_B] test_event_port_consumer_component_init called
+  [test_event_port_snkQueue2_A] test_event_port_consumer_component_init called
+  [test_event_port_snkDefault] test_event_port_consumer_component_init called
+  rt_consumer_component_init called
   ---------------------------------------
-  [src] Sent 0 events.
+  [test_event_port_src] Sent 0 events.
   ---------------------------------------
-  [src] Sent 1 events.
-  [snkDefault] Received 1 events
-  [snkQueue2_A] Received 1 events
-  [snkQueue2_B] Received 1 events
-  [snkQueue5] Received 1 events
+  [test_event_port_src] Sent 1 events.
+  [test_ev[test_event_port_snkQueue2_B] Received 1 events
+  [test_event_port_snkQueue5] Received 1 events
+  ent_port_snkDefault] Received 1 events
+  [test_event_port_snkQueue2_A] Received 1 events
   ---------------------------------------
-  [src] Sent 2 events.
-  [snkDefault] Received 1 events
-  [snkQueue2_A] Received 2 events
-  [snkQueue2_B] Received 2 events
-  [snkQueue5] Received 2 events
+  [test_event_port_src] Sent 2 events.
+  [test_event_port_snkDefault] Received 1 events
+  [test_event_port_snkQueue2_A] Received 2 events
+  [test_event_port_snkQueue2_B] Received 2 events
+  [test_event_port_snkQueue5] Received 2 events
   ---------------------------------------
-  [src] Sent 3 events.
-  [snkDefault] [snkQueue2_A] Received 2 events
-  [snkQueue2_B] Received 2 events
-  [snkQueue5] Received 3 events
-  Received 1 events
+  [test_event_port_src] Sent 3 events.
+  [test_event_port_snkDefault] Received 1 events
+  [test_event_port_snkQueue2_A] Received 2 events
+  [test_event_port_snkQueue2_B] Received 2 events
+  [test_event_port_snkQueue5] Received 3 events
   ---------------------------------------
-  [src] Sent 4 events.
-  [snkDefault] Received 1 events
-  [snkQueue2_A] Received 2 events
-  [snkQueue2_B] Received 2 events
-  [snkQueue5] Received 4 events
+  [test_event_port_src] Sent 4 events.
+  [test_event_port_snkDefault] Received 1 events
+  [test_event_port_snkQueue2_A] Received 2 events
+  [test_event_port_snkQueue2_B] Received 2 events
+  [test_event_port_snkQueue5] Received 4 events
 
   ```
 
@@ -103,36 +103,36 @@
 
   ```
   Booting all finished, dropped to user space
-  [src] test_event_port_emitter_component_init called
-  [snkQueue5] test_event_port_consumer_component_init called
-  [snkQueue2_B] test_event_port_consumer_component_init called
-  [snkQueue2_A] test_event_port_consumer_component_init called
-  [snkDefault] test_event_port_consumer_component_init called
+  [test_event_port_src] test_event_port_emitter_component_init called
+  [test_event_port_snkQueue5] test_event_port_consumer_component_init called
+  [test_event_port_snkQueue2_B] test_event_port_consumer_component_init called
+  [test_event_port_snkQueue2_A] test_event_port_consumer_component_init called
+  [test_event_port_snkDefault] test_event_port_consumer_component_init called
   ---------------------------------------
-  [src] Sent 0 events.
+  [test_event_port_src] Sent 0 events.
   ---------------------------------------
-  [src] Sent 1 events.
-  [snkDefault] Received 1 events
-  [snkQueue2_A] Received 1 events
-  [snkQueue2_B] Received 1 events
-  [snkQueue5] Received 1 events
+  [test_event_port_src] Sent 1 events.
+  [test_event_port_snkDefault] Received 1 events
+  [test_event_port_snkQueue2_A] Received 1 events
+  [test_event_port_snkQueue5] Received 1 events
+  [test_event_port_snkQueue2_B] Received 1 events
   ---------------------------------------
-  [src] Sent 2 events.
-  [snkDefault] Received 1 events
-  [snkQueue2_A] Received 2 events
-  [snkQueue2_B] Received 2 events
-  [snkQueue5] Received 2 events
+  [test_event_port_src] Sent 2 events.
+  [test_event_port_snkDefault] Received 1 events
+  [test_event_port_snkQueue2_A] Received 2 events
+  [test_event_port_snkQueue2_B] Received 2 events
+  [test_event_port_snkQueue5] Received 2 events
   ---------------------------------------
-  [src] Sent 3 events.
-  [snkDefault] Received 1 events
-  [snkQueue2_B] Received 2 ev[snkQueue5] Received 3 events
-  [snkQueue2_A] Received 2 events
-  ents
+  [test_event_port_src] Sent 3 events.
+  [test_event_port_snkDefault] Received 1 events
+  [test_event_port_snkQueue2_A[test_event_port_snkQueue2_B] Received 2 events
+  [test_event_port_snkQueue5] R] Received 2 events
+  eceived 3 events
   ---------------------------------------
-  [src] Sent 4 events.
-  [snkDefault] Received 1 events
-  [snkQueue2_A] Received 2 events
-  [snkQueue2_B] Received 2 events
-  [snkQueue5] Received 4 events
+  [test_event_port_src] Sent 4 events.
+  [test_event_port_snkDefault] Received 1 events
+  [test_event_port_snkQueue2_A] Received 2 events
+  [test_event_port_snkQueue2_B] Received 2 events
+  [test_event_port_snkQueue5] Received 4 events
 
   ```

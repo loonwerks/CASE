@@ -15,24 +15,24 @@ endif()
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/types)
 
-DeclareCAmkESComponent(RadioDriver_Impl
-  SOURCES components/RadioDriver_Impl//src/radiodriver.c components/RadioDriver_Impl/src/sb_RadioDriver_Impl.c types/src/sb_queue_SW__Command_Impl_1.c
-  INCLUDES components/RadioDriver_Impl/includes/ types/includes
+DeclareCAmkESComponent(RadioDriver_Impl_MCMP_PROC_SW_RADIO
+  SOURCES components/RadioDriver_Impl_MCMP_PROC_SW_RADIO//src/radiodriver.c components/RadioDriver_Impl_MCMP_PROC_SW_RADIO/src/sb_RadioDriver_Impl.c types/src/sb_queue_SW__Command_Impl_1.c
+  INCLUDES components/RadioDriver_Impl_MCMP_PROC_SW_RADIO/includes/ types/includes
 )
 
-DeclareCAmkESComponent(FlightPlanner_Impl
-  SOURCES components/FlightPlanner_Impl//src/flightplanner.c components/FlightPlanner_Impl/src/sb_FlightPlanner_Impl.c types/src/sb_queue_sb_SW__Mission_container_1.c types/src/sb_queue_bool_1.c types/src/sb_queue_SW__Command_Impl_1.c
-  INCLUDES components/FlightPlanner_Impl/includes/ types/includes
+DeclareCAmkESComponent(FlightPlanner_Impl_MCMP_PROC_SW_FPLN
+  SOURCES components/FlightPlanner_Impl_MCMP_PROC_SW_FPLN//src/flightplanner.c components/FlightPlanner_Impl_MCMP_PROC_SW_FPLN/src/sb_FlightPlanner_Impl.c types/src/sb_queue_sb_SW__Mission_container_1.c types/src/sb_queue_bool_1.c types/src/sb_queue_SW__Command_Impl_1.c
+  INCLUDES components/FlightPlanner_Impl_MCMP_PROC_SW_FPLN/includes/ types/includes
 )
 
-DeclareCAmkESComponent(WaypointManager_Impl
-  SOURCES components/WaypointManager_Impl//src/waypointmanager.c components/WaypointManager_Impl/src/sb_WaypointManager_Impl.c types/src/sb_queue_sb_SW__Mission_container_1.c types/src/sb_queue_bool_1.c types/src/sb_queue_sb_SW__MissionWindow_container_1.c types/src/sb_queue_int64_t_1.c
-  INCLUDES components/WaypointManager_Impl/includes/ types/includes
+DeclareCAmkESComponent(WaypointManager_Impl_MCMP_PROC_SW_WPM
+  SOURCES components/WaypointManager_Impl_MCMP_PROC_SW_WPM//src/waypointmanager.c components/WaypointManager_Impl_MCMP_PROC_SW_WPM/src/sb_WaypointManager_Impl.c types/src/sb_queue_sb_SW__Mission_container_1.c types/src/sb_queue_bool_1.c types/src/sb_queue_sb_SW__MissionWindow_container_1.c types/src/sb_queue_int64_t_1.c
+  INCLUDES components/WaypointManager_Impl_MCMP_PROC_SW_WPM/includes/ types/includes
 )
 
-DeclareCAmkESComponent(UARTDriver_Impl
-  SOURCES components/UARTDriver_Impl//src/uartdriver.c components/UARTDriver_Impl/src/sb_UARTDriver_Impl.c types/src/sb_queue_sb_SW__MissionWindow_container_1.c types/src/sb_queue_int64_t_1.c
-  INCLUDES components/UARTDriver_Impl/includes/ types/includes
+DeclareCAmkESComponent(UARTDriver_Impl_MCMP_PROC_SW_UART
+  SOURCES components/UARTDriver_Impl_MCMP_PROC_SW_UART//src/uartdriver.c components/UARTDriver_Impl_MCMP_PROC_SW_UART/src/sb_UARTDriver_Impl.c types/src/sb_queue_sb_SW__MissionWindow_container_1.c types/src/sb_queue_int64_t_1.c
+  INCLUDES components/UARTDriver_Impl_MCMP_PROC_SW_UART/includes/ types/includes
 )
 
 DeclareCAmkESRootserver(UAV_Impl_Instance.camkes)

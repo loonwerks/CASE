@@ -15,14 +15,14 @@ endif()
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/types)
 
-DeclareCAmkESComponent(source_thread_impl
-  SOURCES components/source_thread_impl//src/source.c components/source_thread_impl/src/sb_source_thread_impl.c types/src/sp_int8_t.c
-  INCLUDES components/source_thread_impl/includes/ types/includes types/includes
+DeclareCAmkESComponent(source_thread_impl_source_process_component_source_thread_component
+  SOURCES components/source_thread_impl_source_process_component_source_thread_component//src/source.c components/source_thread_impl_source_process_component_source_thread_component/src/sb_source_thread_impl.c types/src/sp_int8_t.c
+  INCLUDES components/source_thread_impl_source_process_component_source_thread_component/includes/ types/includes types/includes
 )
 
-DeclareCAmkESComponent(destination_thread_impl
-  SOURCES components/destination_thread_impl//src/destination.c components/destination_thread_impl/src/sb_destination_thread_impl.c types/src/sp_int8_t.c
-  INCLUDES components/destination_thread_impl/includes/ types/includes types/includes
+DeclareCAmkESComponent(destination_thread_impl_destination_process_component_destination_thread_component
+  SOURCES components/destination_thread_impl_destination_process_component_destination_thread_component//src/destination.c components/destination_thread_impl_destination_process_component_destination_thread_component/src/sb_destination_thread_impl.c types/src/sp_int8_t.c
+  INCLUDES components/destination_thread_impl_destination_process_component_destination_thread_component/includes/ types/includes types/includes
 )
 
 DeclareCAmkESRootserver(top_impl_Instance.camkes)

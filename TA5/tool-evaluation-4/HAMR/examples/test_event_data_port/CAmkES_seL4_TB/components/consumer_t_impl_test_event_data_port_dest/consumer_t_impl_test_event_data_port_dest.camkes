@@ -1,0 +1,8 @@
+import "../../interfaces/sb_Monitor_int8_t_1.idl4";
+component consumer_t_impl_test_event_data_port_dest {
+  include <sb_types.h>;
+  control;
+  uses sb_Monitor_int8_t_1 sb_deq;
+  consumes QueuedData sb_deq_notification;
+  has semaphore sb_dispatch_sem;
+}

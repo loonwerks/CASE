@@ -9,11 +9,11 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 448)">
 <title>g</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-448 962,-448 962,4 -4,4"/>
-<!-- src -->
+<!-- test_data_port_src -->
 <g id="node1" class="node">
-<title>src</title>
+<title>test_data_port_src</title>
 <polygon fill="none" stroke="#000000" points="8.5,-28 8.5,-52 275.5,-52 275.5,-28 8.5,-28"/>
-<text text-anchor="start" x="132" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">src</text>
+<text text-anchor="start" x="78" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">test_data_port_src</text>
 <polygon fill="none" stroke="#000000" points="8.5,-4 8.5,-28 275.5,-28 275.5,-4 8.5,-4"/>
 <text text-anchor="start" x="11.5" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#ffa500">uses sb_Monitor_int8_t </text>
 <text text-anchor="start" x="168.5" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">sb_write_port0</text>
@@ -30,17 +30,17 @@
 <text text-anchor="start" x="330.5" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#ffa500">provides sb_Monitor_int8_t </text>
 <text text-anchor="start" x="516.5" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">mon</text>
 </g>
-<!-- src&#45;&gt;sb_dest_read_port_monitor -->
+<!-- test_data_port_src&#45;&gt;sb_dest_read_port_monitor -->
 <g id="conn1" class="edge">
-<title>src:sb_write_port0&#45;&gt;sb_dest_read_port_monitor:mon</title>
+<title>test_data_port_src:sb_write_port0&#45;&gt;sb_dest_read_port_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M275.5,-16C294.8194,-16 302.0265,-16 317.3716,-16"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="317.5,-19.5001 327.5,-16 317.5,-12.5001 317.5,-19.5001"/>
 </g>
-<!-- dest -->
+<!-- test_data_port_dest -->
 <g id="node2" class="node">
-<title>dest</title>
+<title>test_data_port_dest</title>
 <polygon fill="none" stroke="#000000" points="602,-52 602,-76 950,-76 950,-52 602,-52"/>
-<text text-anchor="start" x="762" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">dest</text>
+<text text-anchor="start" x="708" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">test_data_port_dest</text>
 <polygon fill="none" stroke="#000000" points="602,-28 602,-52 950,-52 950,-28 602,-28"/>
 <text text-anchor="start" x="651.5" y="-37.2" font-family="Times,serif" font-size="16.00" fill="#ffa500">uses sb_Monitor_int8_t </text>
 <text text-anchor="start" x="808.5" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">sb_read_port</text>
@@ -48,15 +48,15 @@
 <text text-anchor="start" x="605" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes DataportWrite </text>
 <text text-anchor="start" x="768" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_read_port_notification</text>
 </g>
-<!-- dest&#45;&gt;sb_dest_read_port_monitor -->
+<!-- test_data_port_dest&#45;&gt;sb_dest_read_port_monitor -->
 <g id="conn2" class="edge">
-<title>dest:sb_read_port&#45;&gt;sb_dest_read_port_monitor:mon</title>
+<title>test_data_port_dest:sb_read_port&#45;&gt;sb_dest_read_port_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M602,-40C580.6934,-40 576.6556,-22.9141 560.7455,-17.5747"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="560.9157,-14.0598 550.5,-16 559.8522,-20.9786 560.9157,-14.0598"/>
 </g>
-<!-- sb_dest_read_port_monitor&#45;&gt;dest -->
+<!-- sb_dest_read_port_monitor&#45;&gt;test_data_port_dest -->
 <g id="conn3" class="edge">
-<title>sb_dest_read_port_monitor:monsig&#45;&gt;dest:sb_read_port_notification</title>
+<title>sb_dest_read_port_monitor:monsig&#45;&gt;test_data_port_dest:sb_read_port_notification</title>
 <path fill="none" stroke="#0000ff" d="M550.5,-40C571.8066,-40 575.8444,-22.9141 591.7545,-17.5747"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="592.6478,-20.9786 602,-16 591.5843,-14.0598 592.6478,-20.9786"/>
 </g>

@@ -1,0 +1,14 @@
+component FlightPlanner_Impl_MCMP_PROC_SW_FPLN {
+  include <sb_types.h>;
+  include <sb_queue_sb_SW__Mission_container_1.h>;
+  include <sb_queue_bool_1.h>;
+  include <sb_queue_SW__Command_Impl_1.h>;
+  control;
+  emits ReceiveEvent sb_flight_plan_1_notification;
+  consumes ReceiveEvent sb_mission_rcv_notification;
+  consumes ReceiveEvent sb_recv_map_notification;
+  dataport sb_queue_sb_SW__Mission_container_1_t sb_flight_plan_queue_1;
+  dataport sb_queue_bool_1_t sb_mission_rcv_queue;
+  dataport sb_queue_SW__Command_Impl_1_t sb_recv_map_queue;
+  has semaphore sb_dispatch_sem;
+}

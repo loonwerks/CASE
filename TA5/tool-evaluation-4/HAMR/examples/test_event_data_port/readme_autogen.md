@@ -51,8 +51,8 @@
 
   ```
   Booting all finished, dropped to user space
-  [src] test_event_data_port_emitter_component_init called
-  [dest] test_event_data_port_consumer_component_init called
+  [test_event_data_port_src] test_event_data_port_emitter_component_init called
+  [test_event_data_port_dest] test_event_data_port_consumer_component_init called
 
   ```
 
@@ -74,7 +74,7 @@
 
   ```
   Booting all finished, dropped to user space
-  [src] test_event_data_port_emitter_component_init called
-  [dest] test_event_data_port_consumer_component_init called
+  [test_event_data_port_src] test_event_data_port_emitter_component_init called
+  [test_event_data_port_dest] test_event_data_port_consumer_component_init called
 
   ```

@@ -27,14 +27,14 @@ DeclareCAmkESConnector(CASE_AADL_EventDataport
   TO_LIBS SB_Type_Library
 )
 
-DeclareCAmkESComponent(emitter_t_impl
-  SOURCES components/emitter_t_impl//src/emitter.c components/emitter_t_impl/src/sb_emitter_t_impl.c types/src/sb_queue_int8_t_1.c
-  INCLUDES components/emitter_t_impl/includes/ types/includes
+DeclareCAmkESComponent(emitter_t_impl_src_process_src_thread
+  SOURCES components/emitter_t_impl_src_process_src_thread//src/emitter.c components/emitter_t_impl_src_process_src_thread/src/sb_emitter_t_impl.c types/src/sb_queue_int8_t_1.c
+  INCLUDES components/emitter_t_impl_src_process_src_thread/includes/ types/includes
 )
 
-DeclareCAmkESComponent(consumer_native_t_impl
-  SOURCES components/consumer_native_t_impl//src/consumer.c components/consumer_native_t_impl/src/sb_consumer_native_t_impl.c types/src/sb_queue_int8_t_1.c
-  INCLUDES components/consumer_native_t_impl/includes/ types/includes
+DeclareCAmkESComponent(consumer_native_t_impl_dst_native_process_dst_thread
+  SOURCES components/consumer_native_t_impl_dst_native_process_dst_thread//src/consumer.c components/consumer_native_t_impl_dst_native_process_dst_thread/src/sb_consumer_native_t_impl.c types/src/sb_queue_int8_t_1.c
+  INCLUDES components/consumer_native_t_impl_dst_native_process_dst_thread/includes/ types/includes
 )
 
 DeclareCAmkESComponent(Pacer

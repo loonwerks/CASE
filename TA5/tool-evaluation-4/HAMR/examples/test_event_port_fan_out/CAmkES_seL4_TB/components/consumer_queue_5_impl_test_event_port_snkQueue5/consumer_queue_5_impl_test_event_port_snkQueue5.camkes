@@ -1,0 +1,8 @@
+import "../../interfaces/AADLEvent_Receiver.idl4";
+component consumer_queue_5_impl_test_event_port_snkQueue5 {
+  include <sb_types.h>;
+  control;
+  uses AADLEvent_Receiver sb_s;
+  consumes ReceiveEvent sb_s_notification;
+  has semaphore sb_dispatch_sem;
+}

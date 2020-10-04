@@ -1,0 +1,10 @@
+import "../../interfaces/sb_Monitor_int8_t.idl4";
+import <std_connector.camkes>;
+component destination_thread_impl_destination_process_component_destination_thread_component {
+  include <sb_types.h>;
+  control;
+  uses sb_Monitor_int8_t sb_read_port;
+  consumes DataportWrite sb_read_port_notification;
+  consumes Notification sb_periodic_dispatch_notification;
+  has semaphore sb_dispatch_sem;
+}

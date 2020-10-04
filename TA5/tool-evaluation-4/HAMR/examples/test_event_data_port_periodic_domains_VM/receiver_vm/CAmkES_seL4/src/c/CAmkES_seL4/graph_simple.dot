@@ -10,10 +10,10 @@ node [
 edge [
 ];
 
-src_thread [
+src_process_src_thread [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>src_thread</B></TD></TR>
+      <TR><TD><B>src_process_src_thread</B></TD></TR>
       <TR><TD PORT="sb_write_port_queue_1"><FONT COLOR="red"><B>sb_write_port_queue_1</B></FONT></TD></TR>
       <TR><TD PORT="sb_write_port_1_notification"><FONT COLOR="blue"><B>sb_write_port_1_notification</B></FONT></TD></TR>
       <TR><TD PORT="sb_pacer_notification"><FONT COLOR="blue"><B>sb_pacer_notification</B></FONT></TD></TR>"
@@ -28,8 +28,46 @@ vmdst_process [
       <TR><TD><B>vmdst_process</B></TD></TR>
       <TR><TD PORT="sb_read_port_queue"><FONT COLOR="red"><B>sb_read_port_queue</B></FONT></TD></TR>
       <TR><TD PORT="sb_pacer_period_queue"><FONT COLOR="red"><B>sb_pacer_period_queue</B></FONT></TD></TR>
+      <TR><TD PORT="notification_ready_connector"><FONT COLOR="blue"><B>notification_ready_connector</B></FONT></TD></TR>
+      <TR><TD PORT="fs"><FONT COLOR="orange"><B>fs</B></FONT></TD></TR>
+      <TR><TD PORT="batch"><FONT COLOR="orange"><B>batch</B></FONT></TD></TR>
+      <TR><TD PORT="guest_putchar"><FONT COLOR="orange"><B>guest_putchar</B></FONT></TD></TR>
+      <TR><TD PORT="serial_getchar"><FONT COLOR="orange"><B>serial_getchar</B></FONT></TD></TR>
+      <TR><TD PORT="recv"><FONT COLOR="orange"><B>recv</B></FONT></TD></TR>
+      <TR><TD PORT="send"><FONT COLOR="orange"><B>send</B></FONT></TD></TR>
+      <TR><TD PORT="dtb_self"><FONT COLOR="orange"><B>dtb_self</B></FONT></TD></TR>
+      <TR><TD PORT="restart_event"><FONT COLOR="blue"><B>restart_event</B></FONT></TD></TR>
+      <TR><TD PORT="notification_ready"><FONT COLOR="blue"><B>notification_ready</B></FONT></TD></TR>
       <TR><TD PORT="sb_read_port_notification"><FONT COLOR="blue"><B>sb_read_port_notification</B></FONT></TD></TR>
-      <TR><TD PORT="sb_pacer_period_notification"><FONT COLOR="blue"><B>sb_pacer_period_notification</B></FONT></TD></TR>"
+      <TR><TD PORT="sb_pacer_period_notification"><FONT COLOR="blue"><B>sb_pacer_period_notification</B></FONT></TD></TR>
+      <TR><TD PORT="dtb"><FONT COLOR="orange"><B>dtb</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+fserv [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>fserv</B></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+serial [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>serial</B></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+time_server [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>time_server</B></TD></TR>"
     </TABLE>
   >
   shape=plaintext
@@ -86,14 +124,49 @@ interfacetypekey [
 
 ];
 
-"src_thread":sb_write_port_1_notification -> "vmdst_process":sb_read_port_notification [
+"vmdst_process":fs -> "fserv":fs_ctrl [
+  color="grey"
+  //label = "seL4RPCDataport"
+  id = fsvmdst_process
+
+];
+
+"vmdst_process":notification_ready_connector -> "vmdst_process":notification_ready [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = notify_ready_vmdst_process
+
+];
+
+"serial":timeout -> "time_server":the_timer [
+  color="green"
+  //label = "seL4TimeServer"
+  id = serialserver_timer
+
+];
+
+"vmdst_process":batch -> "serial":processed_batch [
+  color="grey"
+  //label = "seL4SerialServer"
+  id = serial_vmdst_process
+
+];
+
+"vmdst_process":serial_getchar -> "serial":getchar [
+  color="grey"
+  //label = "seL4SerialServer"
+  id = serial_input_vmdst_process
+
+];
+
+"src_process_src_thread":sb_write_port_1_notification -> "vmdst_process":sb_read_port_notification [
   color="grey"
   //label = "seL4GlobalAsynch"
   id = conn2
 
 ];
 
-"src_thread":sb_write_port_queue_1 -> "vmdst_process":sb_read_port_queue [
+"src_process_src_thread":sb_write_port_queue_1 -> "vmdst_process":sb_read_port_queue [
   color="pink"
   //label = "seL4SharedDataWithCaps"
   id = conn3
@@ -107,7 +180,7 @@ interfacetypekey [
 
 ];
 
-"pacer":period -> "src_thread":sb_pacer_notification [
+"pacer":period -> "src_process_src_thread":sb_pacer_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn5

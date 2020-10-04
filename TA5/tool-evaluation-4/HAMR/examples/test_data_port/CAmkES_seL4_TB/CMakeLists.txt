@@ -15,14 +15,14 @@ endif()
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/types)
 
-DeclareCAmkESComponent(source_t_impl
-  SOURCES components/source_t_impl//src/source.c components/source_t_impl/src/sb_source_t_impl.c
-  INCLUDES components/source_t_impl/includes/ types/includes
+DeclareCAmkESComponent(source_t_impl_test_data_port_src
+  SOURCES components/source_t_impl_test_data_port_src//src/source.c components/source_t_impl_test_data_port_src/src/sb_source_t_impl.c
+  INCLUDES components/source_t_impl_test_data_port_src/includes/ types/includes
 )
 
-DeclareCAmkESComponent(destination_t_impl
-  SOURCES components/destination_t_impl//src/destination.c components/destination_t_impl/src/sb_destination_t_impl.c
-  INCLUDES components/destination_t_impl/includes/ types/includes
+DeclareCAmkESComponent(destination_t_impl_test_data_port_dest
+  SOURCES components/destination_t_impl_test_data_port_dest//src/destination.c components/destination_t_impl_test_data_port_dest/src/sb_destination_t_impl.c
+  INCLUDES components/destination_t_impl_test_data_port_dest/includes/ types/includes
 )
 
 DeclareCAmkESComponent(sb_dest_read_port_Monitor

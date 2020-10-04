@@ -15,10 +15,10 @@ uint32_t aadl_calendar_counter = 0;
 
 void sb_thread_calendar() {
   if ((aadl_calendar_counter % (1000 / aadl_tick_interval)) == 0) {
-    sb_source_thread_component_periodic_dispatch_notification_emit();
+    sb_source_process_component_source_thread_component_periodic_dispatch_notification_emit();
   }
   if ((aadl_calendar_counter % (1000 / aadl_tick_interval)) == 0) {
-    sb_destination_thread_component_periodic_dispatch_notification_emit();
+    sb_destination_process_component_destination_thread_component_periodic_dispatch_notification_emit();
   }
 
   aadl_calendar_counter++;

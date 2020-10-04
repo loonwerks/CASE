@@ -227,8 +227,8 @@ object ArtNative_Ext {
   def toZ(value: Long): Z = Z(value)
 
   def concMap[K, V](): MMap[K, V] = {
-    import scala.collection.JavaConverters._
-    new java.util.concurrent.ConcurrentHashMap[K, V].asScala
+    import org.sireum.$internal.CollectionCompat.Converters._
+    new java.util.concurrent.ConcurrentHashMap[K, V].asInstanceOf[java.util.Map[K, V]].asScala
   }
 
 
@@ -335,7 +335,7 @@ object ArtNative_Ext {
     // note: that could would be changed when we refactor to support event queues of size > 1
     sentPortValues.get(portId) match {
       case scala.Some(value: ArtMessage) => org.sireum.Some[DataContent](value.data)
-      case scala.None => org.sireum.None[DataContent]
+      case scala.None => org.sireum.None[DataContent]()
     }
   }
 }

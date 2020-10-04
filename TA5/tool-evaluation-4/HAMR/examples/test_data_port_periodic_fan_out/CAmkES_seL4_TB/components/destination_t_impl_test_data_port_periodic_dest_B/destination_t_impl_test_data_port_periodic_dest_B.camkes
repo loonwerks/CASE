@@ -1,0 +1,10 @@
+import "../../interfaces/sb_Monitor_int8_t.idl4";
+import <std_connector.camkes>;
+component destination_t_impl_test_data_port_periodic_dest_B {
+  include <sb_types.h>;
+  control;
+  uses sb_Monitor_int8_t sb_read_port;
+  consumes DataportWrite sb_read_port_notification;
+  consumes Notification sb_periodic_dispatch_notification;
+  has semaphore sb_dispatch_sem;
+}

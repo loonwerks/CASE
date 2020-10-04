@@ -15,9 +15,9 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
   add_compile_options("$<$<CONFIG:Release>:-Os>")
 endif()
 
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/top_impl_Instance_src_process_src_thread)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/emitter_t_impl_src_process_src_thread)
 
-add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/top_impl_Instance_dst_process_dst_thread)
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/consumer_t_impl_dst_process_dst_thread)
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/SlangTypeLibrary)
 
@@ -25,10 +25,10 @@ add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/types)
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/components/VM)
 
-DeclareCAmkESComponent(emitter_t_impl
-  SOURCES components/emitter_t_impl/src/sb_emitter_t_impl.c types/src/sp_union_art_DataContent.c
-  INCLUDES components/emitter_t_impl/includes/ types/includes types/includes
-  LIBS top_impl_Instance_src_process_src_thread
+DeclareCAmkESComponent(emitter_t_impl_src_process_src_thread
+  SOURCES components/emitter_t_impl_src_process_src_thread/src/sb_emitter_t_impl.c types/src/sp_union_art_DataContent.c
+  INCLUDES components/emitter_t_impl_src_process_src_thread/includes/ types/includes types/includes
+  LIBS emitter_t_impl_src_process_src_thread
 )
 
 DeclareCAmkESComponent(Pacer

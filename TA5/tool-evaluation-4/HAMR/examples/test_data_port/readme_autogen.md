@@ -51,8 +51,8 @@
 
   ```
   Booting all finished, dropped to user space
-  [src] test_data_port_source_component_init called
-  [dest] test_data_port_destination_component_init called
+  [test_data_port_src] test_data_port_source_component_init called
+  [test_data_port_dest] test_data_port_destination_component_init called
 
   ```
 
@@ -74,7 +74,7 @@
 
   ```
   Booting all finished, dropped to user space
-  [src] test_data_port_source_component_init called
-  [dest] test_data_port_destination_component_init called
+  [test_data_port_src] test_data_port_source_c[test_data_port_dest] test_data_port_destination_component_init called
+  omponent_init called
 
   ```

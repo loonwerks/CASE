@@ -9,27 +9,27 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 448)">
 <title>g</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-448 540,-448 540,4 -4,4"/>
-<!-- src -->
+<!-- test_data_port_src -->
 <g id="node1" class="node">
-<title>src</title>
+<title>test_data_port_src</title>
 <polygon fill="none" stroke="#000000" points="8,-28 8,-52 244,-52 244,-28 8,-28"/>
-<text text-anchor="start" x="116" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">src</text>
+<text text-anchor="start" x="62" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">test_data_port_src</text>
 <polygon fill="none" stroke="#000000" points="8,-4 8,-28 244,-28 244,-4 8,-4"/>
 <text text-anchor="start" x="11" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#ff0000">dataport sp_int8_t_t </text>
 <text text-anchor="start" x="145" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ff0000">sb_write_port</text>
 </g>
-<!-- dest -->
+<!-- test_data_port_dest -->
 <g id="node2" class="node">
-<title>dest</title>
+<title>test_data_port_dest</title>
 <polygon fill="none" stroke="#000000" points="296,-28 296,-52 528,-52 528,-28 296,-28"/>
-<text text-anchor="start" x="398" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">dest</text>
+<text text-anchor="start" x="344" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">test_data_port_dest</text>
 <polygon fill="none" stroke="#000000" points="296,-4 296,-28 528,-28 528,-4 296,-4"/>
 <text text-anchor="start" x="299" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#ff0000">dataport sp_int8_t_t </text>
 <text text-anchor="start" x="433" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ff0000">sb_read_port</text>
 </g>
-<!-- src&#45;&gt;dest -->
+<!-- test_data_port_src&#45;&gt;test_data_port_dest -->
 <g id="conn1" class="edge">
-<title>src:sb_write_port&#45;&gt;dest:sb_read_port</title>
+<title>test_data_port_src:sb_write_port&#45;&gt;test_data_port_dest:sb_read_port</title>
 <path fill="none" stroke="#ff0000" d="M244,-16C263.3194,-16 270.5265,-16 285.8716,-16"/>
 <polygon fill="#ff0000" stroke="#ff0000" points="286,-19.5001 296,-16 286,-12.5001 286,-19.5001"/>
 </g>
