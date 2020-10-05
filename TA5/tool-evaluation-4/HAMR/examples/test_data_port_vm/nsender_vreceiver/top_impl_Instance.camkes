@@ -1,0 +1,69 @@
+// This file will be regenerated, do not edit
+
+#include <configurations/vm.h>
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <seL4VMDTBPassthrough.idl4>;
+import <FileServerInterface.camkes>;
+import <FileServer/FileServer.camkes>;
+import <SerialServer/SerialServer.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <vm-connectors.camkes>;
+import <devices.camkes>;
+import "components/Pacer/Pacer.camkes";
+import "components/emitter_t_impl/emitter_t_impl.camkes";
+import "components/VM_consumer_t_impl/VM_consumer_t_impl.camkes";
+
+connector CASE_AADL_EventDataport {
+    from Dataport with 0 threads;
+    to Dataports;
+    attribute bool to_global_endpoint = True;
+}
+
+assembly {
+  composition {
+    component emitter_t_impl src_thread;
+    component VM_consumer_t_impl vmdst_process;
+    component Pacer pacer;
+
+    connection CASE_AADL_EventDataport conn2(from pacer.period_to_vmdst_process_queue, to vmdst_process.sb_pacer_period_queue);
+        
+    connection seL4VMDTBPassthrough conn1(from vmdst_process.dtb_self, to vmdst_process.dtb);
+    connection seL4Notification conn4(from pacer.tick, to pacer.tock);
+    connection seL4Notification conn5(from pacer.period, to src_thread.sb_pacer_notification);
+
+    connection CASE_AADL_EventDataport conn6(from src_thread.sb_write_port_1, to vmdst_process.sb_read_port);    
+    
+    VM_GENERAL_COMPOSITION_DEF()
+    VM_COMPONENT_CONNECTIONS_DEF(dst_process)
+    VM_VIRTUAL_SERIAL_COMPONENTS_DEF()
+    PER_VM_VIRTUAL_SERIAL_CONNECTIONS_DEF(dst_process)
+  }
+
+  configuration {
+    vmdst_process.cnode_size_bits = 18;
+    vmdst_process.simple_untyped21_pool = 12;
+    vmdst_process.simple_untyped12_pool = 12;
+    vmdst_process.num_extra_frame_caps = 0;
+    vmdst_process.extra_frame_map_address = 0;
+    
+    pacer._domain = 1;
+    src_thread._domain = 2;
+    vmdst_process._domain = 3;
+
+    conn2.with_signalling = true;
+    //conn2.size = 2048;
+    pacer.period_to_vmdst_process_queue_type = "native";
+    vmdst_process.sb_pacer_period_queue_type = "vm";
+    
+    conn6.with_signalling = true;
+    //conn6.size = 2048;
+    src_thread.sb_write_port_1_type = "native";
+    vmdst_process.sb_read_port_type = "vm";
+
+    VM_GENERAL_CONFIGURATION_DEF()
+    VM_CONFIGURATION_DEF(dst_process)
+    VM_VIRTUAL_SERIAL_GENERAL_CONFIGURATION_DEF()
+    PER_VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(dst_process)
+  }
+}
