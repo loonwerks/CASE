@@ -8,6 +8,10 @@ set -Eeuxo pipefail
 : "${SEL4_V:=28831f579e3560bd3aa18a3898505f091d66b076}"
 : "${CAMKES_V:=e7f5c6da03fc8a71a5a2e503de9f9004acf3ef2a}"
 
+export DESKTOP_MACHINE=no
+export MAKE_CACHES=no
+export DEBIAN_FRONTEND=noninteractive
+
 git config --global user.name $GIT_USER
 git config --global user.email $GIT_EMAIL
 git config --global color.ui true
@@ -25,17 +29,11 @@ bash $SEL4_SCRIPTS/sel4.sh
 
 . $SEL4_SCRIPTS/utils/common.sh
 
-echo 'en_US.UTF-8 UTF-8' | as_root tee /etc/locale.gen > /dev/null
-as_root dpkg-reconfigure --frontend=noninteractive locales
-echo "LANG=en_US.UTF-8" | as_root tee -a /etc/default/locale > /dev/null
-echo "export LANG=en_US.UTF-8" >> "$HOME/.bashrc"
-export LANG=en_US.UTF-8
-
 bash $SEL4_SCRIPTS/camkes.sh
 echo "export PATH=\$PATH:$BASE_DIR/camkes/build/capDL-tool" >> "$HOME/.bashrc"
 
-bash $SCRIPT_DIR/bin/sel4-cache.sh $SEL4_V
-bash $SCRIPT_DIR/bin/camkes-cache.sh $CAMKES_V
+bash $HOME/bin/sel4-cache.sh $SEL4_V
+bash $HOME/bin/camkes-cache.sh $CAMKES_V
 
 git config --global --unset user.name $GIT_USER
 git config --global --unset user.email $GIT_EMAIL
