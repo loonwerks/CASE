@@ -178,8 +178,6 @@ public
 			recv_map: in event data port RF_Msg.Impl;
 			request_nofly_zones: out event data port Map;
 			nofly_zones: in event data port MapArray;
-		properties
-			CASE_Properties::BOUNDARY => (UNCONTROLLED);
 		annex agree {**
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);

@@ -4,23 +4,33 @@ public
 	with CASE_Properties;
 
 	thread CASE_Filter
-		features
-			filter_in: in event data port Coordinate.Impl;
-			filter_out: out event data port Coordinate.Impl;
-		properties
-			CASE_Properties::Component_Type => FILTER;
-			CASE_Properties::Component_Spec => ("Req_Filter_LatLong", "Req_Filter_Alt");
+	features
+		Input: in event data port Coordinate.Impl;
+		Output: out event data port Coordinate.Impl;
+	properties
+		CASE_Properties::Component_Type => FILTER;
+		CASE_Properties::Component_Spec => ("Req_Filter_LatLong", "Req_Filter_Alt");
 
-		annex agree {**
-			guarantee Req_Filter_LatLong "The Consumer shall only receive well-formed lat-long values" : WELL_FORMED_LAT_LONG(filter_out);
-			guarantee Req_Filter_Alt "The Consumer shall only receive well-formed altitude values" : WELL_FORMED_ALT(filter_out);
+	annex agree {**
+			guarantee Req_Filter_LatLong "Well-formed Lat-Long" : WELL_FORMED_LAT_LONG(Output);
+			guarantee Req_Filter_Alt "Well-formed Alt" : WELL_FORMED_ALT(Output);
 		**};
-	end CASE_Filter;
+end CASE_Filter;
 
 	thread implementation CASE_Filter.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
 	end CASE_Filter.Impl;
+
+	thread Radio
+		features
+			Input: in event data port Coordinate.Impl;
+			Output: out event data port Coordinate.Impl;
+	end Radio;
+
+	thread implementation Radio.Impl
+
+	end Radio.Impl;
 
 	data Coordinate
 	end Coordinate;
@@ -78,10 +88,13 @@ public
 			Consumer: thread Consumer.Impl;
 			Filter: thread CASE_Filter.Impl;
 		connections
-			c0: port input -> Producer.trigger;
-			c1: port Producer.msg_out -> Filter.filter_in;
-			c3: port Filter.filter_out -> Consumer.msg_in;
-			c2: port Consumer.status -> output;
+			c0: port input -> Producer.trigger {CASE_Properties::Trust_Level => 0;
+				CASE_Properties::Control_Level => 0;};
+			c1: port Producer.msg_out -> Filter.Input {CASE_Properties::Trust_Level => 100;
+				CASE_Properties::Control_Level => 100;};
+			c3: port Filter.Output -> Consumer.msg_in;
+			c2: port Consumer.status -> output {CASE_Properties::Trust_Level => 100;
+				CASE_Properties::Control_Level => 100;};
 		annex resolute {**
 			prove Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong", this.Filter, this.c3, Coordinate.Impl)
 			prove Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt", this.Filter, this.c3, Coordinate.Impl)
@@ -89,11 +102,12 @@ public
 	end SW.Impl;
 
 	processor Proc
+
 	end Proc;
 
 	processor implementation Proc.Impl
 		properties
-			CASE_Properties::OS => "Linux";
+			CASE_Properties::OS => "seL4";
 	end Proc.Impl;
 
 	system Sys
@@ -118,5 +132,5 @@ public
 		fun WELL_FORMED_LAT_LONG(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180;
 		fun WELL_FORMED_ALT(coord : Coordinate.Impl) : bool = coord.altitude >= 0 and coord.altitude <= 15000;
 	**};
-
+	
 end Producer_Consumer;

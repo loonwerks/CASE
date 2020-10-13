@@ -3,7 +3,6 @@ public
 	with GS;
 	with UAV;
 	with UAS_Buses;
-	with CASE_Properties;
 
 	-- UAS
 	system UAS
@@ -11,7 +10,7 @@ public
 
 	system implementation UAS.Impl
 		subcomponents
-			GND: system GS::GroundStation.Impl {CASE_Properties::BOUNDARY => (UNCONTROLLED);};
+			GND: system GS::GroundStation.Impl;
 			UAV: system UAV::UAV.Impl;
 			RFA: bus UAS_Buses::RF_Bus.Impl;
 		connections

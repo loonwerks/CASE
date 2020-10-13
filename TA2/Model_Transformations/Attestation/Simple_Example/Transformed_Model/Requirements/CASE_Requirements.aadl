@@ -1,0 +1,5 @@
+package CASE_Requirements
+private
+	annex resolute {**
+	**};
+end CASE_Requirements;
