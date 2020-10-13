@@ -1,41 +1,41 @@
 // This file will be regenerated, do not edit
 
 import <std_connector.camkes>;
-import "components/RadioDriver_Impl/RadioDriver_Impl.camkes";
-import "components/FlightPlanner_Impl/FlightPlanner_Impl.camkes";
-import "components/WaypointManager_Impl/WaypointManager_Impl.camkes";
-import "components/UARTDriver_Impl/UARTDriver_Impl.camkes";
+import "components/RadioDriver_Impl_MCMP_PROC_SW_RADIO/RadioDriver_Impl_MCMP_PROC_SW_RADIO.camkes";
+import "components/FlightPlanner_Impl_MCMP_PROC_SW_FPLN/FlightPlanner_Impl_MCMP_PROC_SW_FPLN.camkes";
+import "components/WaypointManager_Impl_MCMP_PROC_SW_WPM/WaypointManager_Impl_MCMP_PROC_SW_WPM.camkes";
+import "components/UARTDriver_Impl_MCMP_PROC_SW_UART/UARTDriver_Impl_MCMP_PROC_SW_UART.camkes";
 
 assembly {
   composition {
-    component RadioDriver_Impl RADIO;
-    component FlightPlanner_Impl FPLN;
-    component WaypointManager_Impl WPM;
-    component UARTDriver_Impl UART;
+    component RadioDriver_Impl_MCMP_PROC_SW_RADIO MCMP_PROC_SW_RADIO;
+    component FlightPlanner_Impl_MCMP_PROC_SW_FPLN MCMP_PROC_SW_FPLN;
+    component WaypointManager_Impl_MCMP_PROC_SW_WPM MCMP_PROC_SW_WPM;
+    component UARTDriver_Impl_MCMP_PROC_SW_UART MCMP_PROC_SW_UART;
 
-    connection seL4Notification conn1(from RADIO.sb_recv_map_out_1_notification, to FPLN.sb_recv_map_notification);
-    connection seL4SharedData conn2(from RADIO.sb_recv_map_out_queue_1, to FPLN.sb_recv_map_queue);
-    connection seL4Notification conn3(from FPLN.sb_flight_plan_1_notification, to WPM.sb_flight_plan_notification);
-    connection seL4SharedData conn4(from FPLN.sb_flight_plan_queue_1, to WPM.sb_flight_plan_queue);
-    connection seL4Notification conn5(from WPM.sb_mission_rcv_1_notification, to FPLN.sb_mission_rcv_notification);
-    connection seL4SharedData conn6(from WPM.sb_mission_rcv_queue_1, to FPLN.sb_mission_rcv_queue);
-    connection seL4Notification conn7(from WPM.sb_mission_window_1_notification, to UART.sb_mission_window_notification);
-    connection seL4SharedData conn8(from WPM.sb_mission_window_queue_1, to UART.sb_mission_window_queue);
-    connection seL4Notification conn9(from UART.sb_tracking_id_1_notification, to WPM.sb_tracking_id_notification);
-    connection seL4SharedData conn10(from UART.sb_tracking_id_queue_1, to WPM.sb_tracking_id_queue);
+    connection seL4Notification conn1(from MCMP_PROC_SW_RADIO.sb_recv_map_out_1_notification, to MCMP_PROC_SW_FPLN.sb_recv_map_notification);
+    connection seL4SharedData conn2(from MCMP_PROC_SW_RADIO.sb_recv_map_out_queue_1, to MCMP_PROC_SW_FPLN.sb_recv_map_queue);
+    connection seL4Notification conn3(from MCMP_PROC_SW_FPLN.sb_flight_plan_1_notification, to MCMP_PROC_SW_WPM.sb_flight_plan_notification);
+    connection seL4SharedData conn4(from MCMP_PROC_SW_FPLN.sb_flight_plan_queue_1, to MCMP_PROC_SW_WPM.sb_flight_plan_queue);
+    connection seL4Notification conn5(from MCMP_PROC_SW_WPM.sb_mission_rcv_1_notification, to MCMP_PROC_SW_FPLN.sb_mission_rcv_notification);
+    connection seL4SharedData conn6(from MCMP_PROC_SW_WPM.sb_mission_rcv_queue_1, to MCMP_PROC_SW_FPLN.sb_mission_rcv_queue);
+    connection seL4Notification conn7(from MCMP_PROC_SW_WPM.sb_mission_window_1_notification, to MCMP_PROC_SW_UART.sb_mission_window_notification);
+    connection seL4SharedData conn8(from MCMP_PROC_SW_WPM.sb_mission_window_queue_1, to MCMP_PROC_SW_UART.sb_mission_window_queue);
+    connection seL4Notification conn9(from MCMP_PROC_SW_UART.sb_tracking_id_1_notification, to MCMP_PROC_SW_WPM.sb_tracking_id_notification);
+    connection seL4SharedData conn10(from MCMP_PROC_SW_UART.sb_tracking_id_queue_1, to MCMP_PROC_SW_WPM.sb_tracking_id_queue);
   }
 
   configuration {
-    RADIO.sb_recv_map_out_queue_1_access = "W";
-    FPLN.sb_recv_map_queue_access = "R";
-    FPLN.sb_flight_plan_queue_1_access = "W";
-    WPM.sb_flight_plan_queue_access = "R";
-    WPM.sb_mission_rcv_queue_1_access = "W";
-    FPLN.sb_mission_rcv_queue_access = "R";
-    WPM.sb_mission_window_queue_1_access = "W";
-    UART.sb_mission_window_queue_access = "R";
-    UART.sb_tracking_id_queue_1_access = "W";
-    WPM.sb_tracking_id_queue_access = "R";
+    MCMP_PROC_SW_RADIO.sb_recv_map_out_queue_1_access = "W";
+    MCMP_PROC_SW_FPLN.sb_recv_map_queue_access = "R";
+    MCMP_PROC_SW_FPLN.sb_flight_plan_queue_1_access = "W";
+    MCMP_PROC_SW_WPM.sb_flight_plan_queue_access = "R";
+    MCMP_PROC_SW_WPM.sb_mission_rcv_queue_1_access = "W";
+    MCMP_PROC_SW_FPLN.sb_mission_rcv_queue_access = "R";
+    MCMP_PROC_SW_WPM.sb_mission_window_queue_1_access = "W";
+    MCMP_PROC_SW_UART.sb_mission_window_queue_access = "R";
+    MCMP_PROC_SW_UART.sb_tracking_id_queue_1_access = "W";
+    MCMP_PROC_SW_WPM.sb_tracking_id_queue_access = "R";
 
   }
 }

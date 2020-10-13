@@ -10,20 +10,20 @@ node [
 edge [
 ];
 
-src [
+test_event_port_src [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>src</B></TD></TR>
+      <TR><TD><B>test_event_port_src</B></TD></TR>
       <TR><TD PORT="sb_e0"><FONT COLOR="orange"><B>sb_e0</B></FONT></TD></TR>"
     </TABLE>
   >
   shape=plaintext
 ];
 
-snk [
+test_event_port_snk [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>snk</B></TD></TR>
+      <TR><TD><B>test_event_port_snk</B></TD></TR>
       <TR><TD PORT="sb_s"><FONT COLOR="orange"><B>sb_s</B></FONT></TD></TR>
       <TR><TD PORT="sb_s_notification"><FONT COLOR="blue"><B>sb_s_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -73,21 +73,21 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"src":sb_e0 -> "sb_snk_s_monitor":mon_send [
+"test_event_port_src":sb_e0 -> "sb_snk_s_monitor":mon_send [
   color="orange"
   //label = "seL4RPCCall"
   id = conn1
 
 ];
 
-"snk":sb_s -> "sb_snk_s_monitor":mon_receive [
+"test_event_port_snk":sb_s -> "sb_snk_s_monitor":mon_receive [
   color="orange"
   //label = "seL4RPCCall"
   id = conn2
 
 ];
 
-"sb_snk_s_monitor":monsig -> "snk":sb_s_notification [
+"sb_snk_s_monitor":monsig -> "test_event_port_snk":sb_s_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3

@@ -27,13 +27,13 @@
 //
 const dschedule_t ksDomSchedule[] = { // (1 tick == 2ms)
     { .domain = 0, .length = 100 },   // all other seL4 threads, init, 200ms
-    
+
     { .domain = 1, .length =   5 },   // pacer        
     { .domain = 0, .length =   5 },   // domain0
-         
+
     { .domain = 2, .length =   5 },   // source      
     { .domain = 0, .length =   5 },   // domain0
-         
+
     { .domain = 3, .length = 300 },   // destination 
     { .domain = 0, .length =  80 },   // pad rest of period
 };

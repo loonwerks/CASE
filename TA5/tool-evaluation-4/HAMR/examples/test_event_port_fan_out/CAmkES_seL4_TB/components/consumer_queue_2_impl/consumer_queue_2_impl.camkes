@@ -1,8 +1,0 @@
-import "../../interfaces/AADLEvent_Receiver.idl4";
-component consumer_queue_2_impl {
-  include <sb_types.h>;
-  control;
-  uses AADLEvent_Receiver sb_s;
-  consumes ReceiveEvent sb_s_notification;
-  has semaphore sb_dispatch_sem;
-}

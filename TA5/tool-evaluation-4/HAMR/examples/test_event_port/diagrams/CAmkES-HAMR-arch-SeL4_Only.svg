@@ -9,11 +9,11 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 472)">
 <title>g</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-472 639,-472 639,4 -4,4"/>
-<!-- src -->
+<!-- test_event_port_src -->
 <g id="node1" class="node">
-<title>src</title>
+<title>test_event_port_src</title>
 <polygon fill="none" stroke="#000000" points="8,-52 8,-76 292,-76 292,-52 8,-52"/>
-<text text-anchor="start" x="140" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">src</text>
+<text text-anchor="start" x="83.5" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">test_event_port_src</text>
 <polygon fill="none" stroke="#000000" points="8,-28 8,-52 292,-52 292,-28 8,-28"/>
 <text text-anchor="start" x="11" y="-37.2" font-family="Times,serif" font-size="16.00" fill="#ff0000">dataport sb_event_counter_t </text>
 <text text-anchor="start" x="198" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ff0000">sb_e_counter</text>
@@ -21,11 +21,11 @@
 <text text-anchor="start" x="69.5" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">emits ReceiveEvent </text>
 <text text-anchor="start" x="199.5" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_e</text>
 </g>
-<!-- snk -->
+<!-- test_event_port_snk -->
 <g id="node2" class="node">
-<title>snk</title>
+<title>test_event_port_snk</title>
 <polygon fill="none" stroke="#000000" points="344.5,-52 344.5,-76 627.5,-76 627.5,-52 344.5,-52"/>
-<text text-anchor="start" x="473.5" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">snk</text>
+<text text-anchor="start" x="417" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">test_event_port_snk</text>
 <polygon fill="none" stroke="#000000" points="344.5,-28 344.5,-52 627.5,-52 627.5,-28 344.5,-28"/>
 <text text-anchor="start" x="347.5" y="-37.2" font-family="Times,serif" font-size="16.00" fill="#ff0000">dataport sb_event_counter_t </text>
 <text text-anchor="start" x="534.5" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ff0000">sb_s_counter</text>
@@ -33,15 +33,15 @@
 <text text-anchor="start" x="391.5" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes ReceiveEvent </text>
 <text text-anchor="start" x="550.5" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_s</text>
 </g>
-<!-- src&#45;&gt;snk -->
+<!-- test_event_port_src&#45;&gt;test_event_port_snk -->
 <g id="conn1" class="edge">
-<title>src:sb_e&#45;&gt;snk:sb_s</title>
+<title>test_event_port_src:sb_e&#45;&gt;test_event_port_snk:sb_s</title>
 <path fill="none" stroke="#0000ff" d="M292,-16C311.5052,-16 318.7816,-16 334.2742,-16"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="334.5,-19.5001 344.5,-16 334.5,-12.5001 334.5,-19.5001"/>
 </g>
-<!-- src&#45;&gt;snk -->
+<!-- test_event_port_src&#45;&gt;test_event_port_snk -->
 <g id="conn2" class="edge">
-<title>src:sb_e_counter&#45;&gt;snk:sb_s_counter</title>
+<title>test_event_port_src:sb_e_counter&#45;&gt;test_event_port_snk:sb_s_counter</title>
 <path fill="none" stroke="#ff0000" d="M292,-40C311.5052,-40 318.7816,-40 334.2742,-40"/>
 <polygon fill="#ff0000" stroke="#ff0000" points="334.5,-43.5001 344.5,-40 334.5,-36.5001 334.5,-43.5001"/>
 </g>

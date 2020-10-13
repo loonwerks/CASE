@@ -1,8 +1,0 @@
-component consumer_queue_2_impl {
-  include <sb_types.h>;
-  include <sb_queue_int8_t_2.h>;
-  control;
-  consumes ReceiveEvent sb_deq_notification;
-  dataport sb_queue_int8_t_2_t sb_deq_queue;
-  has semaphore sb_dispatch_sem;
-}

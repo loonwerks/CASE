@@ -166,7 +166,7 @@ public
 
 	thread group UxAS
 		features
-			flight_plan: out data port Mission;
+--			flight_plan: out data port Mission;
 			recv_map: in event data port RF_Msg.Impl;
 			position_status: in event data port Coordinate.Impl;
 			mission_window: out event data port MissionWindow;
@@ -185,7 +185,7 @@ public
 			c5: port WPM.mission_window -> mission_window;
 			c6: port position_status -> FPLN.position_status;
 			c7: port position_status -> WPM.position_status;
-			c8: port FPLN.flight_plan -> flight_plan;
+--			c8: port FPLN.flight_plan -> flight_plan;
 	end UxAS.Impl;
 
 	thread CameraManager
@@ -223,8 +223,8 @@ public
 			radio_send: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			uart_recv: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
 			uart_send: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-			wifi_recv: in event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
-			wifi_send: out event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
+--			wifi_recv: in event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
+--			wifi_send: out event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
 		annex agree {**
 			guarantee Req001_SW "The Mission Computer shall output a valid mission window to the Flight Controller" : uart_send.crc;
 		**};
@@ -233,9 +233,9 @@ public
 	process implementation SW.Impl
 		subcomponents
 			RADIO: thread RadioDriver.Impl;
-			CM: thread CameraManager.Impl;
+--			CM: thread CameraManager.Impl;
 			UART: thread UARTDriver.Impl;
-			WIFI: thread WifiDriver.Impl;
+--			WIFI: thread WifiDriver.Impl;
 			UXAS: thread group UxAS.Impl;
 		connections
 			c1: port radio_recv -> RADIO.recv_data;
@@ -246,11 +246,11 @@ public
 			c6: port UART.status -> RADIO.status;
 			c7: port UART.send_data -> uart_send;
 			c8: port uart_recv -> UART.recv_data;
-			c9: port UXAS.flight_plan -> CM.flight_plan;
-			c10: port UART.status -> CM.position_status;
-			c11: port CM.gimbal_command -> WIFI.gimbal_command;
-			c12: port WIFI.send_data -> wifi_send;
-			c13: port wifi_recv -> WIFI.recv_data;
+--			c9: port UXAS.flight_plan -> CM.flight_plan;
+--			c10: port UART.status -> CM.position_status;
+--			c11: port CM.gimbal_command -> WIFI.gimbal_command;
+--			c12: port WIFI.send_data -> wifi_send;
+--			c13: port wifi_recv -> WIFI.recv_data;
 	end SW.Impl;
 
 	annex agree {**

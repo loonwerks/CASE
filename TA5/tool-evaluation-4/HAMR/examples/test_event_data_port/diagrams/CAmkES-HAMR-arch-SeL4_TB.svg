@@ -9,11 +9,11 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 448)">
 <title>g</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-448 892,-448 892,4 -4,4"/>
-<!-- src -->
+<!-- test_event_data_port_src -->
 <g id="node1" class="node">
-<title>src</title>
+<title>test_event_data_port_src</title>
 <polygon fill="none" stroke="#000000" points="8.5,-28 8.5,-52 245.5,-52 245.5,-28 8.5,-28"/>
-<text text-anchor="start" x="117" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">src</text>
+<text text-anchor="start" x="41" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">test_event_data_port_src</text>
 <polygon fill="none" stroke="#000000" points="8.5,-4 8.5,-28 245.5,-28 245.5,-4 8.5,-4"/>
 <text text-anchor="start" x="11.5" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#ffa500">uses sb_Monitor_int8_t_1 </text>
 <text text-anchor="start" x="185.5" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">sb_enq0</text>
@@ -30,17 +30,17 @@
 <text text-anchor="start" x="300.5" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#ffa500">provides sb_Monitor_int8_t_1 </text>
 <text text-anchor="start" x="502.5" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">mon</text>
 </g>
-<!-- src&#45;&gt;sb_dest_deq_monitor -->
+<!-- test_event_data_port_src&#45;&gt;sb_dest_deq_monitor -->
 <g id="conn1" class="edge">
-<title>src:sb_enq0&#45;&gt;sb_dest_deq_monitor:mon</title>
+<title>test_event_data_port_src:sb_enq0&#45;&gt;sb_dest_deq_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M245.5,-16C264.8194,-16 272.0265,-16 287.3716,-16"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="287.5,-19.5001 297.5,-16 287.5,-12.5001 287.5,-19.5001"/>
 </g>
-<!-- dest -->
+<!-- test_event_data_port_dest -->
 <g id="node2" class="node">
-<title>dest</title>
+<title>test_event_data_port_dest</title>
 <polygon fill="none" stroke="#000000" points="588,-52 588,-76 880,-76 880,-52 588,-52"/>
-<text text-anchor="start" x="720" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">dest</text>
+<text text-anchor="start" x="644" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">test_event_data_port_dest</text>
 <polygon fill="none" stroke="#000000" points="588,-28 588,-52 880,-52 880,-28 588,-28"/>
 <text text-anchor="start" x="622.5" y="-37.2" font-family="Times,serif" font-size="16.00" fill="#ffa500">uses sb_Monitor_int8_t_1 </text>
 <text text-anchor="start" x="796.5" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">sb_deq</text>
@@ -48,15 +48,15 @@
 <text text-anchor="start" x="591" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes QueuedData </text>
 <text text-anchor="start" x="741" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_deq_notification</text>
 </g>
-<!-- dest&#45;&gt;sb_dest_deq_monitor -->
+<!-- test_event_data_port_dest&#45;&gt;sb_dest_deq_monitor -->
 <g id="conn2" class="edge">
-<title>dest:sb_deq&#45;&gt;sb_dest_deq_monitor:mon</title>
+<title>test_event_data_port_dest:sb_deq&#45;&gt;sb_dest_deq_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M588,-40C566.6934,-40 562.6556,-22.9141 546.7455,-17.5747"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="546.9157,-14.0598 536.5,-16 545.8522,-20.9786 546.9157,-14.0598"/>
 </g>
-<!-- sb_dest_deq_monitor&#45;&gt;dest -->
+<!-- sb_dest_deq_monitor&#45;&gt;test_event_data_port_dest -->
 <g id="conn3" class="edge">
-<title>sb_dest_deq_monitor:monsig&#45;&gt;dest:sb_deq_notification</title>
+<title>sb_dest_deq_monitor:monsig&#45;&gt;test_event_data_port_dest:sb_deq_notification</title>
 <path fill="none" stroke="#0000ff" d="M536.5,-40C557.8066,-40 561.8444,-22.9141 577.7545,-17.5747"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="578.6478,-20.9786 588,-16 577.5843,-14.0598 578.6478,-20.9786"/>
 </g>

@@ -1,6 +1,5 @@
 // This file will be regenerated, do not edit
 
-#include <configurations/vm.h>
 import <std_connector.camkes>;
 import <global-connectors.camkes>;
 import <seL4VMDTBPassthrough.idl4>;
@@ -11,9 +10,9 @@ import <TimeServer/TimeServer.camkes>;
 import <vm-connectors.camkes>;
 import <devices.camkes>;
 import "components/Pacer/Pacer.camkes";
-import "components/emitter_t_impl/emitter_t_impl.camkes";
-import "components/VM_consumer_t_impl/VM_consumer_t_impl.camkes";
-import "components/consumer_native_t_impl/consumer_native_t_impl.camkes";
+import "components/emitter_t_impl_src_process_src_thread/emitter_t_impl_src_process_src_thread.camkes";
+import "components/VM_consumer_t_impl_dst_process_dst_thread/VM_consumer_t_impl_dst_process_dst_thread.camkes";
+import "components/consumer_native_t_impl_dst_native_process_dst_thread/consumer_native_t_impl_dst_native_process_dst_thread.camkes";
 
 connector CASE_AADL_EventDataport {
   from Dataport with 0 threads;
@@ -23,43 +22,57 @@ connector CASE_AADL_EventDataport {
 
 assembly {
   composition {
-    component emitter_t_impl src_thread;
-    component VM_consumer_t_impl vmdst_process;
-    component consumer_native_t_impl dst_thread;
+    component emitter_t_impl_src_process_src_thread src_process_src_thread;
+    component VM_consumer_t_impl_dst_process_dst_thread vmdst_process;
+    component FileServer fserv;
+    component SerialServer serial;
+    component TimeServer time_server;
+    component consumer_native_t_impl_dst_native_process_dst_thread dst_native_process_dst_thread;
     component Pacer pacer;
 
     connection seL4VMDTBPassthrough conn1(from vmdst_process.dtb_self, to vmdst_process.dtb);
-    connection CASE_AADL_EventDataport conn2(from src_thread.sb_write_port_queue_1, to vmdst_process.sb_read_port_queue, to dst_thread.sb_read_port_queue);
+    connection seL4RPCDataport fsvmdst_process(from vmdst_process.fs, to fserv.fs_ctrl);
+    connection seL4GlobalAsynch notify_ready_vmdst_process(from vmdst_process.notification_ready_connector, to vmdst_process.notification_ready);
+    connection seL4TimeServer serialserver_timer(from serial.timeout, to time_server.the_timer);
+    connection seL4SerialServer serial_vmdst_process(from vmdst_process.batch, to serial.processed_batch);
+    connection seL4SerialServer serial_input_vmdst_process(from vmdst_process.serial_getchar, to serial.getchar);
+    connection CASE_AADL_EventDataport conn2(from src_process_src_thread.sb_write_port_queue_1, to vmdst_process.sb_read_port_queue, to dst_native_process_dst_thread.sb_read_port_queue);
     connection seL4Notification conn3(from pacer.tick, to pacer.tock);
-    connection seL4Notification conn4(from pacer.period, to src_thread.sb_pacer_notification);
+    connection seL4Notification conn4(from pacer.period, to src_process_src_thread.sb_pacer_notification);
     connection CASE_AADL_EventDataport conn5(from pacer.period_to_vm_queue, to vmdst_process.sb_pacer_period_queue);
-    VM_GENERAL_COMPOSITION_DEF()
-    VM_COMPONENT_CONNECTIONS_DEF(dst_process)
-    VM_VIRTUAL_SERIAL_COMPONENTS_DEF()
-    PER_VM_VIRTUAL_SERIAL_CONNECTIONS_DEF(dst_process)
   }
 
   configuration {
-    src_thread._domain = 2;
+    src_process_src_thread._domain = 2;
     vmdst_process.cnode_size_bits = 18;
     vmdst_process.simple_untyped21_pool = 12;
     vmdst_process.simple_untyped12_pool = 12;
     vmdst_process.num_extra_frame_caps = 0;
     vmdst_process.extra_frame_map_address = 0;
     vmdst_process._domain = 3;
-    dst_thread._domain = 4;
+    dst_native_process_dst_thread._domain = 4;
     conn2.with_signalling = true;
-    src_thread.sb_write_port_queue_1_type = "native";
+    src_process_src_thread.sb_write_port_queue_1_type = "native";
     vmdst_process.sb_read_port_queue_type = "vm";
-    dst_thread.sb_read_port_queue_type = "native";
+    dst_native_process_dst_thread.sb_read_port_queue_type = "native";
     pacer._domain = 1;
     conn5.with_signalling = true;
     pacer.period_to_vm_queue_type = "native";
     vmdst_process.sb_pacer_period_queue_type = "vm";
 
-    VM_GENERAL_CONFIGURATION_DEF()
-    VM_CONFIGURATION_DEF(dst_process)
-    VM_VIRTUAL_SERIAL_GENERAL_CONFIGURATION_DEF()
-    PER_VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(dst_process)
+    fserv.heap_size = 165536;
+    vmdst_process.fs_shmem_size = 0x100000;
+    vmdst_process.global_endpoint_base = 1 << 27;
+    vmdst_process.asid_pool = true;
+    vmdst_process.simple = true;
+    vmdst_process.base_prio = 100;
+    vmdst_process._priority = 101;
+    vmdst_process.sem_value = 0;
+    vmdst_process.heap_size = 0x300000;
+    time_server.timers_per_client = 1;
+    time_server.priority = 255;
+    time_server.simple = true;
+    vmdst_process.serial_getchar_shmem_size = 0x1000;
+    vmdst_process.batch_shmem_size = 0x1000;
   }
 }

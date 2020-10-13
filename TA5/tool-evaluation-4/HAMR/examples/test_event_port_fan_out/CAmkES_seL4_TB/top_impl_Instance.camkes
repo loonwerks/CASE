@@ -3,10 +3,11 @@
 import <std_connector.camkes>;
 import <global-connectors.camkes>;
 import <TimeServer/TimeServer.camkes>;;
-import "components/emitter_impl/emitter_impl.camkes";
-import "components/consumer_queue_default_impl/consumer_queue_default_impl.camkes";
-import "components/consumer_queue_2_impl/consumer_queue_2_impl.camkes";
-import "components/consumer_queue_5_impl/consumer_queue_5_impl.camkes";
+import "components/emitter_impl_test_event_port_src/emitter_impl_test_event_port_src.camkes";
+import "components/consumer_queue_default_impl_test_event_port_snkDefault/consumer_queue_default_impl_test_event_port_snkDefault.camkes";
+import "components/consumer_queue_2_impl_test_event_port_snkQueue2_A/consumer_queue_2_impl_test_event_port_snkQueue2_A.camkes";
+import "components/consumer_queue_2_impl_test_event_port_snkQueue2_B/consumer_queue_2_impl_test_event_port_snkQueue2_B.camkes";
+import "components/consumer_queue_5_impl_test_event_port_snkQueue5/consumer_queue_5_impl_test_event_port_snkQueue5.camkes";
 import "components/sb_Monitors/sb_snkDefault_s_Monitor/sb_snkDefault_s_Monitor.camkes";
 import "components/sb_Monitors/sb_snkQueue2_A_s_Monitor/sb_snkQueue2_A_s_Monitor.camkes";
 import "components/sb_Monitors/sb_snkQueue2_B_s_Monitor/sb_snkQueue2_B_s_Monitor.camkes";
@@ -15,11 +16,11 @@ import "components/dispatch_periodic/dispatch_periodic.camkes";
 
 assembly {
   composition {
-    component emitter_impl src;
-    component consumer_queue_default_impl snkDefault;
-    component consumer_queue_2_impl snkQueue2_A;
-    component consumer_queue_2_impl snkQueue2_B;
-    component consumer_queue_5_impl snkQueue5;
+    component emitter_impl_test_event_port_src test_event_port_src;
+    component consumer_queue_default_impl_test_event_port_snkDefault test_event_port_snkDefault;
+    component consumer_queue_2_impl_test_event_port_snkQueue2_A test_event_port_snkQueue2_A;
+    component consumer_queue_2_impl_test_event_port_snkQueue2_B test_event_port_snkQueue2_B;
+    component consumer_queue_5_impl_test_event_port_snkQueue5 test_event_port_snkQueue5;
     component sb_snkDefault_s_Monitor sb_snkdefault_s_monitor;
     component sb_snkQueue2_A_s_Monitor sb_snkqueue2_a_s_monitor;
     component sb_snkQueue2_B_s_Monitor sb_snkqueue2_b_s_monitor;
@@ -27,19 +28,19 @@ assembly {
     component dispatch_periodic dispatch_periodic_inst;
     component TimeServer time_server;
 
-    connection seL4RPCCall conn1(from src.sb_e0, to sb_snkdefault_s_monitor.mon_send);
-    connection seL4RPCCall conn2(from snkDefault.sb_s, to sb_snkdefault_s_monitor.mon_receive);
-    connection seL4Notification conn3(from sb_snkdefault_s_monitor.monsig, to snkDefault.sb_s_notification);
-    connection seL4RPCCall conn4(from src.sb_e1, to sb_snkqueue2_a_s_monitor.mon_send);
-    connection seL4RPCCall conn5(from snkQueue2_A.sb_s, to sb_snkqueue2_a_s_monitor.mon_receive);
-    connection seL4Notification conn6(from sb_snkqueue2_a_s_monitor.monsig, to snkQueue2_A.sb_s_notification);
-    connection seL4RPCCall conn7(from src.sb_e2, to sb_snkqueue2_b_s_monitor.mon_send);
-    connection seL4RPCCall conn8(from snkQueue2_B.sb_s, to sb_snkqueue2_b_s_monitor.mon_receive);
-    connection seL4Notification conn9(from sb_snkqueue2_b_s_monitor.monsig, to snkQueue2_B.sb_s_notification);
-    connection seL4RPCCall conn10(from src.sb_e3, to sb_snkqueue5_s_monitor.mon_send);
-    connection seL4RPCCall conn11(from snkQueue5.sb_s, to sb_snkqueue5_s_monitor.mon_receive);
-    connection seL4Notification conn12(from sb_snkqueue5_s_monitor.monsig, to snkQueue5.sb_s_notification);
-    connection seL4Notification conn13(from dispatch_periodic_inst.sb_src_periodic_dispatch_notification, to src.sb_periodic_dispatch_notification);
+    connection seL4RPCCall conn1(from test_event_port_src.sb_e0, to sb_snkdefault_s_monitor.mon_send);
+    connection seL4RPCCall conn2(from test_event_port_snkDefault.sb_s, to sb_snkdefault_s_monitor.mon_receive);
+    connection seL4Notification conn3(from sb_snkdefault_s_monitor.monsig, to test_event_port_snkDefault.sb_s_notification);
+    connection seL4RPCCall conn4(from test_event_port_src.sb_e1, to sb_snkqueue2_a_s_monitor.mon_send);
+    connection seL4RPCCall conn5(from test_event_port_snkQueue2_A.sb_s, to sb_snkqueue2_a_s_monitor.mon_receive);
+    connection seL4Notification conn6(from sb_snkqueue2_a_s_monitor.monsig, to test_event_port_snkQueue2_A.sb_s_notification);
+    connection seL4RPCCall conn7(from test_event_port_src.sb_e2, to sb_snkqueue2_b_s_monitor.mon_send);
+    connection seL4RPCCall conn8(from test_event_port_snkQueue2_B.sb_s, to sb_snkqueue2_b_s_monitor.mon_receive);
+    connection seL4Notification conn9(from sb_snkqueue2_b_s_monitor.monsig, to test_event_port_snkQueue2_B.sb_s_notification);
+    connection seL4RPCCall conn10(from test_event_port_src.sb_e3, to sb_snkqueue5_s_monitor.mon_send);
+    connection seL4RPCCall conn11(from test_event_port_snkQueue5.sb_s, to sb_snkqueue5_s_monitor.mon_receive);
+    connection seL4Notification conn12(from sb_snkqueue5_s_monitor.monsig, to test_event_port_snkQueue5.sb_s_notification);
+    connection seL4Notification conn13(from dispatch_periodic_inst.sb_test_event_port_src_periodic_dispatch_notification, to test_event_port_src.sb_periodic_dispatch_notification);
     connection seL4TimeServer conn14(from dispatch_periodic_inst.timer, to time_server.the_timer);
     connection seL4GlobalAsynchCallback conn15(from time_server.timer_notification, to dispatch_periodic_inst.timer_complete);
   }

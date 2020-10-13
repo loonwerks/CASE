@@ -1,0 +1,24 @@
+#ifndef DESTINATION_THREAD_IMPL_DESTINATION_PROCESS_COMPONENT_DESTINATION_THREAD_COMPONENT_API_H
+#define DESTINATION_THREAD_IMPL_DESTINATION_PROCESS_COMPONENT_DESTINATION_THREAD_COMPONENT_API_H
+
+#include <all.h>
+
+// This file was auto-generated.  Do not edit
+
+bool api_get_read_port__test_data_port_periodic_domains_test_data_port_periodic_domains_destination_thread_impl_destination_process_component_destination_thread_component(
+  STACK_FRAME
+  S8 *value);
+
+void api_logInfo__test_data_port_periodic_domains_test_data_port_periodic_domains_destination_thread_impl_destination_process_component_destination_thread_component(
+  STACK_FRAME
+  String str);
+
+void api_logDebug__test_data_port_periodic_domains_test_data_port_periodic_domains_destination_thread_impl_destination_process_component_destination_thread_component(
+  STACK_FRAME
+  String str);
+
+void api_logError__test_data_port_periodic_domains_test_data_port_periodic_domains_destination_thread_impl_destination_process_component_destination_thread_component(
+  STACK_FRAME
+  String str);
+
+#endif

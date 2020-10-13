@@ -1,0 +1,8 @@
+component emitter_impl_test_event_port_src {
+  include <sb_types.h>;
+  include <sb_event_counter.h>;
+  control;
+  emits ReceiveEvent sb_e;
+  dataport sb_event_counter_t sb_e_counter;
+  has semaphore sb_dispatch_sem;
+}

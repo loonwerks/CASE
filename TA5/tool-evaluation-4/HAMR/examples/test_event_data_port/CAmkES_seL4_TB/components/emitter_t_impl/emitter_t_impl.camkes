@@ -1,7 +1,0 @@
-import "../../interfaces/sb_Monitor_int8_t_1.idl4";
-component emitter_t_impl {
-  include <sb_types.h>;
-  control;
-  uses sb_Monitor_int8_t_1 sb_enq0;
-  has semaphore sb_dispatch_sem;
-}

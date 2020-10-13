@@ -1,0 +1,8 @@
+component RadioDriver_Impl_MCMP_PROC_SW_RADIO {
+  include <sb_types.h>;
+  include <sb_queue_SW__Command_Impl_1.h>;
+  control;
+  emits ReceiveEvent sb_recv_map_out_1_notification;
+  dataport sb_queue_SW__Command_Impl_1_t sb_recv_map_out_queue_1;
+  has semaphore sb_dispatch_sem;
+}

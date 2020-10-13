@@ -10,20 +10,20 @@ node [
 edge [
 ];
 
-src [
+test_event_data_port_src [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>src</B></TD></TR>
+      <TR><TD><B>test_event_data_port_src</B></TD></TR>
       <TR><TD PORT="sb_enq0"><FONT COLOR="orange"><B>sb_enq0</B></FONT></TD></TR>"
     </TABLE>
   >
   shape=plaintext
 ];
 
-dest [
+test_event_data_port_dest [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>dest</B></TD></TR>
+      <TR><TD><B>test_event_data_port_dest</B></TD></TR>
       <TR><TD PORT="sb_deq"><FONT COLOR="orange"><B>sb_deq</B></FONT></TD></TR>
       <TR><TD PORT="sb_deq_notification"><FONT COLOR="blue"><B>sb_deq_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -72,21 +72,21 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"src":sb_enq0 -> "sb_dest_deq_monitor":mon [
+"test_event_data_port_src":sb_enq0 -> "sb_dest_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn1
 
 ];
 
-"dest":sb_deq -> "sb_dest_deq_monitor":mon [
+"test_event_data_port_dest":sb_deq -> "sb_dest_deq_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn2
 
 ];
 
-"sb_dest_deq_monitor":monsig -> "dest":sb_deq_notification [
+"sb_dest_deq_monitor":monsig -> "test_event_data_port_dest":sb_deq_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3

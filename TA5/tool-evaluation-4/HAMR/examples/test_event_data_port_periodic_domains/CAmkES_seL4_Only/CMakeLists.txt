@@ -15,14 +15,14 @@ endif()
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/types)
 
-DeclareCAmkESComponent(emitter_t_impl
-  SOURCES components/emitter_t_impl//src/emitter.c components/emitter_t_impl/src/sb_emitter_t_impl.c types/src/sb_queue_int8_t_1.c
-  INCLUDES components/emitter_t_impl/includes/ types/includes
+DeclareCAmkESComponent(emitter_t_impl_src_process_src_thread
+  SOURCES components/emitter_t_impl_src_process_src_thread//src/emitter.c components/emitter_t_impl_src_process_src_thread/src/sb_emitter_t_impl.c types/src/sb_queue_int8_t_1.c
+  INCLUDES components/emitter_t_impl_src_process_src_thread/includes/ types/includes
 )
 
-DeclareCAmkESComponent(consumer_t_impl
-  SOURCES components/consumer_t_impl//src/consumer.c components/consumer_t_impl/src/sb_consumer_t_impl.c types/src/sb_queue_int8_t_1.c
-  INCLUDES components/consumer_t_impl/includes/ types/includes
+DeclareCAmkESComponent(consumer_t_impl_dst_process_dst_thread
+  SOURCES components/consumer_t_impl_dst_process_dst_thread//src/consumer.c components/consumer_t_impl_dst_process_dst_thread/src/sb_consumer_t_impl.c types/src/sb_queue_int8_t_1.c
+  INCLUDES components/consumer_t_impl_dst_process_dst_thread/includes/ types/includes
 )
 
 DeclareCAmkESRootserver(top_impl_Instance.camkes)

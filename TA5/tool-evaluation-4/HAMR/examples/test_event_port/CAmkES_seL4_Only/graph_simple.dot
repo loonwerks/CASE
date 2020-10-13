@@ -10,10 +10,10 @@ node [
 edge [
 ];
 
-src [
+test_event_port_src [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>src</B></TD></TR>
+      <TR><TD><B>test_event_port_src</B></TD></TR>
       <TR><TD PORT="sb_e_counter"><FONT COLOR="red"><B>sb_e_counter</B></FONT></TD></TR>
       <TR><TD PORT="sb_e"><FONT COLOR="blue"><B>sb_e</B></FONT></TD></TR>"
     </TABLE>
@@ -21,10 +21,10 @@ src [
   shape=plaintext
 ];
 
-snk [
+test_event_port_snk [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>snk</B></TD></TR>
+      <TR><TD><B>test_event_port_snk</B></TD></TR>
       <TR><TD PORT="sb_s_counter"><FONT COLOR="red"><B>sb_s_counter</B></FONT></TD></TR>
       <TR><TD PORT="sb_s"><FONT COLOR="blue"><B>sb_s</B></FONT></TD></TR>"
     </TABLE>
@@ -62,14 +62,14 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"src":sb_e -> "snk":sb_s [
+"test_event_port_src":sb_e -> "test_event_port_snk":sb_s [
   color="blue"
   //label = "seL4Notification"
   id = conn1
 
 ];
 
-"src":sb_e_counter -> "snk":sb_s_counter [
+"test_event_port_src":sb_e_counter -> "test_event_port_snk":sb_s_counter [
   color="red"
   //label = "seL4SharedData"
   id = conn2

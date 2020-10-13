@@ -1,0 +1,12 @@
+import "../../interfaces/AADLEvent_Sender.idl4";
+import <std_connector.camkes>;
+component emitter_impl_test_event_port_src {
+  include <sb_types.h>;
+  control;
+  uses AADLEvent_Sender sb_e0;
+  uses AADLEvent_Sender sb_e1;
+  uses AADLEvent_Sender sb_e2;
+  uses AADLEvent_Sender sb_e3;
+  consumes Notification sb_periodic_dispatch_notification;
+  has semaphore sb_dispatch_sem;
+}

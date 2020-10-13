@@ -10,10 +10,10 @@ node [
 edge [
 ];
 
-src_thread [
+src_process_src_thread [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>src_thread</B></TD></TR>
+      <TR><TD><B>src_process_src_thread</B></TD></TR>
       <TR><TD PORT="sb_write_port_queue_1"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_write_port_queue_1</B></FONT></TD></TR>
       <TR><TD PORT="sb_write_port_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_write_port_1_notification</B></FONT></TD></TR>
       <TR><TD PORT="sb_self_pacer_tick"><FONT COLOR="blue">emits TickTock <B>sb_self_pacer_tick</B></FONT></TD></TR>
@@ -23,10 +23,10 @@ src_thread [
   shape=plaintext
 ];
 
-dst_thread [
+dst_process_dst_thread [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>dst_thread</B></TD></TR>
+      <TR><TD><B>dst_process_dst_thread</B></TD></TR>
       <TR><TD PORT="sb_read_port_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_read_port_queue</B></FONT></TD></TR>
       <TR><TD PORT="sb_self_pacer_tick"><FONT COLOR="blue">emits TickTock <B>sb_self_pacer_tick</B></FONT></TD></TR>
       <TR><TD PORT="sb_read_port_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_read_port_notification</B></FONT></TD></TR>
@@ -66,28 +66,28 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"src_thread":sb_write_port_1_notification -> "dst_thread":sb_read_port_notification [
+"src_process_src_thread":sb_write_port_1_notification -> "dst_process_dst_thread":sb_read_port_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn1
 
 ];
 
-"src_thread":sb_write_port_queue_1 -> "dst_thread":sb_read_port_queue [
+"src_process_src_thread":sb_write_port_queue_1 -> "dst_process_dst_thread":sb_read_port_queue [
   color="red"
   //label = "seL4SharedData"
   id = conn2
 
 ];
 
-"src_thread":sb_self_pacer_tick -> "src_thread":sb_self_pacer_tock [
+"src_process_src_thread":sb_self_pacer_tick -> "src_process_src_thread":sb_self_pacer_tock [
   color="blue"
   //label = "seL4Notification"
   id = conn3
 
 ];
 
-"dst_thread":sb_self_pacer_tick -> "dst_thread":sb_self_pacer_tock [
+"dst_process_dst_thread":sb_self_pacer_tick -> "dst_process_dst_thread":sb_self_pacer_tock [
   color="blue"
   //label = "seL4Notification"
   id = conn4

@@ -7,6 +7,14 @@ public
 
 	data Coordinate
 	end Coordinate;
+	
+	data Address
+	end Address;
+	
+	data implementation Address.i
+		subcomponents
+			value: data Base_Types::Integer_8[4];
+	end Address.i;
 
 	data implementation Coordinate.Impl
 		-- This is the structure to hold the lat/long/alt values of a coordinate
@@ -243,7 +251,7 @@ public
 		const CASE_UAV_ID : int = 42;
 		fun VALID_MESSAGE(msg : RF_Msg.Impl) : bool = (msg.header.src > 0 and msg.header.dst = CASE_UAV_ID and msg.header.HMAC);
 		fun TRUSTED_MESSAGE(msg : RF_Msg.Impl) : bool = msg.header.trusted;
-		fun WELL_FORMED_MESSAGE(msg : RF_Msg.Impl) : bool = good_command(msg.payload);
+--		fun WELL_FORMED_MESSAGE(msg : RF_Msg.Impl) : bool = good_command(msg.payload);
 		-- These functions check the well-formedness of message structures
 		fun good_coordinate(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180 and coord.altitude >= 0 and coord.altitude <= 15000;
 		fun good_map(map : Map) : bool = forall wp in map, good_coordinate(wp);

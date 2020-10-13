@@ -1,0 +1,9 @@
+component emitter_t_impl_src_process_src_thread {
+  include <sb_types.h>;
+  include <sb_event_counter.h>;
+  control;
+  emits ReceiveEvent sb_emit;
+  emits TickTock sb_self_pacer_tick;
+  consumes TickTock sb_self_pacer_tock;
+  dataport sb_event_counter_t sb_emit_counter;
+}

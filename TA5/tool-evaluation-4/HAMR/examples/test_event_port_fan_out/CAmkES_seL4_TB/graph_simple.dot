@@ -10,10 +10,10 @@ node [
 edge [
 ];
 
-src [
+test_event_port_src [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>src</B></TD></TR>
+      <TR><TD><B>test_event_port_src</B></TD></TR>
       <TR><TD PORT="sb_e0"><FONT COLOR="orange"><B>sb_e0</B></FONT></TD></TR>
       <TR><TD PORT="sb_e1"><FONT COLOR="orange"><B>sb_e1</B></FONT></TD></TR>
       <TR><TD PORT="sb_e2"><FONT COLOR="orange"><B>sb_e2</B></FONT></TD></TR>
@@ -24,10 +24,10 @@ src [
   shape=plaintext
 ];
 
-snkDefault [
+test_event_port_snkDefault [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>snkDefault</B></TD></TR>
+      <TR><TD><B>test_event_port_snkDefault</B></TD></TR>
       <TR><TD PORT="sb_s"><FONT COLOR="orange"><B>sb_s</B></FONT></TD></TR>
       <TR><TD PORT="sb_s_notification"><FONT COLOR="blue"><B>sb_s_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -35,10 +35,10 @@ snkDefault [
   shape=plaintext
 ];
 
-snkQueue2_A [
+test_event_port_snkQueue2_A [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>snkQueue2_A</B></TD></TR>
+      <TR><TD><B>test_event_port_snkQueue2_A</B></TD></TR>
       <TR><TD PORT="sb_s"><FONT COLOR="orange"><B>sb_s</B></FONT></TD></TR>
       <TR><TD PORT="sb_s_notification"><FONT COLOR="blue"><B>sb_s_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -46,10 +46,10 @@ snkQueue2_A [
   shape=plaintext
 ];
 
-snkQueue2_B [
+test_event_port_snkQueue2_B [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>snkQueue2_B</B></TD></TR>
+      <TR><TD><B>test_event_port_snkQueue2_B</B></TD></TR>
       <TR><TD PORT="sb_s"><FONT COLOR="orange"><B>sb_s</B></FONT></TD></TR>
       <TR><TD PORT="sb_s_notification"><FONT COLOR="blue"><B>sb_s_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -57,10 +57,10 @@ snkQueue2_B [
   shape=plaintext
 ];
 
-snkQueue5 [
+test_event_port_snkQueue5 [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>snkQueue5</B></TD></TR>
+      <TR><TD><B>test_event_port_snkQueue5</B></TD></TR>
       <TR><TD PORT="sb_s"><FONT COLOR="orange"><B>sb_s</B></FONT></TD></TR>
       <TR><TD PORT="sb_s_notification"><FONT COLOR="blue"><B>sb_s_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -120,7 +120,7 @@ dispatch_periodic_inst [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>dispatch_periodic_inst</B></TD></TR>
-      <TR><TD PORT="sb_src_periodic_dispatch_notification"><FONT COLOR="blue"><B>sb_src_periodic_dispatch_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_test_event_port_src_periodic_dispatch_notification"><FONT COLOR="blue"><B>sb_test_event_port_src_periodic_dispatch_notification</B></FONT></TD></TR>
       <TR><TD PORT="timer"><FONT COLOR="orange"><B>timer</B></FONT></TD></TR>
       <TR><TD PORT="timer_complete"><FONT COLOR="blue"><B>timer_complete</B></FONT></TD></TR>"
     </TABLE>
@@ -158,91 +158,91 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"src":sb_e0 -> "sb_snkdefault_s_monitor":mon_send [
+"test_event_port_src":sb_e0 -> "sb_snkdefault_s_monitor":mon_send [
   color="orange"
   //label = "seL4RPCCall"
   id = conn1
 
 ];
 
-"snkDefault":sb_s -> "sb_snkdefault_s_monitor":mon_receive [
+"test_event_port_snkDefault":sb_s -> "sb_snkdefault_s_monitor":mon_receive [
   color="orange"
   //label = "seL4RPCCall"
   id = conn2
 
 ];
 
-"sb_snkdefault_s_monitor":monsig -> "snkDefault":sb_s_notification [
+"sb_snkdefault_s_monitor":monsig -> "test_event_port_snkDefault":sb_s_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3
 
 ];
 
-"src":sb_e1 -> "sb_snkqueue2_a_s_monitor":mon_send [
+"test_event_port_src":sb_e1 -> "sb_snkqueue2_a_s_monitor":mon_send [
   color="orange"
   //label = "seL4RPCCall"
   id = conn4
 
 ];
 
-"snkQueue2_A":sb_s -> "sb_snkqueue2_a_s_monitor":mon_receive [
+"test_event_port_snkQueue2_A":sb_s -> "sb_snkqueue2_a_s_monitor":mon_receive [
   color="orange"
   //label = "seL4RPCCall"
   id = conn5
 
 ];
 
-"sb_snkqueue2_a_s_monitor":monsig -> "snkQueue2_A":sb_s_notification [
+"sb_snkqueue2_a_s_monitor":monsig -> "test_event_port_snkQueue2_A":sb_s_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn6
 
 ];
 
-"src":sb_e2 -> "sb_snkqueue2_b_s_monitor":mon_send [
+"test_event_port_src":sb_e2 -> "sb_snkqueue2_b_s_monitor":mon_send [
   color="orange"
   //label = "seL4RPCCall"
   id = conn7
 
 ];
 
-"snkQueue2_B":sb_s -> "sb_snkqueue2_b_s_monitor":mon_receive [
+"test_event_port_snkQueue2_B":sb_s -> "sb_snkqueue2_b_s_monitor":mon_receive [
   color="orange"
   //label = "seL4RPCCall"
   id = conn8
 
 ];
 
-"sb_snkqueue2_b_s_monitor":monsig -> "snkQueue2_B":sb_s_notification [
+"sb_snkqueue2_b_s_monitor":monsig -> "test_event_port_snkQueue2_B":sb_s_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn9
 
 ];
 
-"src":sb_e3 -> "sb_snkqueue5_s_monitor":mon_send [
+"test_event_port_src":sb_e3 -> "sb_snkqueue5_s_monitor":mon_send [
   color="orange"
   //label = "seL4RPCCall"
   id = conn10
 
 ];
 
-"snkQueue5":sb_s -> "sb_snkqueue5_s_monitor":mon_receive [
+"test_event_port_snkQueue5":sb_s -> "sb_snkqueue5_s_monitor":mon_receive [
   color="orange"
   //label = "seL4RPCCall"
   id = conn11
 
 ];
 
-"sb_snkqueue5_s_monitor":monsig -> "snkQueue5":sb_s_notification [
+"sb_snkqueue5_s_monitor":monsig -> "test_event_port_snkQueue5":sb_s_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn12
 
 ];
 
-"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
+"dispatch_periodic_inst":sb_test_event_port_src_periodic_dispatch_notification -> "test_event_port_src":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn13

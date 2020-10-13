@@ -15,13 +15,13 @@ uint32_t aadl_calendar_counter = 0;
 
 void sb_thread_calendar() {
   if ((aadl_calendar_counter % (1000 / aadl_tick_interval)) == 0) {
-    sb_src_periodic_dispatch_notification_emit();
+    sb_test_data_port_periodic_src_periodic_dispatch_notification_emit();
   }
   if ((aadl_calendar_counter % (2000 / aadl_tick_interval)) == 0) {
-    sb_dest_A_periodic_dispatch_notification_emit();
+    sb_test_data_port_periodic_dest_A_periodic_dispatch_notification_emit();
   }
   if ((aadl_calendar_counter % (2000 / aadl_tick_interval)) == 0) {
-    sb_dest_B_periodic_dispatch_notification_emit();
+    sb_test_data_port_periodic_dest_B_periodic_dispatch_notification_emit();
   }
 
   aadl_calendar_counter++;

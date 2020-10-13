@@ -118,13 +118,13 @@ public
 			c7: port PROC_SW.uart_send -> UART_HW.send_data_in;
 			c8: port UART_HW.send_data_out -> uart_send;
 			c9: port wifi_recv -> WIFI_HW.recv_data_in;
-			c10: port WIFI_HW.recv_data_out -> PROC_SW.wifi_recv;
-			c11: port PROC_SW.wifi_send -> WIFI_HW.send_data_in;
+--			c10: port WIFI_HW.recv_data_out -> PROC_SW.wifi_recv;
+--			c11: port PROC_SW.wifi_send -> WIFI_HW.send_data_in;
 			c12: port WIFI_HW.send_data_out -> wifi_send;
 		properties
 			Actual_Processor_Binding => (reference (PROC_HW)) applies to PROC_SW;
 			Actual_Memory_Binding => (reference (MEM_HW)) applies to PROC_SW;
-			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
+			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7;--, c10, c11;
 		annex resolute {**
 			prove Req001_SW(this.PROC_SW)
 		**};

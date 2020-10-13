@@ -9,11 +9,11 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 520)">
 <title>g</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-520 1265,-520 1265,4 -4,4"/>
-<!-- src_thread -->
+<!-- src_process_src_thread -->
 <g id="node1" class="node">
-<title>src_thread</title>
+<title>src_process_src_thread</title>
 <polygon fill="none" stroke="#000000" points="267.5,-100 267.5,-124 744.5,-124 744.5,-100 267.5,-100"/>
-<text text-anchor="start" x="469.5" y="-109.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">src_thread</text>
+<text text-anchor="start" x="426.5" y="-109.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">src_process_src_thread</text>
 <polygon fill="none" stroke="#000000" points="267.5,-76 267.5,-100 744.5,-100 744.5,-76 267.5,-76"/>
 <text text-anchor="start" x="270.5" y="-85.2" font-family="Times,serif" font-size="16.00" fill="#ff0000">dataport sb_queue_union_art_DataContent_1_t </text>
 <text text-anchor="start" x="580.5" y="-85.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ff0000">sb_write_port_queue_1</text>
@@ -27,17 +27,17 @@
 <text text-anchor="start" x="374.5" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes TickTock </text>
 <text text-anchor="start" x="507.5" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_self_pacer_tock</text>
 </g>
-<!-- src_thread&#45;&gt;src_thread -->
+<!-- src_process_src_thread&#45;&gt;src_process_src_thread -->
 <g id="conn3" class="edge">
-<title>src_thread:sb_self_pacer_tick&#45;&gt;src_thread:sb_self_pacer_tock</title>
+<title>src_process_src_thread:sb_self_pacer_tick&#45;&gt;src_process_src_thread:sb_self_pacer_tock</title>
 <path fill="none" stroke="#0000ff" d="M267.2684,-45.7055C128.9549,-45.9304 0,-40.9712 0,-28 0,-15.3455 122.7351,-10.3165 257.1565,-10.2873"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="257.2659,-13.7873 267.2684,-10.2945 257.2709,-6.7873 257.2659,-13.7873"/>
 </g>
-<!-- dst_thread -->
+<!-- dst_process_dst_thread -->
 <g id="node2" class="node">
-<title>dst_thread</title>
+<title>dst_process_dst_thread</title>
 <polygon fill="none" stroke="#000000" points="796.5,-112 796.5,-136 1253.5,-136 1253.5,-112 796.5,-112"/>
-<text text-anchor="start" x="988" y="-121.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">dst_thread</text>
+<text text-anchor="start" x="945" y="-121.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">dst_process_dst_thread</text>
 <polygon fill="none" stroke="#000000" points="796.5,-88 796.5,-112 1253.5,-112 1253.5,-88 796.5,-88"/>
 <text text-anchor="start" x="799.5" y="-97.2" font-family="Times,serif" font-size="16.00" fill="#ff0000">dataport sb_queue_union_art_DataContent_1_t </text>
 <text text-anchor="start" x="1109.5" y="-97.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ff0000">sb_read_port_queue</text>
@@ -51,21 +51,21 @@
 <text text-anchor="start" x="893.5" y="-25.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes TickTock </text>
 <text text-anchor="start" x="1026.5" y="-25.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_self_pacer_tock</text>
 </g>
-<!-- src_thread&#45;&gt;dst_thread -->
+<!-- src_process_src_thread&#45;&gt;dst_process_dst_thread -->
 <g id="conn1" class="edge">
-<title>src_thread:sb_write_port_1_notification&#45;&gt;dst_thread:sb_read_port_notification</title>
+<title>src_process_src_thread:sb_write_port_1_notification&#45;&gt;dst_process_dst_thread:sb_read_port_notification</title>
 <path fill="none" stroke="#0000ff" d="M744.5,-64C764.3272,-64 770.7687,-55.6145 786.2037,-52.863"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="786.8273,-56.3231 796.5,-52 786.2426,-49.3476 786.8273,-56.3231"/>
 </g>
-<!-- src_thread&#45;&gt;dst_thread -->
+<!-- src_process_src_thread&#45;&gt;dst_process_dst_thread -->
 <g id="conn2" class="edge">
-<title>src_thread:sb_write_port_queue_1&#45;&gt;dst_thread:sb_read_port_queue</title>
+<title>src_process_src_thread:sb_write_port_queue_1&#45;&gt;dst_process_dst_thread:sb_read_port_queue</title>
 <path fill="none" stroke="#ff0000" d="M744.5,-88C764.3272,-88 770.7687,-96.3855 786.2037,-99.137"/>
 <polygon fill="#ff0000" stroke="#ff0000" points="786.2426,-102.6524 796.5,-100 786.8273,-95.6769 786.2426,-102.6524"/>
 </g>
-<!-- dst_thread&#45;&gt;dst_thread -->
+<!-- dst_process_dst_thread&#45;&gt;dst_process_dst_thread -->
 <g id="conn4" class="edge">
-<title>dst_thread:sb_self_pacer_tick&#45;&gt;dst_thread:sb_self_pacer_tock</title>
+<title>dst_process_dst_thread:sb_self_pacer_tick&#45;&gt;dst_process_dst_thread:sb_self_pacer_tock</title>
 <path fill="none" stroke="#0000ff" d="M796.4654,-81.0657C658.8319,-80.3835 529,-72.6572 529,-52 529,-31.8471 652.5698,-24.0015 786.4005,-22.9969"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="786.4874,-26.4965 796.4654,-22.9343 786.4438,-19.4967 786.4874,-26.4965"/>
 </g>

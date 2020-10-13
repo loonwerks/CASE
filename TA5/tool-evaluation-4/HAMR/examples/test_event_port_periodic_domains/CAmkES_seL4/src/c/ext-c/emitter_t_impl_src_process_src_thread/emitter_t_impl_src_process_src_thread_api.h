@@ -1,0 +1,22 @@
+#ifndef EMITTER_T_IMPL_SRC_PROCESS_SRC_THREAD_API_H
+#define EMITTER_T_IMPL_SRC_PROCESS_SRC_THREAD_API_H
+
+#include <all.h>
+
+// This file was auto-generated.  Do not edit
+
+void api_send_emit__test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_src_process_src_thread(STACK_FRAME);
+
+void api_logInfo__test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_src_process_src_thread(
+  STACK_FRAME
+  String str);
+
+void api_logDebug__test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_src_process_src_thread(
+  STACK_FRAME
+  String str);
+
+void api_logError__test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_src_process_src_thread(
+  STACK_FRAME
+  String str);
+
+#endif

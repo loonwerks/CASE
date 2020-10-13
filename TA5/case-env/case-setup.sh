@@ -4,18 +4,9 @@
 set -Eeuxo pipefail
 
 : "${BASE_DIR:=$HOME/CASE}"
-: "${GIT_USER:=Snail}"
-: "${GIT_EMAIL:=<>}"
-
-: "${SEL4_SCRIPTS_V:=759234c023b09fef9d7a1ea655c3a2ce8ede3a82}"
-: "${SEL4_V:=28831f579e3560bd3aa18a3898505f091d66b076}"
-: "${CAMKES_V:=e7f5c6da03fc8a71a5a2e503de9f9004acf3ef2a}"
-: "${SIREUM_V:=cc4d93ca921539fe084dbf9a48b781442d633a3a}"
+: "${SIREUM_V:=a1fbb147f5c1a73ec3ae1c78e194c40a73e232b8}"
 : "${FMIDE_V:=nightly}" # use nightly release by default
 
-export SCRIPT_DIR=$(cd -P $(dirname "$0") && pwd -P)
-export DESKTOP_MACHINE=no
-export MAKE_CACHES=no
 export DEBIAN_FRONTEND=noninteractive
 export SIREUM_HOME=$BASE_DIR/Sireum
 export PATH=$PATH:$HOME/bin:$SIREUM_HOME/bin/linux/java/bin:$SIREUM_HOME/bin:$BASE_DIR/camkes/build/capDL-tool
@@ -59,23 +50,9 @@ mkdir -p $BASE_DIR
 as_root apt-get update
 as_root apt install -y git
 
-# seL4 and friends
-cd $BASE_DIR
-git clone https://github.com/SEL4PROJ/seL4-CAmkES-L4v-dockerfiles
-SEL4_SCRIPTS=$BASE_DIR/seL4-CAmkES-L4v-dockerfiles/scripts
-cd $SEL4_SCRIPTS
-git checkout $SEL4_SCRIPTS_V
-cd $BASE_DIR
 
-git config --global user.name $GIT_USER
-git config --global user.email $GIT_EMAIL
-git config --global color.ui true
-
-bash $SEL4_SCRIPTS/base_tools.sh
-
-bash $SEL4_SCRIPTS/sel4.sh
-
-. $SEL4_SCRIPTS/utils/common.sh
+# seL4+friends (comment the next line to skip seL4 env installation)
+bash $HOME/bin/sel4.sh
 
 echo 'en_US.UTF-8 UTF-8' | as_root tee /etc/locale.gen > /dev/null
 as_root dpkg-reconfigure --frontend=noninteractive locales
@@ -83,18 +60,9 @@ echo "LANG=en_US.UTF-8" | as_root tee -a /etc/default/locale > /dev/null
 echo "export LANG=en_US.UTF-8" >> "$HOME/.bashrc"
 export LANG=en_US.UTF-8
 
-bash $SEL4_SCRIPTS/camkes.sh
-echo "export PATH=\$PATH:$BASE_DIR/camkes/build/capDL-tool" >> "$HOME/.bashrc"
-
-bash $SCRIPT_DIR/bin/sel4-cache.sh $SEL4_V
-bash $SCRIPT_DIR/bin/camkes-cache.sh $CAMKES_V
-
-git config --global --unset user.name $GIT_USER
-git config --global --unset user.email $GIT_EMAIL
-
 
 # Sireum
-bash $SCRIPT_DIR/bin/sireum-install.sh $SIREUM_V 
+bash $HOME/bin/sireum-install.sh $SIREUM_V 
 echo "export SIREUM_HOME=$SIREUM_HOME" >> "$HOME/.bashrc"
 echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
 echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin" >> "$HOME/.bashrc"

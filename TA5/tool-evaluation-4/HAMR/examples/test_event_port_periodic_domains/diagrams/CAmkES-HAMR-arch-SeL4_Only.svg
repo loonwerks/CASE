@@ -9,11 +9,11 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 520)">
 <title>g</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-520 901,-520 901,4 -4,4"/>
-<!-- src_thread -->
+<!-- src_process_src_thread -->
 <g id="node1" class="node">
-<title>src_thread</title>
+<title>src_process_src_thread</title>
 <polygon fill="none" stroke="#000000" points="194.5,-100 194.5,-124 501.5,-124 501.5,-100 194.5,-100"/>
-<text text-anchor="start" x="311.5" y="-109.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">src_thread</text>
+<text text-anchor="start" x="268.5" y="-109.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">src_process_src_thread</text>
 <polygon fill="none" stroke="#000000" points="194.5,-76 194.5,-100 501.5,-100 501.5,-76 194.5,-76"/>
 <text text-anchor="start" x="197.5" y="-85.2" font-family="Times,serif" font-size="16.00" fill="#ff0000">dataport sb_event_counter_t </text>
 <text text-anchor="start" x="384.5" y="-85.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ff0000">sb_emit_counter</text>
@@ -27,17 +27,17 @@
 <text text-anchor="start" x="216.5" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes TickTock </text>
 <text text-anchor="start" x="349.5" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_self_pacer_tock</text>
 </g>
-<!-- src_thread&#45;&gt;src_thread -->
+<!-- src_process_src_thread&#45;&gt;src_process_src_thread -->
 <g id="conn3" class="edge">
-<title>src_thread:sb_self_pacer_tick&#45;&gt;src_thread:sb_self_pacer_tock</title>
+<title>src_process_src_thread:sb_self_pacer_tick&#45;&gt;src_process_src_thread:sb_self_pacer_tock</title>
 <path fill="none" stroke="#0000ff" d="M194.1184,-45.6619C95.1956,-46.2731 0,-41.4326 0,-28 0,-15.0265 88.7993,-10.0678 183.9916,-10.2946"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="184.1034,-13.795 194.1184,-10.3381 184.1335,-6.7951 184.1034,-13.795"/>
 </g>
-<!-- dst_thread -->
+<!-- dst_process_dst_thread -->
 <g id="node2" class="node">
-<title>dst_thread</title>
+<title>dst_process_dst_thread</title>
 <polygon fill="none" stroke="#000000" points="553,-112 553,-136 889,-136 889,-112 553,-112"/>
-<text text-anchor="start" x="684" y="-121.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">dst_thread</text>
+<text text-anchor="start" x="641" y="-121.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">dst_process_dst_thread</text>
 <polygon fill="none" stroke="#000000" points="553,-88 553,-112 889,-112 889,-88 553,-88"/>
 <text text-anchor="start" x="556" y="-97.2" font-family="Times,serif" font-size="16.00" fill="#ff0000">dataport sb_event_counter_t </text>
 <text text-anchor="start" x="743" y="-97.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ff0000">sb_consume_counter</text>
@@ -51,21 +51,21 @@
 <text text-anchor="start" x="589.5" y="-25.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes TickTock </text>
 <text text-anchor="start" x="722.5" y="-25.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_self_pacer_tock</text>
 </g>
-<!-- src_thread&#45;&gt;dst_thread -->
+<!-- src_process_src_thread&#45;&gt;dst_process_dst_thread -->
 <g id="conn1" class="edge">
-<title>src_thread:sb_emit&#45;&gt;dst_thread:sb_consume</title>
+<title>src_process_src_thread:sb_emit&#45;&gt;dst_process_dst_thread:sb_consume</title>
 <path fill="none" stroke="#0000ff" d="M501.5,-64C521.1462,-64 527.5112,-55.6145 542.7995,-52.863"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="543.3307,-56.3307 553,-52 542.7405,-49.3556 543.3307,-56.3307"/>
 </g>
-<!-- src_thread&#45;&gt;dst_thread -->
+<!-- src_process_src_thread&#45;&gt;dst_process_dst_thread -->
 <g id="conn2" class="edge">
-<title>src_thread:sb_emit_counter&#45;&gt;dst_thread:sb_consume_counter</title>
+<title>src_process_src_thread:sb_emit_counter&#45;&gt;dst_process_dst_thread:sb_consume_counter</title>
 <path fill="none" stroke="#ff0000" d="M501.5,-88C521.1462,-88 527.5112,-96.3855 542.7995,-99.137"/>
 <polygon fill="#ff0000" stroke="#ff0000" points="542.7405,-102.6444 553,-100 543.3307,-95.6693 542.7405,-102.6444"/>
 </g>
-<!-- dst_thread&#45;&gt;dst_thread -->
+<!-- dst_process_dst_thread&#45;&gt;dst_process_dst_thread -->
 <g id="conn4" class="edge">
-<title>dst_thread:sb_self_pacer_tick&#45;&gt;dst_thread:sb_self_pacer_tock</title>
+<title>dst_process_dst_thread:sb_self_pacer_tick&#45;&gt;dst_process_dst_thread:sb_self_pacer_tock</title>
 <path fill="none" stroke="#0000ff" d="M552.9641,-81.0592C452.9765,-80.3352 359,-72.5928 359,-52 359,-32.1111 446.6621,-24.2091 542.7361,-23.0399"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="542.9985,-26.5376 552.9641,-22.9408 542.9307,-19.538 542.9985,-26.5376"/>
 </g>

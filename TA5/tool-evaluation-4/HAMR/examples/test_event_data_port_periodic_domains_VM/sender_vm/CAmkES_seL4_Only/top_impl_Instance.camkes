@@ -1,6 +1,5 @@
 // This file will be regenerated, do not edit
 
-#include <configurations/vm.h>
 import <std_connector.camkes>;
 import <global-connectors.camkes>;
 import <seL4VMDTBPassthrough.idl4>;
@@ -11,26 +10,30 @@ import <TimeServer/TimeServer.camkes>;
 import <vm-connectors.camkes>;
 import <devices.camkes>;
 import "components/Pacer/Pacer.camkes";
-import "components/VM_emitter_t_impl/VM_emitter_t_impl.camkes";
-import "components/consumer_t_impl/consumer_t_impl.camkes";
+import "components/VM_emitter_t_impl_src_process_src_thread/VM_emitter_t_impl_src_process_src_thread.camkes";
+import "components/consumer_t_impl_dst_process_dst_thread/consumer_t_impl_dst_process_dst_thread.camkes";
 
 assembly {
   composition {
-    component VM_emitter_t_impl vmsrc_process;
-    component consumer_t_impl dst_thread;
+    component VM_emitter_t_impl_src_process_src_thread vmsrc_process;
+    component FileServer fserv;
+    component SerialServer serial;
+    component TimeServer time_server;
+    component consumer_t_impl_dst_process_dst_thread dst_process_dst_thread;
     component Pacer pacer;
 
     connection seL4VMDTBPassthrough conn1(from vmsrc_process.dtb_self, to vmsrc_process.dtb);
-    connection seL4Notification conn2(from vmsrc_process.sb_write_port_1_notification, to dst_thread.sb_read_port_notification);
-    connection seL4SharedDataWithCaps conn3(from vmsrc_process.sb_write_port_queue_1, to dst_thread.sb_read_port_queue);
+    connection seL4RPCDataport fsvmsrc_process(from vmsrc_process.fs, to fserv.fs_ctrl);
+    connection seL4GlobalAsynch notify_ready_vmsrc_process(from vmsrc_process.notification_ready_connector, to vmsrc_process.notification_ready);
+    connection seL4TimeServer serialserver_timer(from serial.timeout, to time_server.the_timer);
+    connection seL4SerialServer serial_vmsrc_process(from vmsrc_process.batch, to serial.processed_batch);
+    connection seL4SerialServer serial_input_vmsrc_process(from vmsrc_process.serial_getchar, to serial.getchar);
+    connection seL4Notification conn2(from vmsrc_process.sb_write_port_1_notification, to dst_process_dst_thread.sb_read_port_notification);
+    connection seL4SharedDataWithCaps conn3(from vmsrc_process.sb_write_port_queue_1, to dst_process_dst_thread.sb_read_port_queue);
     connection seL4Notification conn4(from pacer.tick, to pacer.tock);
     connection seL4GlobalAsynch conn5(from pacer.period_to_vmsrc_process_notification, to vmsrc_process.sb_pacer_period_notification);
     connection seL4SharedDataWithCaps conn6(from pacer.period_to_vmsrc_process_queue, to vmsrc_process.sb_pacer_period_queue);
-    connection seL4Notification conn7(from pacer.period, to dst_thread.sb_pacer_notification);
-    VM_GENERAL_COMPOSITION_DEF()
-    VM_COMPONENT_CONNECTIONS_DEF(src_process)
-    VM_VIRTUAL_SERIAL_COMPONENTS_DEF()
-    PER_VM_VIRTUAL_SERIAL_CONNECTIONS_DEF(src_process)
+    connection seL4Notification conn7(from pacer.period, to dst_process_dst_thread.sb_pacer_notification);
   }
 
   configuration {
@@ -40,13 +43,23 @@ assembly {
     vmsrc_process.num_extra_frame_caps = 0;
     vmsrc_process.extra_frame_map_address = 0;
     vmsrc_process._domain = 2;
-    dst_thread._domain = 3;
-    dst_thread.sb_read_port_queue_access = "R";
+    dst_process_dst_thread._domain = 3;
+    dst_process_dst_thread.sb_read_port_queue_access = "R";
     pacer._domain = 1;
 
-    VM_GENERAL_CONFIGURATION_DEF()
-    VM_CONFIGURATION_DEF(src_process)
-    VM_VIRTUAL_SERIAL_GENERAL_CONFIGURATION_DEF()
-    PER_VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(src_process)
+    fserv.heap_size = 165536;
+    vmsrc_process.fs_shmem_size = 0x100000;
+    vmsrc_process.global_endpoint_base = 1 << 27;
+    vmsrc_process.asid_pool = true;
+    vmsrc_process.simple = true;
+    vmsrc_process.base_prio = 100;
+    vmsrc_process._priority = 101;
+    vmsrc_process.sem_value = 0;
+    vmsrc_process.heap_size = 0x300000;
+    time_server.timers_per_client = 1;
+    time_server.priority = 255;
+    time_server.simple = true;
+    vmsrc_process.serial_getchar_shmem_size = 0x1000;
+    vmsrc_process.batch_shmem_size = 0x1000;
   }
 }

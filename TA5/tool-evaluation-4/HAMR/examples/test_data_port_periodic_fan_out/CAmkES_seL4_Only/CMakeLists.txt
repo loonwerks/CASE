@@ -17,19 +17,19 @@ includeGlobalComponents()
 
 add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/types)
 
-DeclareCAmkESComponent(source_t_impl
-  SOURCES components/source_t_impl//src/source.c components/source_t_impl/src/sb_source_t_impl.c types/src/sp_int8_t.c
-  INCLUDES components/source_t_impl/includes/ types/includes types/includes
+DeclareCAmkESComponent(source_t_impl_test_data_port_periodic_src
+  SOURCES components/source_t_impl_test_data_port_periodic_src//src/source.c components/source_t_impl_test_data_port_periodic_src/src/sb_source_t_impl.c types/src/sp_int8_t.c
+  INCLUDES components/source_t_impl_test_data_port_periodic_src/includes/ types/includes types/includes
 )
 
-DeclareCAmkESComponent(destination_t_impl
-  SOURCES components/destination_t_impl//src/destination.c components/destination_t_impl/src/sb_destination_t_impl.c types/src/sp_int8_t.c
-  INCLUDES components/destination_t_impl/includes/ types/includes types/includes
+DeclareCAmkESComponent(destination_t_impl_test_data_port_periodic_dest_A
+  SOURCES components/destination_t_impl_test_data_port_periodic_dest_A//src/destination.c components/destination_t_impl_test_data_port_periodic_dest_A/src/sb_destination_t_impl.c types/src/sp_int8_t.c
+  INCLUDES components/destination_t_impl_test_data_port_periodic_dest_A/includes/ types/includes types/includes
 )
 
-DeclareCAmkESComponent(destination_t_impl
-  SOURCES components/destination_t_impl//src/destination.c components/destination_t_impl/src/sb_destination_t_impl.c types/src/sp_int8_t.c
-  INCLUDES components/destination_t_impl/includes/ types/includes types/includes
+DeclareCAmkESComponent(destination_t_impl_test_data_port_periodic_dest_B
+  SOURCES components/destination_t_impl_test_data_port_periodic_dest_B//src/destination.c components/destination_t_impl_test_data_port_periodic_dest_B/src/sb_destination_t_impl.c types/src/sp_int8_t.c
+  INCLUDES components/destination_t_impl_test_data_port_periodic_dest_B/includes/ types/includes types/includes
 )
 
 DeclareCAmkESComponent(dispatch_periodic

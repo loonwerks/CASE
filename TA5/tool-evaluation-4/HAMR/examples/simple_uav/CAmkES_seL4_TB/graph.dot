@@ -10,20 +10,20 @@ node [
 edge [
 ];
 
-RADIO [
+MCMP_PROC_SW_RADIO [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>RADIO</B></TD></TR>
+      <TR><TD><B>MCMP_PROC_SW_RADIO</B></TD></TR>
       <TR><TD PORT="sb_recv_map_out0"><FONT COLOR="orange">uses sb_Monitor_SW__Command_Impl_1 <B>sb_recv_map_out0</B></FONT></TD></TR>"
     </TABLE>
   >
   shape=plaintext
 ];
 
-FPLN [
+MCMP_PROC_SW_FPLN [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>FPLN</B></TD></TR>
+      <TR><TD><B>MCMP_PROC_SW_FPLN</B></TD></TR>
       <TR><TD PORT="sb_flight_plan0"><FONT COLOR="orange">uses sb_Monitor_SW__Mission_1 <B>sb_flight_plan0</B></FONT></TD></TR>
       <TR><TD PORT="sb_mission_rcv"><FONT COLOR="orange">uses sb_Monitor_bool_1 <B>sb_mission_rcv</B></FONT></TD></TR>
       <TR><TD PORT="sb_recv_map"><FONT COLOR="orange">uses sb_Monitor_SW__Command_Impl_1 <B>sb_recv_map</B></FONT></TD></TR>
@@ -34,10 +34,10 @@ FPLN [
   shape=plaintext
 ];
 
-WPM [
+MCMP_PROC_SW_WPM [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>WPM</B></TD></TR>
+      <TR><TD><B>MCMP_PROC_SW_WPM</B></TD></TR>
       <TR><TD PORT="sb_flight_plan"><FONT COLOR="orange">uses sb_Monitor_SW__Mission_1 <B>sb_flight_plan</B></FONT></TD></TR>
       <TR><TD PORT="sb_mission_rcv0"><FONT COLOR="orange">uses sb_Monitor_bool_1 <B>sb_mission_rcv0</B></FONT></TD></TR>
       <TR><TD PORT="sb_mission_window0"><FONT COLOR="orange">uses sb_Monitor_SW__MissionWindow_1 <B>sb_mission_window0</B></FONT></TD></TR>
@@ -49,10 +49,10 @@ WPM [
   shape=plaintext
 ];
 
-UART [
+MCMP_PROC_SW_UART [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>UART</B></TD></TR>
+      <TR><TD><B>MCMP_PROC_SW_UART</B></TD></TR>
       <TR><TD PORT="sb_mission_window"><FONT COLOR="orange">uses sb_Monitor_SW__MissionWindow_1 <B>sb_mission_window</B></FONT></TD></TR>
       <TR><TD PORT="sb_tracking_id0"><FONT COLOR="orange">uses sb_Monitor_int64_t_1 <B>sb_tracking_id0</B></FONT></TD></TR>
       <TR><TD PORT="sb_mission_window_notification"><FONT COLOR="blue">consumes QueuedData <B>sb_mission_window_notification</B></FONT></TD></TR>"
@@ -146,105 +146,105 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"RADIO":sb_recv_map_out0 -> "sb_fpln_recv_map_monitor":mon [
+"MCMP_PROC_SW_RADIO":sb_recv_map_out0 -> "sb_fpln_recv_map_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn1
 
 ];
 
-"FPLN":sb_recv_map -> "sb_fpln_recv_map_monitor":mon [
+"MCMP_PROC_SW_FPLN":sb_recv_map -> "sb_fpln_recv_map_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn2
 
 ];
 
-"sb_fpln_recv_map_monitor":monsig -> "FPLN":sb_recv_map_notification [
+"sb_fpln_recv_map_monitor":monsig -> "MCMP_PROC_SW_FPLN":sb_recv_map_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3
 
 ];
 
-"FPLN":sb_flight_plan0 -> "sb_wpm_flight_plan_monitor":mon [
+"MCMP_PROC_SW_FPLN":sb_flight_plan0 -> "sb_wpm_flight_plan_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn4
 
 ];
 
-"WPM":sb_flight_plan -> "sb_wpm_flight_plan_monitor":mon [
+"MCMP_PROC_SW_WPM":sb_flight_plan -> "sb_wpm_flight_plan_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn5
 
 ];
 
-"sb_wpm_flight_plan_monitor":monsig -> "WPM":sb_flight_plan_notification [
+"sb_wpm_flight_plan_monitor":monsig -> "MCMP_PROC_SW_WPM":sb_flight_plan_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn6
 
 ];
 
-"WPM":sb_mission_rcv0 -> "sb_fpln_mission_rcv_monitor":mon [
+"MCMP_PROC_SW_WPM":sb_mission_rcv0 -> "sb_fpln_mission_rcv_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn7
 
 ];
 
-"FPLN":sb_mission_rcv -> "sb_fpln_mission_rcv_monitor":mon [
+"MCMP_PROC_SW_FPLN":sb_mission_rcv -> "sb_fpln_mission_rcv_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn8
 
 ];
 
-"sb_fpln_mission_rcv_monitor":monsig -> "FPLN":sb_mission_rcv_notification [
+"sb_fpln_mission_rcv_monitor":monsig -> "MCMP_PROC_SW_FPLN":sb_mission_rcv_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn9
 
 ];
 
-"WPM":sb_mission_window0 -> "sb_uart_mission_window_monitor":mon [
+"MCMP_PROC_SW_WPM":sb_mission_window0 -> "sb_uart_mission_window_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn10
 
 ];
 
-"UART":sb_mission_window -> "sb_uart_mission_window_monitor":mon [
+"MCMP_PROC_SW_UART":sb_mission_window -> "sb_uart_mission_window_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn11
 
 ];
 
-"sb_uart_mission_window_monitor":monsig -> "UART":sb_mission_window_notification [
+"sb_uart_mission_window_monitor":monsig -> "MCMP_PROC_SW_UART":sb_mission_window_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn12
 
 ];
 
-"UART":sb_tracking_id0 -> "sb_wpm_tracking_id_monitor":mon [
+"MCMP_PROC_SW_UART":sb_tracking_id0 -> "sb_wpm_tracking_id_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn13
 
 ];
 
-"WPM":sb_tracking_id -> "sb_wpm_tracking_id_monitor":mon [
+"MCMP_PROC_SW_WPM":sb_tracking_id -> "sb_wpm_tracking_id_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn14
 
 ];
 
-"sb_wpm_tracking_id_monitor":monsig -> "WPM":sb_tracking_id_notification [
+"sb_wpm_tracking_id_monitor":monsig -> "MCMP_PROC_SW_WPM":sb_tracking_id_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn15

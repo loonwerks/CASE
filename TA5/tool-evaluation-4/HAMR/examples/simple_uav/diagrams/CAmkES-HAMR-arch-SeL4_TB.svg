@@ -9,11 +9,11 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 683.7005)">
 <title>g</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-683.7005 3281,-683.7005 3281,4 -4,4"/>
-<!-- RADIO -->
+<!-- MCMP_PROC_SW_RADIO -->
 <g id="node1" class="node">
-<title>RADIO</title>
+<title>MCMP_PROC_SW_RADIO</title>
 <polygon fill="none" stroke="#000000" points="8.5,-263.7005 8.5,-287.7005 427.5,-287.7005 427.5,-263.7005 8.5,-263.7005"/>
-<text text-anchor="start" x="191.5" y="-272.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">RADIO</text>
+<text text-anchor="start" x="118.5" y="-272.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">MCMP_PROC_SW_RADIO</text>
 <polygon fill="none" stroke="#000000" points="8.5,-239.7005 8.5,-263.7005 427.5,-263.7005 427.5,-239.7005 8.5,-239.7005"/>
 <text text-anchor="start" x="11.5" y="-248.9005" font-family="Times,serif" font-size="16.00" fill="#ffa500">uses sb_Monitor_SW__Command_Impl_1 </text>
 <text text-anchor="start" x="294.5" y="-248.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">sb_recv_map_out0</text>
@@ -30,17 +30,17 @@
 <text text-anchor="start" x="482" y="-248.9005" font-family="Times,serif" font-size="16.00" fill="#ffa500">provides sb_Monitor_SW__Command_Impl_1 </text>
 <text text-anchor="start" x="793" y="-248.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">mon</text>
 </g>
-<!-- RADIO&#45;&gt;sb_fpln_recv_map_monitor -->
+<!-- MCMP_PROC_SW_RADIO&#45;&gt;sb_fpln_recv_map_monitor -->
 <g id="conn1" class="edge">
-<title>RADIO:sb_recv_map_out0&#45;&gt;sb_fpln_recv_map_monitor:mon</title>
+<title>MCMP_PROC_SW_RADIO:sb_recv_map_out0&#45;&gt;sb_fpln_recv_map_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M427.5,-251.7005C446.6337,-251.7005 453.7714,-251.7005 468.969,-251.7005"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="469,-255.2006 479,-251.7005 469,-248.2006 469,-255.2006"/>
 </g>
-<!-- FPLN -->
+<!-- MCMP_PROC_SW_FPLN -->
 <g id="node2" class="node">
-<title>FPLN</title>
+<title>MCMP_PROC_SW_FPLN</title>
 <polygon fill="none" stroke="#000000" points="879,-347.7005 879,-371.7005 1259,-371.7005 1259,-347.7005 879,-347.7005"/>
-<text text-anchor="start" x="1048" y="-356.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">FPLN</text>
+<text text-anchor="start" x="975.5" y="-356.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">MCMP_PROC_SW_FPLN</text>
 <polygon fill="none" stroke="#000000" points="879,-323.7005 879,-347.7005 1259,-347.7005 1259,-323.7005 879,-323.7005"/>
 <text text-anchor="start" x="901" y="-332.9005" font-family="Times,serif" font-size="16.00" fill="#ffa500">uses sb_Monitor_SW__Mission_1 </text>
 <text text-anchor="start" x="1129" y="-332.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">sb_flight_plan0</text>
@@ -57,9 +57,9 @@
 <text text-anchor="start" x="905" y="-236.9005" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes QueuedData </text>
 <text text-anchor="start" x="1055" y="-236.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_recv_map_notification</text>
 </g>
-<!-- FPLN&#45;&gt;sb_fpln_recv_map_monitor -->
+<!-- MCMP_PROC_SW_FPLN&#45;&gt;sb_fpln_recv_map_monitor -->
 <g id="conn2" class="edge">
-<title>FPLN:sb_recv_map&#45;&gt;sb_fpln_recv_map_monitor:mon</title>
+<title>MCMP_PROC_SW_FPLN:sb_recv_map&#45;&gt;sb_fpln_recv_map_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M879,-287.7005C854.8437,-287.7005 854.562,-261.1136 837.1205,-253.636"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="837.4795,-250.1413 827,-251.7005 836.1645,-257.0167 837.4795,-250.1413"/>
 </g>
@@ -75,9 +75,9 @@
 <text text-anchor="start" x="1314.5" y="-178.9005" font-family="Times,serif" font-size="16.00" fill="#ffa500">provides sb_Monitor_SW__Mission_1 </text>
 <text text-anchor="start" x="1570.5" y="-178.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">mon</text>
 </g>
-<!-- FPLN&#45;&gt;sb_wpm_flight_plan_monitor -->
+<!-- MCMP_PROC_SW_FPLN&#45;&gt;sb_wpm_flight_plan_monitor -->
 <g id="conn4" class="edge">
-<title>FPLN:sb_flight_plan0&#45;&gt;sb_wpm_flight_plan_monitor:mon</title>
+<title>MCMP_PROC_SW_FPLN:sb_flight_plan0&#45;&gt;sb_wpm_flight_plan_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M1259,-335.7005C1327.4991,-335.7005 1248.4466,-197.5144 1301.3836,-182.9401"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="1302,-186.3908 1311.5,-181.7005 1301.1485,-179.4428 1302,-186.3908"/>
 </g>
@@ -93,17 +93,17 @@
 <text text-anchor="start" x="2204.5" y="-262.9005" font-family="Times,serif" font-size="16.00" fill="#ffa500">provides sb_Monitor_bool_1 </text>
 <text text-anchor="start" x="2397.5" y="-262.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">mon</text>
 </g>
-<!-- FPLN&#45;&gt;sb_fpln_mission_rcv_monitor -->
+<!-- MCMP_PROC_SW_FPLN&#45;&gt;sb_fpln_mission_rcv_monitor -->
 <g id="conn8" class="edge">
-<title>FPLN:sb_mission_rcv&#45;&gt;sb_fpln_mission_rcv_monitor:mon</title>
+<title>MCMP_PROC_SW_FPLN:sb_mission_rcv&#45;&gt;sb_fpln_mission_rcv_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M1259,-311.7005C1632.0414,-311.7005 1727.5977,-331.9953 2098,-287.7005 2141.047,-282.5527 2152.7193,-268.1994 2191.1246,-265.9881"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="2191.6009,-269.4763 2201.5,-265.7005 2191.4068,-262.479 2191.6009,-269.4763"/>
 </g>
-<!-- WPM -->
+<!-- MCMP_PROC_SW_WPM -->
 <g id="node3" class="node">
-<title>WPM</title>
+<title>MCMP_PROC_SW_WPM</title>
 <polygon fill="none" stroke="#000000" points="1656,-205.7005 1656,-229.7005 2090,-229.7005 2090,-205.7005 1656,-205.7005"/>
-<text text-anchor="start" x="1852.5" y="-214.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">WPM</text>
+<text text-anchor="start" x="1779.5" y="-214.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">MCMP_PROC_SW_WPM</text>
 <polygon fill="none" stroke="#000000" points="1656,-181.7005 1656,-205.7005 2090,-205.7005 2090,-181.7005 1656,-181.7005"/>
 <text text-anchor="start" x="1709" y="-190.9005" font-family="Times,serif" font-size="16.00" fill="#ffa500">uses sb_Monitor_SW__Mission_1 </text>
 <text text-anchor="start" x="1937" y="-190.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">sb_flight_plan</text>
@@ -123,15 +123,15 @@
 <text text-anchor="start" x="1703" y="-70.9005" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes QueuedData </text>
 <text text-anchor="start" x="1853" y="-70.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_tracking_id_notification</text>
 </g>
-<!-- WPM&#45;&gt;sb_wpm_flight_plan_monitor -->
+<!-- MCMP_PROC_SW_WPM&#45;&gt;sb_wpm_flight_plan_monitor -->
 <g id="conn5" class="edge">
-<title>WPM:sb_flight_plan&#45;&gt;sb_wpm_flight_plan_monitor:mon</title>
+<title>MCMP_PROC_SW_WPM:sb_flight_plan&#45;&gt;sb_wpm_flight_plan_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M1656,-193.7005C1636.3538,-193.7005 1629.9888,-185.315 1614.7005,-182.5635"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="1614.7595,-179.0561 1604.5,-181.7005 1614.1693,-186.0312 1614.7595,-179.0561"/>
 </g>
-<!-- WPM&#45;&gt;sb_fpln_mission_rcv_monitor -->
+<!-- MCMP_PROC_SW_WPM&#45;&gt;sb_fpln_mission_rcv_monitor -->
 <g id="conn7" class="edge">
-<title>WPM:sb_mission_rcv0&#45;&gt;sb_fpln_mission_rcv_monitor:mon</title>
+<title>MCMP_PROC_SW_WPM:sb_mission_rcv0&#45;&gt;sb_fpln_mission_rcv_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M2090,-169.7005C2125.2543,-169.7005 2107.0476,-212.9753 2134,-235.7005 2156.2554,-254.4654 2166.3026,-263.54 2191.1821,-265.3552"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="2191.3885,-268.864 2201.5,-265.7005 2191.6227,-261.8679 2191.3885,-268.864"/>
 </g>
@@ -147,9 +147,9 @@
 <text text-anchor="start" x="2145.5" y="-126.9005" font-family="Times,serif" font-size="16.00" fill="#ffa500">provides sb_Monitor_SW__MissionWindow_1 </text>
 <text text-anchor="start" x="2457.5" y="-126.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">mon</text>
 </g>
-<!-- WPM&#45;&gt;sb_uart_mission_window_monitor -->
+<!-- MCMP_PROC_SW_WPM&#45;&gt;sb_uart_mission_window_monitor -->
 <g id="conn10" class="edge">
-<title>WPM:sb_mission_window0&#45;&gt;sb_uart_mission_window_monitor:mon</title>
+<title>MCMP_PROC_SW_WPM:sb_mission_window0&#45;&gt;sb_uart_mission_window_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M2090,-145.7005C2110.5815,-145.7005 2116.4416,-134.3099 2132.4226,-130.7503"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="2132.9165,-134.2179 2142.5,-129.7005 2132.1911,-127.2556 2132.9165,-134.2179"/>
 </g>
@@ -165,17 +165,17 @@
 <text text-anchor="start" x="3024" y="-126.9005" font-family="Times,serif" font-size="16.00" fill="#ffa500">provides sb_Monitor_int64_t_1 </text>
 <text text-anchor="start" x="3235" y="-126.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">mon</text>
 </g>
-<!-- WPM&#45;&gt;sb_wpm_tracking_id_monitor -->
+<!-- MCMP_PROC_SW_WPM&#45;&gt;sb_wpm_tracking_id_monitor -->
 <g id="conn14" class="edge">
-<title>WPM:sb_tracking_id&#45;&gt;sb_wpm_tracking_id_monitor:mon</title>
+<title>MCMP_PROC_SW_WPM:sb_tracking_id&#45;&gt;sb_wpm_tracking_id_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M2090,-121.7005C2110.9644,-121.7005 2113.5149,-109.1576 2134,-104.7005 2500.2497,-25.0132 2634.6894,71.9833 2977,-80.7005 2999.9718,-90.9468 2994.3398,-119.77 3010.8779,-127.6739"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="3010.5075,-131.1691 3021,-129.7005 3011.8817,-124.3054 3010.5075,-131.1691"/>
 </g>
-<!-- UART -->
+<!-- MCMP_PROC_SW_UART -->
 <g id="node4" class="node">
-<title>UART</title>
+<title>MCMP_PROC_SW_UART</title>
 <polygon fill="none" stroke="#000000" points="2543,-165.7005 2543,-189.7005 2969,-189.7005 2969,-165.7005 2543,-165.7005"/>
-<text text-anchor="start" x="2733.5" y="-174.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">UART</text>
+<text text-anchor="start" x="2661" y="-174.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">MCMP_PROC_SW_UART</text>
 <polygon fill="none" stroke="#000000" points="2543,-141.7005 2543,-165.7005 2969,-165.7005 2969,-141.7005 2543,-141.7005"/>
 <text text-anchor="start" x="2546" y="-150.9005" font-family="Times,serif" font-size="16.00" fill="#ffa500">uses sb_Monitor_SW__MissionWindow_1 </text>
 <text text-anchor="start" x="2829" y="-150.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ffa500">sb_mission_window</text>
@@ -186,45 +186,45 @@
 <text text-anchor="start" x="2569" y="-102.9005" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes QueuedData </text>
 <text text-anchor="start" x="2719" y="-102.9005" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_mission_window_notification</text>
 </g>
-<!-- UART&#45;&gt;sb_uart_mission_window_monitor -->
+<!-- MCMP_PROC_SW_UART&#45;&gt;sb_uart_mission_window_monitor -->
 <g id="conn11" class="edge">
-<title>UART:sb_mission_window&#45;&gt;sb_uart_mission_window_monitor:mon</title>
+<title>MCMP_PROC_SW_UART:sb_mission_window&#45;&gt;sb_uart_mission_window_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M2543,-153.7005C2521.6934,-153.7005 2517.6556,-136.6146 2501.7455,-131.2752"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="2501.9157,-127.7603 2491.5,-129.7005 2500.8522,-134.6791 2501.9157,-127.7603"/>
 </g>
-<!-- UART&#45;&gt;sb_wpm_tracking_id_monitor -->
+<!-- MCMP_PROC_SW_UART&#45;&gt;sb_wpm_tracking_id_monitor -->
 <g id="conn13" class="edge">
-<title>UART:sb_tracking_id0&#45;&gt;sb_wpm_tracking_id_monitor:mon</title>
+<title>MCMP_PROC_SW_UART:sb_tracking_id0&#45;&gt;sb_wpm_tracking_id_monitor:mon</title>
 <path fill="none" stroke="#ffa500" d="M2969,-129.7005C2988.3194,-129.7005 2995.5265,-129.7005 3010.8716,-129.7005"/>
 <polygon fill="#ffa500" stroke="#ffa500" points="3011,-133.2006 3021,-129.7005 3011,-126.2006 3011,-133.2006"/>
 </g>
-<!-- sb_fpln_recv_map_monitor&#45;&gt;FPLN -->
+<!-- sb_fpln_recv_map_monitor&#45;&gt;MCMP_PROC_SW_FPLN -->
 <g id="conn3" class="edge">
-<title>sb_fpln_recv_map_monitor:monsig&#45;&gt;FPLN:sb_recv_map_notification</title>
+<title>sb_fpln_recv_map_monitor:monsig&#45;&gt;MCMP_PROC_SW_FPLN:sb_recv_map_notification</title>
 <path fill="none" stroke="#0000ff" d="M827,-275.7005C851.1563,-275.7005 851.438,-249.1136 868.8795,-241.636"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="869.8355,-245.0167 879,-239.7005 868.5205,-238.1413 869.8355,-245.0167"/>
 </g>
-<!-- sb_wpm_flight_plan_monitor&#45;&gt;WPM -->
+<!-- sb_wpm_flight_plan_monitor&#45;&gt;MCMP_PROC_SW_WPM -->
 <g id="conn6" class="edge">
-<title>sb_wpm_flight_plan_monitor:monsig&#45;&gt;WPM:sb_flight_plan_notification</title>
+<title>sb_wpm_flight_plan_monitor:monsig&#45;&gt;MCMP_PROC_SW_WPM:sb_flight_plan_notification</title>
 <path fill="none" stroke="#0000ff" d="M1604.5,-205.7005C1653.7312,-205.7005 1610.3696,-113.1368 1645.8565,-99.3969"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="1646.7143,-102.8022 1656,-97.7005 1645.5596,-95.898 1646.7143,-102.8022"/>
 </g>
-<!-- sb_fpln_mission_rcv_monitor&#45;&gt;FPLN -->
+<!-- sb_fpln_mission_rcv_monitor&#45;&gt;MCMP_PROC_SW_FPLN -->
 <g id="conn9" class="edge">
-<title>sb_fpln_mission_rcv_monitor:monsig&#45;&gt;FPLN:sb_mission_rcv_notification</title>
+<title>sb_fpln_mission_rcv_monitor:monsig&#45;&gt;MCMP_PROC_SW_FPLN:sb_mission_rcv_notification</title>
 <path fill="none" stroke="#0000ff" d="M2201.5,-289.7005C2099.7048,-289.7005 1404.7744,-265.1523 1269.3837,-263.7619"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="1269.0205,-260.2598 1259,-263.7005 1268.9791,-267.2596 1269.0205,-260.2598"/>
 </g>
-<!-- sb_uart_mission_window_monitor&#45;&gt;UART -->
+<!-- sb_uart_mission_window_monitor&#45;&gt;MCMP_PROC_SW_UART -->
 <g id="conn12" class="edge">
-<title>sb_uart_mission_window_monitor:monsig&#45;&gt;UART:sb_mission_window_notification</title>
+<title>sb_uart_mission_window_monitor:monsig&#45;&gt;MCMP_PROC_SW_UART:sb_mission_window_notification</title>
 <path fill="none" stroke="#0000ff" d="M2491.5,-153.7005C2518.878,-153.7005 2513.8184,-116.9505 2533.087,-107.763"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="2533.9226,-111.1642 2543,-105.7005 2532.4967,-104.3109 2533.9226,-111.1642"/>
 </g>
-<!-- sb_wpm_tracking_id_monitor&#45;&gt;WPM -->
+<!-- sb_wpm_tracking_id_monitor&#45;&gt;MCMP_PROC_SW_WPM -->
 <g id="conn15" class="edge">
-<title>sb_wpm_tracking_id_monitor:monsig&#45;&gt;WPM:sb_tracking_id_notification</title>
+<title>sb_wpm_tracking_id_monitor:monsig&#45;&gt;MCMP_PROC_SW_WPM:sb_tracking_id_notification</title>
 <path fill="none" stroke="#0000ff" d="M3021,-153.7005C2991.7307,-153.7005 3003.7308,-190.7775 2977,-202.7005 2891.457,-240.856 2210.1765,-257.2036 2134,-202.7005 2087.91,-169.7238 2142.5674,-85.5426 2100.2022,-74.8281"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="2100.324,-71.3203 2090,-73.7005 2099.5549,-78.278 2100.324,-71.3203"/>
 </g>

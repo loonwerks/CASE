@@ -1,25 +1,25 @@
 // This file will be regenerated, do not edit
 
 import <std_connector.camkes>;
-import "components/emitter_t_impl/emitter_t_impl.camkes";
-import "components/consumer_t_impl/consumer_t_impl.camkes";
+import "components/emitter_t_impl_src_process_src_thread/emitter_t_impl_src_process_src_thread.camkes";
+import "components/consumer_t_impl_dst_process_dst_thread/consumer_t_impl_dst_process_dst_thread.camkes";
 
 assembly {
   composition {
-    component emitter_t_impl src_thread;
-    component consumer_t_impl dst_thread;
+    component emitter_t_impl_src_process_src_thread src_process_src_thread;
+    component consumer_t_impl_dst_process_dst_thread dst_process_dst_thread;
 
-    connection seL4Notification conn1(from src_thread.sb_write_port_1_notification, to dst_thread.sb_read_port_notification);
-    connection seL4SharedData conn2(from src_thread.sb_write_port_queue_1, to dst_thread.sb_read_port_queue);
-    connection seL4Notification conn3(from src_thread.sb_self_pacer_tick, to src_thread.sb_self_pacer_tock);
-    connection seL4Notification conn4(from dst_thread.sb_self_pacer_tick, to dst_thread.sb_self_pacer_tock);
+    connection seL4Notification conn1(from src_process_src_thread.sb_write_port_1_notification, to dst_process_dst_thread.sb_read_port_notification);
+    connection seL4SharedData conn2(from src_process_src_thread.sb_write_port_queue_1, to dst_process_dst_thread.sb_read_port_queue);
+    connection seL4Notification conn3(from src_process_src_thread.sb_self_pacer_tick, to src_process_src_thread.sb_self_pacer_tock);
+    connection seL4Notification conn4(from dst_process_dst_thread.sb_self_pacer_tick, to dst_process_dst_thread.sb_self_pacer_tock);
   }
 
   configuration {
-    src_thread._domain = 2;
-    dst_thread._domain = 3;
-    src_thread.sb_write_port_queue_1_access = "W";
-    dst_thread.sb_read_port_queue_access = "R";
+    src_process_src_thread._domain = 2;
+    dst_process_dst_thread._domain = 3;
+    src_process_src_thread.sb_write_port_queue_1_access = "W";
+    dst_process_dst_thread.sb_read_port_queue_access = "R";
 
   }
 }

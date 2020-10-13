@@ -9,11 +9,11 @@
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 472)">
 <title>g</title>
 <polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-472 690,-472 690,4 -4,4"/>
-<!-- src -->
+<!-- test_event_data_port_src -->
 <g id="node1" class="node">
-<title>src</title>
+<title>test_event_data_port_src</title>
 <polygon fill="none" stroke="#000000" points="8.5,-52 8.5,-76 325.5,-76 325.5,-52 8.5,-52"/>
-<text text-anchor="start" x="157" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">src</text>
+<text text-anchor="start" x="81" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">test_event_data_port_src</text>
 <polygon fill="none" stroke="#000000" points="8.5,-28 8.5,-52 325.5,-52 325.5,-28 8.5,-28"/>
 <text text-anchor="start" x="11.5" y="-37.2" font-family="Times,serif" font-size="16.00" fill="#ff0000">dataport sb_queue_int8_t_1_t </text>
 <text text-anchor="start" x="208.5" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ff0000">sb_enq_queue_1</text>
@@ -21,11 +21,11 @@
 <text text-anchor="start" x="26" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">emits ReceiveEvent </text>
 <text text-anchor="start" x="156" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_enq_1_notification</text>
 </g>
-<!-- dest -->
+<!-- test_event_data_port_dest -->
 <g id="node2" class="node">
-<title>dest</title>
+<title>test_event_data_port_dest</title>
 <polygon fill="none" stroke="#000000" points="377.5,-52 377.5,-76 678.5,-76 678.5,-52 377.5,-52"/>
-<text text-anchor="start" x="514" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">dest</text>
+<text text-anchor="start" x="438" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">test_event_data_port_dest</text>
 <polygon fill="none" stroke="#000000" points="377.5,-28 377.5,-52 678.5,-52 678.5,-28 377.5,-28"/>
 <text text-anchor="start" x="381" y="-37.2" font-family="Times,serif" font-size="16.00" fill="#ff0000">dataport sb_queue_int8_t_1_t </text>
 <text text-anchor="start" x="578" y="-37.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ff0000">sb_deq_queue</text>
@@ -33,15 +33,15 @@
 <text text-anchor="start" x="380.5" y="-13.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes ReceiveEvent </text>
 <text text-anchor="start" x="539.5" y="-13.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_deq_notification</text>
 </g>
-<!-- src&#45;&gt;dest -->
+<!-- test_event_data_port_src&#45;&gt;test_event_data_port_dest -->
 <g id="conn1" class="edge">
-<title>src:sb_enq_1_notification&#45;&gt;dest:sb_deq_notification</title>
+<title>test_event_data_port_src:sb_enq_1_notification&#45;&gt;test_event_data_port_dest:sb_deq_notification</title>
 <path fill="none" stroke="#0000ff" d="M325.5,-16C344.8194,-16 352.0265,-16 367.3716,-16"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="367.5,-19.5001 377.5,-16 367.5,-12.5001 367.5,-19.5001"/>
 </g>
-<!-- src&#45;&gt;dest -->
+<!-- test_event_data_port_src&#45;&gt;test_event_data_port_dest -->
 <g id="conn2" class="edge">
-<title>src:sb_enq_queue_1&#45;&gt;dest:sb_deq_queue</title>
+<title>test_event_data_port_src:sb_enq_queue_1&#45;&gt;test_event_data_port_dest:sb_deq_queue</title>
 <path fill="none" stroke="#ff0000" d="M325.5,-40C344.8194,-40 352.0265,-40 367.3716,-40"/>
 <polygon fill="#ff0000" stroke="#ff0000" points="367.5,-43.5001 377.5,-40 367.5,-36.5001 367.5,-43.5001"/>
 </g>

@@ -17,6 +17,9 @@ property set CASE_Properties is
 	-- Runtime
 	OS: aadlstring applies to (processor, virtual processor);
 	
+	-- Monitor
+	Monitor_Latched: aadlboolean applies to (system, process, thread, thread group, device, abstract);
+	
 	-- Trust level of a connection or component.
 	-- 0 <= Trust_Level <= 100.
 	-- 0 indicates "no trust", and 100 indicates "complete trust".

@@ -10,10 +10,10 @@ node [
 edge [
 ];
 
-source_thread_component [
+source_process_component_source_thread_component [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>source_thread_component</B></TD></TR>
+      <TR><TD><B>source_process_component_source_thread_component</B></TD></TR>
       <TR><TD PORT="sb_write_port0"><FONT COLOR="orange">uses sb_Monitor_int8_t <B>sb_write_port0</B></FONT></TD></TR>
       <TR><TD PORT="sb_periodic_dispatch_notification"><FONT COLOR="blue">consumes Notification <B>sb_periodic_dispatch_notification</B></FONT></TD></TR>"
     </TABLE>
@@ -32,10 +32,10 @@ sb_destination_thread_component_read_port_monitor [
   shape=plaintext
 ];
 
-destination_thread_component [
+destination_process_component_destination_thread_component [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>destination_thread_component</B></TD></TR>
+      <TR><TD><B>destination_process_component_destination_thread_component</B></TD></TR>
       <TR><TD PORT="sb_read_port"><FONT COLOR="orange">uses sb_Monitor_int8_t <B>sb_read_port</B></FONT></TD></TR>
       <TR><TD PORT="sb_read_port_notification"><FONT COLOR="blue">consumes DataportWrite <B>sb_read_port_notification</B></FONT></TD></TR>
       <TR><TD PORT="sb_periodic_dispatch_notification"><FONT COLOR="blue">consumes Notification <B>sb_periodic_dispatch_notification</B></FONT></TD></TR>"
@@ -48,8 +48,8 @@ dispatch_periodic_inst [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>dispatch_periodic_inst</B></TD></TR>
-      <TR><TD PORT="sb_source_thread_component_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_source_thread_component_periodic_dispatch_notification</B></FONT></TD></TR>
-      <TR><TD PORT="sb_destination_thread_component_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_destination_thread_component_periodic_dispatch_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_source_process_component_source_thread_component_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_source_process_component_source_thread_component_periodic_dispatch_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_destination_process_component_destination_thread_component_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_destination_process_component_destination_thread_component_periodic_dispatch_notification</B></FONT></TD></TR>
       <TR><TD PORT="timer"><FONT COLOR="orange">uses Timer <B>timer</B></FONT></TD></TR>
       <TR><TD PORT="timer_complete"><FONT COLOR="blue">consumes Notification <B>timer_complete</B></FONT></TD></TR>"
     </TABLE>
@@ -87,35 +87,35 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"source_thread_component":sb_write_port0 -> "sb_destination_thread_component_read_port_monitor":mon [
+"source_process_component_source_thread_component":sb_write_port0 -> "sb_destination_thread_component_read_port_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn1
 
 ];
 
-"destination_thread_component":sb_read_port -> "sb_destination_thread_component_read_port_monitor":mon [
+"destination_process_component_destination_thread_component":sb_read_port -> "sb_destination_thread_component_read_port_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn2
 
 ];
 
-"sb_destination_thread_component_read_port_monitor":monsig -> "destination_thread_component":sb_read_port_notification [
+"sb_destination_thread_component_read_port_monitor":monsig -> "destination_process_component_destination_thread_component":sb_read_port_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3
 
 ];
 
-"dispatch_periodic_inst":sb_source_thread_component_periodic_dispatch_notification -> "source_thread_component":sb_periodic_dispatch_notification [
+"dispatch_periodic_inst":sb_source_process_component_source_thread_component_periodic_dispatch_notification -> "source_process_component_source_thread_component":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn4
 
 ];
 
-"dispatch_periodic_inst":sb_destination_thread_component_periodic_dispatch_notification -> "destination_thread_component":sb_periodic_dispatch_notification [
+"dispatch_periodic_inst":sb_destination_process_component_destination_thread_component_periodic_dispatch_notification -> "destination_process_component_destination_thread_component":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn5

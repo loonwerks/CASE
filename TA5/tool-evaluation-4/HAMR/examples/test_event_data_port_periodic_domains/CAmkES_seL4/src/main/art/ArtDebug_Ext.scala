@@ -63,7 +63,7 @@ object ArtDebug_Ext {
   }
 
   def concSet[K](): MSet[K] = {
-    import scala.collection.JavaConverters._
+    import org.sireum.$internal.CollectionCompat.Converters._
     val m: java.util.Set[K] = java.util.concurrent.ConcurrentHashMap.newKeySet()
     m.asScala
   }

@@ -1,8 +1,0 @@
-component consumer_queue_5_impl {
-  include <sb_types.h>;
-  include <sb_event_counter.h>;
-  control;
-  consumes ReceiveEvent sb_s;
-  dataport sb_event_counter_t sb_s_counter;
-  has semaphore sb_dispatch_sem;
-}

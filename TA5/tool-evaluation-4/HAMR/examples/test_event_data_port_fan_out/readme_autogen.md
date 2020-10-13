@@ -51,65 +51,65 @@
 
   ```
   Booting all finished, dropped to user space
-  [src] test_event_data_port_emitter_component_init called
-  [snk_default] test_event_data_port_consumer_component_init called
-  [snk_5] test_event_data_port_consumer_component_init called
-  [snk_2_B] test_event_data_port_consumer_component_init called
-  [snk_2_A] test_event_data_port_consumer_component_init called
+  [test_event_data_port_src] test_event_data_port_emitter_component_init called
+  [test_event_data_port_snk_default] test_event_data_port_consumer_component_init called
+  [test_event_data_port_snk_5] test_event_data_port_consumer_component_init called
+  [test_event_data_port_snk_2_B] test_event_data_port_consumer_component_init called
+  [test_event_data_port_snk_2_A] test_event_data_port_consumer_component_init called
   ---------------------------------------
-  [src] Sent 0 events.
+  [test_event_data_port_src] Sent 0 events.
   ---------------------------------------
-  [src] Sent 1 events.
-  [snk_default] received value {1}
-  [snk_default] 1 events received
-  [snk_2_B] received value {1}
-  [snk_5] received value {1}
-  [snk_5] 1 events received
-  [snk_2_A] received value {1}
-  [snk_2_A] 1 events received
-  [snk_2_B] 1 events received
+  [test_event_data_port_src] Sent 1 events.
+  [test_event_data_port_snk_default] received value {1}
+  [test_event_data_port_snk_2_A] received value {1}
+  [test_event_data_port_snk_2_A] 1 events received
+  [test_event_data_port_snk_2_B] received value {1}
+  [test_event_data_port_snk_5] received value {1}
+  [test_event_data_port_snk_5] 1 even[test_event_data_port_snk_default] 1 events received
+  [test_event_data_port_snk_2_B] 1 events received
+  ts received
   ---------------------------------------
-  [src] Sent 2 events.
-  [snk_default] received value {1}
-  [snk_default] 1 events received
-  [snk_2_A] received value {1}
-  [snk_2_A] received value {2}
-  [snk_2_A] 2 events received
-  [snk_2_B] received value {1}
-  [snk_2_B] received value {2}
-  [snk_2_B] 2 events received
-  [snk_5] received value {1}
-  [snk_5] received value {2}
-  [snk_5] 2 events received
+  [test_event_data_port_src] Sent 2 events.
+  [test_event_data_port_snk_default] received value {1}
+  [test_event_data_port_snk_default] 1 events received
+  [test_event_data_port_snk_2_A] received value {1}
+  [test_event_data_port_snk_2_A] received value {2}
+  [test_event_data_port_snk_2_A] 2 events received
+  [test_event_data_port_snk_2_B] received value {1}
+  [test_event_data_port_snk_2_B] received value {2}
+  [test_event_data_port_snk_2_B] 2 events received
+  [test_event_data_port_snk_5] received value {1}
+  [test_event_data_port_snk_5] received value {2}
+  [test_event_data_port_snk_5] 2 events received
   ---------------------------------------
-  [src] Sent 3 events.
-  [snk_2_A] received value {1}
-  [snk_2_A] received value {2}
-  [snk_2_A] 2 events received
-  [snk_2_B] received value {1}
-  [snk_2_B] received value {2}
-  [snk_2_B] 2 events received
-  [snk_5] received value {1}
-  [snk_5] received value {2}
-  [snk[snk_default] received value {1}
-  [snk_default] 1 events received
-  _5] received value {3}
-  [snk_5] 3 events received
+  [test_event_data_port_src] Sent 3 events.
+  [test_event_data_port_snk_default] received value {1}
+  [test_event_data_port_snk_default] 1 events received
+  [test_event_data_port_snk_2_A] received value {1}
+  [test_event_data_port_snk_2_A] received value {2}
+  [test_event_data_port_snk_2_A] 2 events received
+  [test_event_data_port_snk_2_B] received value {1}
+  [test_event_data_port_snk_2_B] received value {2}
+  [test_event_data_port_snk_2_B] 2 events received
+  [test_event_data_port_snk_5] received value {1}
+  [test_event_data_port_snk_5] received value {2}
+  [test_event_data_port_snk_5] received value {3}
+  [test_event_data_port_snk_5] 3 events received
   ---------------------------------------
-  [src] Sent 4 events.
-  [snk_default] received value {1}
-  [snk_default] 1 events received
-  [snk_2_A][snk_2_B] received value {1}
-  [snk_2_B] received value {2}
-  [snk_2_B] 2 events received
-  [snk_5] received value {1}
-  [snk_5] received value {2}
-  [snk_5] received value {3}
-  [snk_5] received value {4}
-  [snk_5] 4 events received
-   received value {1}
-  [snk_2_A] received value {2}
-  [snk_2_A] 2 events received
+  [test_event_data_port_src] Sent 4 events.
+  [test_event_data_port_snk_default] received value {1}
+  [test_event_data_port_snk_default] 1 events received
+  [test_event_data_port_snk_2_A] received value {1}
+  [test_event_data_port_snk_2_B] received value {1}
+  [test_event_data_port_snk_2_B] received value {2}
+  [test_event_data_port_snk_2_B] 2 events received
+  [test_event_data_port_snk_5] received value {1}
+  [test_event_data_port_snk_5] received value {2}
+  [test_event_data_port_snk_5] received value {3}
+  [test_event_data_port_snk_5] received value {4}
+  [test_event_data_port_snk_5] 4 events received
+  [test_event_data_port_snk_2_A] received value {2}
+  [test_event_data_port_snk_2_A] 2 events received
 
   ```
 
@@ -131,64 +131,64 @@
 
   ```
   Booting all finished, dropped to user space
-  [src] test_event_data_port_emitter_component_init called
-  [snk_default] test_event_data_port_consumer_component_init called
-  [snk_5] test_event_data_port_consumer_component_init called
-  [snk_2_B] test_event_data_port_consumer_component_init called
-  [snk_2_A] test_event_data_port_consumer_component_init called
+  [test_event_data_port_src] test_event_data_port_emitter_component_init called
+  [test_event_data_port_snk_default] test_event_data_port_consumer_component_init called
+  [test_event_data_port_snk_5] test_event_data_port_consumer_component_init called
+  [test_event_data_port_snk_2_B] test_event_data_port_consumer_component_init called
+  [test_event_data_port_snk_2_A] test_event_data_port_consumer_component_init called
   ---------------------------------------
-  [src] Sent 0 events.
+  [test_event_data_port_src] Sent 0 events.
   ---------------------------------------
-  [src] Sent 1 events.
-  [snk_default] received value {1}
-  [snk_default] 1 events received
-  [snk_2_A] received value {1}
-  [snk_2_A] 1 events received
-  [snk_2_B] received value {1}
-  [snk_2_B] 1 events receive[snk_5] received value {1}
-  [snk_5] 1 events received
-  d
+  [test_event_data_port_src] Sent 1 events.
+  [test_event_data_port_snk_default] received value {1}
+  [test_event_data_port_snk_default] 1 events received
+  [test_event_data_port_snk_2_A] received value {1}
+  [t[test_event_data_port_snk_2_B] received value {1}
+  [test_event_data_port_snk_5] received value {1}
+  [test_event_data_port_snk_5] 1 events received
+  est_event_data_port_snk_2_A] 1 events received
+  [test_event_data_port_snk_2_B] 1 events received
   ---------------------------------------
-  [src] Sent 2 events.
-  [snk_default] received value {2}
-  [snk[snk_2_A] received value {1}
-  [snk_2_A] received value {2}
-  [snk_2_A] 2 events received
-  [snk_2_B] received value {1}
-  [snk_2_B] received value {2}
-  [snk_2_B] 2 events received
-  [snk_5_default] 1 events received
-  ] received value {1}
-  [snk_5] received value {2}
-  [snk_5] 2 events received
+  [test_event_data_port_src] Sent 2 events.
+  [test_event_data_port_snk[test_event_data_port_snk_2_A] received value {1}
+  [test_event_data_port_snk_2_A] received value {2}
+  [test_event_data_port_snk_2_A] 2 events received
+  [test_event_data_port_snk_2_B] received value {1}
+  [test_event_data_port_snk_2_B] received value {2}
+  [test_event_data_port_snk_2_B] 2 events received
+  [test__default] received value {2}
+  [test_event_data_port_snk_default] 1 events received
+  event_data_port_snk_5] received value {1}
+  [test_event_data_port_snk_5] received value {2}
+  [test_event_data_port_snk_5] 2 events received
   ---------------------------------------
-  [src] Sent 3 events.
-  [snk_default] received value {3}
-  [snk_default] 1 events received
-  [snk_2_A] received value {2}
-  [snk_2_A] received value {3}
-  [snk_2_A] 2 events received
-  [snk_2_B] received value {2}
-  [snk_2_B] received value {3}
-  [snk_2_B] 2 events received
-  [snk_5] received value {1}
-  [snk_5] received value {2}
-  [snk_5] received value {3}
-  [snk_5] 3 events received
+  [test_event_data_port_src] Sent 3 events.
+  [test_event_data_port_snk_default] received value {3}
+  [test_event_data_port_snk_default] 1 events received
+  [test_event_data_port_snk_2_A] received value {2}
+  [test_event_data_port_snk_2_A] received value {3}
+  [test_event_data_port_snk_2_A] 2 events received
+  [test_event_data_port_snk_2_B] received value {2}
+  [test_event_data_port_snk_2_B] received value {3}
+  [test_event_data_port_snk_2_B] 2 events received
+  [test_event_data_port_snk_5] received value {1}
+  [test_event_data_port_snk_5] received value {2}
+  [test_event_data_port_snk_5] received value {3}
+  [test_event_data_port_snk_5] 3 events received
   ---------------------------------------
-  [src] Sent 4 events.
-  [snk_default] received value {4}
-  [snk_default] 1 events received
-  [snk_2_A] received value {3}
-  [snk_2_A] received value {4}
-  [snk_2_A] 2 events received
-  [snk_2_B] received value {3}
-  [snk_2_B] received value {4}
-  [snk_2_B] 2 events received
-  [snk_5] received value {1}
-  [snk_5] received value {2}
-  [snk_5] received value {3}
-  [snk_5] received value {4}
-  [snk_5] 4 events received
+  [test_event_data_port_src] Sent 4 events.
+  [test_event_data_port_snk_default] received value {4}
+  [test_event_data_port_snk_default] 1 events received
+  [test_event_data_port_snk_2_A] received value {3}
+  [test_event_data_port_[test_event_data_port_snk_2_B] received value {3}
+  [test_event_data_port_snk[test_event_data_port_snk_5] received value {1}
+  [test_event_data_port_snk_5] received value {snk_2_A] received value {4}
+  [test_event_data_port_snk_2_A] 2 events received
+  _2_B] received value {4}
+  [test_event_data_port_snk_2_B] 2 events received
+  2}
+  [test_event_data_port_snk_5] received value {3}
+  [test_event_data_port_snk_5] received value {4}
+  [test_event_data_port_snk_5] 4 events received
 
   ```

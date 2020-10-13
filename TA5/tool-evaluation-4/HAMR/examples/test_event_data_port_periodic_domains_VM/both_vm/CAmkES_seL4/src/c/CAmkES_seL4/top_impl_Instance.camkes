@@ -1,6 +1,5 @@
 // This file will be regenerated, do not edit
 
-#include <configurations/vm.h>
 import <std_connector.camkes>;
 import <global-connectors.camkes>;
 import <seL4VMDTBPassthrough.idl4>;
@@ -11,17 +10,29 @@ import <TimeServer/TimeServer.camkes>;
 import <vm-connectors.camkes>;
 import <devices.camkes>;
 import "components/Pacer/Pacer.camkes";
-import "components/VM_emitter_t_impl/VM_emitter_t_impl.camkes";
-import "components/VM_consumer_t_impl/VM_consumer_t_impl.camkes";
+import "components/VM_emitter_t_impl_src_process_src_thread/VM_emitter_t_impl_src_process_src_thread.camkes";
+import "components/VM_consumer_t_impl_dst_process_dst_thread/VM_consumer_t_impl_dst_process_dst_thread.camkes";
 
 assembly {
   composition {
-    component VM_emitter_t_impl vmsrc_process;
-    component VM_consumer_t_impl vmdst_process;
+    component VM_emitter_t_impl_src_process_src_thread vmsrc_process;
+    component FileServer fserv;
+    component SerialServer serial;
+    component TimeServer time_server;
+    component VM_consumer_t_impl_dst_process_dst_thread vmdst_process;
     component Pacer pacer;
 
     connection seL4VMDTBPassthrough conn1(from vmsrc_process.dtb_self, to vmsrc_process.dtb);
+    connection seL4RPCDataport fsvmsrc_process(from vmsrc_process.fs, to fserv.fs_ctrl);
+    connection seL4GlobalAsynch notify_ready_vmsrc_process(from vmsrc_process.notification_ready_connector, to vmsrc_process.notification_ready);
+    connection seL4TimeServer serialserver_timer(from serial.timeout, to time_server.the_timer);
+    connection seL4SerialServer serial_vmsrc_process(from vmsrc_process.batch, to serial.processed_batch);
+    connection seL4SerialServer serial_input_vmsrc_process(from vmsrc_process.serial_getchar, to serial.getchar);
     connection seL4VMDTBPassthrough conn2(from vmdst_process.dtb_self, to vmdst_process.dtb);
+    connection seL4RPCDataport fsvmdst_process(from vmdst_process.fs, to fserv.fs_ctrl);
+    connection seL4GlobalAsynch notify_ready_vmdst_process(from vmdst_process.notification_ready_connector, to vmdst_process.notification_ready);
+    connection seL4SerialServer serial_vmdst_process(from vmdst_process.batch, to serial.processed_batch);
+    connection seL4SerialServer serial_input_vmdst_process(from vmdst_process.serial_getchar, to serial.getchar);
     connection seL4GlobalAsynch conn3(from vmsrc_process.sb_write_port_1_notification, to vmdst_process.sb_read_port_notification);
     connection seL4SharedDataWithCaps conn4(from vmsrc_process.sb_write_port_queue_1, to vmdst_process.sb_read_port_queue);
     connection seL4Notification conn5(from pacer.tick, to pacer.tock);
@@ -29,12 +40,6 @@ assembly {
     connection seL4SharedDataWithCaps conn7(from pacer.period_to_vmsrc_process_queue, to vmsrc_process.sb_pacer_period_queue);
     connection seL4GlobalAsynch conn8(from pacer.period_to_vmdst_process_notification, to vmdst_process.sb_pacer_period_notification);
     connection seL4SharedDataWithCaps conn9(from pacer.period_to_vmdst_process_queue, to vmdst_process.sb_pacer_period_queue);
-    VM_GENERAL_COMPOSITION_DEF()
-    VM_COMPONENT_CONNECTIONS_DEF(src_process)
-    VM_VIRTUAL_SERIAL_COMPONENTS_DEF()
-    PER_VM_VIRTUAL_SERIAL_CONNECTIONS_DEF(src_process)
-    VM_COMPONENT_CONNECTIONS_DEF(dst_process)
-    PER_VM_VIRTUAL_SERIAL_CONNECTIONS_DEF(dst_process)
   }
 
   configuration {
@@ -53,11 +58,29 @@ assembly {
     vmdst_process.sb_read_port_notification_domain = 3;
     pacer._domain = 1;
 
-    VM_GENERAL_CONFIGURATION_DEF()
-    VM_CONFIGURATION_DEF(src_process)
-    VM_VIRTUAL_SERIAL_GENERAL_CONFIGURATION_DEF()
-    PER_VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(src_process)
-    VM_CONFIGURATION_DEF(dst_process)
-    PER_VM_VIRTUAL_SERIAL_CONFIGURATION_DEF(dst_process)
+    fserv.heap_size = 165536;
+    vmsrc_process.fs_shmem_size = 0x100000;
+    vmsrc_process.global_endpoint_base = 1 << 27;
+    vmsrc_process.asid_pool = true;
+    vmsrc_process.simple = true;
+    vmsrc_process.base_prio = 100;
+    vmsrc_process._priority = 101;
+    vmsrc_process.sem_value = 0;
+    vmsrc_process.heap_size = 0x300000;
+    time_server.timers_per_client = 1;
+    time_server.priority = 255;
+    time_server.simple = true;
+    vmsrc_process.serial_getchar_shmem_size = 0x1000;
+    vmsrc_process.batch_shmem_size = 0x1000;
+    vmdst_process.fs_shmem_size = 0x100000;
+    vmdst_process.global_endpoint_base = 1 << 27;
+    vmdst_process.asid_pool = true;
+    vmdst_process.simple = true;
+    vmdst_process.base_prio = 100;
+    vmdst_process._priority = 101;
+    vmdst_process.sem_value = 0;
+    vmdst_process.heap_size = 0x300000;
+    vmdst_process.serial_getchar_shmem_size = 0x1000;
+    vmdst_process.batch_shmem_size = 0x1000;
   }
 }

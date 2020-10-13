@@ -10,10 +10,10 @@ node [
 edge [
 ];
 
-src [
+test_data_port_periodic_src [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>src</B></TD></TR>
+      <TR><TD><B>test_data_port_periodic_src</B></TD></TR>
       <TR><TD PORT="sb_write_port0"><FONT COLOR="orange">uses sb_Monitor_int8_t <B>sb_write_port0</B></FONT></TD></TR>
       <TR><TD PORT="sb_write_port1"><FONT COLOR="orange">uses sb_Monitor_int8_t <B>sb_write_port1</B></FONT></TD></TR>
       <TR><TD PORT="sb_periodic_dispatch_notification"><FONT COLOR="blue">consumes Notification <B>sb_periodic_dispatch_notification</B></FONT></TD></TR>"
@@ -22,10 +22,10 @@ src [
   shape=plaintext
 ];
 
-dest_A [
+test_data_port_periodic_dest_A [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>dest_A</B></TD></TR>
+      <TR><TD><B>test_data_port_periodic_dest_A</B></TD></TR>
       <TR><TD PORT="sb_read_port"><FONT COLOR="orange">uses sb_Monitor_int8_t <B>sb_read_port</B></FONT></TD></TR>
       <TR><TD PORT="sb_read_port_notification"><FONT COLOR="blue">consumes DataportWrite <B>sb_read_port_notification</B></FONT></TD></TR>
       <TR><TD PORT="sb_periodic_dispatch_notification"><FONT COLOR="blue">consumes Notification <B>sb_periodic_dispatch_notification</B></FONT></TD></TR>"
@@ -34,10 +34,10 @@ dest_A [
   shape=plaintext
 ];
 
-dest_B [
+test_data_port_periodic_dest_B [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
-      <TR><TD><B>dest_B</B></TD></TR>
+      <TR><TD><B>test_data_port_periodic_dest_B</B></TD></TR>
       <TR><TD PORT="sb_read_port"><FONT COLOR="orange">uses sb_Monitor_int8_t <B>sb_read_port</B></FONT></TD></TR>
       <TR><TD PORT="sb_read_port_notification"><FONT COLOR="blue">consumes DataportWrite <B>sb_read_port_notification</B></FONT></TD></TR>
       <TR><TD PORT="sb_periodic_dispatch_notification"><FONT COLOR="blue">consumes Notification <B>sb_periodic_dispatch_notification</B></FONT></TD></TR>"
@@ -72,9 +72,9 @@ dispatch_periodic_inst [
   label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>dispatch_periodic_inst</B></TD></TR>
-      <TR><TD PORT="sb_src_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_src_periodic_dispatch_notification</B></FONT></TD></TR>
-      <TR><TD PORT="sb_dest_A_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_dest_A_periodic_dispatch_notification</B></FONT></TD></TR>
-      <TR><TD PORT="sb_dest_B_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_dest_B_periodic_dispatch_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_test_data_port_periodic_src_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_test_data_port_periodic_src_periodic_dispatch_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_test_data_port_periodic_dest_A_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_test_data_port_periodic_dest_A_periodic_dispatch_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_test_data_port_periodic_dest_B_periodic_dispatch_notification"><FONT COLOR="blue">emits Notification <B>sb_test_data_port_periodic_dest_B_periodic_dispatch_notification</B></FONT></TD></TR>
       <TR><TD PORT="timer"><FONT COLOR="orange">uses Timer <B>timer</B></FONT></TD></TR>
       <TR><TD PORT="timer_complete"><FONT COLOR="blue">consumes Notification <B>timer_complete</B></FONT></TD></TR>"
     </TABLE>
@@ -112,63 +112,63 @@ interfacetypekey [
   shape=plaintext
 ];
 
-"src":sb_write_port0 -> "sb_dest_a_read_port_monitor":mon [
+"test_data_port_periodic_src":sb_write_port0 -> "sb_dest_a_read_port_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn1
 
 ];
 
-"dest_A":sb_read_port -> "sb_dest_a_read_port_monitor":mon [
+"test_data_port_periodic_dest_A":sb_read_port -> "sb_dest_a_read_port_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn2
 
 ];
 
-"sb_dest_a_read_port_monitor":monsig -> "dest_A":sb_read_port_notification [
+"sb_dest_a_read_port_monitor":monsig -> "test_data_port_periodic_dest_A":sb_read_port_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn3
 
 ];
 
-"src":sb_write_port1 -> "sb_dest_b_read_port_monitor":mon [
+"test_data_port_periodic_src":sb_write_port1 -> "sb_dest_b_read_port_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn4
 
 ];
 
-"dest_B":sb_read_port -> "sb_dest_b_read_port_monitor":mon [
+"test_data_port_periodic_dest_B":sb_read_port -> "sb_dest_b_read_port_monitor":mon [
   color="orange"
   //label = "seL4RPCCall"
   id = conn5
 
 ];
 
-"sb_dest_b_read_port_monitor":monsig -> "dest_B":sb_read_port_notification [
+"sb_dest_b_read_port_monitor":monsig -> "test_data_port_periodic_dest_B":sb_read_port_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn6
 
 ];
 
-"dispatch_periodic_inst":sb_src_periodic_dispatch_notification -> "src":sb_periodic_dispatch_notification [
+"dispatch_periodic_inst":sb_test_data_port_periodic_src_periodic_dispatch_notification -> "test_data_port_periodic_src":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn7
 
 ];
 
-"dispatch_periodic_inst":sb_dest_A_periodic_dispatch_notification -> "dest_A":sb_periodic_dispatch_notification [
+"dispatch_periodic_inst":sb_test_data_port_periodic_dest_A_periodic_dispatch_notification -> "test_data_port_periodic_dest_A":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn8
 
 ];
 
-"dispatch_periodic_inst":sb_dest_B_periodic_dispatch_notification -> "dest_B":sb_periodic_dispatch_notification [
+"dispatch_periodic_inst":sb_test_data_port_periodic_dest_B_periodic_dispatch_notification -> "test_data_port_periodic_dest_B":sb_periodic_dispatch_notification [
   color="blue"
   //label = "seL4Notification"
   id = conn9
