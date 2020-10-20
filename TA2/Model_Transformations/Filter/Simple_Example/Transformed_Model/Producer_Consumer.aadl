@@ -4,18 +4,17 @@ public
 	with CASE_Properties;
 
 	thread CASE_Filter
-	features
-		Input: in event data port Coordinate.Impl;
-		Output: out event data port Coordinate.Impl;
-	properties
-		CASE_Properties::Component_Type => FILTER;
-		CASE_Properties::Component_Spec => ("Req_Filter_LatLong", "Req_Filter_Alt");
-
-	annex agree {**
+		features
+			Input: in event data port Coordinate.Impl;
+			Output: out event data port Coordinate.Impl;
+		properties
+			CASE_Properties::Component_Type => FILTER;
+			CASE_Properties::Component_Spec => ("Req_Filter_LatLong", "Req_Filter_Alt");
+		annex agree {**
 			guarantee Req_Filter_LatLong "Well-formed Lat-Long" : WELL_FORMED_LAT_LONG(Output);
 			guarantee Req_Filter_Alt "Well-formed Alt" : WELL_FORMED_ALT(Output);
 		**};
-end CASE_Filter;
+	end CASE_Filter;
 
 	thread implementation CASE_Filter.Impl
 		properties
@@ -29,7 +28,6 @@ end CASE_Filter;
 	end Radio;
 
 	thread implementation Radio.Impl
-
 	end Radio.Impl;
 
 	data Coordinate

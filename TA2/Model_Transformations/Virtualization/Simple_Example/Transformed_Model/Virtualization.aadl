@@ -20,13 +20,16 @@ public
 			B: thread Comp_B.Impl;
 			C: thread Comp_C.Impl;
 		connections
-			c1: port A.output -> B.input;
-			c2: port B.output -> C.input;
+			c1: port A.output -> B.input {CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 0;};
+			c2: port B.output -> C.input {CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 0;};
 	end SW.Impl;
 
 	thread Comp_A
 		features
 			output: out event data port;
+		properties
+			CASE_Properties::Trust_Level => 100;
+			CASE_Properties::Control_Level => 0;
 	end Comp_A;
 
 	thread implementation Comp_A.Impl
@@ -39,6 +42,9 @@ public
 		features
 			input: in event data port;
 			output: out event data port;
+		properties
+			CASE_Properties::Trust_Level => 0;
+			CASE_Properties::Control_Level => 0;
 	end Comp_B;
 
 	thread implementation Comp_B.Impl
@@ -50,6 +56,9 @@ public
 	thread Comp_C
 		features
 			input: in event data port;
+		properties
+			CASE_Properties::Trust_Level => 100;
+			CASE_Properties::Control_Level => 0;
 	end Comp_C;
 
 	thread implementation Comp_C.Impl
@@ -58,15 +67,15 @@ public
 			Source_Text => ("Comp_C.c");
 	end Comp_C.Impl;
 
-	virtual processor CASE_Virtual_Machine
+	virtual processor CASE_VirtualMachine
 		properties
 			CASE_Properties::Component_Type => VIRTUAL_MACHINE;
-	end CASE_Virtual_Machine;
+	end CASE_VirtualMachine;
 
-	virtual processor implementation CASE_Virtual_Machine.Impl
+	virtual processor implementation CASE_VirtualMachine.Impl
 		properties
 			CASE_Properties::OS => "Linux";
-	end CASE_Virtual_Machine.Impl;
+	end CASE_VirtualMachine.Impl;
 
 	system Critical
 	end Critical;
@@ -75,12 +84,12 @@ public
 		subcomponents
 			PROC: processor HW_Proc.Impl;
 			SW: process SW.Impl;
-			VM: virtual processor CASE_Virtual_Machine.Impl;
+			VirtualMachine: virtual processor CASE_VirtualMachine.Impl;
 		properties
-			Actual_Processor_Binding => (reference (PROC)) applies to SW, VM;
-			Actual_Processor_Binding => (reference (VM)) applies to SW.B;
+			Actual_Processor_Binding => (reference (PROC)) applies to VirtualMachine;
+			Actual_Processor_Binding => (reference (VirtualMachine)) applies to SW;
 		annex resolute {**
-			prove Req_Virtualization(this.SW, {this.SW.B}, {}, this.VM)
+			prove Req_Virtualization(this.SW, {this.SW}, {}, this.VirtualMachine)
 		**};
 	end Critical.Impl;
 	

@@ -74,15 +74,15 @@ public
 	bus implementation MC_Bus.Impl
 	end MC_Bus.Impl;
 
-	virtual processor CASE_Virtual_Machine
+	virtual processor CASE_VirtualMachine
 		properties
 			CASE_Properties::Component_Type => VIRTUAL_MACHINE;
-	end CASE_Virtual_Machine;
+	end CASE_VirtualMachine;
 
-	virtual processor implementation CASE_Virtual_Machine.Impl
+	virtual processor implementation CASE_VirtualMachine.Impl
 		properties
 			CASE_Properties::OS => "Linux";
-	end CASE_Virtual_Machine.Impl;
+	end CASE_VirtualMachine.Impl;
 
 	-- The MissionComputer onboard the UAV
 	system MissionComputer
@@ -107,7 +107,7 @@ public
 			BUS_HW: bus MC_Bus.Impl;
 			PROC_SW: process SW::SW.Impl;
 			WIFI_HW: device Wifi.Impl;
-			VM: virtual processor CASE_Virtual_Machine.Impl;
+			VirtualMachine: virtual processor CASE_VirtualMachine.Impl;
 		connections
 			c1: port radio_recv -> RADIO_HW.recv_data_in;
 			c2: port RADIO_HW.recv_data_out -> PROC_SW.radio_recv;
@@ -118,9 +118,7 @@ public
 			c7: port PROC_SW.uart_send -> UART_HW.send_data_in;
 			c8: port UART_HW.send_data_out -> uart_send;
 			c9: port wifi_recv -> WIFI_HW.recv_data_in;
-			c10: port WIFI_HW.recv_data_out -> PROC_SW.wifi_recv;
-			c11: port PROC_SW.wifi_send -> WIFI_HW.send_data_in;
-			c12: port WIFI_HW.send_data_out -> wifi_send;
+			c10: port WIFI_HW.send_data_out -> wifi_send;
 			bac1: bus access RADIO_HW.MCA <-> BUS_HW;
 			bac2: bus access UART_HW.MCA <-> BUS_HW;
 			bac3: bus access PROC_HW.MCA <-> BUS_HW;
@@ -130,13 +128,12 @@ public
 			bac7: bus access UART_HW.UARTA <-> UARTA;
 			bac8: bus access WIFI_HW.WIFIA <-> WIFIA;
 		properties
-			Actual_Processor_Binding => (reference (PROC_HW)) applies to PROC_SW, VM;
+			Actual_Processor_Binding => (reference (PROC_HW)) applies to VirtualMachine;
 			Actual_Memory_Binding => (reference (MEM_HW)) applies to PROC_SW;
-			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7, c10, c11;
-			Actual_Processor_Binding => (
-				reference (VM)) applies to PROC_SW.UXAS, PROC_SW.UXAS.FPLN, PROC_SW.UXAS.NFDB, PROC_SW.UXAS.WPM;
+			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7;
+			Actual_Processor_Binding => (reference (VirtualMachine)) applies to PROC_SW;
 		annex resolute {**
-			prove Req001_SW(this.PROC_SW, {this.PROC_SW.UXAS, this.PROC_SW.UXAS.FPLN, this.PROC_SW.UXAS.NFDB, this.PROC_SW.UXAS.WPM}, {}, this.VM)
+			prove Req001_SW(this.PROC_SW, {this.PROC_SW}, {}, this.VirtualMachine)
 		**};
 	end MissionComputer.Impl;
 

@@ -6,18 +6,18 @@ public
 	with CASE_Properties;
 
 	thread CASE_Filter
-		features
-			filter_in: in event data port RF_Msg.Impl;
-			filter_out: out event data port RF_Msg.Impl;
-		properties
-			CASE_Properties::Component_Type => FILTER;
-			CASE_Properties::Component_Spec => ("Req003_FlightPlanner_Filter", "Req004_FlightPlanner_Filter");
+	features
+		Input: in event data port RF_Msg.Impl;
+		Output: out event data port RF_Msg.Impl;
+	properties
+		CASE_Properties::Component_Type => FILTER;
+		CASE_Properties::Component_Spec => ("Req_MF_WellFormedMap", "Req_MF_WellFormedPattern");
 
 		annex agree {**
-			guarantee Req001_RadioDriver_Filter "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(filter_out);
-			guarantee Req003_FlightPlanner_Filter "The FlightPlanner shall only accept well-formed maps from the GroundStation" : good_map(filter_out.payload.map);
-			guarantee Req004_FlightPlanner_Filter "The FlightPlanner shall only accept well-formed patterns from the GroundStation" : good_pattern(filter_out.payload.pattern);
-		**};
+				guarantee Req_RD_ValidMessage_Filter "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(Output);
+				guarantee Req_F_WellFormedMap "Well-formed Map" : good_map(Output.payload.map);
+				guarantee Req_F_WellFormedPattern "Well-formed Pattern" : good_pattern(Output.payload.pattern);
+			**};
 	end CASE_Filter;
 
 	thread implementation CASE_Filter.Impl
@@ -61,7 +61,7 @@ public
 		-- sensing region to conduct surveillance.
 		properties
 			Data_Model::Data_Representation => Enum;
-			Data_Model::Enumerators => ("ZigZag", "StraightLine", "Perimeter");
+			Data_Model::Enumerators => ("ZigZag", "StraightLine", "Perimeter", "Other");
 	end FlightPattern;
 
 	data implementation FlightPattern.Impl
@@ -124,10 +124,10 @@ public
 			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			mission_command: out event data port RF_Msg.Impl;
 			status: in event data port Coordinate.Impl;
---		properties
---			CASE_Properties::COMP_TYPE => COMM_DRIVER;
+		properties
+			CASE_Properties::Component_type => COMM_DRIVER;
 		annex agree {**
-			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
+			guarantee Req_RD_ValidMessage "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
 		**};
 	end RadioDriver;
 
@@ -146,10 +146,10 @@ public
 			nofly_zones: in event data port MapArray;
 			position_status: in event data port Coordinate.Impl;
 		annex agree {**
-			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
-			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);
-			assume Req003_FlightPlanner "The FlightPlanner shall only accept well-formed maps from the GroundStation" : good_map(recv_map.payload.map);
-			assume Req004_FlightPlanner "The FlightPlanner shall only accept well-formed flight patterns from the GroundStation" : good_pattern(recv_map.payload.pattern);
+			assume Req_FP_ValidMessage "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
+			guarantee Req_FP_ValidMission "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);
+			assume Req_FP_WellFormedMap "The FlightPlanner shall only accept well-formed maps from the GroundStation" : good_map(recv_map.payload.map);
+			assume Req_FP_WellFormedPattern "The FlightPlanner shall only accept well-formed flight patterns from the GroundStation" : good_pattern(recv_map.payload.pattern);
 		**};
 	end FlightPlanner;
 
@@ -177,8 +177,8 @@ public
 			mission_window: out event data port MissionWindow;
 			position_status: in event data port Coordinate.Impl;
 		annex agree {**
-			assume Req001_WaypointManager "The Waypoint Manager shall receive a well-formed mission" : good_mission(flight_plan);
-			guarantee Req002_WaypointManager "The Waypoint Manager shall output a well-formed mission window" : good_mission_window(mission_window);
+			assume Req_WPM_GoodMission "The Waypoint Manager shall receive a well-formed mission" : good_mission(flight_plan);
+			guarantee Req_WPM_GoodMissionWindow "The Waypoint Manager shall output a well-formed mission window" : good_mission_window(mission_window);
 		**};
 	end WaypointManager;
 
@@ -205,8 +205,8 @@ public
 			recv_data: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
 			send_data: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
 		annex agree {**
-			assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(mission_window);
-			guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : send_data.crc;
+			assume Req_UART_GoodMissionWindow "Well-formed mission window" : good_mission_window(mission_window);
+			guarantee Req_UART_CRC "A CRC shall be appended to the message to determine message correctness" : send_data.crc;
 		**};
 	end UARTDriver;
 
@@ -223,7 +223,7 @@ public
 			wifi_recv: in event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
 			wifi_send: out event data port CASE_Model_Transformations::CASE_WIFI_Msg.Impl;
 		annex agree {**
-			guarantee Req001_SW "The Mission Computer shall output a valid mission window to the Flight Controller" : uart_send.crc;
+			guarantee Req_SW_CRC "The Mission Computer shall output a valid mission window to the Flight Controller" : uart_send.crc;
 		**};
 	end SW;
 
@@ -236,12 +236,12 @@ public
 			UART: thread UARTDriver.Impl;
 			WIFI: thread WifiDriver.Impl;
 			NFDB: thread NoFlyZoneDatabase.Impl;
-			FLT: thread CASE_Filter.Impl;
+			Filter: thread CASE_Filter.Impl;
 		connections
 			c1: port radio_recv -> RADIO.recv_data;
 			c2: port RADIO.send_data -> radio_send;
-			c3: port RADIO.mission_command -> FLT.filter_in;
-			c4: port FLT.filter_out -> FPLN.recv_map;
+			c3: port RADIO.mission_command -> Filter.Input;
+			c4: port Filter.Output -> FPLN.recv_map;
 			c5: port FPLN.flight_plan -> WPM.flight_plan;
 			c6: port FPLN.request_nofly_zones -> NFDB.map;
 			c7: port NFDB.zones -> FPLN.nofly_zones;
@@ -257,8 +257,8 @@ public
 			c17: port WIFI.send_data -> wifi_send;
 			c18: port wifi_recv -> WIFI.recv_data;
 		annex resolute {**
-			prove Req003_FlightPlanner(this.FPLN, "Req003_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
-			prove Req004_FlightPlanner(this.FPLN, "Req004_FlightPlanner", this.FLT, this.c4, RF_Msg.Impl)
+			prove Req_FP_WellFormedMap(this.FPLN, "Req_FP_WellFormedMap", this.Filter, this.c4, RF_Msg.Impl)
+			prove Req_FP_WellFormedPattern(this.FPLN, "Req_FP_WellFormedPattern", this.Filter, this.c4, RF_Msg.Impl)
 		**};
 	end SW.Impl;
 

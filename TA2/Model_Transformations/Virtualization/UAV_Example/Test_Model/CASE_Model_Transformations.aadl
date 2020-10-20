@@ -368,7 +368,7 @@ public
 		-- This connects to evidence that AGREE was previously run on the current version of the design.
 		agree_prop_checked(c : component, property_id : string) <=
 			** "AGREE properties passed" **
-			AgreeLib.hasAgreeProperty(c, property_id) and analysis("AgreeCheck")	
+			AgreeLib.hasAgreeProperty(c, property_id) and analysis("AgreeCheck", type(parent(c)))	
 		
 		-- Check to see if there is a filter immediately before 
 		-- the component on the communication pathway.

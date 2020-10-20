@@ -1,10 +1,10 @@
 package CASE_Requirements
 private
 	annex resolute {**
-		Req001_SW(comp_context : component) <=
+		goal Req001_SW(comp_context : component) <=
 			** "[virtualization] Third-party software shall be isolated from critical components" **
 			context Generated_By : "GearCASE";
-			context Generated_On : "May 23, 1970";
+			context Generated_On : "May 23, 2020";
 			context Req_Component : "MC::MissionComputer.Impl.PROC_SW";
 			context Formalized : "False";
 			false
