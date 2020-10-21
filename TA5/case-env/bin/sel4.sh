@@ -4,7 +4,7 @@ set -Eeuxo pipefail
 : "${GIT_USER:=Snail}"
 : "${GIT_EMAIL:=<>}"
 : "${BASE_DIR:=$HOME/CASE}"
-: "${SEL4_SCRIPTS_V:=759234c023b09fef9d7a1ea655c3a2ce8ede3a82}"
+: "${SEL4_SCRIPTS_V:=daf5a3f842663daca8a5e615fd56e22421085539}"
 : "${SEL4_V:=28831f579e3560bd3aa18a3898505f091d66b076}"
 : "${CAMKES_V:=e7f5c6da03fc8a71a5a2e503de9f9004acf3ef2a}"
 
