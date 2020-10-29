@@ -1,21 +1,24 @@
 package Attestation
 public
 	with CASE_Model_Transformations;
-
 	with CASE_Properties;
-
 	with Base_Types;
+
+	data Address
+	end Address;
+	
+	data implementation Address.Impl
+		subcomponents
+			value: data Base_Types::Integer[4];
+	end Address.Impl;
 
 	thread RadioDriver
 		features
 			recv_message: in event data port;
 			command_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			other_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-		flows
-			flow_1: flow path recv_message -> command_message;
 		properties
 			CASE_Properties::Component_Type => COMM_DRIVER;
-			CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 0;
 	end RadioDriver;
 
 	thread implementation RadioDriver.Impl
@@ -28,10 +31,6 @@ public
 		features
 			recv_command: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			status: out event data port Base_types::Boolean;
-		flows
-			flow_1: flow path recv_command -> status;
-		properties
-			 CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;
 		annex agree {**
 			assume Req_Trusted "Command messages shall only come from trusted sources" : recv_command.header.trusted;
 			guarantee "Critical component status shall never be false" : status;
@@ -47,8 +46,6 @@ public
 	thread Critical_B
 		features
 			recv_message: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-		properties
-			 CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;
 	end Critical_B;
 
 	thread implementation Critical_B.Impl
@@ -61,13 +58,6 @@ public
 		features
 			input: in event data port;
 			output: out event data port Base_Types::Boolean;
-		flows
---			sink_1: flow sink input;
---			source_1: flow source output;
-			flow_1: flow path input -> output;
-		properties
-			 CASE_Properties::Trust_Level => 0; -- would prefer to say "unknown"
-			 CASE_Properties::Control_Level => 100;
 		annex agree {**
 			guarantee "Output status shall never be false" : output;
 		**};
@@ -75,21 +65,20 @@ public
 
 	process implementation SW.Impl
 		subcomponents
-			RADIO: thread RadioDriver.Impl;
-			CRIT_A: thread Critical_A.Impl;
-			CRIT_B: thread Critical_B.Impl;
+			Radio: thread RadioDriver.Impl;
+			Crit_A: thread Critical_A.Impl;
+			Crit_B: thread Critical_B.Impl;
 		connections
-			c1: port input -> RADIO.recv_message {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;};
-			c2: port RADIO.command_message -> CRIT_A.recv_command {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 100;};
-			c3: port RADIO.other_message -> CRIT_B.recv_message {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 100;};
-			c4: port CRIT_A.status -> output {CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;};
-		flows
-			flow_1: flow path input -> c1 -> RADIO.flow_1 -> c2 -> CRIT_A.flow_1 -> c4 -> output;
+			c1: port input -> Radio.recv_message;
+			c2: port Radio.command_message -> Crit_A.recv_command;
+			c3: port Radio.other_message -> Crit_B.recv_message;
+			c4: port Crit_A.status -> output;
+		annex resolute {**
+			prove(Req_Attestation(this.Radio))
+		**};
 	end SW.Impl;
 	
 	processor Proc
-		properties
-			CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 0;
  	end Proc;
 
 	processor implementation Proc.Impl
@@ -101,11 +90,6 @@ public
 		features
 			input: in event data port;
 			output: out event data port Base_Types::Boolean;
-		flows
-			flow_1: flow path input -> output;
-		properties
-			 CASE_Properties::Trust_Level => 0; -- would prefer to say "unknown"
-			 CASE_Properties::Control_Level => 100;
 	end Sys;
 	
 	system implementation Sys.Impl
@@ -113,10 +97,8 @@ public
 			SW: process SW.Impl;
 			PROC: processor Proc.Impl;
 		connections
-			c1: port input -> SW.input {CASE_Properties::Trust_Level => 0; CASE_Properties::Control_Level => 0;};
-			c2: port SW.output -> output {CASE_Properties::Trust_Level => 100; CASE_Properties::Control_Level => 100;};
-		flows
-			flow_1: flow path input -> c1 -> SW.flow_1 -> c2 -> output;
+			c1: port input -> SW.input;
+			c2: port SW.output -> output;
 		properties
 			Actual_Processor_Binding => (reference (PROC)) applies to SW;
 	end Sys.Impl;

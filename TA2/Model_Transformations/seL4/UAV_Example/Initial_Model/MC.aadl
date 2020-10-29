@@ -60,16 +60,6 @@ public
 	bus implementation MC_Bus.Impl
 	end MC_Bus.Impl;
 
-	virtual processor CASE_Virtual_Machine
-		properties
-			CASE_Properties::Component_Type => VIRTUAL_MACHINE;
-	end CASE_Virtual_Machine;
-
-	virtual processor implementation CASE_Virtual_Machine.Impl
-		properties
-			CASE_Properties::OS => "Linux";
-	end CASE_Virtual_Machine.Impl;
-
 	-- The MissionComputer onboard the UAV
 	system MissionComputer
 		features
@@ -89,7 +79,6 @@ public
 			MEM_HW: memory MC_Mem.Impl;
 			BUS_HW: bus MC_Bus.Impl;
 			SW: process SW::SW.Impl;
---			VM: virtual processor CASE_Virtual_Machine.Impl;
 		connections
 			c1: port radio_recv -> RADIO_HW.recv_data_in;
 			c2: port RADIO_HW.recv_data_out -> SW.radio_recv;
@@ -106,10 +95,12 @@ public
 			bac6: bus access RADIO_HW.RFA <-> RFA;
 			bac7: bus access UART_HW.UARTA <-> UARTA;
 		properties
-			Actual_Processor_Binding => (reference (PROC_HW)) applies to SW;--, VM;
+			Actual_Processor_Binding => (reference (PROC_HW)) applies to SW;
 			Actual_Memory_Binding => (reference (MEM_HW)) applies to SW;
 			Actual_Connection_Binding => (reference (BUS_HW)) applies to c2, c3, c6, c7;
---			Actual_Processor_Binding => (reference (VM)) applies to SW.UXAS;
+		annex resolute {**
+			prove Req_seL4(this.PROC_HW)
+		**};
 	end MissionComputer.Impl;
 
 end MC;

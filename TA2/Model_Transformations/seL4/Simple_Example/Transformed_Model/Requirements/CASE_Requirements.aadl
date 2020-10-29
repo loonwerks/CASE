@@ -5,7 +5,7 @@ private
 			** "[seL4] Software should run on a secure kernel" **
 			context Generated_By : "GearCASE";
 			context Generated_On : "Jul 20, 2020";
-			context Req_Component : "MC::MissionComputer.Impl.PROC_HW";
+			context Req_Component : "MissionComputer::MissionComputer.Impl.PROC_HW";
 			context Formalized : "False";
 			sel4_transform(comp_context, transformed_component)
 		

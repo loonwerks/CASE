@@ -1,5 +1,12 @@
 package CASE_Requirements
 private
 	annex resolute {**
+		goal Req_Attestation(comm_driver : component) <=
+			** "[attestation] Only messages from trusted sources shall be accepted" **
+			context Generated_By : "GearCASE";
+			context Generated_On : "Jul 20, 2020";
+			context Req_Component : "Attestation::SW.Impl.Radio";
+			context Formalized : "False";
+			false
 	**};
 end CASE_Requirements;

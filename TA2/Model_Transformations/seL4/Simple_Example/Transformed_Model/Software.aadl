@@ -1,0 +1,234 @@
+package Software
+public
+
+	with Base_Types;
+	with CASE_Properties;
+
+	thread Component_A
+		features
+			input: in event data port Base_Types::Integer;
+			output: out event data port Base_Types::Integer;
+		properties
+			CASE_Properties::Component_Type => COMM_DRIVER;
+		annex agree {**
+			assume Req001_A "Input is positive" : POSITIVE(input);
+			guarantee Req002_A "Output is positive" : POSITIVE(output);
+		**};
+	end Component_A;
+
+	thread implementation Component_A.Impl
+	end Component_A.Impl;
+
+	thread Component_B
+		features
+			input: in event data port Base_Types::Integer;
+			output: out event data port Base_Types::Integer;
+		annex agree {**
+			assume Req001_B "Input is positive" : POSITIVE(input);
+			guarantee Req002_B "Output is positive" : POSITIVE(output);
+		**};
+	end Component_B;
+
+	thread implementation Component_B.Impl
+	end Component_B.Impl;
+
+	thread Component_C
+		features
+			input: in event data port Base_Types::Integer;
+			output: out event data port Base_Types::Integer;
+		annex agree {**
+			assume Req001_C "Input is positive" : POSITIVE(input);
+			guarantee Req002_C "Output is positive" : POSITIVE(output);
+		**};
+	end Component_C;
+
+	thread implementation Component_C.Impl
+	end Component_C.Impl;
+
+	thread Component_D
+		features
+			input: in event data port Base_Types::Integer;
+			output: out event data port Base_Types::Integer;
+		annex agree {**
+			assume Req001_D "Input is positive" : POSITIVE(input);
+			guarantee Req002_D "Output is positive" : POSITIVE(output);
+		**};
+	end Component_D;
+
+	thread implementation Component_D.Impl
+	end Component_D.Impl;
+
+	thread group Component_E
+		features
+			input: in event data port Base_Types::Integer;
+			output: out event data port Base_Types::Integer;
+		annex agree {**
+			assume Req001_E "Input is positive" : POSITIVE(input);
+			guarantee Req002_E "Output is positive" : POSITIVE(output);
+		**};
+	end Component_E;
+	
+	thread group implementation Component_E.Impl
+		subcomponents
+			Component_B: thread Component_B.Impl;
+			Component_C: thread Component_C.Impl;
+			Component_D: thread Component_D.Impl;
+		connections
+			c1: port input -> Component_B.input;
+			c2: port Component_B.output -> Component_C.input;
+			c3: port Component_C.output -> Component_D.input;
+			c4: port Component_D.output -> output;
+	end Component_E.Impl;
+
+	process Critical
+		features
+			input: in event data port Base_Types::Integer;
+			output: out event data port Base_Types::Integer;
+		annex agree {**
+			assume Req001_Critical "Input is positive" : POSITIVE(input);
+			guarantee Req002_Critical "Output is positive" : POSITIVE(output);
+		**};
+	end Critical;
+
+	process implementation Critical.Impl
+		subcomponents
+			Component_A: thread Component_A.Impl;
+			Component_E: thread group Component_E.Impl;
+		connections
+			c1: port input -> Component_A.input;
+			c2: port Component_A.output -> Component_E.input;
+			c3: port Component_E.output -> output;
+	end Critical.Impl;
+	
+	process Non_Critical
+	end Non_Critical;
+	
+	process implementation Non_Critical.Impl
+	end Non_Critical.Impl;
+	
+	system SW_Sys
+	end SW_Sys;
+	
+	system implementation SW_Sys.Impl
+		subcomponents
+
+			NonCritical: process Non_Critical.Impl;
+			Critical: system Critical_seL4.Impl;
+	end SW_Sys.Impl;
+
+	annex agree {**
+		fun POSITIVE(num : Base_Types::Integer) : bool = (num > 0);
+	**};
+	
+	process Component_A_seL4
+		features
+			input: in event data port Base_Types::Integer;
+			output: out event data port Base_Types::Integer;
+		properties
+			CASE_Properties::Component_Type => COMM_DRIVER;
+	end Component_A_seL4;
+
+	process implementation Component_A_seL4.Impl
+		subcomponents
+			Component_A: thread Component_A.Impl;
+		connections
+			c1: port Component_A.output -> output;
+			c2: port input -> Component_A.input;
+		annex agree {**
+			lift contract;
+		**};
+	end Component_A_seL4.Impl;
+
+	process Component_B_seL4
+		features
+			input: in event data port Base_Types::Integer;
+			output: out event data port Base_Types::Integer;
+	end Component_B_seL4;
+
+	process implementation Component_B_seL4.Impl
+		subcomponents
+			Component_B: thread Component_B.Impl;
+		connections
+			c1: port Component_B.output -> output;
+			c2: port input -> Component_B.input;
+		annex agree {**
+			lift contract;
+		**};
+	end Component_B_seL4.Impl;
+
+	process Component_C_seL4
+		features
+			input: in event data port Base_Types::Integer;
+			output: out event data port Base_Types::Integer;
+	end Component_C_seL4;
+
+	process implementation Component_C_seL4.Impl
+		subcomponents
+			Component_C: thread Component_C.Impl;
+		connections
+			c1: port input -> Component_C.input;
+			c2: port Component_C.output -> output;
+		annex agree {**
+			lift contract;
+		**};
+	end Component_C_seL4.Impl;
+
+	process Component_D_seL4
+		features
+			input: in event data port Base_Types::Integer;
+			output: out event data port Base_Types::Integer;
+	end Component_D_seL4;
+
+	process implementation Component_D_seL4.Impl
+		subcomponents
+			Component_D: thread Component_D.Impl;
+		connections
+			c1: port input -> Component_D.input;
+			c2: port Component_D.output -> output;
+		annex agree {**
+			lift contract;
+		**};
+	end Component_D_seL4.Impl;
+
+	system Component_E_seL4
+		features
+			input: in event data port Base_Types::Integer;
+			output: out event data port Base_Types::Integer;
+		annex agree {**
+			assume Req001_E_seL4 "Input is positive" : POSITIVE(input);
+			guarantee Req002_E_seL4 "Output is positive" : POSITIVE(output);
+		**};
+	end Component_E_seL4;
+
+	system implementation Component_E_seL4.Impl
+		subcomponents
+			Component_D: process Component_D_seL4.Impl;
+			Component_C: process Component_C_seL4.Impl;
+			Component_B: process Component_B_seL4.Impl;
+		connections
+			c1: port input -> Component_B.input;
+			c2: port Component_B.output -> Component_C.input;
+			c3: port Component_C.output -> Component_D.input;
+			c4: port Component_D.output -> output;
+	end Component_E_seL4.Impl;
+
+	system Critical_seL4
+		features
+			input: in event data port Base_Types::Integer;
+			output: out event data port Base_Types::Integer;
+		annex agree {**
+			assume Req001_Critical_seL4 "Input is positive" : POSITIVE(input);
+			guarantee Req002_Critical_seL4 "Output is positive" : POSITIVE(output);
+		**};
+	end Critical_seL4;
+
+	system implementation Critical_seL4.Impl
+		subcomponents
+			Component_E: system Component_E_seL4.Impl;
+			Component_A: process Component_A_seL4.Impl;
+		connections
+			c1: port input -> Component_A.input;
+			c2: port Component_A.output -> Component_E.input;
+			c3: port Component_E.output -> output;
+	end Critical_seL4.Impl;
+end Software;

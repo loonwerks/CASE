@@ -2,16 +2,6 @@ package Producer_Consumer
 public
 	with Base_Types;
 	with CASE_Properties;
-	
-	thread Radio
-		features
-			Input: in event data port Coordinate.Impl;
-			Output: out event data port Coordinate.Impl;
-	end Radio;
-	
-	thread implementation Radio.Impl
-		
-	end Radio.Impl;
 
 	data Coordinate
 	end Coordinate;
@@ -68,12 +58,9 @@ public
 			Producer: thread Producer.Impl;
 			Consumer: thread Consumer.Impl;
 		connections
-			c0: port input -> Producer.trigger {CASE_Properties::Trust_Level => 0;
-				CASE_Properties::Control_Level => 0;};
-			c1: port Producer.msg_out -> Consumer.msg_in {CASE_Properties::Trust_Level => 100;
-				CASE_Properties::Control_Level => 100;};
-			c2: port Consumer.status -> output {CASE_Properties::Trust_Level => 100;
-				CASE_Properties::Control_Level => 100;};
+			c0: port input -> Producer.trigger;
+			c1: port Producer.msg_out -> Consumer.msg_in;
+			c2: port Consumer.status -> output;
 		annex resolute {**
 			prove(Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong"))
 			prove(Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt"))
@@ -81,7 +68,6 @@ public
 	end SW.Impl;
 
 	processor Proc
-			
 	end Proc;
 	
 	processor implementation Proc.Impl

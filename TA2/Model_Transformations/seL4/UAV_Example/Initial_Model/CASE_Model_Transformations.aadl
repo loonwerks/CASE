@@ -109,6 +109,10 @@ public
 			** "Switch inserted after " comp_context **
 			component_exists(switch, "SWITCH") and component_not_bypassed(switch, comp_context, message_type) and component_implemented(switch)
 		
+		-- Top-level claim for proper transformation of model for seL4 build
+		sel4_transform(comp_context : component, transformed_component : component) <=
+			** "Component " comp_context " transformed for seL4 build" **
+			each_thread_in_separate_process(transformed_component)
 			
 		--------------------------
 		-- PROJECT-LEVEL CLAIMS --
@@ -195,7 +199,7 @@ public
 		
 		backwards_reachable_components_via_connection(comp : component, conn : connection) : {component} = 
 			if is_port_connection(conn) then 
-				if destination_component(conn) = comp then 
+				if destination_component(conn) = comp and has_parent(comp) and not (source_component(conn) = parent(comp)) then 
 					{source_component(conn)} 
 				else 
 					{} 
@@ -275,17 +279,22 @@ public
 						
 		alert_connected(monitor : component) <=
 			** "Monitor Alert port is connected" **
-			let alert_ports : {feature} = {p for (p : features(monitor)) | name(p) = "alert"};
+			let alert_ports : {feature} = {p for (p : features(monitor)) | name(p) = "Alert"};
 			let alert_conns : {connection} = {c for (p : alert_ports) (c : connection) | source(c) = p};
 			length(alert_conns) > 0
 						
 		independent_reset(monitor : component, comp_context : component) <=
 			** "Monitor reset port cannot be triggered by source of observed signal" **
-			let reset_ancestors : {component} = {comp for (conn : connections(monitor)) (comp : recursive_backwards_reach({source_component(conn)})) | destination_component(conn) = monitor and name(destination(conn)) = "reset"};
+			let reset_ancestors : {component} = {comp for (conn : connections(monitor)) (comp : recursive_backwards_reach({source_component(conn)})) | destination_component(conn) = monitor and name(destination(conn)) = "Reset"};
 			length(intersect(reset_ancestors, {comp_context})) = 0
 			
 		is_software_component(comp : component) : bool =
 			is_process(comp) or is_thread_group(comp) or is_thread(comp)
+			
+		each_thread_in_separate_process(root : component) <=
+			** "Each thread is in a separate process" **
+			let comps : {component} = get_subcomponents({root});
+			forall (c : comps) . ((is_system(c) or is_thread(c) or is_process(c)) and is_process(c) => (length(subcomponents(c)) = 1 and is_thread(head(as_list(subcomponents(c))))))
 		
 	**};
 	

@@ -1,11 +1,19 @@
 package CASE_Requirements
 private
 	annex resolute {**
-		Req101_Radio(comp_context : component) <=
-			** "[Monitor] The Radio command message shall be monitored for correctness" **
+		goal Req_Response(comp_context : component) <=
+			** "[response_monitor] Component Comp_A shall be monitored for responsiveness" **
 			context Generated_By : "GearCASE";
 			context Generated_On : "Jan 29, 2020";
-			context Req_Component : "SW::SW.Impl.UxAS";
+			context Req_Component : "Monitor::SW.Impl.Comp_A";
+			context Formalized : "False";
+			false
+			
+		goal Req_CorrectOutput(comp_context : component) <=
+			** "[correctness_monitor] Component Comp_A shall be monitored for correct output" **
+			context Generated_By : "GearCASE";
+			context Generated_On : "Jan 29, 2020";
+			context Req_Component : "Monitor::SW.Impl.Comp_A";
 			context Formalized : "False";
 			false
 		

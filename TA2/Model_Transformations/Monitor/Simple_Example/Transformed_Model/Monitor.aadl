@@ -3,12 +3,80 @@ public
 	with CASE_Model_Transformations;
 	with CASE_Properties;
 	with Base_Types;
+	renames AGREE_PLTL::all;
+
+	thread CASE_CorrectnessMonitor
+		features
+			Observed: in event data port Base_Types::Boolean;
+			Sensor: in event data port Base_Types::Boolean;
+			Alert: out event data port Base_Types::Boolean;
+			Output: out event data port Base_Types::Boolean;
+		properties
+			CASE_Properties::Component_Type => MONITOR;
+			CASE_Properties::Component_Spec => ("Req_CASE_CorrectnessMonitor");
+			CASE_Properties::Monitor_Latched => false;
+		annex agree {**
+			const is_latched : bool = Get_Property(this, CASE_Properties::Monitor_Latched);
+			property CASE_CorrectnessMonitor_policy = (Observed = Sensor);
+			guarantee Req_CASE_CorrectnessMonitor "A violation of the monitor policy shall trigger an alert, and observed input shall not be propagated." :
+				if is_latched and prev(event(Alert), not CASE_CorrectnessMonitor_policy) then
+					event(Alert) and not event(Output)
+				else
+					if event(Observed) then
+						if CASE_CorrectnessMonitor_policy then
+							not event(Alert) and event(Output) and Output = Observed
+						else
+							event(Alert) and not event(Output)
+					else
+						not event(Alert) and not event(Output);
+		**};
+	end CASE_CorrectnessMonitor;
+
+	thread implementation CASE_CorrectnessMonitor.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+	end CASE_CorrectnessMonitor.Impl;
+
+	thread CASE_ResponseMonitor
+		features
+			Observed: in event data port Base_Types::Boolean;
+			Command: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			Alert: out event data port Base_Types::Boolean;
+			Reset: in event data port Base_Types::Boolean;
+		properties
+			CASE_Properties::Component_Type => MONITOR;
+			CASE_Properties::Monitor_Latched => true;
+		annex agree {**
+			const is_latched : bool = Get_Property(this, CASE_Properties::Monitor_Latched);
+			-- Monitor policy (models the expected behavior in terms of the input ports)
+			-- status (Observed) occurs within two time steps of receiving a command (Command)
+			eq empty_day : bool = not event(Observed) and not event(Command);
+			property CASE_ResponseMonitor_policy = 
+				Historically(event(Command) or (empty_day and Yesterday(event(Command) or (empty_day and Yesterday(event(Command))))) => event(Observed));
+			guarantee Req_CASE_ResponseMonitor "A violation of the monitor policy shall trigger an alert." :
+				if not event(Reset) and is_latched and prev(event(Alert), not CASE_ResponseMonitor_policy) then
+					event(Alert)
+				else
+					if event(Observed) then
+						if CASE_ResponseMonitor_policy then
+							not event(Alert)
+						else
+							event(Alert)
+					else
+						not event(Alert);
+		**};
+	end CASE_ResponseMonitor;
+
+	thread implementation CASE_ResponseMonitor.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+	end CASE_ResponseMonitor.Impl;
 
 	thread RadioDriver
 		features
 			recv_message: in event data port;
 			command_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			other_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			alert: in event data port Base_Types::Boolean;
 		properties
 			CASE_Properties::Component_Type => COMM_DRIVER;
 	end RadioDriver;
@@ -18,37 +86,26 @@ public
 			Dispatch_Protocol => Periodic;
 	end RadioDriver.Impl;
 
-	thread Critical_A
+	thread Component_A
 		features
 			recv_command: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			status: out event data port Base_types::Boolean;
 		annex agree {**
-			assume Req_Trusted "Command messages shall only come from trusted sources" : recv_command.header.trusted;
-			guarantee "Critical component status shall never be false" : status;
+			guarantee "Component status shall never be false" : status;
 		**};
-	end Critical_A;
+	end Component_A;
 
-	thread implementation Critical_A.Impl
+	thread implementation Component_A.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
-	end Critical_A.Impl;
-
-	thread Critical_B
-		features
-			recv_message: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-	end Critical_B;
-
-	thread implementation Critical_B.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
-	end Critical_B.Impl;
+	end Component_A.Impl;
 
 	process SW
 		features
 			input: in event data port;
 			reset: in event data port Base_Types::Boolean;
+			sensor: in event data port Base_Types::Boolean;
 			output: out event data port Base_Types::Boolean;
-			alert: out event data port Base_Types::Boolean;
 		annex agree {**
 			guarantee "Output status shall never be false" : output;
 		**};
@@ -56,19 +113,31 @@ public
 
 	process implementation SW.Impl
 		subcomponents
-			RADIO: thread RadioDriver.Impl;
-			CRIT_A: thread Critical_A.Impl;
-			CRIT_B: thread Critical_B.Impl;
+			Radio: thread RadioDriver.Impl;
+			Comp_A: thread Component_A.Impl;
+			ResponseMonitor: thread CASE_ResponseMonitor.Impl;
+			CorrectnessMonitor: thread CASE_CorrectnessMonitor.Impl;
 		connections
-			c1: port input -> RADIO.recv_message;
-			c2: port RADIO.command_message -> CRIT_A.recv_command;
-			c3: port RADIO.other_message -> CRIT_B.recv_message;
-			c4: port CRIT_A.status -> output;
+			c1: port input -> Radio.recv_message;
+			c2: port Radio.command_message -> Comp_A.recv_command;
+			c3: port CorrectnessMonitor.Output -> output;
+			c9: port sensor -> CorrectnessMonitor.Sensor;
+			c8: port Comp_A.status -> CorrectnessMonitor.Observed;
+			c10: port CorrectnessMonitor.Alert -> Radio.alert;
+			c5: port Radio.command_message -> ResponseMonitor.Command;
+			c4: port Comp_A.status -> ResponseMonitor.Observed;
+			c6: port ResponseMonitor.Alert -> Radio.alert;
+			c7: port reset -> ResponseMonitor.Reset;
+		annex resolute {**
+			prove Req_Response(this.Comp_A, this.ResponseMonitor)
+			prove Req_CorrectOutput(this.Comp_A, this.CorrectnessMonitor, this, Base_Types::Boolean)
+		**};
 	end SW.Impl;
 
 	system Sys
 		features
 			input: in event data port;
+			sensor: in event data port Base_Types::Boolean;
 			output: out event data port Base_Types::Boolean;
 	end Sys;
 
@@ -77,7 +146,8 @@ public
 			SW: process SW.Impl;
 		connections
 			c1: port input -> SW.input;
-			c2: port SW.output -> output;
+			c2: port sensor -> SW.sensor;
+			c3: port SW.output -> output;
 	end Sys.Impl;
 	
 end Monitor;

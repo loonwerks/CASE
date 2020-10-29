@@ -1,0 +1,30 @@
+package MissionComputer
+public
+	with Software;
+	with CASE_Properties;
+
+	-- The Mission Computer processor
+	processor MC_Proc
+	end MC_Proc;
+
+	processor implementation MC_Proc.Impl
+		properties
+			CASE_Properties::OS => "seL4";
+	end MC_Proc.Impl;
+
+	-- The MissionComputer
+	system MissionComputer
+	end MissionComputer;
+
+	system implementation MissionComputer.Impl
+		subcomponents
+			PROC_HW: processor MC_Proc.Impl;
+			SW_Sys: system Software::SW_Sys.Impl;
+		properties
+			Actual_Processor_Binding => (reference (PROC_HW)) applies to SW_Sys;
+		annex resolute {**
+			prove Req_seL4(this.PROC_HW)
+		**};
+	end MissionComputer.Impl;
+
+end MissionComputer;
