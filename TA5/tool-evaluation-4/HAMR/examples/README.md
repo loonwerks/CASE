@@ -28,6 +28,10 @@ Simple producer/consumer example using data port communications between native C
 
 - seL4_TB: A version of this example, using the early "trusted build" approach (prior to CASE Phase I), with no domain scheduling, and port communications that are not fully compliant with AADL semantics.
 
+## test_data_port_periodic_domains_VM
+
+Example systems utilizing a data port communications connection between a sender and receiver, where either the sender, receiver, or both are implemented as a virtual machine component. These examples use the specialized connectors designed for communications to and from virtual machines within a CAmkES environment.
+
 ## test_data_port_periodic_fan_out
 
 A producer/consumer example using data port communications where there are two consumer component to the single producer component. Native CAmkES components only, and no domain scheduling.
@@ -66,6 +70,10 @@ Similar to "test_event_data_port_period_domains" above, except that the producer
 
 - sender_vm: The producer component is implemented as an application executing on a virtual machine, while the consumer is a native CAmkES component.
 
+## test_event_data_port_periodic_domains_VMx
+
+A set of examples displaying the use of the event data port between components, where a single sender is communicating with two receiving components in a 1-to-2 fanout configuration. In one example of this set, the sender is a native CAmkES component connected to a native CAmkES component receiver and a virtual machine receiver. In the second example, the sender is implemented as a virtual machine, one of the receivers is a native CAmkES component, and the other receiver is implemented as a virtual machine.
+
 ## test_event_data_port_two_vms
 
 This is an early hand-modified variation of the producer/consumer example that extended the "trusted build" code generation from HAMR. Used to exercise the cross-vm communications within CAmkES. This version is depricated.
@@ -83,5 +91,9 @@ Simple producer/consumer example using event port communications between a singl
 
 The producer/consumer example using event port communications between native CAmkES components, and employing the Pacer component to enforce a periodic domain schedule.
 
+## test_event_port_vm
 
-9JUN2020
+Example systems utilizing an event port communications connection between a sender and receiver, where the sender is a native CAmkES component and the receiver is implemented as a virtual machine component. These examples use the specialized connectors designed for communications to and from virtual machines within a CAmkES environment.
+
+
+9NOV2020
