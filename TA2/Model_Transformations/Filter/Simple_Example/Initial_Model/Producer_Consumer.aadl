@@ -72,7 +72,7 @@ public
 	
 	processor implementation Proc.Impl
 		properties
-			CASE_Properties::OS => "seL4";
+			CASE_Properties::OS => seL4;
 	end Proc.Impl;
 
 	system Sys

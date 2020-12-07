@@ -12,7 +12,7 @@ public
 			Alert: out event data port Base_Types::Boolean;
 			Output: out event data port Base_Types::Boolean;
 		properties
-			CASE_Properties::Component_Type => MONITOR;
+			CASE_Properties::Monitoring => 100;
 			CASE_Properties::Component_Spec => ("Req_CASE_CorrectnessMonitor");
 			CASE_Properties::Monitor_Latched => false;
 		annex agree {**
@@ -44,7 +44,7 @@ public
 			Alert: out event data port Base_Types::Boolean;
 			Reset: in event data port Base_Types::Boolean;
 		properties
-			CASE_Properties::Component_Type => MONITOR;
+			CASE_Properties::Monitoring => 100;
 			CASE_Properties::Monitor_Latched => true;
 		annex agree {**
 			const is_latched : bool = Get_Property(this, CASE_Properties::Monitor_Latched);
@@ -78,7 +78,7 @@ public
 			command_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			alert: in event data port Base_Types::Boolean;
 		properties
-			CASE_Properties::Component_Type => COMM_DRIVER;
+			CASE_Properties::Comm_Driver => true;
 	end RadioDriver;
 
 	thread implementation RadioDriver.Impl

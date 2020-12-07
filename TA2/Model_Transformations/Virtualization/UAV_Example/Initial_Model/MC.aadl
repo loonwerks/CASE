@@ -58,7 +58,7 @@ public
 
 	processor implementation MC_Proc.Impl
 		properties
-			CASE_Properties::OS => "Linux";
+			CASE_Properties::OS => Linux;
 	end MC_Proc.Impl;
 
 		-- The Mission Computer RAM

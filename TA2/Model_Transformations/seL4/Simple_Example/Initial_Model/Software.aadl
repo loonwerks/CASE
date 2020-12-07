@@ -9,7 +9,7 @@ public
 			input: in event data port Base_Types::Integer;
 			output: out event data port Base_Types::Integer;
 		properties
-			CASE_Properties::Component_Type => COMM_DRIVER;
+			CASE_Properties::Comm_Driver => true;
 		annex agree {**
 			assume Req001_A "Input is positive" : POSITIVE(input);
 			guarantee Req002_A "Output is positive" : POSITIVE(output);

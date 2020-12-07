@@ -13,7 +13,7 @@ public
 			filter_in: in event data port RF_Msg.Impl;
 			filter_out: out event data port RF_Msg.Impl;
 		properties
-			CASE_Properties::Component_Type => FILTER;
+			CASE_Properties::Filtering => 100;
 			CASE_Properties::Component_Spec => ("Req001_Filter", "Req002_Filter");
 		annex agree {**
 			guarantee Req001_RadioDriver_Filter "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(filter_out);
@@ -127,7 +127,7 @@ public
 			mission_command: out event data port RF_Msg.Impl;
 			status: in event data port Coordinate.Impl;
 		properties
-			CASE_Properties::Component_Type => COMM_DRIVER;
+			CASE_Properties::Comm_Driver => true;
 		annex agree {**
 			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
 		**};
@@ -376,7 +376,7 @@ public
 			UART: thread UARTDriver.Impl;
 			WIFI: thread WifiDriver.Impl;
 			NFDB: thread NoFlyZoneDatabase.Impl;
-			FLT: thread CASE_Filter.Impl {CASE_Properties::Component_Type => MONITOR;};
+			FLT: thread CASE_Filter.Impl {CASE_Properties::Monitoring => 100;};
 		connections
 			c1: port radio_recv -> RADIO.recv_data;
 			c2: port RADIO.send_data -> radio_send;

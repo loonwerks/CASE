@@ -95,7 +95,7 @@ public
 			mission_command: out event data port RF_Msg.Impl;
 			status: in event data port Coordinate.Impl;
 		properties
-			CASE_Properties::Component_Type => COMM_DRIVER;
+			CASE_Properties::Comm_Driver => true;
 		annex agree {**
 			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
 		**};

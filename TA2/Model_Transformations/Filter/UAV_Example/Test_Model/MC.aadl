@@ -162,7 +162,7 @@ public
 		subcomponents
 			RADIO_HW: device Radio.Impl;
 			UART_HW: device UART.Impl;
-			PROC_HW: processor MC_Proc.Impl {CASE_Properties::OS => "seL4";};
+			PROC_HW: processor MC_Proc.Impl {CASE_Properties::OS => seL4;};
 			MEM_HW: memory MC_Mem.Impl;
 			BUS_HW: bus MC_Bus.Impl;
 			PROC_SW: process SW::SW.Test_Filter_Implemented;

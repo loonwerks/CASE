@@ -8,7 +8,7 @@ public
 			Input: in event data port Coordinate.Impl;
 			Output: out event data port Coordinate.Impl;
 		properties
-			CASE_Properties::Component_Type => FILTER;
+			CASE_Properties::Filtering => 100;
 			CASE_Properties::Component_Spec => ("Req_CASE_Filter", "Req_Filter_Alt");
 	
 		annex agree {**
@@ -97,7 +97,7 @@ public
 
 	processor implementation Proc.Impl
 		properties
-			CASE_Properties::OS => "seL4";
+			CASE_Properties::OS => seL4;
 	end Proc.Impl;
 
 	system Sys

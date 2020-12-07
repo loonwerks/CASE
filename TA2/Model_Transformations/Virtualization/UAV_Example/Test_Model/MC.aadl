@@ -77,12 +77,12 @@ public
 
 	virtual processor CASE_Virtual_Machine
 		properties
-			CASE_Properties::Component_Type => VIRTUAL_MACHINE;
+			CASE_Properties::Isolating => 100;
 	end CASE_Virtual_Machine;
 
 	virtual processor implementation CASE_Virtual_Machine.Impl
 		properties
-			CASE_Properties::OS => "Linux";
+			CASE_Properties::OS => Linux;
 	end CASE_Virtual_Machine.Impl;
 
 		-- The MissionComputer onboard the UAV
@@ -189,7 +189,7 @@ public
 
 	virtual processor implementation CASE_Virtual_Machine_Test_1.Impl
 		properties
-			CASE_Properties::OS => "Linux";
+			CASE_Properties::OS => Linux;
 	end CASE_Virtual_Machine_Test_1.Impl;
 
 	-- VM has no Component_Type property
@@ -246,7 +246,7 @@ public
 			BUS_HW: bus MC_Bus.Impl;
 			PROC_SW: process SW::SW.Impl;
 			WIFI_HW: device Wifi.Impl;
-			VM: virtual processor CASE_Virtual_Machine_Test_1.Impl {CASE_Properties::Component_Type => MONITOR;};
+			VM: virtual processor CASE_Virtual_Machine_Test_1.Impl {CASE_Properties::Monitoring => 100;};
 		connections
 			c1: port radio_recv -> RADIO_HW.recv_data_in;
 			c2: port RADIO_HW.recv_data_out -> PROC_SW.radio_recv;

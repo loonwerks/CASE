@@ -15,7 +15,7 @@ public
 			am_request: out event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
 			am_response: in event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
 		properties
-			CASE_Properties::Component_Type => ATTESTATION;
+			CASE_Properties::Attesting => 100;
 			CASE_Properties::Component_Spec => ("Req_Attestation");
 		annex agree {**
 			guarantee Req001_RadioDriver_AttestationManager "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(am_mission_command_out);
@@ -26,7 +26,7 @@ public
 	thread implementation CASE_AttestationManager.Impl
 		properties
 			CASE_Properties::Component_Impl => "CakeML";
-			CASE_Properties::Cache_Timeout => 30;
+			CASE_Properties::Cache_Timeout => 30 min;
 			CASE_Properties::Cache_Size => 4;
 	end CASE_AttestationManager.Impl;
 
@@ -130,7 +130,7 @@ public
 			mission_command: out event data port RF_Msg.Impl;
 			status: in event data port Coordinate.Impl;
 		properties
-			CASE_Properties::Component_Type => COMM_DRIVER;
+			CASE_Properties::Comm_Driver => true;
 		annex agree {**
 			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
 		**};
@@ -328,7 +328,7 @@ public
 	thread implementation CASE_AttestationManager_Test.Impl
 		properties
 			CASE_Properties::Component_Impl => "CakeML";
-			CASE_Properties::Cache_Timeout => 30;
+			CASE_Properties::Cache_Timeout => 30 min;
 			CASE_Properties::Cache_Size => 4;
 	end CASE_AttestationManager_Test.Impl;
 	
@@ -381,7 +381,7 @@ public
 			UART: thread UARTDriver.Impl;
 			WIFI: thread WifiDriver.Impl;
 			NFDB: thread NoFlyZoneDatabase.Impl;
-			AM: thread CASE_AttestationManager_Test.Impl {CASE_Properties::Component_Type => MONITOR;};
+			AM: thread CASE_AttestationManager_Test.Impl {CASE_Properties::Monitoring => 100;};
 		connections
 			c1: port radio_recv -> RADIO.recv_data;
 			c2: port RADIO.send_data -> radio_send;

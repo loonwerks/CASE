@@ -8,7 +8,7 @@ public
 	
 	processor implementation HW_Proc.Impl
 		properties
-			CASE_Properties::OS => "sel4";
+			CASE_Properties::OS => sel4;
 	end HW_Proc.Impl;
 	
 	process SW

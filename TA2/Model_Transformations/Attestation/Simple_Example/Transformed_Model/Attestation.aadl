@@ -12,7 +12,7 @@ public
 			other_message_out: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			TrustedIds: in event data port Address.Impl;
 		properties
-			CASE_Properties::Component_Type => SWITCH;
+			CASE_Properties::Gating => 100;
 	end CASE_AttestationGate;
 
 	thread implementation CASE_AttestationGate.Impl
@@ -26,12 +26,12 @@ public
 			AttestationResponse: in event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
 			TrustedIds: out event data port Address.Impl;
 		properties
-			CASE_Properties::Component_Type => ATTESTATION;
+			CASE_Properties::Attesting => 100;
 	end CASE_AttestationManager;
 
 	thread implementation CASE_AttestationManager.Impl
 		properties
-			CASE_Properties::Cache_Timeout => 5;
+			CASE_Properties::Cache_Timeout => 5 min;
 			CASE_Properties::Cache_Size => 3;
 			Dispatch_Protocol => Sporadic;
 	end CASE_AttestationManager.Impl;
@@ -50,7 +50,7 @@ public
 			command_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			other_message: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 		properties
-			CASE_Properties::Component_Type => COMM_DRIVER;
+			CASE_Properties::Comm_Driver => true;
 	end RadioDriver;
 
 	thread implementation RadioDriver.Impl
@@ -94,7 +94,7 @@ public
 			AttestationRequest: in event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
 			AttestationResponse: out event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
 		properties
-			CASE_Properties::Component_Type => COMM_DRIVER;
+			CASE_Properties::Comm_Driver => true;
 	end RadioDriver_Attestation;
 
 	thread implementation RadioDriver_Attestation.Impl
@@ -139,7 +139,7 @@ public
 
 	processor implementation Proc.Impl
 		properties
-			CASE_Properties::OS => "Linux";
+			CASE_Properties::OS => Linux;
 	end Proc.Impl;
 
 	system Sys

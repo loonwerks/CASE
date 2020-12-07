@@ -55,7 +55,7 @@ public
 
 	processor implementation MC_Proc.Impl
 		properties
-			CASE_Properties::OS => "Linux";
+			CASE_Properties::OS => Linux;
 	end MC_Proc.Impl;
 
 	-- The Mission Computer RAM
@@ -76,12 +76,12 @@ public
 
 	virtual processor CASE_VirtualMachine
 		properties
-			CASE_Properties::Component_Type => VIRTUAL_MACHINE;
+			CASE_Properties::Isolating => 100;
 	end CASE_VirtualMachine;
 
 	virtual processor implementation CASE_VirtualMachine.Impl
 		properties
-			CASE_Properties::OS => "Linux";
+			CASE_Properties::OS => Linux;
 	end CASE_VirtualMachine.Impl;
 
 	-- The MissionComputer onboard the UAV
