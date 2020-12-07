@@ -52,18 +52,18 @@ public
 			-- status (Observed) occurs within two time steps of receiving a command (Command)
 			eq empty_day : bool = not event(Observed) and not event(Command);
 			property CASE_ResponseMonitor_policy = 
-				Historically(event(Command) or (empty_day and Yesterday(event(Command) or (empty_day and Yesterday(event(Command))))) => event(Observed));
+							Historically(event(Command) or (empty_day and Yesterday(event(Command) or (empty_day and Yesterday(event(Command))))) => event(Observed));
 			guarantee Req_CASE_ResponseMonitor "A violation of the monitor policy shall trigger an alert." :
-				if not event(Reset) and is_latched and prev(event(Alert), not CASE_ResponseMonitor_policy) then
-					event(Alert)
-				else
-					if event(Observed) then
-						if CASE_ResponseMonitor_policy then
-							not event(Alert)
-						else
+						if not event(Reset) and is_latched and prev(event(Alert), not CASE_ResponseMonitor_policy) then
 							event(Alert)
-					else
-						not event(Alert);
+						else
+							if event(Observed) then
+								if CASE_ResponseMonitor_policy then
+									not event(Alert)
+								else
+									event(Alert)
+							else
+								not event(Alert);
 		**};
 	end CASE_ResponseMonitor;
 

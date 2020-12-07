@@ -9,12 +9,12 @@ public
 			Output: out event data port Coordinate.Impl;
 		properties
 			CASE_Properties::Filtering => 100;
-			CASE_Properties::Component_Spec => ("Req_CASE_Filter", "Req_Filter_Alt");
+			CASE_Properties::Component_Spec => ("Req_Filter_LatLong", "Req_Filter_Alt");
 	
 		annex agree {**
-			guarantee Req_Filter_LatLong "The Consumer shall only receive well-formed lat-long values" : WELL_FORMED_LAT_LONG(Output);
-			guarantee Req_Filter_Alt "The Consumer shall only receive well-formed altitude values" : WELL_FORMED_ALT(Output);
-		**};
+				guarantee Req_Filter_LatLong "The Consumer shall only receive well-formed lat-long values" : WELL_FORMED_LAT_LONG(Output);
+				guarantee Req_Filter_Alt "The Consumer shall only receive well-formed altitude values" : WELL_FORMED_ALT(Output);
+			**};
 	end CASE_Filter;
 
 	thread implementation CASE_Filter.Impl
@@ -37,9 +37,6 @@ public
 		features
 			trigger: in event data port Base_Types::Integer;
 			msg_out: out event data port Coordinate.Impl;
-		annex agree {**
-			assume Req_TriggerInRange "Trigger is less than 10" : trigger < 10;
-		**};
 	end Producer;
 
 	thread implementation Producer.Impl
@@ -71,7 +68,6 @@ public
 			input: in event data port Base_Types::Integer;
 			output: out event data port Base_Types::Boolean;
 		annex agree {**
-			assume "Input is less than 10" : input < 10;
 			guarantee "Consumer status is never false" : output;
 		**};
 	end SW;

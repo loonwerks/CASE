@@ -113,14 +113,14 @@ public
 		subcomponents
 
 			NonCritical: process Non_Critical.Impl;
-			Critical: system Critical_seL4.Impl;
+	Critical: system Critical_seL4.Impl;
 	end SW_Sys.Impl;
 
 	annex agree {**
 		fun POSITIVE(num : Base_Types::Integer) : bool = (num > 0);
 	**};
 	
-	process Component_A_seL4
+process Component_A_seL4
 		features
 			input: in event data port Base_Types::Integer;
 			output: out event data port Base_Types::Integer;
@@ -202,8 +202,8 @@ public
 
 	system implementation Component_E_seL4.Impl
 		subcomponents
-			Component_D: process Component_D_seL4.Impl;
 			Component_C: process Component_C_seL4.Impl;
+			Component_D: process Component_D_seL4.Impl;
 			Component_B: process Component_B_seL4.Impl;
 		connections
 			c1: port input -> Component_B.input;
