@@ -1,8 +1,0 @@
-import "../../interfaces/operations_interface.idl4";
-
-component sender_impl {
-  include <sb_proc_types.h>;
-  control;
-  uses operations_interface operations;
-  has semaphore sb_dispatch_sem;
-}

@@ -1,4 +1,0 @@
-procedure int8_t_writer {
-  include <sb_proc_types.h>;
-  bool write_int8_t(refin int8_t arg);
-};

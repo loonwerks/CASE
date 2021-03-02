@@ -1,8 +1,0 @@
-import "../../interfaces/sb_testshare__Thing_t_impl_shared_var.idl4";
-
-component publisher_impl {
-  include <sb_proc_types.h>;
-  control;
-  dataport testshare__Thing_t_impl b1;
-  has semaphore sb_dispatch_sem;
-}

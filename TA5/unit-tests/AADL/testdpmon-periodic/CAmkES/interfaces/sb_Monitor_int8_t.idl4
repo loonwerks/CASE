@@ -1,5 +1,0 @@
-procedure sb_Monitor_int8_t {
-  include <sb_proc_types.h>;
-  bool read(out int8_t m);
-  bool write(refin int8_t m);
-};

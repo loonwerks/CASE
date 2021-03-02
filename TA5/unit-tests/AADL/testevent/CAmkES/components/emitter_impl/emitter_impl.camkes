@@ -1,6 +1,0 @@
-component emitter_impl {
-  include <sb_proc_types.h>;
-  control;
-  emits Notification sb_e;
-  has semaphore sb_dispatch_sem;
-}

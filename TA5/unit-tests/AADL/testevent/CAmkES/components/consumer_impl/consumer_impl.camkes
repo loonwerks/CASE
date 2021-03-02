@@ -1,6 +1,0 @@
-component consumer_impl {
-  include <sb_proc_types.h>;
-  control;
-  consumes Notification sb_s;
-  has semaphore sb_dispatch_sem;
-}
