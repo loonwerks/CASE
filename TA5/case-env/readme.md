@@ -71,8 +71,12 @@ Run the following (and subsequent commands) in your local repo's ``case-env`` di
   ```bash
   bash setup.sh
   ```
+  
+Note that the setup is fully automatic and it might take around 2 hours or so to complete (dependent on network speed). 
+During the setup process, there is no need to interact with Vagrant or the VirtualBox VM until the process is done. 
+A successful setup is typically indicated with a X11 GUI login screen being launched.
 
-Once Vagrant finished setting up the VM, log in using ``vagrant`` for both the username and the password in the Linux VM login GUI.
+Once Vagrant finished setting up the VM with a X11 GUI login screen presented, log in using ``vagrant`` for both the username and the password in the Linux VM login GUI.
 
 Then, optionally, logout/shutdown the VM and take a VM snapshot (to allow for rolling back later) and re-start it from VirtualBox.
 
