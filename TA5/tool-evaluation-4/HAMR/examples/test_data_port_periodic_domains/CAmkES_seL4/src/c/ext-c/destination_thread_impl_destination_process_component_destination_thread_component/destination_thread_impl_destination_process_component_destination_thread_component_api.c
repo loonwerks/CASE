@@ -15,7 +15,7 @@ bool api_get_read_port__test_data_port_periodic_domains_test_data_port_periodic_
   // Option_FC3847 = Option[S8]
   // Some_240B2F = Some[S8]
   DeclNewOption_FC3847(t_0);
-  test_data_port_periodic_domains_test_data_port_periodic_domains_destination_thread_impl_Operational_Api_getread_port_(
+  test_data_port_periodic_domains_test_data_port_periodic_domains_destination_thread_impl_Operational_Api_get_read_port_(
     SF
     (Option_FC3847) &t_0,
     &api);

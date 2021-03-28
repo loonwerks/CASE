@@ -1,5 +1,7 @@
 // #Sireum
 
+// This file was auto-generated.  Do not edit
+
 package both_vm.emitter_t_impl_src_process_src_thread
 
 import org.sireum._
@@ -96,7 +98,7 @@ object src_thread extends App {
       // touch each payload/type in case some are only used as a field in a record
       def printDataContent(a: art.DataContent): Unit = { println(s"${a}") }
 
-      printDataContent(Base_Types.Integer_8_Payload(Base_Types.Integer_8_empty()))
+      printDataContent(Base_Types.Integer_8_Payload(Base_Types.Integer_8_example()))
       printDataContent(art.Empty())
 
       both_vm.test_event_data_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_initialization_api.get.logInfo("")
@@ -105,8 +107,8 @@ object src_thread extends App {
       both_vm.test_event_data_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_operational_api.get.logInfo("")
       both_vm.test_event_data_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_operational_api.get.logDebug("")
       both_vm.test_event_data_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_operational_api.get.logError("")
-      both_vm.test_event_data_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_initialization_api.get.sendwrite_port(Base_Types.Integer_8_empty())
-      both_vm.test_event_data_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_operational_api.get.sendwrite_port(Base_Types.Integer_8_empty())
+      both_vm.test_event_data_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_initialization_api.get.put_write_port(Base_Types.Integer_8_example())
+      both_vm.test_event_data_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_operational_api.get.put_write_port(Base_Types.Integer_8_example())
     }
   }
 

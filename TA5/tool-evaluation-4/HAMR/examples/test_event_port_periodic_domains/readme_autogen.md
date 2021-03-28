@@ -48,16 +48,13 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_event_port_periodic_domains |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_TB.sh](bin/run-hamr-SeL4_TB.sh) |
 
 
   **How To Run**
   ```
-  test_event_port_periodic_domains/CAmkES_seL4_TB/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_TB.sh
+  ./CAmkES_seL4_TB/bin/run-camkes.sh -s
   ```
 
   ```
@@ -91,9 +88,6 @@
   ---------------------------------------
   [src_process_src_thread] Sent event.
   [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 9 total
-  ---------------------------------------
-  [src_process_src_thread] Sent event.
-  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 10 total
 
   ```
 
@@ -101,16 +95,13 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_event_port_periodic_domains |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_Only.sh](bin/run-hamr-SeL4_Only.sh) |
 
 
   **How To Run**
   ```
-  test_event_port_periodic_domains/CAmkES_seL4_Only/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_Only.sh
+  ./CAmkES_seL4_Only/bin/run-camkes.sh -s
   ```
 
   ```
@@ -142,11 +133,6 @@
   ---------------------------------------
   [src_process_src_thread] Sent event.
   [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 8 total
-  ---------------------------------------
-  [src_process_src_thread] Sent event.
-  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 9 total
-  ---------------------------------------
-  [src_process_src_thread] Sent event.
 
   ```
 
@@ -154,34 +140,31 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_event_port_periodic_domains |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4.sh](bin/run-hamr-SeL4.sh) |
 
 
   **How To Run**
   ```
-  test_event_port_periodic_domains/CAmkES_seL4/bin/transpile-sel4.sh
-  test_event_port_periodic_domains/CAmkES_seL4/src/c/CAmkES_seL4/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4.sh
+  ./CAmkES_seL4/src/c/CAmkES_seL4/bin/run-camkes.sh -s
   ```
 
   ```
   Booting all finished, dropped to user space
   Entering pre-init of consumer_t_impl_dst_process_dst_thread
   Entering pre-init of emitter_t_impl_src_process_src_thread
-  Art: Registered coArt: Registered component: top_impl_Instance_dst_process_dst_thread (periodic: 1000)
+  Art: RegisArt: Registered component: top_impl_Instance_dst_process_dst_thread (periodic: 1000)
   Art: - Registered port: top_impl_Instance_dst_process_dst_thread_consume (event in)
   top_impl_Instance_dst_process_dst_thread: Example logInfo
-  top_impl_Instance_dst_process_dst_thread: Example logDebug
-  mponent: top_impl_Instance_src_process_src_thread (periodic: 1000)
+  top_impl_Instance_dst_process_dsttered component: top_impl_Instance_src_process_src_thread (periodic: 1000)
   Art: - Registered port: top_impl_Instance_src_process_src_thread_emit (event out)
   top_impl_Instance_src_process_src_thread: Example logInfo
   top_impl_Instance_src_process_src_thread: Example logDebug
-  top_impl_Instance_src_process_src_thread: Extop_impl_Instance_dst_process_dst_thread: Example logError
+  top_impl_Instance_src_process_src_thread: Example logError
+  _thread: Example logDebug
+  top_impl_Instance_dst_process_dst_thread: Example logError
   Leaving pre-init of consumer_t_impl_dst_process_dst_thread
-  ample logError
   Leaving pre-init of emitter_t_impl_src_process_src_thread
+  top_impl_Instance_dst_process_dst_thread: Received event on consume
 
   ```

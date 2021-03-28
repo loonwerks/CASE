@@ -1,2 +1,3 @@
-UAV.aadl
-UAV.Impl
+system_impl_file=UAV.aadl
+system_impl=UAV.Impl
+projects=.

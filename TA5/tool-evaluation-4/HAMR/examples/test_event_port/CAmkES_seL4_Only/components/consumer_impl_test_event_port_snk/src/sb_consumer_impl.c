@@ -34,12 +34,12 @@ bool sb_s_dequeue() {
 /************************************************************************
  * sb_s_is_empty;
  *
- * Helper method to determine if infrastructure port has received
- * new events
+ * Helper method to determine if infrastructure port has not received
+ * any new events since the last dispatch
  *
  ************************************************************************/
 bool sb_s_is_empty() {
-  return *sb_s_counter == sb_s_last_counter;
+  return sb_s_received_events == 0;
 }
 
 void sb_freeze_event_port_s() {

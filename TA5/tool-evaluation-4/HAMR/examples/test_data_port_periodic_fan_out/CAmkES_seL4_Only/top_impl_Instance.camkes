@@ -25,9 +25,9 @@ assembly {
   }
 
   configuration {
-    test_data_port_periodic_src.write_port_access = "W";
-    test_data_port_periodic_dest_A.read_port_access = "R";
-    test_data_port_periodic_dest_B.read_port_access = "R";
+    test_data_port_periodic_src.sb_write_port_access = "W";
+    test_data_port_periodic_dest_A.sb_read_port_access = "R";
+    test_data_port_periodic_dest_B.sb_read_port_access = "R";
     time_server.timers_per_client = 1;
     dispatch_periodic_inst.timer_attributes = 1;
     dispatch_periodic_inst.priority = 201;

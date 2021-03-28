@@ -32,7 +32,7 @@ import test_event_port_periodic_domains._
   val id: Art.BridgeId,
   val consume_Id : Art.PortId) extends consumer_t_impl_Api {
 
-  def getconsume() : Option[art.Empty] = {
+  def get_consume() : Option[art.Empty] = {
     val value : Option[art.Empty] = Art.getValue(consume_Id) match {
       case Some(Empty()) => Some(Empty())
       case Some(v) =>

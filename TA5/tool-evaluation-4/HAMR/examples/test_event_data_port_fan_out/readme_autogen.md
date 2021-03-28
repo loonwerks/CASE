@@ -37,16 +37,13 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_event_data_port_fan_out |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_TB.sh](bin/run-hamr-SeL4_TB.sh) |
 
 
   **How To Run**
   ```
-  test_event_data_port_fan_out/CAmkES_seL4_TB/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_TB.sh
+  ./CAmkES_seL4_TB/bin/run-camkes.sh -s
   ```
 
   ```
@@ -62,12 +59,12 @@
   [test_event_data_port_src] Sent 1 events.
   [test_event_data_port_snk_default] received value {1}
   [test_event_data_port_snk_2_A] received value {1}
-  [test_event_data_port_snk_2_A] 1 events received
-  [test_event_data_port_snk_2_B] received value {1}
-  [test_event_data_port_snk_5] received value {1}
-  [test_event_data_port_snk_5] 1 even[test_event_data_port_snk_default] 1 events received
-  [test_event_data_port_snk_2_B] 1 events received
-  ts received
+  [test_event_data_port_snk_2_A] 1[test_event_data_port_snk_2_B] received value {1}
+  [test_event_d[test_event_data_port_snk_5] received value {1}
+  [test_event_data_port_snk_default] 1 events received
+   events received
+  ata_port_snk_2_B] 1 events received
+  [test_event_data_port_snk_5] 1 events received
   ---------------------------------------
   [test_event_data_port_src] Sent 2 events.
   [test_event_data_port_snk_default] received value {1}
@@ -83,16 +80,16 @@
   [test_event_data_port_snk_5] 2 events received
   ---------------------------------------
   [test_event_data_port_src] Sent 3 events.
-  [test_event_data_port_snk_default] received value {1}
+  [test_event_data_port_snk_default] received[test_event_data_port_snk_2_A] received value {1}
+  [test_event_data_port_snk_2_A] rece[test_event_data_port_snk_2_B] received value {1}
+  [test_[test_event_data_port_snk_5] received value {1}
+  [test_ value {1}
   [test_event_data_port_snk_default] 1 events received
-  [test_event_data_port_snk_2_A] received value {1}
-  [test_event_data_port_snk_2_A] received value {2}
+  ived value {2}
   [test_event_data_port_snk_2_A] 2 events received
-  [test_event_data_port_snk_2_B] received value {1}
-  [test_event_data_port_snk_2_B] received value {2}
+  event_data_port_snk_2_B] received value {2}
   [test_event_data_port_snk_2_B] 2 events received
-  [test_event_data_port_snk_5] received value {1}
-  [test_event_data_port_snk_5] received value {2}
+  event_data_port_snk_5] received value {2}
   [test_event_data_port_snk_5] received value {3}
   [test_event_data_port_snk_5] 3 events received
   ---------------------------------------
@@ -100,6 +97,7 @@
   [test_event_data_port_snk_default] received value {1}
   [test_event_data_port_snk_default] 1 events received
   [test_event_data_port_snk_2_A] received value {1}
+  [test_event_data_port_snk_2_A] received value {2}
   [test_event_data_port_snk_2_B] received value {1}
   [test_event_data_port_snk_2_B] received value {2}
   [test_event_data_port_snk_2_B] 2 events received
@@ -108,7 +106,6 @@
   [test_event_data_port_snk_5] received value {3}
   [test_event_data_port_snk_5] received value {4}
   [test_event_data_port_snk_5] 4 events received
-  [test_event_data_port_snk_2_A] received value {2}
   [test_event_data_port_snk_2_A] 2 events received
 
   ```
@@ -117,16 +114,13 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_event_data_port_fan_out |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_Only.sh](bin/run-hamr-SeL4_Only.sh) |
 
 
   **How To Run**
   ```
-  test_event_data_port_fan_out/CAmkES_seL4_Only/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_Only.sh
+  ./CAmkES_seL4_Only/bin/run-camkes.sh -s
   ```
 
   ```
@@ -140,25 +134,25 @@
   [test_event_data_port_src] Sent 0 events.
   ---------------------------------------
   [test_event_data_port_src] Sent 1 events.
-  [test_event_data_port_snk_default] received value {1}
+  [test_event_data_port[test_event_data_port_snk_2_A] received value {1}
+  [test_event_data_port_snk_2_A] 1[test_event_data_port_snk_2_B] received value {1}
+  [t[test_event_data_port_snk_5] received value {1}
+  [te_snk_default] received value {1}
   [test_event_data_port_snk_default] 1 events received
-  [test_event_data_port_snk_2_A] received value {1}
-  [t[test_event_data_port_snk_2_B] received value {1}
-  [test_event_data_port_snk_5] received value {1}
-  [test_event_data_port_snk_5] 1 events received
-  est_event_data_port_snk_2_A] 1 events received
-  [test_event_data_port_snk_2_B] 1 events received
+   events received
+  est_event_data_port_snk_2_B] 1 events received
+  st_event_data_port_snk_5] 1 events received
   ---------------------------------------
   [test_event_data_port_src] Sent 2 events.
-  [test_event_data_port_snk[test_event_data_port_snk_2_A] received value {1}
+  [test_event_data_port_snk_default] received value {2}
+  [test_event_data_port_snk_default] 1 events received
+  [test_event_data_port_snk_2_A] received value {1}
   [test_event_data_port_snk_2_A] received value {2}
   [test_event_data_port_snk_2_A] 2 events received
   [test_event_data_port_snk_2_B] received value {1}
   [test_event_data_port_snk_2_B] received value {2}
   [test_event_data_port_snk_2_B] 2 events received
-  [test__default] received value {2}
-  [test_event_data_port_snk_default] 1 events received
-  event_data_port_snk_5] received value {1}
+  [test_event_data_port_snk_5] received value {1}
   [test_event_data_port_snk_5] received value {2}
   [test_event_data_port_snk_5] 2 events received
   ---------------------------------------
@@ -170,23 +164,23 @@
   [test_event_data_port_snk_2_A] 2 events received
   [test_event_data_port_snk_2_B] received value {2}
   [test_event_data_port_snk_2_B] received value {3}
-  [test_event_data_port_snk_2_B] 2 events received
-  [test_event_data_port_snk_5] received value {1}
+  [test_event_data_port_snk_2_B] 2 eve[test_event_data_port_snk_5] received value {1}
   [test_event_data_port_snk_5] received value {2}
   [test_event_data_port_snk_5] received value {3}
   [test_event_data_port_snk_5] 3 events received
+  nts received
   ---------------------------------------
   [test_event_data_port_src] Sent 4 events.
-  [test_event_data_port_snk_default] received value {4}
-  [test_event_data_port_snk_default] 1 events received
-  [test_event_data_port_snk_2_A] received value {3}
-  [test_event_data_port_[test_event_data_port_snk_2_B] received value {3}
-  [test_event_data_port_snk[test_event_data_port_snk_5] received value {1}
-  [test_event_data_port_snk_5] received value {snk_2_A] received value {4}
-  [test_event_data_port_snk_2_A] 2 events received
-  _2_B] received value {4}
+  [test_eve[test_event_data_port_snk_2_A] received value {3}
+  [test_event_[test_event_data_port_snk_2_B] received value {3}
+  [test_event_data_port_snk_2_B] received value {4}
   [test_event_data_port_snk_2_B] 2 events received
-  2}
+  [test_event_data_pnt_data_port_snk_default] received value {4}
+  [test_event_data_port_snk_default] 1 events received
+  data_port_snk_2_A] received value {4}
+  [test_event_data_port_snk_2_A] 2 events received
+  ort_snk_5] received value {1}
+  [test_event_data_port_snk_5] received value {2}
   [test_event_data_port_snk_5] received value {3}
   [test_event_data_port_snk_5] received value {4}
   [test_event_data_port_snk_5] 4 events received

@@ -15,13 +15,13 @@ object emitter_t_impl_src_process_src_thread {
     api.logDebug("Example debug logging")
     api.logError("Example error logging")
 
-    api.setwrite_port(Base_Types.Integer_8_empty())
+    api.put_write_port(Base_Types.Integer_8_example())
   }
 
   def timeTriggered(api: emitter_t_impl_Operational_Api): Unit = {
     // example api usage
 
-    api.setwrite_port(Base_Types.Integer_8_empty())
+
   }
 
   def activate(api: emitter_t_impl_Operational_Api): Unit = { }

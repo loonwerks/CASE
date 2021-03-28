@@ -144,6 +144,8 @@ object ArtNative_Ext {
   def run(): Unit = {
     //require(Art.bridges.elements.forall(_.nonEmpty))
 
+    ArtDebug_Ext.start()
+
     val bridges = {
       var r = Vector[Bridge]()
       for (e <- Art.bridges.elements) e match {
@@ -193,8 +195,6 @@ object ArtNative_Ext {
     Thread.sleep(1000)
 
     logInfo(Art.logTitle, s"Start execution (press Enter twice to terminate) ...")
-
-    ArtDebug_Ext.start()
 
     ArtNative_Ext.synchronized {
       ArtNative_Ext.notifyAll()

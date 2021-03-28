@@ -11,6 +11,9 @@
  */
 
 /*- do configuration[me.instance.name].update({"%s_access" % me.interface.name: "RW"}) -*/
+
+// https://docs.sel4.systems/projects/camkes/seL4SharedDataWithCaps.html
+// https://github.com/SEL4PROJ/global-components/blob/master/templates/seL4SharedDataWithCaps.template.c
 /*- include 'seL4SharedDataWithCaps.template.c' -*/
 
 /*- set generate_notifications = configuration[me.parent.name].get("with_signalling", false) -*/

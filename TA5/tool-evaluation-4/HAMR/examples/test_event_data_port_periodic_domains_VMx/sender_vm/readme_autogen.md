@@ -26,17 +26,14 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | sender_vm |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_Only.sh](bin/run-hamr-SeL4_Only.sh) |
 
 
   **How To Run**
   ```
-  test_event_data_port_periodic_domains_VMx/sender_vm/CAmkES_seL4_Only/bin/setup-camkes-arm-vm.sh
-  test_event_data_port_periodic_domains_VMx/sender_vm/CAmkES_seL4_Only/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_Only.sh
+  ./CAmkES_seL4_Only/bin/setup-camkes-arm-vm.sh
+  ./CAmkES_seL4_Only/bin/run-camkes.sh -o "-DUSE_PRECONFIGURED_ROOTFS=ON" -s
   ```
 
   ```

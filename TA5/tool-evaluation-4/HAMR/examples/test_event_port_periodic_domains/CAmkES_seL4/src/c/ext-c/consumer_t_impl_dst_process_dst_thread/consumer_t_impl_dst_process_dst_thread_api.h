@@ -5,7 +5,7 @@
 
 // This file was auto-generated.  Do not edit
 
-bool api_get_consume__test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_t_impl_dst_process_dst_thread(STACK_FRAME);
+bool api_get_consume__test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_t_impl_dst_process_dst_thread(STACK_FRAME_ONLY);
 
 void api_logInfo__test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_t_impl_dst_process_dst_thread(
   STACK_FRAME

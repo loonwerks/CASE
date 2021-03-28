@@ -3,14 +3,14 @@
 
 // This file was auto-generated.  Do not edit
 
-void api_send_emit__test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_src_process_src_thread(STACK_FRAME) {
-  DeclNewStackFrame(caller, "emitter_t_impl_src_process_src_thread_api.c", "", "api_send_emit__test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_src_process_src_thread", 0);
+void api_put_emit__test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_src_process_src_thread(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "emitter_t_impl_src_process_src_thread_api.c", "", "api_put_emit__test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_src_process_src_thread", 0);
 
   // Option_39052E = Option[test_event_port_periodic_domains.test_event_port_periodic_domains.emitter_t_impl_Initialization_Api]
   DeclNewtest_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_Initialization_Api(api);
   Option_39052E_get_(SF (test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_Initialization_Api) &api, test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_src_process_src_thread_Bridge_c_initialization_api(SF_LAST));
 
-  test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_Initialization_Api_sendemit_(
+  test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_Initialization_Api_put_emit_(
     SF
     &api);
 }

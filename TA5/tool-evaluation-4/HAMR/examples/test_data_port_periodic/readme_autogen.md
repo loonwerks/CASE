@@ -37,22 +37,19 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_data_port_periodic |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_TB.sh](bin/run-hamr-SeL4_TB.sh)
 
 
   **How To Run**
   ```
-  test_data_port_periodic/CAmkES_seL4_TB/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_TB.sh
+  ./CAmkES_seL4_TB/bin/run-camkes.sh -s
   ```
 
   ```
   Booting all finished, dropped to user space
-  [test_data_port_periodic_src] test_data_port_periodic_source_component_init called
-  [test_data_port_periodic_dest] test_data_port_periodic_destination_component_init called
+  [test_data_port_periodic_src] test_data_port_periodic_source_component_init called[test_data_port_periodic_dest] test_data_port_periodic_destination_component_init called
+
   ---------------------------------------
   [test_data_port_periodic_src] Sent 0
   [test_data_port_periodic_dest] value {0}
@@ -76,8 +73,6 @@
   ---------------------------------------
   [test_data_port_periodic_src] Sent 8
   [test_data_port_periodic_dest] value {8}
-  ---------------------------------------
-  [test_data_port_periodic_src] Sent 9
 
   ```
 
@@ -85,16 +80,13 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_data_port_periodic |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_Only.sh](bin/run-hamr-SeL4_Only.sh)
 
 
   **How To Run**
   ```
-  test_data_port_periodic/CAmkES_seL4_Only/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_Only.sh
+  ./CAmkES_seL4_Only/bin/run-camkes.sh -s
   ```
 
   ```
@@ -124,7 +116,5 @@
   ---------------------------------------
   [test_data_port_periodic_src] Sent 8
   [test_data_port_periodic_dest] value {8}
-  ---------------------------------------
-  [test_data_port_periodic_src] Sent 9
 
   ```

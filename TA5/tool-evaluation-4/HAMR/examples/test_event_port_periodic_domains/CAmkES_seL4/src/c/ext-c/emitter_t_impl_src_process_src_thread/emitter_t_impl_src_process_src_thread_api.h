@@ -5,7 +5,7 @@
 
 // This file was auto-generated.  Do not edit
 
-void api_send_emit__test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_src_process_src_thread(STACK_FRAME);
+void api_put_emit__test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_src_process_src_thread(STACK_FRAME_ONLY);
 
 void api_logInfo__test_event_port_periodic_domains_test_event_port_periodic_domains_emitter_t_impl_src_process_src_thread(
   STACK_FRAME

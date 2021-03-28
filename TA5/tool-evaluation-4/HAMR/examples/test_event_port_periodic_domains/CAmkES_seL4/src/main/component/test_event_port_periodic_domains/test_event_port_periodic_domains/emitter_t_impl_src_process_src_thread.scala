@@ -15,13 +15,13 @@ object emitter_t_impl_src_process_src_thread {
     api.logDebug("Example debug logging")
     api.logError("Example error logging")
 
-    api.sendemit()
+    api.put_emit()
   }
 
   def timeTriggered(api: emitter_t_impl_Operational_Api): Unit = {
     // example api usage
 
-    api.sendemit()
+
   }
 
   def activate(api: emitter_t_impl_Operational_Api): Unit = { }

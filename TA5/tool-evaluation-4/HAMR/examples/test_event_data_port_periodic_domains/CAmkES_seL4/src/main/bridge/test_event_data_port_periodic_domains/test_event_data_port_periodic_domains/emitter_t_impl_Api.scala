@@ -10,7 +10,7 @@ import test_event_data_port_periodic_domains._
   def id: Art.BridgeId
   def write_port_Id : Art.PortId
 
-  def sendwrite_port(value : Base_Types.Integer_8) : Unit = {
+  def put_write_port(value : Base_Types.Integer_8) : Unit = {
     Art.putValue(write_port_Id, Base_Types.Integer_8_Payload(value))
   }
 

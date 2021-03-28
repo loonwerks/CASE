@@ -37,16 +37,13 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_data_port_periodic_fan_out |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_TB.sh](bin/run-hamr-SeL4_TB.sh)
 
 
   **How To Run**
   ```
-  test_data_port_periodic_fan_out/CAmkES_seL4_TB/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_TB.sh
+  ./CAmkES_seL4_TB/bin/run-camkes.sh -s
   ```
 
   ```
@@ -78,12 +75,6 @@
   [test_data_port_periodic_dest_B] value {6}
   ---------------------------------------
   [test_data_port_periodic_src] Sent 7
-  ---------------------------------------
-  [test_data_port_periodic_src] Sent 8
-  [test_data_port_periodic_dest_A] value {8}
-  [test_data_port_periodic_dest_B] value {8}
-  ---------------------------------------
-  [test_data_port_periodic_src] Sent 9
 
   ```
 
@@ -91,16 +82,13 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_data_port_periodic_fan_out |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_Only.sh](bin/run-hamr-SeL4_Only.sh)
 
 
   **How To Run**
   ```
-  test_data_port_periodic_fan_out/CAmkES_seL4_Only/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_Only.sh
+  ./CAmkES_seL4_Only/bin/run-camkes.sh -s
   ```
 
   ```

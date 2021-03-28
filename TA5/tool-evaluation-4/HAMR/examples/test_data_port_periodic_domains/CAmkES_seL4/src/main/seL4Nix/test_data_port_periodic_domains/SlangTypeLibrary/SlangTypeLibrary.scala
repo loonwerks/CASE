@@ -12,7 +12,7 @@ object SlangTypeLibrary extends App {
     // touch each payload/type in case some are only used as a field in a record
     def printDataContent(a: art.DataContent): Unit = { println(s"${a}") }
 
-    printDataContent(Base_Types.Integer_8_Payload(Base_Types.Integer_8_empty()))
+    printDataContent(Base_Types.Integer_8_Payload(Base_Types.Integer_8_example()))
     printDataContent(art.Empty())
 
     return 0

@@ -72,11 +72,6 @@ void sb_entrypoint_destination_t_impl_test_data_port_periodic_dest_initializer(c
   test_data_port_periodic_destination_component_init((int64_t *) in_arg);
 }
 
-void pre_init(void) {
-  // initialise data structure for data port read_port
-  init_sp_int8_t(sb_read_port, &sb_read_port_seqNum);
-}
-
 /************************************************************************
  * int run(void)
  * Main active thread function.

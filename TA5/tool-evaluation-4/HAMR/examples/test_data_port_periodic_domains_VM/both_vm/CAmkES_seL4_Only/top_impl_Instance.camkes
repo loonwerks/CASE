@@ -54,6 +54,8 @@ assembly {
     vmdst_process.num_extra_frame_caps = 0;
     vmdst_process.extra_frame_map_address = 0;
     vmdst_process._domain = 3;
+    vmsrc_process.sb_write_port_access = "RW";
+    vmdst_process.sb_read_port_access = "R";
     pacer._domain = 1;
 
     fserv.heap_size = 165536;

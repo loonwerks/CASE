@@ -1,5 +1,7 @@
 // #Sireum
 
+// This file was auto-generated.  Do not edit
+
 package test_event_port_periodic_domains.consumer_t_impl_dst_process_dst_thread
 
 import org.sireum._
@@ -101,7 +103,7 @@ object dst_thread extends App {
       test_event_port_periodic_domains.test_event_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge.c_operational_api.get.logInfo("")
       test_event_port_periodic_domains.test_event_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge.c_operational_api.get.logDebug("")
       test_event_port_periodic_domains.test_event_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge.c_operational_api.get.logError("")
-      val apiUsage_consume: Option[art.Empty] = test_event_port_periodic_domains.test_event_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge.c_operational_api.get.getconsume()
+      val apiUsage_consume: Option[art.Empty] = test_event_port_periodic_domains.test_event_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge.c_operational_api.get.get_consume()
     }
   }
 

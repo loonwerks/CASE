@@ -58,9 +58,6 @@ void pre_init(void) {
 
   printf("Entering pre-init of consumer_t_impl_dst_process_dst_thread\n");
 
-  // initialise data structure for data port read_port
-  init_sp_union_art_DataContent(sb_read_port, &sb_read_port_seqNum);
-
   // initialise slang-embedded components/ports
   sender_vm_test_event_data_port_periodic_domains_consumer_t_impl_dst_process_dst_thread_adapter_initialiseArchitecture(SF_LAST);
 

@@ -37,17 +37,14 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | both_vm |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_Only.sh](bin/run-hamr-SeL4_Only.sh) |
 
 
   **How To Run**
   ```
-  test_data_port_periodic_domains_VM/both_vm/CAmkES_seL4_Only/bin/setup-camkes-arm-vm.sh
-  test_data_port_periodic_domains_VM/both_vm/CAmkES_seL4_Only/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_Only.sh
+  ./CAmkES_seL4_Only/bin/setup-camkes-arm-vm.sh
+  ./CAmkES_seL4_Only/bin/run-camkes.sh -s
   ```
 
   ```
@@ -214,32 +211,30 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | both_vm |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4.sh](bin/run-hamr-SeL4.sh) |
 
 
   **How To Run**
   ```
-  test_data_port_periodic_domains_VM/both_vm/CAmkES_seL4/src/c/CAmkES_seL4/bin/setup-camkes-arm-vm.sh
-  test_data_port_periodic_domains_VM/both_vm/CAmkES_seL4/bin/transpile-sel4.sh
-  test_data_port_periodic_domains_VM/both_vm/CAmkES_seL4/src/c/CAmkES_seL4/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4.sh
+  ./CAmkES_seL4/src/c/CAmkES_seL4/bin/setup-camkes-arm-vm.sh
+  ./CAmkES_seL4/src/c/CAmkES_seL4/bin/run-camkes.sh -s
   ```
 
   ```
   Booting all finished, dropped to user space
-  [0m[30;1m<<[0m[32mseL4(CPU 0)[0m[30;1m [decodeUntypedInvocation/212 T0xff807fc18400 "rootserver" @4006d8]: Untyped Retype: Insufficient memory (1 * 2097152 bytes needed, 0 bytes available).>>[0m
+  [0m[30;1m<<[0m[32mseL4(CPU 0)[0m[30;1m [decodeUntypedInvocation/212 T0xff807fc18400 "rootserver" @4006f0]: Untyped Retype: Insufficient memory (1 * 2097152 bytes needed, 0 bytes available).>>[0m
   _utspace_split_alloc@split.c:272 Failed to find any untyped capable of creating an object at address 0x8040000
   Loading Linux: 'linux' dtb: ''
+  install_linux_devices@main.c:657 module name: map_frame_hack
+  install_linux_devices@main.c:657 module name: init_ram
   _utspace_split_alloc@split.c:272 Failed to find any untyped capable of creating an object at address 0x8040000
   Loading Linux: 'linux' dtb: ''
-  install_linux_devices@main.c:628 module name: map_frame_hack
-  install_linux_devices@main.c:628 module name: virtio_con
-  install_linux_devices@main.c:628 module name: cross_vm_connections
-  install_linux_devices@main.c:628 module name: map_frame_hack
-  install_linux_devices@main.c:628 module name: virtio_con
-  install_linux_devices@main.c:628 module name: cross_vm_connections
+  install_linux_devices@main.c:657 module name: map_frame_hack
+  install_linux_devices@main.c:657 module name: init_ram
+  install_linux_devices@main.c:657 module name: virtio_con
+  install_linux_devices@main.c:657 module name: cross_vm_connections
+  install_linux_devices@main.c:657 module name: virtio_con
+  install_linux_devices@main.c:657 module name: cross_vm_connections
 
   ```

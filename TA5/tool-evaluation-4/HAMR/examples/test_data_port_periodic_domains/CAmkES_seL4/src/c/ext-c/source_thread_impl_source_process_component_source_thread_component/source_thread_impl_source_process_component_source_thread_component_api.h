@@ -5,7 +5,7 @@
 
 // This file was auto-generated.  Do not edit
 
-void api_send_write_port__test_data_port_periodic_domains_test_data_port_periodic_domains_source_thread_impl_source_process_component_source_thread_component(
+void api_put_write_port__test_data_port_periodic_domains_test_data_port_periodic_domains_source_thread_impl_source_process_component_source_thread_component(
   STACK_FRAME
   S8 value);
 

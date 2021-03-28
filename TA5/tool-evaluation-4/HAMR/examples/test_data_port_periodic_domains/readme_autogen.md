@@ -48,16 +48,13 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_data_port_periodic_domains |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_TB.sh](bin/run-hamr-SeL4_TB.sh) |
 
 
   **How To Run**
   ```
-  test_data_port_periodic_domains/CAmkES_seL4_TB/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_TB.sh
+  ./CAmkES_seL4_TB/bin/run-camkes.sh -s
   ```
 
   ```
@@ -101,16 +98,13 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_data_port_periodic_domains |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_Only.sh](bin/run-hamr-SeL4_Only.sh) |
 
 
   **How To Run**
   ```
-  test_data_port_periodic_domains/CAmkES_seL4_Only/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_Only.sh
+  ./CAmkES_seL4_Only/bin/run-camkes.sh -s
   ```
 
   ```
@@ -143,7 +137,6 @@
   [destination_process_component_destination_thread_component] value {7}
   ---------------------------------------
   [source_process_component_source_thread_component] Sent 8
-  [destination_process_component_destination_thread_component] value {8}
 
   ```
 
@@ -151,34 +144,36 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_data_port_periodic_domains |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4.sh](bin/run-hamr-SeL4.sh) |
 
 
   **How To Run**
   ```
-  test_data_port_periodic_domains/CAmkES_seL4/bin/transpile-sel4.sh
-  test_data_port_periodic_domains/CAmkES_seL4/src/c/CAmkES_seL4/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4.sh
+  ./CAmkES_seL4/src/c/CAmkES_seL4/bin/run-camkes.sh -s
   ```
 
   ```
   Booting all finished, dropped to user space
   Entering pre-init of destination_thread_impl_destination_process_component_destination_thread_component
   Entering pre-init of source_thread_impl_source_process_component_source_thread_component
-  Art: Registered component: top_impl_Instance_source_process_component_sArt: Registered component: top_impl_Instance_destination_process_component_destination_thread_component (periodic: 1000)
+  Art:Art: Registered component: top_impl_Instance_destination_process_component_destination_thread_component (periodic: 1000)
   Art: - Registered port: top_impl_Instance_destination_process_component_destination_thread_component_read_port (data in)
-  top_impl_Instance_destination_process_component_destination_threource_thread_component (periodic: 1000)
+  top_i Registered component: top_impl_Instance_source_process_component_source_thread_component (periodic: 1000)
   Art: - Registered port: top_impl_Instance_source_process_component_source_thread_component_write_port (data out)
   top_impl_Instance_source_process_component_source_thread_component: Example logInfo
-  top_impl_Instance_source_process_component_source_thread_component: Example logDebug
-  top_impl_Instance_source_process_component_sourad_component: Example logInfo
+  top_impl_Instance_source_process_component_source_thread_commpl_Instance_destination_process_component_destination_thread_component: Example logInfo
   top_impl_Instance_destination_process_component_destination_thread_component: Example logDebug
   top_impl_Instance_destination_process_component_destination_thread_component: Example logError
   Leaving pre-init of destination_thread_impl_destination_process_component_destination_thread_component
-  ce_thread_component: Example logError
+  ponent: Example logDebug
+  top_impl_Instance_source_process_component_source_thread_component: Example logError
   Leaving pre-init of source_thread_impl_source_process_component_source_thread_component
+  top_impl_Instance_destination_process_component_destination_thread_component: Received on read_port: 0
+  top_impl_Instance_destination_process_component_destination_thread_component: Received on read_port: 0
+  top_impl_Instance_destination_process_component_destination_thread_component: Received on read_port: 0
+  top_impl_Instance_destination_process_component_destination_thread_component: Received on read_port: 0
+  top_impl_Instance_destination_process_component_destination_thread_component: Received on read_port: 0
+  top_impl_Instance_destination_process_component_destination_thread_component: Received on read_port: 0
 
   ```

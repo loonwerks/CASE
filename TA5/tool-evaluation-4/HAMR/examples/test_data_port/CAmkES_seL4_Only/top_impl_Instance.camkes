@@ -13,8 +13,8 @@ assembly {
   }
 
   configuration {
-    test_data_port_src.write_port_access = "W";
-    test_data_port_dest.read_port_access = "R";
+    test_data_port_src.sb_write_port_access = "W";
+    test_data_port_dest.sb_read_port_access = "R";
 
   }
 }

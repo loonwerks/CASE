@@ -3,16 +3,16 @@
 
 // This file was auto-generated.  Do not edit
 
-void api_send_write_port__receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread(
+void api_put_write_port__receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread(
   STACK_FRAME
   S8 value) {
-  DeclNewStackFrame(caller, "emitter_t_impl_src_process_src_thread_api.c", "", "api_send_write_port__receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread", 0);
+  DeclNewStackFrame(caller, "emitter_t_impl_src_process_src_thread_api.c", "", "api_put_write_port__receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread", 0);
 
   // Option_5E9E54 = Option[receiver_vm.test_event_data_port_periodic_domains.emitter_t_impl_Initialization_Api]
   DeclNewreceiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api(api);
   Option_5E9E54_get_(SF (receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api) &api, receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread_Bridge_c_initialization_api(SF_LAST));
 
-  receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api_sendwrite_port_(
+  receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api_put_write_port_(
     SF
     &api,
     value);

@@ -1,5 +1,7 @@
 // #Sireum
 
+// This file was auto-generated.  Do not edit
+
 package sender_vm.consumer_t_impl_dst_process_dst_thread
 
 import org.sireum._
@@ -93,7 +95,7 @@ object dst_thread extends App {
       // touch each payload/type in case some are only used as a field in a record
       def printDataContent(a: art.DataContent): Unit = { println(s"${a}") }
 
-      printDataContent(Base_Types.Integer_8_Payload(Base_Types.Integer_8_empty()))
+      printDataContent(Base_Types.Integer_8_Payload(Base_Types.Integer_8_example()))
       printDataContent(art.Empty())
 
       sender_vm.test_event_data_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge.c_initialization_api.get.logInfo("")
@@ -102,7 +104,7 @@ object dst_thread extends App {
       sender_vm.test_event_data_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge.c_operational_api.get.logInfo("")
       sender_vm.test_event_data_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge.c_operational_api.get.logDebug("")
       sender_vm.test_event_data_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge.c_operational_api.get.logError("")
-      val apiUsage_read_port: Option[Base_Types.Integer_8] = sender_vm.test_event_data_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge.c_operational_api.get.getread_port()
+      val apiUsage_read_port: Option[Base_Types.Integer_8] = sender_vm.test_event_data_port_periodic_domains.consumer_t_impl_dst_process_dst_thread_Bridge.c_operational_api.get.get_read_port()
     }
   }
 

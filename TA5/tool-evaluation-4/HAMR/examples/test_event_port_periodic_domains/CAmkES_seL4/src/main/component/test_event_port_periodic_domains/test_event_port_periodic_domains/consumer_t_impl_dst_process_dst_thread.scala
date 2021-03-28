@@ -20,7 +20,8 @@ object consumer_t_impl_dst_process_dst_thread {
   def timeTriggered(api: consumer_t_impl_Operational_Api): Unit = {
     // example api usage
 
-    val apiUsage_consume: Option[art.Empty] = api.getconsume()
+    val apiUsage_consume: Option[art.Empty] = api.get_consume()
+    api.logInfo(s"Received on consume: ${apiUsage_consume}")
   }
 
   def activate(api: consumer_t_impl_Operational_Api): Unit = { }

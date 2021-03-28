@@ -32,7 +32,7 @@ import test_data_port_periodic_domains._
   val id: Art.BridgeId,
   val read_port_Id : Art.PortId) extends destination_thread_impl_Api {
 
-  def getread_port() : Option[Base_Types.Integer_8] = {
+  def get_read_port() : Option[Base_Types.Integer_8] = {
     val value : Option[Base_Types.Integer_8] = Art.getValue(read_port_Id) match {
       case Some(Base_Types.Integer_8_Payload(v)) => Some(v)
       case Some(v) =>

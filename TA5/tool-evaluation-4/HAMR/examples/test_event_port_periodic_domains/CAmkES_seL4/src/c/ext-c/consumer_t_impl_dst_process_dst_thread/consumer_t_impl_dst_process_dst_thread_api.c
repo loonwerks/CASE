@@ -3,7 +3,7 @@
 
 // This file was auto-generated.  Do not edit
 
-bool api_get_consume__test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_t_impl_dst_process_dst_thread(STACK_FRAME){
+bool api_get_consume__test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_t_impl_dst_process_dst_thread(STACK_FRAME_ONLY){
   DeclNewStackFrame(caller, "consumer_t_impl_dst_process_dst_thread_api.c", "", "api_get_consume__test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_t_impl_dst_process_dst_thread", 0);
 
   // Option_277EC2 = Option[test_event_port_periodic_domains.test_event_port_periodic_domains.consumer_t_impl_Operational_Api]
@@ -13,7 +13,7 @@ bool api_get_consume__test_event_port_periodic_domains_test_event_port_periodic_
   // Option_C622DB = Option[art.Empty]
   // Some_4782C6 = Some[art.Empty]
   DeclNewOption_C622DB(t_0);
-  test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_t_impl_Operational_Api_getconsume_(
+  test_event_port_periodic_domains_test_event_port_periodic_domains_consumer_t_impl_Operational_Api_get_consume_(
     SF
     (Option_C622DB) &t_0,
     &api);

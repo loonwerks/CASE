@@ -10,7 +10,7 @@ import test_event_port_periodic_domains._
   def id: Art.BridgeId
   def emit_Id : Art.PortId
 
-  def sendemit() : Unit = {
+  def put_emit() : Unit = {
     Art.putValue(emit_Id, art.Empty())
   }
 

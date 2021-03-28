@@ -8,6 +8,8 @@ add_definitions(-DCAMKES)
 
 include(${CMAKE_CURRENT_LIST_DIR}/CMake_TranspilerOptions.cmake)
 
+include(${CMAKE_CURRENT_LIST_DIR}/CMake_CAmkES_VM_Options.cmake)
+
 if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "(C|c?)lang")
   add_compile_options("$<$<CONFIG:Release>:-Oz>")
 elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")

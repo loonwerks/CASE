@@ -1,5 +1,7 @@
 // #Sireum
 
+// This file was auto-generated.  Do not edit
+
 package test_event_port_periodic_domains.emitter_t_impl_src_process_src_thread
 
 import org.sireum._
@@ -104,8 +106,8 @@ object src_thread extends App {
       test_event_port_periodic_domains.test_event_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_operational_api.get.logInfo("")
       test_event_port_periodic_domains.test_event_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_operational_api.get.logDebug("")
       test_event_port_periodic_domains.test_event_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_operational_api.get.logError("")
-      test_event_port_periodic_domains.test_event_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_initialization_api.get.sendemit()
-      test_event_port_periodic_domains.test_event_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_operational_api.get.sendemit()
+      test_event_port_periodic_domains.test_event_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_initialization_api.get.put_emit()
+      test_event_port_periodic_domains.test_event_port_periodic_domains.emitter_t_impl_src_process_src_thread_Bridge.c_operational_api.get.put_emit()
     }
   }
 

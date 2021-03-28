@@ -72,7 +72,7 @@ void sb_entrypoint_consumer_t_impl_initializer(const int64_t * in_arg) {
 }
 
 void pre_init(void) {
-  // initialise data structure for incoming event data port read_port
+  // initialise data structure for incoming event data port read_port receiver queue
   sb_queue_int8_t_1_Recv_init(&sb_read_port_recv_queue, sb_read_port_queue);
 }
 
@@ -99,15 +99,28 @@ int run(void) {
 
 int main(int argc, char *argv[]) {
 
-  if (argc != 5) {
-    printf("Usage: %s <fd of sb_read_port_queue> <size of sb_read_port_queue> <fd of sb_pacer_period_queue> <size of sb_pacer_period_queue> \n\n",
-           argv[0]);
-    return 1;
+  printf("VM App %s started\n", get_instance_name());
+  
+  char* defaults[] = {get_instance_name(), "/dev/uio0", "4096", 
+                                           "/dev/uio1", "4096"};
+  
+  char** myargs = defaults;
+  
+  if (argc > 1) { // use cli args instead
+    myargs = argv;   
+    if (argc != (sizeof(defaults) / sizeof(char*))) {
+      char* a = "<fd of sb_read_port_queue> <size of sb_read_port_queue>";
+      char* b = "<fd of sb_pacer_period_queue> <size of sb_pacer_period_queue>";
+      
+      printf("Usage:\n	%s\n	%s\n\n", a, b);
+      
+      return 1;
+    }
   }
 
-  char *sb_read_port_queue_name = argv[1];
+  char *sb_read_port_queue_name = myargs[1];
 
-  int sb_read_port_queue_length = atoi(argv[2]);
+  int sb_read_port_queue_length = atoi(myargs[2]);
   assert(sb_read_port_queue_length > 0);
 
   sb_read_port_queue_fd = open(sb_read_port_queue_name, O_RDWR);
@@ -128,9 +141,9 @@ int main(int argc, char *argv[]) {
   sb_read_port_queue = (sb_queue_int8_t_1_t *) sb_read_port_queue_char;
 
 
-  char *sb_pacer_period_queue_name = argv[3];
+  char *sb_pacer_period_queue_name = myargs[3];
 
-  int sb_pacer_period_queue_length = atoi(argv[4]);
+  int sb_pacer_period_queue_length = atoi(myargs[4]);
   assert(sb_pacer_period_queue_length > 0);
 
   sb_pacer_period_queue_fd = open(sb_pacer_period_queue_name, O_RDWR);

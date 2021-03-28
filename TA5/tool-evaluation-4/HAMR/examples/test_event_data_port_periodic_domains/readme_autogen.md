@@ -48,16 +48,13 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_event_data_port_periodic_domains |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_TB.sh](bin/run-hamr-SeL4_TB.sh) |
 
 
   **How To Run**
   ```
-  test_event_data_port_periodic_domains/CAmkES_seL4_TB/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_TB.sh
+  ./CAmkES_seL4_TB/bin/run-camkes.sh -s
   ```
 
   ```
@@ -91,9 +88,6 @@
   ---------------------------------------
   [src_process_src_thread] Sent 8
   [dst_process_dst_thread] value {8}
-  ---------------------------------------
-  [src_process_src_thread] Sent 9
-  [dst_process_dst_thread] value {9}
 
   ```
 
@@ -101,16 +95,13 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_event_data_port_periodic_domains |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4_Only.sh](bin/run-hamr-SeL4_Only.sh) |
 
 
   **How To Run**
   ```
-  test_event_data_port_periodic_domains/CAmkES_seL4_Only/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4_Only.sh
+  ./CAmkES_seL4_Only/bin/run-camkes.sh -s
   ```
 
   ```
@@ -148,34 +139,31 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | package-name | test_event_data_port_periodic_domains |
-  | exclude-component-impl | true |
-  | bit-width | 32 |
-  | max-string-size | 256 |
-  | max-array-size | 1 |
+  | refer to [bin/run-hamr-SeL4.sh](bin/run-hamr-SeL4.sh) |
 
 
   **How To Run**
   ```
-  test_event_data_port_periodic_domains/CAmkES_seL4/bin/transpile-sel4.sh
-  test_event_data_port_periodic_domains/CAmkES_seL4/src/c/CAmkES_seL4/bin/run-camkes.sh -s
+  ./bin/run-hamr-SeL4.sh
+  ./CAmkES_seL4/src/c/CAmkES_seL4/bin/run-camkes.sh -s
   ```
 
   ```
   Booting all finished, dropped to user space
   Entering pre-init of consumer_t_impl_dst_process_dst_thread
-  Art: Registered coEntering pre-init of emitter_t_impl_src_process_src_thread
-  Art: Registered component: top_impmponent: top_impl_Instance_dst_process_dst_thread (periodic: 1000)
+  Entering pre-init of emitter_t_impl_src_process_src_thread
+  Art: Registered component: tArt: Registered component: top_impl_Instance_dst_process_dst_thread (periodic: 1000)
   Art: - Registered port: top_impl_Instance_dst_process_dst_thread_read_port (event in)
-  top_impl_Instance_dst_process_dst_thread: Example logInfo
-  top_impl_Instance_dst_process_dst_thread: Example logDebug
-  top_impl_Instance_dst_l_Instance_src_process_src_thread (periodic: 1000)
+  top_impl_Instance_dst_process_dst_top_impl_Instance_src_process_src_thread (periodic: 1000)
   Art: - Registered port: top_impl_Instance_src_process_src_thread_write_port (event out)
   top_impl_Instance_src_process_src_thread: Example logInfo
   top_impl_Instance_src_process_src_thread: Example logDebug
-  top_impl_Instance_src_process_src_threadprocess_dst_thread: Example logError
-  Leaving pre-init of consumer_t_impl_dst_process_dst_thread
-  : Example logError
+  top_impl_Instance_src_process_src_thread: Example logError
   Leaving pre-init of emitter_t_impl_src_process_src_thread
+  hread: Example logInfo
+  top_impl_Instance_dst_process_dst_thread: Example logDebug
+  top_impl_Instance_dst_process_dst_thread: Example logError
+  Leaving pre-init of consumer_t_impl_dst_process_dst_thread
+  top_impl_Instance_dst_process_dst_thread: Received on read_port: 0
 
   ```

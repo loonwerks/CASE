@@ -1,5 +1,7 @@
 // #Sireum
 
+// This file was auto-generated.  Do not edit
+
 package test_event_port_periodic_domains.test_event_port_periodic_domains
 
 import org.sireum._

@@ -20,7 +20,8 @@ object destination_thread_impl_destination_process_component_destination_thread_
   def timeTriggered(api: destination_thread_impl_Operational_Api): Unit = {
     // example api usage
 
-    val apiUsage_read_port: Option[Base_Types.Integer_8] = api.getread_port()
+    val apiUsage_read_port: Option[Base_Types.Integer_8] = api.get_read_port()
+    api.logInfo(s"Received on read_port: ${apiUsage_read_port}")
   }
 
   def activate(api: destination_thread_impl_Operational_Api): Unit = { }

@@ -20,7 +20,8 @@ object consumer_t_impl_dst_process_dst_thread {
   def timeTriggered(api: consumer_t_impl_Operational_Api): Unit = {
     // example api usage
 
-    val apiUsage_read_port: Option[Base_Types.Integer_8] = api.getread_port()
+    val apiUsage_read_port: Option[Base_Types.Integer_8] = api.get_read_port()
+    api.logInfo(s"Received on read_port: ${apiUsage_read_port}")
   }
 
   def activate(api: consumer_t_impl_Operational_Api): Unit = { }

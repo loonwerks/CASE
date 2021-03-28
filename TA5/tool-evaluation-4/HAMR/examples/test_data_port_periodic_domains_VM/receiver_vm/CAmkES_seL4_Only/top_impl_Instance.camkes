@@ -36,7 +36,6 @@ assembly {
   }
 
   configuration {
-    src_process_src_thread.write_port_access = "W";
     src_process_src_thread._domain = 2;
     vmdst_process.cnode_size_bits = 18;
     vmdst_process.simple_untyped21_pool = 12;
@@ -44,6 +43,8 @@ assembly {
     vmdst_process.num_extra_frame_caps = 0;
     vmdst_process.extra_frame_map_address = 0;
     vmdst_process._domain = 3;
+    src_process_src_thread.sb_write_port_access = "W";
+    vmdst_process.sb_read_port_access = "R";
     pacer._domain = 1;
 
     fserv.heap_size = 165536;

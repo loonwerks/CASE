@@ -1,5 +1,7 @@
 // #Sireum
 
+// This file was auto-generated.  Do not edit
+
 package test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component
 
 import org.sireum._
@@ -96,7 +98,7 @@ object source_thread_component extends App {
       // touch each payload/type in case some are only used as a field in a record
       def printDataContent(a: art.DataContent): Unit = { println(s"${a}") }
 
-      printDataContent(Base_Types.Integer_8_Payload(Base_Types.Integer_8_empty()))
+      printDataContent(Base_Types.Integer_8_Payload(Base_Types.Integer_8_example()))
       printDataContent(art.Empty())
 
       test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component_Bridge.c_initialization_api.get.logInfo("")
@@ -105,8 +107,8 @@ object source_thread_component extends App {
       test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component_Bridge.c_operational_api.get.logInfo("")
       test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component_Bridge.c_operational_api.get.logDebug("")
       test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component_Bridge.c_operational_api.get.logError("")
-      test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component_Bridge.c_initialization_api.get.setwrite_port(Base_Types.Integer_8_empty())
-      test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component_Bridge.c_operational_api.get.setwrite_port(Base_Types.Integer_8_empty())
+      test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component_Bridge.c_initialization_api.get.put_write_port(Base_Types.Integer_8_example())
+      test_data_port_periodic_domains.test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component_Bridge.c_operational_api.get.put_write_port(Base_Types.Integer_8_example())
     }
   }
 

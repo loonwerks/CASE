@@ -77,23 +77,30 @@ int run(void) {
   return 0;
 }
 
-
-
-
-
-
-
 int main(int argc, char *argv[]) {
 
-  if (argc != 5) {
-    printf("Usage: %s <fd of sb_write_port_queue> <size of sb_write_port_queue> <fd of sb_pacer_period_queue> <size of sb_pacer_period_queue> \n\n",
-           argv[0]);
-    return 1;
+  printf("VM App %s started\n", get_instance_name());
+  
+  char* defaults[] = {get_instance_name(), "/dev/uio0", "4096", 
+                                           "/dev/uio1", "4096"};
+  
+  char** myargs = defaults;
+  
+  if (argc > 1) { // use cli args instead
+    myargs = argv;   
+    if (argc != (sizeof(defaults) / sizeof(char*))) {
+      char* a = "<fd of sb_write_port_queue> <size of sb_write_port_queue>";
+      char* b = "<fd of sb_pacer_period_queue> <size of sb_pacer_period_queue>";
+      
+      printf("Usage:\n	%s\n	%s\n\n", a, b);
+      
+      return 1;
+    }
   }
 
-  char *sb_write_port_name = argv[1];
+  char *sb_write_port_name = myargs[1];
     
-  int sb_write_port_length = atoi(argv[2]);
+  int sb_write_port_length = atoi(myargs[2]);
   assert(sb_write_port_length > 0);
  
   sb_write_port_fd = open(sb_write_port_name, O_RDWR);
@@ -124,9 +131,9 @@ int main(int argc, char *argv[]) {
   sb_write_port_queue_1 = (sb_queue_int8_t_1_t *)raw_sb_write_port_queue_1; 
   sb_write_port_emit = (int*) emit;
 
-  char *sb_pacer_period_queue_name = argv[3];
+  char *sb_pacer_period_queue_name = myargs[3];
 
-  int sb_pacer_period_queue_length = atoi(argv[4]);
+  int sb_pacer_period_queue_length = atoi(myargs[4]);
   assert(sb_pacer_period_queue_length > 0);
 
   sb_pacer_period_queue_fd = open(sb_pacer_period_queue_name, O_RDWR);
@@ -183,6 +190,6 @@ void sb_pacer_notification_wait() {
 }
 
 const char *get_instance_name(void) {
-    static const char name[] = "vmsrc_process";
+    static const char name[] = "vmsrc_vm_process";
     return name;
 }

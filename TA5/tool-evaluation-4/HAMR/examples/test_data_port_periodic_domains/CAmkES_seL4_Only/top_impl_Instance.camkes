@@ -15,10 +15,10 @@ assembly {
   }
 
   configuration {
-    source_process_component_source_thread_component.write_port_access = "W";
     source_process_component_source_thread_component._domain = 2;
-    destination_process_component_destination_thread_component.read_port_access = "R";
     destination_process_component_destination_thread_component._domain = 3;
+    source_process_component_source_thread_component.sb_write_port_access = "W";
+    destination_process_component_destination_thread_component.sb_read_port_access = "R";
 
   }
 }
