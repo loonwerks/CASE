@@ -4,7 +4,8 @@
 set -Eeuxo pipefail
 
 : "${BASE_DIR:=$HOME/CASE}"
-: "${SIREUM_V:=35096a104c9046395bc16b2f29903d484102f549}"
+: "${SIREUM_INIT_V:=20210411.1625}"
+: "${SIREUM_V:=c273380dac945cacffabdedb2daa8097e31b0ea9}"
 : "${FMIDE_V:=nightly}" # use nightly release by default
 
 export DEBIAN_FRONTEND=noninteractive
@@ -62,7 +63,7 @@ export LANG=en_US.UTF-8
 
 
 # Sireum
-bash $HOME/bin/sireum-install.sh $SIREUM_V 
+bash $HOME/bin/sireum-install.sh $SIREUM_INIT_V $SIREUM_V
 echo "export SIREUM_HOME=$SIREUM_HOME" >> "$HOME/.bashrc"
 echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
 echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin" >> "$HOME/.bashrc"
