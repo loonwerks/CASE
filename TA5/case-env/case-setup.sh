@@ -5,7 +5,7 @@ set -Eeuxo pipefail
 
 : "${BASE_DIR:=$HOME/CASE}"
 : "${SIREUM_INIT_V:=20210427.1409}"
-: "${SIREUM_V:=9cd2a8a58168eab554a06c63869d78b53f888090}"
+: "${SIREUM_V:=c84c45372aeae9510a197a43b9ed554eb28efa63}"
 : "${FMIDE_V:=nightly}" # use nightly release by default
 
 export DEBIAN_FRONTEND=noninteractive
