@@ -10,8 +10,8 @@
       * [SeL4_Only CAmkES Arch](#sel4_only-camkes-arch)
       * [SeL4_Only CAmkES HAMR Arch](#sel4_only-camkes-hamr-arch)
   * [Example Output](#example-output)
-    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4_tb-expected-output-timeout--15-seconds)
-    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4_only-expected-output-timeout--15-seconds)
+    * [SeL4_TB Expected Output: Timeout = 18 seconds](#sel4_tb-expected-output-timeout--18-seconds)
+    * [SeL4_Only Expected Output: Timeout = 18 seconds](#sel4_only-expected-output-timeout--18-seconds)
 
 ## Diagrams
 ### AADL Arch
@@ -33,7 +33,7 @@
 
 ## Example Output
 *NOTE:* actual output may differ due to issues related to thread interleaving
-### SeL4_TB Expected Output: Timeout = 15 seconds
+### SeL4_TB Expected Output: Timeout = 18 seconds
 
   |HAMR Codegen Configuration| |
   |--|--|
@@ -53,7 +53,7 @@
 
   ```
 
-### SeL4_Only Expected Output: Timeout = 15 seconds
+### SeL4_Only Expected Output: Timeout = 18 seconds
 
   |HAMR Codegen Configuration| |
   |--|--|

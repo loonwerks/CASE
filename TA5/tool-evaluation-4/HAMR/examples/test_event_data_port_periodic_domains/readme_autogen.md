@@ -13,9 +13,9 @@
       * [SeL4 CAmkES Arch](#sel4-camkes-arch)
       * [SeL4 CAmkES HAMR Arch](#sel4-camkes-hamr-arch)
   * [Example Output](#example-output)
-    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4_tb-expected-output-timeout--15-seconds)
-    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4_only-expected-output-timeout--15-seconds)
-    * [SeL4 Expected Output: Timeout = 15 seconds](#sel4-expected-output-timeout--15-seconds)
+    * [SeL4_TB Expected Output: Timeout = 18 seconds](#sel4_tb-expected-output-timeout--18-seconds)
+    * [SeL4_Only Expected Output: Timeout = 18 seconds](#sel4_only-expected-output-timeout--18-seconds)
+    * [SeL4 Expected Output: Timeout = 18 seconds](#sel4-expected-output-timeout--18-seconds)
 
 ## Diagrams
 ### AADL Arch
@@ -44,7 +44,7 @@
 
 ## Example Output
 *NOTE:* actual output may differ due to issues related to thread interleaving
-### SeL4_TB Expected Output: Timeout = 15 seconds
+### SeL4_TB Expected Output: Timeout = 18 seconds
 
   |HAMR Codegen Configuration| |
   |--|--|
@@ -59,6 +59,7 @@
 
   ```
   Booting all finished, dropped to user space
+  Undelivered IRQ: 18
   [src_process_src_thread] test_event_data_port_emitter_component_init called
   [dst_process_dst_thread] test_event_data_port_consumer_component_init called
   ---------------------------------------
@@ -88,10 +89,25 @@
   ---------------------------------------
   [src_process_src_thread] Sent 8
   [dst_process_dst_thread] value {8}
+  ---------------------------------------
+  [src_process_src_thread] Sent 9
+  [dst_process_dst_thread] value {9}
+  ---------------------------------------
+  [src_process_src_thread] Sent 10
+  [dst_process_dst_thread] value {10}
+  ---------------------------------------
+  [src_process_src_thread] Sent 11
+  [dst_process_dst_thread] value {11}
+  ---------------------------------------
+  [src_process_src_thread] Sent 12
+  [dst_process_dst_thread] value {12}
+  ---------------------------------------
+  [src_process_src_thread] Sent 13
+  [dst_process_dst_thread] value {13}
 
   ```
 
-### SeL4_Only Expected Output: Timeout = 15 seconds
+### SeL4_Only Expected Output: Timeout = 18 seconds
 
   |HAMR Codegen Configuration| |
   |--|--|
@@ -132,10 +148,13 @@
   ---------------------------------------
   [src_process_src_thread] Sent 7
   [dst_process_dst_thread] value {7}
+  ---------------------------------------
+  [src_process_src_thread] Sent 8
+  [dst_process_dst_thread] value {8}
 
   ```
 
-### SeL4 Expected Output: Timeout = 15 seconds
+### SeL4 Expected Output: Timeout = 18 seconds
 
   |HAMR Codegen Configuration| |
   |--|--|
@@ -152,18 +171,18 @@
   Booting all finished, dropped to user space
   Entering pre-init of consumer_t_impl_dst_process_dst_thread
   Entering pre-init of emitter_t_impl_src_process_src_thread
-  Art: Registered component: tArt: Registered component: top_impl_Instance_dst_process_dst_thread (periodic: 1000)
+  Art: Registered component: top_impl_Instance_src_process_src_thread (periArt: Registered component: top_impl_Instance_dst_process_dst_thread (periodic: 1000)
   Art: - Registered port: top_impl_Instance_dst_process_dst_thread_read_port (event in)
-  top_impl_Instance_dst_process_dst_top_impl_Instance_src_process_src_thread (periodic: 1000)
+  top_impl_Instance_dst_process_dst_thread: Example logInfo
+  top_impl_Instance_dst_prodic: 1000)
   Art: - Registered port: top_impl_Instance_src_process_src_thread_write_port (event out)
   top_impl_Instance_src_process_src_thread: Example logInfo
   top_impl_Instance_src_process_src_thread: Example logDebug
-  top_impl_Instance_src_process_src_thread: Example logError
-  Leaving pre-init of emitter_t_impl_src_process_src_thread
-  hread: Example logInfo
-  top_impl_Instance_dst_process_dst_thread: Example logDebug
+  top_impl_Instance_src_process_srocess_dst_thread: Example logDebug
   top_impl_Instance_dst_process_dst_thread: Example logError
   Leaving pre-init of consumer_t_impl_dst_process_dst_thread
+  c_thread: Example logError
+  Leaving pre-init of emitter_t_impl_src_process_src_thread
   top_impl_Instance_dst_process_dst_thread: Received on read_port: 0
 
   ```

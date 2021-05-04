@@ -53,11 +53,11 @@
   [dst_native_process_dst_thread] received {1}
   -----------------------
   [src_process_src_thread] sending 2
+  install_linux_devices@main.c:657 module name: virtio_con
+  install_linux_devices@main.c:657 module name: cross_vm_connections
   [dst_native_process_dst_thread] received {2}
   -----------------------
   [src_process_src_thread] sending 3
-  install_linux_devices@main.c:657 module name: virtio_con
-  install_linux_devices@main.c:657 module name: cross_vm_connections
   [dst_native_process_dst_thread] received {3}
   -----------------------
   [src_process_src_thread] sending 4
@@ -118,10 +118,10 @@
   [dst_native_process_dst_thread] received {22}
   -----------------------
   [src_process_src_thread] sending 23
+  libsel4muslcsys: Error attempting syscall 215
   [dst_native_process_dst_thread] received {23}
   -----------------------
   [src_process_src_thread] sending 24
-  libsel4muslcsys: Error attempting syscall 215
   [dst_native_process_dst_thread] received {24}
   -----------------------
   [src_process_src_thread] sending 25
@@ -149,81 +149,82 @@
   [dst_native_process_dst_thread] received {32}
   -----------------------
   [src_process_src_thread] sending 33
+  libsel4muslcsys: Error attempting syscall 215
   [dst_native_process_dst_thread] received {33}
   -----------------------
   [src_process_src_thread] sending 34
-  libsel4muslcsys: Error attempting syscall 215
-  [dst_native_process_dst_thread] received {34}
-  -----------------------
-  [src_process_src_thread] sending 35
   clean_up@fdtgen.c:370 Non-existing node None specified to be kept
   consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
   consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
   _utspace_split_alloc@split.c:272 Failed to find any untyped capable of creating an object at address 0x8020000
+  [dst_native_process_dst_thread] received {34}
+  -----------------------
+  [src_process_src_thread] sending 35
+  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
+  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
   [dst_native_process_dst_thread] received {35}
   -----------------------
   [src_process_src_thread] sending 36
   consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
   consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
+  [    2.941286] Unable to detect cache hierarchy for CPU 0
+  [    2.964628] e1000: Intel(R) PRO/1000 Network Driver - version 7.3.21-k8-NAPI
+  [    2.982306] e1000: Copyright (c) 1999-2006 Intel Corporation.
+  [    2.996241] e1000e: Intel(R) PRO/1000 Network Driver - 3.2.6-k
+  [    3.008207] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+  [    3.024860] mousedev: PS/2 mouse device common for all mice
+  [    3.046285] ledtrig-cpu: registered to indicate activity on CPUs
+  [    3.059493] dmi-sysfs: dmi entry is absent.
+  [    3.069254] ipip: IPv4 and MPLS over IPv4 tunneling driver
+  [    3.087928] NET: Registered protocol family 10
+  [    3.116591] mip6: Mobile IPv6
+  [    3.132052] NET: Registered protocol family 17
+  [    3.143868] mpls_gso: MPLS GSO support
+  [    3.153328] Registered cp15_barrier emulation handler
+  [    3.163588] Registered setend emulation handler
+  [    3.177426] registered taskstats version 1
+  [    3.187836] zswap: loaded using pool lzo/zbud
+  [    3.202816] ima: No TPM chip found, activating TPM-bypass!
+  [    3.214054] ima: Allocated hash algorithm: sha256
+  [    3.233000] hctosys: unable to open rtc device (rtc0)
+  [    3.243746] PM: Hibernation image not present or could not be loaded.
+  [    3.255978] initcall clk_disable_unused blacklisted
   [dst_native_process_dst_thread] received {36}
   -----------------------
   [src_process_src_thread] sending 37
-  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
-  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
-  [    2.880461] Unable to detect cache hierarchy for CPU 0
-  [    2.900189] e1000: Intel(R) PRO/1000 Network Driver - version 7.3.21-k8-NAPI
-  [    2.916999] e1000: Copyright (c) 1999-2006 Intel Corporation.
-  [    2.931889] e1000e: Intel(R) PRO/1000 Network Driver - 3.2.6-k
-  [    2.944139] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
-  [    2.963712] mousedev: PS/2 mouse device common for all mice
-  [    2.980967] ledtrig-cpu: registered to indicate activity on CPUs
-  [    2.992540] dmi-sysfs: dmi entry is absent.
-  [    3.001204] ipip: IPv4 and MPLS over IPv4 tunneling driver
-  [    3.017251] NET: Registered protocol family 10
-  [    3.045352] mip6: Mobile IPv6
-  [    3.060445] NET: Registered protocol family 17
-  [    3.073180] mpls_gso: MPLS GSO support
-  [    3.083682] Registered cp15_barrier emulation handler
-  [    3.095556] Registered setend emulation handler
-  [    3.113034] registered taskstats version 1
-  [    3.123043] zswap: loaded using pool lzo/zbud
-  [    3.137639] ima: No TPM chip found, activating TPM-bypass!
-  [    3.148555] ima: Allocated hash algorithm: sha256
+  [    4.421835] Freeing unused kernel memory: 3776K
   [dst_native_process_dst_thread] received {37}
   -----------------------
   [src_process_src_thread] sending 38
-  [    3.743531] hctosys: unable to open rtc device (rtc0)
-  [    3.755399] PM: Hibernation image not present or could not be loaded.
-  [    3.767302] initcall clk_disable_unused blacklisted
-  [    4.199707] Freeing unused kernel memory: 3776K
+  Starting syslogd: OK
+  Starting klogd: OK
   [dst_native_process_dst_thread] received {38}
   -----------------------
   [src_process_src_thread] sending 39
-  Starting syslogd: OK
-  Starting klogd: [dst_native_process_dst_thread] received {39}
+  Running sysctl: OK
+  Initializing random number generator... [dst_native_process_dst_thread] received {39}
   -----------------------
   [src_process_src_thread] sending 40
-  OK
-  Running sysctl: [dst_native_process_dst_thread] received {40}
+  [    8.712983] random: dd: uninitialized urandom read (512 bytes read)
+  done.
+  Starting network: OK
+  [dst_native_process_dst_thread] received {40}
   -----------------------
   [src_process_src_thread] sending 41
-  OK
-  Initializing random number generator... [    8.243190] random: dd: uninitialized urandom read (512 bytes read)
-  done.
-  Starting network: [dst_native_process_dst_thread] received {41}
-  -----------------------
-  [src_process_src_thread] sending 42
-  OK
-  [    9.495681] connection: loading out-of-tree module taints kernel.
-  [    9.539456] Event Bar (dev-0) initalised
-  [    9.548842] 2 Dataports (dev-0) initalised
-  [    9.568071] Event Bar (dev-1) initalised
-  [    9.577337] 2 Dataports (dev-1) initalised
+  [   10.135769] connection: loading out-of-tree module taints kernel.
+  [   10.176883] Event Bar (dev-0) initalised
+  [   10.198755] 2 Dataports (dev-0) initalised
+  [   10.207947] Event Bar (dev-1) initalised
+  [   10.224398] 2 Dataports (dev-1) initalised
   VM App vmdst_process started
   [vmdst_process] test_event_data_port_consumer_component_init called
 
   Welcome to Buildroot
-  buildroot login: [dst_native_process_dst_thread] received {42}
+  buildroot login: [dst_native_process_dst_thread] received {41}
+  -----------------------
+  [src_process_src_thread] sending 42
+  [vmdst_process] received {42}
+  [dst_native_process_dst_thread] received {42}
   -----------------------
   [src_process_src_thread] sending 43
   [vmdst_process] received {43}
@@ -256,49 +257,5 @@
   [src_process_src_thread] sending 50
   [vmdst_process] received {50}
   [dst_native_process_dst_thread] received {50}
-  -----------------------
-  [src_process_src_thread] sending 51
-  [vmdst_process] received {51}
-  [dst_native_process_dst_thread] received {51}
-  -----------------------
-  [src_process_src_thread] sending 52
-  [vmdst_process] received {52}
-  [dst_native_process_dst_thread] received {52}
-  -----------------------
-  [src_process_src_thread] sending 53
-  [vmdst_process] received {53}
-  [dst_native_process_dst_thread] received {53}
-  -----------------------
-  [src_process_src_thread] sending 54
-  [vmdst_process] received {54}
-  [dst_native_process_dst_thread] received {54}
-  -----------------------
-  [src_process_src_thread] sending 55
-  [vmdst_process] received {55}
-  [dst_native_process_dst_thread] received {55}
-  -----------------------
-  [src_process_src_thread] sending 56
-  [vmdst_process] received {56}
-  [dst_native_process_dst_thread] received {56}
-  -----------------------
-  [src_process_src_thread] sending 57
-  [vmdst_process] received {57}
-  [dst_native_process_dst_thread] received {57}
-  -----------------------
-  [src_process_src_thread] sending 58
-  [vmdst_process] received {58}
-  [dst_native_process_dst_thread] received {58}
-  -----------------------
-  [src_process_src_thread] sending 59
-  [vmdst_process] received {59}
-  [dst_native_process_dst_thread] received {59}
-  -----------------------
-  [src_process_src_thread] sending 60
-  [vmdst_process] received {60}
-  [dst_native_process_dst_thread] received {60}
-  -----------------------
-  [src_process_src_thread] sending 61
-  [vmdst_process] received {61}
-  [dst_native_process_dst_thread] received {61}
 
   ```

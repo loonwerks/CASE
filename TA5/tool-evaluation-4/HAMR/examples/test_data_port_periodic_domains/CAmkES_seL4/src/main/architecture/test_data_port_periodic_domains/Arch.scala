@@ -38,7 +38,7 @@ object Arch {
   val ad : ArchitectureDescription = {
 
     ArchitectureDescription(
-      components = MSZ (top_impl_Instance_source_process_component_source_thread_component, top_impl_Instance_destination_process_component_destination_thread_component),
+      components = ISZ (top_impl_Instance_source_process_component_source_thread_component, top_impl_Instance_destination_process_component_destination_thread_component),
 
       connections = ISZ (Connection(from = top_impl_Instance_source_process_component_source_thread_component.write_port, to = top_impl_Instance_destination_process_component_destination_thread_component.read_port))
     )

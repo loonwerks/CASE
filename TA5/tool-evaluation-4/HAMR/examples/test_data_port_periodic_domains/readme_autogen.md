@@ -13,9 +13,9 @@
       * [SeL4 CAmkES Arch](#sel4-camkes-arch)
       * [SeL4 CAmkES HAMR Arch](#sel4-camkes-hamr-arch)
   * [Example Output](#example-output)
-    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4_tb-expected-output-timeout--15-seconds)
-    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4_only-expected-output-timeout--15-seconds)
-    * [SeL4 Expected Output: Timeout = 15 seconds](#sel4-expected-output-timeout--15-seconds)
+    * [SeL4_TB Expected Output: Timeout = 18 seconds](#sel4_tb-expected-output-timeout--18-seconds)
+    * [SeL4_Only Expected Output: Timeout = 18 seconds](#sel4_only-expected-output-timeout--18-seconds)
+    * [SeL4 Expected Output: Timeout = 18 seconds](#sel4-expected-output-timeout--18-seconds)
 
 ## Diagrams
 ### AADL Arch
@@ -44,7 +44,7 @@
 
 ## Example Output
 *NOTE:* actual output may differ due to issues related to thread interleaving
-### SeL4_TB Expected Output: Timeout = 15 seconds
+### SeL4_TB Expected Output: Timeout = 18 seconds
 
   |HAMR Codegen Configuration| |
   |--|--|
@@ -59,8 +59,8 @@
 
   ```
   Booting all finished, dropped to user space
-  [source_process_component_source_thread_component] test_data_port_periodic_source_component_init called
-  [destination_process_component_destination_thread_component] test_data_port_periodic_domains_destination_component_init called
+  [source_process_component_source_thread_component] test_data_port_periodic_source_component_in[destination_process_component_destination_thread_component] test_data_port_periodic_domains_destination_component_init called
+  it called
   ---------------------------------------
   [source_process_component_source_thread_component] Sent 0
   [destination_process_component_destination_thread_component] value {0}
@@ -85,16 +85,10 @@
   ---------------------------------------
   [source_process_component_source_thread_component] Sent 7
   [destination_process_component_destination_thread_component] value {7}
-  ---------------------------------------
-  [source_process_component_source_thread_component] Sent 8
-  [destination_process_component_destination_thread_component] value {8}
-  ---------------------------------------
-  [source_process_component_source_thread_component] Sent 9
-  [destination_process_component_destination_thread_component] value {9}
 
   ```
 
-### SeL4_Only Expected Output: Timeout = 15 seconds
+### SeL4_Only Expected Output: Timeout = 18 seconds
 
   |HAMR Codegen Configuration| |
   |--|--|
@@ -137,10 +131,11 @@
   [destination_process_component_destination_thread_component] value {7}
   ---------------------------------------
   [source_process_component_source_thread_component] Sent 8
+  [destination_process_component_destination_thread_component] value {8}
 
   ```
 
-### SeL4 Expected Output: Timeout = 15 seconds
+### SeL4 Expected Output: Timeout = 18 seconds
 
   |HAMR Codegen Configuration| |
   |--|--|
@@ -157,18 +152,20 @@
   Booting all finished, dropped to user space
   Entering pre-init of destination_thread_impl_destination_process_component_destination_thread_component
   Entering pre-init of source_thread_impl_source_process_component_source_thread_component
-  Art:Art: Registered component: top_impl_Instance_destination_process_component_destination_thread_component (periodic: 1000)
+  Art: Registered component: top_impl_Instance_destination_process_component_destination_thread_component (periodic: 1000)
   Art: - Registered port: top_impl_Instance_destination_process_component_destination_thread_component_read_port (data in)
-  top_i Registered component: top_impl_Instance_source_process_component_source_thread_component (periodic: 1000)
-  Art: - Registered port: top_impl_Instance_source_process_component_source_thread_component_write_port (data out)
-  top_impl_Instance_source_process_component_source_thread_component: Example logInfo
-  top_impl_Instance_source_process_component_source_thread_commpl_Instance_destination_process_component_destination_thread_component: Example logInfo
+  top_impl_Instance_destination_process_component_deArt: Registered component: top_impl_Instance_source_process_component_source_thread_component (periodic: 1000)
+  Art: - Registered port: top_impl_Instance_source_process_component_sourcstination_thread_component: Example logInfo
   top_impl_Instance_destination_process_component_destination_thread_component: Example logDebug
   top_impl_Instance_destination_process_component_destination_thread_component: Example logError
-  Leaving pre-init of destination_thread_impl_destination_process_component_destination_thread_component
-  ponent: Example logDebug
+  Leaving pre-init of destination_thread_impl_destination_process_componente_thread_component_write_port (data out)
+  top_impl_Instance_source_process_component_source_thread_component: Example logInfo
+  top_impl_Instance_source_process_component_source_thread_component: Example logDebug
   top_impl_Instance_source_process_component_source_thread_component: Example logError
-  Leaving pre-init of source_thread_impl_source_process_component_source_thread_component
+  Leaving pre-init of source_thread_impl_sou_destination_thread_component
+  rce_process_component_source_thread_component
+  top_impl_Instance_destination_process_component_destination_thread_component: Received on read_port: 0
+  top_impl_Instance_destination_process_component_destination_thread_component: Received on read_port: 0
   top_impl_Instance_destination_process_component_destination_thread_component: Received on read_port: 0
   top_impl_Instance_destination_process_component_destination_thread_component: Received on read_port: 0
   top_impl_Instance_destination_process_component_destination_thread_component: Received on read_port: 0

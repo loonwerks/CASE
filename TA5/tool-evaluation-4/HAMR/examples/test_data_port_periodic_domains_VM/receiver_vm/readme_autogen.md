@@ -44,7 +44,7 @@
   ```
   ./bin/run-hamr-SeL4_Only.sh
   ./CAmkES_seL4_Only/bin/setup-camkes-arm-vm.sh
-  ./CAmkES_seL4_Only/bin/run-camkes.sh -s
+  ./CAmkES_seL4_Only/bin/run-camkes.sh -o "-DUSE_PRECONFIGURED_ROOTFS=ON" -s
   ```
 
   ```
@@ -62,10 +62,10 @@
   [src_process_src_thread] Sent 1
   ---------------------------------------
   [src_process_src_thread] Sent 2
-  ---------------------------------------
-  [src_process_src_thread] Sent 3
   install_linux_devices@main.c:657 module name: virtio_con
   install_linux_devices@main.c:657 module name: cross_vm_connections
+  ---------------------------------------
+  [src_process_src_thread] Sent 3
   ---------------------------------------
   [src_process_src_thread] Sent 4
   ---------------------------------------
@@ -106,9 +106,9 @@
   [src_process_src_thread] Sent 22
   ---------------------------------------
   [src_process_src_thread] Sent 23
+  libsel4muslcsys: Error attempting syscall 215
   ---------------------------------------
   [src_process_src_thread] Sent 24
-  libsel4muslcsys: Error attempting syscall 215
   ---------------------------------------
   [src_process_src_thread] Sent 25
   ---------------------------------------
@@ -127,73 +127,76 @@
   [src_process_src_thread] Sent 32
   ---------------------------------------
   [src_process_src_thread] Sent 33
-  ---------------------------------------
-  [src_process_src_thread] Sent 34
-  ---------------------------------------
-  [src_process_src_thread] Sent 35
   libsel4muslcsys: Error attempting syscall 215
   ---------------------------------------
-  [src_process_src_thread] Sent 36
+  [src_process_src_thread] Sent 34
   clean_up@fdtgen.c:370 Non-existing node None specified to be kept
   consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
   _utspace_split_alloc@split.c:272 Failed to find any untyped capable of creating an object at address 0x8020000
   ---------------------------------------
+  [src_process_src_thread] Sent 35
+  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
+  [    2.100092] Unable to detect cache hierarchy for CPU 0
+  [    2.116237] e1000: Intel(R) PRO/1000 Network Driver - version 7.3.21-k8-NAPI
+  ---------------------------------------
+  [src_process_src_thread] Sent 36
+  [    2.860237] e1000: Copyright (c) 1999-2006 Intel Corporation.
+  [    2.872246] e1000e: Intel(R) PRO/1000 Network Driver - 3.2.6-k
+  [    2.883507] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+  [    2.898009] mousedev: PS/2 mouse device common for all mice
+  [    2.915865] ledtrig-cpu: registered to indicate activity on CPUs
+  [    2.927399] dmi-sysfs: dmi entry is absent.
+  [    2.936464] ipip: IPv4 and MPLS over IPv4 tunneling driver
+  [    2.952535] NET: Registered protocol family 10
+  [    2.974304] mip6: Mobile IPv6
+  [    2.986447] NET: Registered protocol family 17
+  [    2.996229] mpls_gso: MPLS GSO support
+  [    3.003922] Registered cp15_barrier emulation handler
+  [    3.014025] Registered setend emulation handler
+  [    3.027103] registered taskstats version 1
+  [    3.035983] zswap: loaded using pool lzo/zbud
+  [    3.050348] ima: No TPM chip found, activating TPM-bypass!
+  [    3.059991] ima: Allocated hash algorithm: sha256
+  [    3.076824] hctosys: unable to open rtc device (rtc0)
+  [    3.088072] PM: Hibernation image not present or could not be loaded.
+  [    3.099652] initcall clk_disable_unused blacklisted
+  [    3.459360] Freeing unused kernel memory: 3776K
+  ---------------------------------------
   [src_process_src_thread] Sent 37
-  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
-  ---------------------------------------
-  [src_process_src_thread] Sent 38
-  consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
-  [    3.041924] Unable to detect cache hierarchy for CPU 0
-  [    3.062452] e1000: Intel(R) PRO/1000 Network Driver - version 7.3.21-k8-NAPI
-  [    3.077903] e1000: Copyright (c) 1999-2006 Intel Corporation.
-  [    3.093822] e1000e: Intel(R) PRO/1000 Network Driver - 3.2.6-k
-  [    3.108164] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
-  [    3.125945] mousedev: PS/2 mouse device common for all mice
-  [    3.148499] ledtrig-cpu: registered to indicate activity on CPUs
-  [    3.161961] dmi-sysfs: dmi entry is absent.
-  [    3.172878] ipip: IPv4 and MPLS over IPv4 tunneling driver
-  [    3.192762] NET: Registered protocol family 10
-  [    3.219029] mip6: Mobile IPv6
-  [    3.233049] NET: Registered protocol family 17
-  [    3.243160] mpls_gso: MPLS GSO support
-  [    3.253011] Registered cp15_b---------------------------------------
-  [src_process_src_thread] Sent 39
-  arrier emulation handler
-  [    3.950582] Registered setend emulation handler
-  [    3.969082] registered taskstats version 1
-  [    3.979099] zswap: loaded using pool lzo/zbud
-  [    3.994689] ima: No TPM chip found, activating TPM-bypass!
-  [    4.006966] ima: Allocated hash algorithm: sha256
-  [    4.029940] hctosys: unable to open rtc device (rtc0)
-  [    4.041346] PM: Hibernation image not present or could not be loaded.
-  [    4.053271] initcall clk_disable_unused blacklisted
-  [    4.493188] Freeing unused kernel memory: 3776K
-  ---------------------------------------
-  [src_process_src_thread] Sent 40
-  ---------------------------------------
-  [src_process_src_thread] Sent 41
   Starting syslogd: OK
-  Starting klogd: OK
-  Running sysctl: ---------------------------------------
-  [src_process_src_thread] Sent 42
+  Starting klogd: ---------------------------------------
+  [src_process_src_thread] Sent 38
   OK
-  Initializing random number generator... [    8.392852] random: dd: uninitialized urandom read (512 bytes read)
+  Running sysctl: OK
+  Initializing random number generator... ---------------------------------------
+  [src_process_src_thread] Sent 39
+  [    7.393726] random: dd: uninitialized urandom read (512 bytes read)
   done.
-  ---------------------------------------
-  [src_process_src_thread] Sent 43
   Starting network: OK
-  [    9.702936] connection: loading out-of-tree module taints kernel.
-  [    9.747022] Event Bar (dev-0) initalised
-  [    9.771057] 2 Dataports (dev-0) initalised
-  [    9.782941] Event Bar (dev-1) initalised
-  [    9.802055] 2 Dataports (dev-1) initalised
-  ---------------------------------------
-  [src_process_src_thread] Sent 44
+  [    7.940889] connection: loading out-of-tree module taints kernel.
+  [    7.974621] Event Bar (dev-0) initalised
+  [    7.987987] 2 Dataports (dev-0) initalised
+  [    7.996294] Event Bar (dev-1) initalised
+  [    8.011970] 2 Dataports (dev-1) initalised
   VM App vmdst_process started
-  [vmdst_process] test_event_data_port_consumer_component_init called
+  [vmdst_process] test_event_data_port_consumer_component_init called---------------------------------------
+  [src_process_src_thread] Sent 40
+
 
   Welcome to Buildroot
   buildroot login: ---------------------------------------
+  [src_process_src_thread] Sent 41
+  [vmdst_process] value {41}
+  ---------------------------------------
+  [src_process_src_thread] Sent 42
+  [vmdst_process] value {42}
+  ---------------------------------------
+  [src_process_src_thread] Sent 43
+  [vmdst_process] value {43}
+  ---------------------------------------
+  [src_process_src_thread] Sent 44
+  [vmdst_process] value {44}
+  ---------------------------------------
   [src_process_src_thread] Sent 45
   [vmdst_process] value {45}
   ---------------------------------------
@@ -208,33 +211,6 @@
   ---------------------------------------
   [src_process_src_thread] Sent 49
   [vmdst_process] value {49}
-  ---------------------------------------
-  [src_process_src_thread] Sent 50
-  [vmdst_process] value {50}
-  ---------------------------------------
-  [src_process_src_thread] Sent 51
-  [vmdst_process] value {51}
-  ---------------------------------------
-  [src_process_src_thread] Sent 52
-  [vmdst_process] value {52}
-  ---------------------------------------
-  [src_process_src_thread] Sent 53
-  [vmdst_process] value {53}
-  ---------------------------------------
-  [src_process_src_thread] Sent 54
-  [vmdst_process] value {54}
-  ---------------------------------------
-  [src_process_src_thread] Sent 55
-  [vmdst_process] value {55}
-  ---------------------------------------
-  [src_process_src_thread] Sent 56
-  [vmdst_process] value {56}
-  ---------------------------------------
-  [src_process_src_thread] Sent 57
-  [vmdst_process] value {57}
-  ---------------------------------------
-  [src_process_src_thread] Sent 58
-  [vmdst_process] value {58}
 
   ```
 
@@ -249,7 +225,7 @@
   ```
   ./bin/run-hamr-SeL4.sh
   ./CAmkES_seL4/src/c/CAmkES_seL4/bin/setup-camkes-arm-vm.sh
-  ./CAmkES_seL4/src/c/CAmkES_seL4/bin/run-camkes.sh -s
+  ./CAmkES_seL4/src/c/CAmkES_seL4/bin/run-camkes.sh -o "-DUSE_PRECONFIGURED_ROOTFS=ON" -s
   ```
 
   ```

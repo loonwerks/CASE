@@ -27,7 +27,7 @@ ${SIREUM_HOME}/bin/sireum slang transpilers c \
   --bits 32 \
   --string-size 256 \
   --sequence-size 1 \
-  --sequence "MS[Z,art.Bridge]=1;MS[Z,MOption[art.Bridge]]=1;IS[Z,art.UPort]=1;IS[Z,art.UConnection]=1" \
+  --sequence "IS[Z,art.Bridge]=1;MS[Z,Option[art.Bridge]]=1;IS[Z,art.UPort]=1;IS[Z,art.UConnection]=1" \
   --constants "art.Art.maxComponents=1;art.Art.maxPorts=1" \
   --cmake-includes "+${SCRIPT_HOME}/settings_emitter_t_impl_src_process_src_thread.cmake" \
   --forward "art.ArtNative=sender_vm.emitter_t_impl_src_process_src_thread.src_thread" \
@@ -49,7 +49,7 @@ ${SIREUM_HOME}/bin/sireum slang transpilers c \
   --bits 32 \
   --string-size 256 \
   --sequence-size 1 \
-  --sequence "MS[Z,art.Bridge]=1;MS[Z,MOption[art.Bridge]]=1;IS[Z,art.UPort]=1;IS[Z,art.UConnection]=1" \
+  --sequence "IS[Z,art.Bridge]=1;MS[Z,Option[art.Bridge]]=1;IS[Z,art.UPort]=1;IS[Z,art.UConnection]=1" \
   --constants "art.Art.maxComponents=1;art.Art.maxPorts=1" \
   --cmake-includes "+${SCRIPT_HOME}/settings_consumer_t_impl_dst_process_dst_thread.cmake" \
   --forward "art.ArtNative=sender_vm.consumer_t_impl_dst_process_dst_thread.dst_thread" \

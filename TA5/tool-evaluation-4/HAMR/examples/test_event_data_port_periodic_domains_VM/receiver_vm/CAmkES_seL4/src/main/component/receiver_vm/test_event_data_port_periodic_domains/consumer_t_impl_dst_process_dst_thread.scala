@@ -8,21 +8,9 @@ import receiver_vm._
 // This file will not be overwritten so is safe to edit
 object consumer_t_impl_dst_process_dst_thread {
 
-  def initialise(api: consumer_t_impl_Initialization_Api): Unit = {
-    // example api usage
+  def initialise(api: consumer_t_impl_Initialization_Api): Unit = { }
 
-    api.logInfo("Example info logging")
-    api.logDebug("Example debug logging")
-    api.logError("Example error logging")
-
-  }
-
-  def timeTriggered(api: consumer_t_impl_Operational_Api): Unit = {
-    // example api usage
-
-    val apiUsage_read_port: Option[Base_Types.Integer_8] = api.get_read_port()
-    api.logInfo(s"Received on read_port: ${apiUsage_read_port}")
-  }
+  def timeTriggered(api: consumer_t_impl_Operational_Api): Unit = { }
 
   def activate(api: consumer_t_impl_Operational_Api): Unit = { }
 

@@ -13,9 +13,9 @@
       * [SeL4 CAmkES Arch](#sel4-camkes-arch)
       * [SeL4 CAmkES HAMR Arch](#sel4-camkes-hamr-arch)
   * [Example Output](#example-output)
-    * [SeL4_TB Expected Output: Timeout = 15 seconds](#sel4_tb-expected-output-timeout--15-seconds)
-    * [SeL4_Only Expected Output: Timeout = 15 seconds](#sel4_only-expected-output-timeout--15-seconds)
-    * [SeL4 Expected Output: Timeout = 15 seconds](#sel4-expected-output-timeout--15-seconds)
+    * [SeL4_TB Expected Output: Timeout = 18 seconds](#sel4_tb-expected-output-timeout--18-seconds)
+    * [SeL4_Only Expected Output: Timeout = 18 seconds](#sel4_only-expected-output-timeout--18-seconds)
+    * [SeL4 Expected Output: Timeout = 18 seconds](#sel4-expected-output-timeout--18-seconds)
 
 ## Diagrams
 ### AADL Arch
@@ -44,7 +44,7 @@
 
 ## Example Output
 *NOTE:* actual output may differ due to issues related to thread interleaving
-### SeL4_TB Expected Output: Timeout = 15 seconds
+### SeL4_TB Expected Output: Timeout = 18 seconds
 
   |HAMR Codegen Configuration| |
   |--|--|
@@ -88,10 +88,13 @@
   ---------------------------------------
   [src_process_src_thread] Sent event.
   [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 9 total
+  ---------------------------------------
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 10 total
 
   ```
 
-### SeL4_Only Expected Output: Timeout = 15 seconds
+### SeL4_Only Expected Output: Timeout = 18 seconds
 
   |HAMR Codegen Configuration| |
   |--|--|
@@ -133,10 +136,16 @@
   ---------------------------------------
   [src_process_src_thread] Sent event.
   [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 8 total
+  ---------------------------------------
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 9 total
+  ---------------------------------------
+  [src_process_src_thread] Sent event.
+  [dst_process_dst_thread] Callback fired.  Received 1 events this dispatch, 10 total
 
   ```
 
-### SeL4 Expected Output: Timeout = 15 seconds
+### SeL4 Expected Output: Timeout = 18 seconds
 
   |HAMR Codegen Configuration| |
   |--|--|
@@ -153,17 +162,17 @@
   Booting all finished, dropped to user space
   Entering pre-init of consumer_t_impl_dst_process_dst_thread
   Entering pre-init of emitter_t_impl_src_process_src_thread
-  Art: RegisArt: Registered component: top_impl_Instance_dst_process_dst_thread (periodic: 1000)
+  Art: Registered component: top_impl_Instance_dst_process_dst_thread (periodic: 1000)
   Art: - Registered port: top_impl_Instance_dst_process_dst_thread_consume (event in)
-  top_impl_Instance_dst_process_dst_thread: Example logInfo
-  top_impl_Instance_dst_process_dsttered component: top_impl_Instance_src_process_src_thread (periodic: 1000)
+  top_impl_Instance_dst_process_dst_thread: Example logIArt: Registered component: top_impl_Instance_src_process_src_thread (periodic: 1000)
   Art: - Registered port: top_impl_Instance_src_process_src_thread_emit (event out)
   top_impl_Instance_src_process_src_thread: Example logInfo
-  top_impl_Instance_src_process_src_thread: Example logDebug
-  top_impl_Instance_src_process_src_thread: Example logError
-  _thread: Example logDebug
+  nfo
+  top_impl_Instance_dst_process_dst_thread: Example logDebug
   top_impl_Instance_dst_process_dst_thread: Example logError
   Leaving pre-init of consumer_t_impl_dst_process_dst_thread
+  top_impl_Instance_src_process_src_thread: Example logDebug
+  top_impl_Instance_src_process_src_thread: Example logError
   Leaving pre-init of emitter_t_impl_src_process_src_thread
   top_impl_Instance_dst_process_dst_thread: Received event on consume
 

@@ -66,7 +66,7 @@ object src_thread extends App {
 
   def initialiseArchitecture(): Unit = {
     val ad = ArchitectureDescription(
-      components = MSZ (src_threadBridge),
+      components = ISZ (src_threadBridge),
       connections = ISZ ()
     )
     Art.run(ad)

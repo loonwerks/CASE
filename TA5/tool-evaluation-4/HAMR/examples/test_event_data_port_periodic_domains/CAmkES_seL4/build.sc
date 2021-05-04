@@ -4,7 +4,7 @@ import ammonite.ops._
 
 // Example mill build -- the contents of this file will not be overwritten.
 //
-// mill is included with Sireum Kekinian: https://github.com/sireum/kekinian#installing
+// mill can be obtained following instructions at https://github.com/sireum/kekinian#slang-app-example-mill-project
 //
 // To run the demo from the command line:
 //   $SIREUM_HOME/bin/mill test_event_data_port_periodic_domains.run
@@ -37,20 +37,20 @@ trait SlangEmbeddedModule extends ScalaModule {
   // refer to https://github.com/sireum/kekinian/blob/master/versions.properties
   // to get the most recent versions of the following dependencies
 
-  // versions.properties key: org.sireum.version.scala
+  // versions.properties key: org.scala-lang%scala-library%
   val scalaVer = "2.13.5"
 
-  // versions.properties key: org.sireum.version.scalatest
-  val scalaTestVersion = "3.2.6"
+  // versions.properties key: org.scalatest%%scalatest%%
+  val scalaTestVersion = "3.2.8"
 
-  // versions.properties key: org.sireum.version.scalac-plugin
-  // https://github.com/sireum/scalac-plugin/tree/4.20210223.b70a539
-  val sireumScalacVersion = "4.20210223.b70a539"
+  // versions.properties key: org.sireum%%scalac-plugin%
+  // https://github.com/sireum/scalac-plugin/tree/4.20210430.0cf092f
+  val sireumScalacVersion = "4.20210430.0cf092f"
 
 
   // refer to https://github.com/sireum/kekinian/releases to get the latest
-  // Sireum Kekinian release: https://github.com/sireum/kekinian/tree/4.20210318.5f39324
-  val kekinianVersion = "4.20210318.5f39324"
+  // Sireum Kekinian release: https://github.com/sireum/kekinian/tree/4.20210427.9cd2a8a
+  val kekinianVersion = "4.20210427.9cd2a8a"
 
 
   val inspectorVersion = "0.6-SNAPSHOT"

@@ -63,7 +63,7 @@ object destination_thread_component extends App {
 
   def initialiseArchitecture(): Unit = {
     val ad = ArchitectureDescription(
-      components = MSZ (destination_thread_componentBridge),
+      components = ISZ (destination_thread_componentBridge),
       connections = ISZ ()
     )
     Art.run(ad)

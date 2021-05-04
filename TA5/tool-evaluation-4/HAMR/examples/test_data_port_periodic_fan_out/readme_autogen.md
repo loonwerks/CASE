@@ -37,7 +37,7 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | refer to [bin/run-hamr-SeL4_TB.sh](bin/run-hamr-SeL4_TB.sh)
+  | refer to [bin/run-hamr-SeL4_TB.sh](bin/run-hamr-SeL4_TB.sh) |
 
 
   **How To Run**
@@ -75,6 +75,12 @@
   [test_data_port_periodic_dest_B] value {6}
   ---------------------------------------
   [test_data_port_periodic_src] Sent 7
+  ---------------------------------------
+  [test_data_port_periodic_src] Sent 8
+  [test_data_port_periodic_dest_A] value {8}
+  [test_data_port_periodic_dest_B] value {8}
+  ---------------------------------------
+  [test_data_port_periodic_src] Sent 9
 
   ```
 
@@ -82,7 +88,7 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | refer to [bin/run-hamr-SeL4_Only.sh](bin/run-hamr-SeL4_Only.sh)
+  | refer to [bin/run-hamr-SeL4_Only.sh](bin/run-hamr-SeL4_Only.sh) |
 
 
   **How To Run**
@@ -118,13 +124,5 @@
   [test_data_port_periodic_src] Sent 6
   [test_data_port_periodic_dest_A] value {6}
   [test_data_port_periodic_dest_B] value {6}
-  ---------------------------------------
-  [test_data_port_periodic_src] Sent 7
-  ---------------------------------------
-  [test_data_port_periodic_src] Sent 8
-  [test_data_port_periodic_dest_A] value {8}
-  [test_data_port_periodic_dest_B] value {8}
-  ---------------------------------------
-  [test_data_port_periodic_src] Sent 9
 
   ```

@@ -102,7 +102,7 @@
               },
               "properties" : [
               ],
-              "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@featureInstance.0"
+              "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@featureInstance.0"
             }
           ],
           "subComponents" : [
@@ -185,13 +185,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
                             },
-                            "beginLine" : 234,
+                            "beginLine" : 235,
                             "beginColumn" : 2,
-                            "endLine" : 236,
+                            "endLine" : 237,
                             "endColumn" : 76,
-                            "offset" : 17037,
+                            "offset" : 17093,
                             "length" : 224
                           }
                         }
@@ -206,7 +206,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
+                  "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0\/@featureInstance.0"
                 }
               ],
               "subComponents" : [
@@ -227,13 +227,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
                         },
-                        "beginLine" : 46,
+                        "beginLine" : 47,
                         "beginColumn" : 2,
-                        "endLine" : 47,
+                        "endLine" : 48,
                         "endColumn" : 81,
-                        "offset" : 3075,
+                        "offset" : 3130,
                         "length" : 189
                       }
                     }
@@ -264,13 +264,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
                         },
-                        "beginLine" : 12,
+                        "beginLine" : 13,
                         "beginColumn" : 2,
-                        "endLine" : 13,
+                        "endLine" : 14,
                         "endColumn" : 50,
-                        "offset" : 476,
+                        "offset" : 527,
                         "length" : 97
                       }
                     }
@@ -295,13 +295,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
                         },
-                        "beginLine" : 191,
+                        "beginLine" : 192,
                         "beginColumn" : 2,
-                        "endLine" : 192,
+                        "endLine" : 193,
                         "endColumn" : 99,
-                        "offset" : 11575,
+                        "offset" : 11626,
                         "length" : 119
                       }
                     }
@@ -330,13 +330,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
                         },
-                        "beginLine" : 53,
+                        "beginLine" : 54,
                         "beginColumn" : 2,
-                        "endLine" : 54,
+                        "endLine" : 55,
                         "endColumn" : 72,
-                        "offset" : 3703,
+                        "offset" : 3754,
                         "length" : 106
                       }
                     }
@@ -376,13 +376,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
                         },
-                        "beginLine" : 159,
+                        "beginLine" : 160,
                         "beginColumn" : 2,
-                        "endLine" : 160,
+                        "endLine" : 161,
                         "endColumn" : 31,
-                        "offset" : 11570,
+                        "offset" : 11626,
                         "length" : 76
                       }
                     }
@@ -407,13 +407,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
                         },
-                        "beginLine" : 234,
+                        "beginLine" : 235,
                         "beginColumn" : 2,
-                        "endLine" : 236,
+                        "endLine" : 237,
                         "endColumn" : 76,
-                        "offset" : 17037,
+                        "offset" : 17093,
                         "length" : 224
                       }
                     }
@@ -438,13 +438,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
                         },
-                        "beginLine" : 71,
+                        "beginLine" : 72,
                         "beginColumn" : 2,
-                        "endLine" : 72,
+                        "endLine" : 73,
                         "endColumn" : 79,
-                        "offset" : 5356,
+                        "offset" : 5412,
                         "length" : 121
                       }
                     }
@@ -490,20 +490,9 @@
                     "properties" : [
                     ]
                   }
-                },
-                {
-                  "type" : "Annex",
-                  "name" : "smf",
-                  "clause" : {
-                    "type" : "SmfClause",
-                    "classification" : [
-                    ],
-                    "declass" : [
-                    ]
-                  }
                 }
               ],
-              "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0"
+              "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0\/@componentInstance.0"
             }
           ],
           "connections" : [
@@ -655,7 +644,7 @@
               ],
               "properties" : [
               ],
-              "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.0"
+              "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.0"
             }
           ],
           "connectionInstances" : [
@@ -672,13 +661,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
                     },
-                    "beginLine" : 46,
+                    "beginLine" : 47,
                     "beginColumn" : 2,
-                    "endLine" : 47,
+                    "endLine" : 48,
                     "endColumn" : 81,
-                    "offset" : 3075,
+                    "offset" : 3130,
                     "length" : 189
                   }
                 }
@@ -764,20 +753,9 @@
                 "properties" : [
                 ]
               }
-            },
-            {
-              "type" : "Annex",
-              "name" : "smf",
-              "clause" : {
-                "type" : "SmfClause",
-                "classification" : [
-                ],
-                "declass" : [
-                ]
-              }
             }
           ],
-          "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0"
+          "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.0"
         },
         {
           "type" : "Component",
@@ -848,7 +826,7 @@
               },
               "properties" : [
               ],
-              "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1\/@featureInstance.0"
+              "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1\/@featureInstance.0"
             }
           ],
           "subComponents" : [
@@ -931,13 +909,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
                             },
-                            "beginLine" : 234,
+                            "beginLine" : 235,
                             "beginColumn" : 2,
-                            "endLine" : 236,
+                            "endLine" : 237,
                             "endColumn" : 76,
-                            "offset" : 17037,
+                            "offset" : 17093,
                             "length" : 224
                           }
                         }
@@ -962,13 +940,13 @@
                             "type" : "Position",
                             "uriOpt" : {
                               "type" : "Some",
-                              "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
                             },
-                            "beginLine" : 71,
+                            "beginLine" : 72,
                             "beginColumn" : 2,
-                            "endLine" : 72,
+                            "endLine" : 73,
                             "endColumn" : 79,
-                            "offset" : 5356,
+                            "offset" : 5412,
                             "length" : 121
                           }
                         }
@@ -983,7 +961,7 @@
                       ]
                     }
                   ],
-                  "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1\/@componentInstance.0\/@featureInstance.0"
+                  "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1\/@componentInstance.0\/@featureInstance.0"
                 }
               ],
               "subComponents" : [
@@ -1004,13 +982,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
                         },
-                        "beginLine" : 46,
+                        "beginLine" : 47,
                         "beginColumn" : 2,
-                        "endLine" : 47,
+                        "endLine" : 48,
                         "endColumn" : 81,
-                        "offset" : 3075,
+                        "offset" : 3130,
                         "length" : 189
                       }
                     }
@@ -1041,13 +1019,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Thread_Properties.aadl"
                         },
-                        "beginLine" : 12,
+                        "beginLine" : 13,
                         "beginColumn" : 2,
-                        "endLine" : 13,
+                        "endLine" : 14,
                         "endColumn" : 50,
-                        "offset" : 476,
+                        "offset" : 527,
                         "length" : 97
                       }
                     }
@@ -1072,13 +1050,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
                         },
-                        "beginLine" : 191,
+                        "beginLine" : 192,
                         "beginColumn" : 2,
-                        "endLine" : 192,
+                        "endLine" : 193,
                         "endColumn" : 99,
-                        "offset" : 11575,
+                        "offset" : 11626,
                         "length" : 119
                       }
                     }
@@ -1107,13 +1085,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
                         },
-                        "beginLine" : 53,
+                        "beginLine" : 54,
                         "beginColumn" : 2,
-                        "endLine" : 54,
+                        "endLine" : 55,
                         "endColumn" : 72,
-                        "offset" : 3703,
+                        "offset" : 3754,
                         "length" : 106
                       }
                     }
@@ -1153,13 +1131,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
                         },
-                        "beginLine" : 159,
+                        "beginLine" : 160,
                         "beginColumn" : 2,
-                        "endLine" : 160,
+                        "endLine" : 161,
                         "endColumn" : 31,
-                        "offset" : 11570,
+                        "offset" : 11626,
                         "length" : 76
                       }
                     }
@@ -1184,13 +1162,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
                         },
-                        "beginLine" : 234,
+                        "beginLine" : 235,
                         "beginColumn" : 2,
-                        "endLine" : 236,
+                        "endLine" : 237,
                         "endColumn" : 76,
-                        "offset" : 17037,
+                        "offset" : 17093,
                         "length" : 224
                       }
                     }
@@ -1215,13 +1193,13 @@
                         "type" : "Position",
                         "uriOpt" : {
                           "type" : "Some",
-                          "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
+                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
                         },
-                        "beginLine" : 71,
+                        "beginLine" : 72,
                         "beginColumn" : 2,
-                        "endLine" : 72,
+                        "endLine" : 73,
                         "endColumn" : 79,
-                        "offset" : 5356,
+                        "offset" : 5412,
                         "length" : 121
                       }
                     }
@@ -1267,20 +1245,9 @@
                     "properties" : [
                     ]
                   }
-                },
-                {
-                  "type" : "Annex",
-                  "name" : "smf",
-                  "clause" : {
-                    "type" : "SmfClause",
-                    "classification" : [
-                    ],
-                    "declass" : [
-                    ]
-                  }
                 }
               ],
-              "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1\/@componentInstance.0"
+              "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1\/@componentInstance.0"
             }
           ],
           "connections" : [
@@ -1432,7 +1399,7 @@
               ],
               "properties" : [
               ],
-              "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.2"
+              "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.2"
             }
           ],
           "connectionInstances" : [
@@ -1449,13 +1416,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Deployment_Properties.aadl"
                     },
-                    "beginLine" : 46,
+                    "beginLine" : 47,
                     "beginColumn" : 2,
-                    "endLine" : 47,
+                    "endLine" : 48,
                     "endColumn" : 81,
-                    "offset" : 3075,
+                    "offset" : 3130,
                     "length" : 189
                   }
                 }
@@ -1541,20 +1508,9 @@
                 "properties" : [
                 ]
               }
-            },
-            {
-              "type" : "Annex",
-              "name" : "smf",
-              "clause" : {
-                "type" : "SmfClause",
-                "classification" : [
-                ],
-                "declass" : [
-                ]
-              }
             }
           ],
-          "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1"
+          "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.1"
         },
         {
           "type" : "Component",
@@ -1609,13 +1565,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
                     },
-                    "beginLine" : 293,
+                    "beginLine" : 294,
                     "beginColumn" : 2,
-                    "endLine" : 294,
+                    "endLine" : 295,
                     "endColumn" : 45,
-                    "offset" : 17428,
+                    "offset" : 17479,
                     "length" : 63
                   }
                 }
@@ -1644,13 +1600,13 @@
                     "type" : "Position",
                     "uriOpt" : {
                       "type" : "Some",
-                      "value" : "\/org.osate.workspace\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
+                      "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Timing_Properties.aadl"
                     },
-                    "beginLine" : 251,
+                    "beginLine" : 252,
                     "beginColumn" : 2,
-                    "endLine" : 252,
+                    "endLine" : 253,
                     "endColumn" : 42,
-                    "offset" : 15216,
+                    "offset" : 15267,
                     "length" : 60
                   }
                 }
@@ -1765,20 +1721,9 @@
                 "properties" : [
                 ]
               }
-            },
-            {
-              "type" : "Annex",
-              "name" : "smf",
-              "clause" : {
-                "type" : "SmfClause",
-                "classification" : [
-                ],
-                "declass" : [
-                ]
-              }
             }
           ],
-          "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.2"
+          "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@componentInstance.2"
         }
       ],
       "connections" : [
@@ -1930,7 +1875,7 @@
           ],
           "properties" : [
           ],
-          "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.1"
+          "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/\/@connectionInstance.0\/@connectionReference.1"
         }
       ],
       "connectionInstances" : [
@@ -2272,20 +2217,9 @@
             "properties" : [
             ]
           }
-        },
-        {
-          "type" : "Annex",
-          "name" : "smf",
-          "clause" : {
-            "type" : "SmfClause",
-            "classification" : [
-            ],
-            "declass" : [
-            ]
-          }
         }
       ],
-      "uriFrag" : "test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/"
+      "uriFrag" : "platform:\/resource\/test_event_port_periodic_domains\/instances\/test_event_port_periodic_domains_top_impl_Instance.aaxl2#\/"
     }
   ],
   "annexLib" : [

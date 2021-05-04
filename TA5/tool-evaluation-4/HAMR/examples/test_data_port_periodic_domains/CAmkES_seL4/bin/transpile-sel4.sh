@@ -27,7 +27,7 @@ ${SIREUM_HOME}/bin/sireum slang transpilers c \
   --bits 32 \
   --string-size 256 \
   --sequence-size 1 \
-  --sequence "MS[Z,art.Bridge]=1;MS[Z,MOption[art.Bridge]]=1;IS[Z,art.UPort]=1;IS[Z,art.UConnection]=1" \
+  --sequence "IS[Z,art.Bridge]=1;MS[Z,Option[art.Bridge]]=1;IS[Z,art.UPort]=1;IS[Z,art.UConnection]=1" \
   --constants "art.Art.maxComponents=1;art.Art.maxPorts=1" \
   --cmake-includes "+${SCRIPT_HOME}/settings_source_thread_impl_source_process_component_source_thread_component.cmake" \
   --forward "art.ArtNative=test_data_port_periodic_domains.source_thread_impl_source_process_component_source_thread_component.source_thread_component" \
@@ -49,7 +49,7 @@ ${SIREUM_HOME}/bin/sireum slang transpilers c \
   --bits 32 \
   --string-size 256 \
   --sequence-size 1 \
-  --sequence "MS[Z,art.Bridge]=1;MS[Z,MOption[art.Bridge]]=1;IS[Z,art.UPort]=1;IS[Z,art.UConnection]=1" \
+  --sequence "IS[Z,art.Bridge]=1;MS[Z,Option[art.Bridge]]=1;IS[Z,art.UPort]=1;IS[Z,art.UConnection]=1" \
   --constants "art.Art.maxComponents=1;art.Art.maxPorts=1" \
   --cmake-includes "+${SCRIPT_HOME}/settings_destination_thread_impl_destination_process_component_destination_thread_component.cmake" \
   --forward "art.ArtNative=test_data_port_periodic_domains.destination_thread_impl_destination_process_component_destination_thread_component.destination_thread_component" \

@@ -9,7 +9,7 @@ import test_event_port_periodic_domains.test_event_port_periodic_domains.{emitte
 
 // This file was auto-generated.  Do not edit
 
-@record class emitter_t_impl_src_process_src_thread_Bridge(
+@datatype class emitter_t_impl_src_process_src_thread_Bridge(
   val id: Art.BridgeId,
   val name: String,
   val dispatchProtocol: DispatchPropertyProtocol,
@@ -65,7 +65,7 @@ object emitter_t_impl_src_process_src_thread_Bridge {
   var c_initialization_api: Option[emitter_t_impl_Initialization_Api] = None()
   var c_operational_api: Option[emitter_t_impl_Operational_Api] = None()
 
-  @record class EntryPoints(
+  @datatype class EntryPoints(
     emitter_t_impl_src_process_src_thread_BridgeId : Art.BridgeId,
 
     emit_Id : Art.PortId,
@@ -85,35 +85,46 @@ object emitter_t_impl_src_process_src_thread_Bridge {
 
     def compute(): Unit = {
       Art.receiveInput(eventInPortIds, dataInPortIds)
+
+      // implement the following in 'component':  def timeTriggered(api: emitter_t_impl_Operational_Api): Unit = {}
       component.timeTriggered(operational_api)
+
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
     }
 
     override
     def testCompute(): Unit = {
       Art.receiveInput(eventInPortIds, dataInPortIds)
+
+      // implement the following in 'component':  def timeTriggered(api: emitter_t_impl_Operational_Api): Unit = {}
       component.timeTriggered(operational_api)
+
       Art.releaseOutput(eventOutPortIds, dataOutPortIds)
     }
 
     def activate(): Unit = {
+      // implement the following method in 'component':  def activate(api: emitter_t_impl_Operational_Api): Unit = {}
       component.activate(operational_api)
     }
 
     def deactivate(): Unit = {
+      // implement the following method in 'component':  def deactivate(api: emitter_t_impl_Operational_Api): Unit = {}
       component.deactivate(operational_api)
     }
 
     def finalise(): Unit = {
+      // implement the following method in 'component':  def finalise(api: emitter_t_impl_Operational_Api): Unit = {}
       component.finalise(operational_api)
     }
 
     def initialise(): Unit = {
+      // implement the following method in 'component':  def initialise(api: emitter_t_impl_Initialization_Api): Unit = {}
       component.initialise(initialization_api)
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
     }
 
     def recover(): Unit = {
+      // implement the following method in 'component':  def recover(api: emitter_t_impl_Operational_Api): Unit = {}
       component.recover(operational_api)
     }
   }

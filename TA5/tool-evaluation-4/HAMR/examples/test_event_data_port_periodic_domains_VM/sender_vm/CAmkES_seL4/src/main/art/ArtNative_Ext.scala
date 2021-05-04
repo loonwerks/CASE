@@ -149,7 +149,7 @@ object ArtNative_Ext {
     val bridges = {
       var r = Vector[Bridge]()
       for (e <- Art.bridges.elements) e match {
-        case MSome(b) => r :+= b
+        case Some(b) => r :+= b
         case _ =>
       }
       r

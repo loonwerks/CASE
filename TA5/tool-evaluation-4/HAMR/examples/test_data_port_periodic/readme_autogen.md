@@ -37,7 +37,7 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | refer to [bin/run-hamr-SeL4_TB.sh](bin/run-hamr-SeL4_TB.sh)
+  | refer to [bin/run-hamr-SeL4_TB.sh](bin/run-hamr-SeL4_TB.sh) |
 
 
   **How To Run**
@@ -48,8 +48,8 @@
 
   ```
   Booting all finished, dropped to user space
-  [test_data_port_periodic_src] test_data_port_periodic_source_component_init called[test_data_port_periodic_dest] test_data_port_periodic_destination_component_init called
-
+  [test_data_port_periodic_src] test_data_port_periodic_source_component_init called
+  [test_data_port_periodic_dest] test_data_port_periodic_destination_component_init called
   ---------------------------------------
   [test_data_port_periodic_src] Sent 0
   [test_data_port_periodic_dest] value {0}
@@ -80,7 +80,7 @@
 
   |HAMR Codegen Configuration| |
   |--|--|
-  | refer to [bin/run-hamr-SeL4_Only.sh](bin/run-hamr-SeL4_Only.sh)
+  | refer to [bin/run-hamr-SeL4_Only.sh](bin/run-hamr-SeL4_Only.sh) |
 
 
   **How To Run**
@@ -111,10 +111,5 @@
   ---------------------------------------
   [test_data_port_periodic_src] Sent 6
   [test_data_port_periodic_dest] value {6}
-  ---------------------------------------
-  [test_data_port_periodic_src] Sent 7
-  ---------------------------------------
-  [test_data_port_periodic_src] Sent 8
-  [test_data_port_periodic_dest] value {8}
 
   ```
