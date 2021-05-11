@@ -1,0 +1,102 @@
+package MC
+public
+	with SW;
+
+	with UAS_Buses;
+
+	with CASE_Model_Transformations;
+
+	-- The radio communication hardware
+	device Radio
+		features
+			MCA: requires bus access MC_Bus.Impl;
+			RFA: requires bus access UAS_Buses::RF_Bus.Impl;
+			RecvIn: in event data port;
+			RecvOut: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			SendIn: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			SendOut: out event data port;
+	end Radio;
+
+	device implementation Radio.Impl
+	end Radio.Impl;
+
+		-- The serial communication hardware
+	device UART
+		features
+			MCA: requires bus access MC_Bus.Impl;
+			UARTA: requires bus access UAS_Buses::Serial_Bus.Impl;
+			RecvIn: in event data port;
+			RecvOut: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			SendIn: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			SendOut: out event data port;
+	end UART;
+
+	device implementation UART.Impl
+	end UART.Impl;
+
+		-- The Mission Computer processor
+	processor MC_Proc
+		features
+			MCA: requires bus access MC_Bus.Impl;
+	end MC_Proc;
+
+	processor implementation MC_Proc.Impl
+	end MC_Proc.Impl;
+
+		-- The Mission Computer RAM
+	memory MC_Mem
+		features
+			MCA: requires bus access MC_Bus.Impl;
+	end MC_Mem;
+
+	memory implementation MC_Mem.Impl
+	end MC_Mem.Impl;
+
+		-- The Mission Computer on-board bus
+	bus MC_Bus
+	end MC_Bus;
+
+	bus implementation MC_Bus.Impl
+	end MC_Bus.Impl;
+
+		-- The MissionComputer onboard the UAV
+	system MissionComputer
+		features
+			RadioRecv: in event data port;
+			RadioSend: out event data port;
+			UartRecv: in event data port;
+			UartSend: out event data port;
+			UARTA: requires bus access UAS_Buses::Serial_Bus.Impl;
+			RFA: requires bus access UAS_Buses::RF_Bus.Impl;
+	end MissionComputer;
+
+	system implementation MissionComputer.Impl
+		subcomponents
+			Radio_HW: device Radio.Impl;
+			UART_HW: device UART.Impl;
+			Proc_HW: processor MC_Proc.Impl;
+			Mem_HW: memory MC_Mem.Impl;
+			Bus_HW: bus MC_Bus.Impl;
+			Proc_SW: process SW::SW.Impl;
+		connections
+			bac1: bus access Radio_HW.MCA <-> Bus_HW;
+			bac2: bus access UART_HW.MCA <-> Bus_HW;
+			bac3: bus access Proc_HW.MCA <-> Bus_HW;
+			bac4: bus access Mem_HW.MCA <-> Bus_HW;
+			bac5: bus access Radio_HW.RFA <-> RFA;
+			bac6: bus access UART_HW.UARTA <-> UARTA;
+			c1: port RadioRecv -> Radio_HW.RecvIn;
+			c2: port Radio_HW.RecvOut -> Proc_SW.RadioRecv;
+			c3: port Proc_SW.RadioSend -> Radio_HW.SendIn;
+			c4: port Radio_HW.SendOut -> RadioSend;
+			c5: port UartRecv -> UART_HW.RecvIn;
+			c6: port UART_HW.RecvOut -> Proc_SW.UartRecv;
+			c7: port Proc_SW.UartSend -> UART_HW.SendIn;
+			c8: port UART_HW.SendOut -> UartSend;
+		properties
+			Actual_Processor_Binding => (reference (Proc_HW)) applies to Proc_SW;
+			Actual_Memory_Binding => (reference (Mem_HW)) applies to Proc_SW;
+			Actual_Connection_Binding => (reference (Bus_HW)) applies to c2, c3, c6, c7;
+	end MissionComputer.Impl;
+
+end MC;
