@@ -96,7 +96,7 @@ public
 			MissionCommand: out event data port RF_Msg.Impl;
 			Status: in event data port Coordinate.Impl;
 		properties
-			CASE_Properties::COMM_DRIVER => true;
+			CASE_Properties::Comm_Driver => true;
 		annex agree {**
 			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(MissionCommand);
 		**};
@@ -108,12 +108,9 @@ public
 	thread FlightPlanner
 		-- The FlightPlanner is an abstraction for UxAS.
 		-- It accepts a command message containing a map and flight pattern, and generates a mission.
-		-- The FlightPlanner also has access to a No-Fly zone database, which it uses to generate the mission 
-		-- to avoid specified no-fly zones
 		features
 			FlightPlan: out data port Mission;
 			MissionCommand: in event data port RF_Msg.Impl;
-			FlyZones: in event data port MapArray;
 			Status: in event data port Coordinate.Impl;
 		annex agree {**
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(MissionCommand);
@@ -192,14 +189,13 @@ public
 			c1: port RadioRecv -> Radio.RecvData;
 			c2: port Radio.SendData -> RadioSend;
 			c3: port Radio.MissionCommand -> FlightPlanner.MissionCommand;
-			c5: port FlightPlanner.FlightPlan -> WaypointManager.FlightPlan;
-			c6: port FlyZones.FlyZones -> FlightPlanner.FlyZones;
-			c7: port WaypointManager.MissionWindow -> UART.MissionWindow;
-			c8: port UART.status -> WaypointManager.Status;
-			c9: port UART.status -> FlightPlanner.Status;
-			c10: port UART.status -> RADIO.status;
-			c11: port UART.SendData -> UartSend;
-			c12: port UartRecv -> UART.RecvData;
+			c4: port FlightPlanner.FlightPlan -> WaypointManager.FlightPlan;
+			c5: port WaypointManager.MissionWindow -> UART.MissionWindow;
+			c6: port UART.status -> WaypointManager.Status;
+			c7: port UART.status -> FlightPlanner.Status;
+			c8: port UART.status -> RADIO.status;
+			c9: port UART.SendData -> UartSend;
+			c10: port UartRecv -> UART.RecvData;
 
 	end SW.Impl;
 
