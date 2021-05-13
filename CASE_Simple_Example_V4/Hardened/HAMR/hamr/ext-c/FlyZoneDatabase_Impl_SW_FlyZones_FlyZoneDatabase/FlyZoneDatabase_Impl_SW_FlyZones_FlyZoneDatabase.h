@@ -1,0 +1,10 @@
+#ifndef FLYZONEDATABASE_IMPL_SW_FLYZONES_FLYZONEDATABASE_H
+#define FLYZONEDATABASE_IMPL_SW_FLYZONES_FLYZONEDATABASE_H
+
+#include <all.h>
+
+Unit HAMR_SW_FlyZoneDatabase_Impl_SW_FlyZones_FlyZoneDatabase_initialise_(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_FlyZoneDatabase_Impl_SW_FlyZones_FlyZoneDatabase_finalise_(STACK_FRAME_ONLY);
+
+#endif

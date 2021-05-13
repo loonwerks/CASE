@@ -1,0 +1,14 @@
+#ifndef FLIGHTPLANNER_IMPL_SW_FLIGHTPLANNER_FLIGHTPLANNER_ADAPTER_H
+#define FLIGHTPLANNER_IMPL_SW_FLIGHTPLANNER_FLIGHTPLANNER_ADAPTER_H
+
+#include <all.h>
+
+Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_initialiseArchitecture(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_initialiseEntryPoint(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_computeEntryPoint(STACK_FRAME_ONLY);
+
+art_Bridge_EntryPoints HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_entryPoints(STACK_FRAME_ONLY);
+
+#endif

@@ -90,13 +90,9 @@ public
 			VirtualMachine: virtual processor CASE_VirtualMachine.Impl;
 		connections
 			c1: port RadioRecv -> Radio_HW.RecvIn;
-			c2: port Radio_HW.RecvOut -> SW.RadioRecv;
-			c3: port SW.RadioSend -> Radio_HW.SendIn;
-			c4: port Radio_HW.SendOut -> RadioSend;
-			c5: port UartRecv -> UART_HW.RecvIn;
-			c6: port UART_HW.RecvOut -> SW.UartRecv;
-			c7: port SW.UartSend -> UART_HW.SendIn;
-			c8: port UART_HW.SendOut -> UartSend;
+			c2: port Radio_HW.SendOut -> RadioSend;
+			c3: port UartRecv -> UART_HW.RecvIn;
+			c4: port UART_HW.SendOut -> UartSend;
 			bac1: bus access Radio_HW.MCA <-> Bus_HW;
 			bac2: bus access UART_HW.MCA <-> Bus_HW;
 			bac3: bus access Proc_HW.MCA <-> Bus_HW;
@@ -106,12 +102,11 @@ public
 		properties
 			Actual_Processor_Binding => (reference (Proc_HW)) applies to SW, VirtualMachine;
 			Actual_Memory_Binding => (reference (Mem_HW)) applies to SW;
-			Actual_Connection_Binding => (reference (Bus_HW)) applies to c2, c3, c6, c7;
 			CASE_Properties::OS => seL4 applies to Proc_HW;
 			Actual_Processor_Binding => (reference (VirtualMachine)) applies to SW.FlightPlanner;
 		annex resolute {**
 			check HAMR_Guidelines
-			prove Req_WellFormed_MissionCommand(this.SW.FlightPlanner, "Req_Wellformed_MissionCommand", this.SW.Filter, this.SW.c9, SW::RF_Msg.Impl)
+			prove Req_WellFormed_MissionCommand(this.SW.FlightPlanner, "Req_Wellformed_MissionCommand", this.SW.Filter, this.SW.c5, SW::RF_Msg.Impl)
 			prove Req_Attestation(this.SW.Radio, this.SW.AttestationManager, this.SW.AttestationGate)
 			prove Req_FlightPlanner_Response(this.SW.FlightPlanner, this.SW.ResponseMonitor)
 			prove Req_FlightPlanner_Geofence(this.SW.FlightPlanner, this.SW.GeofenceMonitor, this.SW.WaypointManager, SW::Mission)

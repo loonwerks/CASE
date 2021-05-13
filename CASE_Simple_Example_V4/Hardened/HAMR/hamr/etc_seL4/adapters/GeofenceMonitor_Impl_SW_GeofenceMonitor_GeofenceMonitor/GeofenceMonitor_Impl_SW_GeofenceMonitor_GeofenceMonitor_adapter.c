@@ -1,0 +1,25 @@
+#include <GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter.h>
+
+Unit HAMR_SW_GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter_initialiseArchitecture(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter.c", "", "HAMR_SW_GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter_initialiseArchitecture", 0);
+
+  HAMR_GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_GeofenceMonitor_initialiseArchitecture(SF_LAST);
+}
+
+Unit HAMR_SW_GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter_initialiseEntryPoint(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter.c", "", "HAMR_SW_GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter_initialiseEntryPoint", 0);
+
+  HAMR_GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_GeofenceMonitor_initialiseEntryPoint(SF_LAST);
+}
+
+Unit HAMR_SW_GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter_computeEntryPoint(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter.c", "", "HAMR_SW_GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter_computeEntryPoint", 0);
+
+  HAMR_GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_GeofenceMonitor_computeEntryPoint(SF_LAST);
+}
+
+art_Bridge_EntryPoints HAMR_SW_GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter_entryPoints(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter.c", "", "HAMR_SW_GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_adapter_entryPoints", 0);
+
+  return HAMR_GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor_GeofenceMonitor_entryPoints(SF_LAST);
+}

@@ -1,0 +1,16 @@
+#ifndef RADIODRIVER_ATTESTATION_IMPL_SW_RADIO_RADIODRIVER_ATTESTATION_H
+#define RADIODRIVER_ATTESTATION_IMPL_SW_RADIO_RADIODRIVER_ATTESTATION_H
+
+#include <all.h>
+
+Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_initialise_(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_finalise_(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest_(
+  STACK_FRAME
+  HAMR_CASE_Model_Transformations_CASE_AttestationRequestMsg_Impl value);
+
+Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_Alert_(STACK_FRAME_ONLY);
+
+#endif

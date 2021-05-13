@@ -5,6 +5,7 @@ public
 	with Base_Types;
 	with CASE_Properties;
 	with CASE_Model_Transformations;
+	with CASE_Scheduling;
 
 	thread GeofenceMonitor
 		features
@@ -108,9 +109,9 @@ public
 	data implementation Coordinate.Impl
 		-- This is the structure to hold the lat/long/alt values of a coordinate
 		subcomponents
-			Latitude: data Base_Types::Integer;
-			Longitude: data Base_Types::Integer;
-			Altitude: data Base_Types::Integer;
+			Latitude: data Base_Types::Integer_32;
+			Longitude: data Base_Types::Integer_32;
+			Altitude: data Base_Types::Integer_32;
 	end Coordinate.Impl;
 
 	data Map
@@ -209,8 +210,6 @@ public
 		-- The RadioDriver is the software that enables other SW components to communicate to other systems over RF
 		features
 			Alert: in event port;
-			RecvData: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			SendData: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			MissionCommand: out event data port RF_Msg.Impl;
 		properties
 			CASE_Properties::Comm_Driver => true;
@@ -220,6 +219,8 @@ public
 	end RadioDriver;
 
 	thread implementation RadioDriver.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
 	end RadioDriver.Impl;
 
 	thread FlightPlanner
@@ -236,6 +237,8 @@ public
 	end FlightPlanner;
 
 	thread implementation FlightPlanner.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
 	end FlightPlanner.Impl;
 
 	thread FlyZoneDatabase
@@ -247,6 +250,8 @@ public
 	end FlyZoneDatabase;
 
 	thread implementation FlyZoneDatabase.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
 	end FlyZoneDatabase.Impl;
 
 	thread WaypointManager
@@ -265,6 +270,8 @@ public
 	end WaypointManager;
 
 	thread implementation WaypointManager.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
 	end WaypointManager.Impl;
 
 	thread UARTDriver
@@ -272,22 +279,19 @@ public
 		features
 			Status: out event data port Coordinate.Impl;
 			MissionWindow: in event data port MissionWindow;
-			RecvData: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-			SendData: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
 		annex agree {**
 			assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(MissionWindow);
-			guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : SendData.crc;
 		**};
 	end UARTDriver;
 
 	thread implementation UARTDriver.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
 	end UARTDriver.Impl;
 
 	thread RadioDriver_Attestation
 		features
 			Alert: in event port;
-			RecvData: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			SendData: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			MissionCommand: out event data port RF_Msg.Impl;
 			AttestationRequest: in event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
 			AttestationResponse: out event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
@@ -299,18 +303,11 @@ public
 	end RadioDriver_Attestation;
 
 	thread implementation RadioDriver_Attestation.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
 	end RadioDriver_Attestation.Impl;
 
 	process SW
-		-- The Mission Computer Software process runs all threads
-		features
-			RadioRecv: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			RadioSend: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			UartRecv: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-			UartSend: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-		annex agree {**
-			guarantee Req001_SW "The Mission Computer shall output a valid mission window to the Flight Controller" : UartSend.crc;
-		**};
 	end SW;
 
 	process implementation SW.Impl
@@ -326,47 +323,26 @@ public
 			ResponseMonitor: thread ResponseMonitor.Impl;
 			GeofenceMonitor: thread GeofenceMonitor.Impl;
 		connections
-			c1: port RadioRecv -> Radio.RecvData;
-			c2: port Radio.SendData -> RadioSend;
-			c3: port AttestationGate.MissionCommand_out -> Filter.Input;
-			c4: port GeofenceMonitor.FlightPlan_Out -> WaypointManager.FlightPlan;
-			c5: port WaypointManager.MissionWindow -> UART.MissionWindow;
-			c6: port UART.status -> WaypointManager.Status;
-			c7: port UART.SendData -> UartSend;
-			c8: port UartRecv -> UART.RecvData;
-			c9: port Filter.Output -> FlightPlanner.MissionCommand;
-			c10: port FlightPlanner.FlightPlan -> ResponseMonitor.FlightPlan;
-			c11: port AttestationGate.MissionCommand_out -> ResponseMonitor.MissionCommand;
-			c12: port ResponseMonitor.Alert -> Radio.Alert;
-			c13: port FlightPlanner.FlightPlan -> GeofenceMonitor.FlightPlan_In;
-			c14: port FlyZones.FlyZones -> GeofenceMonitor.FlyZones;
-			c15: port GeofenceMonitor.Alert -> WaypointManager.ReturnHome;
-			c16: port Radio.MissionCommand -> AttestationGate.MissionCommand_In;
-			c17: port AttestationManager.AttestationRequest -> Radio.AttestationRequest;
-			c18: port Radio.AttestationResponse -> AttestationManager.AttestationResponse;
-			c19: port AttestationManager.TrustedIds -> AttestationGate.TrustedIds;
+			c1: port AttestationGate.MissionCommand_out -> Filter.Input;
+			c2: port GeofenceMonitor.FlightPlan_Out -> WaypointManager.FlightPlan;
+			c3: port WaypointManager.MissionWindow -> UART.MissionWindow;
+			c4: port UART.status -> WaypointManager.Status;
+			c5: port Filter.Output -> FlightPlanner.MissionCommand;
+			c6: port FlightPlanner.FlightPlan -> ResponseMonitor.FlightPlan;
+			c7: port AttestationGate.MissionCommand_out -> ResponseMonitor.MissionCommand;
+			c8: port ResponseMonitor.Alert -> Radio.Alert;
+			c9: port FlightPlanner.FlightPlan -> GeofenceMonitor.FlightPlan_In;
+			c10: port FlyZones.FlyZones -> GeofenceMonitor.FlyZones;
+			c11: port GeofenceMonitor.Alert -> WaypointManager.ReturnHome;
+			c12: port Radio.MissionCommand -> AttestationGate.MissionCommand_In;
+			c13: port AttestationManager.AttestationRequest -> Radio.AttestationRequest;
+			c14: port Radio.AttestationResponse -> AttestationManager.AttestationResponse;
+			c15: port AttestationManager.TrustedIds -> AttestationGate.TrustedIds;
 	end SW.Impl;
-
-	annex agree {**
-		-- ID of this UAV
-		const CASE_UAV_ID : int = 42;
-		fun VALID_MESSAGE(msg : RF_Msg.Impl) : bool = (msg.header.src > 0 and msg.header.dst = CASE_UAV_ID and msg.header.HMAC);
-		fun TRUSTED_MESSAGE(msg : RF_Msg.Impl) : bool = msg.header.trusted;
-		fun WELL_FORMED_MESSAGE(msg : RF_Msg.Impl) : bool = good_command(msg.payload);
-		-- These functions check the well-formedness of message structures
-		fun good_coordinate(coord : Coordinate.Impl) : bool = coord.Latitude >= -90 and coord.Latitude <= 90 and coord.Longitude >= -180 and coord.Longitude <= 180 and coord.Altitude >= 0 and coord.Altitude <= 15000;
-		fun good_map(map : Map) : bool = forall wp in map, good_coordinate(wp);
-		fun good_pattern(pattern : FlightPattern) : bool = (pattern = enum(FlightPattern, ZigZag)) or (pattern = enum(FlightPattern, StraightLine)) or (pattern = enum(FlightPattern, Perimeter));
-		fun good_command(cmd : Command.Impl) : bool = good_map(cmd.Map) and good_pattern(cmd.Pattern);
-		fun good_mission(mission : Mission) : bool = forall wp in mission, good_coordinate(wp);
-		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
-	**};
 
 	process RadioDriver_Attestation_seL4
 		features
 			Alert: in event port;
-			RecvData: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			SendData: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			MissionCommand: out event data port RF_Msg.Impl;
 			AttestationRequest: in event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
 			AttestationResponse: out event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
@@ -381,9 +357,9 @@ public
 			c1: port AttestationRequest -> RadioDriver_Attestation.AttestationRequest;
 			c2: port RadioDriver_Attestation.AttestationResponse -> AttestationResponse;
 			c3: port Alert -> RadioDriver_Attestation.Alert;
-			c4: port RecvData -> RadioDriver_Attestation.RecvData;
-			c5: port RadioDriver_Attestation.SendData -> SendData;
-			c6: port RadioDriver_Attestation.MissionCommand -> MissionCommand;
+			c4: port RadioDriver_Attestation.MissionCommand -> MissionCommand;
+		properties
+			CASE_Scheduling::Domain => 3;
 		annex agree {**
 			lift contract;
 		**};
@@ -401,6 +377,8 @@ public
 		connections
 			c1: port FlightPlanner.FlightPlan -> FlightPlan;
 			c2: port MissionCommand -> FlightPlanner.MissionCommand;
+		properties
+			CASE_Scheduling::Domain => 11;
 		annex agree {**
 			lift contract;
 		**};
@@ -422,6 +400,8 @@ public
 			c2: port Status -> WaypointManager.Status;
 			c3: port WaypointManager.MissionWindow -> MissionWindow;
 			c4: port FlightPlan -> WaypointManager.FlightPlan;
+		properties
+			CASE_Scheduling::Domain => 7;
 		annex agree {**
 			lift contract;
 		**};
@@ -431,8 +411,6 @@ public
 		features
 			Status: out event data port Coordinate.Impl;
 			MissionWindow: in event data port MissionWindow;
-			RecvData: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-			SendData: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
 	end UARTDriver_seL4;
 
 	process implementation UARTDriver_seL4.Impl
@@ -440,9 +418,9 @@ public
 			UARTDriver: thread UARTDriver.Impl;
 		connections
 			c1: port UARTDriver.Status -> Status;
-			c2: port RecvData -> UARTDriver.RecvData;
-			c3: port MissionWindow -> UARTDriver.MissionWindow;
-			c4: port UARTDriver.SendData -> SendData;
+			c2: port MissionWindow -> UARTDriver.MissionWindow;
+		properties
+			CASE_Scheduling::Domain => 4;
 		annex agree {**
 			lift contract;
 		**};
@@ -458,6 +436,8 @@ public
 			FlyZoneDatabase: thread FlyZoneDatabase.Impl;
 		connections
 			c1: port FlyZoneDatabase.FlyZones -> FlyZones;
+		properties
+			CASE_Scheduling::Domain => 2;
 	end FlyZoneDatabase_seL4.Impl;
 
 	process CASE_Filter_seL4
@@ -475,6 +455,8 @@ public
 		connections
 			c1: port Input -> CASE_Filter.Input;
 			c2: port CASE_Filter.Output -> Output;
+		properties
+			CASE_Scheduling::Domain => 6;
 		annex agree {**
 			lift contract;
 		**};
@@ -497,6 +479,7 @@ public
 			c2: port CASE_AttestationManager.TrustedIds -> TrustedIds;
 			c3: port AttestationResponse -> CASE_AttestationManager.AttestationResponse;
 		properties
+			CASE_Scheduling::Domain => 8;
 			CASE_Properties::Cache_Timeout => 5 min;
 			CASE_Properties::Cache_Size => 4;
 	end CASE_AttestationManager_seL4.Impl;
@@ -517,6 +500,8 @@ public
 			c1: port CASE_AttestationGate.MissionCommand_out -> MissionCommand_out;
 			c2: port MissionCommand_in -> CASE_AttestationGate.MissionCommand_in;
 			c3: port TrustedIds -> CASE_AttestationGate.TrustedIds;
+		properties
+			CASE_Scheduling::Domain => 5;
 	end CASE_AttestationGate_seL4.Impl;
 
 	process ResponseMonitor_seL4
@@ -536,6 +521,8 @@ public
 			c1: port MissionCommand -> ResponseMonitor.MissionCommand;
 			c2: port FlightPlan -> ResponseMonitor.FlightPlan;
 			c3: port ResponseMonitor.Alert -> Alert;
+		properties
+			CASE_Scheduling::Domain => 10;
 		annex agree {**
 			lift contract;
 		**};
@@ -560,20 +547,14 @@ public
 			c2: port GeofenceMonitor.Alert -> Alert;
 			c3: port FlyZones -> GeofenceMonitor.FlyZones;
 			c4: port GeofenceMonitor.FlightPlan_Out -> FlightPlan_Out;
+		properties
+			CASE_Scheduling::Domain => 9;
 		annex agree {**
 			lift contract;
 		**};
 	end GeofenceMonitor_seL4.Impl;
 
 	system SW_seL4
-		features
-			RadioRecv: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			RadioSend: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			UartRecv: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-			UartSend: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-		annex agree {**
-			guarantee Req001_SW_seL4 "The Mission Computer shall output a valid mission window to the Flight Controller" : UartSend.crc;
-		**};
 	end SW_seL4;
 
 	system implementation SW_seL4.Impl
@@ -589,24 +570,36 @@ public
 			ResponseMonitor: process ResponseMonitor_seL4.Impl;
 			FlightPlanner: process FlightPlanner_seL4.Impl;
 		connections
-			c1: port RadioRecv -> Radio.RecvData;
-			c2: port Radio.SendData -> RadioSend;
-			c3: port AttestationGate.MissionCommand_out -> Filter.Input;
-			c4: port GeofenceMonitor.FlightPlan_Out -> WaypointManager.FlightPlan;
-			c5: port WaypointManager.MissionWindow -> UART.MissionWindow;
-			c6: port UART.Status -> WaypointManager.Status;
-			c7: port UART.SendData -> UartSend;
-			c8: port UartRecv -> UART.RecvData;
-			c9: port Filter.Output -> FlightPlanner.MissionCommand;
-			c10: port FlightPlanner.FlightPlan -> ResponseMonitor.FlightPlan;
-			c11: port AttestationGate.MissionCommand_out -> ResponseMonitor.MissionCommand;
-			c12: port ResponseMonitor.Alert -> Radio.Alert;
-			c13: port FlightPlanner.FlightPlan -> GeofenceMonitor.FlightPlan_In;
-			c14: port FlyZones.FlyZones -> GeofenceMonitor.FlyZones;
-			c15: port GeofenceMonitor.Alert -> WaypointManager.ReturnHome;
-			c16: port Radio.MissionCommand -> AttestationGate.MissionCommand_In;
-			c17: port AttestationManager.AttestationRequest -> Radio.AttestationRequest;
-			c18: port Radio.AttestationResponse -> AttestationManager.AttestationResponse;
-			c19: port AttestationManager.TrustedIds -> AttestationGate.TrustedIds;
+			c1: port AttestationGate.MissionCommand_out -> Filter.Input;
+			c2: port GeofenceMonitor.FlightPlan_Out -> WaypointManager.FlightPlan;
+			c3: port WaypointManager.MissionWindow -> UART.MissionWindow;
+			c4: port UART.Status -> WaypointManager.Status;
+			c5: port Filter.Output -> FlightPlanner.MissionCommand;
+			c6: port FlightPlanner.FlightPlan -> ResponseMonitor.FlightPlan;
+			c7: port AttestationGate.MissionCommand_out -> ResponseMonitor.MissionCommand;
+			c8: port ResponseMonitor.Alert -> Radio.Alert;
+			c9: port FlightPlanner.FlightPlan -> GeofenceMonitor.FlightPlan_In;
+			c10: port FlyZones.FlyZones -> GeofenceMonitor.FlyZones;
+			c11: port GeofenceMonitor.Alert -> WaypointManager.ReturnHome;
+			c12: port Radio.MissionCommand -> AttestationGate.MissionCommand_In;
+			c13: port AttestationManager.AttestationRequest -> Radio.AttestationRequest;
+			c14: port Radio.AttestationResponse -> AttestationManager.AttestationResponse;
+			c15: port AttestationManager.TrustedIds -> AttestationGate.TrustedIds;
 	end SW_seL4.Impl;
+
+	annex agree {**
+		-- ID of this UAV
+		const CASE_UAV_ID : int = 42;
+		fun VALID_MESSAGE(msg : RF_Msg.Impl) : bool = (msg.header.src > 0 and msg.header.dst = CASE_UAV_ID and msg.header.HMAC);
+		fun TRUSTED_MESSAGE(msg : RF_Msg.Impl) : bool = msg.header.trusted;
+		fun WELL_FORMED_MESSAGE(msg : RF_Msg.Impl) : bool = good_command(msg.payload);
+		-- These functions check the well-formedness of message structures
+		fun good_coordinate(coord : Coordinate.Impl) : bool = coord.Latitude >= -90 and coord.Latitude <= 90 and coord.Longitude >= -180 and coord.Longitude <= 180 and coord.Altitude >= 0 and coord.Altitude <= 15000;
+		fun good_map(map : Map) : bool = forall wp in map, good_coordinate(wp);
+		fun good_pattern(pattern : FlightPattern) : bool = (pattern = enum(FlightPattern, ZigZag)) or (pattern = enum(FlightPattern, StraightLine)) or (pattern = enum(FlightPattern, Perimeter));
+		fun good_command(cmd : Command.Impl) : bool = good_map(cmd.Map) and good_pattern(cmd.Pattern);
+		fun good_mission(mission : Mission) : bool = forall wp in mission, good_coordinate(wp);
+		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
+	**};
+	
 end SW;

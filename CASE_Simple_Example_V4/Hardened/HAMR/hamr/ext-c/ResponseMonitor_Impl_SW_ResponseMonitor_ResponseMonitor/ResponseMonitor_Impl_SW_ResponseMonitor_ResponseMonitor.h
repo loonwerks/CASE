@@ -1,0 +1,18 @@
+#ifndef RESPONSEMONITOR_IMPL_SW_RESPONSEMONITOR_RESPONSEMONITOR_H
+#define RESPONSEMONITOR_IMPL_SW_RESPONSEMONITOR_RESPONSEMONITOR_H
+
+#include <all.h>
+
+Unit HAMR_SW_ResponseMonitor_Impl_SW_ResponseMonitor_ResponseMonitor_initialise_(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_ResponseMonitor_Impl_SW_ResponseMonitor_ResponseMonitor_finalise_(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_ResponseMonitor_Impl_SW_ResponseMonitor_ResponseMonitor_handle_FlightPlan_(
+  STACK_FRAME
+  HAMR_SW_Mission value);
+
+Unit HAMR_SW_ResponseMonitor_Impl_SW_ResponseMonitor_ResponseMonitor_handle_MissionCommand_(
+  STACK_FRAME
+  HAMR_SW_RF_Msg_Impl value);
+
+#endif

@@ -1,0 +1,11 @@
+base.package.name=
+bit.width=64
+c.src.directory=
+camkes.aux.src.dir=
+camkes.output.directory=/home/vagrant/git/CASE/CASE_Simple_Example_V4/Hardened/HAMR
+eclipse.preferences.version=1
+exclude.slang.impl=true
+max.sequence.size=16
+max.string.size=256
+platform=seL4
+slang.output.directory=/home/vagrant/git/CASE/CASE_Simple_Example_V4/Hardened/HAMR

@@ -1,0 +1,14 @@
+#ifndef CASE_FILTER_IMPL_SW_FILTER_CASE_FILTER_ADAPTER_H
+#define CASE_FILTER_IMPL_SW_FILTER_CASE_FILTER_ADAPTER_H
+
+#include <all.h>
+
+Unit HAMR_SW_CASE_Filter_Impl_SW_Filter_CASE_Filter_adapter_initialiseArchitecture(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_CASE_Filter_Impl_SW_Filter_CASE_Filter_adapter_initialiseEntryPoint(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_CASE_Filter_Impl_SW_Filter_CASE_Filter_adapter_computeEntryPoint(STACK_FRAME_ONLY);
+
+art_Bridge_EntryPoints HAMR_SW_CASE_Filter_Impl_SW_Filter_CASE_Filter_adapter_entryPoints(STACK_FRAME_ONLY);
+
+#endif

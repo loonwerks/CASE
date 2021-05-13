@@ -1,0 +1,25 @@
+#include <FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter.h>
+
+Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_initialiseArchitecture(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter.c", "", "HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_initialiseArchitecture", 0);
+
+  HAMR_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_FlightPlanner_initialiseArchitecture(SF_LAST);
+}
+
+Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_initialiseEntryPoint(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter.c", "", "HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_initialiseEntryPoint", 0);
+
+  HAMR_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_FlightPlanner_initialiseEntryPoint(SF_LAST);
+}
+
+Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_computeEntryPoint(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter.c", "", "HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_computeEntryPoint", 0);
+
+  HAMR_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_FlightPlanner_computeEntryPoint(SF_LAST);
+}
+
+art_Bridge_EntryPoints HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_entryPoints(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter.c", "", "HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_entryPoints", 0);
+
+  return HAMR_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_FlightPlanner_entryPoints(SF_LAST);
+}

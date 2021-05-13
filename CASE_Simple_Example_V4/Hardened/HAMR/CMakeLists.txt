@@ -1,0 +1,102 @@
+# This file will be regenerated, do not edit
+
+cmake_minimum_required(VERSION 3.8.2)
+
+project (MissionComputer_Impl_Instance C)
+
+add_definitions(-DCAMKES)
+
+include(${CMAKE_CURRENT_LIST_DIR}/CMake_TranspilerOptions.cmake)
+
+if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "(C|c?)lang")
+  add_compile_options("$<$<CONFIG:Release>:-Oz>")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  add_compile_options(-fstack-usage)
+  add_compile_options("$<$<CONFIG:Release>:-Os>")
+endif()
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/FlyZoneDatabase_Impl_SW_FlyZones_FlyZoneDatabase)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/UARTDriver_Impl_SW_UART_UARTDriver)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/CASE_AttestationGate_Impl_SW_AttestationGate_CASE_AttestationGate)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/CASE_Filter_Impl_SW_Filter_CASE_Filter)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/WaypointManager_Impl_SW_WaypointManager_WaypointManager)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/CASE_AttestationManager_Impl_SW_AttestationManager_CASE_AttestationManager)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/ResponseMonitor_Impl_SW_ResponseMonitor_ResponseMonitor)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/SlangTypeLibrary)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/types)
+
+DeclareCAmkESComponent(FlyZoneDatabase_Impl_SW_FlyZones_FlyZoneDatabase
+  SOURCES components/FlyZoneDatabase_Impl_SW_FlyZones_FlyZoneDatabase/src/sb_FlyZoneDatabase_Impl.c types/src/sp_union_art_DataContent.c
+  INCLUDES components/FlyZoneDatabase_Impl_SW_FlyZones_FlyZoneDatabase/includes/ types/includes types/includes
+  LIBS FlyZoneDatabase_Impl_SW_FlyZones_FlyZoneDatabase
+)
+
+DeclareCAmkESComponent(RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation
+  SOURCES components/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation/src/sb_RadioDriver_Attestation_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation/includes/ types/includes
+  LIBS RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation
+)
+
+DeclareCAmkESComponent(UARTDriver_Impl_SW_UART_UARTDriver
+  SOURCES components/UARTDriver_Impl_SW_UART_UARTDriver/src/sb_UARTDriver_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/UARTDriver_Impl_SW_UART_UARTDriver/includes/ types/includes
+  LIBS UARTDriver_Impl_SW_UART_UARTDriver
+)
+
+DeclareCAmkESComponent(CASE_AttestationGate_Impl_SW_AttestationGate_CASE_AttestationGate
+  SOURCES components/CASE_AttestationGate_Impl_SW_AttestationGate_CASE_AttestationGate/src/sb_CASE_AttestationGate_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/CASE_AttestationGate_Impl_SW_AttestationGate_CASE_AttestationGate/includes/ types/includes
+  LIBS CASE_AttestationGate_Impl_SW_AttestationGate_CASE_AttestationGate
+)
+
+DeclareCAmkESComponent(CASE_Filter_Impl_SW_Filter_CASE_Filter
+  SOURCES components/CASE_Filter_Impl_SW_Filter_CASE_Filter/src/sb_CASE_Filter_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/CASE_Filter_Impl_SW_Filter_CASE_Filter/includes/ types/includes
+  LIBS CASE_Filter_Impl_SW_Filter_CASE_Filter
+)
+
+DeclareCAmkESComponent(WaypointManager_Impl_SW_WaypointManager_WaypointManager
+  SOURCES components/WaypointManager_Impl_SW_WaypointManager_WaypointManager/src/sb_WaypointManager_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/WaypointManager_Impl_SW_WaypointManager_WaypointManager/includes/ types/includes
+  LIBS WaypointManager_Impl_SW_WaypointManager_WaypointManager
+)
+
+DeclareCAmkESComponent(CASE_AttestationManager_Impl_SW_AttestationManager_CASE_AttestationManager
+  SOURCES components/CASE_AttestationManager_Impl_SW_AttestationManager_CASE_AttestationManager/src/sb_CASE_AttestationManager_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/CASE_AttestationManager_Impl_SW_AttestationManager_CASE_AttestationManager/includes/ types/includes
+  LIBS CASE_AttestationManager_Impl_SW_AttestationManager_CASE_AttestationManager
+)
+
+DeclareCAmkESComponent(GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor
+  SOURCES components/GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor/src/sb_GeofenceMonitor_Impl.c types/src/sp_union_art_DataContent.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor/includes/ types/includes types/includes
+  LIBS GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor
+)
+
+DeclareCAmkESComponent(ResponseMonitor_Impl_SW_ResponseMonitor_ResponseMonitor
+  SOURCES components/ResponseMonitor_Impl_SW_ResponseMonitor_ResponseMonitor/src/sb_ResponseMonitor_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/ResponseMonitor_Impl_SW_ResponseMonitor_ResponseMonitor/includes/ types/includes
+  LIBS ResponseMonitor_Impl_SW_ResponseMonitor_ResponseMonitor
+)
+
+DeclareCAmkESComponent(FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner
+  SOURCES components/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/src/sb_FlightPlanner_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/includes/ types/includes
+  LIBS FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner
+)
+
+DeclareCAmkESRootserver(MissionComputer_Impl_Instance.camkes)

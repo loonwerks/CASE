@@ -4,7 +4,6 @@ public
 	with Data_Model;
 	with Base_Types;
 	with CASE_Properties;
-	with CASE_Model_Transformations;
 
 	data Coordinate
 	end Coordinate;
@@ -12,9 +11,9 @@ public
 	data implementation Coordinate.Impl
 		-- This is the structure to hold the lat/long/alt values of a coordinate
 		subcomponents
-			Latitude: data Base_Types::Integer;
-			Longitude: data Base_Types::Integer;
-			Altitude: data Base_Types::Integer;
+			Latitude: data Base_Types::Integer_32;
+			Longitude: data Base_Types::Integer_32;
+			Altitude: data Base_Types::Integer_32;
 	end Coordinate.Impl;
 
 	data Map
@@ -113,9 +112,7 @@ public
 	thread RadioDriver
 		-- The RadioDriver is the software that enables other SW components to communicate to other systems over RF
 		features
-			RecvData: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			Alert: in event port;
-			SendData: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			MissionCommand: out event data port RF_Msg.Impl;
 		properties
 			CASE_Properties::Comm_Driver => true;
@@ -125,6 +122,8 @@ public
 	end RadioDriver;
 
 	thread implementation RadioDriver.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
 	end RadioDriver.Impl;
 
 	thread FlightPlanner
@@ -141,6 +140,8 @@ public
 	end FlightPlanner;
 
 	thread implementation FlightPlanner.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
 	end FlightPlanner.Impl;
 
 	thread FlyZoneDatabase
@@ -152,6 +153,8 @@ public
 	end FlyZoneDatabase;
 
 	thread implementation FlyZoneDatabase.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
 	end FlyZoneDatabase.Impl;
 
 	thread WaypointManager
@@ -170,6 +173,8 @@ public
 	end WaypointManager;
 
 	thread implementation WaypointManager.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
 	end WaypointManager.Impl;
 
 
@@ -178,27 +183,17 @@ public
 		features
 			Status: out event data port Coordinate.Impl;
 			MissionWindow: in event data port MissionWindow;
-			RecvData: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-			SendData: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
 		annex agree {**
 			assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(MissionWindow);
-			guarantee Req002_UARTDriver "A CRC shall be appended to the message to determine message correctness" : SendData.crc;
 		**};
 	end UARTDriver;
 
 	thread implementation UARTDriver.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
 	end UARTDriver.Impl;
 
 	process SW
-		-- The Mission Computer Software process runs all threads
-		features
-			RadioRecv: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			RadioSend: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			UartRecv: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-			UartSend: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
-		annex agree {**
-			guarantee Req001_SW "The Mission Computer shall output a valid mission window to the Flight Controller" : UartSend.crc;
-		**};
 	end SW;
 
 	process implementation SW.Impl
@@ -209,14 +204,10 @@ public
 			UART: thread UARTDriver.Impl;
 			FlyZones: thread FlyZoneDatabase.Impl;
 		connections
-			c1: port RadioRecv -> Radio.RecvData;
-			c2: port Radio.SendData -> RadioSend;
-			c3: port Radio.MissionCommand -> FlightPlanner.MissionCommand;
-			c4: port FlightPlanner.FlightPlan -> WaypointManager.FlightPlan;
-			c5: port WaypointManager.MissionWindow -> UART.MissionWindow;
-			c6: port UART.status -> WaypointManager.Status;
-			c7: port UART.SendData -> UartSend;
-			c8: port UartRecv -> UART.RecvData;
+			c1: port Radio.MissionCommand -> FlightPlanner.MissionCommand;
+			c2: port FlightPlanner.FlightPlan -> WaypointManager.FlightPlan;
+			c3: port WaypointManager.MissionWindow -> UART.MissionWindow;
+			c4: port UART.status -> WaypointManager.Status;
 	end SW.Impl;
 
 	annex agree {**

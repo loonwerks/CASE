@@ -86,18 +86,14 @@ public
 			bac5: bus access Radio_HW.RFA <-> RFA;
 			bac6: bus access UART_HW.UARTA <-> UARTA;
 			c1: port RadioRecv -> Radio_HW.RecvIn;
-			c2: port Radio_HW.RecvOut -> SW.RadioRecv;
-			c3: port SW.RadioSend -> Radio_HW.SendIn;
-			c4: port Radio_HW.SendOut -> RadioSend;
-			c5: port UartRecv -> UART_HW.RecvIn;
-			c6: port UART_HW.RecvOut -> SW.UartRecv;
-			c7: port SW.UartSend -> UART_HW.SendIn;
-			c8: port UART_HW.SendOut -> UartSend;
+			c2: port Radio_HW.SendOut -> RadioSend;
+			c3: port UartRecv -> UART_HW.RecvIn;
+			c4: port UART_HW.SendOut -> UartSend;
 		properties
 			Actual_Processor_Binding => (reference (Proc_HW)) applies to SW;
 			Actual_Memory_Binding => (reference (Mem_HW)) applies to SW;
-			Actual_Connection_Binding => (reference (Bus_HW)) applies to c2, c3, c6, c7;
 		annex resolute {**
+			check HAMR_Guidelines
 			prove Req_Attestation(this.SW.Radio)
 			prove Req_WellFormed_MissionCommand(this.SW.FlightPlanner, "Req_Wellformed_MissionCommand")
 			prove Req_FlightPlanner_Response(this.SW.FlightPlanner)

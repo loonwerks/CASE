@@ -1,0 +1,20 @@
+#ifndef WAYPOINTMANAGER_IMPL_SW_WAYPOINTMANAGER_WAYPOINTMANAGER_H
+#define WAYPOINTMANAGER_IMPL_SW_WAYPOINTMANAGER_WAYPOINTMANAGER_H
+
+#include <all.h>
+
+Unit HAMR_SW_WaypointManager_Impl_SW_WaypointManager_WaypointManager_initialise_(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_WaypointManager_Impl_SW_WaypointManager_WaypointManager_finalise_(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_WaypointManager_Impl_SW_WaypointManager_WaypointManager_handle_FlightPlan_(
+  STACK_FRAME
+  HAMR_SW_Mission value);
+
+Unit HAMR_SW_WaypointManager_Impl_SW_WaypointManager_WaypointManager_handle_Status_(
+  STACK_FRAME
+  HAMR_SW_Coordinate_Impl value);
+
+Unit HAMR_SW_WaypointManager_Impl_SW_WaypointManager_WaypointManager_handle_ReturnHome_(STACK_FRAME_ONLY);
+
+#endif
