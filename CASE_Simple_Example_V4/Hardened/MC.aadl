@@ -1,10 +1,9 @@
 package MC
 public
 	with SW;
-
 	with UAS_Buses;
-
 	with CASE_Model_Transformations;
+	with CASE_Properties;
 
 	-- The radio communication hardware
 	device Radio
@@ -20,7 +19,7 @@ public
 	device implementation Radio.Impl
 	end Radio.Impl;
 
-		-- The serial communication hardware
+	-- The serial communication hardware
 	device UART
 		features
 			MCA: requires bus access MC_Bus.Impl;
@@ -34,7 +33,7 @@ public
 	device implementation UART.Impl
 	end UART.Impl;
 
-		-- The Mission Computer processor
+	-- The Mission Computer processor
 	processor MC_Proc
 		features
 			MCA: requires bus access MC_Bus.Impl;
@@ -43,7 +42,7 @@ public
 	processor implementation MC_Proc.Impl
 	end MC_Proc.Impl;
 
-		-- The Mission Computer RAM
+	-- The Mission Computer RAM
 	memory MC_Mem
 		features
 			MCA: requires bus access MC_Bus.Impl;
@@ -52,14 +51,24 @@ public
 	memory implementation MC_Mem.Impl
 	end MC_Mem.Impl;
 
-		-- The Mission Computer on-board bus
+	-- The Mission Computer on-board bus
 	bus MC_Bus
 	end MC_Bus;
 
 	bus implementation MC_Bus.Impl
 	end MC_Bus.Impl;
 
-		-- The MissionComputer onboard the UAV
+	virtual processor CASE_VirtualMachine
+		properties
+			CASE_Properties::Isolating => 100;
+	end CASE_VirtualMachine;
+
+	virtual processor implementation CASE_VirtualMachine.Impl
+		properties
+			CASE_Properties::OS => Linux;
+	end CASE_VirtualMachine.Impl;
+
+	-- The MissionComputer onboard the UAV
 	system MissionComputer
 		features
 			RadioRecv: in event data port;
@@ -77,14 +86,9 @@ public
 			Proc_HW: processor MC_Proc.Impl;
 			Mem_HW: memory MC_Mem.Impl;
 			Bus_HW: bus MC_Bus.Impl;
-			SW: process SW::SW.Impl;
+			SW: system SW::SW_seL4.Impl;
+			VirtualMachine: virtual processor CASE_VirtualMachine.Impl;
 		connections
-			bac1: bus access Radio_HW.MCA <-> Bus_HW;
-			bac2: bus access UART_HW.MCA <-> Bus_HW;
-			bac3: bus access Proc_HW.MCA <-> Bus_HW;
-			bac4: bus access Mem_HW.MCA <-> Bus_HW;
-			bac5: bus access Radio_HW.RFA <-> RFA;
-			bac6: bus access UART_HW.UARTA <-> UARTA;
 			c1: port RadioRecv -> Radio_HW.RecvIn;
 			c2: port Radio_HW.RecvOut -> SW.RadioRecv;
 			c3: port SW.RadioSend -> Radio_HW.SendIn;
@@ -93,16 +97,25 @@ public
 			c6: port UART_HW.RecvOut -> SW.UartRecv;
 			c7: port SW.UartSend -> UART_HW.SendIn;
 			c8: port UART_HW.SendOut -> UartSend;
+			bac1: bus access Radio_HW.MCA <-> Bus_HW;
+			bac2: bus access UART_HW.MCA <-> Bus_HW;
+			bac3: bus access Proc_HW.MCA <-> Bus_HW;
+			bac4: bus access Mem_HW.MCA <-> Bus_HW;
+			bac5: bus access Radio_HW.RFA <-> RFA;
+			bac6: bus access UART_HW.UARTA <-> UARTA;
 		properties
-			Actual_Processor_Binding => (reference (Proc_HW)) applies to SW;
+			Actual_Processor_Binding => (reference (Proc_HW)) applies to SW, VirtualMachine;
 			Actual_Memory_Binding => (reference (Mem_HW)) applies to SW;
 			Actual_Connection_Binding => (reference (Bus_HW)) applies to c2, c3, c6, c7;
+			CASE_Properties::OS => seL4 applies to Proc_HW;
+			Actual_Processor_Binding => (reference (VirtualMachine)) applies to SW.FlightPlanner;
 		annex resolute {**
-			prove Req_Attestation(this.SW.Radio)
-			prove Req_WellFormed_MissionCommand(this.SW.FlightPlanner, "Req_Wellformed_MissionCommand")
-			prove Req_FlightPlanner_Response(this.SW.FlightPlanner)
-			prove Req_FlightPlanner_Geofence(this.SW.FlightPlanner)
-			prove Req_Virtualization(this.SW.FlightPlanner)		
+			check HAMR_Guidelines
+			prove Req_WellFormed_MissionCommand(this.SW.FlightPlanner, "Req_Wellformed_MissionCommand", this.SW.Filter, this.SW.c9, SW::RF_Msg.Impl)
+			prove Req_Attestation(this.SW.Radio, this.SW.AttestationManager, this.SW.AttestationGate)
+			prove Req_FlightPlanner_Response(this.SW.FlightPlanner, this.SW.ResponseMonitor)
+			prove Req_FlightPlanner_Geofence(this.SW.FlightPlanner, this.SW.GeofenceMonitor, this.SW.WaypointManager, SW::Mission)
+			prove Req_Virtualization(this.SW.FlightPlanner, {this.SW.FlightPlanner}, this.VirtualMachine)
 		**};
 	end MissionComputer.Impl;
 
