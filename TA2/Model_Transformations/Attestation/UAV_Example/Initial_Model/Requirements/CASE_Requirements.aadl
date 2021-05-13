@@ -7,7 +7,7 @@ private
 			context Generated_On : "May 23, 1970";
 			context Req_Component : "SW::SW.Impl.FPLN";
 			context Formalized : "True";
-			agree_prop_checked(comp_context, property_id)
+			agree_property_checked(comp_context, property_id)
 		
 	**};
 end CASE_Requirements;

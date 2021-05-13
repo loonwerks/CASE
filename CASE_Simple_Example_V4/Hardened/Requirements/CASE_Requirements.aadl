@@ -10,38 +10,14 @@ private
 			context Formalized : "False";
 			undeveloped
 		
-		goal Req_WellFormed_OperatingRegion(comp_context : component, property_id : string) <=
-			** "[permit_well_formed_OR_data] FlightPlanner component shall only receive well-formed messages" **
+		goal Req_WellFormed_MissionCommand(comp_context : component, property_id : string) <=
+			** "[permit_well_formed_data] FlightPlanner component shall only receive well-formed messages" **
 			context Generated_On : "January 29, 2021";
 			context Req_Component : "MC::MissionComputer.Impl.SW.FlightPlanner";			
 			context Formalized : "True";			
-			undeveloped
-		
-		goal Req_WellFormed_LineSearchTask(comp_context : component, property_id : string) <=
-			** "[permit_well_formed_LST_data] FlightPlanner component shall only receive well-formed messages" **
-			context Generated_By : "GearCASE";
-			context Generated_On : "Jul 20, 2020";
-			context Req_Component : "MC::MissionComputer.Impl.SW.FlightPlanner";
-			context Formalized : "True";
-			undeveloped		
-		
-		goal Req_WellFormed_AutomationRequest(comp_context : component, property_id : string) <=
-			** "[permit_well_formed_AReq_data] FlightPlanner component shall only receive well-formed messages" **
-			context Generated_By : "GearCASE";
-			context Generated_On : "Jul 20, 2020";
-			context Req_Component : "MC::MissionComputer.Impl.SW.FlightPlanner";
-			context Formalized : "True";
-			undeveloped
-		
-		goal Req_WellFormed_AutomationResponse(comp_context : component, property_id : string) <=
-			** "[permit_well_formed_AResp_data] UxAS component shall only receive well-formed messages" **
-			context Generated_By : "GearCASE";
-			context Generated_On : "Jul 20, 2020";
-			context Req_Component : "MC::MissionComputer.Impl.SW.WaypointManager";
-			context Formalized : "True";
-			undeveloped
+			agree_property_checked(comp_context, property_id)
 					
-		goal Req_UxAS_Response(comp_context : component) <=
+		goal Req_FlightPlanner_Response(comp_context : component) <=
 			** "[monitor_response] Uncontrolled FlightPlanner component shall be monitored for crashes" **
 			context Generated_By : "GearCASE";
 			context Generated_On : "Jul 20, 2020";
@@ -49,7 +25,7 @@ private
 			context Formalized : "False";
 			undeveloped
 		
-		goal Req_UxAS_Geofence(comp_context : component) <=
+		goal Req_FlightPlanner_Geofence(comp_context : component) <=
 			** "[monitor_correctness] Uncontrolled FlightPlanner component shall be monitored for output correctness" **
 			context Generated_By : "GearCASE";
 			context Generated_On : "Jul 20, 2020";

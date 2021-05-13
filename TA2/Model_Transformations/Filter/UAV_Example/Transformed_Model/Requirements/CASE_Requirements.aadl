@@ -7,7 +7,7 @@ private
 			context Generated_On : "May 23, 2020";
 			context Req_Component : "SW::SW.Impl.FPLN";
 			context Formalized : "True";
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
+			agree_property_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 		
 		goal Req_FP_WellFormedPattern(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
 			** "[well_formed_pattern] The FlightPlanner shall only accept well-formed flight patterns from the GroundStation" **
@@ -15,7 +15,7 @@ private
 			context Generated_On : "May 23, 2020";
 			context Req_Component : "SW::SW.Impl.FPLN";
 			context Formalized : "True";
-			agree_prop_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
+			agree_property_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 		
 	**};
 end CASE_Requirements;

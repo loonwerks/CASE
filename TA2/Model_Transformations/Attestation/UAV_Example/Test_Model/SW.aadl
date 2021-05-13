@@ -25,7 +25,7 @@ public
 
 	thread implementation CASE_AttestationManager.Impl
 		properties
-			CASE_Properties::Component_Impl => "CakeML";
+			CASE_Properties::Component_Language => CakeML;
 			CASE_Properties::Cache_Timeout => 30 min;
 			CASE_Properties::Cache_Size => 4;
 	end CASE_AttestationManager.Impl;
@@ -327,7 +327,7 @@ public
 
 	thread implementation CASE_AttestationManager_Test.Impl
 		properties
-			CASE_Properties::Component_Impl => "CakeML";
+			CASE_Properties::Component_Language => CakeML;
 			CASE_Properties::Cache_Timeout => 30 min;
 			CASE_Properties::Cache_Size => 4;
 	end CASE_AttestationManager_Test.Impl;

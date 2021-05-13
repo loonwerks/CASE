@@ -24,7 +24,7 @@ public
 
 	thread implementation CASE_Filter.Impl
 		properties
-			CASE_Properties::Component_Impl => "CakeML";
+			CASE_Properties::Component_Language => CakeML;
 	end CASE_Filter.Impl;
 
 	data Coordinate
@@ -322,7 +322,7 @@ public
 	
 	thread implementation CASE_Filter_Test_1.Impl
 		properties
-			CASE_Properties::Component_Impl => "CakeML";
+			CASE_Properties::Component_Language => CakeML;
 	end CASE_Filter_Test_1.Impl;
 	
 	-- Filter has no COMP_TYPE property value
@@ -514,7 +514,7 @@ public
 			UART: thread UARTDriver.Impl;
 			WIFI: thread WifiDriver.Impl;
 			NFDB: thread NoFlyZoneDatabase.Impl;
-			FLT: thread CASE_Filter.Impl {CASE_Properties::Component_Impl => "c";};
+			FLT: thread CASE_Filter.Impl {CASE_Properties::Component_Language => c;};
 			-- test
 		connections
 			c1: port radio_recv -> RADIO.recv_data;

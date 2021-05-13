@@ -1,0 +1,35 @@
+package UAV
+public
+	
+	with MC;
+	with FC;
+	with UAS_Buses;
+	
+	
+	-- UAV
+	system UAV
+		features
+			RadioRecv: in event data port;
+			RadioSend: out event data port;
+			RFA: requires bus access UAS_Buses::RF_Bus.Impl;
+	end UAV;
+	
+	system implementation UAV.Impl
+		subcomponents
+			MissionComputer: system MC::MissionComputer.Impl;
+			FlightControlComputer: system FC::FlightController.Impl;
+			SerialBus: bus UAS_Buses::Serial_Bus.Impl;
+		connections
+			bac1: bus access SerialBus <-> MissionComputer.UARTA;
+			bac2: bus access SerialBus <-> FlightControlComputer.UARTA;
+			bac3: bus access RFA -> MissionComputer.RFA;
+			c1: port RadioRecv -> MissionComputer.RadioRecv;
+			c2: port MissionComputer.RadioSend -> RadioSend;
+			c3: port MissionComputer.UartSend -> FlightControlComputer.UartRecv;
+			c4: port FlightControlComputer.UartSend -> MissionComputer.UartRecv;
+		properties
+			Actual_Connection_Binding => (reference (SerialBus)) applies to c3, c4;
+			
+	end UAV.Impl;
+	
+end UAV;

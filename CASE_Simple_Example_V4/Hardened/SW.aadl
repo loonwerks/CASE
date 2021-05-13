@@ -94,7 +94,6 @@ public
 			RecvData: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			SendData: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
 			MissionCommand: out event data port RF_Msg.Impl;
-			Status: in event data port Coordinate.Impl;
 		properties
 			CASE_Properties::Comm_Driver => true;
 		annex agree {**
@@ -109,10 +108,10 @@ public
 		-- The FlightPlanner is an abstraction for UxAS.
 		-- It accepts a command message containing a map and flight pattern, and generates a mission.
 		features
-			FlightPlan: out data port Mission;
+			FlightPlan: out event data port Mission;
 			MissionCommand: in event data port RF_Msg.Impl;
-			Status: in event data port Coordinate.Impl;
 		annex agree {**
+			assume Req_Wellformed_MissionCommand "FlightPlanner component shall only receive well-formed messages" : WELL_FORMED_MESSAGE(MissionCommand);
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(MissionCommand);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(FlightPlan);
 		**};
@@ -137,7 +136,7 @@ public
 		-- Because the FlightController can only process a small number of waypoints at a time, the WaypointManager
 		-- creates these mission windows in response to the current position of the UAV, provided by the FlightController GPS.
 		features
-			FlightPlan: in data port Mission;
+			FlightPlan: in event data port Mission;
 			MissionWindow: out event data port MissionWindow;
 			Status: in event data port Coordinate.Impl;
 		annex agree {**
@@ -192,10 +191,8 @@ public
 			c4: port FlightPlanner.FlightPlan -> WaypointManager.FlightPlan;
 			c5: port WaypointManager.MissionWindow -> UART.MissionWindow;
 			c6: port UART.status -> WaypointManager.Status;
-			c7: port UART.status -> FlightPlanner.Status;
-			c8: port UART.status -> RADIO.status;
-			c9: port UART.SendData -> UartSend;
-			c10: port UartRecv -> UART.RecvData;
+			c7: port UART.SendData -> UartSend;
+			c8: port UartRecv -> UART.RecvData;
 
 	end SW.Impl;
 

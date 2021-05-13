@@ -10,13 +10,13 @@ public
 
 	system implementation UAS.Impl
 		subcomponents
-			GND: system GS::GroundStation.Impl;
+			GroundStation: system GS::GroundStation.Impl;
 			UAV: system UAV::UAV.Impl;
 			RFA: bus UAS_Buses::RF_Bus.Impl;
 		connections
-			c1: port GND.radio_send -> UAV.radio_recv;
-			c2: port UAV.radio_send -> GND.radio_recv;
-			bac1: bus access RFA <-> GND.RFA;
+			c1: port GroundStation.RadioSend -> UAV.RadioRecv;
+			c2: port UAV.RadioSend -> GroundStation.RadioRecv;
+			bac1: bus access RFA <-> GroundStation.RFA;
 			bac2: bus access RFA <-> UAV.RFA;
 		properties
 			Actual_Connection_Binding => (reference (RFA)) applies to c1, c2;

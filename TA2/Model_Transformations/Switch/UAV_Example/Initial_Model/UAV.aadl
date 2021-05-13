@@ -3,9 +3,7 @@ public
 	
 	with MC;
 	with FC;
-	with UAS_Buses;
-	with CASE_Properties;
-	
+	with UAS_Buses;	
 	
 	-- UAV on-board camera
 	device Camera
@@ -25,8 +23,6 @@ public
 			radio_recv: in event data port;
 			radio_send: out event data port;
 			RFA: requires bus access UAS_Buses::RF_Bus.Impl;
-		properties
-			CASE_Properties::BOUNDARY => (PHYSICAL);
 	end UAV;
 	
 	system implementation UAV.Impl

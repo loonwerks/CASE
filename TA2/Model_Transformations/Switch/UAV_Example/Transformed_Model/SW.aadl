@@ -1,11 +1,8 @@
 package SW
 public
 	with Data_Model;
-
 	with Base_Types;
-
 	with CASE_Properties;
-
 	with CASE_Model_Transformations;
 
 	thread CASE_Monitor
@@ -14,7 +11,7 @@ public
 			expected: in event data port RF_Msg.Impl;
 			alert: out event data port;
 		properties
-			CASE_Properties::Component_Type => MONITOR;
+			CASE_Properties::Monitoring => 100;
 		annex agree {**
 			property monitor_policy = event(observed) => event(expected);
 			guarantee Req001_Monitor "The monitor shall only output an alert when the monitor policy is true" : event(observed) and if monitor_policy then event(alert) else not event(alert);
@@ -32,7 +29,7 @@ public
 			expected: in data port MapArray;
 			alert: out event data port;
 		properties
-			CASE_Properties::Component_Type => MONITOR;
+			CASE_Properties::Monitoring => 100;
 		annex agree {**
 			property monitor_policy = WAYPOINTS_IN_KEEPIN_ZONE(observed, expected);
 			fun WAYPOINTS_IN_KEEPIN_ZONE(o : Mission, e : MapArray) : bool = true;	-- some actual function needs to go here
@@ -48,7 +45,7 @@ public
 			filter_in: in data port Mission;
 			filter_out: out data port Mission;
 		properties
-			CASE_Properties::Component_Type => FILTER;
+			CASE_Properties::Filtering => 100;
 		annex agree {**
 			guarantee Req002_FlightPlanner_Filter "The Flight Planner shall generate a valid mission" : good_mission(filter_out);
 		**};
@@ -159,7 +156,7 @@ public
 			mission_command: out event data port RF_Msg.Impl;
 			status: in event data port Coordinate.Impl;
 		properties
-			CASE_Properties::Component_Type => COMM_DRIVER;
+			CASE_Properties::Comm_Driver => true;
 		annex agree {**
 			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(mission_command);
 		**};
@@ -178,8 +175,6 @@ public
 			recv_map: in event data port RF_Msg.Impl;
 			request_nofly_zones: out event data port Map;
 			nofly_zones: in event data port MapArray;
-		properties
-			CASE_Properties::BOUNDARY => (UNCONTROLLED);
 		annex agree {**
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(recv_map);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(flight_plan);

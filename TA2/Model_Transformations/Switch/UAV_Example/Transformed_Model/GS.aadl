@@ -3,7 +3,6 @@ package GS
 public
 	
 	with UAS_Buses;
-	with CASE_Properties;
 	
 	-- Radio hardware on the Ground Station
 	device Radio
@@ -65,8 +64,6 @@ public
 			radio_recv: in event data port;
 			radio_send: out event data port;
 			RFA: requires bus access UAS_Buses::RF_Bus.Impl;
-		properties
-			CASE_Properties::BOUNDARY => (PHYSICAL);
 	end GroundStation;
 	
 	system implementation GroundStation.Impl
