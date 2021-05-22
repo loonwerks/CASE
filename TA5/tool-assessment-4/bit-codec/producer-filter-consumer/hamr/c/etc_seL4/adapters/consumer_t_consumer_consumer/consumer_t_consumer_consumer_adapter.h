@@ -1,0 +1,14 @@
+#ifndef CONSUMER_T_CONSUMER_CONSUMER_ADAPTER_H
+#define CONSUMER_T_CONSUMER_CONSUMER_ADAPTER_H
+
+#include <all.h>
+
+Unit pfc_PFC_consumer_t_consumer_consumer_adapter_initialiseArchitecture(STACK_FRAME_ONLY);
+
+Unit pfc_PFC_consumer_t_consumer_consumer_adapter_initialiseEntryPoint(STACK_FRAME_ONLY);
+
+Unit pfc_PFC_consumer_t_consumer_consumer_adapter_computeEntryPoint(STACK_FRAME_ONLY);
+
+art_Bridge_EntryPoints pfc_PFC_consumer_t_consumer_consumer_adapter_entryPoints(STACK_FRAME_ONLY);
+
+#endif

@@ -1,0 +1,93 @@
+(* This structure is populated with HAMR-generated code *)
+structure API =
+struct
+
+  val empty_byte_array = Word8Array.array 0 (Word8.fromInt 0);
+
+  fun logInfo s = (
+    #(api_logInfo) s empty_byte_array
+  );
+  
+  fun print_buffer buffer = (
+    #(raw_print_buffer) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+  )
+  
+  val data_t_max_payload = 8192 - 8;
+  val keep_in_zoneSizeBytes = 48;
+  val keep_out_zoneSizeBytes = 48;
+  val observedSizeBytes = data_t_max_payload; 
+  
+  val outputSizeBytes = data_t_max_payload;
+  
+  fun get_keep_in_zone buffer = (
+    if Word8Array.length buffer >= keep_in_zoneSizeBytes then
+      #(api_get_keep_in_zones) "" buffer
+    else 
+      logInfo (String.concat ["ERROR: get_keep_in_zone buffer too small"])
+  )
+
+  fun get_keep_out_zone buffer = (
+    if Word8Array.length buffer >= keep_out_zoneSizeBytes then
+      #(api_get_keep_out_zones) "" buffer
+    else 
+      logInfo (String.concat ["ERROR: get_keep_out_zone buffer too small"])
+  )
+
+  fun get_observed buffer = (
+    if Word8Array.length buffer >= observedSizeBytes then
+      #(api_get_observed) "" buffer
+    else
+      logInfo (String.concat ["ERROR: observed buffer too small"])
+  )
+  
+  fun send_output buffer =  (
+    if Word8Array.length buffer <= outputSizeBytes then
+      #(api_send_output) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+    else
+      logInfo (String.concat ["ERROR: output buffer too large"])
+  );
+  
+  fun send_alert () =  (
+    #(api_send_alert) "" empty_byte_array
+  );
+
+  fun toHexDigit nibble =
+    let val nibbleValue = Word8.toInt nibble
+    in case (nibbleValue) 
+    of (0) => "0"
+    | (1) => "1"
+    | (2) => "2"
+    | (3) => "3"
+    | (4) => "4"
+    | (5) => "5"
+    | (6) => "6"
+    | (7) => "7"
+    | (8) => "8"
+    | (9) => "9"
+    | (10) => "a"
+    | (11) => "b"
+    | (12) => "c"
+    | (13) => "d"
+    | (14) => "e"
+    | (15) => "f"
+    | otherwise => "xDohx"
+  end;    
+
+  fun toHex byte =
+    let val highNibble = (Word8.>> byte 4)
+        val lowNibble = (Word8.>> (Word8.<< byte 4) 4)
+    in String.concat [toHexDigit highNibble, toHexDigit lowNibble] 
+  end;
+
+ fun word8ArrayToHex bytes =
+    let val length = (Word8Array.length bytes)
+        fun get i = 
+          if i >= length then "" else
+            String.concat [toHex (Word8Array.sub bytes i), get (i + 1)]
+    in get(0)
+  end;
+
+  fun float2double float_byte_array double_byte_array =
+    #(float2double) float_byte_array double_byte_array;
+
+end;

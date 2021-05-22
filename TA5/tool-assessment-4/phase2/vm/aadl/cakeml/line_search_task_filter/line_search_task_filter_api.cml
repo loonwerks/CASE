@@ -1,0 +1,67 @@
+(* This structure is populated with HAMR-generated code *)
+structure API =
+struct
+
+  val empty_byte_array = Word8Array.array 0 (Word8.fromInt 0);
+
+  fun logInfo s = (
+    #(api_logInfo) s empty_byte_array
+  );
+
+  val filter_inSizeBytes = 8184; 
+  val filter_outSizeBytes = 8184; 
+  
+  fun get_filter_in buffer = (
+    if Word8Array.length buffer >= filter_inSizeBytes then
+      #(api_get_filter_in) "" buffer
+    else
+      logInfo (String.concat ["ERROR: filter_in buffer too small"])
+  )
+  
+  fun send_filter_out buffer =  (
+    if Word8Array.length buffer <= filter_outSizeBytes then
+      #(api_send_filter_out) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+    else
+      logInfo (String.concat ["ERROR: filter_out buffer too large"])
+  );
+
+  fun toHexDigit nibble =
+    let val nibbleValue = Word8.toInt nibble
+    in case (nibbleValue) 
+    of (0) => "0"
+    | (1) => "1"
+    | (2) => "2"
+    | (3) => "3"
+    | (4) => "4"
+    | (5) => "5"
+    | (6) => "6"
+    | (7) => "7"
+    | (8) => "8"
+    | (9) => "9"
+    | (10) => "a"
+    | (11) => "b"
+    | (12) => "c"
+    | (13) => "d"
+    | (14) => "e"
+    | (15) => "f"
+    | otherwise => "xDohx"
+  end;    
+
+  fun toHex byte =
+    let val highNibble = (Word8.>> byte 4)
+        val lowNibble = (Word8.>> (Word8.<< byte 4) 4)
+    in String.concat [toHexDigit highNibble, toHexDigit lowNibble] 
+  end;
+
+ fun word8ArrayToHex bytes =
+    let val length = (Word8Array.length bytes)
+        fun get i = 
+          if i >= length then "" else
+            String.concat [toHex (Word8Array.sub bytes i), get (i + 1)]
+    in get(0)
+  end;
+
+  fun float2double float_byte_array double_byte_array =
+    #(api_float2double) float_byte_array double_byte_array;
+
+end;

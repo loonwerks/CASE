@@ -1,0 +1,12 @@
+#ifndef CONSUMER_T_I_CONSUMER_CONSUMER_H
+#define CONSUMER_T_I_CONSUMER_CONSUMER_H
+
+#include <all.h>
+
+Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_initialise_(STACK_FRAME_ONLY);
+
+Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_finalise_(STACK_FRAME_ONLY);
+
+Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered_(STACK_FRAME_ONLY);
+
+#endif

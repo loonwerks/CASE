@@ -1,0 +1,150 @@
+package PFC
+public
+	with Base_Types, Data_Model, HAMR, PFC_Property_Set, CASE_Scheduling;
+
+	data Coordinate
+	end Coordinate;
+
+	data implementation Coordinate.Impl
+		subcomponents
+			latitude: data Base_Types::Integer_32;
+			longitude: data Base_Types::Integer_32;
+			altitude: data Base_Types::Integer_32;
+	end Coordinate.Impl;
+
+	data Mission
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Coordinate.Impl));
+			Data_Model::Dimension => (3);
+
+			HAMR::Bit_Codec_Spec => "data/Mission.sc";
+			HAMR::Bit_Codec_Max_Size => 288 Bits;
+	end Mission;
+
+	------------------------------------------------------------------------
+	system PFC_Sys
+	end PFC_Sys;
+
+	system implementation PFC_Sys.Impl
+		subcomponents
+			processor_pfc: processor PFC_Processor.impl;
+
+			producer: process producer_p.i;
+			filter: process filter_p.i;
+			consumer: process consumer_p.i;
+		connections
+			c1: port producer.to_filter -> filter.from_producer;
+			c2: port filter.to_consumer -> consumer.from_filter;
+		properties
+			HAMR::Platform => (Linux, seL4);
+
+			HAMR::Default_Bit_Width => 32;
+			HAMR::Default_Max_Sequence_Size => 1;
+			HAMR::Max_String_Size => 256;
+
+			HAMR::Bit_Codec_Raw_Connections => true;
+
+			Actual_Processor_Binding => (reference (processor_pfc)) applies to producer, filter, consumer;
+			
+		annex resolute {**
+			check CASE_Tools
+		**};			
+	end PFC_Sys.Impl;
+
+	------------------------------------------------------------------------
+	processor PFC_Processor
+	end PFC_Processor;
+
+	processor implementation PFC_Processor.impl
+		properties
+			Frame_Period => 1000ms;
+			Clock_Period => 2ms;
+			CASE_Scheduling::Max_Domain => 5;
+			CASE_Scheduling::Schedule_Source_Text => "domain_schedule.c";
+	end PFC_Processor.impl;
+
+	------------------------------------------------------------------------
+	process producer_p
+		features
+			to_filter: out event data port Mission;
+		properties
+			CASE_Scheduling::Domain => 2;
+	end producer_p;
+
+	process implementation producer_p.i
+		subcomponents
+			producer: thread producer_t;
+		connections
+			c1: port producer.to_filter -> to_filter;
+	end producer_p.i;
+
+	------------------------------------------------------------------------
+	process filter_p
+		features
+			from_producer: in event data port Mission;
+			to_consumer: out event data port Mission;
+		properties
+			CASE_Scheduling::Domain => 3;
+	end filter_p;
+
+	process implementation filter_p.i
+		subcomponents
+			filter: thread filter_t;
+		connections
+			c1: port from_producer -> filter.from_producer;
+			c2: port filter.to_consumer -> to_consumer;
+	end filter_p.i;
+
+	------------------------------------------------------------------------
+	process consumer_p
+		features
+			from_filter: in event data port Mission;
+		properties
+			CASE_Scheduling::Domain => 4;
+	end consumer_p;
+
+	process implementation consumer_p.i
+		subcomponents
+			consumer: thread consumer_t;
+		connections
+			c1: port from_filter -> consumer.from_filter;
+	end consumer_p.i;
+
+	------------------------------------------------------------------------
+	thread producer_t
+		features
+			to_filter: out event data port Mission;
+		properties
+			Thread_Properties::Dispatch_Protocol => Periodic;
+			Timing_Properties::Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+
+			Stack_Size => PFC_Property_Set::Stack_Size;
+
+	end producer_t;
+
+	thread filter_t
+		features
+			from_producer: in event data port Mission;
+			to_consumer: out event data port Mission;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+
+			Stack_Size => PFC_Property_Set::Stack_Size;
+
+	end filter_t; 
+
+	thread consumer_t
+		features
+			from_filter: in event data port Mission;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+
+			Stack_Size => PFC_Property_Set::Stack_Size;
+	end consumer_t;
+end PFC;

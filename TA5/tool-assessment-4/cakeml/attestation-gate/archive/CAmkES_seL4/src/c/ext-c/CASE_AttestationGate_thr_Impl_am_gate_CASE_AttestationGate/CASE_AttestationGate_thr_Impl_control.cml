@@ -1,0 +1,40 @@
+(* This structure is populated with HAMR-generated code *)
+structure Control =
+struct
+
+  val singleton_byte_array = Word8Array.array 1 (Word8.fromInt 0);
+  
+  fun pacer_emit() = 
+      (#(sb_pacer_notification_emit) "" singleton_byte_array;
+       Word8Array.sub singleton_byte_array 0 <> Word8.fromInt 0);
+      
+  fun pacer_wait() =
+      (#(sb_pacer_notification_wait) "" singleton_byte_array;
+       Word8Array.sub singleton_byte_array 0 <> Word8.fromInt 0);
+
+
+  val empty_byte_array = Word8Array.array 0 (Word8.fromInt 0);  
+  
+  fun receiveInput() = (#(api_receiveInput) "" empty_byte_array);
+  
+  fun sendOutput() = (#(api_sendOutput) "" empty_byte_array);
+
+  fun loop () =
+      if pacer_wait() then
+        (receiveInput();
+         Client.timeTriggered();
+         sendOutput();
+         pacer_emit();
+         loop())
+      else
+        loop();
+  
+  fun emitLoop() = 
+      (pacer_emit();
+       loop());
+      
+end;
+
+(* Startup *)
+val _ = Client.initialise();
+val _ = Control.emitLoop();

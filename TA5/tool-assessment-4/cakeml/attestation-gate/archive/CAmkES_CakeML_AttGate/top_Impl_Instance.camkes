@@ -1,0 +1,69 @@
+import <std_connector.camkes>;
+import "components/Pacer/Pacer.camkes";
+import "components/UxAS_thr_Impl/UxAS_thr_Impl.camkes";
+import "components/RadioDriver_thr_Impl/RadioDriver_thr_Impl.camkes";
+import "components/CASE_AttestationGate_thr_Impl/CASE_AttestationGate_thr_Impl.camkes";
+
+assembly {
+  composition {
+    component UxAS_thr_Impl UxAS_thread;
+    component RadioDriver_thr_Impl RadioDriver;
+    component CASE_AttestationGate_thr_Impl CASE_AttestationGate;
+    component Pacer pacer;
+
+    connection seL4SharedData conn1(from RadioDriver.sb_trusted_ids_out, to CASE_AttestationGate.sb_trusted_ids);
+    connection seL4Notification conn2(from RadioDriver.sb_automation_request_out_1_notification, to CASE_AttestationGate.sb_AutomationRequest_in_notification);
+    connection seL4SharedData conn3(from RadioDriver.sb_automation_request_out_queue_1, to CASE_AttestationGate.sb_AutomationRequest_in_queue);
+    connection seL4Notification conn4(from RadioDriver.sb_operating_region_out_1_notification, to CASE_AttestationGate.sb_OperatingRegion_in_notification);
+    connection seL4SharedData conn5(from RadioDriver.sb_operating_region_out_queue_1, to CASE_AttestationGate.sb_OperatingRegion_in_queue);
+    connection seL4Notification conn6(from RadioDriver.sb_line_search_task_out_1_notification, to CASE_AttestationGate.sb_LineSearchTask_in_notification);
+    connection seL4SharedData conn7(from RadioDriver.sb_line_search_task_out_queue_1, to CASE_AttestationGate.sb_LineSearchTask_in_queue);
+    connection seL4Notification conn8(from CASE_AttestationGate.sb_AutomationRequest_out_1_notification, to UxAS_thread.sb_AutomationRequest_notification);
+    connection seL4SharedData conn9(from CASE_AttestationGate.sb_AutomationRequest_out_queue_1, to UxAS_thread.sb_AutomationRequest_queue);
+    connection seL4Notification conn10(from CASE_AttestationGate.sb_OperatingRegion_out_1_notification, to UxAS_thread.sb_OperatingRegion_notification);
+    connection seL4SharedData conn11(from CASE_AttestationGate.sb_OperatingRegion_out_queue_1, to UxAS_thread.sb_OperatingRegion_queue);
+    connection seL4Notification conn12(from CASE_AttestationGate.sb_LineSearchTask_out_1_notification, to UxAS_thread.sb_LineSearchTask_notification);
+    connection seL4SharedData conn13(from CASE_AttestationGate.sb_LineSearchTask_out_queue_1, to UxAS_thread.sb_LineSearchTask_queue);
+    connection seL4Notification conn14(from pacer.tick, to pacer.tock);
+    connection seL4Notification conn15(from pacer.period, to UxAS_thread.sb_pacer_notification);
+    connection seL4Notification conn16(from pacer.period, to RadioDriver.sb_pacer_notification);
+    connection seL4Notification conn17(from pacer.period, to CASE_AttestationGate.sb_pacer_notification);
+  }
+
+  configuration {
+    UxAS_thread._stack_size = 16777216;
+    RadioDriver.trusted_ids_out_access = "W";
+    RadioDriver._stack_size = 16777216;
+    CASE_AttestationGate.trusted_ids_access = "R";
+    CASE_AttestationGate._stack_size = 16777216;
+    RadioDriver.sb_automation_request_out_queue_1_access = "W";
+    CASE_AttestationGate.sb_AutomationRequest_in_queue_access = "R";
+    RadioDriver.sb_operating_region_out_queue_1_access = "W";
+    CASE_AttestationGate.sb_OperatingRegion_in_queue_access = "R";
+    RadioDriver.sb_line_search_task_out_queue_1_access = "W";
+    CASE_AttestationGate.sb_LineSearchTask_in_queue_access = "R";
+    CASE_AttestationGate.sb_AutomationRequest_out_queue_1_access = "W";
+    UxAS_thread.sb_AutomationRequest_queue_access = "R";
+    CASE_AttestationGate.sb_OperatingRegion_out_queue_1_access = "W";
+    UxAS_thread.sb_OperatingRegion_queue_access = "R";
+    CASE_AttestationGate.sb_LineSearchTask_out_queue_1_access = "W";
+    UxAS_thread.sb_LineSearchTask_queue_access = "R";
+    pacer._domain = 1;
+    UxAS_thread._domain = 9;
+    RadioDriver._domain = 2;
+    CASE_AttestationGate._domain = 5;
+    conn1.size = 131072;
+    conn2.size = 131072;
+    conn3.size = 131072;
+    conn4.size = 131072;
+    conn5.size = 131072;
+    conn6.size = 131072;
+    conn7.size = 131072;
+    conn8.size = 131072;
+    conn9.size = 131072;
+    conn10.size = 131072;
+    conn11.size = 131072;
+    conn12.size = 131072;
+    conn13.size = 131072;
+  }
+}

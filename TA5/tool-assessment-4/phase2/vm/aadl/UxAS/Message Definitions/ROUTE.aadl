@@ -1,0 +1,182 @@
+----------------------------------------------------------------------------------------------------------------
+-- This package defines messages that form the interface to a route planning service. It includes geometric 
+-- constructs defining road networks to support the routing of ground vehicles.
+----------------------------------------------------------------------------------------------------------------
+package ROUTE
+public
+	with CMASI;
+	with Base_Types;
+    renames Base_Types::all;
+	with Data_Model;
+	
+	-- Start/end points and associated heading constraints for a route request
+	data RouteConstraints
+	end RouteConstraints;
+	
+	data implementation RouteConstraints.i
+	    subcomponents
+	        --ID denoting this set of route constraints
+	        RouteID: data Integer_64;
+	        --Location from which the planned route will start
+	        StartLocation: data CMASI::Location3D.i;
+	        --Heading of entity at the start of the route
+	        StartHeading: data Float_32;
+	        --If "true" the heading value in StartHeading must be used to start
+	        --the route. If not, any starting heading can be used.
+	        UseStartHeading: data Boolean;
+	        --Location to which the planned route will end
+	        EndLocation: data CMASI::Location3D.i;
+	        --Heading of entity at the end of the route
+	        EndHeading: data Float_32;
+	        --If "true" the heading value in EndHeading must be used to end the
+	        --route. If not, ant ending heading can be used.
+	        UseEndHeading: data Boolean;
+	end RouteConstraints.i;
+
+	-- Route request: macro route request for a list of available vehicles
+	data RouteConstraintsArray
+    properties
+            Data_Model::Data_Representation => Array;
+            Data_Model::Base_Type => (classifier (RouteConstraints.i));
+            Data_Model::Dimension => (1);    
+    end RouteConstraintsArray;
+    
+    data Int64Array
+        properties
+            Data_Model::Data_Representation => Array;
+            Data_Model::Base_Type => (classifier (Integer_64));
+            Data_Model::Dimension => (1);
+    end Int64Array;
+    
+	data RouteRequest		
+	end RouteRequest;
+	
+	data implementation RouteRequest.i
+    subcomponents
+        --Request ID for correlating with response
+        RequestID: data Integer_64;
+        --Associated Task ID (0 if no associated task) for this set of
+        --requests
+        AssociatedTaskID: data Integer_64;
+        --Vehicles to consider when planning. If list is empty, route planner
+        --plans for all known vehicles.
+        VehicleID: data Int64Array;
+        -- ADDED: AWF (20170808)
+        -- Number of VehicleIDs (not necessary if AGREE can get array size)                
+        NumVehicleIDs: data Integer_64; 
+        --Operating region to be considered during planning
+        OperatingRegion: data Integer_64;
+        --List of all requests for this vehicle set + operating region situation
+        RouteConstraints: data RouteConstraintsArray;       
+        --Request that planner only return costs of routes rather than
+        --complete waypoint plans
+        IsCostOnlyRequest: data Boolean;
+	end RouteRequest.i;
+
+	--Route response: list of all fulfilled route requests for a complete
+	--list of vehicles (see {@link RouteRequest})	
+	data RouteResponse		
+	end RouteResponse;
+	
+	data implementation RouteResponse.i
+	    subcomponents
+	        --Response ID matching ID from request ({@link RouteRequest})
+	        ResponseID: data Integer_64;
+	        --Corresponding route responses for all requested vehicles
+	        Routes: data RoutePlanResponse.i {Data_Model::Data_Representation => Array;};
+	end RouteResponse.i;
+
+	--Route plan request: find route from the current vehicle position to
+	--a point of interest or world location
+	data RoutePlanRequest		
+	end RoutePlanRequest;
+	
+	data implementation RoutePlanRequest.i
+	subcomponents
+			--Request ID for correlating with response
+		RequestID: data Integer_64;
+				--Associated Task ID (0 if no associated task) for this set of
+				--requests
+		AssociatedTaskID: data Integer_64;
+				--Vehicle to consider when planning
+		VehicleID: data Integer_64;
+				--Operating region to be considered during planning
+		OperatingRegion: data Integer_64;
+				--List of all requests for this vehicle + operating region situation
+				-- AWF (20170808)
+				--  The original name of "RouteRequests" was misleading as this field actually describes the
+				--  route constraints that the vehicle planners must take in account. 
+		RouteConstraints: data RouteConstraintsArray;
+				--Request that planner only return costs of routes rather than
+				--complete waypoint plans
+		IsCostOnlyRequest: data Boolean;
+	end RoutePlanRequest.i;
+	
+	--Individual route plan
+	data RoutePlan
+	end RoutePlan;
+
+	data implementation RoutePlan.i
+	    subcomponents
+	        --ID denoting this plan corresponding with requested route constraint
+	        --pair
+	        RouteID: data Integer_64;
+	        --Waypoints that connect the start location with the end location.
+	        --Empty if only costs were requested
+	        Waypoints: data CMASI::WaypointArray;
+	        --Time cost of route. If less than zero, a planning error has occurred
+	        RouteCost: data Integer_64;
+	        --Error messages, if applicable
+	        RouteError: data CMASI::KeyValuePair.i {Data_Model::Data_Representation => Array;};
+	end RoutePlan.i;
+
+	--Route plan response: list of all fulfilled route requests
+	data RoutePlanResponse		
+	end RoutePlanResponse;
+	
+	data implementation RoutePlanResponse.i
+	    subcomponents
+	        --Response ID matching ID from request ({@link RoutePlanRequest})
+	        ResponseID: data Integer_64;
+	        --Associated Task ID (0 if no associated task) that this set of
+	        --responses corresponds to
+	        AssociatedTaskID: data Integer_64;
+	        --Vehicle that was considered during planning
+	        VehicleID: data Integer_64;
+	        --Operating region that was considered during planning
+	        OperatingRegion: data Integer_64;
+	        --List of all responses for this vehicle + operating region situation
+	        RouteResponses: data RoutePlan.i {Data_Model::Data_Representation => Array;};
+	end RoutePlanResponse.i;
+
+	--Egress route request: find all egress routes (nearby intersections)
+	--from a point	
+	data EgressRouteRequest		
+	end EgressRouteRequest;
+
+	data implementation EgressRouteRequest.i
+	    subcomponents
+	        --Request ID for correlating with response
+	        RequestID: data Integer_64;
+	        --Location from which to calculate the routes
+	        StartLocation: data CMASI::Location3D.i;
+	        --The radius of the area of concern
+	        Radius: data Float_32;
+	end EgressRouteRequest.i;
+	
+	--Egress route response: returns egress routes (nearby intersections)
+	--from a point
+	data EgressRouteResponse		
+	end EgressRouteResponse;
+	
+	data implementation EgressRouteResponse.i
+	    subcomponents
+	        --Response ID matching ID from request ({@link EgressRouteRequest})
+	        ResponseID: data Integer_64;
+	        --The route locations
+	        NodeLocations: data CMASI::Location3D.i {Data_Model::Data_Representation => Array;};
+	        --The orientations
+	        Headings: data Float_32 {Data_Model::Data_Representation => Array;};
+	end EgressRouteResponse.i;
+	
+end ROUTE;

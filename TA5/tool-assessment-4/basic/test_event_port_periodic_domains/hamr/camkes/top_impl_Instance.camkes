@@ -1,0 +1,24 @@
+// This file will be regenerated, do not edit
+
+import <std_connector.camkes>;
+import "components/producer_t_i_producer_producer/producer_t_i_producer_producer.camkes";
+import "components/consumer_t_i_consumer_consumer/consumer_t_i_consumer_consumer.camkes";
+
+assembly {
+  composition {
+    component producer_t_i_producer_producer producer_producer;
+    component consumer_t_i_consumer_consumer consumer_consumer;
+
+    connection seL4Notification conn1(from producer_producer.sb_emit, to consumer_consumer.sb_consume);
+    connection seL4SharedData conn2(from producer_producer.sb_emit_counter, to consumer_consumer.sb_consume_counter);
+    connection seL4Notification conn3(from producer_producer.sb_self_pacer_tick, to producer_producer.sb_self_pacer_tock);
+  }
+
+  configuration {
+    producer_producer._domain = 2;
+    consumer_consumer._domain = 3;
+    producer_producer.sb_emit_counter_access = "W";
+    consumer_consumer.sb_consume_counter_access = "R";
+
+  }
+}

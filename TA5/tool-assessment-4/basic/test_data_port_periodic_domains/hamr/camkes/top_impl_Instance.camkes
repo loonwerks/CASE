@@ -1,0 +1,25 @@
+// This file will be regenerated, do not edit
+
+import <std_connector.camkes>;
+import "components/producer_thread_i_producer_producer/producer_thread_i_producer_producer.camkes";
+import "components/consumer_thread_i_consumer_consumer/consumer_thread_i_consumer_consumer.camkes";
+
+assembly {
+  composition {
+    component producer_thread_i_producer_producer producer_producer;
+    component consumer_thread_i_consumer_consumer consumer_consumer;
+
+    connection seL4SharedData conn1(from producer_producer.sb_write_port, to consumer_consumer.sb_read_port);
+    connection seL4Notification conn2(from producer_producer.sb_self_pacer_tick, to producer_producer.sb_self_pacer_tock);
+    connection seL4Notification conn3(from consumer_consumer.sb_self_pacer_tick, to consumer_consumer.sb_self_pacer_tock);
+  }
+
+  configuration {
+    producer_producer._domain = 2;
+    consumer_consumer._domain = 3;
+    conn1.size = 4096;
+    producer_producer.sb_write_port_access = "W";
+    consumer_consumer.sb_read_port_access = "R";
+
+  }
+}

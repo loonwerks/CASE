@@ -1,0 +1,77 @@
+package CASEAgree
+public
+	
+	with CASE_Model_Transformations;
+	renames CASE_Model_Transformations::all;
+	renames Base_Types::all;
+	with CMASI;
+	renames CMASI::all;
+	with Common_Data; 
+	renames Common_Data::all;
+	with CASEConsts;
+	
+annex agree {**
+		
+	-- Message constants
+	const OPERATING_REGION_ID_MIN : int = 0;
+	const OPERATING_REGION_ID_MAX : int = 500;
+	const KEEP_IN_ZONE_ID_MIN : int = 0;
+	const KEEP_IN_ZONE_ID_MAX : int = 500;
+	const KEEP_OUT_ZONE_ID_MIN : int = 0;
+	const KEEP_OUT_ZONE_ID_MAX : int = 500;
+	const TASK_ID_MIN : int = 0;
+	const TASK_ID_MAX : int = 2000;
+	const ENTITY_ID_MIN : int = 0;
+	const ENTITY_ID_MAX : int = 500;
+	const ALTITUDE_MIN : real = 0.0;
+	const ALTITUDE_MAX : real = 15000.0;
+	const LATITUDE_MIN : real = -90.0;
+	const LATITUDE_MAX : real = 90.0;
+	const LONGITUDE_MIN : real = -180.0;
+	const LONGITUDE_MAX : real = 180.0;
+	const AZIMUTH_CENTERLINE_MIN : real = -180.0;
+	const AZIMUTH_CENTERLINE_MAX : real = 180.0;
+	const VERTICAL_CENTERLINE_MIN : real = -180.0;
+	const VERTICAL_CENTERLINE_MAX : real = 180.0;
+              
+    fun WellformedCASE_RF_Msg(msg : CASE_RF_Msg.Impl, src : int64.i, dst : int64.i ) : bool = 
+       WellformedCASE_MsgHeader(msg.header, src, dst);
+       
+    fun WellformedCASE_MsgHeader(hdr : CASE_MsgHeader.Impl, src : int64.i, dst : int64.i ) : bool =
+       (hdr.src = src) and (hdr.dst = dst) and (hdr.trusted = true) and (hdr.HMAC = true);
+     
+    fun WellformedCASE_UART_Msg(msg : CASE_UART_Msg.Impl) : bool = 
+       msg.crc = true;
+
+	fun WELL_FORMED_AUTOMATION_REQUEST(msg : CMASI::AutomationRequest.i) : bool = 
+		(forall e in msg.EntityList, e >= ENTITY_ID_MIN and e <= ENTITY_ID_MAX) and
+		(forall t in msg.TaskList, t >= TASK_ID_MIN and t <= TASK_ID_MAX) and
+		msg.OperatingRegion >= OPERATING_REGION_ID_MIN and msg.OperatingRegion <= OPERATING_REGION_ID_MAX;
+		
+	fun WELL_FORMED_OPERATING_REGION(msg : CMASI::OperatingRegion.i) : bool =
+		msg.ID >= OPERATING_REGION_ID_MIN and msg.ID <= OPERATING_REGION_ID_MAX and
+		(forall kiz in msg.KeepInAreas, kiz >= KEEP_IN_ZONE_ID_MIN and kiz <= KEEP_IN_ZONE_ID_MAX) and
+		(forall koz in msg.KeepOutAreas, koz >= KEEP_OUT_ZONE_ID_MIN and koz <= KEEP_OUT_ZONE_ID_MAX);
+	
+	fun WELL_FORMED_LINE_SEARCH_TASK(msg : CMASI::LineSearchTask.i) : bool = 
+		msg.TaskID >= TASK_ID_MIN and msg.TaskID <= TASK_ID_MAX and
+		(forall point in msg.PointList, WELL_FORMED_POINT(point)) and
+		(forall viewangle in msg.ViewAngleList, WELL_FORMED_VIEWANGLE(viewangle));
+		
+	fun WELL_FORMED_AUTOMATION_RESPONSE(msg : CMASI::AutomationResponse.i) : bool = 
+		false;
+		
+	fun WELL_FORMED_POINT(point : CMASI::Location3D.i) : bool =
+		point.Latitude >= LATITUDE_MIN and point.Latitude <= LATITUDE_MAX and
+		point.Longitude >= LONGITUDE_MIN and point.Longitude <= LONGITUDE_MAX and
+		point.Altitude >= ALTITUDE_MIN and point.Altitude <= ALTITUDE_MAX;
+    
+    fun WELL_FORMED_VIEWANGLE(viewangle : CMASI::Wedge.i) : bool =
+    	viewangle.AzimuthCenterline >= AZIMUTH_CENTERLINE_MIN and viewangle.AzimuthCenterline <= AZIMUTH_CENTERLINE_MAX and
+    	viewangle.VerticalCenterline >= VERTICAL_CENTERLINE_MIN and viewangle.VerticalCenterline <= VERTICAL_CENTERLINE_MAX;
+    	
+**};
+
+
+end CASEAgree;
+

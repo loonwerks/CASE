@@ -1,0 +1,57 @@
+package GS_SW_Pkg
+public
+    
+    with CASE_Properties;
+    with CASE_Model_Transformations;
+    with CMASI;
+    with SendMessagesService_Pkg;
+    
+    thread GSRadioDriver
+        features
+            recv_data: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+            send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+            
+            AutomationRequest: in event data port CMASI::AutomationRequest.i;
+            OperatingRegion: in event data port CMASI::OperatingRegion.i;
+            LineSearchTask: in event data port CMASI::LineSearchTask.i;
+            
+        properties
+            Dispatch_Protocol => Sporadic;
+            --CASE_Properties::Component_Type => COMM_DRIVER;
+    end GSRadioDriver;
+    
+    thread implementation GSRadioDriver.i
+    end GSRadioDriver.i;
+      
+    -- Ground Station communication SW
+    process GS_SW
+        features
+            recv_data: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+            send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+    end GS_SW;
+    
+    process implementation GS_SW.Impl
+        subcomponents
+            RadioDriver: thread GSRadioDriver.i;
+            SendMessagesServiceGS: thread SendMessagesService_Pkg::SendMessagesServiceGS;
+    	connections
+    		------------------
+            -- Primary Inputs
+            ------------------
+            c_GS_2_RD: port recv_data -> RadioDriver.recv_data;
+            
+            ------------------
+            -- RadioDriver
+            ------------------
+            c_RD_2_GS: port RadioDriver.send_data -> send_data;
+            
+            -------------------------
+            -- SendMessageServiceGS
+            -------------------------
+            c_SMS_2_RD_01: port SendMessagesServiceGS.OperatingRegion -> RadioDriver.OperatingRegion;
+            c_SMS_2_RD_02: port SendMessagesServiceGS.LineSearchTask -> RadioDriver.LineSearchTask;
+            c_SMS_2_RD_03: port SendMessagesServiceGS.AutomationRequest -> RadioDriver.AutomationRequest;
+            
+    end GS_SW.Impl;
+    
+end GS_SW_Pkg;

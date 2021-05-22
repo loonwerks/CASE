@@ -1,0 +1,8 @@
+component consumer_t_i_consumer_consumer {
+  include <sb_types.h>;
+  include <sb_event_counter.h>;
+  control;
+  consumes ReceiveEvent sb_consume;
+  dataport sb_event_counter_t sb_consume_counter;
+  has semaphore sb_dispatch_sem;
+}

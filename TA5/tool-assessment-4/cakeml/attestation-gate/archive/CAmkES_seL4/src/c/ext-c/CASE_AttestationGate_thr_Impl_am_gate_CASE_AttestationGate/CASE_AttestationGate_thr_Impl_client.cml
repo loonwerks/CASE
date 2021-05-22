@@ -1,0 +1,291 @@
+(* This structure is populated with developer-written code *)
+structure Client =
+struct
+
+val w8zero = Word8.fromInt 0;
+
+(*---------------------------------------------------------------------------*)
+(* Declare input buffers as global variables.                                *)
+(*---------------------------------------------------------------------------*)
+
+val trusted_id_buffer
+    = Word8Array.array API.trusted_idsSizeBytes w8zero;
+
+val operating_region_buffer
+    = Word8Array.array API.operatingRegion_inSizeBytes w8zero;
+
+val linesearch_task_buffer
+    = Word8Array.array API.lineSearchTask_inSizeBytes w8zero;
+
+val automation_request_buffer
+    = Word8Array.array API.automationRequest_inSizeBytes w8zero;
+
+val trusted_id_buffer_out
+    = Word8Array.array API.trusted_idsSizeBytes w8zero;
+
+val operating_region_buffer_out
+    = Word8Array.array API.operatingRegion_outSizeBytes w8zero;
+
+val linesearch_task_buffer_out
+    = Word8Array.array API.lineSearchTask_outSizeBytes w8zero;
+
+val automation_request_buffer_out
+    = Word8Array.array API.automationRequest_outSizeBytes w8zero;
+
+val emptybuf = Word8Array.array 0 w8zero;
+
+fun clear buffer =
+ let val len = Word8Array.length buffer
+     fun zero i = Word8Array.update buffer i w8zero
+     fun loop j = if j < len then (zero j; loop (j+1)) else ()
+ in
+    loop 0
+ end;
+
+(*---------------------------------------------------------------------------*)
+(* Contiguity types for the trusted_ids input and the address-attributed     *)
+(* messages.                                                                 *)
+(*                                                                           *)
+(* trusted_ids = Array(i32,intLit 3)                                         *)
+(*                                                                           *)
+(* AAmesg = Recd [                                                           *)
+(*   ("address",           Scanner (scanTo "$")),                            *)
+(*   ("contentType",       Scanner (scanTo "|")),                            *)
+(*   ("descriptor",        Scanner (scanTo "|")),                            *)
+(*   ("source_group",      Scanner (scanTo "|")),                            *)
+(*   ("source_entity_ID",  Scanner (scanTo "|")),                            *)
+(*   ("source_service_ID", Scanner (scanTo "$")),                            *)
+(*   ("all_the_rest",      Scanner (fn s => SOME(s,"")))                     *)
+(* ]                                                                         *)
+(*                                                                           *)
+(* AAmesg_port = Recd [                                                      *)
+(*   ("present", Basic Bool),                                                *)
+(*   ("contents", Union [                                                    *)
+(*       (BLoc (VarName "present"), AAmesg),                                 *)
+(*       (Bnot(BLoc (VarName "present")), SKIP)])                            *)
+(*  ]                                                                        *)
+(*---------------------------------------------------------------------------*)
+
+(*---------------------------------------------------------------------------*)
+(* Map 3 adjacent 4-byte chunks in trusted_id_buffer to an array of 3 ints   *)
+(*---------------------------------------------------------------------------*)
+
+fun mk_tid_array () =
+  let val project = Word8Array.substring trusted_id_buffer
+  in case (Int.fromString (project 0 3),
+           Int.fromString (project 4 3),
+           Int.fromString (project 8 3))
+      of (Some i1, Some i2, Some i3) => Some(Array.fromList[i1,i2,i3])
+       | otherwise => None
+   end;
+
+fun tid_array_to_string tidArrayOpt =
+case tidArrayOpt
+  of Some tidArray => String.concat ["tidArray = (", 
+                                                  Int.toString (Array.sub tidArray 0),
+                                                  ", ",
+                                                  Int.toString (Array.sub tidArray 1),
+                                                  ", ",
+                                                  Int.toString (Array.sub tidArray 2),
+                                                  ")"]
+   | otherwise => String.concat ["tidArray = ()"]
+;
+
+(*---------------------------------------------------------------------------*)
+(* Look for x element in arr, starting from i and going up.                  *)
+(*---------------------------------------------------------------------------*)
+
+fun seekFrom arr x i =
+ let val top = Word8Array.length arr
+     fun seek j =
+       if j >= top then None else
+       if Word8Array.sub arr j = x then Some j
+       else seek (j+1)
+ in seek i
+ end;
+
+(*---------------------------------------------------------------------------*)
+(* Parsing the header of an address-attributed message. Breaks the input     *)
+(* into A$B|C|D|E|F$G, where the letters stand for arbitrary strings not     *)
+(* having the delimiter that folllows, e.g. "$" or "|". Return sub-string E, *)
+(* which corresponds to source-entity-ID above. NB: vertical bar attached.   *)
+(*---------------------------------------------------------------------------*)
+
+fun w8_of c = Word8.fromInt (Char.ord c);
+
+fun scanAA arr offset =
+case seekFrom arr (w8_of #"$") offset
+ of None => None
+  | Some segA =>
+case seekFrom arr (w8_of #"|") (segA+offset)
+ of None => None
+  | Some segB =>
+case seekFrom arr (w8_of #"|") (segB+offset)
+ of None => None
+  | Some segC =>
+case seekFrom arr (w8_of #"|") (segC+offset)
+ of None => None
+  | Some segD =>
+case seekFrom arr (w8_of #"|") (segD+offset)
+ of None => None
+  | Some segE =>
+case seekFrom arr (w8_of #"$") (segE+offset)
+ of None => None
+  | Some segF =>
+    Some(Word8Array.substring arr (segD+offset) (segE-segD))
+;
+
+(*---------------------------------------------------------------------------*)
+(* Drop vertical bar at end of identifier, leaving only digits, I hope.      *)
+(*---------------------------------------------------------------------------*)
+
+fun dropBar s = String.substring s 0 (String.size s - 1);
+
+(*---------------------------------------------------------------------------*)
+(* Map byte array into int option. Return a Some if first element is non-zero*)
+(* and subsequent bytes decode properly according to scanAA.                 *)
+(*---------------------------------------------------------------------------*)
+
+fun getID bytes = (
+ if Word8Array.sub bytes 0 = w8zero then
+  None
+ else
+  case scanAA bytes 1
+   of None => None
+    | Some ssID => Int.fromString (dropBar ssID) 
+);
+
+(*---------------------------------------------------------------------------*)
+(* Tests                                                                     *)
+(*---------------------------------------------------------------------------*)
+(*
+
+fun string_to_bytes s =
+ let val arr = Word8Array.array (String.size s) (w8zero)
+     val _ = Word8Array.copyVec s 0 (String.size s) arr 0
+ in
+    arr
+ end
+
+val test1 = (Some 500 = getID (string_to_bytes "A$B|C|D|500|F$G"));
+val test2 = (Some 500 = getID (string_to_bytes "A$B||D|500|F$G"));
+val test3 = (Some 500 = getID (string_to_bytes "199.0.0.1$p--q--r|foo|A!D!CD|500|FRED$GHIJ"));
+
+val _ = if test1 andalso test2 andalso test3 then
+         TextIO.print "\ngetID: tests passed.\n"
+        else
+         TextIO.print "\ngetID: tests failed.\n"
+*)
+
+fun equal a b = (a=b);
+
+(*---------------------------------------------------------------------------*)
+(* Look at a uxas AA message: if it's not got an input, return False; if it  *)
+(* does, return whether or not the input's ID is in the tid array. Also      *)
+(* ensure that the ID is not zero (initial state so don't send along mesgs). *)
+(*---------------------------------------------------------------------------*)
+
+fun check tidArr idOpt =
+ case idOpt
+  of None => False
+   | Some i => i <> 0 andalso Array.exists (equal i) tidArr;
+
+
+(*---------------------------------------------------------------------------*)
+(* Look at events in the following order: opregion; lst; autorqt. Pass along *)
+(* only the first one that meets the criterion.                              *)
+(*---------------------------------------------------------------------------*)
+
+fun att_gate_seq tidArrOpt opregion lst autorqt =
+  case tidArrOpt
+   of None => (False,False,False)
+    | Some tidArr =>
+      if check tidArr opregion then (True,False,False)
+      else
+      if check tidArr lst then (False,True,False)
+      else
+      if check tidArr autorqt then (False,False,True)
+      else (False,False,False)
+;
+
+(*---------------------------------------------------------------------------*)
+(* Look at all events in a parallel manner. Pass along all that meet the     *)
+(* criterion.                                                                *)
+(*---------------------------------------------------------------------------*)
+
+fun att_gate_par tidArrOpt opregion lst autorqt =
+  case tidArrOpt
+   of None => (False,False,False)
+    | Some tidArr => (check tidArr opregion,
+                      check tidArr lst, check tidArr autorqt);
+
+fun fill_buffers() = (
+    clear                        trusted_id_buffer
+  ; API.get_trusted_ids          trusted_id_buffer
+  ; clear                        operating_region_buffer
+  ; API.get_OperatingRegion_in   operating_region_buffer
+  ; clear                        linesearch_task_buffer
+  ; API.get_LineSearchTask_in    linesearch_task_buffer
+  ; clear                        automation_request_buffer
+  ; API.get_AutomationRequest_in automation_request_buffer
+)
+
+fun fill_out_buffers() = (
+    Word8Array.copy operating_region_buffer 1 (Word8Array.length operating_region_buffer - 1) operating_region_buffer_out 0
+  ; Word8Array.copy linesearch_task_buffer 1 (Word8Array.length  linesearch_task_buffer - 1) linesearch_task_buffer_out 0
+  ; Word8Array.copy automation_request_buffer 1 (Word8Array.length automation_request_buffer - 1) automation_request_buffer_out 0
+)
+
+(*---------------------------------------------------------------------------*)
+(* Get the inputs, do the check(s), and perform the outputs. Can swap in     *)
+(* att_gate_par for att_gate_seq if that behavior is wanted.                 *)
+(*---------------------------------------------------------------------------*)
+
+fun id_to_string idOpt = 
+  case idOpt
+  of Some i1 => Int.toString i1
+   | otherwise => ""
+;
+
+fun att_gate () =
+ let val _          = fill_buffers()
+     val tidArrOpt  = mk_tid_array()
+     val opregionID = getID operating_region_buffer
+     val lstID      = getID linesearch_task_buffer
+     val autorqtID  = getID automation_request_buffer
+     val (a,b,c)    = att_gate_seq tidArrOpt opregionID lstID autorqtID
+     val _          = fill_out_buffers()
+ in
+  API.logInfo (String.concat ["\n\t",
+                              (tid_array_to_string tidArrOpt),
+                              "\n\topregionID = ",
+                              id_to_string opregionID,
+                              "\n\tlstID = ",
+                              id_to_string lstID,
+                              "\n\tautorqtID = ",
+                              id_to_string autorqtID])
+  ;  (if a then API.send_OperatingRegion_out operating_region_buffer_out else ())
+  ; (if b then API.send_LineSearchTask_out linesearch_task_buffer_out else ())
+  ; (if c then API.send_AutomationRequest_out automation_request_buffer_out else ())
+ end
+
+  fun initialise() = ();
+
+  val count = 0;
+
+  fun timeTriggered() = (
+    att_gate()
+  );
+
+  (* ===========================================================*
+   * The methods below are not currently used in HAMR/Slang     *
+   * ===========================================================*)
+
+  fun activate() = ();
+
+  fun deactivate() = ();
+
+  fun finalise() = ();
+
+  fun recover() = ();
+end;

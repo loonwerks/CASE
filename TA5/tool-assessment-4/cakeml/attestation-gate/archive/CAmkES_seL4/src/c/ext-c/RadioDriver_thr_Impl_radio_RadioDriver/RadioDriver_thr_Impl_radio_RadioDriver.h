@@ -1,0 +1,12 @@
+#ifndef RADIODRIVER_THR_IMPL_RADIO_RADIODRIVER_H
+#define RADIODRIVER_THR_IMPL_RADIO_RADIODRIVER_H
+
+#include <all.h>
+
+Unit attestation_gate_RadioDriver_RadioDriver_thr_Impl_radio_RadioDriver_initialise_(STACK_FRAME_ONLY);
+
+Unit attestation_gate_RadioDriver_RadioDriver_thr_Impl_radio_RadioDriver_finalise_(STACK_FRAME_ONLY);
+
+Unit attestation_gate_RadioDriver_RadioDriver_thr_Impl_radio_RadioDriver_timeTriggered_(STACK_FRAME);
+
+#endif

@@ -1,0 +1,78 @@
+{
+  "type" : "BitCodecGenSpec",
+  "maxSize" : 288,
+  "spec" : {
+    "type" : "Spec.Concat",
+    "name" : "Mission",
+    "elements" : [
+      {
+        "type" : "Spec.GenRepeat",
+        "name" : "data",
+        "maxElements" : 3,
+        "element" : {
+          "type" : "Spec.Concat",
+          "name" : "Coordinate",
+          "elements" : [
+            {
+              "type" : "Spec.Ints",
+              "name" : "latitude",
+              "size" : 1,
+              "signed" : true,
+              "minOpt" : {
+                "type" : "None"
+              },
+              "maxOpt" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Spec.Ints",
+              "name" : "longitude",
+              "size" : 1,
+              "signed" : true,
+              "minOpt" : {
+                "type" : "None"
+              },
+              "maxOpt" : {
+                "type" : "None"
+              }
+            },
+            {
+              "type" : "Spec.Ints",
+              "name" : "altitude",
+              "size" : 1,
+              "signed" : true,
+              "minOpt" : {
+                "type" : "None"
+              },
+              "maxOpt" : {
+                "type" : "None"
+              }
+            }
+          ],
+          "asOpt" : {
+            "type" : "None"
+          }
+        }
+      }
+    ],
+    "asOpt" : {
+      "type" : "None"
+    }
+  },
+  "enums" : {
+    "type" : "Map",
+    "entries" : [
+    ]
+  },
+  "funs" : {
+    "type" : "Map",
+    "entries" : [
+    ]
+  },
+  "funTexts" : {
+    "type" : "Map",
+    "entries" : [
+    ]
+  }
+}

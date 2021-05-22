@@ -1,0 +1,3 @@
+property set PFC_Property_Set is
+	Stack_Size: constant Size => 20480 Bytes;
+end PFC_Property_Set;

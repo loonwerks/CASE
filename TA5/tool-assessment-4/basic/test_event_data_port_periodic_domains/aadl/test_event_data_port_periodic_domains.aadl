@@ -1,0 +1,100 @@
+----------------------------------------------------------------------
+-- Copyright 2020 DARPA CASE
+--
+-- Micro example AADL to show single AADL dataport communications for
+-- a periodic process running under the seL4 domain scheduler
+----------------------------------------------------------------------
+package test_event_data_port_periodic_domains
+public
+	with HAMR;
+	with Base_Types;
+	with CASE_Scheduling;
+
+	thread producer_t
+		features
+			write_port: out event data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+	end producer_t;
+
+	thread implementation producer_t.i
+	end producer_t.i;
+	
+	process producer_p
+		features 
+			write_port : out event data port Base_Types::Integer_8;
+		properties
+			CASE_Scheduling::Domain => 2; -- pacer 1, source 2, destination 3
+	end producer_p;
+	
+    -- process specifies boundary of spatial isolation
+	process implementation producer_p.i
+		subcomponents
+			producer : thread producer_t.i;
+		connections
+			c1 : port producer.write_port -> write_port;
+	end producer_p.i;
+
+    ----------------------------------------------------------------------------------
+    
+	thread consumer_t
+		features
+			read_port: in event data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Sporadic;
+			Compute_Execution_Time => 10ms .. 10ms;
+	end consumer_t;
+
+	thread implementation consumer_t.i
+	end consumer_t.i;
+	
+	process consumer_p
+		features
+			read_port : in event data port Base_Types::Integer_8;
+		properties
+			CASE_Scheduling::Domain => 3; -- pacer 1, source 2, destination 3
+	end consumer_p;
+	
+    -- process specifies boundary of spatial isolation
+	process implementation consumer_p.i
+		subcomponents
+			consumer : thread consumer_t.i;
+		connections
+			c1 : port read_port -> consumer.read_port;
+	end consumer_p.i;
+
+    --------------------------------------------------------------------------------
+    
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+		properties
+			Frame_Period => 1000ms;
+            Clock_Period => 2ms;
+            CASE_Scheduling::Max_Domain => 3;
+			CASE_Scheduling::Schedule_Source_Text => "domain_schedule.c";
+	end proc.impl;
+
+	system top
+	end top;
+
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			producer : process producer_p.i;
+			consumer : process consumer_p.i;
+		connections
+			data_interconnect: port producer.write_port -> consumer.read_port;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to producer, consumer;
+			HAMR::Platform => (Linux, seL4);
+			HAMR::Bit_Codec_Raw_Connections => true;
+		--annex resolute {**
+		--	check CASE_Tools
+		--**};
+	end top.impl;
+
+end test_event_data_port_periodic_domains;

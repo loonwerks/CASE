@@ -1,0 +1,12 @@
+#ifndef UARTDRIVER_IMPL_MCMP_PROC_SW_FC_UART_UARTDRIVER_H
+#define UARTDRIVER_IMPL_MCMP_PROC_SW_FC_UART_UARTDRIVER_H
+
+#include <all.h>
+
+Unit hamr_Drivers_UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_initialise_(STACK_FRAME_ONLY);
+
+Unit hamr_Drivers_UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_finalise_(STACK_FRAME_ONLY);
+
+Unit hamr_Drivers_UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_timeTriggered_(STACK_FRAME_ONLY);
+
+#endif

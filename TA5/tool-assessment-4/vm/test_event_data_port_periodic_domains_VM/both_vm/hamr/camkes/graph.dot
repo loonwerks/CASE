@@ -1,0 +1,259 @@
+digraph g {
+graph [
+  overlap = false,
+  rankdir = "LR"
+];
+node [
+  fontsize = "16",
+  shape = "ellipse"
+];
+edge [
+];
+
+vmproducer [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>vmproducer</B></TD></TR>
+      <TR><TD PORT="sb_write_port_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_write_port_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_period_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_pacer_period_queue</B></FONT></TD></TR>
+      <TR><TD PORT="notification_ready_connector"><FONT COLOR="blue">emits HaveNotification <B>notification_ready_connector</B></FONT></TD></TR>
+      <TR><TD PORT="sb_write_port_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_write_port_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="fs"><FONT COLOR="orange">uses FileServerInterface <B>fs</B></FONT></TD></TR>
+      <TR><TD PORT="batch"><FONT COLOR="orange">uses Batch <B>batch</B></FONT></TD></TR>
+      <TR><TD PORT="guest_putchar"><FONT COLOR="orange">uses PutChar <B>guest_putchar</B></FONT></TD></TR>
+      <TR><TD PORT="serial_getchar"><FONT COLOR="orange">uses GetChar <B>serial_getchar</B></FONT></TD></TR>
+      <TR><TD PORT="recv"><FONT COLOR="orange">uses VirtQueueDev <B>recv</B></FONT></TD></TR>
+      <TR><TD PORT="send"><FONT COLOR="orange">uses VirtQueueDrv <B>send</B></FONT></TD></TR>
+      <TR><TD PORT="dtb_self"><FONT COLOR="orange">uses VMDTBPassthrough <B>dtb_self</B></FONT></TD></TR>
+      <TR><TD PORT="restart_event"><FONT COLOR="blue">consumes restart <B>restart_event</B></FONT></TD></TR>
+      <TR><TD PORT="notification_ready"><FONT COLOR="blue">consumes HaveNotification <B>notification_ready</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_period_notification"><FONT COLOR="blue">consumes Period_VM <B>sb_pacer_period_notification</B></FONT></TD></TR>
+      <TR><TD PORT="dtb"><FONT COLOR="orange">provides VMDTBPassthrough <B>dtb</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+fserv [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>fserv</B></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+serial [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>serial</B></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+time_server [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>time_server</B></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+vmconsumer [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>vmconsumer</B></TD></TR>
+      <TR><TD PORT="sb_read_port_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_read_port_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_period_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_pacer_period_queue</B></FONT></TD></TR>
+      <TR><TD PORT="notification_ready_connector"><FONT COLOR="blue">emits HaveNotification <B>notification_ready_connector</B></FONT></TD></TR>
+      <TR><TD PORT="fs"><FONT COLOR="orange">uses FileServerInterface <B>fs</B></FONT></TD></TR>
+      <TR><TD PORT="batch"><FONT COLOR="orange">uses Batch <B>batch</B></FONT></TD></TR>
+      <TR><TD PORT="guest_putchar"><FONT COLOR="orange">uses PutChar <B>guest_putchar</B></FONT></TD></TR>
+      <TR><TD PORT="serial_getchar"><FONT COLOR="orange">uses GetChar <B>serial_getchar</B></FONT></TD></TR>
+      <TR><TD PORT="recv"><FONT COLOR="orange">uses VirtQueueDev <B>recv</B></FONT></TD></TR>
+      <TR><TD PORT="send"><FONT COLOR="orange">uses VirtQueueDrv <B>send</B></FONT></TD></TR>
+      <TR><TD PORT="dtb_self"><FONT COLOR="orange">uses VMDTBPassthrough <B>dtb_self</B></FONT></TD></TR>
+      <TR><TD PORT="restart_event"><FONT COLOR="blue">consumes restart <B>restart_event</B></FONT></TD></TR>
+      <TR><TD PORT="notification_ready"><FONT COLOR="blue">consumes HaveNotification <B>notification_ready</B></FONT></TD></TR>
+      <TR><TD PORT="sb_read_port_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_read_port_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_period_notification"><FONT COLOR="blue">consumes Period_VM <B>sb_pacer_period_notification</B></FONT></TD></TR>
+      <TR><TD PORT="dtb"><FONT COLOR="orange">provides VMDTBPassthrough <B>dtb</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+pacer [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>pacer</B></TD></TR>
+      <TR><TD PORT="period_to_vmproducer_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>period_to_vmproducer_queue</B></FONT></TD></TR>
+      <TR><TD PORT="period_to_vmconsumer_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>period_to_vmconsumer_queue</B></FONT></TD></TR>
+      <TR><TD PORT="period_to_vmproducer_notification"><FONT COLOR="blue">emits Period_VM <B>period_to_vmproducer_notification</B></FONT></TD></TR>
+      <TR><TD PORT="period_to_vmconsumer_notification"><FONT COLOR="blue">emits Period_VM <B>period_to_vmconsumer_notification</B></FONT></TD></TR>
+      <TR><TD PORT="tick"><FONT COLOR="blue">emits TickTock <B>tick</B></FONT></TD></TR>
+      <TR><TD PORT="tock"><FONT COLOR="blue">consumes TickTock <B>tock</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+connectiontypekey [
+  label=<
+   <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+     <TR><TD COLSPAN="2"><B>Key: Connection Types</B></TD></TR>
+     <TR><TD><FONT COLOR="red">seL4SharedData</FONT></TD><TD BGCOLOR="red">red</TD></TR>
+     <TR><TD><FONT COLOR="blue">seL4Notification</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="orange">seL4RPCCall</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+     <TR><TD><FONT COLOR="green">seL4TimeServer</FONT></TD><TD BGCOLOR="green">green</TD></TR>
+     <TR><TD><FONT COLOR="brown">seL4GlobalAsynchCallback</FONT></TD><TD BGCOLOR="brown">brown</TD></TR>
+     <TR><TD><FONT COLOR="yellow">seL4VMDTBPassthrough</FONT></TD><TD BGCOLOR="yellow">yellow</TD></TR>
+     <TR><TD><FONT COLOR="pink">seL4SharedDataWithCaps</FONT></TD><TD BGCOLOR="pink">pink</TD></TR>
+   </TABLE>
+  >
+  shape=plaintext
+];
+
+interfacetypekey [
+  label=<
+   <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+     <TR><TD COLSPAN="2"><B>Key: Interface Types</B></TD></TR>
+     <TR><TD><FONT COLOR="red">dataport</FONT></TD><TD BGCOLOR="red">red</TD></TR>
+     <TR><TD><FONT COLOR="blue">emits</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="blue">consumes</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="orange">provides</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+     <TR><TD><FONT COLOR="orange">uses</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+   </TABLE>
+  >
+  shape=plaintext
+];
+
+"vmproducer":dtb_self -> "vmproducer":dtb [
+  color="yellow"
+  //label = "seL4VMDTBPassthrough"
+  id = conn1
+
+];
+
+"vmproducer":fs -> "fserv":fs_ctrl [
+  color="grey"
+  //label = "seL4RPCDataport"
+  id = fsvmproducer
+
+];
+
+"vmproducer":notification_ready_connector -> "vmproducer":notification_ready [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = notify_ready_vmproducer
+
+];
+
+"serial":timeout -> "time_server":the_timer [
+  color="green"
+  //label = "seL4TimeServer"
+  id = serialserver_timer
+
+];
+
+"vmproducer":batch -> "serial":processed_batch [
+  color="grey"
+  //label = "seL4SerialServer"
+  id = serial_vmproducer
+
+];
+
+"vmproducer":serial_getchar -> "serial":getchar [
+  color="grey"
+  //label = "seL4SerialServer"
+  id = serial_input_vmproducer
+
+];
+
+"vmconsumer":dtb_self -> "vmconsumer":dtb [
+  color="yellow"
+  //label = "seL4VMDTBPassthrough"
+  id = conn2
+
+];
+
+"vmconsumer":fs -> "fserv":fs_ctrl [
+  color="grey"
+  //label = "seL4RPCDataport"
+  id = fsvmconsumer
+
+];
+
+"vmconsumer":notification_ready_connector -> "vmconsumer":notification_ready [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = notify_ready_vmconsumer
+
+];
+
+"vmconsumer":batch -> "serial":processed_batch [
+  color="grey"
+  //label = "seL4SerialServer"
+  id = serial_vmconsumer
+
+];
+
+"vmconsumer":serial_getchar -> "serial":getchar [
+  color="grey"
+  //label = "seL4SerialServer"
+  id = serial_input_vmconsumer
+
+];
+
+"vmproducer":sb_write_port_1_notification -> "vmconsumer":sb_read_port_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn3
+
+];
+
+"vmproducer":sb_write_port_queue_1 -> "vmconsumer":sb_read_port_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn4
+
+];
+
+"pacer":tick -> "pacer":tock [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn5
+
+];
+
+"pacer":period_to_vmproducer_notification -> "vmproducer":sb_pacer_period_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn6
+
+];
+
+"pacer":period_to_vmproducer_queue -> "vmproducer":sb_pacer_period_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn7
+
+];
+
+"pacer":period_to_vmconsumer_notification -> "vmconsumer":sb_pacer_period_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn8
+
+];
+
+"pacer":period_to_vmconsumer_queue -> "vmconsumer":sb_pacer_period_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn9
+
+];
+
+}

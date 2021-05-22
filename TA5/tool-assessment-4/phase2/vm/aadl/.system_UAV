@@ -1,0 +1,3 @@
+projects=.
+system_impl=UAV.Impl
+system_impl_file=UAV/UAV.aadl

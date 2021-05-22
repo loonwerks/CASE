@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="c7f867e7-c5f9-45cd-8b00-860e4a2d04b2" manual="true">
+    <element uuid="e6886414-71e5-4697-8bc5-a4d824aa1e5e" manual="true">
+      <element uuid="044fa2de-22d0-4789-a153-bb6cbb24c248" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_gs_2_rd</seg>
+      </bo>
+    </element>
+    <element uuid="e2eac9e1-4c3c-4c03-8897-8f7ad49d86db" manual="true">
+      <element uuid="f3c23a17-92bb-4dad-adc4-f18c142583dc" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_rd_2_gs</seg>
+      </bo>
+    </element>
+    <element uuid="55ca4e59-b77c-48f9-a3cd-47ec004a6695" manual="true">
+      <element uuid="43eb5149-fbe6-4106-8b70-e3f432e2eb7e" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_sms_2_rd_01</seg>
+      </bo>
+    </element>
+    <element uuid="16489d46-c4de-4523-9fa1-7e73b80c9bc9" manual="true">
+      <element uuid="c5453a1d-f60e-457a-b895-c74576a749f0" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_sms_2_rd_02</seg>
+      </bo>
+    </element>
+    <element uuid="dfefcb90-456f-422b-a56b-40ad3bc943ed" manual="true">
+      <element uuid="577b4a88-e79e-49b1-86cf-1284f3db9905" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c_sms_2_rd_03</seg>
+      </bo>
+    </element>
+    <element uuid="16619da3-5abf-4dce-8b5e-660d83ad6d69" manual="true" dockArea="left">
+      <bo>
+        <seg>feature</seg>
+        <seg>recv_data</seg>
+      </bo>
+      <position y="198.0"/>
+    </element>
+    <element uuid="aa772ba3-46c7-48e0-a826-c73b14fb8ca6" manual="true" dockArea="right">
+      <bo>
+        <seg>feature</seg>
+        <seg>send_data</seg>
+      </bo>
+      <position x="1062.0" y="123.0"/>
+    </element>
+    <element uuid="830286a9-f78f-4457-b41b-b8c2fa8f7837" manual="true">
+      <element uuid="4540cca1-ce27-4c21-8062-c22560bbf41f" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>automationrequest</seg>
+        </bo>
+        <position y="60.0"/>
+      </element>
+      <element uuid="b701e790-863f-4183-b76b-7d7580f80af6" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>linesearchtask</seg>
+        </bo>
+        <position y="110.0"/>
+      </element>
+      <element uuid="d9d4f15f-f8b3-4a57-8151-5ac58069cc84" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>operatingregion</seg>
+        </bo>
+        <position y="10.0"/>
+      </element>
+      <element uuid="46543c89-682f-414b-91f9-e146434eface" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>recv_data</seg>
+        </bo>
+        <position y="160.0"/>
+      </element>
+      <element uuid="e31c3586-160b-48a0-9097-c31ce03618ad" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>send_data</seg>
+        </bo>
+        <position x="341.0" y="85.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>radiodriver</seg>
+      </bo>
+      <position x="626.0" y="38.0"/>
+      <size width="422.0" height="210.0"/>
+    </element>
+    <element uuid="26a5c109-2bbc-404b-b959-7f969e33a66d" manual="true">
+      <element uuid="ebab5705-c686-4d59-8055-341d26d57b2e" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>automationrequest</seg>
+        </bo>
+        <position x="371.0" y="60.0"/>
+      </element>
+      <element uuid="750285d8-bb7d-4fe0-9762-1fc9efee8957" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>linesearchtask</seg>
+        </bo>
+        <position x="399.0" y="110.0"/>
+      </element>
+      <element uuid="6e09fcbd-f6c9-4ae5-893e-747447bbae67" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>operatingregion</seg>
+        </bo>
+        <position x="391.0" y="10.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>sendmessagesservicegs</seg>
+      </bo>
+      <position x="91.0" y="38.0"/>
+      <size width="515.0" height="160.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>gs_sw.impl</seg>
+    </bo>
+    <position x="12.0" y="12.0"/>
+    <size width="1143.0" height="260.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>gs_sw_pkg::gs_sw.impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>

@@ -1,0 +1,12 @@
+#ifndef PRODUCER_THREAD_I_PRODUCER_PRODUCER_H
+#define PRODUCER_THREAD_I_PRODUCER_PRODUCER_H
+
+#include <all.h>
+
+Unit base_test_data_port_periodic_domains_producer_thread_i_producer_producer_initialise_(STACK_FRAME_ONLY);
+
+Unit base_test_data_port_periodic_domains_producer_thread_i_producer_producer_finalise_(STACK_FRAME_ONLY);
+
+Unit base_test_data_port_periodic_domains_producer_thread_i_producer_producer_timeTriggered_(STACK_FRAME_ONLY);
+
+#endif

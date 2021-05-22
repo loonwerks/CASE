@@ -1,0 +1,14 @@
+#ifndef UXAS_THR_IMPL_UXAS_UXAS_THREAD_ADAPTER_H
+#define UXAS_THR_IMPL_UXAS_UXAS_THREAD_ADAPTER_H
+
+#include <all.h>
+
+Unit attestation_gate_SysContext_UxAS_thr_Impl_uxas_UxAS_thread_adapter_initialiseArchitecture(STACK_FRAME_ONLY);
+
+Unit attestation_gate_SysContext_UxAS_thr_Impl_uxas_UxAS_thread_adapter_initialiseEntryPoint(STACK_FRAME_ONLY);
+
+Unit attestation_gate_SysContext_UxAS_thr_Impl_uxas_UxAS_thread_adapter_computeEntryPoint(STACK_FRAME_ONLY);
+
+art_Bridge_EntryPoints attestation_gate_SysContext_UxAS_thr_Impl_uxas_UxAS_thread_adapter_entryPoints(STACK_FRAME_ONLY);
+
+#endif

@@ -1,0 +1,66 @@
+// This file will be regenerated, do not edit
+
+import <std_connector.camkes>;
+import <global-connectors.camkes>;
+import <seL4VMDTBPassthrough.idl4>;
+import <FileServerInterface.camkes>;
+import <FileServer/FileServer.camkes>;
+import <SerialServer/SerialServer.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <vm-connectors.camkes>;
+import <devices.camkes>;
+import "components/Pacer/Pacer.camkes";
+import "components/VM_producer_t_i_producer_producer/VM_producer_t_i_producer_producer.camkes";
+import "components/consumer_t_i_consumer_consumer/consumer_t_i_consumer_consumer.camkes";
+
+assembly {
+  composition {
+    component VM_producer_t_i_producer_producer vmproducer;
+    component FileServer fserv;
+    component SerialServer serial;
+    component TimeServer time_server;
+    component consumer_t_i_consumer_consumer consumer_consumer;
+    component Pacer pacer;
+
+    connection seL4VMDTBPassthrough conn1(from vmproducer.dtb_self, to vmproducer.dtb);
+    connection seL4RPCDataport fsvmproducer(from vmproducer.fs, to fserv.fs_ctrl);
+    connection seL4GlobalAsynch notify_ready_vmproducer(from vmproducer.notification_ready_connector, to vmproducer.notification_ready);
+    connection seL4TimeServer serialserver_timer(from serial.timeout, to time_server.the_timer);
+    connection seL4SerialServer serial_vmproducer(from vmproducer.batch, to serial.processed_batch);
+    connection seL4SerialServer serial_input_vmproducer(from vmproducer.serial_getchar, to serial.getchar);
+    connection seL4Notification conn2(from vmproducer.sb_write_port_1_notification, to consumer_consumer.sb_read_port_notification);
+    connection seL4SharedDataWithCaps conn3(from vmproducer.sb_write_port_queue_1, to consumer_consumer.sb_read_port_queue);
+    connection seL4Notification conn4(from pacer.tick, to pacer.tock);
+    connection seL4GlobalAsynch conn5(from pacer.period_to_vmproducer_notification, to vmproducer.sb_pacer_period_notification);
+    connection seL4SharedDataWithCaps conn6(from pacer.period_to_vmproducer_queue, to vmproducer.sb_pacer_period_queue);
+    connection seL4Notification conn7(from pacer.period, to consumer_consumer.sb_pacer_notification);
+  }
+
+  configuration {
+    vmproducer.cnode_size_bits = 18;
+    vmproducer.simple_untyped21_pool = 12;
+    vmproducer.simple_untyped12_pool = 12;
+    vmproducer.num_extra_frame_caps = 0;
+    vmproducer.extra_frame_map_address = 0;
+    vmproducer._domain = 2;
+    consumer_consumer._domain = 3;
+    conn3.size = 4096;
+    consumer_consumer.sb_read_port_queue_access = "R";
+    pacer._domain = 1;
+
+    fserv.heap_size = 165536;
+    vmproducer.fs_shmem_size = 0x100000;
+    vmproducer.global_endpoint_base = 1 << 27;
+    vmproducer.asid_pool = true;
+    vmproducer.simple = true;
+    vmproducer.base_prio = 100;
+    vmproducer._priority = 101;
+    vmproducer.sem_value = 0;
+    vmproducer.heap_size = 0x300000;
+    time_server.timers_per_client = 1;
+    time_server.priority = 255;
+    time_server.simple = true;
+    vmproducer.serial_getchar_shmem_size = 0x1000;
+    vmproducer.batch_shmem_size = 0x1000;
+  }
+}

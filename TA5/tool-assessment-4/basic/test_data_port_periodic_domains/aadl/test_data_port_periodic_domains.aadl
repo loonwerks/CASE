@@ -1,0 +1,109 @@
+----------------------------------------------------------------------
+-- Copyright 2020 DARPA CASE
+--
+-- Micro example AADL to show single AADL dataport communications for
+-- a periodic process running under the seL4 domain scheduler
+----------------------------------------------------------------------
+package test_data_port_periodic_domains
+public
+	with Base_Types;
+	with HAMR;
+	with CASE_Scheduling;
+
+	----------------------------------------------------------------------
+	-- no inputs, one output, periodically places a value on the dataport
+	----------------------------------------------------------------------
+	-- thread specifies unit of temporal execution; depending on scheduling
+	-- model this can provide temporal isolation.
+	thread producer_thread
+		features
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+	end producer_thread;
+
+	thread implementation producer_thread.i
+	end producer_thread.i;
+
+	-- process specifies boundary of spatial isolation
+	process producer_process
+		features
+			write_port: out data port Base_Types::Integer_8;
+		properties
+			CASE_Scheduling::Domain => 2; -- pacer 1, source 2, destination 3
+	end producer_process;
+
+	process implementation producer_process.i
+		subcomponents
+			producer: thread producer_thread.i;
+		connections
+			c1: port producer.write_port -> write_port;
+	end producer_process.i;
+
+	----------------------------------------------------------------------
+	-- one input, no outputs, periodically reads a value from the dataport
+	----------------------------------------------------------------------
+	-- thread specifies unit of temporal execution; depending on scheduling
+	-- model this can provide temporal isolation.
+	thread consumer_thread
+		features
+			read_port: in data port Base_Types::Integer_8;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 10ms;
+	end consumer_thread;
+
+	thread implementation consumer_thread.i
+	end consumer_thread.i;
+
+	-- process specifies boundary of spatial isolation
+	process consumer_process
+		features
+			read_port: in data port Base_Types::Integer_8;
+		properties
+			CASE_Scheduling::Domain => 3; -- pacer 1, source 2, destination 3
+	end consumer_process;
+
+	process implementation consumer_process.i
+		subcomponents
+			consumer: thread consumer_thread.i;
+		connections
+			c1: port read_port -> consumer.read_port;
+	end consumer_process.i;
+
+	----------------------------------------------------------------------
+	processor proc
+	end proc;
+
+	processor implementation proc.impl
+		properties
+			Frame_Period => 1000ms;
+			Clock_Period => 2ms;
+			CASE_Scheduling::Max_Domain => 4;
+			CASE_Scheduling::Schedule_Source_Text => "domain_schedule.c";
+	end proc.impl;
+
+	----------------------------------------------------------------------
+	system top
+	end top;
+
+	system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			producer: process producer_process.i;
+			consumer: process consumer_process.i;
+		connections
+			c1: port producer.write_port -> consumer.read_port;
+		properties
+			Actual_Processor_Binding => (reference (proc)) applies to producer, consumer;
+			HAMR::Platform => (Linux, seL4);
+			HAMR::Bit_Codec_Raw_Connections => true;
+	--annex resolute {**
+	--	check CASE_Tools
+	--**};
+	end top.impl;
+
+end test_data_port_periodic_domains;

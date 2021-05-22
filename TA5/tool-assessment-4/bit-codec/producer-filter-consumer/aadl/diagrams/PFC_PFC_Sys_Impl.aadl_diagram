@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="02843bb0-3b84-4106-9072-4dfc6f1ee90b" manual="true">
+    <element uuid="499da3fa-2f7c-44e7-93ff-ba32f742b7cd" manual="true">
+      <element uuid="4e47eacb-cb40-4739-ab16-ac1200c9c4d2" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c1</seg>
+      </bo>
+    </element>
+    <element uuid="06e5e248-4a40-4683-9bcf-d80d8630fcde" manual="true">
+      <element uuid="dbe57d18-70cb-4876-9c9b-8b5418fcd835" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>c2</seg>
+      </bo>
+    </element>
+    <element uuid="7ab0ac31-810f-443d-8d24-d49fa221f6f5" manual="true">
+      <element uuid="8c08c2a2-aecb-4ba2-9d31-8353023e7e54" manual="true">
+        <element uuid="7cc289d1-cffc-4ed8-adaa-d70e504504af" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="9f8d797f-898a-4588-b2a4-c27866f49b99" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>from_filter</seg>
+        </bo>
+        <position y="48.0"/>
+      </element>
+      <element uuid="5f1b921d-f9c0-4d6a-a213-6a5f21008d92" manual="true">
+        <element uuid="29cb271d-0d89-4f22-9e0d-d33a2729040f" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>from_filter</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>consumer</seg>
+        </bo>
+        <position x="158.0" y="38.0"/>
+        <size width="272.0" height="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>consumer</seg>
+      </bo>
+      <position x="1004.0" y="93.0"/>
+      <size width="442.0" height="110.0"/>
+    </element>
+    <element uuid="46171981-8797-4124-8893-e927f951ab3f" manual="true">
+      <element uuid="c7139b85-faef-4b49-86a2-d9a0c6bbacce" manual="true">
+        <element uuid="0779705a-7515-4d9d-91b3-f1cb73620d1a" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="59d15cba-d327-4db8-ab41-b59be3383f95" manual="true">
+        <element uuid="30af730c-d9cd-4318-8bee-deb699d262b4" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+      </element>
+      <element uuid="ffc6d733-d5b7-4f99-bfeb-03a781d49681" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>from_producer</seg>
+        </bo>
+        <position y="48.0"/>
+      </element>
+      <element uuid="ea4068ff-45ed-4483-91b9-47f596d725b3" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>to_consumer</seg>
+        </bo>
+        <position x="536.0" y="48.0"/>
+      </element>
+      <element uuid="dbf450dc-51f4-48dd-ba7f-04799006b96e" manual="true">
+        <element uuid="5f9cb645-dac4-4ce6-aa37-425563d18b82" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>from_producer</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="99ca8e3e-bf67-41a5-b88b-b14589643b9d" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>to_consumer</seg>
+          </bo>
+          <position x="201.0" y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>filter</seg>
+        </bo>
+        <position x="218.0" y="38.0"/>
+        <size width="296.0" height="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>filter</seg>
+      </bo>
+      <position x="353.0" y="93.0"/>
+      <size width="631.0" height="110.0"/>
+    </element>
+    <element uuid="36ebaded-7c2b-48bb-95d2-b8b99385d514" manual="true">
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>processor_pfc</seg>
+      </bo>
+      <position x="12.0" y="38.0"/>
+      <size width="147.0" height="35.0"/>
+    </element>
+    <element uuid="eadd8395-489c-4316-9985-186a97b19952" manual="true">
+      <element uuid="8ef29a5e-a53f-4063-a4f7-fb357a618e92" manual="true">
+        <element uuid="edd18fc7-1262-4d5c-80f7-8603a4dff9bf" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="881069da-5233-4964-9bf8-c71cb0651c12" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>to_filter</seg>
+        </bo>
+        <position x="262.0" y="48.0"/>
+      </element>
+      <element uuid="719afca2-8619-4784-ac6c-f6acc843ad3f" manual="true">
+        <element uuid="50374979-d43a-474e-869b-e7510fab9e70" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>to_filter</seg>
+          </bo>
+          <position x="169.0" y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>producer</seg>
+        </bo>
+        <position x="12.0" y="38.0"/>
+        <size width="228.0" height="60.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>producer</seg>
+      </bo>
+      <position x="12.0" y="93.0"/>
+      <size width="321.0" height="110.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>PFC_Sys.Impl</seg>
+    </bo>
+    <position x="12.0" y="12.0"/>
+    <size width="1458.0" height="215.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>PFC::PFC_Sys.Impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>

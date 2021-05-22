@@ -1,0 +1,14 @@
+#ifndef PRODUCER_T_PRODUCER_PRODUCER_ADAPTER_H
+#define PRODUCER_T_PRODUCER_PRODUCER_ADAPTER_H
+
+#include <all.h>
+
+Unit pfc_PFC_producer_t_producer_producer_adapter_initialiseArchitecture(STACK_FRAME_ONLY);
+
+Unit pfc_PFC_producer_t_producer_producer_adapter_initialiseEntryPoint(STACK_FRAME_ONLY);
+
+Unit pfc_PFC_producer_t_producer_producer_adapter_computeEntryPoint(STACK_FRAME_ONLY);
+
+art_Bridge_EntryPoints pfc_PFC_producer_t_producer_producer_adapter_entryPoints(STACK_FRAME_ONLY);
+
+#endif

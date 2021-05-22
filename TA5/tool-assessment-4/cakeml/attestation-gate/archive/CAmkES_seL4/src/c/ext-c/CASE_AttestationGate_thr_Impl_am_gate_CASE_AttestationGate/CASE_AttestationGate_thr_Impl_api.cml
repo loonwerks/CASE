@@ -1,0 +1,105 @@
+(* This structure is populated with HAMR-generated code *)
+structure API =
+struct
+
+  val empty_byte_array = Word8Array.array 0 (Word8.fromInt 0);
+
+  fun logInfo s = (
+    #(api_logInfo) s empty_byte_array
+  );
+
+  val trusted_idsSizeBytes = Int.div 96 8;
+  val automationRequest_inSizeBytes = Int.+ 1 (Int.div 2048 8);
+  val lineSearchTask_inSizeBytes = Int.+ 1 (Int.div 65536 8); 
+  val operatingRegion_inSizeBytes = Int.+ 1 (Int.div 2048 8);
+  
+  val automationRequest_outSizeBytes = Int.div 2048 8;
+  val lineSearchTask_outSizeBytes = Int.div 65536 8; 
+  val operatingRegion_outSizeBytes = Int.div 2048 8;
+  
+  fun get_trusted_ids buffer = (
+    if Word8Array.length buffer >= trusted_idsSizeBytes then
+      #(api_get_trusted_ids) "" buffer
+    else 
+      logInfo (String.concat ["ERROR: get_trusted_ids buffer too small"])
+  )
+
+  fun get_AutomationRequest_in buffer = (
+    if Word8Array.length buffer >= automationRequest_inSizeBytes then
+      #(api_get_AutomationRequest_in) "" buffer
+    else
+      logInfo (String.concat ["ERROR: AutomationRequest_in buffer too small"])
+  )
+  
+  fun send_AutomationRequest_out buffer =  (
+    if Word8Array.length buffer <= automationRequest_outSizeBytes then
+      #(api_send_AutomationRequest_out) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+    else
+      logInfo (String.concat ["ERROR: AutomationRequest_out buffer too large"])
+  );
+  
+  fun get_LineSearchTask_in buffer = (
+    if Word8Array.length buffer >= lineSearchTask_inSizeBytes then
+      #(api_get_LineSearchTask_in) "" buffer
+    else
+      logInfo (String.concat ["ERROR: LineSearchTask_in buffer too small"])
+  )
+  
+  fun send_LineSearchTask_out buffer =  (
+    if Word8Array.length buffer <= lineSearchTask_outSizeBytes then
+      #(api_send_LineSearchTask_out) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+    else
+      logInfo (String.concat ["ERROR: LineSearchTask_out buffer too large"])
+  );
+
+  fun get_OperatingRegion_in buffer = (
+    if Word8Array.length buffer >= operatingRegion_inSizeBytes then
+      #(api_get_OperatingRegion_in) "" buffer
+    else
+      logInfo (String.concat ["ERROR: OperatingRegion_in buffer too small"])
+  )
+  
+  fun send_OperatingRegion_out buffer =  (
+    if Word8Array.length buffer <= operatingRegion_outSizeBytes then
+      #(api_send_OperatingRegion_out) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+    else
+      logInfo (String.concat ["ERROR: OperatingRegion_out buffer too large"])
+  );
+
+  fun toHexDigit nibble =
+    let val nibbleValue = Word8.toInt nibble
+    in case (nibbleValue) 
+    of (0) => "0"
+    | (1) => "1"
+    | (2) => "2"
+    | (3) => "3"
+    | (4) => "4"
+    | (5) => "5"
+    | (6) => "6"
+    | (7) => "7"
+    | (8) => "8"
+    | (9) => "9"
+    | (10) => "a"
+    | (11) => "b"
+    | (12) => "c"
+    | (13) => "d"
+    | (14) => "e"
+    | (15) => "f"
+    | otherwise => "xDohx"
+  end;    
+
+  fun toHex byte =
+    let val highNibble = (Word8.>> byte 4)
+        val lowNibble = (Word8.>> (Word8.<< byte 4) 4)
+    in String.concat [toHexDigit highNibble, toHexDigit lowNibble] 
+  end;
+
+ fun word8ArrayToHex bytes =
+    let val length = (Word8Array.length bytes)
+        fun get i = 
+          if i >= length then "" else
+            String.concat [toHex (Word8Array.sub bytes i), get (i + 1)]
+    in get(0)
+  end;
+
+end;

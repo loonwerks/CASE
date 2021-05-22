@@ -1,0 +1,11 @@
+**/.aadlbin-gen/
+**/instances
+**/src/c/nix
+**/*-build/
+**/slang_libraries/
+**/sel4-build/
+**/workspace/
+
+**/hamr/**/*.cml 
+**/compile-cakeml*.jar
+**/sb_CASE_AttestationGate_thr_Impl.cml

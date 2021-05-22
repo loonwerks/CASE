@@ -1,0 +1,114 @@
+package SysContext
+public
+    with CMASI;
+	renames CMASI::all;
+    with CASE_Scheduling;
+    with RadioDriver;
+    with HAMR;
+    with CM_Property_Set;
+    with CASE_AttestationGate;
+    
+    ----------------------------------------------------------------------
+    processor proc
+    end proc;
+
+    processor implementation proc.Impl
+        properties
+            Frame_Period => 1000ms;
+            Clock_Period => 2ms;
+            CASE_Scheduling::Max_Domain => 15;
+            CASE_Scheduling::Schedule_Source_Text => "kernel/domain_schedule.c";
+    end proc.Impl;
+    ----------------------------------------------------------------------
+    
+	thread UxAS_thr
+		features
+			AutomationRequest: in event data port CMASI::AutomationRequest.i;
+			OperatingRegion: in event data port CMASI::OperatingRegion.i;
+			LineSearchTask: in event data port CMASI::LineSearchTask.i;
+	    properties
+            Dispatch_Protocol => Periodic;
+            Period => 1000ms;
+            Stack_Size => CM_Property_Set::Stack_Size;
+	end UxAS_thr;
+
+	thread implementation UxAS_thr.Impl
+	end UxAS_thr.Impl;
+
+    process UxAS
+        features
+			AutomationRequest: in event data port CMASI::AutomationRequest.i;
+			OperatingRegion: in event data port CMASI::OperatingRegion.i;
+			LineSearchTask: in event data port CMASI::LineSearchTask.i;
+        properties
+            CASE_Scheduling::Domain => CM_Property_Set::UxAS_Domain;
+    end UxAS;
+
+    process implementation UxAS.Impl
+    	subcomponents
+    		UxAS_thread: thread UxAS_thr.Impl;
+    	connections
+    		automationRequest_connection: port AutomationRequest -> UxAS_thread.AutomationRequest;
+    		operatingRegion_connection: port OperatingRegion -> UxAS_thread.OperatingRegion;
+    		lineSearchTask_connection: port LineSearchTask -> UxAS_thread.LineSearchTask;
+    end UxAS.Impl;
+    
+	thread UARTDriver_thr
+		features
+			MissionCommand: in event data port MissionCommand.i;
+			AirVehicleState: out event data port AirVehicleState.i;
+	    properties
+            Dispatch_Protocol => Periodic;
+            Period => 1000ms;
+            Stack_Size => CM_Property_Set::Stack_Size;
+	end UARTDriver_thr;
+
+	thread implementation UARTDriver_thr.Impl
+	end UARTDriver_thr.Impl;
+	
+	process UARTDriver
+	    features
+            MissionCommand: in event data port MissionCommand.i;
+            AirVehicleState: out event data port AirVehicleState.i;
+        properties
+            CASE_Scheduling::Domain => CM_Property_Set::UARTDriver_Domain;  
+	end UARTDriver;
+
+    process implementation UARTDriver.Impl
+    	subcomponents
+    		UARTDriver_thread: thread UARTDriver_thr;
+    	connections
+    		missionCommand_connection: port MissionCommand -> UARTDriver_thread.MissionCommand;
+    		AirVehicleState_connection: port UARTDriver_thread.AirVehicleState -> AirVehicleState;
+    end UARTDriver.Impl;
+
+
+    system top
+    end top;
+
+    system implementation top.Impl
+    	subcomponents
+            proc: processor proc.Impl;
+            uxas: process UxAS.Impl;
+            radio: process RadioDriver::RadioDriver.Impl;
+            am_gate: process CASE_AttestationGate::CASE_AttestationGate.Impl;
+    	connections
+            radio_am_gate_trusted_ids: port radio.trusted_ids_out -> am_gate.trusted_ids;
+            radio_am_gate_ar: port radio.automation_request_out -> am_gate.AutomationRequest_in;
+            radio_am_gate_or: port radio.operating_region_out -> am_gate.OperatingRegion_in;
+            radio_am_gate_lst: port radio.line_search_task_out -> am_gate.LineSearchTask_in;
+            am_gate_uxas_ar: port am_gate.AutomationRequest_out -> uxas.AutomationRequest;
+            am_gate_uxas_or: port am_gate.OperatingRegion_out -> uxas.OperatingRegion;
+            am_gate_uxas_lst: port am_gate.LineSearchTask_out -> uxas.LineSearchTask;
+    	properties
+            Actual_Processor_Binding => (reference (proc)) applies to uxas;
+            Actual_Processor_Binding => (reference (proc)) applies to radio;
+            Actual_Processor_Binding => (reference (proc)) applies to am_gate;
+            
+            HAMR::Default_Bit_Width => 32;
+            HAMR::Default_Max_Sequence_Size => 1;
+            HAMR::Max_String_Size => 256;
+            HAMR::Bit_Codec_Raw_Connections => true;         
+    end top.Impl;
+    	
+end SysContext;

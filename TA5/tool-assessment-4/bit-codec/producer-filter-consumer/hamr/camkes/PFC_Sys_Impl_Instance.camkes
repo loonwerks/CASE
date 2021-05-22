@@ -1,0 +1,38 @@
+// This file will be regenerated, do not edit
+
+import <std_connector.camkes>;
+import "components/producer_t_producer_producer/producer_t_producer_producer.camkes";
+import "components/filter_t_filter_filter/filter_t_filter_filter.camkes";
+import "components/consumer_t_consumer_consumer/consumer_t_consumer_consumer.camkes";
+
+assembly {
+  composition {
+    component producer_t_producer_producer producer_producer;
+    component filter_t_filter_filter filter_filter;
+    component consumer_t_consumer_consumer consumer_consumer;
+
+    connection seL4Notification conn1(from producer_producer.sb_to_filter_1_notification, to filter_filter.sb_from_producer_notification);
+    connection seL4SharedData conn2(from producer_producer.sb_to_filter_queue_1, to filter_filter.sb_from_producer_queue);
+    connection seL4Notification conn3(from filter_filter.sb_to_consumer_1_notification, to consumer_consumer.sb_from_filter_notification);
+    connection seL4SharedData conn4(from filter_filter.sb_to_consumer_queue_1, to consumer_consumer.sb_from_filter_queue);
+    connection seL4Notification conn5(from producer_producer.sb_self_pacer_tick, to producer_producer.sb_self_pacer_tock);
+    connection seL4Notification conn6(from filter_filter.sb_self_pacer_tick, to filter_filter.sb_self_pacer_tock);
+    connection seL4Notification conn7(from consumer_consumer.sb_self_pacer_tick, to consumer_consumer.sb_self_pacer_tock);
+  }
+
+  configuration {
+    producer_producer._stack_size = 20480;
+    producer_producer._domain = 2;
+    filter_filter._stack_size = 20480;
+    filter_filter._domain = 3;
+    consumer_consumer._stack_size = 20480;
+    consumer_consumer._domain = 4;
+    conn2.size = 4096;
+    producer_producer.sb_to_filter_queue_1_access = "W";
+    filter_filter.sb_from_producer_queue_access = "R";
+    conn4.size = 4096;
+    filter_filter.sb_to_consumer_queue_1_access = "W";
+    consumer_consumer.sb_from_filter_queue_access = "R";
+
+  }
+}

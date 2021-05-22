@@ -1,0 +1,8 @@
+component producer_t_i_producer_producer {
+  include <sb_types.h>;
+  include <sb_queue_union_art_DataContent_1.h>;
+  control;
+  emits ReceiveEvent sb_write_port_1_notification;
+  consumes Period sb_pacer_notification;
+  dataport sb_queue_union_art_DataContent_1_t sb_write_port_queue_1;
+}

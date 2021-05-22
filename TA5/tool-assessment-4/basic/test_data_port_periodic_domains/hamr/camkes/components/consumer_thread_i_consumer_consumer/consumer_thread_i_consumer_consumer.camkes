@@ -1,0 +1,8 @@
+component consumer_thread_i_consumer_consumer {
+  include <sb_types.h>;
+  include <sp_union_art_DataContent.h>;
+  control;
+  emits TickTock sb_self_pacer_tick;
+  consumes TickTock sb_self_pacer_tock;
+  dataport sp_union_art_DataContent_t sb_read_port;
+}

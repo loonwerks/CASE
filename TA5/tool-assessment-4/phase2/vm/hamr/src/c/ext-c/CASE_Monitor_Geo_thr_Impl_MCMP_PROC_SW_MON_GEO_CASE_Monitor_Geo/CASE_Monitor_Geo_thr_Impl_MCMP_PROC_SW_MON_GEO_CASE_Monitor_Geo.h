@@ -1,0 +1,12 @@
+#ifndef CASE_MONITOR_GEO_THR_IMPL_MCMP_PROC_SW_MON_GEO_CASE_MONITOR_GEO_H
+#define CASE_MONITOR_GEO_THR_IMPL_MCMP_PROC_SW_MON_GEO_CASE_MONITOR_GEO_H
+
+#include <all.h>
+
+Unit hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_initialise_(STACK_FRAME_ONLY);
+
+Unit hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_finalise_(STACK_FRAME_ONLY);
+
+Unit hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_timeTriggered_(STACK_FRAME_ONLY);
+
+#endif

@@ -1,0 +1,25 @@
+#include <RadioDriver_thr_Impl_radio_RadioDriver_adapter.h>
+
+Unit attestation_gate_RadioDriver_RadioDriver_thr_Impl_radio_RadioDriver_adapter_initialiseArchitecture(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "RadioDriver_thr_Impl_radio_RadioDriver_adapter.c", "", "attestation_gate_RadioDriver_RadioDriver_thr_Impl_radio_RadioDriver_adapter_initialiseArchitecture", 0);
+
+  attestation_gate_RadioDriver_thr_Impl_radio_RadioDriver_RadioDriver_initialiseArchitecture(SF_LAST);
+}
+
+Unit attestation_gate_RadioDriver_RadioDriver_thr_Impl_radio_RadioDriver_adapter_initialiseEntryPoint(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "RadioDriver_thr_Impl_radio_RadioDriver_adapter.c", "", "attestation_gate_RadioDriver_RadioDriver_thr_Impl_radio_RadioDriver_adapter_initialiseEntryPoint", 0);
+
+  attestation_gate_RadioDriver_thr_Impl_radio_RadioDriver_RadioDriver_initialiseEntryPoint(SF_LAST);
+}
+
+Unit attestation_gate_RadioDriver_RadioDriver_thr_Impl_radio_RadioDriver_adapter_computeEntryPoint(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "RadioDriver_thr_Impl_radio_RadioDriver_adapter.c", "", "attestation_gate_RadioDriver_RadioDriver_thr_Impl_radio_RadioDriver_adapter_computeEntryPoint", 0);
+
+  attestation_gate_RadioDriver_thr_Impl_radio_RadioDriver_RadioDriver_computeEntryPoint(SF_LAST);
+}
+
+art_Bridge_EntryPoints attestation_gate_RadioDriver_RadioDriver_thr_Impl_radio_RadioDriver_adapter_entryPoints(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "RadioDriver_thr_Impl_radio_RadioDriver_adapter.c", "", "attestation_gate_RadioDriver_RadioDriver_thr_Impl_radio_RadioDriver_adapter_entryPoints", 0);
+
+  return attestation_gate_RadioDriver_thr_Impl_radio_RadioDriver_RadioDriver_entryPoints(SF_LAST);
+}

@@ -1,0 +1,51 @@
+package RadioDriver
+public
+	with CMASI;
+	with CASE_Properties;
+	with CM_Property_Set;
+	with CASE_Scheduling;
+	
+	------------------
+	-- Radio Driver --
+	------------------
+
+	thread RadioDriver_thr
+		features
+			trusted_ids_out: out data port CMASI::AddressArray.i;
+			automation_request_out: out event data port CMASI::AddressAttributedMessage.i;
+			operating_region_out: out event data port CMASI::AddressAttributedMessage.i;
+			line_search_task_out: out event data port CMASI::AddressAttributedMessage.i;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 20ms .. 20ms;
+            Stack_Size => CM_Property_Set::Stack_Size;
+	end RadioDriver_thr;
+
+	thread implementation RadioDriver_thr.Impl
+		--properties
+			-- CASE_Properties::Component_Type => COMM_DRIVER;
+	end RadioDriver_thr.Impl;
+
+	process RadioDriver
+		features
+			-- UxAS
+			trusted_ids_out: out data port CMASI::AddressArray.i;
+			automation_request_out: out event data port CMASI::AddressAttributedMessage.i;
+			operating_region_out: out event data port CMASI::AddressAttributedMessage.i;
+			line_search_task_out: out event data port CMASI::AddressAttributedMessage.i;
+		properties
+			CASE_Scheduling::Domain => CM_Property_Set::Radio_Domain;
+	end RadioDriver;
+	
+	process implementation RadioDriver.Impl
+		subcomponents
+			RadioDriver: thread RadioDriver_thr.Impl;
+		connections
+			automation_request_connection: port RadioDriver.automation_request_out -> automation_request_out;
+			operating_region_connection: port RadioDriver.operating_region_out -> operating_region_out;
+			line_search_task_connection: port RadioDriver.line_search_task_out -> line_search_task_out;
+			trusted_ids_connection: port RadioDriver.trusted_ids_out -> trusted_ids_out;
+	end RadioDriver.Impl;
+
+end RadioDriver;

@@ -1,0 +1,58 @@
+package Drivers
+public
+	with CASE_Model_Transformations;
+	with CMASI;
+	with CASEAgree;
+	with CASE_Properties;
+
+	thread RadioDriver
+		-- The RadioDriver is the software that enables other SW components to communicate to other systems over RF
+		features
+			recv_data: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			send_data: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+
+			-- UxAS
+--			AutomationResponse: in event data port CMASI::AutomationResponse.i;
+--			AirVehicleState: in event data port CMASI::AirVehicleState.i;
+
+			AutomationRequest: out event data port CMASI::AddressAttributedMessage.i;
+			OperatingRegion: out event data port CMASI::AddressAttributedMessage.i;
+			LineSearchTask: out event data port CMASI::AddressAttributedMessage.i;
+
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 20ms .. 20ms;
+	end RadioDriver;
+
+	thread implementation RadioDriver.Impl
+		--properties
+		--	CASE_Properties::Component_Type => COMM_DRIVER;
+	end RadioDriver.Impl;
+
+	thread UARTDriver
+		-- The UARTDriver is the software that enables other SW components to communicate to other systems over the serial connection
+		features
+			recv_data: in event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			MissionCommand: in event data port CMASI::MissionCommand.i;
+
+			send_data: out event data port CASE_Model_Transformations::CASE_UART_Msg.Impl;
+			AirVehicleState_WPM: out event data port CMASI::AirVehicleState.i;
+			AirVehicleState_UXAS: out event data port CMASI::AirVehicleState.i;
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 6ms .. 6ms;
+			Stack_Size => CM_Property_Set::Stack_Size;
+		annex agree {**
+			assume Req001_UARTDriver "Assumes recv_data only gets well formed CASE_UART_Msg.Impl types" : 
+					        CASEAgree::WellformedCASE_UART_Msg(recv_data);
+			guarantee Req003_UARTDRiver "The send_data outputs only well formed CASE_UART_Msg.Impl types" : 
+			                CASEAgree::WellformedCASE_UART_Msg(send_data);
+		**};
+	end UARTDriver;
+
+	thread implementation UARTDriver.Impl
+	end UARTDriver.Impl;
+
+end Drivers;

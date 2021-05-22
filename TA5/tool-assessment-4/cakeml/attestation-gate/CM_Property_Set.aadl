@@ -1,0 +1,22 @@
+property set CM_Property_Set is
+	Stack_Size: constant Size => 16777216 Bytes;
+	Radio_Domain: constant aadlinteger => 2;
+	UARTDriver_Domain: constant aadlinteger => 3;
+	AM_Gate_Domain: constant aadlinteger => 5;
+	UxAS_Domain: constant aadlinteger => 9;
+	FlyZonesDatabase_Domain: constant aadlinteger => 10;
+	CASE_Monitor_Req_Domain: constant aadlinteger => 11;
+	CASE_Monitor_Geo_Domain: constant aadlinteger => 13;
+	WaypointPlanManangerService_Domain: constant aadlinteger => 14;
+	-- EGM: HAMR crashes on Mac OS with 2^14 (16k) so turned down to 2^13
+    AutomationResponse_Bit_Codec_Max_Size: constant Size => 262144 Bits; -- 22951 Bytes --> made 2^18 bits
+    AutomationRequest_Bit_Codec_Max_Size: constant Size => 2048 Bits; -- 129 Bytes --> made 2^11 bits
+    Polygon_Bit_Codec_Max_Size: constant Size => 1024 Bits;
+    MissionCommand_Bit_Codec_Max_Size: constant Size => 16384 Bits; -- 1834 Bytes --> made 2^14 bits
+    AirVehicleState_Bit_Codec_Max_Size: constant Size => 4096 Bits; -- 263 Bytes --> made 2^12 bits
+    Address_Array_Codec_Max_Size: constant Size => 96 Bits;
+    OperatingRegion_Codec_Max_Size: constant Size => 2048 Bits; -- 131 Bytes --> 2^11 bits
+    LineSearchTask_Codec_Max_Size: constant Size => 65536 Bits; -- 7989 Bytes --> 2^16 bits
+    AddressAttributedMessage_Codec_Max_Size: constant Size => 131072 Bits;
+    
+end CM_Property_Set;

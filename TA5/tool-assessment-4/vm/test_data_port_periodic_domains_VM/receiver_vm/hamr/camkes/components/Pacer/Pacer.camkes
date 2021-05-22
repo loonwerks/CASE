@@ -1,0 +1,9 @@
+component Pacer {
+  include <sb_queue_int8_t_1.h>;
+  control;
+  emits Period_VM period_to_vmconsumer_notification;
+  emits Period period;
+  emits TickTock tick;
+  consumes TickTock tock;
+  dataport sb_queue_int8_t_1_t period_to_vmconsumer_queue;
+}

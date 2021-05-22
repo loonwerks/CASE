@@ -1,0 +1,12 @@
+#ifndef FLYZONESDATABASE_THR_IMPL_MCMP_PROC_SW_FLYZONES_FLYZONESDATABASE_H
+#define FLYZONESDATABASE_THR_IMPL_MCMP_PROC_SW_FLYZONES_FLYZONESDATABASE_H
+
+#include <all.h>
+
+Unit hamr_SW_FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_initialise_(STACK_FRAME_ONLY);
+
+Unit hamr_SW_FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_finalise_(STACK_FRAME_ONLY);
+
+Unit hamr_SW_FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_timeTriggered_(STACK_FRAME_ONLY);
+
+#endif
