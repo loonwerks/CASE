@@ -56,7 +56,7 @@
 
 Bit-Codec is not currently integrated with HAMR Codegen so the developers needs to create the bit-codec spec by hand and then call the bit-codec generator (e.g. [aadl/bin/bcgen.sh](aadl/bin/bcgen.sh)).  This will generate structured data types, encoders and decoders  (e.g. [hamr/slang/src/main/data/pfc/PFC/MissionBitCodec.scala](hamr/slang/src/main/data/pfc/PFC/MissionBitCodec.scala))
 
-The transpiler only includes Slang artifacts that are reachable from its apps option (e.g. [here](hamr/slang/bin/transpile.sh#L24)) so the developer also needs expliclity call the decoders/encoders/etc so that they are available at the C level (e.g. [hamr/slang/src/main/component/pfc/TranspilerToucher.scala](hamr/slang/src/main/component/pfc/TranspilerToucher.scala))
+The transpiler only includes Slang artifacts that are reachable from its apps option (e.g. [here](hamr/slang/bin/transpile.sh#L24)) so the developer also needs to expliclity call the decoders/encoders/etc so that they are available at the C level (e.g. [hamr/slang/src/main/component/pfc/TranspilerToucher.scala](hamr/slang/src/main/component/pfc/TranspilerToucher.scala))
 
 An example workflow:
 ```
@@ -64,7 +64,7 @@ An example workflow:
 ./aadl/bin/bcgen.sh
 ```
 
-Developer 'touches' bit-codec artifacts and then runs the transpiler like below.  Note that the transpiler only needs to be done when/if Slang artifacts are modified.
+Developer 'touches' bit-codec artifacts and then runs the transpiler like below.  Note that the transpiler only needs to be rerun when/if Slang artifacts are modified.
 
 ```
 ./hamr/slang/bin/transpile.sh
