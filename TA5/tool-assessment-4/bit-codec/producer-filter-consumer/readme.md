@@ -3,6 +3,7 @@
  Table of Contents
 <!--table-of-contents_start-->
   * [AADL Architecture](#aadl-architecture)
+  * [Bit-Codec Spec](#bit-codec-spec)
   * [Linux](#linux)
     * [HAMR Configuration: Linux](#hamr-configuration-linux)
     * [Behavior Code: Linux](#behavior-code-linux)
