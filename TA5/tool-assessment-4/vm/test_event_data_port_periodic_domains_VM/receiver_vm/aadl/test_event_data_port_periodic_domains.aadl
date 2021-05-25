@@ -91,7 +91,7 @@ public
 			c1: port producer.write_port -> consumer.read_port;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to producer, consumer;
-			HAMR::Platform => (seL4, seL4_Only);
+			HAMR::Platform => (seL4);
 			HAMR::Bit_Codec_Raw_Connections => true;
 		annex resolute {**
 			check HAMR_Guidelines

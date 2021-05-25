@@ -86,7 +86,7 @@ public
 			c1: port producer.emit -> consumer.consume;
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to producer, consumer;
-			HAMR::Platform => (seL4_TB, seL4_Only);
+			HAMR::Platform => (Linux, seL4);
 		annex resolute {**
 			check HAMR_Guidelines
 		**};
