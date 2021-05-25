@@ -48,8 +48,8 @@ public
 			Actual_Processor_Binding => (reference (processor_pfc)) applies to producer, filter, consumer;
 			
 		annex resolute {**
-			check CASE_Tools
-		**};			
+			check HAMR_Guidelines
+		**};
 	end PFC_Sys.Impl;
 
 	------------------------------------------------------------------------

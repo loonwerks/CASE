@@ -87,9 +87,9 @@ public
 		properties
 			Actual_Processor_Binding => (reference (proc)) applies to producer, consumer;
 			HAMR::Platform => (seL4_TB, seL4_Only);
-	--annex resolute {**
-	--	check CASE_Tools
-	--**};
+		annex resolute {**
+			check HAMR_Guidelines
+		**};
 	end top.impl;
 
 end test_event_port_periodic_domains;

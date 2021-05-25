@@ -93,9 +93,9 @@ public
 			Actual_Processor_Binding => (reference (proc)) applies to producer, consumer;
 			HAMR::Platform => (seL4, seL4_Only);
 			HAMR::Bit_Codec_Raw_Connections => true;
-	--annex resolute {**
-	--	check CASE_Tools
-	--**};
+		annex resolute {**
+			check HAMR_Guidelines
+		**};
 	end top.impl;
 
 end test_event_data_port_periodic_domains;
