@@ -72,20 +72,6 @@ void sb_freeze_event_port_consume() {
   }
 }
 
-/************************************************************************
- * sb_consume_handler:
- * Invoked by: seL4 notification callback
- *
- * This is the function invoked by an seL4 notification callback to 
- * dispatch the component due to the arrival of an event on port
- * consume
- *
- ************************************************************************/
-static void sb_consume_handler(void * unused) {
-  MUTEXOP(sb_dispatch_sem_post())
-  CALLBACKOP(sb_consume_reg_callback(sb_consume_handler, NULL));
-}
-
 // is_empty consume: In EventPort
 B base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_seL4Nix_consume_IsEmpty(STACK_FRAME_ONLY) {
   return sb_consume_is_empty();
@@ -125,13 +111,6 @@ void pre_init(void) {
   printf("Leaving pre-init of consumer_t_i_consumer_consumer\n");
 }
 
-void post_init(void) {
-  DeclNewStackFrame(NULL, "sb_consumer_t_i.c", "", "post_init", 0);
-
-  // register callback for EventPort port consume
-  CALLBACKOP(sb_consume_reg_callback(sb_consume_handler, NULL));
-}
-
 /************************************************************************
  * int run(void)
  * Main active thread function.
@@ -140,12 +119,13 @@ int run(void) {
   DeclNewStackFrame(NULL, "sb_consumer_t_i.c", "", "run", 0);
 
 
-  MUTEXOP(sb_dispatch_sem_wait())
+  sb_self_pacer_tick_emit();
   for(;;) {
-    MUTEXOP(sb_dispatch_sem_wait())
+    sb_self_pacer_tock_wait();
     sb_freeze_event_port_consume();
     // call the component's compute entrypoint
     base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_adapter_computeEntryPoint(SF_LAST);
+    sb_self_pacer_tick_emit();
   }
   return 0;
 }

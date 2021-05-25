@@ -40,7 +40,8 @@ public
 		features
 			consume: in event port;
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
 			Compute_Execution_Time => 10ms .. 10ms;
 	end consumer_t;
 

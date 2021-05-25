@@ -10,7 +10,7 @@ object consumer_t_i_consumer_consumer {
 
   def initialise(api: consumer_t_i_Initialization_Api): Unit = { }
 
-  def handle_consume(api: consumer_t_i_Operational_Api): Unit = { }
+  def timeTriggered(api: consumer_t_i_Operational_Api): Unit = { }
 
   def activate(api: consumer_t_i_Operational_Api): Unit = { }
 

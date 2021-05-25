@@ -33,7 +33,7 @@
 
 |consumer Properties|
 |--|
-|Sporadic|
+|Periodic: 1000 ms|
 |Native|
 
 
@@ -100,11 +100,11 @@ Timeout = 18 seconds
 ```
 Booting all finished, dropped to user space
 Entering pre-init of consumer_t_i_consumer_consumer
-Entering pre-init of producer_t_i_producer_producer
-Art: Registered compoArt: Registered component: top_impl_Instance_consumer_consumer (sporadic: 1)
+Art: Registered Entering pre-init of producer_t_i_producer_producer
+Art: Registered component: top_impl_Instance_producer_producer (periodic: 1000)
+component: top_impl_Instance_consumer_consumer (periodic: 1000)
 Art: - Registered port: top_impl_Instance_consumer_consumer_consume (event in)
 Leaving pre-init of consumer_t_i_consumer_consumer
-nent: top_impl_Instance_producer_producer (periodic: 1000)
 Art: - Registered port: top_impl_Instance_producer_producer_emit (event out)
 Leaving pre-init of producer_t_i_producer_producer
 top_impl_Instance_consumer_consumer: Received 1 events on consume
@@ -113,7 +113,6 @@ top_impl_Instance_consumer_consumer: Received 3 events on consume
 top_impl_Instance_consumer_consumer: Received 4 events on consume
 top_impl_Instance_consumer_consumer: Received 5 events on consume
 top_impl_Instance_consumer_consumer: Received 6 events on consume
-top_impl_Instance_consumer_consumer: Received 7 events on consume
 
 ```
 <!--example-output-sel4_end-->

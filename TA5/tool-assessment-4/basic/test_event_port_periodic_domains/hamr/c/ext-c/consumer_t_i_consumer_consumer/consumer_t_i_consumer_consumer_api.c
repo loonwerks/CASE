@@ -86,10 +86,10 @@ Unit base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_finali
   base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_finalise_(SF_LAST);
 }
 
-Unit base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_handle_consume(
+Unit base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered(
   STACK_FRAME
   base_test_event_port_periodic_domains_consumer_t_i_Operational_Api api) {
-  DeclNewStackFrame(caller, "consumer_t_i_consumer_consumer_api.c", "", "base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_handle_consume", 0);
+  DeclNewStackFrame(caller, "consumer_t_i_consumer_consumer_api.c", "", "base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered", 0);
 
-  base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_handle_consume_(SF_LAST);
+  base_test_event_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered_(SF_LAST);
 }

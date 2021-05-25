@@ -27,23 +27,18 @@ object consumer_t_i_consumer_consumer_App extends App {
   }
 
   def compute(): Unit = {
-    var dispatch = F
 
     {
       val out = IPCPorts.emptyReceiveAsyncOut
       Platform.receiveAsync(consumePortIdOpt, out)
       out.value2 match {
-        case Some(v: art.Empty) => ArtNix.updateData(consumePortId, v); dispatch = T
+        case Some(v: art.Empty) => ArtNix.updateData(consumePortId, v)
         case Some(v) => halt(s"Unexpected payload on port consume.  Expecting something of type art.Empty but received ${v}")
         case None() => // do nothing
       }
     }
-    if (dispatch) {
-      entryPoints.compute()
-      Process.sleep(1)
-    } else {
-      Process.sleep(10)
-    }
+    entryPoints.compute()
+    Process.sleep(1000)
   }
 
   def finalise(): Unit = {
@@ -69,7 +64,7 @@ object consumer_t_i_consumer_consumer_App extends App {
 
     println("consumer_t_i_consumer_consumer_App starting ...")
 
-    ArtNix.eventDispatch()
+    ArtNix.timeDispatch()
 
     var terminated = F
     while (!terminated) {
