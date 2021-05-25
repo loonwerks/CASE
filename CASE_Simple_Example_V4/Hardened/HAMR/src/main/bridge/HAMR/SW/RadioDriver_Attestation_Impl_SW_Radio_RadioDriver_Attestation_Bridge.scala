@@ -15,9 +15,9 @@ import HAMR.SW.{RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation =>
   val dispatchProtocol: DispatchPropertyProtocol,
   val dispatchTriggers: Option[ISZ[Art.PortId]],
 
-  MissionCommand: Port[SW.RF_Msg_Impl],
-  AttestationRequest: Port[CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl],
-  AttestationResponse: Port[CASE_Model_Transformations.CASE_AttestationResponseMsg_Impl],
+  MissionCommand: Port[Base_Types.Bits],
+  AttestationRequest: Port[Base_Types.Bits],
+  AttestationResponse: Port[Base_Types.Bits],
   Alert: Port[art.Empty]
   ) extends Bridge {
 
@@ -130,9 +130,9 @@ object RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge {
 
       for(portId <- dispatchableEventPorts) {
         if(portId == AttestationRequest_Id){
-          val Some(CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl_Payload(value)) = Art.getValue(AttestationRequest_Id)
+          val Some(Base_Types.Bits_Payload(value)) = Art.getValue(AttestationRequest_Id)
 
-          // implement the following in 'component':  def handle_AttestationRequest(api: RadioDriver_Attestation_Impl_Operational_Api, value: CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl): Unit = {}
+          // implement the following in 'component':  def handle_AttestationRequest(api: RadioDriver_Attestation_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
           component.handle_AttestationRequest(operational_api, value)
         }
         else if(portId == Alert_Id) {
@@ -170,9 +170,9 @@ object RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge {
 
       for(portId <- dispatchableEventPorts) {
         if(portId == AttestationRequest_Id){
-          val Some(CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl_Payload(value)) = Art.getValue(AttestationRequest_Id)
+          val Some(Base_Types.Bits_Payload(value)) = Art.getValue(AttestationRequest_Id)
 
-          // implement the following in 'component':  def handle_AttestationRequest(api: RadioDriver_Attestation_Impl_Operational_Api, value: CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl): Unit = {}
+          // implement the following in 'component':  def handle_AttestationRequest(api: RadioDriver_Attestation_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
           component.handle_AttestationRequest(operational_api, value)
         }
         else if(portId == Alert_Id) {

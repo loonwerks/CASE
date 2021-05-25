@@ -1,86 +1,71 @@
 // This file will be regenerated, do not edit
 
 import <std_connector.camkes>;
-import "components/FlyZoneDatabase_Impl_SW_FlyZones_FlyZoneDatabase/FlyZoneDatabase_Impl_SW_FlyZones_FlyZoneDatabase.camkes";
 import "components/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation.camkes";
-import "components/UARTDriver_Impl_SW_UART_UARTDriver/UARTDriver_Impl_SW_UART_UARTDriver.camkes";
-import "components/CASE_AttestationGate_Impl_SW_AttestationGate_CASE_AttestationGate/CASE_AttestationGate_Impl_SW_AttestationGate_CASE_AttestationGate.camkes";
-import "components/CASE_Filter_Impl_SW_Filter_CASE_Filter/CASE_Filter_Impl_SW_Filter_CASE_Filter.camkes";
-import "components/WaypointManager_Impl_SW_WaypointManager_WaypointManager/WaypointManager_Impl_SW_WaypointManager_WaypointManager.camkes";
-import "components/CASE_AttestationManager_Impl_SW_AttestationManager_CASE_AttestationManager/CASE_AttestationManager_Impl_SW_AttestationManager_CASE_AttestationManager.camkes";
-import "components/GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor/GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor.camkes";
-import "components/ResponseMonitor_Impl_SW_ResponseMonitor_ResponseMonitor/ResponseMonitor_Impl_SW_ResponseMonitor_ResponseMonitor.camkes";
+import "components/Monitor_Impl_SW_Monitor_Monitor/Monitor_Impl_SW_Monitor_Monitor.camkes";
+import "components/FlightController_Impl_SW_FlightController_FlightController/FlightController_Impl_SW_FlightController_FlightController.camkes";
+import "components/AttestationManager_Impl_SW_AttestationManager_AttestationManager/AttestationManager_Impl_SW_AttestationManager_AttestationManager.camkes";
+import "components/Filter_Impl_SW_Filter_Filter/Filter_Impl_SW_Filter_Filter.camkes";
 import "components/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner.camkes";
+import "components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/AttestationGate_Impl_SW_AttestationGate_AttestationGate.camkes";
 
 assembly {
   composition {
-    component FlyZoneDatabase_Impl_SW_FlyZones_FlyZoneDatabase SW_FlyZones_FlyZoneDatabase;
     component RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation SW_Radio_RadioDriver_Attestation;
-    component UARTDriver_Impl_SW_UART_UARTDriver SW_UART_UARTDriver;
-    component CASE_AttestationGate_Impl_SW_AttestationGate_CASE_AttestationGate SW_AttestationGate_CASE_AttestationGate;
-    component CASE_Filter_Impl_SW_Filter_CASE_Filter SW_Filter_CASE_Filter;
-    component WaypointManager_Impl_SW_WaypointManager_WaypointManager SW_WaypointManager_WaypointManager;
-    component CASE_AttestationManager_Impl_SW_AttestationManager_CASE_AttestationManager SW_AttestationManager_CASE_AttestationManager;
-    component GeofenceMonitor_Impl_SW_GeofenceMonitor_GeofenceMonitor SW_GeofenceMonitor_GeofenceMonitor;
-    component ResponseMonitor_Impl_SW_ResponseMonitor_ResponseMonitor SW_ResponseMonitor_ResponseMonitor;
+    component Monitor_Impl_SW_Monitor_Monitor SW_Monitor_Monitor;
+    component FlightController_Impl_SW_FlightController_FlightController SW_FlightController_FlightController;
+    component AttestationManager_Impl_SW_AttestationManager_AttestationManager SW_AttestationManager_AttestationManager;
+    component Filter_Impl_SW_Filter_Filter SW_Filter_Filter;
     component FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner SW_FlightPlanner_FlightPlanner;
+    component AttestationGate_Impl_SW_AttestationGate_AttestationGate SW_AttestationGate_AttestationGate;
 
-    connection seL4SharedData conn1(from SW_FlyZones_FlyZoneDatabase.sb_FlyZones, to SW_GeofenceMonitor_GeofenceMonitor.sb_FlyZones);
-    connection seL4Notification conn2(from SW_Radio_RadioDriver_Attestation.sb_MissionCommand_1_notification, to SW_AttestationGate_CASE_AttestationGate.sb_MissionCommand_in_notification);
-    connection seL4SharedData conn3(from SW_Radio_RadioDriver_Attestation.sb_MissionCommand_queue_1, to SW_AttestationGate_CASE_AttestationGate.sb_MissionCommand_in_queue);
-    connection seL4Notification conn4(from SW_Radio_RadioDriver_Attestation.sb_AttestationResponse_1_notification, to SW_AttestationManager_CASE_AttestationManager.sb_AttestationResponse_notification);
-    connection seL4SharedData conn5(from SW_Radio_RadioDriver_Attestation.sb_AttestationResponse_queue_1, to SW_AttestationManager_CASE_AttestationManager.sb_AttestationResponse_queue);
-    connection seL4Notification conn6(from SW_UART_UARTDriver.sb_Status_1_notification, to SW_WaypointManager_WaypointManager.sb_Status_notification);
-    connection seL4SharedData conn7(from SW_UART_UARTDriver.sb_Status_queue_1, to SW_WaypointManager_WaypointManager.sb_Status_queue);
-    connection seL4Notification conn8(from SW_AttestationGate_CASE_AttestationGate.sb_MissionCommand_out_1_notification, to SW_Filter_CASE_Filter.sb_Input_notification, to SW_ResponseMonitor_ResponseMonitor.sb_MissionCommand_notification);
-    connection seL4SharedData conn9(from SW_AttestationGate_CASE_AttestationGate.sb_MissionCommand_out_queue_1, to SW_Filter_CASE_Filter.sb_Input_queue, to SW_ResponseMonitor_ResponseMonitor.sb_MissionCommand_queue);
-    connection seL4Notification conn10(from SW_Filter_CASE_Filter.sb_Output_1_notification, to SW_FlightPlanner_FlightPlanner.sb_MissionCommand_notification);
-    connection seL4SharedData conn11(from SW_Filter_CASE_Filter.sb_Output_queue_1, to SW_FlightPlanner_FlightPlanner.sb_MissionCommand_queue);
-    connection seL4Notification conn12(from SW_WaypointManager_WaypointManager.sb_MissionWindow_1_notification, to SW_UART_UARTDriver.sb_MissionWindow_notification);
-    connection seL4SharedData conn13(from SW_WaypointManager_WaypointManager.sb_MissionWindow_queue_1, to SW_UART_UARTDriver.sb_MissionWindow_queue);
-    connection seL4Notification conn14(from SW_AttestationManager_CASE_AttestationManager.sb_AttestationRequest_1_notification, to SW_Radio_RadioDriver_Attestation.sb_AttestationRequest_notification);
-    connection seL4SharedData conn15(from SW_AttestationManager_CASE_AttestationManager.sb_AttestationRequest_queue_1, to SW_Radio_RadioDriver_Attestation.sb_AttestationRequest_queue);
-    connection seL4Notification conn16(from SW_AttestationManager_CASE_AttestationManager.sb_TrustedIds_1_notification, to SW_AttestationGate_CASE_AttestationGate.sb_TrustedIds_notification);
-    connection seL4SharedData conn17(from SW_AttestationManager_CASE_AttestationManager.sb_TrustedIds_queue_1, to SW_AttestationGate_CASE_AttestationGate.sb_TrustedIds_queue);
-    connection seL4Notification conn18(from SW_GeofenceMonitor_GeofenceMonitor.sb_FlightPlan_Out_1_notification, to SW_WaypointManager_WaypointManager.sb_FlightPlan_notification);
-    connection seL4SharedData conn19(from SW_GeofenceMonitor_GeofenceMonitor.sb_FlightPlan_Out_queue_1, to SW_WaypointManager_WaypointManager.sb_FlightPlan_queue);
-    connection seL4Notification conn20(from SW_GeofenceMonitor_GeofenceMonitor.sb_Alert, to SW_WaypointManager_WaypointManager.sb_ReturnHome);
-    connection seL4SharedData conn21(from SW_GeofenceMonitor_GeofenceMonitor.sb_Alert_counter, to SW_WaypointManager_WaypointManager.sb_ReturnHome_counter);
-    connection seL4Notification conn22(from SW_ResponseMonitor_ResponseMonitor.sb_Alert, to SW_Radio_RadioDriver_Attestation.sb_Alert);
-    connection seL4SharedData conn23(from SW_ResponseMonitor_ResponseMonitor.sb_Alert_counter, to SW_Radio_RadioDriver_Attestation.sb_Alert_counter);
-    connection seL4Notification conn24(from SW_FlightPlanner_FlightPlanner.sb_FlightPlan_1_notification, to SW_ResponseMonitor_ResponseMonitor.sb_FlightPlan_notification, to SW_GeofenceMonitor_GeofenceMonitor.sb_FlightPlan_In_notification);
-    connection seL4SharedData conn25(from SW_FlightPlanner_FlightPlanner.sb_FlightPlan_queue_1, to SW_ResponseMonitor_ResponseMonitor.sb_FlightPlan_queue, to SW_GeofenceMonitor_GeofenceMonitor.sb_FlightPlan_In_queue);
+    connection seL4Notification conn1(from SW_Radio_RadioDriver_Attestation.sb_MissionCommand_1_notification, to SW_AttestationGate_AttestationGate.sb_MissionCommand_in_notification);
+    connection seL4SharedData conn2(from SW_Radio_RadioDriver_Attestation.sb_MissionCommand_queue_1, to SW_AttestationGate_AttestationGate.sb_MissionCommand_in_queue);
+    connection seL4Notification conn3(from SW_Radio_RadioDriver_Attestation.sb_AttestationResponse_1_notification, to SW_AttestationManager_AttestationManager.sb_AttestationResponse_notification);
+    connection seL4SharedData conn4(from SW_Radio_RadioDriver_Attestation.sb_AttestationResponse_queue_1, to SW_AttestationManager_AttestationManager.sb_AttestationResponse_queue);
+    connection seL4Notification conn5(from SW_Monitor_Monitor.sb_FlightPlan_out_1_notification, to SW_FlightController_FlightController.sb_FlightPlan_notification);
+    connection seL4SharedData conn6(from SW_Monitor_Monitor.sb_FlightPlan_out_queue_1, to SW_FlightController_FlightController.sb_FlightPlan_queue);
+    connection seL4Notification conn7(from SW_Monitor_Monitor.sb_Alert, to SW_Radio_RadioDriver_Attestation.sb_Alert);
+    connection seL4SharedData conn8(from SW_Monitor_Monitor.sb_Alert_counter, to SW_Radio_RadioDriver_Attestation.sb_Alert_counter);
+    connection seL4Notification conn9(from SW_AttestationManager_AttestationManager.sb_AttestationRequest_1_notification, to SW_Radio_RadioDriver_Attestation.sb_AttestationRequest_notification);
+    connection seL4SharedData conn10(from SW_AttestationManager_AttestationManager.sb_AttestationRequest_queue_1, to SW_Radio_RadioDriver_Attestation.sb_AttestationRequest_queue);
+    connection seL4Notification conn11(from SW_AttestationManager_AttestationManager.sb_TrustedIds_1_notification, to SW_AttestationGate_AttestationGate.sb_TrustedIds_notification);
+    connection seL4SharedData conn12(from SW_AttestationManager_AttestationManager.sb_TrustedIds_queue_1, to SW_AttestationGate_AttestationGate.sb_TrustedIds_queue);
+    connection seL4Notification conn13(from SW_Filter_Filter.sb_Output_1_notification, to SW_FlightPlanner_FlightPlanner.sb_MissionCommand_notification);
+    connection seL4SharedData conn14(from SW_Filter_Filter.sb_Output_queue_1, to SW_FlightPlanner_FlightPlanner.sb_MissionCommand_queue);
+    connection seL4Notification conn15(from SW_FlightPlanner_FlightPlanner.sb_FlightPlan_1_notification, to SW_Monitor_Monitor.sb_FlightPlan_in_notification);
+    connection seL4SharedData conn16(from SW_FlightPlanner_FlightPlanner.sb_FlightPlan_queue_1, to SW_Monitor_Monitor.sb_FlightPlan_in_queue);
+    connection seL4Notification conn17(from SW_AttestationGate_AttestationGate.sb_MissionCommand_out_1_notification, to SW_Filter_Filter.sb_Input_notification);
+    connection seL4SharedData conn18(from SW_AttestationGate_AttestationGate.sb_MissionCommand_out_queue_1, to SW_Filter_Filter.sb_Input_queue);
   }
 
   configuration {
-    SW_FlyZones_FlyZoneDatabase.sb_FlyZones_access = "W";
-    SW_GeofenceMonitor_GeofenceMonitor.sb_FlyZones_access = "R";
+    conn2.size = 4096;
     SW_Radio_RadioDriver_Attestation.sb_MissionCommand_queue_1_access = "W";
-    SW_AttestationGate_CASE_AttestationGate.sb_MissionCommand_in_queue_access = "R";
+    SW_AttestationGate_AttestationGate.sb_MissionCommand_in_queue_access = "R";
+    conn4.size = 4096;
     SW_Radio_RadioDriver_Attestation.sb_AttestationResponse_queue_1_access = "W";
-    SW_AttestationManager_CASE_AttestationManager.sb_AttestationResponse_queue_access = "R";
-    SW_UART_UARTDriver.sb_Status_queue_1_access = "W";
-    SW_WaypointManager_WaypointManager.sb_Status_queue_access = "R";
-    SW_AttestationGate_CASE_AttestationGate.sb_MissionCommand_out_queue_1_access = "W";
-    SW_Filter_CASE_Filter.sb_Input_queue_access = "R";
-    SW_ResponseMonitor_ResponseMonitor.sb_MissionCommand_queue_access = "R";
-    SW_Filter_CASE_Filter.sb_Output_queue_1_access = "W";
-    SW_FlightPlanner_FlightPlanner.sb_MissionCommand_queue_access = "R";
-    SW_WaypointManager_WaypointManager.sb_MissionWindow_queue_1_access = "W";
-    SW_UART_UARTDriver.sb_MissionWindow_queue_access = "R";
-    SW_AttestationManager_CASE_AttestationManager.sb_AttestationRequest_queue_1_access = "W";
-    SW_Radio_RadioDriver_Attestation.sb_AttestationRequest_queue_access = "R";
-    SW_AttestationManager_CASE_AttestationManager.sb_TrustedIds_queue_1_access = "W";
-    SW_AttestationGate_CASE_AttestationGate.sb_TrustedIds_queue_access = "R";
-    SW_GeofenceMonitor_GeofenceMonitor.sb_FlightPlan_Out_queue_1_access = "W";
-    SW_WaypointManager_WaypointManager.sb_FlightPlan_queue_access = "R";
-    SW_GeofenceMonitor_GeofenceMonitor.sb_Alert_counter_access = "W";
-    SW_WaypointManager_WaypointManager.sb_ReturnHome_counter_access = "R";
-    SW_ResponseMonitor_ResponseMonitor.sb_Alert_counter_access = "W";
+    SW_AttestationManager_AttestationManager.sb_AttestationResponse_queue_access = "R";
+    conn6.size = 4096;
+    SW_Monitor_Monitor.sb_FlightPlan_out_queue_1_access = "W";
+    SW_FlightController_FlightController.sb_FlightPlan_queue_access = "R";
+    SW_Monitor_Monitor.sb_Alert_counter_access = "W";
     SW_Radio_RadioDriver_Attestation.sb_Alert_counter_access = "R";
+    conn10.size = 4096;
+    SW_AttestationManager_AttestationManager.sb_AttestationRequest_queue_1_access = "W";
+    SW_Radio_RadioDriver_Attestation.sb_AttestationRequest_queue_access = "R";
+    conn12.size = 4096;
+    SW_AttestationManager_AttestationManager.sb_TrustedIds_queue_1_access = "W";
+    SW_AttestationGate_AttestationGate.sb_TrustedIds_queue_access = "R";
+    conn14.size = 4096;
+    SW_Filter_Filter.sb_Output_queue_1_access = "W";
+    SW_FlightPlanner_FlightPlanner.sb_MissionCommand_queue_access = "R";
+    conn16.size = 4096;
     SW_FlightPlanner_FlightPlanner.sb_FlightPlan_queue_1_access = "W";
-    SW_ResponseMonitor_ResponseMonitor.sb_FlightPlan_queue_access = "R";
-    SW_GeofenceMonitor_GeofenceMonitor.sb_FlightPlan_In_queue_access = "R";
+    SW_Monitor_Monitor.sb_FlightPlan_in_queue_access = "R";
+    conn18.size = 4096;
+    SW_AttestationGate_AttestationGate.sb_MissionCommand_out_queue_1_access = "W";
+    SW_Filter_Filter.sb_Input_queue_access = "R";
 
   }
 }

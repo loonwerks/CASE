@@ -15,16 +15,16 @@ object RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation {
     api.logDebug("Example debug logging")
     api.logError("Example error logging")
 
-    api.put_MissionCommand(SW.RF_Msg_Impl.example())
-    api.put_AttestationResponse(CASE_Model_Transformations.CASE_AttestationResponseMsg_Impl.example())
+    api.put_MissionCommand(Base_Types.Bits_example())
+    api.put_AttestationResponse(Base_Types.Bits_example())
   }
 
-  def handle_AttestationRequest(api: RadioDriver_Attestation_Impl_Operational_Api, value : CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl): Unit = {
+  def handle_AttestationRequest(api: RadioDriver_Attestation_Impl_Operational_Api, value : Base_Types.Bits): Unit = {
     api.logInfo("example handle_AttestationRequest implementation")
     api.logInfo(s"received ${value}")
     // example api usage
 
-    val apiUsage_AttestationRequest: Option[CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl] = api.get_AttestationRequest()
+    val apiUsage_AttestationRequest: Option[Base_Types.Bits] = api.get_AttestationRequest()
     api.logInfo(s"Received on AttestationRequest: ${apiUsage_AttestationRequest}")
     val apiUsage_Alert: Option[art.Empty] = api.get_Alert()
     api.logInfo(s"Received on Alert: ${apiUsage_Alert}")

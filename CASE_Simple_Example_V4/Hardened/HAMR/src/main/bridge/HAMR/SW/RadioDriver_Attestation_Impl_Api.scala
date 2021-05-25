@@ -13,12 +13,12 @@ import HAMR._
   def AttestationResponse_Id : Art.PortId
   def Alert_Id : Art.PortId
 
-  def put_MissionCommand(value : SW.RF_Msg_Impl) : Unit = {
-    Art.putValue(MissionCommand_Id, SW.RF_Msg_Impl_Payload(value))
+  def put_MissionCommand(value : Base_Types.Bits) : Unit = {
+    Art.putValue(MissionCommand_Id, Base_Types.Bits_Payload(value))
   }
 
-  def put_AttestationResponse(value : CASE_Model_Transformations.CASE_AttestationResponseMsg_Impl) : Unit = {
-    Art.putValue(AttestationResponse_Id, CASE_Model_Transformations.CASE_AttestationResponseMsg_Impl_Payload(value))
+  def put_AttestationResponse(value : Base_Types.Bits) : Unit = {
+    Art.putValue(AttestationResponse_Id, Base_Types.Bits_Payload(value))
   }
 
   def logInfo(msg: String): Unit = {
@@ -48,13 +48,13 @@ import HAMR._
   val AttestationResponse_Id : Art.PortId,
   val Alert_Id : Art.PortId) extends RadioDriver_Attestation_Impl_Api {
 
-  def get_AttestationRequest() : Option[CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl] = {
-    val value : Option[CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl] = Art.getValue(AttestationRequest_Id) match {
-      case Some(CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl_Payload(v)) => Some(v)
+  def get_AttestationRequest() : Option[Base_Types.Bits] = {
+    val value : Option[Base_Types.Bits] = Art.getValue(AttestationRequest_Id) match {
+      case Some(Base_Types.Bits_Payload(v)) => Some(v)
       case Some(v) =>
-        Art.logError(id, s"Unexpected payload on port AttestationRequest.  Expecting 'CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl_Payload' but received ${v}")
-        None[CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl]()
-      case _ => None[CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl]()
+        Art.logError(id, s"Unexpected payload on port AttestationRequest.  Expecting 'Base_Types.Bits_Payload' but received ${v}")
+        None[Base_Types.Bits]()
+      case _ => None[Base_Types.Bits]()
     }
     return value
   }

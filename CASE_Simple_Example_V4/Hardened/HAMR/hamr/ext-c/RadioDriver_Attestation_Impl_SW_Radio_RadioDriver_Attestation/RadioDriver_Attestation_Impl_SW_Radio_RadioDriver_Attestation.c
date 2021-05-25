@@ -9,13 +9,13 @@ Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_initi
 
   // examples of api setter and logging usage
 
-  DeclNewHAMR_SW_RF_Msg_Impl(t0);
-  HAMR_SW_RF_Msg_Impl_example(SF &t0);
-  api_put_MissionCommand__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(SF &t0);
+  uint8_t t0[numBytes_HAMR_SW_RF_Msg_Impl];
+  byte_array_default(SF t0, numBits_HAMR_SW_RF_Msg_Impl, numBytes_HAMR_SW_RF_Msg_Impl);
+  api_put_MissionCommand__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(SF numBits_HAMR_SW_RF_Msg_Impl, t0);
 
-  DeclNewHAMR_CASE_Model_Transformations_CASE_AttestationResponseMsg_Impl(t1);
-  HAMR_CASE_Model_Transformations_CASE_AttestationResponseMsg_Impl_example(SF &t1);
-  api_put_AttestationResponse__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(SF &t1);
+  uint8_t t1[numBytes_HAMR_SW_AttestationResponseMsg_Impl];
+  byte_array_default(SF t1, numBits_HAMR_SW_AttestationResponseMsg_Impl, numBytes_HAMR_SW_AttestationResponseMsg_Impl);
+  api_put_AttestationResponse__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(SF numBits_HAMR_SW_AttestationResponseMsg_Impl, t1);
 
   api_logInfo__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(SF string("Example logInfo"));
 
@@ -28,27 +28,37 @@ Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_final
   DeclNewStackFrame(caller, "RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation.c", "", "HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_finalise_", 0);
 }
 
+Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest_raw(
+  STACK_FRAME
+  size_t numBits,
+  uint8_t *byteArray) {
+  DeclNewStackFrame(caller, "RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_api.c", "", "HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest_raw", 0);
+
+  size_t numBytes = numBits == 0 ? 0 : (numBits - 1) / 8 + 1;
+  DeclNewString(AttestationRequestString);
+  String__append(SF (String) &AttestationRequestString, string("HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest_raw called"));
+  byte_array_string(SF (String) &AttestationRequestString, byteArray, numBytes);
+  api_logInfo__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation (SF (String) &AttestationRequestString);
+}
+
 Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest_(
   STACK_FRAME
-  HAMR_CASE_Model_Transformations_CASE_AttestationRequestMsg_Impl value) {
+  IS_C4F575 value) {
   DeclNewStackFrame(caller, "RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation.c", "", "HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest_", 0);
 
-  DeclNewString(AttestationRequestString);
-  String__append(SF (String) &AttestationRequestString, string("HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest called"));
-  api_logInfo__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation (SF (String) &AttestationRequestString);
-
-  DeclNewString(_str);
-  String__append(SF (String) &_str, string("Received on AttestationRequest: "));
-  HAMR_CASE_Model_Transformations_CASE_AttestationRequestMsg_Impl_string_(SF (String) &_str, value);
-  api_logInfo__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(SF (String) &_str);
+  HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest_raw(SF value->size, value->value);
 
   // examples of api getter usage
 
-  DeclNewHAMR_CASE_Model_Transformations_CASE_AttestationRequestMsg_Impl(t0);
-  if(api_get_AttestationRequest__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(SF &t0)) {
+  uint8_t t0[numBytes_HAMR_SW_AttestationRequestMsg_Impl];
+  size_t t0_numBits;
+  if(api_get_AttestationRequest__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(SF &t0_numBits, t0)) {
+    // sanity check
+    sfAssert(SF (Z) t0_numBits == numBits_HAMR_SW_AttestationRequestMsg_Impl, "numBits received does not match expected");
+
     DeclNewString(AttestationRequest_str);
     String__append(SF (String) &AttestationRequest_str, string("Received on AttestationRequest: "));
-    HAMR_CASE_Model_Transformations_CASE_AttestationRequestMsg_Impl_string_(SF (String) &AttestationRequest_str, &t0);
+    byte_array_string(SF (String) &AttestationRequest_str, t0, numBytes_HAMR_SW_AttestationRequestMsg_Impl);
     api_logInfo__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(SF (String) &AttestationRequest_str);
   }
 

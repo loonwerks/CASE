@@ -5,13 +5,15 @@
 
 // This file was auto-generated.  Do not edit
 
-void api_put_FlightPlan__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(
-  STACK_FRAME
-  HAMR_SW_Mission value);
-
 bool api_get_MissionCommand__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(
   STACK_FRAME
-  HAMR_SW_RF_Msg_Impl value);
+  size_t *numBits,
+  uint8_t *byteArray);
+
+void api_put_FlightPlan__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(
+  STACK_FRAME
+  size_t numBits,
+  uint8_t *byteArray);
 
 void api_logInfo__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(
   STACK_FRAME

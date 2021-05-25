@@ -1,13 +1,7 @@
 package CASE_Requirements
 private
+
 	annex resolute {**
-		
-		goal Req_WellFormed_MissionCommand(comp_context : component, property_id : string, filter : component, conn : connection, message_type : aadl) <=
-			** "[permit_well_formed_data] FlightPlanner component shall only receive well-formed messages" **
-			context Generated_On : "January 29, 2021";
-			context Req_Component : "MC::MissionComputer.Impl.SW.FlightPlanner";
-			context Formalized : "True";
-			agree_property_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 		
 		goal Req_Attestation(comm_driver : component, attestation_manager : component, attestation_gate : component) <=
 			** "[attestation] Only messages from trusted sources shall be accepted" **
@@ -17,21 +11,20 @@ private
 			context Formalized : "False";
 			add_attestation_manager(comm_driver, attestation_manager, attestation_gate)
 		
-		goal Req_FlightPlanner_Response(comp_context : component, monitor : component) <=
-			** "[monitor_response] Uncontrolled FlightPlanner component shall be monitored for crashes" **
-			context Generated_By : "GearCASE";
-			context Generated_On : "Jul 20, 2020";
+		goal Req_WellFormed_MissionCommand(comp_context : component, property_id : string, filter : component, conn : connection, message_type : data) <=
+			** "[permit_well_formed_data] FlightPlanner component shall only receive well-formed messages" **
+			context Generated_On : "January 29, 2021";
 			context Req_Component : "MC::MissionComputer.Impl.SW.FlightPlanner";
-			context Formalized : "False";
-			add_monitor(comp_context, monitor)
+			context Formalized : "True";
+			agree_property_checked(comp_context, property_id) and add_filter(comp_context, filter, conn, message_type)
 		
-		goal Req_FlightPlanner_Geofence(comp_context : component, monitor : component, gate_context : component, message_type : data) <=
+		goal Req_FlightPlanner_Geofence(comp_context : component, monitor : component, alert_port : feature, gate_context : component, message_type : data) <=
 			** "[monitor_correctness] Uncontrolled FlightPlanner component shall be monitored for output correctness" **
 			context Generated_By : "GearCASE";
 			context Generated_On : "Jul 20, 2020";
 			context Req_Component : "MC::MissionComputer.Impl.SW.FlightPlanner";
 			context Formalized : "False";
-			add_monitor_gate(comp_context, monitor, gate_context, message_type)
+			add_monitor_gate(comp_context, monitor, alert_port, gate_context, message_type)
 		
 		goal Req_Virtualization(comp_context : component, vm_components : {component}, virtual_machine : component) <=
 			** "[application_sandboxing] Uncontrolled FlightPlanner component shall be monitored for output correctness" **

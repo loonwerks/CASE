@@ -1,0 +1,25 @@
+#include <AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter.h>
+
+Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter_initialiseArchitecture(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter.c", "", "HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter_initialiseArchitecture", 0);
+
+  HAMR_AttestationGate_Impl_SW_AttestationGate_AttestationGate_AttestationGate_initialiseArchitecture(SF_LAST);
+}
+
+Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter_initialiseEntryPoint(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter.c", "", "HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter_initialiseEntryPoint", 0);
+
+  HAMR_AttestationGate_Impl_SW_AttestationGate_AttestationGate_AttestationGate_initialiseEntryPoint(SF_LAST);
+}
+
+Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter_computeEntryPoint(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter.c", "", "HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter_computeEntryPoint", 0);
+
+  HAMR_AttestationGate_Impl_SW_AttestationGate_AttestationGate_AttestationGate_computeEntryPoint(SF_LAST);
+}
+
+art_Bridge_EntryPoints HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter_entryPoints(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter.c", "", "HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_adapter_entryPoints", 0);
+
+  return HAMR_AttestationGate_Impl_SW_AttestationGate_AttestationGate_AttestationGate_entryPoints(SF_LAST);
+}

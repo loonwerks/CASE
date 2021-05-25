@@ -5,8 +5,20 @@
 
 void api_put_MissionCommand__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(
   STACK_FRAME
-  HAMR_SW_RF_Msg_Impl value) {
+  size_t numBits,
+  uint8_t *byteArray) {
   DeclNewStackFrame(caller, "RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_api.c", "", "api_put_MissionCommand__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation", 0);
+
+  sfAssert(SF (Z) numBits >= 0, "numBits must be non-negative for IS[Z, B].");
+  sfAssert(SF (Z) numBits <= MaxIS_C4F575, "numBits too large for IS[Z, B].");
+
+  DeclNewIS_C4F575(t_0);
+
+  t_0.size = numBits;
+  if(numBits > 0) {
+    size_t numBytes = (numBits - 1) / 8 + 1;
+    memcpy(&t_0.value, byteArray, numBytes);
+  }
 
   // Option_4EC416 = Option[HAMR.SW.RadioDriver_Attestation_Impl_Initialization_Api]
   DeclNewHAMR_SW_RadioDriver_Attestation_Impl_Initialization_Api(api);
@@ -15,28 +27,34 @@ void api_put_MissionCommand__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_Radio
   HAMR_SW_RadioDriver_Attestation_Impl_Initialization_Api_put_MissionCommand_(
     SF
     &api,
-    value);
+    &t_0);
 }
 
 bool api_get_AttestationRequest__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(
   STACK_FRAME
-  HAMR_CASE_Model_Transformations_CASE_AttestationRequestMsg_Impl value){
+  size_t *numBits,
+  uint8_t *byteArray){
   DeclNewStackFrame(caller, "RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_api.c", "", "api_get_AttestationRequest__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation", 0);
+
+  // Option_30119F = Option[IS[Z, B]]
+  // Some_8D03B1 = Some[IS[Z, B]]
+  DeclNewOption_30119F(t_0);
 
   // Option_87EF85 = Option[HAMR.SW.RadioDriver_Attestation_Impl_Operational_Api]
   DeclNewHAMR_SW_RadioDriver_Attestation_Impl_Operational_Api(api);
   Option_87EF85_get_(SF (HAMR_SW_RadioDriver_Attestation_Impl_Operational_Api) &api, HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge_c_operational_api(SF_LAST));
 
-  // Option_21CC40 = Option[HAMR.CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl]
-  // Some_6DE28F = Some[HAMR.CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl]
-  DeclNewOption_21CC40(t_0);
   HAMR_SW_RadioDriver_Attestation_Impl_Operational_Api_get_AttestationRequest_(
     SF
-    (Option_21CC40) &t_0,
+    (Option_30119F) &t_0,
     &api);
 
-  if(t_0.type == TSome_6DE28F){
-    Type_assign(value, &t_0.Some_6DE28F.value, sizeof(struct HAMR_CASE_Model_Transformations_CASE_AttestationRequestMsg_Impl));
+  if(t_0.type == TSome_8D03B1){
+    *numBits = t_0.Some_8D03B1.value.size;
+    if(*numBits > 0) {
+      size_t numBytes = (*numBits - 1) / 8 + 1;
+      memcpy(byteArray, &t_0.Some_8D03B1.value.value, numBytes);
+    }
     return true;
   } else {
     return false;
@@ -45,8 +63,20 @@ bool api_get_AttestationRequest__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_R
 
 void api_put_AttestationResponse__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(
   STACK_FRAME
-  HAMR_CASE_Model_Transformations_CASE_AttestationResponseMsg_Impl value) {
+  size_t numBits,
+  uint8_t *byteArray) {
   DeclNewStackFrame(caller, "RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_api.c", "", "api_put_AttestationResponse__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation", 0);
+
+  sfAssert(SF (Z) numBits >= 0, "numBits must be non-negative for IS[Z, B].");
+  sfAssert(SF (Z) numBits <= MaxIS_C4F575, "numBits too large for IS[Z, B].");
+
+  DeclNewIS_C4F575(t_0);
+
+  t_0.size = numBits;
+  if(numBits > 0) {
+    size_t numBytes = (numBits - 1) / 8 + 1;
+    memcpy(&t_0.value, byteArray, numBytes);
+  }
 
   // Option_4EC416 = Option[HAMR.SW.RadioDriver_Attestation_Impl_Initialization_Api]
   DeclNewHAMR_SW_RadioDriver_Attestation_Impl_Initialization_Api(api);
@@ -55,7 +85,7 @@ void api_put_AttestationResponse__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_
   HAMR_SW_RadioDriver_Attestation_Impl_Initialization_Api_put_AttestationResponse_(
     SF
     &api,
-    value);
+    &t_0);
 }
 
 bool api_get_Alert__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(STACK_FRAME_ONLY){
@@ -144,7 +174,7 @@ Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_final
 Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest(
   STACK_FRAME
   HAMR_SW_RadioDriver_Attestation_Impl_Operational_Api api,
-  HAMR_CASE_Model_Transformations_CASE_AttestationRequestMsg_Impl value) {
+  IS_C4F575 value) {
   DeclNewStackFrame(caller, "RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_api.c", "", "HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest", 0);
 
   HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest_(SF value);

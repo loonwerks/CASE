@@ -1,10 +1,9 @@
 package MC
 public
 	with SW;
-
 	with UAS_Buses;
-
 	with CASE_Model_Transformations;
+	with HAMR;
 
 	-- The radio communication hardware
 	device Radio
@@ -20,7 +19,7 @@ public
 	device implementation Radio.Impl
 	end Radio.Impl;
 
-		-- The serial communication hardware
+	-- The serial communication hardware
 	device UART
 		features
 			MCA: requires bus access MC_Bus.Impl;
@@ -34,7 +33,7 @@ public
 	device implementation UART.Impl
 	end UART.Impl;
 
-		-- The Mission Computer processor
+	-- The Mission Computer processor
 	processor MC_Proc
 		features
 			MCA: requires bus access MC_Bus.Impl;
@@ -43,7 +42,7 @@ public
 	processor implementation MC_Proc.Impl
 	end MC_Proc.Impl;
 
-		-- The Mission Computer RAM
+	-- The Mission Computer RAM
 	memory MC_Mem
 		features
 			MCA: requires bus access MC_Bus.Impl;
@@ -52,14 +51,14 @@ public
 	memory implementation MC_Mem.Impl
 	end MC_Mem.Impl;
 
-		-- The Mission Computer on-board bus
+	-- The Mission Computer on-board bus
 	bus MC_Bus
 	end MC_Bus;
 
 	bus implementation MC_Bus.Impl
 	end MC_Bus.Impl;
 
-		-- The MissionComputer onboard the UAV
+	-- The MissionComputer onboard the UAV
 	system MissionComputer
 		features
 			RadioRecv: in event data port;
@@ -92,13 +91,13 @@ public
 		properties
 			Actual_Processor_Binding => (reference (Proc_HW)) applies to SW;
 			Actual_Memory_Binding => (reference (Mem_HW)) applies to SW;
+			HAMR::Bit_Codec_Raw_Connections => true;
 		annex resolute {**
 			check HAMR_Guidelines
 			prove Req_Attestation(this.SW.Radio)
 			prove Req_WellFormed_MissionCommand(this.SW.FlightPlanner, "Req_Wellformed_MissionCommand")
-			prove Req_FlightPlanner_Response(this.SW.FlightPlanner)
 			prove Req_FlightPlanner_Geofence(this.SW.FlightPlanner)
-			prove Req_Virtualization(this.SW.FlightPlanner)		
+			prove Req_Virtualization(this.SW.FlightPlanner)
 		**};
 	end MissionComputer.Impl;
 

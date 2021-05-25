@@ -5,8 +5,8 @@
 
 #include <sb_types.h>
 
-bool sb_FlightPlan_enqueue(const union_art_DataContent *);
-
 bool sb_MissionCommand_dequeue(union_art_DataContent *);
+
+bool sb_FlightPlan_enqueue(const union_art_DataContent *);
 
 #endif // SB_FLIGHTPLANNER_IMPL_H

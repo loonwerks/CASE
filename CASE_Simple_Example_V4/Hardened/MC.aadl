@@ -4,6 +4,7 @@ public
 	with UAS_Buses;
 	with CASE_Model_Transformations;
 	with CASE_Properties;
+	with HAMR;
 
 	-- The radio communication hardware
 	device Radio
@@ -58,15 +59,15 @@ public
 	bus implementation MC_Bus.Impl
 	end MC_Bus.Impl;
 
-	virtual processor CASE_VirtualMachine
+	virtual processor VirtualMachine
 		properties
 			CASE_Properties::Isolating => 100;
-	end CASE_VirtualMachine;
+	end VirtualMachine;
 
-	virtual processor implementation CASE_VirtualMachine.Impl
+	virtual processor implementation VirtualMachine.Impl
 		properties
 			CASE_Properties::OS => Linux;
-	end CASE_VirtualMachine.Impl;
+	end VirtualMachine.Impl;
 
 	-- The MissionComputer onboard the UAV
 	system MissionComputer
@@ -87,7 +88,7 @@ public
 			Mem_HW: memory MC_Mem.Impl;
 			Bus_HW: bus MC_Bus.Impl;
 			SW: system SW::SW_seL4.Impl;
-			VirtualMachine: virtual processor CASE_VirtualMachine.Impl;
+			VirtualMachine: virtual processor VirtualMachine.Impl;
 		connections
 			c1: port RadioRecv -> Radio_HW.RecvIn;
 			c2: port Radio_HW.SendOut -> RadioSend;
@@ -104,12 +105,12 @@ public
 			Actual_Memory_Binding => (reference (Mem_HW)) applies to SW;
 			CASE_Properties::OS => seL4 applies to Proc_HW;
 			Actual_Processor_Binding => (reference (VirtualMachine)) applies to SW.FlightPlanner;
+			HAMR::Bit_Codec_Raw_Connections => true;
 		annex resolute {**
 			check HAMR_Guidelines
-			prove Req_WellFormed_MissionCommand(this.SW.FlightPlanner, "Req_Wellformed_MissionCommand", this.SW.Filter, this.SW.c5, SW::RF_Msg.Impl)
 			prove Req_Attestation(this.SW.Radio, this.SW.AttestationManager, this.SW.AttestationGate)
-			prove Req_FlightPlanner_Response(this.SW.FlightPlanner, this.SW.ResponseMonitor)
-			prove Req_FlightPlanner_Geofence(this.SW.FlightPlanner, this.SW.GeofenceMonitor, this.SW.WaypointManager, SW::Mission)
+			prove Req_WellFormed_MissionCommand(this.SW.FlightPlanner, "Req_Wellformed_MissionCommand", this.SW.Filter, this.SW.c7, SW::RF_Msg.Impl)
+			prove Req_FlightPlanner_Geofence(this.SW.FlightPlanner, this.SW.Monitor, this.SW.Monitor.Alert, this.SW.FlightController, SW::Mission)
 			prove Req_Virtualization(this.SW.FlightPlanner, {this.SW.FlightPlanner}, this.VirtualMachine)
 		**};
 	end MissionComputer.Impl;

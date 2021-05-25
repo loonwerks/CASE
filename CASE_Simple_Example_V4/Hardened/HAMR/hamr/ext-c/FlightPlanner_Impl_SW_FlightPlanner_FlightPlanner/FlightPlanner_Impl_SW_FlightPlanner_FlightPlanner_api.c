@@ -3,10 +3,53 @@
 
 // This file was auto-generated.  Do not edit
 
+bool api_get_MissionCommand__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(
+  STACK_FRAME
+  size_t *numBits,
+  uint8_t *byteArray){
+  DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_api.c", "", "api_get_MissionCommand__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner", 0);
+
+  // Option_30119F = Option[IS[Z, B]]
+  // Some_8D03B1 = Some[IS[Z, B]]
+  DeclNewOption_30119F(t_0);
+
+  // Option_6475FA = Option[HAMR.SW.FlightPlanner_Impl_Operational_Api]
+  DeclNewHAMR_SW_FlightPlanner_Impl_Operational_Api(api);
+  Option_6475FA_get_(SF (HAMR_SW_FlightPlanner_Impl_Operational_Api) &api, HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge_c_operational_api(SF_LAST));
+
+  HAMR_SW_FlightPlanner_Impl_Operational_Api_get_MissionCommand_(
+    SF
+    (Option_30119F) &t_0,
+    &api);
+
+  if(t_0.type == TSome_8D03B1){
+    *numBits = t_0.Some_8D03B1.value.size;
+    if(*numBits > 0) {
+      size_t numBytes = (*numBits - 1) / 8 + 1;
+      memcpy(byteArray, &t_0.Some_8D03B1.value.value, numBytes);
+    }
+    return true;
+  } else {
+    return false;
+  }
+}
+
 void api_put_FlightPlan__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(
   STACK_FRAME
-  HAMR_SW_Mission value) {
+  size_t numBits,
+  uint8_t *byteArray) {
   DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_api.c", "", "api_put_FlightPlan__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner", 0);
+
+  sfAssert(SF (Z) numBits >= 0, "numBits must be non-negative for IS[Z, B].");
+  sfAssert(SF (Z) numBits <= MaxIS_C4F575, "numBits too large for IS[Z, B].");
+
+  DeclNewIS_C4F575(t_0);
+
+  t_0.size = numBits;
+  if(numBits > 0) {
+    size_t numBytes = (numBits - 1) / 8 + 1;
+    memcpy(&t_0.value, byteArray, numBytes);
+  }
 
   // Option_A0CA6B = Option[HAMR.SW.FlightPlanner_Impl_Initialization_Api]
   DeclNewHAMR_SW_FlightPlanner_Impl_Initialization_Api(api);
@@ -15,32 +58,7 @@ void api_put_FlightPlan__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlann
   HAMR_SW_FlightPlanner_Impl_Initialization_Api_put_FlightPlan_(
     SF
     &api,
-    value);
-}
-
-bool api_get_MissionCommand__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(
-  STACK_FRAME
-  HAMR_SW_RF_Msg_Impl value){
-  DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_api.c", "", "api_get_MissionCommand__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner", 0);
-
-  // Option_6475FA = Option[HAMR.SW.FlightPlanner_Impl_Operational_Api]
-  DeclNewHAMR_SW_FlightPlanner_Impl_Operational_Api(api);
-  Option_6475FA_get_(SF (HAMR_SW_FlightPlanner_Impl_Operational_Api) &api, HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge_c_operational_api(SF_LAST));
-
-  // Option_50CDFF = Option[HAMR.SW.RF_Msg_Impl]
-  // Some_B09443 = Some[HAMR.SW.RF_Msg_Impl]
-  DeclNewOption_50CDFF(t_0);
-  HAMR_SW_FlightPlanner_Impl_Operational_Api_get_MissionCommand_(
-    SF
-    (Option_50CDFF) &t_0,
-    &api);
-
-  if(t_0.type == TSome_B09443){
-    Type_assign(value, &t_0.Some_B09443.value, sizeof(struct HAMR_SW_RF_Msg_Impl));
-    return true;
-  } else {
-    return false;
-  }
+    &t_0);
 }
 
 void api_logInfo__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(
@@ -107,7 +125,7 @@ Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_finalise(
 Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand(
   STACK_FRAME
   HAMR_SW_FlightPlanner_Impl_Operational_Api api,
-  HAMR_SW_RF_Msg_Impl value) {
+  IS_C4F575 value) {
   DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_api.c", "", "HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand", 0);
 
   HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand_(SF value);

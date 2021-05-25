@@ -15,15 +15,15 @@ object FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner {
     api.logDebug("Example debug logging")
     api.logError("Example error logging")
 
-    api.put_FlightPlan(SW.Mission.example())
+    api.put_FlightPlan(Base_Types.Bits_example())
   }
 
-  def handle_MissionCommand(api: FlightPlanner_Impl_Operational_Api, value : SW.RF_Msg_Impl): Unit = {
+  def handle_MissionCommand(api: FlightPlanner_Impl_Operational_Api, value : Base_Types.Bits): Unit = {
     api.logInfo("example handle_MissionCommand implementation")
     api.logInfo(s"received ${value}")
     // example api usage
 
-    val apiUsage_MissionCommand: Option[SW.RF_Msg_Impl] = api.get_MissionCommand()
+    val apiUsage_MissionCommand: Option[Base_Types.Bits] = api.get_MissionCommand()
     api.logInfo(s"Received on MissionCommand: ${apiUsage_MissionCommand}")
   }
 

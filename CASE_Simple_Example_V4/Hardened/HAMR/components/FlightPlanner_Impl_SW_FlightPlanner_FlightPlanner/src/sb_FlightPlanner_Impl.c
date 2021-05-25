@@ -2,18 +2,11 @@
 
 #include <sb_FlightPlanner_Impl.h>
 #include <sb_queue_union_art_DataContent_1.h>
-#include <sb_queue_union_art_DataContent_1.h>
 #include <sb_event_counter.h>
+#include <sb_queue_union_art_DataContent_1.h>
 #include <FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter.h>
 #include <string.h>
 #include <camkes.h>
-
-bool sb_FlightPlan_enqueue(const union_art_DataContent *data) {
-  sb_queue_union_art_DataContent_1_enqueue(sb_FlightPlan_queue_1, (union_art_DataContent*) data);
-  sb_FlightPlan_1_notification_emit();
-
-  return true;
-}
 
 sb_queue_union_art_DataContent_1_Recv_t sb_MissionCommand_recv_queue;
 
@@ -56,6 +49,13 @@ static void sb_MissionCommand_notification_handler(void * unused) {
   CALLBACKOP(sb_MissionCommand_notification_reg_callback(sb_MissionCommand_notification_handler, NULL));
 }
 
+bool sb_FlightPlan_enqueue(const union_art_DataContent *data) {
+  sb_queue_union_art_DataContent_1_enqueue(sb_FlightPlan_queue_1, (union_art_DataContent*) data);
+  sb_FlightPlan_1_notification_emit();
+
+  return true;
+}
+
 // send FlightPlan: Out EventDataPort SW__Mission
 Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_seL4Nix_FlightPlan_Send(
   STACK_FRAME
@@ -95,11 +95,11 @@ void pre_init(void) {
 
   printf("Entering pre-init of FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner\n");
 
-  // initialise data structure for outgoing event data port FlightPlan
-  sb_queue_union_art_DataContent_1_init(sb_FlightPlan_queue_1);
-
   // initialise data structure for incoming event data port MissionCommand
   sb_queue_union_art_DataContent_1_Recv_init(&sb_MissionCommand_recv_queue, sb_MissionCommand_queue);
+
+  // initialise data structure for outgoing event data port FlightPlan
+  sb_queue_union_art_DataContent_1_init(sb_FlightPlan_queue_1);
 
   // initialise slang-embedded components/ports
   HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter_initialiseArchitecture(SF_LAST);

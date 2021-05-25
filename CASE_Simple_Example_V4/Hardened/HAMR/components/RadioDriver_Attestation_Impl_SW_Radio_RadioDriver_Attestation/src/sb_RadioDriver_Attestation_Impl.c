@@ -153,7 +153,7 @@ Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL4N
   sb_MissionCommand_enqueue(d);
 }
 
-// send AttestationResponse: Out EventDataPort CASE_Model_Transformations__CASE_AttestationResponseMsg_Impl
+// send AttestationResponse: Out EventDataPort SW__AttestationResponseMsg_Impl
 Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL4Nix_AttestationResponse_Send(
   STACK_FRAME
   art_DataContent d) {

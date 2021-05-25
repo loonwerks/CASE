@@ -7,15 +7,18 @@
 
 void api_put_MissionCommand__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(
   STACK_FRAME
-  HAMR_SW_RF_Msg_Impl value);
+  size_t numBits,
+  uint8_t *byteArray);
 
 bool api_get_AttestationRequest__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(
   STACK_FRAME
-  HAMR_CASE_Model_Transformations_CASE_AttestationRequestMsg_Impl value);
+  size_t *numBits,
+  uint8_t *byteArray);
 
 void api_put_AttestationResponse__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(
   STACK_FRAME
-  HAMR_CASE_Model_Transformations_CASE_AttestationResponseMsg_Impl value);
+  size_t numBits,
+  uint8_t *byteArray);
 
 bool api_get_Alert__HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation(STACK_FRAME_ONLY);
 

@@ -9,9 +9,9 @@ Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_initialise_(STACK
 
   // examples of api setter and logging usage
 
-  DeclNewHAMR_SW_Mission(t0);
-  HAMR_SW_Mission_example(SF &t0);
-  api_put_FlightPlan__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF &t0);
+  uint8_t t0[numBytes_HAMR_SW_Mission];
+  byte_array_default(SF t0, numBits_HAMR_SW_Mission, numBytes_HAMR_SW_Mission);
+  api_put_FlightPlan__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF numBits_HAMR_SW_Mission, t0);
 
   api_logInfo__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF string("Example logInfo"));
 
@@ -24,27 +24,37 @@ Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_finalise_(STACK_F
   DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner.c", "", "HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_finalise_", 0);
 }
 
+Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand_raw(
+  STACK_FRAME
+  size_t numBits,
+  uint8_t *byteArray) {
+  DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_api.c", "", "HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand_raw", 0);
+
+  size_t numBytes = numBits == 0 ? 0 : (numBits - 1) / 8 + 1;
+  DeclNewString(MissionCommandString);
+  String__append(SF (String) &MissionCommandString, string("HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand_raw called"));
+  byte_array_string(SF (String) &MissionCommandString, byteArray, numBytes);
+  api_logInfo__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner (SF (String) &MissionCommandString);
+}
+
 Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand_(
   STACK_FRAME
-  HAMR_SW_RF_Msg_Impl value) {
+  IS_C4F575 value) {
   DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner.c", "", "HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand_", 0);
 
-  DeclNewString(MissionCommandString);
-  String__append(SF (String) &MissionCommandString, string("HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand called"));
-  api_logInfo__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner (SF (String) &MissionCommandString);
-
-  DeclNewString(_str);
-  String__append(SF (String) &_str, string("Received on MissionCommand: "));
-  HAMR_SW_RF_Msg_Impl_string_(SF (String) &_str, value);
-  api_logInfo__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF (String) &_str);
+  HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand_raw(SF value->size, value->value);
 
   // examples of api getter usage
 
-  DeclNewHAMR_SW_RF_Msg_Impl(t0);
-  if(api_get_MissionCommand__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF &t0)) {
+  uint8_t t0[numBytes_HAMR_SW_RF_Msg_Impl];
+  size_t t0_numBits;
+  if(api_get_MissionCommand__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF &t0_numBits, t0)) {
+    // sanity check
+    sfAssert(SF (Z) t0_numBits == numBits_HAMR_SW_RF_Msg_Impl, "numBits received does not match expected");
+
     DeclNewString(MissionCommand_str);
     String__append(SF (String) &MissionCommand_str, string("Received on MissionCommand: "));
-    HAMR_SW_RF_Msg_Impl_string_(SF (String) &MissionCommand_str, &t0);
+    byte_array_string(SF (String) &MissionCommand_str, t0, numBytes_HAMR_SW_RF_Msg_Impl);
     api_logInfo__HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF (String) &MissionCommand_str);
   }
 }

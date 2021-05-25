@@ -4,104 +4,88 @@ public
 	with Data_Model;
 	with Base_Types;
 	with CASE_Properties;
-	with CASE_Model_Transformations;
-	with CASE_Scheduling;
+	with HAMR;
 
-	thread GeofenceMonitor
-		features
-			FlyZones: in data port MapArray;
-			Alert: out event port;
-			FlightPlan_In: in event data port Mission;
-			FlightPlan_Out: out event data port Mission;
-		properties
-			CASE_Properties::Monitoring => 100;
-			CASE_Properties::Component_Spec => ("GeofenceMonitor_Alert", "GeofenceMonitor_FlightPlan_Out");
-		annex agree {**
-			const is_latched : bool = true;
-			property GeofenceMonitor_policy = false;
-			property alerted = (not GeofenceMonitor_policy) -> ((is_latched and pre(alerted)) or (event(FlightPlan_In) and not GeofenceMonitor_policy));
-			guarantee GeofenceMonitor_Alert "A violation of the monitor policy shall trigger an alert" : alerted <=> event(Alert);
-			guarantee GeofenceMonitor_FlightPlan_Out "A violation of the monitor policy shall prevent propagation of the Observed input." : if alerted then not event(FlightPlan_Out) else event(FlightPlan_Out) and FlightPlan_Out = FlightPlan_In;
-		**};
-	end GeofenceMonitor;
-
-	thread implementation GeofenceMonitor.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
-	end GeofenceMonitor.Impl;
-
-	thread ResponseMonitor
+	thread Monitor
 		features
 			Alert: out event port;
-			FlightPlan: in event data port Mission;
-			MissionCommand: in event data port RF_Msg.Impl;
+			FlightPlan_in: in event data port Mission;
+			FlightPlan_out: out event data port Mission;
 		properties
 			CASE_Properties::Monitoring => 100;
-			CASE_Properties::Component_Spec => ("ResponseMonitor_Alert");
+			CASE_Properties::Component_Spec => ("Monitor_Alert", "Monitor_FlightPlan_out");
 		annex agree {**
 			const is_latched : bool = false;
-			property ResponseMonitor_policy = false;
-			property alerted = (not ResponseMonitor_policy) -> ((is_latched and pre(alerted)) or (event(FlightPlan) and not ResponseMonitor_policy));
-			guarantee ResponseMonitor_Alert "A violation of the monitor policy shall trigger an alert" : alerted <=> event(Alert);
+			property Monitor_policy = false;
+			property alerted = (not Monitor_policy) -> ((is_latched and pre(alerted)) or (event(FlightPlan_in) and not Monitor_policy));
+			guarantee Monitor_Alert "A violation of the monitor policy shall trigger an alert" : alerted <=> event(Alert);
+			guarantee Monitor_FlightPlan_out "A violation of the monitor policy shall prevent propagation of the Observed input." : 
+				if alerted then 
+					not event(FlightPlan_out) 
+				else 
+					event(FlightPlan_out) and FlightPlan_out = FlightPlan_in;
 		**};
-	end ResponseMonitor;
+	end Monitor;
 
-	thread implementation ResponseMonitor.Impl
+	thread implementation Monitor.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
-	end ResponseMonitor.Impl;
+			Source_Text => ("./SW_Monitor/Monitor.S");
+	end Monitor.Impl;
 
-	thread CASE_AttestationGate
+	thread Filter
+		features
+			Input: in event data port RF_Msg.Impl;
+			Output: out event data port RF_Msg.Impl;
+		properties
+			CASE_Properties::Filtering => 100;
+			CASE_Properties::Component_Spec => ("Filter_Output");
+		annex agree {**
+			property Filter_policy = WELL_FORMED_MESSAGE(Input);
+			guarantee Filter_Output "The filter output shall be well-formed" :
+				if event(Input) and Filter_policy then
+					event(Output) and Output = Input
+				else
+					not event(Output);
+		**};
+	end Filter;
+
+	thread implementation Filter.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+			Source_Text => ("./SW_Filter/Filter.S");
+	end Filter.Impl;
+
+	thread AttestationGate
 		features
 			MissionCommand_in: in event data port RF_Msg.Impl;
 			MissionCommand_out: out event data port RF_Msg.Impl;
 			TrustedIds: in event data port Address.Impl;
 		properties
 			CASE_Properties::Gating => 100;
-	end CASE_AttestationGate;
+	end AttestationGate;
 
-	thread implementation CASE_AttestationGate.Impl
+	thread implementation AttestationGate.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
-	end CASE_AttestationGate.Impl;
+			Source_Text => ("./SW_AttestationGate/AttestationGate.S");
+	end AttestationGate.Impl;
 
-	thread CASE_AttestationManager
+	thread AttestationManager
 		features
-			AttestationRequest: out event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
-			AttestationResponse: in event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+			AttestationRequest: out event data port AttestationRequestMsg.Impl;
+			AttestationResponse: in event data port AttestationResponseMsg.Impl;
 			TrustedIds: out event data port Address.Impl;
 		properties
 			CASE_Properties::Attesting => 100;
-	end CASE_AttestationManager;
+	end AttestationManager;
 
-	thread implementation CASE_AttestationManager.Impl
+	thread implementation AttestationManager.Impl
 		properties
 			CASE_Properties::Cache_Timeout => 5 min;
-			CASE_Properties::Cache_Size => 4;
+			CASE_Properties::Cache_Size => 3;
 			Dispatch_Protocol => Sporadic;
-	end CASE_AttestationManager.Impl;
-
-	thread CASE_Filter
-		features
-			Input: in event data port RF_Msg.Impl;
-			Output: out event data port RF_Msg.Impl;
-		properties
-			CASE_Properties::Filtering => 100;
-			CASE_Properties::Component_Spec => ("CASE_Filter_Output");
-		annex agree {**
-			property CASE_Filter_policy = WELL_FORMED_MESSAGE(Input);
-			guarantee CASE_Filter_Output "The filter output shall be well-formed" :
-			if event(Input) and CASE_Filter_policy then
-			event(Output) and Output = Input
-			else
-			not event(Output);
-		**};
-	end CASE_Filter;
-
-	thread implementation CASE_Filter.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
-	end CASE_Filter.Impl;
+	end AttestationManager.Impl;
 
 	data Coordinate
 	end Coordinate;
@@ -112,6 +96,8 @@ public
 			Latitude: data Base_Types::Integer_32;
 			Longitude: data Base_Types::Integer_32;
 			Altitude: data Base_Types::Integer_32;
+		properties
+			HAMR::Bit_Codec_Max_Size => 12 Bytes;
 	end Coordinate.Impl;
 
 	data Map
@@ -122,17 +108,8 @@ public
 			Data_Model::Data_Representation => Array;
 			Data_Model::Base_Type => (classifier (Coordinate.Impl));
 			Data_Model::Dimension => (4);
+			HAMR::Bit_Codec_Max_Size => 48 Bytes;
 	end Map;
-
-	data MapArray
-		-- The MapArray is a structure that hold multiple Maps
-		-- In this implementation, we fix the size of the map array to 5 maps
-		-- Future versions will use an array
-		properties
-			Data_Model::Data_Representation => Array;
-			Data_Model::Base_Type => (classifier (Map));
-			Data_Model::Dimension => (5);
-	end MapArray;
 
 	data FlightPattern
 		-- The Flight Pattern is an enumeration that defines how the UAV will fly through the
@@ -143,6 +120,8 @@ public
 	end FlightPattern;
 
 	data implementation FlightPattern.Impl
+		properties
+			HAMR::Bit_Codec_Max_Size => 1 Bytes;
 	end FlightPattern.Impl;
 
 	data Command
@@ -154,6 +133,8 @@ public
 		subcomponents
 			Map: data Map;
 			Pattern: data FlightPattern;
+		properties
+			HAMR::Bit_Codec_Max_Size => 49 Bytes;
 	end Command.Impl;
 
 	-- Message header
@@ -166,6 +147,8 @@ public
 			dst: data Base_Types::Unsigned_32;
 			trusted: data Base_Types::Boolean;
 			HMAC: data Base_Types::Boolean;
+		properties
+			HAMR::Bit_Codec_Max_Size => 10 Bytes;
 	end MsgHeader.Impl;
 
 	-- RF Message structure
@@ -176,7 +159,35 @@ public
 		subcomponents
 			header: data MsgHeader.Impl;
 			payload: data Command.Impl;
+		properties
+			HAMR::Bit_Codec_Max_Size => 59 Bytes;
 	end RF_Msg.Impl;
+	
+	-- This is the structure of an Attestation Request message
+	-- that the Attestation Manager sends to the comm driver
+	data AttestationRequestMsg
+	end AttestationRequestMsg;
+
+	data implementation AttestationRequestMsg.Impl
+		subcomponents
+			header: data MsgHeader.Impl;
+		properties
+			HAMR::Bit_Codec_Max_Size => 10 Bytes;
+	end AttestationRequestMsg.Impl;
+
+	-- This is the structure of an Attestation Response message
+	-- that the comm driver returns to the Attestation Manager
+	-- when it gets a response from the Ground Station
+	data AttestationResponseMsg
+	end AttestationResponseMsg;
+
+	data implementation AttestationResponseMsg.Impl
+		subcomponents
+			header: data MsgHeader.Impl;
+			status: data Base_Types::Boolean;
+		properties
+			HAMR::Bit_Codec_Max_Size => 11 Bytes;
+	end AttestationResponseMsg.Impl;
 
 	data Address
 	end Address;
@@ -184,27 +195,19 @@ public
 	data implementation Address.Impl
 		subcomponents
 			value: data Base_Types::Unsigned_32[4];
+		properties
+			HAMR::Bit_Codec_Max_Size => 16 Bytes;
 	end Address.Impl;
 
 	data Mission
 		-- The Mission is a list of waypoints that is generated by the Flight Planner based on a
 		-- Map and Flight Pattern.
-		-- For this implementation, we fix the size of the Mission to 10 waypoints.
-		-- Future versions will use an array
 		properties
 			Data_Model::Data_Representation => Array;
 			Data_Model::Base_Type => (classifier (Coordinate.Impl));
 			Data_Model::Dimension => (10);
+			HAMR::Bit_Codec_Max_Size => 120 Bytes;
 	end Mission;
-
-	data MissionWindow
-		-- The Mission Window is a list of waypoints that the Waypoint Manager assembles from the Mission.
-		-- For this implementation, we fix the size of the Mission Window to 4 waypoints.
-		properties
-			Data_Model::Data_Representation => Array;
-			Data_Model::Base_Type => (classifier (Coordinate.Impl));
-			Data_Model::Dimension => (4);
-	end MissionWindow;
 
 	thread RadioDriver
 		-- The RadioDriver is the software that enables other SW components to communicate to other systems over RF
@@ -224,14 +227,12 @@ public
 	end RadioDriver.Impl;
 
 	thread FlightPlanner
-		-- The FlightPlanner is an abstraction for UxAS.
-		-- It accepts a command message containing a map and flight pattern, and generates a mission.
+		-- The FlightPlanner accepts a command message containing a map and flight pattern, and generates a mission.
 		features
-			FlightPlan: out event data port Mission;
 			MissionCommand: in event data port RF_Msg.Impl;
+			FlightPlan: out event data port Mission;
 		annex agree {**
-			assume Req_Wellformed_MissionCommand "FlightPlanner component shall only receive well-formed messages" : event(MissionCommand) => WELL_FORMED_MESSAGE(MissionCommand);
-			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : event(MissionCommand) => VALID_MESSAGE(MissionCommand);
+			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(MissionCommand);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(FlightPlan);
 		**};
 	end FlightPlanner;
@@ -241,60 +242,26 @@ public
 			Dispatch_Protocol => Sporadic;
 	end FlightPlanner.Impl;
 
-	thread FlyZoneDatabase
-		-- The NoFlyZoneDatabase is a collection of polygons that represent areas on a map which the UAV should avoid.
-		-- The database is populated at build-time and stored in memory.
-		-- When provided a map of a region, it will return all no-fly areas within that region.
+	thread FlightController
+		-- The FlightController is the software that flies the UAV
 		features
-			FlyZones: out data port MapArray;
-	end FlyZoneDatabase;
-
-	thread implementation FlyZoneDatabase.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
-	end FlyZoneDatabase.Impl;
-
-	thread WaypointManager
-		-- The WaypointManager divides a mission into a small window of waypoints suitable for the FlightController.
-		-- Because the FlightController can only process a small number of waypoints at a time, the WaypointManager
-		-- creates these mission windows in response to the current position of the UAV, provided by the FlightController GPS.
-		features
-			ReturnHome: in event port;
 			FlightPlan: in event data port Mission;
-			MissionWindow: out event data port MissionWindow;
-			Status: in event data port Coordinate.Impl;
 		annex agree {**
-			assume Req001_WaypointManager "The Waypoint Manager shall receive a well-formed mission" : good_mission(FlightPlan);
-			guarantee Req002_WaypointManager "The Waypoint Manager shall output a well-formed mission window" : good_mission_window(MissionWindow);
+			assume Req001_FlightController "Well-formed mission window" : good_mission(FlightPlan);
 		**};
-	end WaypointManager;
+	end FlightController;
 
-	thread implementation WaypointManager.Impl
+	thread implementation FlightController.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
-	end WaypointManager.Impl;
-
-	thread UARTDriver
-		-- The UARTDriver is the software that enables other SW components to communicate to other systems over the serial connection
-		features
-			Status: out event data port Coordinate.Impl;
-			MissionWindow: in event data port MissionWindow;
-		annex agree {**
-			assume Req001_UARTDriver "Well-formed mission window" : good_mission_window(MissionWindow);
-		**};
-	end UARTDriver;
-
-	thread implementation UARTDriver.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
-	end UARTDriver.Impl;
+	end FlightController.Impl;
 
 	thread RadioDriver_Attestation
 		features
 			Alert: in event port;
 			MissionCommand: out event data port RF_Msg.Impl;
-			AttestationRequest: in event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
-			AttestationResponse: out event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+			AttestationRequest: in event data port AttestationRequestMsg.Impl;
+			AttestationResponse: out event data port AttestationResponseMsg.Impl;
 		properties
 			CASE_Properties::Comm_Driver => true;
 		annex agree {**
@@ -314,38 +281,29 @@ public
 		subcomponents
 			Radio: thread RadioDriver_Attestation.Impl;
 			FlightPlanner: thread FlightPlanner.Impl;
-			WaypointManager: thread WaypointManager.Impl;
-			UART: thread UARTDriver.Impl;
-			FlyZones: thread FlyZoneDatabase.Impl;
-			Filter: thread CASE_Filter.Impl;
-			AttestationManager: thread CASE_AttestationManager.Impl;
-			AttestationGate: thread CASE_AttestationGate.Impl;
-			ResponseMonitor: thread ResponseMonitor.Impl;
-			GeofenceMonitor: thread GeofenceMonitor.Impl;
+			FlightController: thread FlightController.Impl;
+			AttestationManager: thread AttestationManager.Impl;
+			AttestationGate: thread AttestationGate.Impl;
+			Filter: thread Filter.Impl;
+			Monitor: thread Monitor.Impl;
 		connections
+			c3: port Radio.MissionCommand -> AttestationGate.MissionCommand_in;
+			c4: port AttestationManager.TrustedIds -> AttestationGate.TrustedIds;
+			c5: port AttestationManager.AttestationRequest -> Radio.AttestationRequest;
+			c6: port Radio.AttestationResponse -> AttestationManager.AttestationResponse;
 			c1: port AttestationGate.MissionCommand_out -> Filter.Input;
-			c2: port GeofenceMonitor.FlightPlan_Out -> WaypointManager.FlightPlan;
-			c3: port WaypointManager.MissionWindow -> UART.MissionWindow;
-			c4: port UART.status -> WaypointManager.Status;
-			c5: port Filter.Output -> FlightPlanner.MissionCommand;
-			c6: port FlightPlanner.FlightPlan -> ResponseMonitor.FlightPlan;
-			c7: port AttestationGate.MissionCommand_out -> ResponseMonitor.MissionCommand;
-			c8: port ResponseMonitor.Alert -> Radio.Alert;
-			c9: port FlightPlanner.FlightPlan -> GeofenceMonitor.FlightPlan_In;
-			c10: port FlyZones.FlyZones -> GeofenceMonitor.FlyZones;
-			c11: port GeofenceMonitor.Alert -> WaypointManager.ReturnHome;
-			c12: port Radio.MissionCommand -> AttestationGate.MissionCommand_In;
-			c13: port AttestationManager.AttestationRequest -> Radio.AttestationRequest;
-			c14: port Radio.AttestationResponse -> AttestationManager.AttestationResponse;
-			c15: port AttestationManager.TrustedIds -> AttestationGate.TrustedIds;
+			c2: port Monitor.FlightPlan_out -> FlightController.FlightPlan;
+			c7: port Filter.Output -> FlightPlanner.MissionCommand;
+			c8: port FlightPlanner.FlightPlan -> Monitor.FlightPlan_in;
+			c9: port Monitor.Alert -> Radio.Alert;			
 	end SW.Impl;
 
 	process RadioDriver_Attestation_seL4
 		features
 			Alert: in event port;
 			MissionCommand: out event data port RF_Msg.Impl;
-			AttestationRequest: in event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
-			AttestationResponse: out event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+			AttestationRequest: in event data port AttestationRequestMsg.Impl;
+			AttestationResponse: out event data port AttestationResponseMsg.Impl;
 		properties
 			CASE_Properties::Comm_Driver => true;
 	end RadioDriver_Attestation_seL4;
@@ -354,12 +312,10 @@ public
 		subcomponents
 			RadioDriver_Attestation: thread RadioDriver_Attestation.Impl;
 		connections
-			c1: port AttestationRequest -> RadioDriver_Attestation.AttestationRequest;
-			c2: port RadioDriver_Attestation.AttestationResponse -> AttestationResponse;
+			c1: port RadioDriver_Attestation.AttestationResponse -> AttestationResponse;
+			c2: port AttestationRequest -> RadioDriver_Attestation.AttestationRequest;
 			c3: port Alert -> RadioDriver_Attestation.Alert;
 			c4: port RadioDriver_Attestation.MissionCommand -> MissionCommand;
-		properties
-			CASE_Scheduling::Domain => 3;
 		annex agree {**
 			lift contract;
 		**};
@@ -367,8 +323,8 @@ public
 
 	process FlightPlanner_seL4
 		features
-			FlightPlan: out event data port Mission;
 			MissionCommand: in event data port RF_Msg.Impl;
+			FlightPlan: out event data port Mission;
 	end FlightPlanner_seL4;
 
 	process implementation FlightPlanner_seL4.Impl
@@ -377,214 +333,129 @@ public
 		connections
 			c1: port FlightPlanner.FlightPlan -> FlightPlan;
 			c2: port MissionCommand -> FlightPlanner.MissionCommand;
-		properties
-			CASE_Scheduling::Domain => 11;
 		annex agree {**
 			lift contract;
 		**};
 	end FlightPlanner_seL4.Impl;
 
-	process WaypointManager_seL4
+	process FlightController_seL4
 		features
-			ReturnHome: in event port;
 			FlightPlan: in event data port Mission;
-			MissionWindow: out event data port MissionWindow;
-			Status: in event data port Coordinate.Impl;
-	end WaypointManager_seL4;
+	end FlightController_seL4;
 
-	process implementation WaypointManager_seL4.Impl
+	process implementation FlightController_seL4.Impl
 		subcomponents
-			WaypointManager: thread WaypointManager.Impl;
+			FlightController: thread FlightController.Impl;
 		connections
-			c1: port ReturnHome -> WaypointManager.ReturnHome;
-			c2: port Status -> WaypointManager.Status;
-			c3: port WaypointManager.MissionWindow -> MissionWindow;
-			c4: port FlightPlan -> WaypointManager.FlightPlan;
-		properties
-			CASE_Scheduling::Domain => 7;
+			c1: port FlightPlan -> FlightController.FlightPlan;
 		annex agree {**
 			lift contract;
 		**};
-	end WaypointManager_seL4.Impl;
+	end FlightController_seL4.Impl;
 
-	process UARTDriver_seL4
+	process AttestationManager_seL4
 		features
-			Status: out event data port Coordinate.Impl;
-			MissionWindow: in event data port MissionWindow;
-	end UARTDriver_seL4;
-
-	process implementation UARTDriver_seL4.Impl
-		subcomponents
-			UARTDriver: thread UARTDriver.Impl;
-		connections
-			c1: port UARTDriver.Status -> Status;
-			c2: port MissionWindow -> UARTDriver.MissionWindow;
-		properties
-			CASE_Scheduling::Domain => 4;
-		annex agree {**
-			lift contract;
-		**};
-	end UARTDriver_seL4.Impl;
-
-	process FlyZoneDatabase_seL4
-		features
-			FlyZones: out data port MapArray;
-	end FlyZoneDatabase_seL4;
-
-	process implementation FlyZoneDatabase_seL4.Impl
-		subcomponents
-			FlyZoneDatabase: thread FlyZoneDatabase.Impl;
-		connections
-			c1: port FlyZoneDatabase.FlyZones -> FlyZones;
-		properties
-			CASE_Scheduling::Domain => 2;
-	end FlyZoneDatabase_seL4.Impl;
-
-	process CASE_Filter_seL4
-		features
-			Input: in event data port RF_Msg.Impl;
-			Output: out event data port RF_Msg.Impl;
-		properties
-			CASE_Properties::Filtering => 100;
-			CASE_Properties::Component_Spec => ("CASE_Filter_Output");
-	end CASE_Filter_seL4;
-
-	process implementation CASE_Filter_seL4.Impl
-		subcomponents
-			CASE_Filter: thread CASE_Filter.Impl;
-		connections
-			c1: port Input -> CASE_Filter.Input;
-			c2: port CASE_Filter.Output -> Output;
-		properties
-			CASE_Scheduling::Domain => 6;
-		annex agree {**
-			lift contract;
-		**};
-	end CASE_Filter_seL4.Impl;
-
-	process CASE_AttestationManager_seL4
-		features
-			AttestationRequest: out event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
-			AttestationResponse: in event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+			AttestationRequest: out event data port AttestationRequestMsg.Impl;
+			AttestationResponse: in event data port AttestationResponseMsg.Impl;
 			TrustedIds: out event data port Address.Impl;
 		properties
 			CASE_Properties::Attesting => 100;
-	end CASE_AttestationManager_seL4;
+	end AttestationManager_seL4;
 
-	process implementation CASE_AttestationManager_seL4.Impl
+	process implementation AttestationManager_seL4.Impl
 		subcomponents
-			CASE_AttestationManager: thread CASE_AttestationManager.Impl;
+			AttestationManager: thread AttestationManager.Impl;
 		connections
-			c1: port CASE_AttestationManager.AttestationRequest -> AttestationRequest;
-			c2: port CASE_AttestationManager.TrustedIds -> TrustedIds;
-			c3: port AttestationResponse -> CASE_AttestationManager.AttestationResponse;
+			c1: port AttestationManager.TrustedIds -> TrustedIds;
+			c2: port AttestationManager.AttestationRequest -> AttestationRequest;
+			c3: port AttestationResponse -> AttestationManager.AttestationResponse;
 		properties
-			CASE_Scheduling::Domain => 8;
 			CASE_Properties::Cache_Timeout => 5 min;
-			CASE_Properties::Cache_Size => 4;
-	end CASE_AttestationManager_seL4.Impl;
+			CASE_Properties::Cache_Size => 3;
+	end AttestationManager_seL4.Impl;
 
-	process CASE_AttestationGate_seL4
+	process AttestationGate_seL4
 		features
 			MissionCommand_in: in event data port RF_Msg.Impl;
 			MissionCommand_out: out event data port RF_Msg.Impl;
 			TrustedIds: in event data port Address.Impl;
 		properties
 			CASE_Properties::Gating => 100;
-	end CASE_AttestationGate_seL4;
+	end AttestationGate_seL4;
 
-	process implementation CASE_AttestationGate_seL4.Impl
+	process implementation AttestationGate_seL4.Impl
 		subcomponents
-			CASE_AttestationGate: thread CASE_AttestationGate.Impl;
+			AttestationGate: thread AttestationGate.Impl;
 		connections
-			c1: port CASE_AttestationGate.MissionCommand_out -> MissionCommand_out;
-			c2: port MissionCommand_in -> CASE_AttestationGate.MissionCommand_in;
-			c3: port TrustedIds -> CASE_AttestationGate.TrustedIds;
-		properties
-			CASE_Scheduling::Domain => 5;
-	end CASE_AttestationGate_seL4.Impl;
+			c1: port MissionCommand_in -> AttestationGate.MissionCommand_in;
+			c2: port TrustedIds -> AttestationGate.TrustedIds;
+			c3: port AttestationGate.MissionCommand_out -> MissionCommand_out;
+	end AttestationGate_seL4.Impl;
 
-	process ResponseMonitor_seL4
+	process Filter_seL4
 		features
-			Alert: out event port;
-			FlightPlan: in event data port Mission;
-			MissionCommand: in event data port RF_Msg.Impl;
+			Input: in event data port RF_Msg.Impl;
+			Output: out event data port RF_Msg.Impl;
 		properties
-			CASE_Properties::Monitoring => 100;
-			CASE_Properties::Component_Spec => ("ResponseMonitor_Alert");
-	end ResponseMonitor_seL4;
+			CASE_Properties::Filtering => 100;
+			CASE_Properties::Component_Spec => ("Filter_Output");
+	end Filter_seL4;
 
-	process implementation ResponseMonitor_seL4.Impl
+	process implementation Filter_seL4.Impl
 		subcomponents
-			ResponseMonitor: thread ResponseMonitor.Impl;
+			Filter: thread Filter.Impl;
 		connections
-			c1: port MissionCommand -> ResponseMonitor.MissionCommand;
-			c2: port FlightPlan -> ResponseMonitor.FlightPlan;
-			c3: port ResponseMonitor.Alert -> Alert;
-		properties
-			CASE_Scheduling::Domain => 10;
+			c1: port Input -> Filter.Input;
+			c2: port Filter.Output -> Output;
 		annex agree {**
 			lift contract;
 		**};
-	end ResponseMonitor_seL4.Impl;
+	end Filter_seL4.Impl;
 
-	process GeofenceMonitor_seL4
+	process Monitor_seL4
 		features
-			FlyZones: in data port MapArray;
 			Alert: out event port;
-			FlightPlan_In: in event data port Mission;
-			FlightPlan_Out: out event data port Mission;
+			FlightPlan_in: in event data port Mission;
+			FlightPlan_out: out event data port Mission;
 		properties
 			CASE_Properties::Monitoring => 100;
-			CASE_Properties::Component_Spec => ("GeofenceMonitor_Alert", "GeofenceMonitor_FlightPlan_Out");
-	end GeofenceMonitor_seL4;
+			CASE_Properties::Component_Spec => ("Monitor_Alert", "Monitor_FlightPlan_out");
+	end Monitor_seL4;
 
-	process implementation GeofenceMonitor_seL4.Impl
+	process implementation Monitor_seL4.Impl
 		subcomponents
-			GeofenceMonitor: thread GeofenceMonitor.Impl;
+			Monitor: thread Monitor.Impl;
 		connections
-			c1: port FlightPlan_In -> GeofenceMonitor.FlightPlan_In;
-			c2: port GeofenceMonitor.Alert -> Alert;
-			c3: port FlyZones -> GeofenceMonitor.FlyZones;
-			c4: port GeofenceMonitor.FlightPlan_Out -> FlightPlan_Out;
-		properties
-			CASE_Scheduling::Domain => 9;
+			c1: port Monitor.Alert -> Alert;
+			c2: port FlightPlan_in -> Monitor.FlightPlan_in;
+			c3: port Monitor.FlightPlan_out -> FlightPlan_out;
 		annex agree {**
 			lift contract;
 		**};
-	end GeofenceMonitor_seL4.Impl;
+	end Monitor_seL4.Impl;
 
 	system SW_seL4
 	end SW_seL4;
 
 	system implementation SW_seL4.Impl
 		subcomponents
-			FlyZones: process FlyZoneDatabase_seL4.Impl;
 			Radio: process RadioDriver_Attestation_seL4.Impl;
-			UART: process UARTDriver_seL4.Impl;
-			AttestationGate: process CASE_AttestationGate_seL4.Impl;
-			Filter: process CASE_Filter_seL4.Impl;
-			WaypointManager: process WaypointManager_seL4.Impl;
-			AttestationManager: process CASE_AttestationManager_seL4.Impl;
-			GeofenceMonitor: process GeofenceMonitor_seL4.Impl;
-			ResponseMonitor: process ResponseMonitor_seL4.Impl;
+			Monitor: process Monitor_seL4.Impl;
+			FlightController: process FlightController_seL4.Impl;
+			AttestationManager: process AttestationManager_seL4.Impl;
+			Filter: process Filter_seL4.Impl;
 			FlightPlanner: process FlightPlanner_seL4.Impl;
+			AttestationGate: process AttestationGate_seL4.Impl;
 		connections
-			c1: port AttestationGate.MissionCommand_out -> Filter.Input;
-			c2: port GeofenceMonitor.FlightPlan_Out -> WaypointManager.FlightPlan;
-			c3: port WaypointManager.MissionWindow -> UART.MissionWindow;
-			c4: port UART.Status -> WaypointManager.Status;
-			c5: port Filter.Output -> FlightPlanner.MissionCommand;
-			c6: port FlightPlanner.FlightPlan -> ResponseMonitor.FlightPlan;
-			c7: port AttestationGate.MissionCommand_out -> ResponseMonitor.MissionCommand;
-			c8: port ResponseMonitor.Alert -> Radio.Alert;
-			c9: port FlightPlanner.FlightPlan -> GeofenceMonitor.FlightPlan_In;
-			c10: port FlyZones.FlyZones -> GeofenceMonitor.FlyZones;
-			c11: port GeofenceMonitor.Alert -> WaypointManager.ReturnHome;
-			c12: port Radio.MissionCommand -> AttestationGate.MissionCommand_In;
-			c13: port AttestationManager.AttestationRequest -> Radio.AttestationRequest;
-			c14: port Radio.AttestationResponse -> AttestationManager.AttestationResponse;
-			c15: port AttestationManager.TrustedIds -> AttestationGate.TrustedIds;
+			c1: port Radio.MissionCommand -> AttestationGate.MissionCommand_in;
+			c2: port AttestationManager.TrustedIds -> AttestationGate.TrustedIds;
+			c3: port AttestationManager.AttestationRequest -> Radio.AttestationRequest;
+			c4: port Radio.AttestationResponse -> AttestationManager.AttestationResponse;
+			c5: port AttestationGate.MissionCommand_out -> Filter.Input;
+			c6: port Monitor.FlightPlan_out -> FlightController.FlightPlan;
+			c7: port Filter.Output -> FlightPlanner.MissionCommand;
+			c8: port FlightPlanner.FlightPlan -> Monitor.FlightPlan_in;
+			c9: port Monitor.Alert -> Radio.Alert;
 	end SW_seL4.Impl;
 
 	annex agree {**
@@ -599,7 +470,6 @@ public
 		fun good_pattern(pattern : FlightPattern) : bool = (pattern = enum(FlightPattern, ZigZag)) or (pattern = enum(FlightPattern, StraightLine)) or (pattern = enum(FlightPattern, Perimeter));
 		fun good_command(cmd : Command.Impl) : bool = good_map(cmd.Map) and good_pattern(cmd.Pattern);
 		fun good_mission(mission : Mission) : bool = forall wp in mission, good_coordinate(wp);
-		fun good_mission_window(win : MissionWindow) : bool = forall wp in win, good_coordinate(wp);
 	**};
 	
 end SW;

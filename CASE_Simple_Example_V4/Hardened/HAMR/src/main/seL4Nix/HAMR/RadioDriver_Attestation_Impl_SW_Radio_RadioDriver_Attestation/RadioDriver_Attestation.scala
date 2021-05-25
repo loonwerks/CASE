@@ -14,9 +14,9 @@ import HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL
 object RadioDriver_Attestation extends App {
 
   val RadioDriver_AttestationBridge : HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge = {
-    val MissionCommand = Port[SW.RF_Msg_Impl] (id = 0, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_MissionCommand", mode = EventOut)
-    val AttestationRequest = Port[CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl] (id = 1, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationRequest", mode = EventIn)
-    val AttestationResponse = Port[CASE_Model_Transformations.CASE_AttestationResponseMsg_Impl] (id = 2, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationResponse", mode = EventOut)
+    val MissionCommand = Port[Base_Types.Bits] (id = 0, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_MissionCommand", mode = EventOut)
+    val AttestationRequest = Port[Base_Types.Bits] (id = 1, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationRequest", mode = EventIn)
+    val AttestationResponse = Port[Base_Types.Bits] (id = 2, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationResponse", mode = EventOut)
     val Alert = Port[art.Empty] (id = 3, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_Alert", mode = EventIn)
 
     HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge(
@@ -35,15 +35,15 @@ object RadioDriver_Attestation extends App {
   val entryPoints: Bridge.EntryPoints = RadioDriver_AttestationBridge.entryPoints
   val noData: Option[DataContent] = None()
 
-  // MissionCommand: Out EventDataPort SW.RF_Msg_Impl
+  // MissionCommand: Out EventDataPort Base_Types.Bits
   val MissionCommand_id: Art.PortId = RadioDriver_AttestationBridge.MissionCommand.id
   var MissionCommand_port: Option[DataContent] = noData
 
-  // AttestationRequest: In EventDataPort CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl
+  // AttestationRequest: In EventDataPort Base_Types.Bits
   val AttestationRequest_id: Art.PortId = RadioDriver_AttestationBridge.AttestationRequest.id
   var AttestationRequest_port: Option[DataContent] = noData
 
-  // AttestationResponse: Out EventDataPort CASE_Model_Transformations.CASE_AttestationResponseMsg_Impl
+  // AttestationResponse: Out EventDataPort Base_Types.Bits
   val AttestationResponse_id: Art.PortId = RadioDriver_AttestationBridge.AttestationResponse.id
   var AttestationResponse_port: Option[DataContent] = noData
 
@@ -138,25 +138,7 @@ object RadioDriver_Attestation extends App {
       // touch each payload/type in case some are only used as a field in a record
       def printDataContent(a: art.DataContent): Unit = { println(s"${a}") }
 
-      printDataContent(Base_Types.Integer_32_Payload(Base_Types.Integer_32_example()))
-      printDataContent(Base_Types.Boolean_Payload(Base_Types.Boolean_example()))
-      printDataContent(CASE_Model_Transformations.CASE_MsgHeader_Impl_Payload(CASE_Model_Transformations.CASE_MsgHeader_Impl.example()))
-      printDataContent(CASE_Model_Transformations.CASE_RF_Msg_Impl_Payload(CASE_Model_Transformations.CASE_RF_Msg_Impl.example()))
-      printDataContent(CASE_Model_Transformations.CASE_UART_Msg_Impl_Payload(CASE_Model_Transformations.CASE_UART_Msg_Impl.example()))
-      printDataContent(SW.Coordinate_Impl_Payload(SW.Coordinate_Impl.example()))
-      printDataContent(SW.Map_Payload(SW.Map.example()))
-      printDataContent(SW.MapArray_Payload(SW.MapArray.example()))
-      printDataContent(Base_Types.Unsigned_32_Payload(Base_Types.Unsigned_32_example()))
-      printDataContent(SW.MsgHeader_Impl_Payload(SW.MsgHeader_Impl.example()))
-      printDataContent(SW.FlightPattern_Payload(SW.FlightPattern.byOrdinal(0).get))
-      printDataContent(SW.Command_Impl_Payload(SW.Command_Impl.example()))
-      printDataContent(SW.RF_Msg_Impl_Payload(SW.RF_Msg_Impl.example()))
-      printDataContent(CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl_Payload(CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl.example()))
-      printDataContent(CASE_Model_Transformations.CASE_AttestationResponseMsg_Impl_Payload(CASE_Model_Transformations.CASE_AttestationResponseMsg_Impl.example()))
-      printDataContent(SW.MissionWindow_Payload(SW.MissionWindow.example()))
-      printDataContent(SW.Address_Impl_Payload(SW.Address_Impl.example()))
-      printDataContent(SW.Mission_Payload(SW.Mission.example()))
-      printDataContent(Missing.MISSING_AADL_TYPE_Payload(Missing.MISSING_AADL_TYPE.example()))
+      printDataContent(Base_Types.Bits_Payload(Base_Types.Bits_example()))
       printDataContent(art.Empty())
 
       HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_initialization_api.get.logInfo("")
@@ -165,11 +147,11 @@ object RadioDriver_Attestation extends App {
       HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.logInfo("")
       HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.logDebug("")
       HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.logError("")
-      HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_initialization_api.get.put_MissionCommand(SW.RF_Msg_Impl.example())
-      HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.put_MissionCommand(SW.RF_Msg_Impl.example())
-      val apiUsage_AttestationRequest: Option[CASE_Model_Transformations.CASE_AttestationRequestMsg_Impl] = HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.get_AttestationRequest()
-      HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_initialization_api.get.put_AttestationResponse(CASE_Model_Transformations.CASE_AttestationResponseMsg_Impl.example())
-      HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.put_AttestationResponse(CASE_Model_Transformations.CASE_AttestationResponseMsg_Impl.example())
+      HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_initialization_api.get.put_MissionCommand(Base_Types.Bits_example())
+      HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.put_MissionCommand(Base_Types.Bits_example())
+      val apiUsage_AttestationRequest: Option[Base_Types.Bits] = HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.get_AttestationRequest()
+      HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_initialization_api.get.put_AttestationResponse(Base_Types.Bits_example())
+      HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.put_AttestationResponse(Base_Types.Bits_example())
       val apiUsage_Alert: Option[art.Empty] = HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.get_Alert()
     }
   }

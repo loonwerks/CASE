@@ -15,13 +15,13 @@ import HAMR.SW.{FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner => component}
   val dispatchProtocol: DispatchPropertyProtocol,
   val dispatchTriggers: Option[ISZ[Art.PortId]],
 
-  FlightPlan: Port[SW.Mission],
-  MissionCommand: Port[SW.RF_Msg_Impl]
+  MissionCommand: Port[Base_Types.Bits],
+  FlightPlan: Port[Base_Types.Bits]
   ) extends Bridge {
 
   val ports : Bridge.Ports = Bridge.Ports(
-    all = ISZ(FlightPlan,
-              MissionCommand),
+    all = ISZ(MissionCommand,
+              FlightPlan),
 
     dataIns = ISZ(),
 
@@ -35,8 +35,8 @@ import HAMR.SW.{FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner => component}
   val initialization_api : FlightPlanner_Impl_Initialization_Api = {
     val api = FlightPlanner_Impl_Initialization_Api(
       id,
-      FlightPlan.id,
-      MissionCommand.id
+      MissionCommand.id,
+      FlightPlan.id
     )
     FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge.c_initialization_api = Some(api)
     api
@@ -45,8 +45,8 @@ import HAMR.SW.{FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner => component}
   val operational_api : FlightPlanner_Impl_Operational_Api = {
     val api = FlightPlanner_Impl_Operational_Api(
       id,
-      FlightPlan.id,
-      MissionCommand.id
+      MissionCommand.id,
+      FlightPlan.id
     )
     FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge.c_operational_api = Some(api)
     api
@@ -56,8 +56,8 @@ import HAMR.SW.{FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner => component}
     FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge.EntryPoints(
       id,
 
-      FlightPlan.id,
       MissionCommand.id,
+      FlightPlan.id,
 
       dispatchTriggers,
 
@@ -73,8 +73,8 @@ object FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge {
   @record class EntryPoints(
     FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_BridgeId : Art.BridgeId,
 
-    FlightPlan_Id : Art.PortId,
     MissionCommand_Id : Art.PortId,
+    FlightPlan_Id : Art.PortId,
 
     dispatchTriggers : Option[ISZ[Art.PortId]],
 
@@ -114,9 +114,9 @@ object FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge {
 
       for(portId <- dispatchableEventPorts) {
         if(portId == MissionCommand_Id){
-          val Some(SW.RF_Msg_Impl_Payload(value)) = Art.getValue(MissionCommand_Id)
+          val Some(Base_Types.Bits_Payload(value)) = Art.getValue(MissionCommand_Id)
 
-          // implement the following in 'component':  def handle_MissionCommand(api: FlightPlanner_Impl_Operational_Api, value: SW.RF_Msg_Impl): Unit = {}
+          // implement the following in 'component':  def handle_MissionCommand(api: FlightPlanner_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
           component.handle_MissionCommand(operational_api, value)
         }
       }
@@ -150,9 +150,9 @@ object FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge {
 
       for(portId <- dispatchableEventPorts) {
         if(portId == MissionCommand_Id){
-          val Some(SW.RF_Msg_Impl_Payload(value)) = Art.getValue(MissionCommand_Id)
+          val Some(Base_Types.Bits_Payload(value)) = Art.getValue(MissionCommand_Id)
 
-          // implement the following in 'component':  def handle_MissionCommand(api: FlightPlanner_Impl_Operational_Api, value: SW.RF_Msg_Impl): Unit = {}
+          // implement the following in 'component':  def handle_MissionCommand(api: FlightPlanner_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
           component.handle_MissionCommand(operational_api, value)
         }
       }

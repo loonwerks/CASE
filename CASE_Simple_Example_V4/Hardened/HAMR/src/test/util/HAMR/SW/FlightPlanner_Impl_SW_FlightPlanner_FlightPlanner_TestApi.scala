@@ -12,7 +12,7 @@ abstract class FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_TestApi extends
    *   ART currently supports single element event data queues so
    *   only the last element of MissionCommand will be used
    */
-  def put_concrete_inputs(MissionCommand : ISZ[SW.RF_Msg_Impl]): Unit = {
+  def put_concrete_inputs(MissionCommand : ISZ[Base_Types.Bits]): Unit = {
     for(v <- MissionCommand){
       put_MissionCommand(v)
     }
@@ -24,10 +24,10 @@ abstract class FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_TestApi extends
    * @param FlightPlan method that will be called with the payloads to be sent
    *        on the outgoing event data port 'FlightPlan'.
    */
-  def check_concrete_output(FlightPlan: ISZ[SW.Mission] => B = FlightPlanParam => {T}): Unit = {
+  def check_concrete_output(FlightPlan: ISZ[Base_Types.Bits] => B = FlightPlanParam => {T}): Unit = {
     var testFailures: ISZ[ST] = ISZ()
 
-    var FlightPlanValue: ISZ[SW.Mission] = ISZ()
+    var FlightPlanValue: ISZ[Base_Types.Bits] = ISZ()
     // TODO: event data port getter should return all of the events/payloads
     //       received on event data ports when queue sizes > 1 support is added
     //       to ART
@@ -41,23 +41,23 @@ abstract class FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_TestApi extends
 
 
   // setter for in EventDataPort
-  def put_MissionCommand(value : SW.RF_Msg_Impl): Unit = {
-    ArtNative_Ext.insertInPortValue(bridge.operational_api.MissionCommand_Id, SW.RF_Msg_Impl_Payload(value))
+  def put_MissionCommand(value : Base_Types.Bits): Unit = {
+    ArtNative_Ext.insertInPortValue(bridge.operational_api.MissionCommand_Id, Base_Types.Bits_Payload(value))
   }
 
   // getter for out EventDataPort
-  def get_FlightPlan(): Option[SW.Mission] = {
-    val value: Option[SW.Mission] = get_FlightPlan_payload() match {
-      case Some(SW.Mission_Payload(v)) => Some(v)
-      case Some(v) => fail(s"Unexpected payload on port FlightPlan.  Expecting 'SW.Mission_Payload' but received ${v}")
-      case _ => None[SW.Mission]()
+  def get_FlightPlan(): Option[Base_Types.Bits] = {
+    val value: Option[Base_Types.Bits] = get_FlightPlan_payload() match {
+      case Some(Base_Types.Bits_Payload(v)) => Some(v)
+      case Some(v) => fail(s"Unexpected payload on port FlightPlan.  Expecting 'Base_Types.Bits_Payload' but received ${v}")
+      case _ => None[Base_Types.Bits]()
     }
     return value
   }
 
   // payload getter for out EventDataPort
-  def get_FlightPlan_payload(): Option[SW.Mission_Payload] = {
-    return ArtNative_Ext.observeOutPortValue(bridge.initialization_api.FlightPlan_Id).asInstanceOf[Option[SW.Mission_Payload]]
+  def get_FlightPlan_payload(): Option[Base_Types.Bits_Payload] = {
+    return ArtNative_Ext.observeOutPortValue(bridge.initialization_api.FlightPlan_Id).asInstanceOf[Option[Base_Types.Bits_Payload]]
   }
 
 }

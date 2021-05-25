@@ -9,6 +9,6 @@ Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_finalise_(STACK_F
 
 Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand_(
   STACK_FRAME
-  HAMR_SW_RF_Msg_Impl value);
+  IS_C4F575 value);
 
 #endif

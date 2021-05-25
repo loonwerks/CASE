@@ -9,7 +9,7 @@ Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_final
 
 Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest_(
   STACK_FRAME
-  HAMR_CASE_Model_Transformations_CASE_AttestationRequestMsg_Impl value);
+  IS_C4F575 value);
 
 Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_Alert_(STACK_FRAME_ONLY);
 

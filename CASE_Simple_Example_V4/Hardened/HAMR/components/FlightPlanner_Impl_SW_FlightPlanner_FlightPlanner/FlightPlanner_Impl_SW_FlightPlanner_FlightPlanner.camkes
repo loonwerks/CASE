@@ -4,7 +4,7 @@ component FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner {
   control;
   emits ReceiveEvent sb_FlightPlan_1_notification;
   consumes ReceiveEvent sb_MissionCommand_notification;
-  dataport sb_queue_union_art_DataContent_1_t sb_FlightPlan_queue_1;
   dataport sb_queue_union_art_DataContent_1_t sb_MissionCommand_queue;
+  dataport sb_queue_union_art_DataContent_1_t sb_FlightPlan_queue_1;
   has semaphore sb_dispatch_sem;
 }
