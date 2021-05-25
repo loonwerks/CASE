@@ -24,8 +24,15 @@ Unit base_test_data_port_periodic_domains_consumer_thread_i_consumer_consumer_ti
     sfAssert(SF (Z) t0_numBits == numBits_S8, "numBits received does not match expected");
 
     DeclNewString(read_port_str);
-    String__append(SF (String) &read_port_str, string("Read on read_port: "));
+    String__append(SF (String) &read_port_str, string("Read "));
+    Z_string_(SF (String) &read_port_str, t0_numBits);
+    String__append(SF (String) &read_port_str, string(" bits on read_port: [ "));
     byte_array_string(SF (String) &read_port_str, t0, numBytes_S8);
+    String__append(SF (String) &read_port_str, string("]"));
     api_logInfo__base_test_data_port_periodic_domains_consumer_thread_i_consumer_consumer(SF (String) &read_port_str);
+
+    // alternatively
+    //printf("consumer: Read %i bits on read_port: ", t0_numBits);
+    //hex_dump(t0, numBytes_S8);
   }
 }

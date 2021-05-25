@@ -78,7 +78,7 @@ int run(void) {
       size_t numBits;
       uint8_t byteArray[1]; // producer is sending a single unsigned 8 bit integer
       if(api_get_read_port__base_test_data_port_periodic_domains_consumer_t_i_consumer_consumer(&numBits, byteArray)){
-        printf("Read %i bits on read_port: \n", numBits);
+        printf("%s: Read %i bits on read_port: ", get_instance_name(), numBits);
         hex_dump(byteArray, (numBits - 1) / 8 + 1);
         printf("\n");
       }

@@ -19,7 +19,7 @@ object consumer extends App {
     base.test_event_data_port_periodic_domains.consumer_t_i_consumer_consumer_Bridge(
       id = 0,
       name = "top_impl_Instance_consumer_consumer",
-      dispatchProtocol = Sporadic(min = 1),
+      dispatchProtocol = Periodic(period = 1000),
       dispatchTriggers = None(),
 
       read_port = read_port
@@ -34,11 +34,7 @@ object consumer extends App {
   var read_port_port: Option[DataContent] = noData
 
   def dispatchStatus(bridgeId: Art.BridgeId): DispatchStatus = {
-    var portIds: ISZ[Art.PortId] = ISZ()
-    if(!consumer_t_i_consumer_consumer_seL4Nix.read_port_IsEmpty()) {
-      portIds = portIds :+ read_port_id
-    }
-    return EventTriggered(portIds)
+    return TimeTriggered()
   }
 
   def getValue(portId: Art.PortId): Option[DataContent] = {

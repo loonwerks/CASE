@@ -28,7 +28,7 @@ object Arch {
     base.test_event_data_port_periodic_domains.consumer_t_i_consumer_consumer_Bridge(
       id = 1,
       name = "top_impl_Instance_consumer_consumer",
-      dispatchProtocol = Sporadic(min = 1),
+      dispatchProtocol = Periodic(period = 1000),
       dispatchTriggers = None(),
 
       read_port = read_port

@@ -68,7 +68,98 @@ refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
 <!--example-output-sel4_start-->
 Timeout = 90 seconds
 ```
-NEED TO MANUALLY UPDATE EXPECTED OUTPUT
+Booting all finished, dropped to user space
+<<seL4(CPU 0) [decodeUntypedInvocation/212 T0xff807fc17400 "rootserver" @4006f0]: Untyped Retype: Insufficient memory (1 * 2097152 bytes needed, 0 bytes available).>>
+<<seL4(CPU 0) [maskVMRights/187 T0xff807fc17400 "rootserver" @4006f0]: Attempted to make unsupported write only mapping>>
+Entering pre-init of producer_t_i_producer_producer
+Art: Registered component: top_impl_Instance_producer_producer (periodic: 1000)
+Art: - Registered port: top_impl_Instance_producer_producer_write_port (data out)
+Leaving pre-init of producer_t_i_producer_producer
+_utspace_split_alloc@split.c:272 Failed to find any untyped capable of creating an object at address 0x8040000
+Loading Linux: 'linux' dtb: ''
+install_linux_devices@main.c:657 module name: map_frame_hack
+install_linux_devices@main.c:657 module name: init_ram
+install_linux_devices@main.c:657 module name: virtio_con
+install_linux_devices@main.c:657 module name: cross_vm_connections
+libsel4muslcsys: Error attempting syscall 215
+libsel4muslcsys: Error attempting syscall 215
+clean_up@fdtgen.c:370 Non-existing node None specified to be kept
+consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
+_utspace_split_alloc@split.c:272 Failed to find any untyped capable of creating an object at address 0x8020000
+consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
+consume_connection_event@cross_vm_connection.c:247 Failed to inject connection irq
+[    2.482346] Unable to detect cache hierarchy for CPU 0
+[    2.500369] e1000: Intel(R) PRO/1000 Network Driver - version 7.3.21-k8-NAPI
+[    2.515265] e1000: Copyright (c) 1999-2006 Intel Corporation.
+[    2.530070] e1000e: Intel(R) PRO/1000 Network Driver - 3.2.6-k
+[    2.542126] e1000e: Copyright(c) 1999 - 2015 Intel Corporation.
+[    2.560073] mousedev: PS/2 mouse device common for all mice
+[    2.580235] ledtrig-cpu: registered to indicate activity on CPUs
+[    2.594036] dmi-sysfs: dmi entry is absent.
+[    2.605933] ipip: IPv4 and MPLS over IPv4 tunneling driver
+[    2.625880] NET: Registered protocol family 10
+[    2.653669] mip6: Mobile IPv6
+[    2.668576] NET: Registered protocol family 17
+[    2.679799] mpls_gso: MPLS GSO support
+[    2.688764] Registered cp15_barrier emulation handler
+[    2.699991] Registered setend emulation handler
+[    2.718039] registered taskstats version 1
+[    2.728215] zswap: loaded using pool lzo/zbud
+[    2.744077] ima: No TPM chip found, activating TPM-bypass!
+[    2.755229] ima: Allocated hash algorithm: sha256
+[    2.777632] hctosys: unable to open rtc device (rtc0)
+[    3.265680] PM: Hibernation image not present or could not be loaded.
+[    3.277658] initcall clk_disable_unused blacklisted
+[    4.506170] Freeing unused kernel memory: 3776K
+Starting syslogd: OK
+Starting klogd: OK
+Running sysctl: OK
+Initializing random number generator... [    8.080551] random: dd: uninitialized urandom read (512 bytes read)
+done.
+Starting network: OK
+[    8.709839] connection: loading out-of-tree module taints kernel.
+[    8.751513] Event Bar (dev-0) initalised
+[    8.775813] 2 Dataports (dev-0) initalised
+[    9.280242] Event Bar (dev-1) initalised
+[    9.291919] 2 Dataports (dev-1) initalised
+
+Welcome to Buildroot
+buildroot login: root
+# vmconsumer 
+VM App vmconsumer started
+Setting up incoming data port /dev/uio0 with size 4096
+Successfully setup incoming data port /dev/uio0
+Setting up incoming event data port /dev/uio1 with size 4096
+Successfully setup incoming event data port /dev/uio1
+vmconsumer: Read 8 bits on read_port: [ 2E ]
+
+vmconsumer: Read 8 bits on read_port: [ 2F ]
+
+vmconsumer: Read 8 bits on read_port: [ 30 ]
+
+vmconsumer: Read 8 bits on read_port: [ 31 ]
+
+vmconsumer: Read 8 bits on read_port: [ 32 ]
+
+vmconsumer: Read 8 bits on read_port: [ 33 ]
+
+vmconsumer: Read 8 bits on read_port: [ 34 ]
+
+vmconsumer: Read 8 bits on read_port: [ 35 ]
+
+vmconsumer: Read 8 bits on read_port: [ 36 ]
+
+vmconsumer: Read 8 bits on read_port: [ 37 ]
+
+vmconsumer: Read 8 bits on read_port: [ 38 ]
+
+vmconsumer: Read 8 bits on read_port: [ 39 ]
+
+vmconsumer: Read 8 bits on read_port: [ 3A ]
+
+vmconsumer: Read 8 bits on read_port: [ 3B ]
+
+QEMU: Terminated
 ```
 <!--example-output-sel4_end-->
 

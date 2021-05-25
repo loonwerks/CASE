@@ -34,20 +34,6 @@ bool sb_read_port_is_empty(){
   return sb_queue_union_art_DataContent_1_is_empty(&sb_read_port_recv_queue);
 }
 
-/************************************************************************
- * sb_read_port_notification_handler:
- * Invoked by: seL4 notification callback
- *
- * This is the function invoked by an seL4 notification callback to 
- * dispatch the component due to the arrival of an event on port
- * sb_read_port
- *
- ************************************************************************/
-static void sb_read_port_notification_handler(void * unused) {
-  MUTEXOP(sb_dispatch_sem_post())
-  CALLBACKOP(sb_read_port_notification_reg_callback(sb_read_port_notification_handler, NULL));
-}
-
 // is_empty read_port: In EventDataPort
 B base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_seL4Nix_read_port_IsEmpty(STACK_FRAME_ONLY) {
   return sb_read_port_is_empty();
@@ -90,13 +76,6 @@ void pre_init(void) {
   printf("Leaving pre-init of consumer_t_i_consumer_consumer\n");
 }
 
-void post_init(void) {
-  DeclNewStackFrame(NULL, "sb_consumer_t_i.c", "", "post_init", 0);
-
-  // register callback for EventDataPort port read_port
-  CALLBACKOP(sb_read_port_notification_reg_callback(sb_read_port_notification_handler, NULL));
-}
-
 /************************************************************************
  * int run(void)
  * Main active thread function.
@@ -104,11 +83,12 @@ void post_init(void) {
 int run(void) {
   DeclNewStackFrame(NULL, "sb_consumer_t_i.c", "", "run", 0);
 
-  MUTEXOP(sb_dispatch_sem_wait())
+  sb_self_pacer_tick_emit();
   for(;;) {
-    MUTEXOP(sb_dispatch_sem_wait())
+    sb_self_pacer_tock_wait();
     // call the component's compute entrypoint
     base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_adapter_computeEntryPoint(SF_LAST);
+    sb_self_pacer_tick_emit();
   }
   return 0;
 }

@@ -43,7 +43,8 @@ public
 		features
 			read_port: in event data port Base_Types::Integer_8;
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
+			Period => 1000ms;
 			Compute_Execution_Time => 10ms .. 10ms;
 	end consumer_t;
 

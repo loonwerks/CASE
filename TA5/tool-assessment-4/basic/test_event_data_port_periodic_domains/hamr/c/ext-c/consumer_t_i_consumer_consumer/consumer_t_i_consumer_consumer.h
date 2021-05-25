@@ -7,8 +7,6 @@ Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_i
 
 Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_finalise_(STACK_FRAME_ONLY);
 
-Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_handle_read_port_(
-  STACK_FRAME
-  IS_C4F575 value);
+Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered_(STACK_FRAME_ONLY);
 
 #endif

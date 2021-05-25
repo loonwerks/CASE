@@ -34,7 +34,7 @@
 
 |consumer Properties|
 |--|
-|Sporadic|
+|Periodic: 1000 ms|
 |Native|
 
 
@@ -101,18 +101,21 @@ Timeout = 18 seconds
 ```
 Booting all finished, dropped to user space
 Entering pre-init of consumer_t_i_consumer_consumer
-Entering pre-init of producer_t_i_producer_producer
-Art: Registered componeArt: Registered component: top_impl_Instance_consumer_consumer (sporadic: 1)
+Art: Registered compEntering pre-init of producer_t_i_producer_producer
+Art: Registered component: top_impl_Instanonent: top_impl_Instance_consumer_consumer (periodic: 1000)
 Art: - Registered port: top_impl_Instance_consumer_consumer_read_port (event in)
 Leaving pre-init of consumer_t_i_consumer_consumer
-nt: top_impl_Instance_producer_producer (periodic: 1000)
+ce_producer_producer (periodic: 1000)
 Art: - Registered port: top_impl_Instance_producer_producer_write_port (event out)
 Leaving pre-init of producer_t_i_producer_producer
-top_impl_Instance_consumer_consumer: Received on read_port: 00 
-top_impl_Instance_consumer_consumer: Received on read_port: 01 
-top_impl_Instance_consumer_consumer: Received on read_port: 02 
-top_impl_Instance_consumer_consumer: Received on read_port: 03 
-top_impl_Instance_consumer_consumer: Received on read_port: 04 
+top_impl_Instance_consumer_consumer: Received 8 on read port: [ 00 ]
+top_impl_Instance_consumer_consumer: Received 8 on read port: [ 01 ]
+top_impl_Instance_consumer_consumer: Received 8 on read port: [ 02 ]
+top_impl_Instance_consumer_consumer: Received 8 on read port: [ 03 ]
+top_impl_Instance_consumer_consumer: Received 8 on read port: [ 04 ]
+top_impl_Instance_consumer_consumer: Received 8 on read port: [ 05 ]
+top_impl_Instance_consumer_consumer: Received 8 on read port: [ 06 ]
+top_impl_Instance_consumer_consumer: Received 8 on read port: [ 07 ]
 
 ```
 <!--example-output-sel4_end-->

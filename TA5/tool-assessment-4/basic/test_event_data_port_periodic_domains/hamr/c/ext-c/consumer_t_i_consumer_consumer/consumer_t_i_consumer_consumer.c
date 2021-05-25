@@ -12,23 +12,25 @@ Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_f
   DeclNewStackFrame(caller, "consumer_t_i_consumer_consumer.c", "", "base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_finalise_", 0);
 }
 
-Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_handle_read_port_raw(
-  STACK_FRAME
-  size_t numBits,
-  uint8_t *byteArray) {
-  DeclNewStackFrame(caller, "consumer_t_i_consumer_consumer_api.c", "", "base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_handle_read_port_raw", 0);
+Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered_(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "consumer_t_i_consumer_consumer.c", "", "base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered_", 0);
 
-  size_t numBytes = numBits == 0 ? 0 : (numBits - 1) / 8 + 1;
-  DeclNewString(read_portString);
-  String__append(SF (String) &read_portString, string("Received on read_port: "));
-  byte_array_string(SF (String) &read_portString, byteArray, numBytes);
-  api_logInfo__base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer (SF (String) &read_portString);
-}
+  uint8_t t0[numBytes_S8];
+  size_t t0_numBits;
+  if(api_get_read_port__base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer(SF &t0_numBits, t0)) {
+    // sanity check
+    sfAssert(SF (Z) t0_numBits == numBits_S8, "numBits received does not match expected");
 
-Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_handle_read_port_(
-  STACK_FRAME
-  IS_C4F575 value) {
-  DeclNewStackFrame(caller, "consumer_t_i_consumer_consumer.c", "", "base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_handle_read_port_", 0);
+    DeclNewString(read_port_str);
+    String__append(SF (String) &read_port_str, string("Received "));
+    Z_string_(SF (String) &read_port_str, t0_numBits);
+    String__append(SF (String) &read_port_str, string(" on read port: [ "));
+    byte_array_string(SF (String) &read_port_str, t0, numBytes_S8);
+    String__append(SF (String) &read_port_str, string("]"));
+    api_logInfo__base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer(SF (String) &read_port_str);
 
-  base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_handle_read_port_raw(SF value->size, value->value);
+    // alternatively
+    //printf("consumer: Received %i bits on read_port: ", t0_numBits);
+    //hex_dump(t0, numBytes_S8);
+  }
 }

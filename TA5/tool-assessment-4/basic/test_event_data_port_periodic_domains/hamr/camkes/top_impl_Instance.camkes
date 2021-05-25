@@ -12,6 +12,7 @@ assembly {
     connection seL4Notification conn1(from producer_producer.sb_write_port_1_notification, to consumer_consumer.sb_read_port_notification);
     connection seL4SharedData conn2(from producer_producer.sb_write_port_queue_1, to consumer_consumer.sb_read_port_queue);
     connection seL4Notification conn3(from producer_producer.sb_self_pacer_tick, to producer_producer.sb_self_pacer_tock);
+    connection seL4Notification conn4(from consumer_consumer.sb_self_pacer_tick, to consumer_consumer.sb_self_pacer_tock);
   }
 
   configuration {

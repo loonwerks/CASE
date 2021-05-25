@@ -28,7 +28,9 @@ consumer_consumer [
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
       <TR><TD><B>consumer_consumer</B></TD></TR>
       <TR><TD PORT="sb_read_port_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_read_port_queue</B></FONT></TD></TR>
-      <TR><TD PORT="sb_read_port_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_read_port_notification</B></FONT></TD></TR>"
+      <TR><TD PORT="sb_self_pacer_tick"><FONT COLOR="blue">emits TickTock <B>sb_self_pacer_tick</B></FONT></TD></TR>
+      <TR><TD PORT="sb_read_port_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_read_port_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_self_pacer_tock"><FONT COLOR="blue">consumes TickTock <B>sb_self_pacer_tock</B></FONT></TD></TR>"
     </TABLE>
   >
   shape=plaintext
@@ -82,6 +84,13 @@ interfacetypekey [
   color="blue"
   //label = "seL4Notification"
   id = conn3
+
+];
+
+"consumer_consumer":sb_self_pacer_tick -> "consumer_consumer":sb_self_pacer_tock [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn4
 
 ];
 

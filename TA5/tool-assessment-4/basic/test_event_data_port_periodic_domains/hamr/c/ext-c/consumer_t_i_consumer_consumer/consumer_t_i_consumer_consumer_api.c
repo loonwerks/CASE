@@ -95,11 +95,10 @@ Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_f
   base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_finalise_(SF_LAST);
 }
 
-Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_handle_read_port(
+Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered(
   STACK_FRAME
-  base_test_event_data_port_periodic_domains_consumer_t_i_Operational_Api api,
-  IS_C4F575 value) {
-  DeclNewStackFrame(caller, "consumer_t_i_consumer_consumer_api.c", "", "base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_handle_read_port", 0);
+  base_test_event_data_port_periodic_domains_consumer_t_i_Operational_Api api) {
+  DeclNewStackFrame(caller, "consumer_t_i_consumer_consumer_api.c", "", "base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered", 0);
 
-  base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_handle_read_port_(SF value);
+  base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered_(SF_LAST);
 }

@@ -36,26 +36,38 @@
 <!-- consumer_consumer -->
 <g id="node2" class="node">
 <title>consumer_consumer</title>
-<polygon fill="none" stroke="#000000" points="796.5,-100 796.5,-124 1253.5,-124 1253.5,-100 796.5,-100"/>
-<text text-anchor="start" x="954.5" y="-109.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">consumer_consumer</text>
-<polygon fill="none" stroke="#000000" points="796.5,-76 796.5,-100 1253.5,-100 1253.5,-76 796.5,-76"/>
-<text text-anchor="start" x="799.5" y="-85.2" font-family="Times,serif" font-size="16.00" fill="#ff0000">dataport sb_queue_union_art_DataContent_1_t </text>
-<text text-anchor="start" x="1109.5" y="-85.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ff0000">sb_read_port_queue</text>
-<polygon fill="none" stroke="#000000" points="796.5,-52 796.5,-76 1253.5,-76 1253.5,-52 796.5,-52"/>
-<text text-anchor="start" x="856" y="-61.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes ReceiveEvent </text>
-<text text-anchor="start" x="1015" y="-61.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_read_port_notification</text>
+<polygon fill="none" stroke="#000000" points="796.5,-112 796.5,-136 1253.5,-136 1253.5,-112 796.5,-112"/>
+<text text-anchor="start" x="954.5" y="-121.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#000000">consumer_consumer</text>
+<polygon fill="none" stroke="#000000" points="796.5,-88 796.5,-112 1253.5,-112 1253.5,-88 796.5,-88"/>
+<text text-anchor="start" x="799.5" y="-97.2" font-family="Times,serif" font-size="16.00" fill="#ff0000">dataport sb_queue_union_art_DataContent_1_t </text>
+<text text-anchor="start" x="1109.5" y="-97.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#ff0000">sb_read_port_queue</text>
+<polygon fill="none" stroke="#000000" points="796.5,-64 796.5,-88 1253.5,-88 1253.5,-64 796.5,-64"/>
+<text text-anchor="start" x="909.5" y="-73.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">emits TickTock </text>
+<text text-anchor="start" x="1014.5" y="-73.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_self_pacer_tick</text>
+<polygon fill="none" stroke="#000000" points="796.5,-40 796.5,-64 1253.5,-64 1253.5,-40 796.5,-40"/>
+<text text-anchor="start" x="856" y="-49.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes ReceiveEvent </text>
+<text text-anchor="start" x="1015" y="-49.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_read_port_notification</text>
+<polygon fill="none" stroke="#000000" points="796.5,-16 796.5,-40 1253.5,-40 1253.5,-16 796.5,-16"/>
+<text text-anchor="start" x="893.5" y="-25.2" font-family="Times,serif" font-size="16.00" fill="#0000ff">consumes TickTock </text>
+<text text-anchor="start" x="1026.5" y="-25.2" font-family="Times,serif" font-weight="bold" font-size="16.00" fill="#0000ff">sb_self_pacer_tock</text>
 </g>
 <!-- producer_producer&#45;&gt;consumer_consumer -->
 <g id="conn1" class="edge">
 <title>producer_producer:sb_write_port_1_notification&#45;&gt;consumer_consumer:sb_read_port_notification</title>
-<path fill="none" stroke="#0000ff" d="M744.5,-64C763.8194,-64 771.0265,-64 786.3716,-64"/>
-<polygon fill="#0000ff" stroke="#0000ff" points="786.5,-67.5001 796.5,-64 786.5,-60.5001 786.5,-67.5001"/>
+<path fill="none" stroke="#0000ff" d="M744.5,-64C764.3272,-64 770.7687,-55.6145 786.2037,-52.863"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="786.8273,-56.3231 796.5,-52 786.2426,-49.3476 786.8273,-56.3231"/>
 </g>
 <!-- producer_producer&#45;&gt;consumer_consumer -->
 <g id="conn2" class="edge">
 <title>producer_producer:sb_write_port_queue_1&#45;&gt;consumer_consumer:sb_read_port_queue</title>
-<path fill="none" stroke="#ff0000" d="M744.5,-88C763.8194,-88 771.0265,-88 786.3716,-88"/>
-<polygon fill="#ff0000" stroke="#ff0000" points="786.5,-91.5001 796.5,-88 786.5,-84.5001 786.5,-91.5001"/>
+<path fill="none" stroke="#ff0000" d="M744.5,-88C764.3272,-88 770.7687,-96.3855 786.2037,-99.137"/>
+<polygon fill="#ff0000" stroke="#ff0000" points="786.2426,-102.6524 796.5,-100 786.8273,-95.6769 786.2426,-102.6524"/>
+</g>
+<!-- consumer_consumer&#45;&gt;consumer_consumer -->
+<g id="conn4" class="edge">
+<title>consumer_consumer:sb_self_pacer_tick&#45;&gt;consumer_consumer:sb_self_pacer_tock</title>
+<path fill="none" stroke="#0000ff" d="M796.4654,-81.0657C658.8319,-80.3835 529,-72.6572 529,-52 529,-31.8471 652.5698,-24.0015 786.4005,-22.9969"/>
+<polygon fill="#0000ff" stroke="#0000ff" points="786.4874,-26.4965 796.4654,-22.9343 786.4438,-19.4967 786.4874,-26.4965"/>
 </g>
 <!-- connectiontypekey -->
 <g id="node3" class="node">

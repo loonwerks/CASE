@@ -101,21 +101,30 @@ Timeout = 18 seconds
 ```
 Booting all finished, dropped to user space
 Entering pre-init of consumer_thread_i_consumer_consumer
-Entering pre-init of producer_thread_i_producer_producer
-Art: Registered component: top_impl_Instance_producer_producer (periodiArt: Registered component: top_impl_Instance_consumer_consumer (periodic: 1000)
-Art: - Registered port: top_impl_Instance_consumer_consumer_read_port (data in)
-Leaving pre-init of consumer_thread_i_consumer_consumer
-c: 1000)
+Art: RegisEntering pre-init of producer_thread_i_producer_producer
+Art: Registeredtered component: top_impl_Instance_consumer_consumer (periodic: 1000)
+Art: - Registered port: top_impl_Instance_consumer_consumer_read_port (d component: top_impl_Instance_producer_producer (periodic: 1000)
 Art: - Registered port: top_impl_Instance_producer_producer_write_port (data out)
 Leaving pre-init of producer_thread_i_producer_producer
-top_impl_Instance_consumer_consumer: Read on read_port: 00 
-top_impl_Instance_consumer_consumer: Read on read_port: 01 
-top_impl_Instance_consumer_consumer: Read on read_port: 02 
-top_impl_Instance_consumer_consumer: Read on read_port: 03 
-top_impl_Instance_consumer_consumer: Read on read_port: 04 
-top_impl_Instance_consumer_consumer: Read on read_port: 05 
-top_impl_Instance_consumer_consumer: Read on read_port: 06 
-top_impl_Instance_consumer_consumer: Read on read_port: 07 
+ata in)
+Leaving pre-init of consumer_thread_i_consumer_consumer
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 00 ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 01 ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 02 ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 03 ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 04 ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 05 ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 06 ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 07 ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 08 ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 09 ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 0A ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 0B ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 0C ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 0D ]
+top_impl_Instance_consumer_consumer: Read 8 bits on read_port: [ 0E ]
+QEMU: Terminated
+
 
 ```
 <!--example-output-sel4_end-->
