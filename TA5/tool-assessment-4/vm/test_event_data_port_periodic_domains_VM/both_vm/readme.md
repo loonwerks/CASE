@@ -63,6 +63,19 @@ refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
 ```
 <!--how-to-buildrun-sel4_end-->
 
+Eventually you will see ``buildroot login``.  Type ``root`` and at the ``#``
+prompt type ``vmproducer``.  Type ``@1`` to switch to the other VM, type ``root``, and at the 
+``#`` prompt type ``vmconsumer``.
+
+If you see the following when starting up the producer,
+
+```
+handle_event_bar_fault@cross_vm_connection.c:128 Connection is not configured with an emit function
+```
+
+then you're in the wrong VM.  Type ``^c`` to shutdown the producer, press ``return`` to get to a fresh ``#`` prompt, type ``@1`` to switch to the other VM, type ``root`` and then ``vmproducer``.  Type ``@0`` to return to the other vm and type ``vmconsumer``.
+
+Type ``^a x`` to shutdown the QEMU simulation.
 
 ### Example Output: SeL4
 <!--example-output-sel4_start-->
