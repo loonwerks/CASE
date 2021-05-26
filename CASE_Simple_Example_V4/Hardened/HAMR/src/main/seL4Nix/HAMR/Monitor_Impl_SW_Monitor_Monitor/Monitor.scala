@@ -93,7 +93,7 @@ object Monitor extends App {
 
   def initialiseArchitecture(): Unit = {
     val ad = ArchitectureDescription(
-      components = MSZ (MonitorBridge),
+      components = ISZ (MonitorBridge),
       connections = ISZ ()
     )
     Art.run(ad)

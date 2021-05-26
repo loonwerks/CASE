@@ -9,7 +9,7 @@ import HAMR.SW.{FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner => component}
 
 // This file was auto-generated.  Do not edit
 
-@record class FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge(
+@datatype class FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge(
   val id: Art.BridgeId,
   val name: String,
   val dispatchProtocol: DispatchPropertyProtocol,
@@ -70,7 +70,7 @@ object FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge {
   var c_initialization_api: Option[FlightPlanner_Impl_Initialization_Api] = None()
   var c_operational_api: Option[FlightPlanner_Impl_Operational_Api] = None()
 
-  @record class EntryPoints(
+  @datatype class EntryPoints(
     FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_BridgeId : Art.BridgeId,
 
     MissionCommand_Id : Art.PortId,

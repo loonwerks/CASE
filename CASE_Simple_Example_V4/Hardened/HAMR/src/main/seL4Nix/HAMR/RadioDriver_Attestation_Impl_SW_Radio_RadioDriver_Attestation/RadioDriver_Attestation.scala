@@ -106,7 +106,7 @@ object RadioDriver_Attestation extends App {
 
   def initialiseArchitecture(): Unit = {
     val ad = ArchitectureDescription(
-      components = MSZ (RadioDriver_AttestationBridge),
+      components = ISZ (RadioDriver_AttestationBridge),
       connections = ISZ ()
     )
     Art.run(ad)

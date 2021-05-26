@@ -120,7 +120,7 @@ object Arch {
   val ad : ArchitectureDescription = {
 
     ArchitectureDescription(
-      components = MSZ (MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation, MissionComputer_Impl_Instance_SW_Monitor_Monitor, MissionComputer_Impl_Instance_SW_FlightController_FlightController, MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager, MissionComputer_Impl_Instance_SW_Filter_Filter, MissionComputer_Impl_Instance_SW_FlightPlanner_FlightPlanner, MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate),
+      components = ISZ (MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation, MissionComputer_Impl_Instance_SW_Monitor_Monitor, MissionComputer_Impl_Instance_SW_FlightController_FlightController, MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager, MissionComputer_Impl_Instance_SW_Filter_Filter, MissionComputer_Impl_Instance_SW_FlightPlanner_FlightPlanner, MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate),
 
       connections = ISZ (Connection(from = MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation.MissionCommand, to = MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate.MissionCommand_in),
                          Connection(from = MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation.AttestationResponse, to = MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager.AttestationResponse),

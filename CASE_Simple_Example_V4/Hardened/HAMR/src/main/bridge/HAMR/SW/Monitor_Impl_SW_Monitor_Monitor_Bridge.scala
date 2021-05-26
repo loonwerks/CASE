@@ -9,7 +9,7 @@ import HAMR.SW.{Monitor_Impl_SW_Monitor_Monitor => component}
 
 // This file was auto-generated.  Do not edit
 
-@record class Monitor_Impl_SW_Monitor_Monitor_Bridge(
+@datatype class Monitor_Impl_SW_Monitor_Monitor_Bridge(
   val id: Art.BridgeId,
   val name: String,
   val dispatchProtocol: DispatchPropertyProtocol,
@@ -76,7 +76,7 @@ object Monitor_Impl_SW_Monitor_Monitor_Bridge {
   var c_initialization_api: Option[Monitor_Impl_Initialization_Api] = None()
   var c_operational_api: Option[Monitor_Impl_Operational_Api] = None()
 
-  @record class EntryPoints(
+  @datatype class EntryPoints(
     Monitor_Impl_SW_Monitor_Monitor_BridgeId : Art.BridgeId,
 
     FlightPlan_in_Id : Art.PortId,

@@ -9,7 +9,7 @@ import HAMR.SW.{AttestationManager_Impl_SW_AttestationManager_AttestationManager
 
 // This file was auto-generated.  Do not edit
 
-@record class AttestationManager_Impl_SW_AttestationManager_AttestationManager_Bridge(
+@datatype class AttestationManager_Impl_SW_AttestationManager_AttestationManager_Bridge(
   val id: Art.BridgeId,
   val name: String,
   val dispatchProtocol: DispatchPropertyProtocol,
@@ -76,7 +76,7 @@ object AttestationManager_Impl_SW_AttestationManager_AttestationManager_Bridge {
   var c_initialization_api: Option[AttestationManager_Impl_Initialization_Api] = None()
   var c_operational_api: Option[AttestationManager_Impl_Operational_Api] = None()
 
-  @record class EntryPoints(
+  @datatype class EntryPoints(
     AttestationManager_Impl_SW_AttestationManager_AttestationManager_BridgeId : Art.BridgeId,
 
     AttestationRequest_Id : Art.PortId,

@@ -9,7 +9,7 @@ import HAMR.SW.{AttestationGate_Impl_SW_AttestationGate_AttestationGate => compo
 
 // This file was auto-generated.  Do not edit
 
-@record class AttestationGate_Impl_SW_AttestationGate_AttestationGate_Bridge(
+@datatype class AttestationGate_Impl_SW_AttestationGate_AttestationGate_Bridge(
   val id: Art.BridgeId,
   val name: String,
   val dispatchProtocol: DispatchPropertyProtocol,
@@ -76,7 +76,7 @@ object AttestationGate_Impl_SW_AttestationGate_AttestationGate_Bridge {
   var c_initialization_api: Option[AttestationGate_Impl_Initialization_Api] = None()
   var c_operational_api: Option[AttestationGate_Impl_Operational_Api] = None()
 
-  @record class EntryPoints(
+  @datatype class EntryPoints(
     AttestationGate_Impl_SW_AttestationGate_AttestationGate_BridgeId : Art.BridgeId,
 
     MissionCommand_in_Id : Art.PortId,

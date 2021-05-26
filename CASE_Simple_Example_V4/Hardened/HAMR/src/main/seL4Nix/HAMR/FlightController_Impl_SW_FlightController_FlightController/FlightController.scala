@@ -67,7 +67,7 @@ object FlightController extends App {
 
   def initialiseArchitecture(): Unit = {
     val ad = ArchitectureDescription(
-      components = MSZ (FlightControllerBridge),
+      components = ISZ (FlightControllerBridge),
       connections = ISZ ()
     )
     Art.run(ad)

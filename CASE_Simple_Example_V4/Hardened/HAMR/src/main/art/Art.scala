@@ -15,12 +15,12 @@ object Art {
   val maxPorts: PortId = 18
 
   val logTitle: String = "Art"
-  val bridges: MS[BridgeId, MOption[Bridge]] = MS.create[BridgeId, MOption[Bridge]](maxComponents, MNone[Bridge]())
+  val bridges: MS[BridgeId, Option[Bridge]] = MS.create[BridgeId, Option[Bridge]](maxComponents, None[Bridge]())
   val connections: MS[PortId, ISZ[PortId]] = MS.create[PortId, ISZ[PortId]](maxPorts, ISZ())
   val ports: MS[PortId, Option[UPort]] = MS.create[PortId, Option[UPort]](maxPorts, None[UPort]())
 
   def bridge(bridgeId: BridgeId): Bridge = {
-    val MSome(r) = bridges(bridgeId)
+    val Some(r) = bridges(bridgeId)
     return r
   }
 
@@ -30,7 +30,7 @@ object Art {
   }
 
   def register(bridge: Bridge): Unit = {
-    bridges(bridge.id) = MSome(bridge)
+    bridges(bridge.id) = Some(bridge)
     bridge.dispatchProtocol match {
       case DispatchPropertyProtocol.Periodic(period) =>
         ArtNative.logInfo(logTitle, s"Registered component: ${bridge.name} (periodic: $period)")
@@ -115,7 +115,7 @@ object Art {
   def initTest(bridge: Bridge): Unit = {
     // remove all bridges
     for (i <- bridges.indices) {
-      bridges(i) = MNone()
+      bridges(i) = None()
     }
 
     // remove all ports

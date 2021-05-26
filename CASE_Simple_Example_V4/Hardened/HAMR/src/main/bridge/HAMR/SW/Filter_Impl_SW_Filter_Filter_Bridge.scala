@@ -9,7 +9,7 @@ import HAMR.SW.{Filter_Impl_SW_Filter_Filter => component}
 
 // This file was auto-generated.  Do not edit
 
-@record class Filter_Impl_SW_Filter_Filter_Bridge(
+@datatype class Filter_Impl_SW_Filter_Filter_Bridge(
   val id: Art.BridgeId,
   val name: String,
   val dispatchProtocol: DispatchPropertyProtocol,
@@ -70,7 +70,7 @@ object Filter_Impl_SW_Filter_Filter_Bridge {
   var c_initialization_api: Option[Filter_Impl_Initialization_Api] = None()
   var c_operational_api: Option[Filter_Impl_Operational_Api] = None()
 
-  @record class EntryPoints(
+  @datatype class EntryPoints(
     Filter_Impl_SW_Filter_Filter_BridgeId : Art.BridgeId,
 
     Input_Id : Art.PortId,

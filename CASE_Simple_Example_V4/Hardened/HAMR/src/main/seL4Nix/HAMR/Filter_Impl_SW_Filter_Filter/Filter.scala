@@ -80,7 +80,7 @@ object Filter extends App {
 
   def initialiseArchitecture(): Unit = {
     val ad = ArchitectureDescription(
-      components = MSZ (FilterBridge),
+      components = ISZ (FilterBridge),
       connections = ISZ ()
     )
     Art.run(ad)

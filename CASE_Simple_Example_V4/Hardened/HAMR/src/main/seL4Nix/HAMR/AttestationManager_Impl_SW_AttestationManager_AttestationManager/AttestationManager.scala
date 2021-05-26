@@ -93,7 +93,7 @@ object AttestationManager extends App {
 
   def initialiseArchitecture(): Unit = {
     val ad = ArchitectureDescription(
-      components = MSZ (AttestationManagerBridge),
+      components = ISZ (AttestationManagerBridge),
       connections = ISZ ()
     )
     Art.run(ad)

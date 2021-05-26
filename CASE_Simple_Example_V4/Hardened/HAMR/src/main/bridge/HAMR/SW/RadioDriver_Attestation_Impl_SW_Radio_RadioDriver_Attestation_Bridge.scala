@@ -9,7 +9,7 @@ import HAMR.SW.{RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation =>
 
 // This file was auto-generated.  Do not edit
 
-@record class RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge(
+@datatype class RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge(
   val id: Art.BridgeId,
   val name: String,
   val dispatchProtocol: DispatchPropertyProtocol,
@@ -82,7 +82,7 @@ object RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge {
   var c_initialization_api: Option[RadioDriver_Attestation_Impl_Initialization_Api] = None()
   var c_operational_api: Option[RadioDriver_Attestation_Impl_Operational_Api] = None()
 
-  @record class EntryPoints(
+  @datatype class EntryPoints(
     RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_BridgeId : Art.BridgeId,
 
     MissionCommand_Id : Art.PortId,

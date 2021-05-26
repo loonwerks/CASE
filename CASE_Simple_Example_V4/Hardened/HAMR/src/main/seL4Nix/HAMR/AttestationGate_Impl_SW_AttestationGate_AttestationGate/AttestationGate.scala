@@ -93,7 +93,7 @@ object AttestationGate extends App {
 
   def initialiseArchitecture(): Unit = {
     val ad = ArchitectureDescription(
-      components = MSZ (AttestationGateBridge),
+      components = ISZ (AttestationGateBridge),
       connections = ISZ ()
     )
     Art.run(ad)

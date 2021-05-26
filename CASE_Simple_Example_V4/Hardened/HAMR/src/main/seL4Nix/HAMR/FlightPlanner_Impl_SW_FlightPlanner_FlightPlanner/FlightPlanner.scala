@@ -80,7 +80,7 @@ object FlightPlanner extends App {
 
   def initialiseArchitecture(): Unit = {
     val ad = ArchitectureDescription(
-      components = MSZ (FlightPlannerBridge),
+      components = ISZ (FlightPlannerBridge),
       connections = ISZ ()
     )
     Art.run(ad)

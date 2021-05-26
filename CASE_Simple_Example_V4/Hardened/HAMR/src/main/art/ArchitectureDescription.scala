@@ -5,8 +5,8 @@ package art
 import org.sireum._
 
 
-@record class ArchitectureDescription(components: MSZ[Bridge],
-                                      connections: ISZ[UConnection]) {
+@datatype class ArchitectureDescription(components: ISZ[Bridge],
+                                        connections: ISZ[UConnection]) {
   @spec val allPorts: ISZ[UPort] = $
 
   @spec def allPortsSpec(i: Z): ISZ[UPort] = $
@@ -77,7 +77,7 @@ import org.sireum._
                               val urgency: Z)
   extends UPort
 
-@msig trait Bridge {
+@sig trait Bridge {
   def id: Art.BridgeId
 
   def name: String
@@ -93,7 +93,7 @@ import org.sireum._
 object Bridge {
 
   // initialise()  ( compute() | activate() deactivate() | recover() )* finalise()
-  @msig trait EntryPoints {
+  @sig trait EntryPoints {
 
     def initialise(): Unit
 

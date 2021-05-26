@@ -1,5 +1,7 @@
 base.package.name=
 bit.width=64
+c.aux.src.directory=
+c.output.directory=
 c.src.directory=
 camkes.aux.src.dir=
 camkes.output.directory=/home/vagrant/git/CASE/CASE_Simple_Example_V4/Hardened/HAMR

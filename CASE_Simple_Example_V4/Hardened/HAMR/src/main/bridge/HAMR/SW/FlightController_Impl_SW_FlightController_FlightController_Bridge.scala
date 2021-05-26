@@ -9,7 +9,7 @@ import HAMR.SW.{FlightController_Impl_SW_FlightController_FlightController => co
 
 // This file was auto-generated.  Do not edit
 
-@record class FlightController_Impl_SW_FlightController_FlightController_Bridge(
+@datatype class FlightController_Impl_SW_FlightController_FlightController_Bridge(
   val id: Art.BridgeId,
   val name: String,
   val dispatchProtocol: DispatchPropertyProtocol,
@@ -65,7 +65,7 @@ object FlightController_Impl_SW_FlightController_FlightController_Bridge {
   var c_initialization_api: Option[FlightController_Impl_Initialization_Api] = None()
   var c_operational_api: Option[FlightController_Impl_Operational_Api] = None()
 
-  @record class EntryPoints(
+  @datatype class EntryPoints(
     FlightController_Impl_SW_FlightController_FlightController_BridgeId : Art.BridgeId,
 
     FlightPlan_Id : Art.PortId,

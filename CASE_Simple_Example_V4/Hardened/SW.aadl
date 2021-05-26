@@ -108,10 +108,13 @@ public
 			CASE_Properties::Gating => 100;
 			CASE_Properties::Component_Spec => ("Gate_Output");
 		annex agree {**
+			const array : Base_Types::Unsigned_32[4] = [| 0,0,0,0 |];
+			const default_trustedid_list : Address.impl = Address.impl { value = array };
+			eq trusted_ids : Address.Impl = if event(TrustedIds) then TrustedIds else prev(trusted_ids, default_trustedid_list);
 			fun IS_TRUSTED(command : RF_Msg.Impl, ids : Address.Impl) : bool =
 				exists i in ids.value, command.header.src = i;
 			guarantee Gate_Output "The gate shall output only data from trusted sources" :
-				if event(MissionCommand_in) and event(TrustedIds) and IS_TRUSTED(MissionCommand_in, TrustedIds) then
+				if event(MissionCommand_in) and IS_TRUSTED(MissionCommand_in, trusted_ids) then
 					event(MissionCommand_out) and MissionCommand_out = MissionCommand_in
 				else
 					not event(MissionCommand_out);
@@ -229,12 +232,23 @@ public
 			HAMR::Bit_Codec_Max_Size => 11 Bytes;
 	end AttestationResponseMsg.Impl;
 
+	data UnsignedIntArray
+	end UnsignedIntArray;
+
+	data implementation UnsignedIntArray.Impl
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Base_Types::Unsigned_32));
+			Data_Model::Dimension => (4);
+			HAMR::Bit_Codec_Max_Size => 16 Bytes;
+	end UnsignedIntArray.Impl;
+
 	data Address
 	end Address;
 
 	data implementation Address.Impl
 		subcomponents
-			value: data Base_Types::Unsigned_32[4];
+			value: data UnsignedIntArray.Impl;
 		properties
 			HAMR::Bit_Codec_Max_Size => 16 Bytes;
 	end Address.Impl;
