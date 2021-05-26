@@ -108,8 +108,7 @@ public
 			CASE_Properties::Gating => 100;
 			CASE_Properties::Component_Spec => ("Gate_Output");
 		annex agree {**
-			const array : Base_Types::Unsigned_32[4] = [| 0,0,0,0 |];
-			const default_trustedid_list : Address.impl = Address.impl { value = array };
+			const default_trustedid_list : Address.impl = Address.impl { value = [| 0, 0, 0, 0 |] };
 			eq trusted_ids : Address.Impl = if event(TrustedIds) then TrustedIds else prev(trusted_ids, default_trustedid_list);
 			fun IS_TRUSTED(command : RF_Msg.Impl, ids : Address.Impl) : bool =
 				exists i in ids.value, command.header.src = i;
