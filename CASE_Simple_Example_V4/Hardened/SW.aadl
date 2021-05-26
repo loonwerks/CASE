@@ -5,6 +5,31 @@ public
 	with Base_Types;
 	with CASE_Properties;
 	with HAMR;
+	
+
+	data Coordinate
+	end Coordinate;
+
+	data implementation Coordinate.Impl
+		-- This is the structure to hold the lat/long/alt values of a coordinate
+		subcomponents
+			Latitude: data Base_Types::Integer_32;
+			Longitude: data Base_Types::Integer_32;
+			Altitude: data Base_Types::Integer_32;
+		properties
+			HAMR::Bit_Codec_Max_Size => 12 Bytes;
+	end Coordinate.Impl;
+	
+	data KeepInZone		
+	end KeepInZone;
+
+	data implementation KeepInZone.Impl
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Coordinate.Impl));
+			Data_Model::Dimension => (2);
+			HAMR::Bit_Codec_Max_Size => 24 Bytes;
+	end KeepInZone.Impl;
 
 	thread Monitor
 		features
@@ -16,7 +41,25 @@ public
 			CASE_Properties::Component_Spec => ("Monitor_Alert", "Monitor_FlightPlan_out");
 		annex agree {**
 			const is_latched : bool = false;
-			property Monitor_policy = false;
+			
+			const bottom_left : Coordinate.Impl = Coordinate.Impl{Latitude = 30; Longitude = 30; Altitude = 0};
+			const top_right : Coordinate.Impl = Coordinate.Impl{Latitude = 60; Longitude = 60; Altitude = 10000};
+			const keep_in_zone : KeepInZone.Impl = [| bottom_left, top_right |];
+			
+			fun IS_BOUNDED(pt : Base_Types::Integer_32, low : Base_Types::Integer_32, high : Base_Types::Integer_32) : bool =
+				pt >= low and pt <= high;
+			
+			fun WAYPOINT_IN_ZONE(wp: Coordinate.Impl, kiz : KeepInZone.Impl) : bool =
+				IS_BOUNDED(wp.Latitude, (kiz[1]).Latitude, (kiz[2]).Latitude) and 
+				IS_BOUNDED(wp.Longitude, (kiz[1]).Longitude, (kiz[2]).Longitude) and 
+				IS_BOUNDED(wp.Altitude, (kiz[1]).Altitude, (kiz[2]).Altitude);
+				
+			fun WAYPOINTS_IN_ZONE(plan: Mission, kiz : KeepInZone.Impl) : bool =
+				forall i in plan, WAYPOINT_IN_ZONE(i, kiz);
+				
+			property Monitor_policy =
+				event(FlightPlan_in) => WAYPOINTS_IN_ZONE(FlightPlan_in, keep_in_zone);
+				
 			property alerted = (not Monitor_policy) -> ((is_latched and pre(alerted)) or (event(FlightPlan_in) and not Monitor_policy));
 			guarantee Monitor_Alert "A violation of the monitor policy shall trigger an alert" : alerted <=> event(Alert);
 			guarantee Monitor_FlightPlan_out "A violation of the monitor policy shall prevent propagation of the Observed input." : 
@@ -63,6 +106,16 @@ public
 			TrustedIds: in event data port Address.Impl;
 		properties
 			CASE_Properties::Gating => 100;
+			CASE_Properties::Component_Spec => ("Gate_Output");
+		annex agree {**
+			fun IS_TRUSTED(command : RF_Msg.Impl, ids : Address.Impl) : bool =
+				exists i in ids.value, command.header.src = i;
+			guarantee Gate_Output "The gate shall output only data from trusted sources" :
+				if event(MissionCommand_in) and event(TrustedIds) and IS_TRUSTED(MissionCommand_in, TrustedIds) then
+					event(MissionCommand_out) and MissionCommand_out = MissionCommand_in
+				else
+					not event(MissionCommand_out);
+		**};
 	end AttestationGate;
 
 	thread implementation AttestationGate.Impl
@@ -86,19 +139,6 @@ public
 			CASE_Properties::Cache_Size => 3;
 			Dispatch_Protocol => Sporadic;
 	end AttestationManager.Impl;
-
-	data Coordinate
-	end Coordinate;
-
-	data implementation Coordinate.Impl
-		-- This is the structure to hold the lat/long/alt values of a coordinate
-		subcomponents
-			Latitude: data Base_Types::Integer_32;
-			Longitude: data Base_Types::Integer_32;
-			Altitude: data Base_Types::Integer_32;
-		properties
-			HAMR::Bit_Codec_Max_Size => 12 Bytes;
-	end Coordinate.Impl;
 
 	data Map
 		-- The Map is a structure that contains a list of coordinates that encircle a
