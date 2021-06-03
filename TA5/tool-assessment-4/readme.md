@@ -5,7 +5,9 @@ Collins Aerospace TA5 team.  TA5 deliverable scope includes (a) the
 HAMR code generation framework for generating system infrastructure
 code from AADL system models and (b) tool support for developing
 system application code that integrates with the generated
-infrastructure code to form a completed system.  In expected workflow
+infrastructure code to form a completed system.  
+
+In expected workflow
 for Collins CASE tools, system developers will use CASE TA1 and TA2
 tools to develop system models in AADL, generate cyber-assurance
 requirements, and transform models to obtain a model of
@@ -36,8 +38,16 @@ deliverables: (a) make sure that appropriate tools are installed,
 for the simple producer/consumer example for AADL event data ports,
 (c) consult the other examples to understand additional supported
 features and more realistic system builds, and (d) experiment with
-building your system (perhaps starting making simple modifications of
+building your own system (perhaps starting by making simple modifications of
 the provided examples).
+
+## Tool Installation
+
+The installation instructions for the Collins FMIDE (a customization of the AADL OSATE editor to include CASE plug-ins) can be found [here](https://github.com/loonwerks/CASE/tree/master/TA5/case-env).  The tools can be installed by (a) automatically provisioning a Linux VM using VirtualBox and Vagrant, or (b) creating a dedicated Linux installation.   We recommend the Vagrant VM method (method (a)) to help ensure uniformity across installations.
+
+A C development environment that supports CMake files is needed.  The JetBrains CLion IDE can be used, as suggested in the *Post Setup* steps.  The basic delivered examples (Producer/Consumer, Bit-Codec, Virtual Machine) can be completed using C development alone.  However, when CASE Splat tools, Attestation, and Phase I and II examples are used, CakeML will also needed to be set up as described in *Post Setup*.
+
+## Tutorial Example
 
 
 ## Producer-Consumer Illustrating AADL Port Kinds
