@@ -12,6 +12,45 @@
     * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
 <!--table-of-contents_end-->
 
+This example illustrates how to model and implement event data port communications between
+components, where both the sending and receiving components are implemented as C binary executing within
+a Linux virtual machine hosted within a separate CAmkES component.
+
+Virtualization of application components does not alter the behavior of
+port communications.
+In this context, an event data port communication is a shared memory construct
+where the sending component has write-only permissions, to the designated block
+of memory, and the receiving component has read-only permissions. The data in the
+shared memory is queued, and each write operation is accompanied with an event signal
+that is forwarded to the receiving component, indicating that a new communication has
+been sent. If a write operation is invoked when the queue is full, then the oldest data entry
+is overwritten. The data transferred via the port communication 
+has a designated data type (e.g., integer, real, boolean, array, struct).
+Both write and read operations are non-blocking.
+
+This example also illustrates the use of periodic component scheduling. For a
+seL4 target, the implementation employs a static cyclic scheduler. Each
+component is assigned a domain (or temporal partition) and typically a domain
+is assigned a single component (domain zero is reserved for seL4 infrastructure
+and must be invoked regularly to maintain operational flow). The schedule consists
+of a series of ordered (non-overlapping) time slots of a specific length and domain.
+Time slot lengths are expressed as a number of ticks (by default a tick is
+2 milliseconds). The user defines the component schedule in the *domain_schedule.c*
+file. 
+
+For seL4 targets, the static cyclic scheduler maintains temporal isolation
+between the components, assuming the domain schedule has been correctly engineered.
+It is the responsibility of the system designer to define a schedule
+in which the components execute to completion within their assigned slots.
+A component execution that exceeds the length of a time slot will resume from
+where it left off when its next assigned time slot is invoked. 
+For applications with virtualized components, it is often necessary to implement
+a relatively large time slot for domain zero at the start of a major frame interaction 
+to accommodate the initialization of the virtual machines during system startup.
+
+Further details regarding modeling guidelines, virtual machine integration, 
+and HAMR integration can be found in the [CASE-Tool-Assessment-Guide](https://github.com/loonwerks/CASE/tree/master/TA5/tool-assessment-4/doc/CASE-Tool-Assessment-Guide.pdf).
+
 
 ## AADL Architecture
 <!--aadl-architecture_start-->

@@ -16,6 +16,36 @@
     * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
 <!--table-of-contents_end-->
 
+This example illustrates how to model and implement data port communications between
+components. In this context, a data port communication is a shared memory construct
+where the sending component has write-only permissions, to the designated block
+of memory, and the receiving component has read-only permissions. The data in the
+shared memory is not queued (i.e., has a queue size of one) and is overwritten
+by consecutive write operations. The data transferred via the port communication 
+has a designated data type (e.g., integer, real, boolean, array, struct).
+Both write and read operations are non-blocking.
+
+This example also illustrates the use of periodic component scheduling. For a
+seL4 target, the implementation employs a static cyclic scheduler. Each
+component is assigned a domain (or temporal partition) and typically a domain
+is assigned a single component (domain zero is reserved for seL4 infrastructure
+and must be invoked regularly to maintain operational flow). The schedule consists
+of a series of ordered (non-overlapping) time slots of a specific length and domain.
+Time slot lengths are expressed as a number of ticks (by default a tick is
+2 milliseconds). The user defines the component schedule in the *domain_schedule.c*
+file. 
+
+For seL4 targets, the static cyclic scheduler maintains temporal isolation
+between the components, assuming the domain schedule has been correctly engineered.
+It is the responsibility of the system designer to define a schedule
+in which the components execute to completion within their assigned slots.
+A component execution that exceeds the length of a time slot will resume from
+where it left off when its next assigned time slot is invoked. 
+For Linux targets, the components follow the default round-robin periodic
+scheduler employed by the Linux operating system.
+
+Further details regarding modeling guidelines and HAMR integration can be found
+in the [CASE-Tool-Assessment-Guide](https://github.com/loonwerks/CASE/tree/master/TA5/tool-assessment-4/doc/CASE-Tool-Assessment-Guide.pdf).
 
 ## AADL Architecture
 <!--aadl-architecture_start-->
