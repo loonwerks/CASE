@@ -47,8 +47,20 @@ The installation instructions for the Collins FMIDE (a customization of the AADL
 
 A C development environment that supports CMake files is needed.  The JetBrains CLion IDE can be used, as suggested in the *Post Setup* steps.  The basic delivered examples (Producer/Consumer, Bit-Codec, Virtual Machine) can be completed using C development alone.  However, when CASE Splat tools, Attestation, and Phase I and II examples are used, CakeML will also needed to be set up as described in *Post Setup*.
 
-## Tutorial Example
+## Background
 
+AADL can be used to support a variety of processing and communication styles.  The CASE tools support a restricted subset of AADL that is aligned with platform infrastructure used in the Collins product groups participating in CASE TA6.  The following help developers stay within the supported AADL subset.
+
+- The CASE AADL style guidelines (**insert link**) summarize the CASE-supported AADL subset as well as CASE-specific AADL properties that are used to configure and direct CASE tools.
+
+- The CASE Resolint tool (**insert link to documentation**??) (essentially, a rule-based linter for AADL models) is used to check that models conform to the supported AADL subset.
+
+Developers should follow the CASE style guidelines when building models, and Resolint should be run before HAMR code generation is performed.  There may be additional model restrictions that not enforced by Resolint that are indicated by warnings/errors during HAMR code generation.
+
+In CASE Phase II and III, Collins systems are focusing on using *periodic* AADL threads and *event data* ports.  This allows HAMR supported systems to align with ARINC 653 style real-time tasking and communication used in Collins product groups.
+
+
+## Tutorial Example
 
 ## Producer-Consumer Illustrating AADL Port Kinds
 
