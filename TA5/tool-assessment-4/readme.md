@@ -27,9 +27,7 @@ Qemu ARM emulator.
 The deliverables include the following types of content.
 
 - Tool installation instructions
-
 - Tool documentation and tutorials
-
 - Examples that illustrate HAMR code generation and application code development
 
 The following progression is recommended for working through the
@@ -94,9 +92,7 @@ A brief description of each example is given below.  Click through to the exampl
 The following examples illustrate the basics of HAMR-generated threading and port-based communication for AADL's three port categories (data, event data, and event).  The **Event Data Ports** is the example used in the tutorial above.  The examples use on AADL **Periodic** (time-triggered) threads, which is what will be used on Collins TA6 systems.   AADL **Sporadic** (event-triggered) threads are explained in other HAMR documentation.
 
 - [Data Ports](basic/test_data_port_periodic_domains)
-
-- [Event Data Ports](basic/test_event_data_port_periodic_domains)
-
+- [Event Data Ports](basic/test_event_data_port_periodic_domains) 
 - [Event Ports](basic/test_event_port_periodic_domains)
 
 ### Bit-Codec 
@@ -110,21 +106,32 @@ This example uses a three-component producer/filter/consumer structure to illust
 
 These examples extend the producer/consumer examples above to illustrate the use of seL4-hosted Linux virtual machines (VMs).   HAMR provides support for auto-generating seL4 configuration for VMs and configuration of the VMs themselves.
 
-- [Data Ports](vm/test_data_port_periodic_domains_VM)
-
-- [Event Data Ports](vm/test_event_data_port_periodic_domains_VM)
+- [Data Ports](vm/test_data_port_periodic_domains_VM) - includes two examples illustrating (1) VM for producer and native consumer and (2) Native producer and VM for consumer.
+- [Event Data Ports](vm/test_event_data_port_periodic_domains_VM) - includes three examples illustrating (1) VMs for both producer and consumer, (2) VM for producer and native consumer, and (3) Native producer and VM consumer.
 
 ### CakeML 
+
+This example illustrates use of the high assurance CakeML programming language to program AADL component application logic.  HAMR can integrate CakeML-programmed components with C-programmed components.   This concept is illustrated with a simple example that incorporates CakeML-programmed components that utilize the Collins CASE Attestation Framework from the University of Kansas.   The Collins CASE SPLAT framework which auto-generates cyber-resiliency filters and monitors also generates CakeML-implemented components.  Thus, this example illustrates the basic CakeML integration strategy used in several ways within the Collins CASE tools.
 
 _Just need to adapt/clean-up our attestation gate micro-example_
 
 [Attestation Gate](cakeml/attestation-gate)
 
-### Phase 1
+### Phase 1 Example
+
+The purpose of this example is to "end-to-end" CASE cyber-resiliency concepts in a simple but domain-relevant example.   The system used is an enhancement of the simple UAV software example used in CASE Phase I.   The example illustrates C-programmed application components along with filter cyber-resiliency components automatically inserted by CASE transforms.
 
 _Get this from Isaac?_
 
-### Phase 2
+### Phase 2 Example
+
+This example illustrates "end-to-end" CASE cyber-resiliency concepts using a more complex example.  The system used is the end-of-phase deliverable for Phase II, based on the AFRL UxAS "water ways" example.   The example includes:
+
+- incorporation of C-programmed legacy application components based on the AFRL UxAs framwork hosted in a Linux VM
+- CASE tool-generated cyber-resiliency filter components that weed out malformed messages that might be used in cyber-attacks
+- CASE tool-generated cyber-resiliency monitor components that monitor system examples for anomalous behaviors that might be indicative of cyber-attacks
+- C-programmed native components (e.g., a native implementation of the UxAS waypoint manager)
+- VM-based "boundary" components that implement low-level communication between the high-assurance system (the UAV software with cyber-resiliency) and untrusted context components (e.g., UAV ground stations)
 
 _Still need to resolve the VM+CakeML issue, and potentially determine how the "seamless" intgration of SPLAT + HAMR will work_
 
