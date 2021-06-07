@@ -57,10 +57,35 @@ AADL can be used to support a variety of processing and communication styles.  T
 
 Developers should follow the CASE style guidelines when building models, and Resolint should be run before HAMR code generation is performed.  There may be additional model restrictions that not enforced by Resolint that are indicated by warnings/errors during HAMR code generation.
 
-In CASE Phase II and III, Collins systems are focusing on using *periodic* AADL threads and *event data* ports.  This allows HAMR supported systems to align with ARINC 653 style real-time tasking and communication used in Collins product groups.
+In CASE Phase II and III, Collins systems are focusing on using *periodic* AADL threads and *event data* ports.  This allows HAMR supported systems to align with ARINC 653 style real-time tasking and communication used in Collins product groups.   Thus, the deliverable documentation will focus on this type of tasking/communication.
 
 
 ## Tutorial Example
+
+This tutorial will illustrate:
+
+- how to invoke the HAMR code generation framework to generate infrastructure code from AADL models (as one would do after Collins CASE TA2 system models and cyber-resiliency transformation steps)
+
+- basic aspects of code for HAMR-generated threading
+
+- basic aspects of using the HAMR-generated APIs for communicating over ports
+
+- executing a completed system on Linux
+
+- executing a completed system on seL4 (using Qemu ARM emulator)
+
+The tutorial assumes that 
+
+- the FMIDE customization of the OSATE AADL editor and accompanying CASE tools have already been installed according to the directions above
+- the reader is familiar with creating AADL models as necessary to support Collins CASE TA2 activities.
+
+The example uses a simple two-component producer/consumer system -- with periodic threads and event data ports, which is the type of threading/ports that will be used on the Collins TA6 Phase III systems.
+
+- **Video link**
+- **Models/code for completed system**
+- **Written tutorial**
+
+Consult the examples below for illustration of additional concepts.
 
 ## Producer-Consumer Illustrating AADL Port Kinds
 
