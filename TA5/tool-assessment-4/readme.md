@@ -49,7 +49,7 @@ A C development environment that supports CMake files is needed.  The JetBrains 
 
 AADL can be used to support a variety of processing and communication styles.  The CASE tools support a restricted subset of AADL that is aligned with platform infrastructure used in the Collins product groups participating in CASE TA6.  The following help developers stay within the supported AADL subset.
 
-- The CASE AADL style guidelines (**insert link**) summarize the CASE-supported AADL subset as well as CASE-specific AADL properties that are used to configure and direct CASE tools.
+- The [CASE-Tool-Assessment-AADL-Guide](https://github.com/loonwerks/CASE/tree/master/TA5/tool-assessment-4/doc/CASE-Tool-Assessment-Guide.pdf) summarizes the currently supported CASE-supported AADL subset as well as CASE-specific AADL properties that are used to configure and direct CASE tools.
 
 - The CASE Resolint tool (**insert link to documentation**??) (essentially, a rule-based linter for AADL models) is used to check that models conform to the supported AADL subset.
 
