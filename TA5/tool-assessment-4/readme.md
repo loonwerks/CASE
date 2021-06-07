@@ -1,4 +1,19 @@
 # CASE Tool Assessment #4
+<!--ts-->
+   * [Tool Installation](#tool-installation)
+   * [Background](#background)
+   * [Tutorial Example](#tutorial-example)
+   * [Additional Examples](#additional-examples)
+      * [Producer-Consumer Illustrating AADL Port Kinds](#producer-consumer-illustrating-aadl-port-kinds)
+      * [Bit-Codec](#bit-codec)
+      * [Virtual Machine](#virtual-machine)
+      * [CakeML](#cakeml)
+      * [Phase 1 Example](#phase-1-example)
+      * [Phase 2 Example](#phase-2-example)
+
+<!-- Added by: vagrant, at: Mon 07 Jun 2021 07:27:23 PM UTC -->
+
+<!--te-->
 
 This page summarizes the deliverables for Tool Assessment #4 from the
 Collins Aerospace TA5 team.  TA5 deliverable scope includes (a) the
