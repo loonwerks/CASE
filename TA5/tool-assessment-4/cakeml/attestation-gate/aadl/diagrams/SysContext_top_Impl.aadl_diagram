@@ -1,0 +1,532 @@
+<?xml version="1.0" encoding="ASCII"?>
+<diagram:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:diagram="http://osate.org/diagram" formatVersion="7">
+  <element uuid="fe3e37e6-6bb0-4dbb-af2f-43fcd7b49af2" manual="true">
+    <element uuid="576e6adb-b69b-4623-9767-db92e6b271bd" manual="true">
+      <element uuid="bd35fbf0-0ef1-4100-a1bc-7b731c0f263f" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>am_gate_uxas_ar</seg>
+      </bo>
+      <bendpoints>
+        <point x="1807.0" y="205.0"/>
+        <point x="1807.0" y="242.5"/>
+      </bendpoints>
+    </element>
+    <element uuid="8211bbb3-a683-4b7e-b7bd-b8f2331bdbc1" manual="true">
+      <element uuid="c9819cbc-c078-4e54-859f-65faf9a3c5fe" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>am_gate_uxas_lst</seg>
+      </bo>
+      <bendpoints>
+        <point x="1797.0" y="267.5"/>
+        <point x="1797.0" y="192.5"/>
+      </bendpoints>
+    </element>
+    <element uuid="14251944-5fd7-49e8-8957-b97ceb39a9f4" manual="true">
+      <element uuid="a7ff9d1b-720f-4515-b0b3-c14360676783" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>am_gate_uxas_or</seg>
+      </bo>
+    </element>
+    <element uuid="96cd4cce-ac9d-4515-bf5c-d605156bce43" manual="true">
+      <element uuid="cbb739b1-dc18-4116-8d76-c50cb8301e37" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>radio_am_gate_ar</seg>
+      </bo>
+    </element>
+    <element uuid="1c9af553-25eb-4c83-b996-7a6549754bbe" manual="true">
+      <element uuid="6b05aad9-7433-4fe6-b0ab-c28ac799cc54" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>radio_am_gate_lst</seg>
+      </bo>
+    </element>
+    <element uuid="d4cd9160-0b78-47b4-a139-779737797c44" manual="true">
+      <element uuid="dc49ef46-a285-40a0-8a05-4b156dee90b1" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>radio_am_gate_or</seg>
+      </bo>
+      <bendpoints>
+        <point x="714.0" y="230.0"/>
+        <point x="714.0" y="280.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="fb32d3df-3b7d-4854-b41b-e43088a1879e" manual="true">
+      <element uuid="515509a6-74d7-4514-a263-b6fa0c118b43" manual="true">
+        <bo>
+          <seg>tag</seg>
+          <seg>unidirectional</seg>
+        </bo>
+      </element>
+      <bo>
+        <seg>connection</seg>
+        <seg>radio_am_gate_trusted_ids</seg>
+      </bo>
+      <bendpoints>
+        <point x="704.0" y="280.0"/>
+        <point x="704.0" y="255.0"/>
+        <point x="724.0" y="255.0"/>
+        <point x="724.0" y="230.0"/>
+      </bendpoints>
+    </element>
+    <element uuid="927d7648-5c41-4cef-96e9-a10dd899a348" manual="true">
+      <element uuid="92678d07-56d4-4dae-b336-0691bd8b1241" manual="true">
+        <element uuid="2837cad8-8932-4a2b-bf33-16b16b050688" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c1</seg>
+        </bo>
+      </element>
+      <element uuid="7502e2bd-8734-4fbe-84b5-5d0d48f76be4" manual="true">
+        <element uuid="42761595-4530-4541-8e76-4ca717d6d953" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c2</seg>
+        </bo>
+      </element>
+      <element uuid="72612dbb-132f-4dc1-8659-53f52eb63871" manual="true">
+        <element uuid="c7107db5-6273-49bb-9278-d107c0a86723" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c3</seg>
+        </bo>
+      </element>
+      <element uuid="30b5f867-6bfc-4a8d-9fc6-af14867ab800" manual="true">
+        <element uuid="50b1daaa-8464-439f-b887-74af16448563" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c4</seg>
+        </bo>
+      </element>
+      <element uuid="26b2b8d2-d6d7-43c3-aad6-16853d3a6775" manual="true">
+        <element uuid="7f2813a8-602c-48c0-a46a-cf6172844e17" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c5</seg>
+        </bo>
+      </element>
+      <element uuid="49fa9bdf-5f0d-4d39-9146-e1803d94524c" manual="true">
+        <element uuid="762561de-c7c5-4c50-b991-1a82ccbd53a3" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c6</seg>
+        </bo>
+      </element>
+      <element uuid="0c40e3f2-8b6b-458f-bf37-a60df53d3e03" manual="true">
+        <element uuid="f86c840b-7302-4fc4-8dd1-43c9dc1a9926" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>c7</seg>
+        </bo>
+      </element>
+      <element uuid="af5e402e-d3b6-41c2-bee7-6e2125c93542" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>AutomationRequest_in</seg>
+        </bo>
+        <position y="98.0"/>
+      </element>
+      <element uuid="8386e5ec-7ebb-4248-81ea-4d2fa66b5349" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>AutomationRequest_out</seg>
+        </bo>
+        <position x="884.0" y="123.0"/>
+      </element>
+      <element uuid="45a22965-e7ed-48bf-8490-5642a25835a4" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>LineSearchTask_in</seg>
+        </bo>
+        <position y="48.0"/>
+      </element>
+      <element uuid="f61d341c-6cbb-4ede-81d3-f6ed47b6150f" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>LineSearchTask_out</seg>
+        </bo>
+        <position x="909.0" y="186.0"/>
+      </element>
+      <element uuid="d1ebc334-2818-4ff4-b6d5-512204bd6c45" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>OperatingRegion_in</seg>
+        </bo>
+        <position y="198.0"/>
+      </element>
+      <element uuid="b2ef1d1e-713a-43c6-9061-a3d866be580b" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>OperatingRegion_out</seg>
+        </bo>
+        <position x="902.0" y="61.0"/>
+      </element>
+      <element uuid="e3dec5ed-58f9-48a6-a789-ab916f0b7644" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>trusted_ids</seg>
+        </bo>
+        <position y="148.0"/>
+      </element>
+      <element uuid="dc171c43-a103-48e9-ad83-7eb393282387" manual="true">
+        <element uuid="46fe3c64-ca7b-425e-b62b-6245b31284dd" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>AutomationRequest_in</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <element uuid="ceff2499-c6f5-4876-abac-e0480cec6ceb" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>AutomationRequest_out</seg>
+          </bo>
+          <position x="369.0" y="85.0"/>
+        </element>
+        <element uuid="77169f2d-2fd0-4265-ba38-7592dc097fcc" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>LineSearchTask_in</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <element uuid="c6cb3b37-79c8-4929-9ce1-d97f8a0beb27" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>LineSearchTask_out</seg>
+          </bo>
+          <position x="394.0" y="148.0"/>
+        </element>
+        <element uuid="5f40c3bf-ec1b-4097-b2c5-6f3d37278d1e" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>OperatingRegion_in</seg>
+          </bo>
+          <position y="160.0"/>
+        </element>
+        <element uuid="ce09d330-37ae-4635-9616-2e61cdbe06da" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>OperatingRegion_out</seg>
+          </bo>
+          <position x="387.0" y="23.0"/>
+        </element>
+        <element uuid="8a7787e1-1bbc-4cfe-ba06-f811c5e5ca87" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>trusted_ids</seg>
+          </bo>
+          <position y="110.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>CASE_AttestationGate</seg>
+        </bo>
+        <position x="324.0" y="38.0"/>
+        <size width="538.0" height="210.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>am_gate</seg>
+      </bo>
+      <position x="722.0" y="38.0"/>
+      <size width="1053.0" height="260.0"/>
+    </element>
+    <element uuid="7b11dff4-852c-4ab7-b43e-40707ddd368c" manual="true">
+      <element uuid="f9f0d07f-37f7-459b-815e-ee82e7fbb189" manual="true">
+        <element uuid="8edd35cb-c0ef-44dc-a91d-bc7d1a553af1" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>automation_request_connection</seg>
+        </bo>
+      </element>
+      <element uuid="243a75e1-2a47-48da-bd36-330338e72ecc" manual="true">
+        <element uuid="e12550da-d92e-448b-8a12-98c07d75229f" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>line_search_task_connection</seg>
+        </bo>
+      </element>
+      <element uuid="5cf80565-3375-41d2-9ae8-9e49a4f2770b" manual="true">
+        <element uuid="eb5ab886-efcc-4608-b922-85566510896b" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>operating_region_connection</seg>
+        </bo>
+      </element>
+      <element uuid="5798fe49-07af-4de5-ad87-f499c9c8f331" manual="true">
+        <element uuid="168b0206-9b8a-47dc-a067-fbcd5ce38b79" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>trusted_ids_connection</seg>
+        </bo>
+      </element>
+      <element uuid="14091a29-8a9d-475d-b203-0e3b4decfbe9" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>automation_request_out</seg>
+        </bo>
+        <position x="502.0" y="98.0"/>
+      </element>
+      <element uuid="d1303f73-2bd3-401a-8b14-72c3fec3a4f0" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>line_search_task_out</seg>
+        </bo>
+        <position x="522.0" y="48.0"/>
+      </element>
+      <element uuid="88393c4e-7694-4831-a7e2-5ca76c73976b" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>operating_region_out</seg>
+        </bo>
+        <position x="519.0" y="148.0"/>
+      </element>
+      <element uuid="b261de16-8e42-4baf-a764-5a61e2acc710" manual="true" dockArea="right">
+        <bo>
+          <seg>feature</seg>
+          <seg>trusted_ids_out</seg>
+        </bo>
+        <position x="556.0" y="198.0"/>
+      </element>
+      <element uuid="ca5418d6-ff3a-410b-9d09-a13b8ae63cf1" manual="true">
+        <element uuid="aab3c4e9-333d-4618-bd67-25d9b9a57207" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>automation_request_out</seg>
+          </bo>
+          <position x="300.0" y="60.0"/>
+        </element>
+        <element uuid="ed66b688-e5de-44f0-ac98-dd183b1f299c" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>line_search_task_out</seg>
+          </bo>
+          <position x="320.0" y="10.0"/>
+        </element>
+        <element uuid="dd35eb35-eaea-4a54-923e-ef712b60f6c7" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>operating_region_out</seg>
+          </bo>
+          <position x="317.0" y="110.0"/>
+        </element>
+        <element uuid="f7fd552d-2d60-4024-8f79-ebcfca18ca23" manual="true" dockArea="right">
+          <bo>
+            <seg>feature</seg>
+            <seg>trusted_ids_out</seg>
+          </bo>
+          <position x="354.0" y="160.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>RadioDriver</seg>
+        </bo>
+        <position x="12.0" y="38.0"/>
+        <size width="468.0" height="210.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>radio</seg>
+      </bo>
+      <position x="12.0" y="38.0"/>
+      <size width="670.0" height="260.0"/>
+    </element>
+    <element uuid="b179ed6e-2864-4cb9-9746-ba5157ca6e80" manual="true">
+      <element uuid="047cbf18-8980-4bc9-864c-8574e9f4fca9" manual="true">
+        <element uuid="1cb86795-ff06-42ec-ab12-e8eaf2f364fd" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>automationRequest_connection</seg>
+        </bo>
+      </element>
+      <element uuid="10f9fd18-ca9c-43f0-b919-ac00dfd7ae98" manual="true">
+        <element uuid="b7c87780-4cf3-4309-89be-60262b532099" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>lineSearchTask_connection</seg>
+        </bo>
+      </element>
+      <element uuid="2e4956c1-c77b-459c-b142-4448866caefd" manual="true">
+        <element uuid="03a3fad1-188d-4c5d-89cd-79009fe0ecd9" manual="true">
+          <bo>
+            <seg>tag</seg>
+            <seg>unidirectional</seg>
+          </bo>
+        </element>
+        <bo>
+          <seg>connection</seg>
+          <seg>operatingRegion_connection</seg>
+        </bo>
+      </element>
+      <element uuid="758350c3-af87-4dc4-8437-27296686e77d" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>AutomationRequest</seg>
+        </bo>
+        <position y="148.0"/>
+      </element>
+      <element uuid="1566c450-7ff9-4824-a525-a7977e1445aa" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>LineSearchTask</seg>
+        </bo>
+        <position y="98.0"/>
+      </element>
+      <element uuid="abba9f67-c63f-4ff4-84c4-98560d51d7c4" manual="true" dockArea="left">
+        <bo>
+          <seg>feature</seg>
+          <seg>OperatingRegion</seg>
+        </bo>
+        <position y="48.0"/>
+      </element>
+      <element uuid="43d15c9d-c636-4a0e-bdc1-f68b6eb07440" manual="true">
+        <element uuid="f19ce669-219f-4a82-8814-b8ff0006bc2b" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>AutomationRequest</seg>
+          </bo>
+          <position y="110.0"/>
+        </element>
+        <element uuid="47c2e79b-6744-4abe-b5d9-b335cd8585a5" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>LineSearchTask</seg>
+          </bo>
+          <position y="60.0"/>
+        </element>
+        <element uuid="45c6328c-8958-4259-84f1-4f066dfad5ae" manual="true" dockArea="left">
+          <bo>
+            <seg>feature</seg>
+            <seg>OperatingRegion</seg>
+          </bo>
+          <position y="10.0"/>
+        </element>
+        <bo>
+          <seg>subcomponent</seg>
+          <seg>UxAS_thread</seg>
+        </bo>
+        <position x="286.0" y="38.0"/>
+        <size width="423.0" height="160.0"/>
+      </element>
+      <bo>
+        <seg>subcomponent</seg>
+        <seg>uxas</seg>
+      </bo>
+      <position x="1805.0" y="51.0"/>
+      <size width="721.0" height="210.0"/>
+    </element>
+    <bo>
+      <seg>classifier</seg>
+      <seg>top.Impl</seg>
+    </bo>
+    <position x="12.0" y="12.0"/>
+    <size width="2538.0" height="310.0"/>
+  </element>
+  <config type="structure" connectionPrimaryLabelsVisible="false">
+    <enabledAadlProperties/>
+    <context>
+      <seg>classifier</seg>
+      <seg>SysContext::top.Impl</seg>
+    </context>
+  </config>
+</diagram:Diagram>

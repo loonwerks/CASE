@@ -1,55 +1,55 @@
-# Attestation Gate - CakeML Integration Example
+# attestation-gate
 
-<!--ts-->
-   * [Attestation Gate - CakeML Integration Example](#attestation-gate---cakeml-integration-example)
-      * [Installing the Tools](#installing-the-tools)
-         * [Update Sireum](#update-sireum)
-         * [Install/Update osireum](#installupdate-osireum)
-         * [Install CakeML](#install-cakeml)
-      * [Modify the AADL Model for CakeML Integration](#modify-the-aadl-model-for-cakeml-integration)
-         * [Wire Protocol](#wire-protocol)
-         * [Specify Monitor/Filter components](#specify-monitorfilter-components)
-      * [Prototype Under Linux](#prototype-under-linux)
-      * [Deploy to seL4 - Simulate using QEMU](#deploy-to-sel4---simulate-using-qemu)
-         * [With the Mocked Up Behavior Code](#with-the-mocked-up-behavior-code)
-         * [Integrating CakeML behavior code](#integrating-cakeml-behavior-code)
+ Table of Contents
+<!--table-of-contents_start-->
+  * [AADL Architecture](#aadl-architecture)
+  * [Linux](#linux)
+    * [HAMR Configuration: Linux](#hamr-configuration-linux)
+    * [Behavior Code: Linux](#behavior-code-linux)
+    * [How to Build/Run: Linux](#how-to-buildrun-linux)
+  * [SeL4](#sel4)
+    * [HAMR Configuration: SeL4](#hamr-configuration-sel4)
+    * [Behavior Code: SeL4](#behavior-code-sel4)
+    * [How to Build/Run: SeL4](#how-to-buildrun-sel4)
+    * [Example Output: SeL4](#example-output-sel4)
+    * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
+    * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
+<!--table-of-contents_end-->
 
-<!-- Added by: vagrant, at: Tue 13 Apr 2021 09:51:17 PM UTC -->
 
-<!--te-->
+## AADL Architecture
+<!--aadl-architecture_start-->
+![AADL Arch](aadl/diagrams/aadl-arch.png)
+|System Properties|
+|--|
+|Domain Scheduling|
+|Wire Protocol|
+
+|UxAS_thread Properties|
+|--|
+|Periodic: 1000 ms|
+|Native|
+
+
+
+|RadioDriver Properties|
+|--|
+|Periodic: 500 ms|
+|Native|
+
+
+
+|CASE_AttestationGate Properties|
+|--|
+|Periodic: 500 ms|
+|CakeML|
+
+
+<!--aadl-architecture_end-->
 
 ## Installing the Tools
 
-
 The following assumes a case-env is used (see [https://github.com/loonwerks/CASE/tree/master/TA5/case-env](https://github.com/loonwerks/CASE/tree/master/TA5/case-env))
-
-### Update Sireum
-
-Update Sireum if older than 2021.03.08 -- run ``$SIREUM_HOME/bin/sireum`` to see the build date
-
-```
-cd $SIREUM_HOME
-git pull --recurse-submodules
-bin/build.cmd
-```
-
-### Install/Update osireum
-
-``osireum`` lets you run Sireum's command line iterface, but via an OSATE cli.  This allows allows an in-memory version of AIR to be passed directly to HAMR codegen rather than the previous method of first running phantom and serializing AIR to a file, and then running codegen on the serialized version.
-
-This step may take several minutes the first time it's run as it will download OSATE 2.9.1 from SEI's servers (or wherever) which are slow.
-There is an option to instead use a local copy of OSATE (refer to ``$SIREUM_HOME/bin/sireum hamr phantom -h``).
-
-```
-$SIREUM_HOME/bin/sireum hamr phantom -u
-```
-
-The phantom ``-u`` update option will suggest setting up an alias for osate-sireum called ``osireum`` like below.
-It's suggested you place this in your ``$HOME/.bashrc`` so that it's available in the next steps
-
-```
-alias osireum='/home/vagrant/.sireum/phantom/osate-2.9.1-vfinal/osate -nosplash -console -consoleLog -data @user.home/.sireum -application org.sireum.aadl.osate.cli'
-```
 
 ### Install CakeML
 
@@ -64,81 +64,166 @@ Once installed, make sure the 64bit version is available from the command line. 
 ### Wire Protocol
 Only the wire protocol (ie. byte arrays) is supported for CakeML integration.
 
-  - Attach ``HAMR::Bit_Codec_Raw_Connections => true;`` to the top-level system [SysContext.aadl](SysContext.aadl#L111)
-  - Use the ``HAMR::Bit_Codec_Max_Size`` property to specify the encoded size of each data component that is used by an event data or data port.  For example, see [AirVehicleState.i](CMASI.aadl#L363) that is used by [UARTDriver_thr.AirVehicleState](SysContext.aadl#L59)
+  - Attach ``HAMR::Bit_Codec_Raw_Connections => true;`` to the top-level system [SysContext.aadl](aadl/SysContext.aadl#L111)
+  - Use the ``HAMR::Bit_Codec_Max_Size`` property to specify the encoded size of each data component that is used by an event data or data port.  For example, see [AirVehicleState.i](aadl/CMASI.aadl#L363) that is used by [UARTDriver_thr.AirVehicleState](aadl/SysContext.aadl#L59)
 
     - This property only needs to be attached to the top level data component (e.g. array subtypes and record field types do not need to be modified if they are not directly used by a port)
 
     - HAMR will use the ``Memory_Properties::Data_Size`` annotation if present for types defined in [Base_Types](https://github.com/osate/osate2/blob/master/core/org.osate.contribution.sei/resources/packages/Base_Types.aadl).  The following unbounded types are not currently supported: ``Bases_Types::Boolean``, ``Base_Types::Character``, ``Base_Types::String``, ``Base_Types::Integer``, ``Base_Types::Float``
 
 ### Specify Monitor/Filter components
-Atttach the ``CASE_Properties::Component_Type`` to the filters or monitors - e.g. [CASE_AttesationGate.aadl](CASE_AttesationGate.aadl#L23)
+Attach the ``CASE_Properties::Component_Type`` to the filters or monitors - e.g. [CASE_AttesationGate.aadl](aadl/CASE_AttesationGate.aadl#L25)
 
-## Prototype Under Linux
+Attach ``Source_Text`` to the filters or monitors indicating where the CakeML assemblies are - e.g. 
+[CASE_AttesationGate.aadl](aadl/CASE_AttesationGate.aadl#L24).  For this example the assembly can be created by running the script 
+[compile-cakeml.cmd](aadl/cakeml/compile-cakeml.cmd)
+
+```
+.aadl/cakeml/compile-cakeml.cmd
+```
+
+## Linux
+<!--Linux_start--><!--Linux_end-->
 
 CakeML integeration is not currently supported for the Linux platform.  However, the behavior of the CakeML components can be mocked up and then the actual CakeML behavior code can be swapped in when deploying to seL4.
 
-1. Run HAMR codegen targeting Linux via [this](bin/run-hamr-Linux.sh) script.  The script will generate the Slang project and transpile the code to C.  Transpiling only needs to be rerun when Slang files (e.g. *.scala) are modified
-  
-    ```./bin/run-hamr-Linux.sh```
-
-1. You can immediately compile/run the demo using the following scripts
-    ```
-    ./CAmkES_seL4_2021/bin/compile-linux.sh
-    ./CAmkES_seL4_2021/bin/run-linux.sh
-    ./CAmkES_seL4_2021/bin/stop.sh
-    ```
-
-    **Development Hint**: the attestation gate and uxas terminals will immediatly close due to them crashing.  To diagnose why, uncomment this [line](CAmkES_seL4_2021/bin/run-linux.sh#L10) in the run script and relaunch.  The output from the crashing app will indicate ``Insufficient maximum for String characters.``.  This is due to the use of the transpiled ``.toString`` pretty print methods being used on the received messages (for eg commented out 
-    [here](CAmkES_seL4_2021/src/c/ext-c/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate.c#L94)).
-    Those require the use of statically allocated strings, but the passed in max size of 256 [here](bin/run-hamr-Linux.sh#L30) is too small.  If you wanted to use the pretty printers then you could increase the max size as needed, however that will increase the stack size usage of the code.  Alternatively you could write your own hexdump method (using printf, loops, etc) to print the byte streams.
+### HAMR Configuration: Linux
+<!--hamr-configuration-linux_start-->
+refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
+<!--hamr-configuration-linux_end-->
 
 
-1. HAMR Codegen will report that the CMake directory is at ``CAmkES_seL4_2021/src/c/nix``.  Open this in a C-IDE (e.g. CLion)
+### Behavior Code: Linux
+<!--behavior-code-linux_start-->
+  * [UxAS_thread](hamr/c/ext-c/UxAS_thr_Impl_uxas_UxAS_thread/UxAS_thr_Impl_uxas_UxAS_thread.c)
 
-1. Codegen also indicates the developer code is in the [ext-c](CAmkES_seL4_2021/src/c/ext-c) directory, which will be accessible via the ``nix`` dir.  Add behavior code to the following files:
+  * [RadioDriver](hamr/c/ext-c/RadioDriver_thr_Impl_radio_RadioDriver/RadioDriver_thr_Impl_radio_RadioDriver.c)
 
-    - [RadioDriver_thr_Impl_radio_RadioDriver.c](CAmkES_seL4_2021/src/c/ext-c/RadioDriver_thr_Impl_radio_RadioDriver/RadioDriver_thr_Impl_radio_RadioDriver.c)
-
-    - [CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate](CAmkES_seL4_2021/src/c/ext-c/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate.c)
-
-    - [UxAS_thr_Impl_uxas_UxAS_thread.c](CAmkES_seL4_2021/src/c/ext-c/UxAS_thr_Impl_uxas_UxAS_thread/UxAS_thr_Impl_uxas_UxAS_thread.c)
+  * [CASE_AttestationGate](hamr/c/ext-c/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate.c)
+<!--behavior-code-linux_end-->
 
 
-## Deploy to seL4 - Simulate using QEMU
+### How to Build/Run: Linux
+<!--how-to-buildrun-linux_start-->
+```
+./aadl/bin/run-hamr-Linux.sh
+./hamr/c/bin/compile-linux.sh
+./hamr/c/bin/run-linux.sh
+./hamr/c/bin/stop.sh
+```
+<!--how-to-buildrun-linux_end-->
 
-### With the Mocked Up Behavior Code
-Once you're satisified with the behavior under Linux, you can deploy to seL4 and simulate via QEMU.  First run [this](bin/run-hamr-SeL4.sh) script,
+
+## SeL4
+<!--SeL4_start--><!--SeL4_end-->
+
+### HAMR Configuration: SeL4
+<!--hamr-configuration-sel4_start-->
+refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
+<!--hamr-configuration-sel4_end-->
+
+
+### Behavior Code: SeL4
+<!--behavior-code-sel4_start-->
+  * [UxAS_thread](hamr/c/ext-c/UxAS_thr_Impl_uxas_UxAS_thread/UxAS_thr_Impl_uxas_UxAS_thread.c)
+
+  * [RadioDriver](hamr/c/ext-c/RadioDriver_thr_Impl_radio_RadioDriver/RadioDriver_thr_Impl_radio_RadioDriver.c)
+
+  * [CASE_AttestationGate](hamr/c/ext-c/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate.c)
+<!--behavior-code-sel4_end-->
+
+
+### How to Build/Run: SeL4
+<!--how-to-buildrun-sel4_start-->
+```
+./aadl/bin/run-hamr-SeL4.sh
+./hamr/camkes/bin/run-camkes.sh -o "-DCAKEML_ASSEMBLIES_PRESENT=ON" -s
+```
+<!--how-to-buildrun-sel4_end-->
+
+
+### Example Output: SeL4
+<!--example-output-sel4_start-->
+Timeout = 18 seconds
+```
+Booting all finished, dropped to user space
+Entering pre-init of RadioDriver_thr_Impl_radio_RadioDriver
+Art: Registered component: top_Impl_Instance_radio_RadioDriver (periodic: 500)
+Art: - Registered port: top_Impl_Instance_radio_RadioDrivEntering pre-init of CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate
+Art: Registered component: top_Impl_Instance_am_gate_CASE_AttestationGate (periodic: 500)
+Art: - Registered port: top_Impl_Instance_am_gate_CASE_AttestationGate_trusEntering pre-init of UxAS_thr_Impl_uxas_UxAS_thread
+Art: Registered component: top_Impl_Instance_uxas_UxAS_thread (periodic: 1000)
+Art: - Registered port: top_Impl_Instance_uxas_UxAS_thread_AutomationRequest (event in)
+Art: - Registered port: top_Impl_Instance_uxas_UxAS_thread_OperatingRegion (eer_trusted_ids_out (data out)
+Art: - Registered port: top_Impl_Instance_radio_RadioDriver_automation_request_out (event out)
+Art: - Registered port: top_Impl_Instance_radio_RadioDriver_operating_region_out (event out)
+Art: - Registered port: top_Impl_Instance_radio_RadioDriver_line_search_task_out (event out)
+Leaving pre-init of RadioDriver_thr_Impl_radio_RadioDriver
+ted_ids (data in)
+Art: - Registered port: top_Impl_Instance_am_gate_CASE_AttestationGate_AutomationRequest_in (event in)
+Art: - Registered port: top_Impl_Instance_am_gate_CASE_AttestationGate_AutomationRequest_out (event out)
+Art: - Registered port: top_Impl_Instance_am_gate_CASE_AttestationGate_OperatingRegion_in (event in)
+Art: - Registered port: top_Impl_Instance_am_gate_CASE_AttestationGate_OperatingRegion_out (event out)
+Art: - Registered port: top_Impl_Instance_am_gate_CASE_AttestationGate_LineSearchTask_in (event in)
+Art: - Registered port: top_Impl_Instance_am_gate_CASE_AttestationGate_LineSearchTask_out (event out)
+Leaving pre-init of CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate
+vent in)
+Art: - Registered port: top_Impl_Instance_uxas_UxAS_thread_LineSearchTask (event in)
+Leaving pre-init of UxAS_thr_Impl_uxas_UxAS_thread
+top_Impl_Instance_am_gate_CASE_AttestationGate: 
+	tidArray = (555, 666, 777)
+	opregionID = 
+	lstID = 
+	autorqtID = 400
+top_Impl_Instance_am_gate_CASE_AttestationGate: 
+	tidArray = (500, 400, 600)
+	opregionID = 
+	lstID = 400
+	autorqtID = 
+top_Impl_Instance_uxas_UxAS_thread: 
+	Line Search Task (8192 bytes)
+top_Impl_Instance_am_gate_CASE_AttestationGate: 
+	tidArray = (555, 666, 777)
+	opregionID = 
+	lstID = 
+	autorqtID = 400
+top_Impl_Instance_am_gate_CASE_AttestationGate: 
+	tidArray = (500, 400, 600)
+	opregionID = 
+	lstID = 400
+	autorqtID = 
+top_Impl_Instance_uxas_UxAS_thread: 
+	Line Search Task (8192 bytes)
+top_Impl_Instance_am_gate_CASE_AttestationGate: 
+	tidArray = (500, 400, 600)
+	opregionID = 400
+	lstID = 
+	autorqtID = 
+top_Impl_Instance_uxas_UxAS_thread: 
+	Operating Region (256 bytes)
+top_Impl_Instance_am_gate_CASE_AttestationGate: 
+	tidArray = (555, 666, 777)
+	opregionID = 
+	lstID = 400
+	autorqtID = 
+top_Impl_Instance_am_gate_CASE_AttestationGate: 
+	tidArray = (555, 666, 777)
+	opregionID = 
+	lstID = 
+	autorqtID = 400
 
 ```
-./bin/run-hamr-SeL4.sh
-```
+<!--example-output-sel4_end-->
 
-which generate the CAmkES project and transpiles the Slang project so that it can be used by the CAmkES components.
 
-Then run [this](CAmkES_seL4_2021/src/c/CAmkES_seL4/bin/run-camkes.sh) script to build the CAmkES project and then simulate it via QEMU
+### CAmkES Architecture: SeL4
+<!--camkes-architecture-sel4_start-->
+![CAmkES Architecture: SeL4](aadl/diagrams/CAmkES-arch-SeL4.svg)
+<!--camkes-architecture-sel4_end-->
 
-```
-./CAmkES_seL4_2021/src/c/CAmkES_seL4/bin/run-camkes.sh -s
-```
 
-### Integrating CakeML behavior code
+### HAMR CAmkES Architecture: SeL4
+<!--hamr-camkes-architecture-sel4_start-->
+![HAMR CAmkES Architecture: SeL4](aadl/diagrams/CAmkES-HAMR-arch-SeL4.svg)
+<!--hamr-camkes-architecture-sel4_end-->
 
-After verifying the mocked-up behavior of the CakeML components behave as expected under QEMU, you can then swap in the actual CakeML assemblies.  First run [this](cakeml/compile-cakeml.cmd) Slash script to generate the CakeML assembly -- it will replace the code in 
-[this](CAmkES_seL4_2021/src/c/CAmkES_seL4/components/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate/src/sb_CASE_AttestationGate_thr_Impl.S) file.
-
-```
-bash ./cakeml/compile-cakeml.cmd
-```
-
-Then pass the ``CAKEML_ASSEMBLIES_PRESENT=ON`` option to the run-camkes.sh script
-
-```
- ./CAmkES_seL4_2021/src/c/CAmkES_seL4/bin/run-camkes.sh -o "-DCAKEML_ASSEMBLIES_PRESENT=ON" -s
-```
-
-This will remove the run method generated by HAMR 
-[here](CAmkES_seL4_2021/src/c/CAmkES_seL4/components/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate/src/sb_CASE_AttestationGate_thr_Impl.c#L295) 
-so that the run method provided by the CakeML assembly will be used instead.
-
-Refer to [readme_autogen.md](readme_autogen.md#example-output) for example output from simulating the project under QEMU.
