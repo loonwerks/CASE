@@ -69,7 +69,7 @@ Once installed, make sure the 64bit version is available from the command line. 
 ### Wire Protocol
 Only the wire protocol (ie. byte arrays) is supported for CakeML integration.
 
-  - Attach ``HAMR::Bit_Codec_Raw_Connections => true;`` to the top-level system [SysContext.aadl](aadl/SysContext.aadl#L111)
+  - Attach ``HAMR::Bit_Codec_Raw_Connections => true;`` to the top-level system [SysContext.aadl](aadl/SysContext.aadl#L112)
   - Use the ``HAMR::Bit_Codec_Max_Size`` property to specify the encoded size of each data component that is used by an event data or data port.  For example, see [AirVehicleState.i](aadl/CMASI.aadl#L363) that is used by [UARTDriver_thr.AirVehicleState](aadl/SysContext.aadl#L59)
 
     - This property only needs to be attached to the top level data component (e.g. array subtypes and record field types do not need to be modified if they are not directly used by a port)
