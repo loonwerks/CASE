@@ -137,7 +137,7 @@ refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
   * [CASE_AttestationGate](hamr/c/ext-c/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate.c)
 <!--behavior-code-sel4_end-->
 
-** If ``CAKEML_ASSEMBLIES_PRESENT=ON`` is passed to ``run-camkes.sh`` (see below) then the beahvior code for the attestation gate will come from the CakeML file 
+** If ``CAKEML_ASSEMBLIES_PRESENT=ON`` is passed to ``run-camkes.sh`` (see below) then the behavior code for the attestation gate will come from the CakeML file 
 [CASE_AttestationGate_thr_Impl.cml](aadl/cakeml/CASE_AttestationGate_thr_Impl/CASE_AttestationGate_thr_Impl.cml)
 
 ### How to Build/Run: SeL4
