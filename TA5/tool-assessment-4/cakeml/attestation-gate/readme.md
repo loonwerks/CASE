@@ -84,7 +84,7 @@ Attach ``Source_Text`` to the filters or monitors indicating where the CakeML as
 [compile-cakeml.cmd](aadl/cakeml/compile-cakeml.cmd)
 
 ```
-.aadl/cakeml/compile-cakeml.cmd
+./aadl/cakeml/compile-cakeml.cmd
 ```
 
 ## Linux
