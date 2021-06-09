@@ -128,8 +128,6 @@ These examples extend the producer/consumer examples above to illustrate the use
 
 This example illustrates use of the high assurance CakeML programming language to program AADL component application logic.  HAMR can integrate CakeML-programmed components with C-programmed components.   This concept is illustrated with a simple example that incorporates CakeML-programmed components that utilize the Collins CASE Attestation Framework from the University of Kansas.   The Collins CASE SPLAT framework which auto-generates cyber-resiliency filters and monitors also generates CakeML-implemented components.  Thus, this example illustrates the basic CakeML integration strategy used in several ways within the Collins CASE tools.
 
-_Just need to adapt/clean-up our attestation gate micro-example_
-
 [Attestation Gate](cakeml/attestation-gate)
 
 ### Phase 1 Example
