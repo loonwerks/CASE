@@ -141,6 +141,15 @@ refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
 [CASE_AttestationGate_thr_Impl.cml](aadl/cakeml/CASE_AttestationGate_thr_Impl/CASE_AttestationGate_thr_Impl.cml)_
 
 ### How to Build/Run: SeL4
+
+Generate the CakeML assembly by running this script [compile-cakeml.cmd](aadl/cakeml/compile-cakeml.cmd)
+
+```
+./aadl/cakeml/compile-cakeml.cmd
+```
+
+then
+
 <!--how-to-buildrun-sel4_start-->
 ```
 ./aadl/bin/run-hamr-SeL4.sh
