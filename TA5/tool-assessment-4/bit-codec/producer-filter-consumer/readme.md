@@ -135,22 +135,31 @@ refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
 Timeout = 18 seconds
 ```
 Booting all finished, dropped to user space
-Entering pre-init of filter_t_filter_filter
 Entering pre-init of producer_t_producer_producer
-Art: Registered component: PFC_Sys_Impl_Instance_producer_producer (periodic: 1Art: Registered component: PFC_Sys_Impl_Instance_filter_filter (periodic: 1000)
+Entering pre-init of filter_t_filter_filter
+Art: Registered cEntering pre-init of consumer_t_consumer_consumer
+Art: Registered comArt: Registered component: PFC_Sys_Impl_Instance_producer_producer (periodic: 1000)
+Art: - Registered port: PFC_Sys_Impl_Instance_producer_producer_to_filter (event out)
+Leaving pre-init of proomponent: PFC_Sys_Impl_Instance_filter_filter (periodic: 1000)
 Art: - Registered port: PFC_Sys_Impl_Instance_filter_filter_from_producer (event in)
 Art: - Registered port: PFC_Sys_Impl_Instance_filter_filter_to_consumer (event out)
 Leaving pre-init of filter_t_filter_filter
-000)
-Art: - Registered port: PFC_Sys_Impl_Instance_producer_producer_to_filter (event out)
-Leaving pre-init of producer_t_producer_producer
+ponent: PFC_Sys_Impl_Instance_consumer_consumer (periodic: 1000)
+Art: - Registered port: PFC_Sys_Impl_Instance_consumer_consumer_from_filter (event in)
+Leaving pre-init of consumer_t_consumer_consumer
+ducer_t_producer_producer
 PFC_Sys_Impl_Instance_filter_filter:     Approved Mission([Coordinate(1, 1, 1), Coordinate(2, 2, 2), Coordinate(3, 3, 3)])
+PFC_Sys_Impl_Instance_consumer_consumer: Received Mission([Coordinate(1, 1, 1), Coordinate(2, 2, 2), Coordinate(3, 3, 3)])
 PFC_Sys_Impl_Instance_filter_filter:     Rejected Mission([Coordinate(4, 4, 4), Coordinate(5, 5, 5), Coordinate(6, 6, 6)])
 PFC_Sys_Impl_Instance_filter_filter:     Approved Mission([Coordinate(7, 7, 7), Coordinate(8, 8, 8), Coordinate(9, 9, 9)])
+PFC_Sys_Impl_Instance_consumer_consumer: Received Mission([Coordinate(7, 7, 7), Coordinate(8, 8, 8), Coordinate(9, 9, 9)])
 PFC_Sys_Impl_Instance_filter_filter:     Approved Mission([Coordinate(1, 1, 1), Coordinate(2, 2, 2), Coordinate(3, 3, 3)])
+PFC_Sys_Impl_Instance_consumer_consumer: Received Mission([Coordinate(1, 1, 1), Coordinate(2, 2, 2), Coordinate(3, 3, 3)])
 PFC_Sys_Impl_Instance_filter_filter:     Rejected Mission([Coordinate(4, 4, 4), Coordinate(5, 5, 5), Coordinate(6, 6, 6)])
 PFC_Sys_Impl_Instance_filter_filter:     Approved Mission([Coordinate(7, 7, 7), Coordinate(8, 8, 8), Coordinate(9, 9, 9)])
+PFC_Sys_Impl_Instance_consumer_consumer: Received Mission([Coordinate(7, 7, 7), Coordinate(8, 8, 8), Coordinate(9, 9, 9)])
 PFC_Sys_Impl_Instance_filter_filter:     Approved Mission([Coordinate(1, 1, 1), Coordinate(2, 2, 2), Coordinate(3, 3, 3)])
+PFC_Sys_Impl_Instance_consumer_consumer: Received Mission([Coordinate(1, 1, 1), Coordinate(2, 2, 2), Coordinate(3, 3, 3)])
 
 ```
 <!--example-output-sel4_end-->

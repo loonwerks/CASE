@@ -63,7 +63,9 @@ object MissionBitCodec {
     var altitude: S32
   ) extends Runtime.Composite {
 
-    @strictpure def toImmutable: Coordinate = Coordinate(latitude, longitude, altitude)
+    def toImmutable: Coordinate = {
+      return Coordinate(latitude, longitude, altitude)
+    }
 
     def wellFormed: Z = {
 
@@ -126,7 +128,7 @@ object MissionBitCodec {
       return if (context.hasError) None[Mission]() else Some(r.toImmutable)
     }
 
-    def toMutableData(s: ISZ[Coordinate]): MSZ[MCoordinate] = {
+    @pure def toMutableData(s: ISZ[Coordinate]): MSZ[MCoordinate] = {
       var r = MSZ[MCoordinate]()
       for (e <- s) {
         r = r :+ e.toMutable
@@ -164,7 +166,9 @@ object MissionBitCodec {
     var data: MSZ[MCoordinate]
   ) extends Runtime.Composite {
 
-    @strictpure def toImmutable: Mission = Mission(Mission.toImmutableData(data))
+    def toImmutable: Mission = {
+      return Mission(Mission.toImmutableData(data))
+    }
 
     def wellFormed: Z = {
 
