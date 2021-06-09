@@ -148,7 +148,7 @@ public
             HAMR::Bit_Codec_Raw_Connections => true;
             
         annex resolute {**
-            check CASE_Tools
+            check HAMR_Guidelines
         **};
              
 	end MissionComputer.Impl;

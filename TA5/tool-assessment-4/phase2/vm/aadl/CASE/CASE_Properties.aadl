@@ -1,299 +1,343 @@
 property set CASE_Properties is
-
-	-- Deprecated
-	-- Type of CASE component
-	--Component_Type: inherit enumeration (FILTER, MONITOR, ATTESTATION, GATE, SWITCH, PROXY, ADAPTER, VIRTUAL_MACHINE, SEL4) applies to (thread, thread group, process, system, processor, virtual processor);
 	
-	-- Implementation language for this component (eg c, CakeML)
+	-- NOTE: This resource is contributed by the Collins CASE TA2 plugin which is included in FMIDE.
+	-- If you are running FMIDE (or OSATE with the Collins CASE TA2 plugin), then you will see various
+	-- errors coming from this resource, which also will cause the HAMR plugin to fail.
+    -- To prevent these errors, delete the CASE directory and its contents from the project.
+    
+    
+    
+	--- The <b>Component_Language</b> property specifies the language for the component (e.g. c or CakeML).
 	Component_Language: inherit enumeration (c, CakeML) applies to (thread, thread group, process, system);
 	
-	-- ID of the AGREE CONTRACT that specifies the behavior of this component
-	Component_Spec: list of aadlstring applies to (thread, thread group, process, system);
+	--- The <b>Component_Spec</b> property identifies the AGREE contract that specifies the behavior of the 
+	--- component.
+	Component_Spec: list of aadlstring applies to (thread, process, system);
 	
-	-- Remote Attestation
-	Cache_Timeout: time applies to (thread, thread group, process, system);
+	--- Remote Attestation
+	Cache_Timeout: time applies to (thread, process, system);
 	
-	-- Future iterations of this property set will likely change this property (The name or removed entirely)
-	Cache_Size: aadlinteger applies to (thread, thread group, process, system);
+	--- Future iterations of this property set will likely change this property (i.e. the name or entirely 
+	--- removed).
+	Cache_Size: aadlinteger applies to (thread, process, system);
 	
-	-- Communication Driver
-	Comm_Driver: aadlboolean applies to (thread, thread group, process, system);
+	--- Communication Driver
+	Comm_Driver: aadlboolean applies to (thread, process, system);
 	
-	-- Communication Modality
+	--- Communication Modality
 	Comm_Modality: inherit enumeration (RF, WIFI, WIRED_ETHERNET, SERIAL, BT, 
 		NFC) applies to (bus, virtual bus);
 
-	-- Operating system being used
+	--- The <b>OS</b> property specifies the operating system (e.g. seL4, Linux, Andoird, LynxOS, or other).
 	OS: enumeration(seL4, Linux, Android, LynxOS, other) applies to (processor, 
 		virtual processor);
 	
-	-- Monitor
+	--- The <b>Monitor_Latched</b> property specifies whether the monitor's alert output will latch once its 
+	--- policy is broken.
 	Monitor_Latched: aadlboolean applies to (system, process, thread, 
 		thread group, device, abstract);
 
-	-------------------------------------------------------------
-	-------------------------------------------------------------
-	-------------Trust level properties -------------------------
-	-------------------------------------------------------------
 	
 	-- Expect this property to be deprecated and replaced by the "CIA" trust 
 	-- levels below in the future.
+	
+	--- The <b>Trust_Level</b> property specifies the level of trust for the component.
+	--- <ul>
+	--- 	<li><b>'0'</b> indicates no trust (or unknown).
+	--- 	<li><b>'100'</b> indicates complete trust.
+	--- </ul>
+	--- Omitting this property will implicitly indicate an unknown trust level, 
+	--- which is the same as no trust. There is no implied inheritance of trust 
+	--- between a subcomponent and its parent component or vice versa. A 
+	--- subcomponent could have more or less trust than its parent.
+	
 	Trust_Level: aadlinteger 0 .. 100 applies to (subcomponent, connection, 
 		port, feature, System, Thread, Thread Group, Process, Subprogram, 
 		processor, virtual processor, Memory, device, bus, virtual bus); 
 	
-	-------------------------------------------------------------	
-	-- Trust levels are divided into 3 sub-categories (Confidentiality, Integrity and Availability)
-	
-	-- For all the following trust levels, 0 indicates "no trust" (or unknown), 
-	-- and 100 indicates "complete trust". Omitting a trust_level will 
-	-- implicitly indicate an unknown trust level (which is the same as no trust)
-	-- There is no implied inheritance of trust between a subcomponent and its 
-	-- parent component or vice versa. (A subcomponent could have more or less 
-	-- trust than the parent.)
-
-    --------------------------------------
-	---- Confidentiality Trust Levels ----
-	--------------------------------------
-	
-	-- Trust_Level_Confidentiality:
-	--
-	-- For a trust level (Confidentiality) on a component (subcomponent, 
-	-- System, Thread, Thread Group,  Process, Subprogram, processor, 
-	-- virtual processor, Memory, device):
-	
-	-- '100' indicates gaining access to the component would not threaten 
-	-- confidentiality of data contained within that component. Also indicates
-	-- data confidentiality is protected between a component's input features 
-	-- to its output features.  
-	-- '0' indicates no trust that the component would maintain the 
-	-- confidentiality of data contained within it, should an attacker gain 
-	-- access to the component
-	
-	-- For a trust level (Confidentiality) on a Bus (Bus, Virtual Bus):
-	
-	-- '100' indicates gaining physical access to the bus would not threaten 
-	-- confidentiality of data on that bus.  Data confidentiality is maintained
-	-- in transit on that bus
-	-- '0' indicates no trust that data in transit on the bus would maintain 
-	-- any confidentiality should an attacker gain access to the bus.	
+	--- The <b>Trust_Level_Confidentiality</b> property specifies the level of
+	--- confidentiality for a particular element. This property has 2 semantic 
+	--- interpretations.<p>
+	---
+	--- For <b>Trust_Level_Confidentiality</b> specified on a component (e.g. subcomponent, 
+	--- system, thread, thread group, process, subprogram, processor, 
+	--- virtual processor, memory, device):
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates gaining access to the component would not threaten 
+	--- 		confidentiality of data contained within that component. This also indicates
+	--- 		data confidentiality is protected between a component's input features 
+	--- 		and its output features.  
+	--- 	<li><b>'0'</b> indicates no trust that the component would maintain the 
+	--- 		confidentiality of data contained within it should an attacker gain 
+	--- 		access to the component.
+	--- </ul>
+	--- For <b>Trust_Level_Confidentiality</b> specified on a bus (e.g. bus, virtual bus):
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates gaining physical access to the bus would not threaten 
+	--- 		confidentiality of data on that bus.  Data confidentiality is maintained
+	--- 		in transit on that bus.
+	--- 	<li><b>'0'</b> indicates no trust that data in transit on the bus would maintain 
+	--- 		any confidentiality should an attacker gain access to the bus.	
+	--- </ul>
 	Trust_Level_Confidentiality: aadlinteger 0 .. 100 applies to (subcomponent, 
 		System, Thread, Thread Group, Process, Subprogram, processor, 
 		virtual processor, Memory, device, bus, virtual bus);
 
-	-- Requires_Data_Confidentiality:
-	
-	-- Indicates if a component/bus/connection *requires* data confidentiality.
-	-- Used in combination with the 'Trust_Level_Confidentiality' property.
-	-- Not all components require confidentiality, so this property should be 
-	-- used to indicate where components require confidentiality. Unlike the 
-	-- Trust_Level_Confidentiality property, "Connection" is included in this 
-	-- property.  As a connection is generally a logical element, including 
-	-- 'Connection' allows the system modeler to enter in the "intent" of the 
-	-- design i.e. This connection "should" be confidential.  Expectation is
-	-- that this property is used in combination with the binding of a 
-	-- connection to a bus (which would have a trust level associated with 
-	-- confidentiality) and would generate any relevant cyber requirements 
-	-- accordingly.
-		
-	-- '100' indicates an element requires total confidentiality
-	-- '0' indicates an element does not requires any confidentiality 
+	--- The <b>Requires_Data_Confidentiality</b> property specifies the level of
+	--- confidentiality a component requires.<p>
+	--- 	
+	--- Not all components require confidentiality, so this property should be 
+	--- used to indicate where components require confidentiality. Unlike the 
+	--- Trust_Level_Confidentiality property, "Connection" is included in this 
+	--- property.  As a connection is generally a logical element, including 
+	--- "Connection" allows the system modeler to enter in the "intent" of the 
+	--- design i.e. This connection "should" be confidential.  Expectation is
+	--- that this property is used in combination with the binding of a 
+	--- connection to a bus (which would have a trust level associated with 
+	--- confidentiality) and would generate any relevant cyber requirements 
+	--- accordingly.
+	--- <ul>	
+	--- 	<li><b>'100'</b> indicates an element requires total confidentiality.
+	--- 	<li><b>'0'</b> indicates an element does not requires any confidentiality.
+	--- </ul>
 	Requires_Data_Confidentiality: aadlinteger 0 .. 100 applies to (subcomponent, 
 		System, Thread, Thread Group, Process, Subprogram, processor, 
 		virtual processor, Memory, device, bus, virtual bus, connection);
 	
-    --------------------------------------
-	-------Integrity Trust Levels --------
-	--------------------------------------
-	
-	-- Trust_Level_Integrity:
-	
-	-- For a Trust Level (Integrity) on a component (subcomponent, System, 
-	-- Thread, Thread Group,  Process, Subprogram, processor, virtual processor, 
-	-- Memory, device):
-	-- Used to indicate the level of trust a component of a component to ensure 
-	-- data integrity to avoid unauthorized data changed within its physical 
-	-- boundary. 
-	
-	-- '100' indicates total trust that any data contained within this 
-	-- component is resilient to potential corruption of data consistency and 
-	-- accuracy.  	
-	-- '0' indicates no trust (or unknown) in the integrity of the data 
-	-- contained within the component as well as its accuracy or well-formedness.
-	
-	-- For a Trust Level (Integrity) on a Bus (Bus, Virtual Bus):
-	--
-    -- Indicates that a bus has some characteristic which provides data integrity.
-    -- Ethernet 802.3 would be an example that provides twisted pair Ethernet 
-    -- which bit-level integrity up to 100 meters. In this context, annotating 
-    -- a bus with a trust level of '100' for integrity would indicate that the 
-    -- physical bus itself provides a fully trusted data transmission medium 
-    -- for accuracy, and cannot be altered in transit. 
-	
-	-- '100' indicates gaining physical access to the bus would not threaten 
-	-- confidentiality of data on that bus.  Data confidentiality is maintained 
-	-- in transit on that bus
-	-- '0' indicates no trust that data in transit on the bus would maintain 
-	-- any confidentiality should an attacker gain access to the bus.	
+	--- The <b>Trust_Level_Integrity</b> property specifies the level of
+	--- integrity for a particular element. This property has 2 semantic 
+	--- interpretations.<p>
+	--- 
+	--- For a <b>Trust_Level_Integrity</b> specified on a component (subcomponent, System, 
+	--- Thread, Thread Group,  Process, Subprogram, processor, virtual processor, 
+	--- Memory, device):
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates total trust that any data contained within this 
+	--- 		component is resilient to potential corruption of data consistency and 
+	--- 		accuracy.  	
+	---  	<li><b>'0'</b> indicates no trust (or unknown) in the integrity of the data 
+	--- 		contained within the component as well as its accuracy or well-formedness.
+	--- </ul>
+	--- For <b>Trust Level_Integrity</b> specified on a bus (bus, virtual bus):
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates gaining physical access to the bus would not threaten 
+	--- 		confidentiality of data on that bus.  Data confidentiality is maintained 
+	--- 		in transit on that bus.
+	--- <li><b>'0'</b> indicates no trust that data in transit on the bus would maintain 
+	--- 	any confidentiality should an attacker gain access to the bus.
+	--- </ul>
 	Trust_Level_Integrity: aadlinteger 0 .. 100 applies to (subcomponent, 
 		System, Thread, Thread Group, Process, Subprogram, processor, 
 		virtual processor, Memory, device, bus, virtual bus);
-		
-	-- Requires_Data_Integrity:
 	
-	-- Used to indicate if a component, bus or connection requires data 
-	-- integrity.  Used in conjunction with Trust_Level_Integrity.
-	-- Some data paths may not require strong integrity (real-time video can 
-	-- have corrupted pixels and still be useful for instance)
-	-- 'Connection' element is included to allow the system designer to 
-	-- annotate the 'intent' of a connection.  The "actual" integrity will 
-	-- depend on a particular connection's binding to a bus  
-	-- '100' indicates an element requires maximum integrity
-	-- '0' indicates an element does not requires any integrity 
+	--- The <b>Requires_Data_Integrity</b> property specifies the level of
+	--- integrity a component requires.<p>
+	--- 
+	--- Some data paths may not require strong integrity (real-time video can 
+	--- have corrupted pixels and still be useful for instance). 
+	--- "Connection" element is included to allow the system designer to 
+	--- annotate the "intent" of a connection.  The "actual" integrity will 
+	--- depend on a particular connection's binding to a bus. 
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates an element requires maximum integrity. 
+	--- 	<li><b>'0'</b> indicates an element does not require any integrity.
+	--- </ul>
 	Requires_Data_Integrity: aadlinteger 0 .. 100 applies to (subcomponent, 
 		System, Thread, Thread Group, Process, Subprogram, processor, 
 		virtual processor, Memory, device, bus, virtual bus, connection);
 	
-	-----------------------------------------
-	-------Availability Trust Levels --------
-	-----------------------------------------
-	
-	-- Trust_Level_Availability:
-	--
-	-- For a Trust Level (Availability) on a component (subcomponent, System, 
-	-- Thread, Thread Group, Process, Subprogram, processor, virtual processor,
-	-- Memory, device):
-	
-	-- Used to indicate the trust level associated with a component's ability 
-	-- to meet data rate and timing requirements.
-	-- '100' indicates that that component's output features can be fully 
-	-- trusted to output their data and meet timing requirements.
-	-- '0' indicates that a component's output features cannot be trusted to 
-	-- output their data or meet timing requirements
+	--- The <b>Trust_Level_Availability</b> property specifies the level of
+	--- availability for a particular element. This property has 2 semantic 
+	--- interpretations.<p>
+	---
+	--- For <b>Trust_Level_Availability</b> specified on a component (subcomponent, System, 
+	--- Thread, Thread Group, Process, Subprogram, processor, virtual processor,
+	--- Memory, device):
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates that that component's output features can be fully 
+	--- 		trusted to output their data and meet timing requirements.
+	--- 	<li><b>'0'</b> indicates that a component's output features cannot be trusted to 
+	--- 		output their data or meet timing requirements
+	--- </ul>
+	--- For <b>Trust Level_Availability</b> specified on a bus (bus, virtual bus):
+	--- <ul>
+	--- 	<li><b>'100' on a bus</b> indicates a completely trusted bus for reliability and is not 
+	--- 		susceptible to an arbitrary number of physical hardware failures which 
+	--- 		would result in the availability of the bus to facilitate data 
+	--- 		transmission to fail.  
+	--- 	<li><b>'0' on a bus</b> indicates no trust of the reliability of the bus hardware and no 
+	--- 		redundancy or protection against physical attacks.
+	--- 	<li><b>'100' on a virtual bus</b> would not degrade the availability of 
+	--- 		the bus it is a subcomponent of.  
+	--- 	<li><b>'0' on a virtual bus</b> specifies no availability assurance.
+	--- </ul>
 	Trust_Level_Availability: aadlinteger 0 .. 100 applies to (subcomponent, 
 		System, Thread, Thread Group, Process, Subprogram, processor, 
 		virtual processor, Memory, device, bus, virtual bus);
 	
-	-- For a Trust Level (Availability) on a Bus (Bus, Virtual Bus):
-	-- '100' indicates a completely trusted bus for reliability and not 
-	-- susceptible to an arbitrary number of physical hardware failures which 
-	-- would result in the availability of the bus to facilitate data 
-	-- transmission to fail.  
-	-- '0' indicates no trust of the reliability of the bus hardware. No 
-	-- redundancy or protection against physical attacks.
-	
-	-- A value of 100 in a virtual bus would not degrade the availability of 
-	-- the bus it is a subcomponent of.  A value of 0 has no availability 
-	-- assurance.
-	
-	-- Requires_Data_Availability:
-	--
-	-- Used to indicate if a component, bus or connection requires data 
-	-- availability.  Used in conjunction with Trust_Level_Availability
-	-- 'Connection' element is included to allow the system designer to 
-	-- annotate the 'intent' of a connection.  The "actual" Availability will 
-	-- depend on a particular connection's binding to a bus  
-	-- '100' indicates an element requires maximum Availability
-	-- '0' indicates an element does not require any Availability (is completely optional)
+	--- The <b>Requires_Data_Availability</b> property specifies the level of
+	--- availability a component requires.<p>
+	--- 
+	--- "Connection" element is included to allow the system designer to 
+	--- annotate the "intent" of a connection.  The "actual" Availability will 
+	--- depend on a particular connection's binding to a bus. 
+	--- <ul> 
+	--- 	<li><b>'100'</b> indicates an element requires maximum availability.
+	--- 	<li><b>'0'</b> indicates an element does not require any availability. 
+	--- <ul>
 	Requires_Data_Availability: aadlinteger 0 .. 100 applies to (subcomponent, 
 		System, Thread, Thread Group, Process, Subprogram, processor, 
 		virtual processor, Memory, device, bus, virtual bus, connection);
-			
-	-------------------------------------------------------------
-	-------------------------------------------------------------
-	-------------------------------------------------------------
-	-------------------------------------------------------------
-	-------------------------------------------------------------
-			
-	-----------------------------------------
-	---------- Control Level ----------------
-	-----------------------------------------
 	
-	-- Control level of a connection or component.
-	-- 0 <= Control_Level <= 100.
-	-- 0 indicates that a component cannot be altered in any way (i.e. "no control"),
-	-- and 100 indicates "complete control".
-	-- Essentially this is an indicator of how difficult it is for the system
-	-- Designer to make a change to a particular component.
-	-- Intended to be used for optimized requirements generated by a cyber requirement
-	-- tool.  Components with a lower control_level value should be prioritized lower
-	-- than components with a higher control level for requirement generation purposes. 
-	-- Previously, the annotation UNCONTROLLED was used to denote Control_Level 0.
-	
-	-- All subcomponents will inherit the control level of the parent component by default
-	-- Can be overridden by subcomponents
-	-- Unspecified control levels will implicitly be considered control level 
-	-- 100 unless there is an ancestor component	
+	--- The <b>Control_Level</b> property specifies the level of control for the component.
+	--- <ul>		
+	--- 	<li><b>'100'</b> indicates "complete control".
+	--- 	<li><b>'0'</b> indicates that a component cannot be altered in any way (i.e. "no control"),
+	---</ul>
+	--- This is an indicator of how difficult it is for the system designer to make a change to a 
+	--- particular component.
+	--- Intended to be used for optimized requirements generated by a cyber requirement
+	--- tool. Components with a lower Control_Level value should be prioritized lower
+	--- than components with a higher Control_Level.<p>
+	---
+	--- Control level values will be inherited from a component in which it is contained, 
+	--- but this value can be overridden on a subcomponent level basis.
+	--- Unspecified control levels will implicitly be considered control level 
+	--- 100 unless there is an ancestor component.	
 	Control_Level: inherit aadlinteger 0 .. 100 applies to (feature, connection, classifier, subcomponent);
 
 	
-	-----------------------------------------
-	---------- Security Functions -----------
-	-----------------------------------------	
-	
+	-- ---------------------------------------
+	-- -------- Security Functions -----------
+	-- ---------------------------------------
+	-- 
 	-- The following properties describe the security function of a component. 
 	-- These functions correspond to the trusted build transform components 
 	-- implemented by the CASE toolset.  These properties are to be used in 
 	-- conjunction with cyber-security analysis to address cyber requirements 
 	-- generated in a system model.
 	
-	-- Indicates this component provides filtering functionality with respect 
-	-- to well-formedness of messages.  
-	-- '100' indicates the component was implemented using a trusted build / formal 
-	-- method process by the CASE toolset
+	--- The <b>Filtering</b> property specifies a component's ability to filter messages
+	--- based on well-formedness.
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates the component was implemented using a trusted build / formal 
+	---			method process by the CASE toolset.
+	--- </ul>
 	Filtering: aadlinteger 0 .. 100 applies to (thread, thread group, process, system, subcomponent);
-	
-	-- Indicates this component provides attestation functionality  
-	-- '100' indicates the component was implemented using a trusted build / formal 
-	-- method process by the CASE toolset
+	                   
+	--- The <b>Attesting</b> property specifies a component's ability to attest external components.                   
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates the component was implemented using a trusted build / formal 
+	--- 		method process by the CASE toolset.
+	--- </ul>
 	Attesting: aadlinteger 0 .. 100 applies to (thread, thread group, process, system, subcomponent);
 	
-	-- Indicates this component provides isolation (virtualization) functionality
-	-- '100' indicates the component was implemented using a trusted build / formal 
-	-- method process by the CASE toolset
-	Isolating: aadlinteger 0 .. 100 applies to (thread, thread group, process, system, processor, virtual processor, subcomponent);	
+	--- The <b>Isolating</b> property specifies a component's ability to isolate (virtualize) components.
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates the component was implemented using a trusted build / formal 
+	--- 		method process by the CASE toolset.
+	--- </ul>
+	Isolating: aadlinteger 0 .. 100 applies to (thread, thread group, process, processor, virtual processor, system, subcomponent);	
 
-	-- Indicates this component provides run-time monitoring functionality
-	-- ' 100' indicates the component was implemented using a trusted build / formal 
-	-- method process by the CASE toolset
-	-- TODO: Further refinement of the definition of "Monitoring" is required.
+	--- The <b>Monitoring</b> property specifies a component's ability to monitor messages.
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates the component was implemented using a trusted build / formal 
+	--- 		method process by the CASE toolset.
+	--- </ul>
 	Monitoring: aadlinteger 0 .. 100 applies to (thread, thread group, process, system, subcomponent);
 
-	-- Indicates this component provides switching/gating functionality
-	-- ' 100' indicates the component was implemented using a trusted build / formal 
-	-- method process by the CASE toolset
-	-- TODO: Further refinement of the definition of "Switch/Gate" is required.
+	--- The <b>Gating</b> property specifies a component's ability to gate messages.
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates the component was implemented using a trusted build / formal 
+	--- 		method process by the CASE toolset.
+	--- </ul>
 	Gating: aadlinteger 0 .. 100 applies to (thread, thread group, process, system, subcomponent);		
 	
-	-- Indicates this component provides authentication of messages. 
-	-- ' 100' indicates the component has the maximum level of authenticating 
-	-- functionality
-	-- Note: There is currently no trusted build transform for authenticating 
-	-- from the CASE toolset
+	--- The <b>Authenticating</b> property specifies a component's ability to autheticate messages.
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates the component was implemented using a trusted build / formal 
+	--- 		method process by the CASE toolset.
+	--- </ul>
+	--- Note: There is currently no trusted build transform for authenticating 
+	--- from the CASE toolset.
 	Authenticating: aadlinteger 0 .. 100 applies to (thread, thread group, process, system, subcomponent);		
 	
-	-- Indicates this component provides encrypting functionality. 
-	-- ' 100' indicates the component has the maximum level of encryption as 
-	-- determined by the system modeler
-	-- Note: There is currently no trusted build transform for encryption from 
-	-- the CASE toolset
+	--- The <b>Encrypting</b> property specifies a component's ability to encrypt messages.
+	--- <ul>
+	--- 	<li><b>'100'</b> indicates the component was implemented using a trusted build / formal 
+	--- 		method process by the CASE toolset.
+	--- </ul>
+	--- Note: There is currently no trusted build transform for encrypting 
+	--- from the CASE toolset.
 	Encrypting: aadlinteger 0 .. 100 applies to (thread, thread group, process, system, subcomponent);
 	
-	------------------------------------------
-	---------- Security Attributes -----------
-	------------------------------------------
+	-- ----------------------------------------
+	-- -------- Security Attributes -----------
+	-- ----------------------------------------
+	-- 
+	-- The following properties (attributes) describe static features of a 
+	-- component (inherent properties as opposed to an active
+	-- function are included in this category).
 	
 	-- TODO: consider adding "filtered, monitored, attested, etc." to explicitly 
 	-- state which connection out of a component is filtered, monitored, etc.
 	
-	--Indicates the connection is an authenticated communication channel
+	--- The <b>Authenticated<b> property indicates the connection is an authenticated communication channel.
 	Authenticated: aadlinteger 0 .. 100 applies to (connection);
 	
-	-- Indicates a bus virtual bus is an encrypted channel, or that data is encrypted
+	--- The <b>Encrypted</b> property indicates a bus or virtual bus is an encrypted channel
+	--- or that data is encrypted.
 	Encrypted: aadlinteger 0 .. 100 applies to (bus, virtual bus, data);
 	
-	-- The following properties (attributes) describe static features of a 
-	-- component -- inherent properties as opposed to an active
-	-- function are included in this category.
+	-- ----------------------------------------
+	-- -------- DCRYPPS Properties ------------
+	-- ----------------------------------------
+
+	--- The <b>Smart_Component</b> property specifies whether a component is smart, meaning that is is a programmable (i.e. hackable)
+	--- component from which it is possible to perform a lateral attack. These are becoming more and more common as it is cheap and 
+	--- easy to have a controller running some variant of Unix.
+    Smart_Component: aadlboolean applies to (subcomponent, 
+    	System, Thread, Thread Group, Process, Subprogram, processor,
+        virtual processor, Memory, device, bus, virtual bus);
+  
+    --- The <b>Connection_Category</b> property is described below:
+    --- <ul>
+    --- 	<li><b>ExternalConnections</b>: These are component types that have connections to the outside world.
+    ---		<li><b>InternalConnections</b>: These are component types that make local network connections to other 
+    --- 		subcomponents of the system.
+    --- </ul>              
+    Connection_Category: enumeration (ExternalConnections, InternalConnections) applies to 
+    	(subcomponent, System, Thread, Thread Group, Process, Subprogram, processor,
+         virtual processor, Memory, device, bus, virtual bus);            
+
+    --- The <b>Component_Category</b> property specifies additional details about the component are defined below:
+    --- <ul>
+    --- 	<li><b>NavigationalSensor</b>: These are component types that act as navigational sensors.
+    --- 	<li><b>NavigationalSensorNotDependentOnRadio</b>: These are component types that are navigational
+	---			sensors that DO NOT depend upon radio.
+    --- 	<li><b>Workstation</b>: These are component types that can be be used as a workstation, in the sense that
+	--- 		someone logs into it and runs application on it, such as, perhaps, the ground station. It is quite likely that
+	--- 		in many systems there will not be ANY components of this kind. 
+    --- 	<li><b>Router</b>: These are component types that act as a network router.
+    --- 	<li><b>SmartController</b>: These are component types that could be considered as a smart controller.
+	--- 		These are becoming more and more common as it is cheap and easy to have a controller running some
+	--- 		variant of Unix.
+    --- 	<li><b>SmartCamera</b>: These are component types that are cameras that contain embedded software.
+    --- 	<li><b>SmartRadio</b>: These are component types that are radios that contain embedded software.
+    --- 	<li><b>Actuator</b>:  An actuator is a component that controls smoother device, often a physical device such
+	--- 		as a servo, a fin control, etc. It is not a smart device, it simple takes commands and translates them into
+	--- 		the desired actuation, such as a servo set point.
+    --- 	<li><b>SmartActuator</b>: A smart actuator is like a SmartComponent but it is understood to be a physical
+	--- 		actuator as described above. The difference between an <b>Actuator</b> and a <b>SmartActuator</b> is that the
+	--- 		latter contains a processor that could be the target of a lateral move (not a simple controller).
+   	--- 	<li><b>Sensor</b>: A sensor is an input from a sensor. The device has no smarts of its own.
+    --- 	<li><b>SmartSensor</b>: A SmartSensor is like a SmartComponent but it is understood to be a sensor. The
+	--- 		difference between an <b>Sensor</b> and a <b>SmartSensor</b> is that the latter contains a processor that could
+	--- 		be the target of a lateral move (not a simple controller).
+    --- 	</ul>       
+    Component_Category: enumeration (NavigationalSensor, NavigationalSensorNotDependentOnRadio, Workstation, 
+    	Router, SmartController, SmartCamera, SmartRadio, Actuator, SmartActuator, Sensor, SmartSensor)
+        applies to (subcomponent, System, Thread, Thread Group, Process, Subprogram, processor,
+                    virtual processor, Memory, device, bus, virtual bus);
 
 end CASE_Properties;

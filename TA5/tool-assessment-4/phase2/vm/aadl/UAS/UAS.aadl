@@ -21,7 +21,7 @@ public
 		properties
 			Actual_Connection_Binding => (reference (RFA)) applies to c1, c2;
 		annex resolute {**
-			check CASE_Tools
+			check HAMR_Guidelines
 		**};
 	end UAS.Impl;
 
