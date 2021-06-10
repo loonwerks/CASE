@@ -121,7 +121,7 @@ This example uses a three-component producer/filter/consumer structure to illust
 
 These examples extend the producer/consumer examples above to illustrate the use of seL4-hosted Linux virtual machines (VMs).   HAMR provides support for auto-generating seL4 configuration for VMs and configuration of the VMs themselves.
 
-- [Data Ports](vm/test_data_port_periodic_domains_VM) - includes two examples illustrating (1) VM for producer and native consumer and (2) Native producer and VM for consumer.
+- [Data Ports](vm/test_data_port_periodic_domains_VM) - includes example illustrating a Native producer and VM for consumer.
 - [Event Data Ports](vm/test_event_data_port_periodic_domains_VM) - includes three examples illustrating (1) VMs for both producer and consumer, (2) VM for producer and native consumer, and (3) Native producer and VM consumer.
 
 ### CakeML 
