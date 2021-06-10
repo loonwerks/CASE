@@ -1,0 +1,25 @@
+#include <producer_t_i_producer_producer_adapter.h>
+
+Unit base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_adapter_initialiseArchitecture(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "producer_t_i_producer_producer_adapter.c", "", "base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_adapter_initialiseArchitecture", 0);
+
+  base_producer_t_i_producer_producer_producer_initialiseArchitecture(SF_LAST);
+}
+
+Unit base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_adapter_initialiseEntryPoint(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "producer_t_i_producer_producer_adapter.c", "", "base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_adapter_initialiseEntryPoint", 0);
+
+  base_producer_t_i_producer_producer_producer_initialiseEntryPoint(SF_LAST);
+}
+
+Unit base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_adapter_computeEntryPoint(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "producer_t_i_producer_producer_adapter.c", "", "base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_adapter_computeEntryPoint", 0);
+
+  base_producer_t_i_producer_producer_producer_computeEntryPoint(SF_LAST);
+}
+
+art_Bridge_EntryPoints base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_adapter_entryPoints(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "producer_t_i_producer_producer_adapter.c", "", "base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_adapter_entryPoints", 0);
+
+  return base_producer_t_i_producer_producer_producer_entryPoints(SF_LAST);
+}
