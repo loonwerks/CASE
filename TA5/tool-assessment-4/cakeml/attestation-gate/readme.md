@@ -77,7 +77,7 @@ Only the wire protocol (ie. byte arrays) is supported for CakeML integration.
     - HAMR will use the ``Memory_Properties::Data_Size`` annotation if present for types defined in [Base_Types](https://github.com/osate/osate2/blob/master/core/org.osate.contribution.sei/resources/packages/Base_Types.aadl).  The following unbounded types are not currently supported: ``Bases_Types::Boolean``, ``Base_Types::Character``, ``Base_Types::String``, ``Base_Types::Integer``, ``Base_Types::Float``
 
 ### Specify Monitor/Filter components
-Attach the ``CASE_Properties::Component_Type`` to the filters or monitors - e.g. [CASE_AttesationGate.aadl](aadl/CASE_AttesationGate.aadl#L25)
+Attach ``CASE_Properties::Component_Type => CakeML`` to the filters or monitors - e.g. [CASE_AttesationGate.aadl](aadl/CASE_AttesationGate.aadl#L25)
 
 Attach ``Source_Text`` to the filters or monitors indicating where the CakeML assemblies are - e.g. 
 [CASE_AttesationGate.aadl](aadl/CASE_AttesationGate.aadl#L24).  For this example the assembly can be created by running the script 
