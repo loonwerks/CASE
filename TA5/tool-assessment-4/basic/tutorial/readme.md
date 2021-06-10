@@ -112,49 +112,46 @@ Sent 0
 [ 00 00 00 00 ]
 
 Received 0
-top_impl_Instance_consumer_consumer: Received 32 on port read_port: [ 00 00 00 00 ]
+top_impl_Instance_consumer_consumer: Received 32 bits on port read_port: [ 00 00 00 00 ]
 
 Sent 1
 [ 00 00 00 01 ]
 
 Received 1
-top_impl_Instance_consumer_consumer: Received 32 on port read_port: [ 00 00 00 01 ]
+top_impl_Instance_consumer_consumer: Received 32 bits on port read_port: [ 00 00 00 01 ]
 
 Sent 2
 [ 00 00 00 02 ]
 
 Received 2
-top_impl_Instance_consumer_consumer: Received 32 on port read_port: [ 00 00 00 02 ]
+top_impl_Instance_consumer_consumer: Received 32 bits on port read_port: [ 00 00 00 02 ]
 
 Sent 3
 [ 00 00 00 03 ]
 
 Received 3
-top_impl_Instance_consumer_consumer: Received 32 on port read_port: [ 00 00 00 03 ]
+top_impl_Instance_consumer_consumer: Received 32 bits on port read_port: [ 00 00 00 03 ]
 
 Sent 4
 [ 00 00 00 04 ]
 
 Received 4
-top_impl_Instance_consumer_consumer: Received 32 on port read_port: [ 00 00 00 04 ]
+top_impl_Instance_consumer_consumer: Received 32 bits on port read_port: [ 00 00 00 04 ]
 
 Sent 5
 [ 00 00 00 05 ]
 
 Received 5
-top_impl_Instance_consumer_consumer: Received 32 on port read_port: [ 00 00 00 05 ]
+top_impl_Instance_consumer_consumer: Received 32 bits on port read_port: [ 00 00 00 05 ]
 
 Sent 6
 [ 00 00 00 06 ]
 
 Received 6
-top_impl_Instance_consumer_consumer: Received 32 on port read_port: [ 00 00 00 06 ]
+top_impl_Instance_consumer_consumer: Received 32 bits on port read_port: [ 00 00 00 06 ]
 
 Sent 7
 [ 00 00 00 07 ]
-
-Received 7
-top_impl_Instance_consumer_consumer: Received 32 on port read_port: [ 00 00 00 07 ]
 
 
 ```

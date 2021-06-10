@@ -27,7 +27,7 @@ Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_t
     DeclNewString(read_port_str);
     String__append(SF (String) &read_port_str, string("Received "));
     Z_string_(SF (String) &read_port_str, t0_numBits);
-    String__append(SF (String) &read_port_str, string(" on port read_port: [ "));
+    String__append(SF (String) &read_port_str, string(" bits on port read_port: [ "));
     byte_array_string(SF (String) &read_port_str, t0, numBytes_S32);
     String__append(SF (String) &read_port_str, string("]\n"));
     
