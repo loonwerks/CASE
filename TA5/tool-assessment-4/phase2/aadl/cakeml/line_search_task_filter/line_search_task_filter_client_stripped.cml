@@ -1,0 +1,58 @@
+structure Client =
+struct
+
+val w8zero = Word8.fromInt 0;
+val emptybuf = Word8Array.array 0 w8zero;
+
+(*---------------------------------------------------------------------------*)
+(* Declare input buffers as global variables.                                *)
+(*---------------------------------------------------------------------------*)
+
+val filter_in_buffer = Word8Array.array API.filter_inSizeBytes w8zero;
+val filter_out_buffer = Word8Array.array API.filter_inSizeBytes w8zero;
+
+fun clear buffer =
+ let val len = Word8Array.length buffer
+     fun zero i = Word8Array.update buffer i w8zero
+     fun loop j = if j < len then (zero j; loop (j+1)) else ()
+ in
+    loop 0
+ end;
+
+fun filter_step () =
+ let val () = clear filter_in_buffer
+     val () = API.get_filter_in filter_in_buffer
+     val bufLen = API.filter_inSizeBytes
+     val string = Word8Array.substring filter_in_buffer 0 bufLen
+ in
+    if Word8Array.sub filter_in_buffer 0 <> Word8.fromInt 0 then (
+      API.logInfo("STRIPPED Ver: Just passing on the LineSearchTask");
+      clear filter_out_buffer;
+      Word8Array.copy filter_in_buffer 1 (Word8Array.length filter_in_buffer - 1) filter_out_buffer 0;
+      API.send_filter_out filter_out_buffer
+    )
+    else ()
+ end
+
+  fun initialise() = ();
+
+  val count = 0;
+
+  fun timeTriggered() = (
+    filter_step()
+  );
+
+  (* ===========================================================*
+   * The methods below are not currently used in HAMR/Slang     *
+   * ===========================================================*)
+
+  fun activate() = ();
+
+  fun deactivate() = ();
+
+  fun finalise() = ();
+
+  fun recover() = ();
+
+end (* Client, LST_Filter *)
+

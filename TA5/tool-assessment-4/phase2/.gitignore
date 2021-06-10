@@ -8,3 +8,4 @@
 
 **/hamr/**/*.cml 
 **/compile-cakeml*.jar
+*.S

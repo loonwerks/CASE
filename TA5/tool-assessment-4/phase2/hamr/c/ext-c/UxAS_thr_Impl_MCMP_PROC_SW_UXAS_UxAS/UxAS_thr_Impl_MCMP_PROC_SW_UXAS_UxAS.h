@@ -1,0 +1,12 @@
+#ifndef UXAS_THR_IMPL_MCMP_PROC_SW_UXAS_UXAS_H
+#define UXAS_THR_IMPL_MCMP_PROC_SW_UXAS_UXAS_H
+
+#include <all.h>
+
+Unit hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_initialise_(STACK_FRAME_ONLY);
+
+Unit hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_finalise_(STACK_FRAME_ONLY);
+
+Unit hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_timeTriggered_(STACK_FRAME_ONLY);
+
+#endif

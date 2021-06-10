@@ -1,0 +1,77 @@
+
+structure Geofence_Monitor =
+struct
+
+exception ERR string string;
+
+val w8zero = Word8.fromInt 0;
+
+(*---------------------------------------------------------------------------*)
+(* Declare input buffers as global variables.                                *)
+(*---------------------------------------------------------------------------*)
+
+val kizone_buffer   = Word8Array.array API.keep_in_zoneSizeBytes w8zero
+val kozone_buffer   = Word8Array.array API.keep_out_zoneSizeBytes w8zero
+val observed_buffer = Word8Array.array API.observedSizeBytes w8zero
+
+
+val emptybuf = Word8Array.array 0 w8zero;
+
+fun clear buffer =
+ let val len = Word8Array.length buffer
+     fun zero i = Word8Array.update buffer i w8zero
+     fun loop j = if j < len then (zero j; loop (j+1)) else ()
+ in
+    loop 0
+ end;
+
+fun fill_buffers() =
+ let in
+    API.get_keep_in_zone kizone_buffer
+  ; API.get_keep_out_zone kozone_buffer
+  ; API.get_observed observed_buffer
+ end
+
+val out_buffer = Word8Array.array API.outputSizeBytes w8zero;
+
+fun geofence_monitor () =
+ let val ()      = fill_buffers()
+ in
+  if Word8Array.sub observed_buffer 0 <> Word8.fromInt 0 then (
+
+   	(* just pass the message onto the WPM *)   	
+   	API.logInfo("STRIPPED Ver: just passing on the AutomationResponse to WPM");
+
+   	clear out_buffer;
+    Word8Array.copy observed_buffer 1 (Word8Array.length observed_buffer - 1) out_buffer 0;
+    API.send_output out_buffer
+  )
+  else()
+ end
+
+end (* Geofence_Monitor *)
+
+
+(* This structure is populated with developer-written code *)
+structure Client =
+struct
+
+fun initialise() = ();
+
+fun timeTriggered() = (
+  Geofence_Monitor.geofence_monitor()
+);
+
+(* ===========================================================*
+ * The methods below are not currently used in HAMR/Slang     *
+ * ===========================================================*)
+
+fun activate() = ();
+
+fun deactivate() = ();
+
+fun finalise() = ();
+
+fun recover() = ();
+
+end;

@@ -1,0 +1,498 @@
+(* This structure is populated with HAMR-generated code *)
+structure API =
+struct
+
+  val empty_byte_array = Word8Array.array 0 (Word8.fromInt 0);
+
+  fun logInfo s = (
+    #(api_logInfo) s empty_byte_array
+  );
+
+  fun print_buffer buffer = (
+    #(raw_print_buffer) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+  )
+
+  val trusted_idsSizeBytes = Int.div 96 8;
+  val automationRequest_inSizeBytes = 16384; (* 16384 bytes, 131072 bits, is the sizeof an AddressAttributedMessage according to model *)
+  val lineSearchTask_inSizeBytes = 16384; 
+  val operatingRegion_inSizeBytes = 16384;
+
+  (* address attrbiuted part of message isn't stripped off so the following have
+     to be the same size as what came in *)
+  val automationRequest_outSizeBytes = 16384; (*  256 bytes,  2048 bits, is the sizeof a AutomationRequest *)
+  val lineSearchTask_outSizeBytes = 16384;   (* 8192 bytes, 65536 bits, is the sizeof a LineSearchTask *) 
+  val operatingRegion_outSizeBytes = 16384;   (*  256 bytes,  2048 bits, is the sizeof a OperatingRegions *) 
+
+  fun get_trusted_ids buffer = (
+    if Word8Array.length buffer >= trusted_idsSizeBytes then
+      #(api_get_trusted_ids) "" buffer
+    else 
+      logInfo (String.concat ["ERROR: get_trusted_ids buffer too small"])
+  )
+
+  fun get_AutomationRequest_in buffer = (
+    if Word8Array.length buffer >= automationRequest_inSizeBytes then
+      #(api_get_AutomationRequest_in) "" buffer
+    else
+      logInfo (String.concat ["ERROR: AutomationRequest_in buffer too small"])
+  )
+
+  fun send_AutomationRequest_out buffer =  (
+    if Word8Array.length buffer <= automationRequest_outSizeBytes then (
+      (* handle fan out to UXAS and MON_REQ *)
+      #(api_send_AutomationRequest_out_UXAS) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array;
+      #(api_send_AutomationRequest_out_MON_REQ) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+    )
+    else
+      logInfo (String.concat ["ERROR: AutomationRequest_out buffer too large"])
+  );
+
+  fun get_LineSearchTask_in buffer = (
+    if Word8Array.length buffer >= lineSearchTask_inSizeBytes then
+      #(api_get_LineSearchTask_in) "" buffer
+    else
+      logInfo (String.concat ["ERROR: LineSearchTask_in buffer too small"])
+  )
+
+  fun send_LineSearchTask_out buffer =  (
+    if Word8Array.length buffer <= lineSearchTask_outSizeBytes then
+      #(api_send_LineSearchTask_out) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+    else
+      logInfo (String.concat ["ERROR: LineSearchTask_out buffer too large"])
+  );
+
+  fun get_OperatingRegion_in buffer = (
+    if Word8Array.length buffer >= operatingRegion_inSizeBytes then
+      #(api_get_OperatingRegion_in) "" buffer
+    else
+      logInfo (String.concat ["ERROR: OperatingRegion_in buffer too small"])
+  )
+
+  fun send_OperatingRegion_out buffer =  (
+    if Word8Array.length buffer <= operatingRegion_outSizeBytes then
+      #(api_send_OperatingRegion_out) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+    else
+      logInfo (String.concat ["ERROR: OperatingRegion_out buffer too large"])
+  );
+
+  fun toHexDigit nibble =
+    let val nibbleValue = Word8.toInt nibble
+    in case (nibbleValue) 
+    of (0) => "0"
+    | (1) => "1"
+    | (2) => "2"
+    | (3) => "3"
+    | (4) => "4"
+    | (5) => "5"
+    | (6) => "6"
+    | (7) => "7"
+    | (8) => "8"
+    | (9) => "9"
+    | (10) => "a"
+    | (11) => "b"
+    | (12) => "c"
+    | (13) => "d"
+    | (14) => "e"
+    | (15) => "f"
+    | otherwise => "xDohx"
+  end;    
+
+  fun toHex byte =
+    let val highNibble = (Word8.>> byte 4)
+        val lowNibble = (Word8.>> (Word8.<< byte 4) 4)
+    in String.concat [toHexDigit highNibble, toHexDigit lowNibble] 
+  end;
+
+ fun word8ArrayToHex bytes =
+    let val length = (Word8Array.length bytes)
+        fun get i = 
+          if i >= length then "" else
+            String.concat [toHex (Word8Array.sub bytes i), get (i + 1)]
+    in get(0)
+  end;
+
+end;
+(* This structure is populated with developer-written code *)
+structure Client =
+struct
+
+val w8zero = Word8.fromInt 0;
+
+(*---------------------------------------------------------------------------*)
+(* Declare input buffers as global variables.                                *)
+(*---------------------------------------------------------------------------*)
+
+val trusted_id_buffer
+    = Word8Array.array API.trusted_idsSizeBytes w8zero;
+
+val operating_region_buffer
+    = Word8Array.array API.operatingRegion_inSizeBytes w8zero;
+
+val linesearch_task_buffer
+    = Word8Array.array API.lineSearchTask_inSizeBytes w8zero;
+
+val automation_request_buffer
+    = Word8Array.array API.automationRequest_inSizeBytes w8zero;
+
+val trusted_id_buffer_out
+    = Word8Array.array API.trusted_idsSizeBytes w8zero;
+
+val operating_region_buffer_out
+    = Word8Array.array API.operatingRegion_outSizeBytes w8zero;
+
+val linesearch_task_buffer_out
+    = Word8Array.array API.lineSearchTask_outSizeBytes w8zero;
+
+val automation_request_buffer_out
+    = Word8Array.array API.automationRequest_outSizeBytes w8zero;
+
+val emptybuf = Word8Array.array 0 w8zero;
+
+fun clear buffer =
+ let val len = Word8Array.length buffer
+     fun zero i = Word8Array.update buffer i w8zero
+     fun loop j = if j < len then (zero j; loop (j+1)) else ()
+ in
+    loop 0
+ end;
+
+(*---------------------------------------------------------------------------*)
+(* Contiguity types for the trusted_ids input and the address-attributed     *)
+(* messages.                                                                 *)
+(*                                                                           *)
+(* trusted_ids = Array(i32,intLit 3)                                         *)
+(*                                                                           *)
+(* AAmesg = Recd [                                                           *)
+(*   ("address",           Scanner (scanTo "$")),                            *)
+(*   ("contentType",       Scanner (scanTo "|")),                            *)
+(*   ("descriptor",        Scanner (scanTo "|")),                            *)
+(*   ("source_group",      Scanner (scanTo "|")),                            *)
+(*   ("source_entity_ID",  Scanner (scanTo "|")),                            *)
+(*   ("source_service_ID", Scanner (scanTo "$")),                            *)
+(*   ("all_the_rest",      Scanner (fn s => SOME(s,"")))                     *)
+(* ]                                                                         *)
+(*                                                                           *)
+(* AAmesg_port = Recd [                                                      *)
+(*   ("present", Basic Bool),                                                *)
+(*   ("contents", Union [                                                    *)
+(*       (BLoc (VarName "present"), AAmesg),                                 *)
+(*       (Bnot(BLoc (VarName "present")), SKIP)])                            *)
+(*  ]                                                                        *)
+(*---------------------------------------------------------------------------*)
+
+(*---------------------------------------------------------------------------*)
+(* Map 3 adjacent 4-byte chunks in trusted_id_buffer to an array of 3 ints   *)
+(*---------------------------------------------------------------------------*)
+
+fun mk_tid_array () =
+  let val project = Word8Array.substring trusted_id_buffer
+      (*val _ = API.logInfo(String.concat ["trusted_id_buffer: ", Word8Array.substring trusted_id_buffer 0 11])*) 
+  in case (Int.fromString (project 0 3),
+           Int.fromString (project 4 3),
+           Int.fromString (project 8 3))
+      of (Some i1, Some i2, Some i3) => Some(Array.fromList[i1,i2,i3])
+       | otherwise => None
+   end;
+
+fun tid_array_to_string tidArrayOpt =
+case tidArrayOpt
+  of Some tidArray => String.concat ["tidArray = (", 
+                                                  Int.toString (Array.sub tidArray 0),
+                                                  ", ",
+                                                  Int.toString (Array.sub tidArray 1),
+                                                  ", ",
+                                                  Int.toString (Array.sub tidArray 2),
+                                                  ")"]
+   | otherwise => String.concat ["tidArray = ()"]
+;
+
+(*---------------------------------------------------------------------------*)
+(* Look for x element in arr, starting from i and going up.                  *)
+(*---------------------------------------------------------------------------*)
+
+fun seekFrom arr x i =
+ let val top = Word8Array.length arr
+     fun seek j =
+       if j >= top then None else
+       if Word8Array.sub arr j = x then Some j
+       else seek (j+1)
+ in seek i
+ end;
+
+(*---------------------------------------------------------------------------*)
+(* Parsing the header of an address-attributed message. Breaks the input     *)
+(* into A$B|C|D|E|F$G, where the letters stand for arbitrary strings not     *)
+(* having the delimiter that folllows, e.g. "$" or "|". Return sub-string E, *)
+(* which corresponds to source-entity-ID above. NB: vertical bar attached.   *)
+(*---------------------------------------------------------------------------*)
+
+fun w8_of c = Word8.fromInt (Char.ord c);
+
+fun scanAA arr offset =
+case seekFrom arr (w8_of #"$") offset
+ of None => None
+  | Some segA =>
+case seekFrom arr (w8_of #"|") (segA+offset)
+ of None => None
+  | Some segB =>
+case seekFrom arr (w8_of #"|") (segB+offset)
+ of None => None
+  | Some segC =>
+case seekFrom arr (w8_of #"|") (segC+offset)
+ of None => None
+  | Some segD =>
+case seekFrom arr (w8_of #"|") (segD+offset)
+ of None => None
+  | Some segE =>
+case seekFrom arr (w8_of #"$") (segE+offset)
+ of None => None
+  | Some segF =>
+    Some(Word8Array.substring arr (segD+offset) (segE-segD))
+;
+
+(*---------------------------------------------------------------------------*)
+(* Drop vertical bar at end of identifier, leaving only digits, I hope.      *)
+(*---------------------------------------------------------------------------*)
+
+fun dropBar s = String.substring s 0 (String.size s - 1);
+
+(*---------------------------------------------------------------------------*)
+(* Map byte array into int option. Return a Some if first element is non-zero*)
+(* and subsequent bytes decode properly according to scanAA.                 *)
+(*---------------------------------------------------------------------------*)
+
+fun getID bytes = (
+(*  API.logInfo(Word8Array.substring bytes 0 (Word8Array.length bytes)) ; *)
+ if Word8Array.sub bytes 0 = w8zero then
+    None
+ else
+  case scanAA bytes 1
+   of None => None
+    | Some ssID => Int.fromString (dropBar ssID) 
+);
+
+(*---------------------------------------------------------------------------*)
+(* Tests                                                                     *)
+(*---------------------------------------------------------------------------*)
+(*
+
+fun string_to_bytes s =
+ let val arr = Word8Array.array (String.size s) (w8zero)
+     val _ = Word8Array.copyVec s 0 (String.size s) arr 0
+ in
+    arr
+ end
+
+val test1 = (Some 500 = getID (string_to_bytes "A$B|C|D|500|F$G"));
+val test2 = (Some 500 = getID (string_to_bytes "A$B||D|500|F$G"));
+val test3 = (Some 500 = getID (string_to_bytes "199.0.0.1$p--q--r|foo|A!D!CD|500|FRED$GHIJ"));
+
+val _ = if test1 andalso test2 andalso test3 then
+         TextIO.print "\ngetID: tests passed.\n"
+        else
+         TextIO.print "\ngetID: tests failed.\n"
+*)
+
+fun equal a b = (a=b);
+
+(*---------------------------------------------------------------------------*)
+(* Look at a uxas AA message: if it's not got an input, return False; if it  *)
+(* does, return whether or not the input's ID is in the tid array. Also      *)
+(* ensure that the ID is not zero (initial state so don't send along mesgs). *)
+(*---------------------------------------------------------------------------*)
+
+fun check tidArr idOpt =
+ case idOpt
+  of None => False
+   | Some i => i <> 0 andalso Array.exists (equal i) tidArr;
+
+
+(*---------------------------------------------------------------------------*)
+(* Look at events in the following order: opregion; lst; autorqt. Pass along *)
+(* only the first one that meets the criterion.                              *)
+(*---------------------------------------------------------------------------*)
+
+fun att_gate_seq tidArrOpt opregion lst autorqt =
+  case tidArrOpt
+   of None => (False,False,False)
+    | Some     
+    tidArr =>
+      if check tidArr opregion then (True,False,False)
+      else
+      if check tidArr lst then (False,True,False)
+      else
+      if check tidArr autorqt then (False,False,True)
+      else (False,False,False)
+;
+
+(*---------------------------------------------------------------------------*)
+(* Look at all events in a parallel manner. Pass along all that meet the     *)
+(* criterion.                                                                *)
+(*---------------------------------------------------------------------------*)
+
+fun att_gate_par tidArrOpt opregion lst autorqt =
+  case tidArrOpt
+   of None => (False,False,False)
+    | Some tidArr => (check tidArr opregion,
+                      check tidArr lst, check tidArr autorqt);
+
+fun fill_buffers() = (
+    clear                        trusted_id_buffer
+  ; API.get_trusted_ids          trusted_id_buffer
+  ; clear                        operating_region_buffer
+  ; API.get_OperatingRegion_in   operating_region_buffer
+  ; clear                        linesearch_task_buffer
+  ; API.get_LineSearchTask_in    linesearch_task_buffer
+  ; clear                        automation_request_buffer
+  ; API.get_AutomationRequest_in automation_request_buffer
+)
+
+fun fill_out_buffers() = (
+    Word8Array.copy operating_region_buffer 1 (Word8Array.length operating_region_buffer - 1) operating_region_buffer_out 0
+  ; Word8Array.copy linesearch_task_buffer 1 (Word8Array.length  linesearch_task_buffer - 1) linesearch_task_buffer_out 0
+  ; Word8Array.copy automation_request_buffer 1 (Word8Array.length automation_request_buffer - 1) automation_request_buffer_out 0
+)
+
+(*---------------------------------------------------------------------------*)
+(* Get the inputs, do the check(s), and perform the outputs. Can swap in     *)
+(* att_gate_par for att_gate_seq if that behavior is wanted.                 *)
+(*---------------------------------------------------------------------------*)
+
+fun id_to_string idOpt = 
+  case idOpt
+  of Some i1 => Int.toString i1
+   | otherwise => ""
+;
+
+fun att_gate () =
+  let
+    val _          = fill_buffers()
+    val tidArrOpt  = mk_tid_array()
+    val opregionID = getID operating_region_buffer
+    val lstID      = getID linesearch_task_buffer
+    val autorqtID  = getID automation_request_buffer
+    val (a,b,c)    = att_gate_seq tidArrOpt opregionID lstID autorqtID
+(*  val _          = fill_out_buffers() *)
+  in
+
+(*API.print_buffer trusted_id_buffer
+;*)
+(*
+    (if Word8Array.sub operating_region_buffer 0 <> Word8.fromInt 0 orelse
+      Word8Array.sub linesearch_task_buffer 0 <> Word8.fromInt 0 orelse
+      Word8Array.sub automation_request_buffer 0 <> Word8.fromInt 0 then
+
+        API.logInfo (String.concat ["\n\t",  
+                                (tid_array_to_string tidArrOpt),
+                                "\n\topregionID = ",  
+                                id_to_string opregionID,  
+                                "\n\tlstID = ",  
+                                id_to_string lstID,  
+                                "\n\tautorqtID = ",  
+                                id_to_string autorqtID]) 
+    else())
+    ;
+*)
+
+    (if Word8Array.sub operating_region_buffer 0 <> Word8.fromInt 0 then (
+      if a then (
+        Word8Array.copy operating_region_buffer 1 (Word8Array.length operating_region_buffer - 1) operating_region_buffer_out 0;
+        API.send_OperatingRegion_out operating_region_buffer_out
+      )
+      else (
+        API.logInfo (String.concat ["\n\t** Blocked OperatingRegion **",
+                                    "\n\t  Valid IDS: ", (tid_array_to_string tidArrOpt),
+                                    "\n\t  Received OperatingRegion ID = ", id_to_string opregionID])
+      )
+    )
+    else())
+    ;
+    (if Word8Array.sub linesearch_task_buffer 0 <> Word8.fromInt 0 then (
+      if b then (
+        Word8Array.copy linesearch_task_buffer 1 (Word8Array.length linesearch_task_buffer - 1) linesearch_task_buffer_out 0;
+        API.send_LineSearchTask_out linesearch_task_buffer_out
+      )
+      else (
+        API.logInfo (String.concat ["\n\t** Blocked LineSearchTask **",
+                                    "\n\t  Valid IDS: ", (tid_array_to_string tidArrOpt),
+                                    "\n\t  Received LineSearchTask ID = ", id_to_string lstID])
+      )
+    )
+    else())
+    ;
+    (if Word8Array.sub automation_request_buffer 0 <> Word8.fromInt 0 then (
+      if c then (
+        Word8Array.copy automation_request_buffer 1 (Word8Array.length automation_request_buffer - 1) automation_request_buffer_out 0;
+        API.send_AutomationRequest_out automation_request_buffer_out
+      )
+      else (
+        API.logInfo (String.concat ["\n\t** Blocked AutomationRequest **",
+                                    "\n\t  Valid IDS: ", (tid_array_to_string tidArrOpt),
+                                    "\n\t  Received AutomationRequest ID = ", id_to_string autorqtID])
+      )
+    )
+    else())
+  end
+
+  fun initialise() = ();
+
+  val count = 0;
+
+  fun timeTriggered() = (
+    att_gate()
+  );
+
+  (* ===========================================================*
+   * The methods below are not currently used in HAMR/Slang     *
+   * ===========================================================*)
+
+  fun activate() = ();
+
+  fun deactivate() = ();
+
+  fun finalise() = ();
+
+  fun recover() = ();
+end;
+
+(* This structure is populated with HAMR-generated code *)
+structure Control =
+struct
+
+  val singleton_byte_array = Word8Array.array 1 (Word8.fromInt 0);
+
+  fun pacer_emit() = 
+      (#(sb_pacer_notification_emit) "" singleton_byte_array;
+       Word8Array.sub singleton_byte_array 0 <> Word8.fromInt 0);
+
+  fun pacer_wait() =
+      (#(sb_pacer_notification_wait) "" singleton_byte_array;
+       Word8Array.sub singleton_byte_array 0 <> Word8.fromInt 0);
+
+
+  val empty_byte_array = Word8Array.array 0 (Word8.fromInt 0);  
+
+  fun receiveInput() = (#(api_receiveInput) "" empty_byte_array);
+
+  fun sendOutput() = (#(api_sendOutput) "" empty_byte_array);
+
+  fun loop () =
+      if pacer_wait() then
+        ((*API.logInfo("Welcome to CakeML attestation_gate_control");*)
+         receiveInput();
+         Client.timeTriggered();
+         sendOutput();
+         pacer_emit();
+         loop())
+      else
+        loop();
+
+  fun emitLoop() = 
+      (pacer_emit();
+       loop());
+
+end;
+
+(* Startup *)
+val _ = Client.initialise();
+val _ = Control.emitLoop();

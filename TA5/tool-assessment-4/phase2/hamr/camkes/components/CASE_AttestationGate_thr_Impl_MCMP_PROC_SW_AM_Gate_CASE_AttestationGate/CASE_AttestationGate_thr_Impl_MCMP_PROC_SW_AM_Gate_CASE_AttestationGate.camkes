@@ -1,0 +1,22 @@
+component CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate {
+  include <sb_types.h>;
+  include <sb_queue_union_art_DataContent_1.h>;
+  control;
+  emits ReceiveEvent sb_AutomationRequest_out_UXAS_1_notification;
+  emits ReceiveEvent sb_AutomationRequest_out_MON_REQ_1_notification;
+  emits ReceiveEvent sb_OperatingRegion_out_1_notification;
+  emits ReceiveEvent sb_LineSearchTask_out_1_notification;
+  consumes ReceiveEvent sb_trusted_ids_notification;
+  consumes ReceiveEvent sb_AutomationRequest_in_notification;
+  consumes ReceiveEvent sb_OperatingRegion_in_notification;
+  consumes ReceiveEvent sb_LineSearchTask_in_notification;
+  consumes Period sb_pacer_notification;
+  dataport sb_queue_union_art_DataContent_1_t sb_trusted_ids_queue;
+  dataport sb_queue_union_art_DataContent_1_t sb_AutomationRequest_in_queue;
+  dataport sb_queue_union_art_DataContent_1_t sb_AutomationRequest_out_UXAS_queue_1;
+  dataport sb_queue_union_art_DataContent_1_t sb_AutomationRequest_out_MON_REQ_queue_1;
+  dataport sb_queue_union_art_DataContent_1_t sb_OperatingRegion_in_queue;
+  dataport sb_queue_union_art_DataContent_1_t sb_OperatingRegion_out_queue_1;
+  dataport sb_queue_union_art_DataContent_1_t sb_LineSearchTask_in_queue;
+  dataport sb_queue_union_art_DataContent_1_t sb_LineSearchTask_out_queue_1;
+}

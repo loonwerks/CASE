@@ -1,0 +1,213 @@
+(* This structure is populated with HAMR-generated code *)
+structure API =
+struct
+
+  val empty_byte_array = Word8Array.array 0 (Word8.fromInt 0);
+
+  fun logInfo s = (
+    #(api_logInfo) s empty_byte_array
+  );
+
+  fun print_buffer buffer = (
+    #(raw_print_buffer) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+  )
+
+  val data_t_max_payload = 8192 - 8;
+  val keep_in_zoneSizeBytes = 48;
+  val keep_out_zoneSizeBytes = 48;
+  val observedSizeBytes = data_t_max_payload; 
+
+  val outputSizeBytes = data_t_max_payload;
+
+  fun get_keep_in_zone buffer = (
+    if Word8Array.length buffer >= keep_in_zoneSizeBytes then
+      #(api_get_keep_in_zones) "" buffer
+    else 
+      logInfo (String.concat ["ERROR: get_keep_in_zone buffer too small"])
+  )
+
+  fun get_keep_out_zone buffer = (
+    if Word8Array.length buffer >= keep_out_zoneSizeBytes then
+      #(api_get_keep_out_zones) "" buffer
+    else 
+      logInfo (String.concat ["ERROR: get_keep_out_zone buffer too small"])
+  )
+
+  fun get_observed buffer = (
+    if Word8Array.length buffer >= observedSizeBytes then
+      #(api_get_observed) "" buffer
+    else
+      logInfo (String.concat ["ERROR: observed buffer too small"])
+  )
+
+  fun send_output buffer =  (
+    if Word8Array.length buffer <= outputSizeBytes then
+      #(api_send_output) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+    else
+      logInfo (String.concat ["ERROR: output buffer too large"])
+  );
+
+  fun send_alert () =  (
+    #(api_send_alert) "" empty_byte_array
+  );
+
+  fun toHexDigit nibble =
+    let val nibbleValue = Word8.toInt nibble
+    in case (nibbleValue) 
+    of (0) => "0"
+    | (1) => "1"
+    | (2) => "2"
+    | (3) => "3"
+    | (4) => "4"
+    | (5) => "5"
+    | (6) => "6"
+    | (7) => "7"
+    | (8) => "8"
+    | (9) => "9"
+    | (10) => "a"
+    | (11) => "b"
+    | (12) => "c"
+    | (13) => "d"
+    | (14) => "e"
+    | (15) => "f"
+    | otherwise => "xDohx"
+  end;    
+
+  fun toHex byte =
+    let val highNibble = (Word8.>> byte 4)
+        val lowNibble = (Word8.>> (Word8.<< byte 4) 4)
+    in String.concat [toHexDigit highNibble, toHexDigit lowNibble] 
+  end;
+
+ fun word8ArrayToHex bytes =
+    let val length = (Word8Array.length bytes)
+        fun get i = 
+          if i >= length then "" else
+            String.concat [toHex (Word8Array.sub bytes i), get (i + 1)]
+    in get(0)
+  end;
+
+  fun float2double float_byte_array double_byte_array =
+    #(float2double) float_byte_array double_byte_array;
+
+end;
+
+
+structure Geofence_Monitor =
+struct
+
+exception ERR string string;
+
+val w8zero = Word8.fromInt 0;
+
+(*---------------------------------------------------------------------------*)
+(* Declare input buffers as global variables.                                *)
+(*---------------------------------------------------------------------------*)
+
+val kizone_buffer   = Word8Array.array API.keep_in_zoneSizeBytes w8zero
+val kozone_buffer   = Word8Array.array API.keep_out_zoneSizeBytes w8zero
+val observed_buffer = Word8Array.array API.observedSizeBytes w8zero
+
+
+val emptybuf = Word8Array.array 0 w8zero;
+
+fun clear buffer =
+ let val len = Word8Array.length buffer
+     fun zero i = Word8Array.update buffer i w8zero
+     fun loop j = if j < len then (zero j; loop (j+1)) else ()
+ in
+    loop 0
+ end;
+
+fun fill_buffers() =
+ let in
+    API.get_keep_in_zone kizone_buffer
+  ; API.get_keep_out_zone kozone_buffer
+  ; API.get_observed observed_buffer
+ end
+
+val out_buffer = Word8Array.array API.outputSizeBytes w8zero;
+
+fun geofence_monitor () =
+ let val ()      = fill_buffers()
+ in
+  if Word8Array.sub observed_buffer 0 <> Word8.fromInt 0 then (
+
+   	(* just pass the message onto the WPM *)   	
+   	API.logInfo("STRIPPED Ver: just passing on the AutomationResponse to WPM");
+
+   	clear out_buffer;
+    Word8Array.copy observed_buffer 1 (Word8Array.length observed_buffer - 1) out_buffer 0;
+    API.send_output out_buffer
+  )
+  else()
+ end
+
+end (* Geofence_Monitor *)
+
+
+(* This structure is populated with developer-written code *)
+structure Client =
+struct
+
+fun initialise() = ();
+
+fun timeTriggered() = (
+  Geofence_Monitor.geofence_monitor()
+);
+
+(* ===========================================================*
+ * The methods below are not currently used in HAMR/Slang     *
+ * ===========================================================*)
+
+fun activate() = ();
+
+fun deactivate() = ();
+
+fun finalise() = ();
+
+fun recover() = ();
+
+end;
+
+(* This structure is populated with HAMR-generated code *)
+structure Control =
+struct
+
+  val singleton_byte_array = Word8Array.array 1 (Word8.fromInt 0);
+
+  fun pacer_emit() = 
+      (#(sb_pacer_notification_emit) "" singleton_byte_array;
+       Word8Array.sub singleton_byte_array 0 <> Word8.fromInt 0);
+
+  fun pacer_wait() =
+      (#(sb_pacer_notification_wait) "" singleton_byte_array;
+       Word8Array.sub singleton_byte_array 0 <> Word8.fromInt 0);
+
+
+  val empty_byte_array = Word8Array.array 0 (Word8.fromInt 0);  
+
+  fun receiveInput() = (#(api_receiveInput) "" empty_byte_array);
+
+  fun sendOutput() = (#(api_sendOutput) "" empty_byte_array);
+
+  fun loop () =
+      if pacer_wait() then
+        ((*API.logInfo("Welcome to CakeML geofence_monitor_control");*)
+         receiveInput();
+         Client.timeTriggered();
+         sendOutput();
+         pacer_emit();
+         loop())
+      else
+        loop();
+
+  fun emitLoop() = 
+      (pacer_emit();
+       loop());
+
+end;
+
+(* Startup *)
+val _ = Client.initialise();
+val _ = Control.emitLoop();

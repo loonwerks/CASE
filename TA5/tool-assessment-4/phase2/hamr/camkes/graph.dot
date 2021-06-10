@@ -1,0 +1,667 @@
+digraph g {
+graph [
+  overlap = false,
+  rankdir = "LR"
+];
+node [
+  fontsize = "16",
+  shape = "ellipse"
+];
+edge [
+];
+
+MCMP_PROC_SW_FC_UART_UARTDriver [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>MCMP_PROC_SW_FC_UART_UARTDriver</B></TD></TR>
+      <TR><TD PORT="sb_MissionCommand_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_MissionCommand_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AirVehicleState_WPM_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_AirVehicleState_WPM_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AirVehicleState_UXAS_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_AirVehicleState_UXAS_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AirVehicleState_WPM_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_AirVehicleState_WPM_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AirVehicleState_UXAS_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_AirVehicleState_UXAS_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_MissionCommand_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_MissionCommand_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_notification"><FONT COLOR="blue">consumes Period <B>sb_pacer_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+vmRADIO [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>vmRADIO</B></TD></TR>
+      <TR><TD PORT="sb_trusted_ids_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_trusted_ids_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationRequest_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_AutomationRequest_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_OperatingRegion_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_OperatingRegion_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_LineSearchTask_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_LineSearchTask_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_period_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_pacer_period_queue</B></FONT></TD></TR>
+      <TR><TD PORT="notification_ready_connector"><FONT COLOR="blue">emits HaveNotification <B>notification_ready_connector</B></FONT></TD></TR>
+      <TR><TD PORT="sb_trusted_ids_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_trusted_ids_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationRequest_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_AutomationRequest_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_OperatingRegion_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_OperatingRegion_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_LineSearchTask_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_LineSearchTask_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="fs"><FONT COLOR="orange">uses FileServerInterface <B>fs</B></FONT></TD></TR>
+      <TR><TD PORT="batch"><FONT COLOR="orange">uses Batch <B>batch</B></FONT></TD></TR>
+      <TR><TD PORT="guest_putchar"><FONT COLOR="orange">uses PutChar <B>guest_putchar</B></FONT></TD></TR>
+      <TR><TD PORT="serial_getchar"><FONT COLOR="orange">uses GetChar <B>serial_getchar</B></FONT></TD></TR>
+      <TR><TD PORT="recv"><FONT COLOR="orange">uses VirtQueueDev <B>recv</B></FONT></TD></TR>
+      <TR><TD PORT="send"><FONT COLOR="orange">uses VirtQueueDrv <B>send</B></FONT></TD></TR>
+      <TR><TD PORT="dtb_self"><FONT COLOR="orange">uses VMDTBPassthrough <B>dtb_self</B></FONT></TD></TR>
+      <TR><TD PORT="restart_event"><FONT COLOR="blue">consumes restart <B>restart_event</B></FONT></TD></TR>
+      <TR><TD PORT="notification_ready"><FONT COLOR="blue">consumes HaveNotification <B>notification_ready</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_period_notification"><FONT COLOR="blue">consumes Period_VM <B>sb_pacer_period_notification</B></FONT></TD></TR>
+      <TR><TD PORT="dtb"><FONT COLOR="orange">provides VMDTBPassthrough <B>dtb</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+fserv [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>fserv</B></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+serial [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>serial</B></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+time_server [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>time_server</B></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+MCMP_PROC_SW_FlyZones_FlyZonesDatabase [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>MCMP_PROC_SW_FlyZones_FlyZonesDatabase</B></TD></TR>
+      <TR><TD PORT="sb_keep_in_zones"><FONT COLOR="red">dataport sp_union_art_DataContent_t <B>sb_keep_in_zones</B></FONT></TD></TR>
+      <TR><TD PORT="sb_keep_out_zones"><FONT COLOR="red">dataport sp_union_art_DataContent_t <B>sb_keep_out_zones</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_notification"><FONT COLOR="blue">consumes Period <B>sb_pacer_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+vmUXAS [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>vmUXAS</B></TD></TR>
+      <TR><TD PORT="sb_AutomationRequest_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_AutomationRequest_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AirVehicleState_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_AirVehicleState_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_OperatingRegion_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_OperatingRegion_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_LineSearchTask_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_LineSearchTask_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationResponse_MON_GEO_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_AutomationResponse_MON_GEO_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationResponse_MON_REQ_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_AutomationResponse_MON_REQ_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_period_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>sb_pacer_period_queue</B></FONT></TD></TR>
+      <TR><TD PORT="notification_ready_connector"><FONT COLOR="blue">emits HaveNotification <B>notification_ready_connector</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationResponse_MON_GEO_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_AutomationResponse_MON_GEO_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationResponse_MON_REQ_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_AutomationResponse_MON_REQ_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="fs"><FONT COLOR="orange">uses FileServerInterface <B>fs</B></FONT></TD></TR>
+      <TR><TD PORT="batch"><FONT COLOR="orange">uses Batch <B>batch</B></FONT></TD></TR>
+      <TR><TD PORT="guest_putchar"><FONT COLOR="orange">uses PutChar <B>guest_putchar</B></FONT></TD></TR>
+      <TR><TD PORT="serial_getchar"><FONT COLOR="orange">uses GetChar <B>serial_getchar</B></FONT></TD></TR>
+      <TR><TD PORT="recv"><FONT COLOR="orange">uses VirtQueueDev <B>recv</B></FONT></TD></TR>
+      <TR><TD PORT="send"><FONT COLOR="orange">uses VirtQueueDrv <B>send</B></FONT></TD></TR>
+      <TR><TD PORT="dtb_self"><FONT COLOR="orange">uses VMDTBPassthrough <B>dtb_self</B></FONT></TD></TR>
+      <TR><TD PORT="restart_event"><FONT COLOR="blue">consumes restart <B>restart_event</B></FONT></TD></TR>
+      <TR><TD PORT="notification_ready"><FONT COLOR="blue">consumes HaveNotification <B>notification_ready</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationRequest_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_AutomationRequest_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AirVehicleState_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_AirVehicleState_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_OperatingRegion_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_OperatingRegion_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_LineSearchTask_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_LineSearchTask_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_period_notification"><FONT COLOR="blue">consumes Period_VM <B>sb_pacer_period_notification</B></FONT></TD></TR>
+      <TR><TD PORT="dtb"><FONT COLOR="orange">provides VMDTBPassthrough <B>dtb</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+MCMP_PROC_SW_WPM_WaypointPlanManagerService [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>MCMP_PROC_SW_WPM_WaypointPlanManagerService</B></TD></TR>
+      <TR><TD PORT="sb_AutomationResponse_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_AutomationResponse_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AirVehicleState_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_AirVehicleState_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_MissionCommand_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_MissionCommand_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_ReturnHome_counter"><FONT COLOR="red">dataport sb_event_counter_t <B>sb_ReturnHome_counter</B></FONT></TD></TR>
+      <TR><TD PORT="sb_MissionCommand_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_MissionCommand_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationResponse_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_AutomationResponse_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AirVehicleState_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_AirVehicleState_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_ReturnHome"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_ReturnHome</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_notification"><FONT COLOR="blue">consumes Period <B>sb_pacer_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+MCMP_PROC_SW_AM_Gate_CASE_AttestationGate [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>MCMP_PROC_SW_AM_Gate_CASE_AttestationGate</B></TD></TR>
+      <TR><TD PORT="sb_trusted_ids_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_trusted_ids_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationRequest_in_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_AutomationRequest_in_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationRequest_out_UXAS_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_AutomationRequest_out_UXAS_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationRequest_out_MON_REQ_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_AutomationRequest_out_MON_REQ_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_OperatingRegion_in_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_OperatingRegion_in_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_OperatingRegion_out_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_OperatingRegion_out_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_LineSearchTask_in_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_LineSearchTask_in_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_LineSearchTask_out_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_LineSearchTask_out_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationRequest_out_UXAS_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_AutomationRequest_out_UXAS_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationRequest_out_MON_REQ_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_AutomationRequest_out_MON_REQ_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_OperatingRegion_out_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_OperatingRegion_out_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_LineSearchTask_out_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_LineSearchTask_out_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_trusted_ids_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_trusted_ids_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_AutomationRequest_in_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_AutomationRequest_in_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_OperatingRegion_in_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_OperatingRegion_in_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_LineSearchTask_in_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_LineSearchTask_in_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_notification"><FONT COLOR="blue">consumes Period <B>sb_pacer_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+MCMP_PROC_SW_FLT_LST_CASE_Filter_LST [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>MCMP_PROC_SW_FLT_LST_CASE_Filter_LST</B></TD></TR>
+      <TR><TD PORT="sb_filter_in_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_filter_in_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_filter_out_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_filter_out_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_filter_out_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_filter_out_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_filter_in_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_filter_in_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_notification"><FONT COLOR="blue">consumes Period <B>sb_pacer_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req</B></TD></TR>
+      <TR><TD PORT="sb_observed_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_observed_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_reference_1_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_reference_1_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_observed_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_observed_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_reference_1_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_reference_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_notification"><FONT COLOR="blue">consumes Period <B>sb_pacer_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo</B></TD></TR>
+      <TR><TD PORT="sb_keep_in_zones"><FONT COLOR="red">dataport sp_union_art_DataContent_t <B>sb_keep_in_zones</B></FONT></TD></TR>
+      <TR><TD PORT="sb_keep_out_zones"><FONT COLOR="red">dataport sp_union_art_DataContent_t <B>sb_keep_out_zones</B></FONT></TD></TR>
+      <TR><TD PORT="sb_observed_queue"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_observed_queue</B></FONT></TD></TR>
+      <TR><TD PORT="sb_output_queue_1"><FONT COLOR="red">dataport sb_queue_union_art_DataContent_1_t <B>sb_output_queue_1</B></FONT></TD></TR>
+      <TR><TD PORT="sb_alert_counter"><FONT COLOR="red">dataport sb_event_counter_t <B>sb_alert_counter</B></FONT></TD></TR>
+      <TR><TD PORT="sb_output_1_notification"><FONT COLOR="blue">emits ReceiveEvent <B>sb_output_1_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_alert"><FONT COLOR="blue">emits ReceiveEvent <B>sb_alert</B></FONT></TD></TR>
+      <TR><TD PORT="sb_observed_notification"><FONT COLOR="blue">consumes ReceiveEvent <B>sb_observed_notification</B></FONT></TD></TR>
+      <TR><TD PORT="sb_pacer_notification"><FONT COLOR="blue">consumes Period <B>sb_pacer_notification</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+pacer [
+  label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+      <TR><TD><B>pacer</B></TD></TR>
+      <TR><TD PORT="period_to_vmRADIO_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>period_to_vmRADIO_queue</B></FONT></TD></TR>
+      <TR><TD PORT="period_to_vmUXAS_queue"><FONT COLOR="red">dataport sb_queue_int8_t_1_t <B>period_to_vmUXAS_queue</B></FONT></TD></TR>
+      <TR><TD PORT="period_to_vmRADIO_notification"><FONT COLOR="blue">emits Period_VM <B>period_to_vmRADIO_notification</B></FONT></TD></TR>
+      <TR><TD PORT="period_to_vmUXAS_notification"><FONT COLOR="blue">emits Period_VM <B>period_to_vmUXAS_notification</B></FONT></TD></TR>
+      <TR><TD PORT="period"><FONT COLOR="blue">emits Period <B>period</B></FONT></TD></TR>
+      <TR><TD PORT="tick"><FONT COLOR="blue">emits TickTock <B>tick</B></FONT></TD></TR>
+      <TR><TD PORT="tock"><FONT COLOR="blue">consumes TickTock <B>tock</B></FONT></TD></TR>"
+    </TABLE>
+  >
+  shape=plaintext
+];
+
+connectiontypekey [
+  label=<
+   <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+     <TR><TD COLSPAN="2"><B>Key: Connection Types</B></TD></TR>
+     <TR><TD><FONT COLOR="red">seL4SharedData</FONT></TD><TD BGCOLOR="red">red</TD></TR>
+     <TR><TD><FONT COLOR="blue">seL4Notification</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="orange">seL4RPCCall</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+     <TR><TD><FONT COLOR="green">seL4TimeServer</FONT></TD><TD BGCOLOR="green">green</TD></TR>
+     <TR><TD><FONT COLOR="brown">seL4GlobalAsynchCallback</FONT></TD><TD BGCOLOR="brown">brown</TD></TR>
+     <TR><TD><FONT COLOR="yellow">seL4VMDTBPassthrough</FONT></TD><TD BGCOLOR="yellow">yellow</TD></TR>
+     <TR><TD><FONT COLOR="pink">seL4SharedDataWithCaps</FONT></TD><TD BGCOLOR="pink">pink</TD></TR>
+   </TABLE>
+  >
+  shape=plaintext
+];
+
+interfacetypekey [
+  label=<
+   <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0">
+     <TR><TD COLSPAN="2"><B>Key: Interface Types</B></TD></TR>
+     <TR><TD><FONT COLOR="red">dataport</FONT></TD><TD BGCOLOR="red">red</TD></TR>
+     <TR><TD><FONT COLOR="blue">emits</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="blue">consumes</FONT></TD><TD BGCOLOR="blue">blue</TD></TR>
+     <TR><TD><FONT COLOR="orange">provides</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+     <TR><TD><FONT COLOR="orange">uses</FONT></TD><TD BGCOLOR="orange">orange</TD></TR>
+   </TABLE>
+  >
+  shape=plaintext
+];
+
+"vmRADIO":dtb_self -> "vmRADIO":dtb [
+  color="yellow"
+  //label = "seL4VMDTBPassthrough"
+  id = conn1
+
+];
+
+"vmRADIO":fs -> "fserv":fs_ctrl [
+  color="grey"
+  //label = "seL4RPCDataport"
+  id = fsvmRADIO
+
+];
+
+"vmRADIO":notification_ready_connector -> "vmRADIO":notification_ready [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = notify_ready_vmRADIO
+
+];
+
+"serial":timeout -> "time_server":the_timer [
+  color="green"
+  //label = "seL4TimeServer"
+  id = serialserver_timer
+
+];
+
+"vmRADIO":batch -> "serial":processed_batch [
+  color="grey"
+  //label = "seL4SerialServer"
+  id = serial_vmRADIO
+
+];
+
+"vmRADIO":serial_getchar -> "serial":getchar [
+  color="grey"
+  //label = "seL4SerialServer"
+  id = serial_input_vmRADIO
+
+];
+
+"vmUXAS":dtb_self -> "vmUXAS":dtb [
+  color="yellow"
+  //label = "seL4VMDTBPassthrough"
+  id = conn2
+
+];
+
+"vmUXAS":fs -> "fserv":fs_ctrl [
+  color="grey"
+  //label = "seL4RPCDataport"
+  id = fsvmUXAS
+
+];
+
+"vmUXAS":notification_ready_connector -> "vmUXAS":notification_ready [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = notify_ready_vmUXAS
+
+];
+
+"vmUXAS":batch -> "serial":processed_batch [
+  color="grey"
+  //label = "seL4SerialServer"
+  id = serial_vmUXAS
+
+];
+
+"vmUXAS":serial_getchar -> "serial":getchar [
+  color="grey"
+  //label = "seL4SerialServer"
+  id = serial_input_vmUXAS
+
+];
+
+"MCMP_PROC_SW_FC_UART_UARTDriver":sb_AirVehicleState_WPM_1_notification -> "MCMP_PROC_SW_WPM_WaypointPlanManagerService":sb_AirVehicleState_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn3
+
+];
+
+"MCMP_PROC_SW_FC_UART_UARTDriver":sb_AirVehicleState_WPM_queue_1 -> "MCMP_PROC_SW_WPM_WaypointPlanManagerService":sb_AirVehicleState_queue [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn4
+
+];
+
+"MCMP_PROC_SW_FC_UART_UARTDriver":sb_AirVehicleState_UXAS_1_notification -> "vmUXAS":sb_AirVehicleState_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn5
+
+];
+
+"MCMP_PROC_SW_FC_UART_UARTDriver":sb_AirVehicleState_UXAS_queue_1 -> "vmUXAS":sb_AirVehicleState_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn6
+
+];
+
+"vmRADIO":sb_trusted_ids_1_notification -> "MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_trusted_ids_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn7
+
+];
+
+"vmRADIO":sb_trusted_ids_queue_1 -> "MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_trusted_ids_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn8
+
+];
+
+"vmRADIO":sb_AutomationRequest_1_notification -> "MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_AutomationRequest_in_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn9
+
+];
+
+"vmRADIO":sb_AutomationRequest_queue_1 -> "MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_AutomationRequest_in_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn10
+
+];
+
+"vmRADIO":sb_OperatingRegion_1_notification -> "MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_OperatingRegion_in_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn11
+
+];
+
+"vmRADIO":sb_OperatingRegion_queue_1 -> "MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_OperatingRegion_in_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn12
+
+];
+
+"vmRADIO":sb_LineSearchTask_1_notification -> "MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_LineSearchTask_in_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn13
+
+];
+
+"vmRADIO":sb_LineSearchTask_queue_1 -> "MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_LineSearchTask_in_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn14
+
+];
+
+"MCMP_PROC_SW_FlyZones_FlyZonesDatabase":sb_keep_in_zones -> "MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo":sb_keep_in_zones [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn15
+
+];
+
+"MCMP_PROC_SW_FlyZones_FlyZonesDatabase":sb_keep_out_zones -> "MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo":sb_keep_out_zones [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn16
+
+];
+
+"vmUXAS":sb_AutomationResponse_MON_GEO_1_notification -> "MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo":sb_observed_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn17
+
+];
+
+"vmUXAS":sb_AutomationResponse_MON_GEO_queue_1 -> "MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo":sb_observed_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn18
+
+];
+
+"vmUXAS":sb_AutomationResponse_MON_REQ_1_notification -> "MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req":sb_observed_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn19
+
+];
+
+"vmUXAS":sb_AutomationResponse_MON_REQ_queue_1 -> "MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req":sb_observed_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn20
+
+];
+
+"MCMP_PROC_SW_WPM_WaypointPlanManagerService":sb_MissionCommand_1_notification -> "MCMP_PROC_SW_FC_UART_UARTDriver":sb_MissionCommand_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn21
+
+];
+
+"MCMP_PROC_SW_WPM_WaypointPlanManagerService":sb_MissionCommand_queue_1 -> "MCMP_PROC_SW_FC_UART_UARTDriver":sb_MissionCommand_queue [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn22
+
+];
+
+"MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_AutomationRequest_out_UXAS_1_notification -> "vmUXAS":sb_AutomationRequest_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn23
+
+];
+
+"MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_AutomationRequest_out_UXAS_queue_1 -> "vmUXAS":sb_AutomationRequest_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn24
+
+];
+
+"MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_AutomationRequest_out_MON_REQ_1_notification -> "MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req":sb_reference_1_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn25
+
+];
+
+"MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_AutomationRequest_out_MON_REQ_queue_1 -> "MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req":sb_reference_1_queue [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn26
+
+];
+
+"MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_OperatingRegion_out_1_notification -> "vmUXAS":sb_OperatingRegion_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn27
+
+];
+
+"MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_OperatingRegion_out_queue_1 -> "vmUXAS":sb_OperatingRegion_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn28
+
+];
+
+"MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_LineSearchTask_out_1_notification -> "MCMP_PROC_SW_FLT_LST_CASE_Filter_LST":sb_filter_in_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn29
+
+];
+
+"MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_LineSearchTask_out_queue_1 -> "MCMP_PROC_SW_FLT_LST_CASE_Filter_LST":sb_filter_in_queue [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn30
+
+];
+
+"MCMP_PROC_SW_FLT_LST_CASE_Filter_LST":sb_filter_out_1_notification -> "vmUXAS":sb_LineSearchTask_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn31
+
+];
+
+"MCMP_PROC_SW_FLT_LST_CASE_Filter_LST":sb_filter_out_queue_1 -> "vmUXAS":sb_LineSearchTask_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn32
+
+];
+
+"MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo":sb_output_1_notification -> "MCMP_PROC_SW_WPM_WaypointPlanManagerService":sb_AutomationResponse_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn33
+
+];
+
+"MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo":sb_output_queue_1 -> "MCMP_PROC_SW_WPM_WaypointPlanManagerService":sb_AutomationResponse_queue [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn34
+
+];
+
+"MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo":sb_alert -> "MCMP_PROC_SW_WPM_WaypointPlanManagerService":sb_ReturnHome [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn35
+
+];
+
+"MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo":sb_alert_counter -> "MCMP_PROC_SW_WPM_WaypointPlanManagerService":sb_ReturnHome_counter [
+  color="red"
+  //label = "seL4SharedData"
+  id = conn36
+
+];
+
+"pacer":tick -> "pacer":tock [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn37
+
+];
+
+"pacer":period -> "MCMP_PROC_SW_FC_UART_UARTDriver":sb_pacer_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn38
+
+];
+
+"pacer":period_to_vmRADIO_notification -> "vmRADIO":sb_pacer_period_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn39
+
+];
+
+"pacer":period_to_vmRADIO_queue -> "vmRADIO":sb_pacer_period_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn40
+
+];
+
+"pacer":period -> "MCMP_PROC_SW_FlyZones_FlyZonesDatabase":sb_pacer_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn41
+
+];
+
+"pacer":period_to_vmUXAS_notification -> "vmUXAS":sb_pacer_period_notification [
+  color="grey"
+  //label = "seL4GlobalAsynch"
+  id = conn42
+
+];
+
+"pacer":period_to_vmUXAS_queue -> "vmUXAS":sb_pacer_period_queue [
+  color="pink"
+  //label = "seL4SharedDataWithCaps"
+  id = conn43
+
+];
+
+"pacer":period -> "MCMP_PROC_SW_WPM_WaypointPlanManagerService":sb_pacer_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn44
+
+];
+
+"pacer":period -> "MCMP_PROC_SW_AM_Gate_CASE_AttestationGate":sb_pacer_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn45
+
+];
+
+"pacer":period -> "MCMP_PROC_SW_FLT_LST_CASE_Filter_LST":sb_pacer_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn46
+
+];
+
+"pacer":period -> "MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req":sb_pacer_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn47
+
+];
+
+"pacer":period -> "MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo":sb_pacer_notification [
+  color="blue"
+  //label = "seL4Notification"
+  id = conn48
+
+];
+
+}

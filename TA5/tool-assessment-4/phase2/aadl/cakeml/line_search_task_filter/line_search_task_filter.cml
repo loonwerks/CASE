@@ -1,0 +1,170 @@
+(* This structure is populated with HAMR-generated code *)
+structure API =
+struct
+
+  val empty_byte_array = Word8Array.array 0 (Word8.fromInt 0);
+
+  fun logInfo s = (
+    #(api_logInfo) s empty_byte_array
+  );
+
+  (* address attributed part of mesg coming from radio are not stripped off by the
+     attestation gate so these have to be the size of AddressAttributedMessage *)
+  val filter_inSizeBytes = 16384;   (* 8192 bytes, 65536 bits, is the sizeof a LineSearchTask *)
+  val filter_outSizeBytes = 16384;  (* 8192 bytes, 65536 bits, is the sizeof a LineSearchTask *)
+
+  fun get_filter_in buffer = (
+    if Word8Array.length buffer >= filter_inSizeBytes then
+      #(api_get_filter_in) "" buffer
+    else
+      logInfo (String.concat ["ERROR: filter_in buffer too small"])
+  )
+
+  fun send_filter_out buffer =  (
+    if Word8Array.length buffer <= filter_outSizeBytes then
+      #(api_send_filter_out) (Word8Array.substring buffer 0 (Word8Array.length buffer)) empty_byte_array
+    else
+      logInfo (String.concat ["ERROR: filter_out buffer too large"])
+  );
+
+  fun toHexDigit nibble =
+    let val nibbleValue = Word8.toInt nibble
+    in case (nibbleValue) 
+    of (0) => "0"
+    | (1) => "1"
+    | (2) => "2"
+    | (3) => "3"
+    | (4) => "4"
+    | (5) => "5"
+    | (6) => "6"
+    | (7) => "7"
+    | (8) => "8"
+    | (9) => "9"
+    | (10) => "a"
+    | (11) => "b"
+    | (12) => "c"
+    | (13) => "d"
+    | (14) => "e"
+    | (15) => "f"
+    | otherwise => "xDohx"
+  end;    
+
+  fun toHex byte =
+    let val highNibble = (Word8.>> byte 4)
+        val lowNibble = (Word8.>> (Word8.<< byte 4) 4)
+    in String.concat [toHexDigit highNibble, toHexDigit lowNibble] 
+  end;
+
+ fun word8ArrayToHex bytes =
+    let val length = (Word8Array.length bytes)
+        fun get i = 
+          if i >= length then "" else
+            String.concat [toHex (Word8Array.sub bytes i), get (i + 1)]
+    in get(0)
+  end;
+
+  fun float2double float_byte_array double_byte_array =
+    #(api_float2double) float_byte_array double_byte_array;
+
+end;
+
+structure Client =
+struct
+
+val w8zero = Word8.fromInt 0;
+val emptybuf = Word8Array.array 0 w8zero;
+
+(*---------------------------------------------------------------------------*)
+(* Declare input buffers as global variables.                                *)
+(*---------------------------------------------------------------------------*)
+
+val filter_in_buffer = Word8Array.array API.filter_inSizeBytes w8zero;
+val filter_out_buffer = Word8Array.array API.filter_inSizeBytes w8zero;
+
+fun clear buffer =
+ let val len = Word8Array.length buffer
+     fun zero i = Word8Array.update buffer i w8zero
+     fun loop j = if j < len then (zero j; loop (j+1)) else ()
+ in
+    loop 0
+ end;
+
+fun filter_step () =
+ let val () = clear filter_in_buffer
+     val () = API.get_filter_in filter_in_buffer
+     val bufLen = API.filter_inSizeBytes
+     val string = Word8Array.substring filter_in_buffer 0 bufLen
+ in
+    if Word8Array.sub filter_in_buffer 0 <> Word8.fromInt 0 then (
+      API.logInfo("STRIPPED Ver: Just passing on the LineSearchTask");
+      clear filter_out_buffer;
+      Word8Array.copy filter_in_buffer 1 (Word8Array.length filter_in_buffer - 1) filter_out_buffer 0;
+      API.send_filter_out filter_out_buffer
+    )
+    else ()
+ end
+
+  fun initialise() = ();
+
+  val count = 0;
+
+  fun timeTriggered() = (
+    filter_step()
+  );
+
+  (* ===========================================================*
+   * The methods below are not currently used in HAMR/Slang     *
+   * ===========================================================*)
+
+  fun activate() = ();
+
+  fun deactivate() = ();
+
+  fun finalise() = ();
+
+  fun recover() = ();
+
+end (* Client, LST_Filter *)
+
+
+(* This structure is populated with HAMR-generated code *)
+structure Control =
+struct
+
+  val singleton_byte_array = Word8Array.array 1 (Word8.fromInt 0);
+
+  fun pacer_emit() = 
+      (#(sb_pacer_notification_emit) "" singleton_byte_array;
+       Word8Array.sub singleton_byte_array 0 <> Word8.fromInt 0);
+
+  fun pacer_wait() =
+      (#(sb_pacer_notification_wait) "" singleton_byte_array;
+       Word8Array.sub singleton_byte_array 0 <> Word8.fromInt 0);
+
+
+  val empty_byte_array = Word8Array.array 0 (Word8.fromInt 0);  
+
+  fun receiveInput() = (#(api_receiveInput) "" empty_byte_array);
+
+  fun sendOutput() = (#(api_sendOutput) "" empty_byte_array);
+
+  fun loop () =
+      if pacer_wait() then
+        ((*API.logInfo("Welcome to CakeML line_search_task_filter_control");*)
+         receiveInput();
+         Client.timeTriggered();
+         sendOutput();
+         pacer_emit();
+         loop())
+      else
+        loop();
+
+  fun emitLoop() = 
+      (pacer_emit();
+       loop());
+
+end;
+
+(* Startup *)
+val _ = Client.initialise();
+val _ = Control.emitLoop();
