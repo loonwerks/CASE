@@ -1,0 +1,19 @@
+package CASE_Types
+public
+
+	with HAMR;
+	with Base_Types;
+
+	data Coordinate
+	end Coordinate;
+
+	data implementation Coordinate.i
+		subcomponents
+			altitude: data Base_Types::Integer_32;
+			latitude: data Base_Types::Integer_32;
+			longitude: data Base_Types::Integer_32;
+		properties
+			HAMR::Bit_Codec_Max_Size => 96 bits;
+	end Coordinate.i;
+	
+end CASE_Types;
