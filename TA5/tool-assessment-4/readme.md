@@ -149,3 +149,9 @@ This example illustrates "end-to-end" CASE cyber-resiliency concepts using a mor
 _Still need to resolve the VM+CakeML issue, and potentially determine how the "seamless" intgration of SPLAT + HAMR will work_
 
 The work-in-progress version is [here](https://github.com/ku-sldg/CASETeam/tree/master/examples/ksu-proprietary/Phase-2-UAV-Experimental-Platform-June-step6-hamr)
+
+### Debugging Note
+
+A common issue when debugging the execution of the CASE applications is a limitation on thread stack size.
+Refer to the additional [notes](https://github.com/loonwerks/CASE/tree/master/TA5/tool-assessment-4/doc/debug_camkes_stacksize.md)
+to address this run-time issue.
