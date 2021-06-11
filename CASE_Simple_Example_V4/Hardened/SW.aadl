@@ -5,31 +5,7 @@ public
 	with Base_Types;
 	with CASE_Properties;
 	with HAMR;
-	
 
-	data Coordinate
-	end Coordinate;
-
-	data implementation Coordinate.Impl
-		-- This is the structure to hold the lat/long/alt values of a coordinate
-		subcomponents
-			Latitude: data Base_Types::Integer_32;
-			Longitude: data Base_Types::Integer_32;
-			Altitude: data Base_Types::Integer_32;
-		properties
-			HAMR::Bit_Codec_Max_Size => 12 Bytes;
-	end Coordinate.Impl;
-	
-	data KeepInZone		
-	end KeepInZone;
-
-	data implementation KeepInZone.Impl
-		properties
-			Data_Model::Data_Representation => Array;
-			Data_Model::Base_Type => (classifier (Coordinate.Impl));
-			Data_Model::Dimension => (2);
-			HAMR::Bit_Codec_Max_Size => 24 Bytes;
-	end KeepInZone.Impl;
 
 	thread Monitor
 		features
@@ -42,7 +18,7 @@ public
 		annex agree {**
 			const is_latched : bool = false;
 			
-			const bottom_left : Coordinate.Impl = Coordinate.Impl{Latitude = 30; Longitude = 30; Altitude = 0};
+			const bottom_left : Coordinate.Impl = Coordinate.Impl{Latitude = 30; Longitude = 30; Altitude = 10000};
 			const top_right : Coordinate.Impl = Coordinate.Impl{Latitude = 60; Longitude = 60; Altitude = 10000};
 			const keep_in_zone : KeepInZone.Impl = [| bottom_left, top_right |];
 			
@@ -73,6 +49,7 @@ public
 	thread implementation Monitor.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Period => 500ms;
 			Source_Text => ("./SW_Monitor/Monitor.S");
 	end Monitor.Impl;
 
@@ -96,6 +73,7 @@ public
 	thread implementation Filter.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Period => 500ms;
 			Source_Text => ("./SW_Filter/Filter.S");
 	end Filter.Impl;
 
@@ -103,14 +81,14 @@ public
 		features
 			MissionCommand_in: in event data port RF_Msg.Impl;
 			MissionCommand_out: out event data port RF_Msg.Impl;
-			TrustedIds: in event data port Address.Impl;
+			TrustedIds: in event data port AllowList.Impl;
 		properties
 			CASE_Properties::Gating => 100;
 			CASE_Properties::Component_Spec => ("Gate_Output");
 		annex agree {**
-			const default_trustedid_list : Address.impl = Address.impl { value = [| 0, 0, 0, 0 |] };
-			eq trusted_ids : Address.Impl = if event(TrustedIds) then TrustedIds else prev(trusted_ids, default_trustedid_list);
-			fun IS_TRUSTED(command : RF_Msg.Impl, ids : Address.Impl) : bool =
+			const default_trustedid_list : AllowList.Impl = AllowList.Impl { value = [| 0, 0, 0, 0 |] };
+			eq trusted_ids : AllowList.Impl = if event(TrustedIds) then TrustedIds else prev(trusted_ids, default_trustedid_list);
+			fun IS_TRUSTED(command : RF_Msg.Impl, ids : AllowList.Impl) : bool =
 				exists i in ids.value, command.header.src = i;
 			guarantee Gate_Output "The gate shall output only data from trusted sources" :
 				if event(MissionCommand_in) and IS_TRUSTED(MissionCommand_in, trusted_ids) then
@@ -123,6 +101,7 @@ public
 	thread implementation AttestationGate.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Period => 500ms;
 			Source_Text => ("./SW_AttestationGate/AttestationGate.S");
 	end AttestationGate.Impl;
 
@@ -130,7 +109,7 @@ public
 		features
 			AttestationRequest: out event data port AttestationRequestMsg.Impl;
 			AttestationResponse: in event data port AttestationResponseMsg.Impl;
-			TrustedIds: out event data port Address.Impl;
+			TrustedIds: out event data port AllowList.Impl;
 		properties
 			CASE_Properties::Attesting => 100;
 	end AttestationManager;
@@ -138,45 +117,52 @@ public
 	thread implementation AttestationManager.Impl
 		properties
 			CASE_Properties::Cache_Timeout => 5 min;
-			CASE_Properties::Cache_Size => 3;
 			Dispatch_Protocol => Sporadic;
+			Period => 500ms;
 	end AttestationManager.Impl;
-
-	data Map
-		-- The Map is a structure that contains a list of coordinates that encircle a
-		-- region.  
-		-- In this implementation, we fix the size of the map to 4 waypoints
+	
+	data KeepInZone
 		properties
 			Data_Model::Data_Representation => Array;
 			Data_Model::Base_Type => (classifier (Coordinate.Impl));
-			Data_Model::Dimension => (4);
-			HAMR::Bit_Codec_Max_Size => 48 Bytes;
+			Data_Model::Dimension => (2);
+			HAMR::Bit_Codec_Max_Size => 24 Bytes;
+	end KeepInZone;
+	
+	data implementation KeepInZone.Impl		
+	end KeepInZone.Impl;
+
+	data Coordinate
+	end Coordinate;
+
+	data implementation Coordinate.Impl
+		-- This is the structure to hold the lat/long/alt values of a coordinate
+		subcomponents
+			Latitude: data Base_Types::Integer_32;
+			Longitude: data Base_Types::Integer_32;
+			Altitude: data Base_Types::Integer_32;
+		properties
+			HAMR::Bit_Codec_Max_Size => 12 Bytes;
+	end Coordinate.Impl;
+
+	data Map
+		-- The Map is a structure that contains 2 coordinate on either side of a region.
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Coordinate.Impl));
+			Data_Model::Dimension => (2);
+			HAMR::Bit_Codec_Max_Size => 24 Bytes;
 	end Map;
-
-	data FlightPattern
-		-- The Flight Pattern is an enumeration that defines how the UAV will fly through the
-		-- sensing region to conduct surveillance.
-		properties
-			Data_Model::Data_Representation => Enum;
-			Data_Model::Enumerators => ("ZigZag", "StraightLine", "Perimeter");
-	end FlightPattern;
-
-	data implementation FlightPattern.Impl
-		properties
-			HAMR::Bit_Codec_Max_Size => 1 Bytes;
-	end FlightPattern.Impl;
 
 	data Command
 	end Command;
 
 	data implementation Command.Impl
 		-- The Command structure contains data that the Ground Station passes to the UAV.
-		-- It contains a message header, Map and Flight Pattern.
 		subcomponents
 			Map: data Map;
-			Pattern: data FlightPattern;
 		properties
-			HAMR::Bit_Codec_Max_Size => 49 Bytes;
+			HAMR::Bit_Codec_Max_Size => 24 Bytes;
 	end Command.Impl;
 
 	-- Message header
@@ -187,10 +173,8 @@ public
 		subcomponents
 			src: data Base_Types::Unsigned_32;
 			dst: data Base_Types::Unsigned_32;
-			trusted: data Base_Types::Boolean;
-			HMAC: data Base_Types::Boolean;
 		properties
-			HAMR::Bit_Codec_Max_Size => 10 Bytes;
+			HAMR::Bit_Codec_Max_Size => 8 Bytes;
 	end MsgHeader.Impl;
 
 	-- RF Message structure
@@ -202,70 +186,88 @@ public
 			header: data MsgHeader.Impl;
 			payload: data Command.Impl;
 		properties
-			HAMR::Bit_Codec_Max_Size => 59 Bytes;
+			HAMR::Bit_Codec_Max_Size => 32 Bytes;
 	end RF_Msg.Impl;
 	
 	-- This is the structure of an Attestation Request message
 	-- that the Attestation Manager sends to the comm driver
 	data AttestationRequestMsg
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Base_Types::Unsigned_8));
+			Data_Model::Dimension => (16);
+			HAMR::Bit_Codec_Max_Size => 16 Bytes;
 	end AttestationRequestMsg;
 
 	data implementation AttestationRequestMsg.Impl
-		subcomponents
-			header: data MsgHeader.Impl;
-		properties
-			HAMR::Bit_Codec_Max_Size => 10 Bytes;
 	end AttestationRequestMsg.Impl;
 
 	-- This is the structure of an Attestation Response message
 	-- that the comm driver returns to the Attestation Manager
 	-- when it gets a response from the Ground Station
 	data AttestationResponseMsg
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (Base_Types::Unsigned_8));
+			Data_Model::Dimension => (2048);
+			HAMR::Bit_Codec_Max_Size => 2048 Bytes;
 	end AttestationResponseMsg;
 
 	data implementation AttestationResponseMsg.Impl
-		subcomponents
-			header: data MsgHeader.Impl;
-			status: data Base_Types::Boolean;
-		properties
-			HAMR::Bit_Codec_Max_Size => 11 Bytes;
 	end AttestationResponseMsg.Impl;
 
-	data UnsignedIntArray
-	end UnsignedIntArray;
-
-	data implementation UnsignedIntArray.Impl
+	data AddressArray
 		properties
 			Data_Model::Data_Representation => Array;
 			Data_Model::Base_Type => (classifier (Base_Types::Unsigned_32));
 			Data_Model::Dimension => (4);
 			HAMR::Bit_Codec_Max_Size => 16 Bytes;
-	end UnsignedIntArray.Impl;
+	end AddressArray;
 
-	data Address
-	end Address;
+	data implementation AddressArray.Impl
+	end AddressArray.Impl;
 
-	data implementation Address.Impl
+	data AllowList
+		properties
+			Data_Model::Data_Representation => Array;
+			Data_Model::Base_Type => (classifier (AddressArray.Impl));
+			Data_Model::Dimension => (4);
+			HAMR::Bit_Codec_Max_Size => 64 Bytes;		
+	end AllowList;
+	
+	data implementation AllowList.Impl
 		subcomponents
-			value: data UnsignedIntArray.Impl;
+			value: data AddressArray.Impl;
 		properties
 			HAMR::Bit_Codec_Max_Size => 16 Bytes;
-	end Address.Impl;
+	end AllowList.Impl;
 
 	data Mission
-		-- The Mission is a list of waypoints that is generated by the Flight Planner based on a
-		-- Map and Flight Pattern.
+		-- The Mission is a list of waypoints that is generated by the Flight Planner based on a Map
 		properties
 			Data_Model::Data_Representation => Array;
 			Data_Model::Base_Type => (classifier (Coordinate.Impl));
-			Data_Model::Dimension => (10);
-			HAMR::Bit_Codec_Max_Size => 120 Bytes;
+			Data_Model::Dimension => (3);
+			HAMR::Bit_Codec_Max_Size => 36 Bytes;
 	end Mission;
+	
+	thread AttestationTester
+		features
+			AttestationRequest: in event data port AttestationRequestMsg.Impl;
+			AttestationResponse: out event data port AttestationResponseMsg.Impl;
+	end AttestationTester;
+	
+	thread implementation AttestationTester.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+			Period => 500ms;
+	end AttestationTester.Impl;
 
 	thread RadioDriver
 		-- The RadioDriver is the software that enables other SW components to communicate to other systems over RF
 		features
-			Alert: in event port;
+			AttestationTesterResponse: in event data port AttestationResponseMsg.Impl;
+			AttestationTesterRequest: out event data port AttestationRequestMsg.Impl;
 			MissionCommand: out event data port RF_Msg.Impl;
 		properties
 			CASE_Properties::Comm_Driver => true;
@@ -277,6 +279,7 @@ public
 	thread implementation RadioDriver.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Period => 500ms;
 	end RadioDriver.Impl;
 
 	thread FlightPlanner
@@ -293,12 +296,14 @@ public
 	thread implementation FlightPlanner.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Period => 500ms;
 	end FlightPlanner.Impl;
 
 	thread FlightController
 		-- The FlightController is the software that flies the UAV
 		features
 			FlightPlan: in event data port Mission;
+			Alert: in event port;
 		annex agree {**
 			assume Req001_FlightController "Well-formed mission window" : good_mission(FlightPlan);
 		**};
@@ -307,11 +312,13 @@ public
 	thread implementation FlightController.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Period => 500ms;
 	end FlightController.Impl;
 
 	thread RadioDriver_Attestation
 		features
-			Alert: in event port;
+			AttestationTesterResponse: in event data port AttestationResponseMsg.Impl;
+			AttestationTesterRequest: out event data port AttestationRequestMsg.Impl;
 			MissionCommand: out event data port RF_Msg.Impl;
 			AttestationRequest: in event data port AttestationRequestMsg.Impl;
 			AttestationResponse: out event data port AttestationResponseMsg.Impl;
@@ -325,6 +332,7 @@ public
 	thread implementation RadioDriver_Attestation.Impl
 		properties
 			Dispatch_Protocol => Sporadic;
+			Period => 500ms;
 	end RadioDriver_Attestation.Impl;
 
 	process SW
@@ -332,6 +340,7 @@ public
 
 	process implementation SW.Impl
 		subcomponents
+			AttestationTester: thread AttestationTester.Impl;
 			Radio: thread RadioDriver_Attestation.Impl;
 			FlightPlanner: thread FlightPlanner.Impl;
 			FlightController: thread FlightController.Impl;
@@ -340,20 +349,37 @@ public
 			Filter: thread Filter.Impl;
 			Monitor: thread Monitor.Impl;
 		connections
+			c1: port Radio.AttestationTesterRequest -> AttestationTester.AttestationRequest;
+			c2: port AttestationTester.AttestationResponse -> Radio.AttestationTesterResponse;
 			c3: port Radio.MissionCommand -> AttestationGate.MissionCommand_in;
 			c4: port AttestationManager.TrustedIds -> AttestationGate.TrustedIds;
 			c5: port AttestationManager.AttestationRequest -> Radio.AttestationRequest;
 			c6: port Radio.AttestationResponse -> AttestationManager.AttestationResponse;
-			c1: port AttestationGate.MissionCommand_out -> Filter.Input;
-			c2: port Monitor.FlightPlan_out -> FlightController.FlightPlan;
+			c10: port AttestationGate.MissionCommand_out -> Filter.Input;
+			c11: port Monitor.FlightPlan_out -> FlightController.FlightPlan;
 			c7: port Filter.Output -> FlightPlanner.MissionCommand;
 			c8: port FlightPlanner.FlightPlan -> Monitor.FlightPlan_in;
-			c9: port Monitor.Alert -> Radio.Alert;			
+			c9: port Monitor.Alert -> FlightController.Alert;			
 	end SW.Impl;
+	
+	process AttestationTester_seL4
+		features
+			AttestationRequest: in event data port AttestationRequestMsg.Impl;
+			AttestationResponse: out event data port AttestationResponseMsg.Impl;
+	end AttestationTester_seL4;
+	
+	process implementation AttestationTester_seL4.Impl
+		subcomponents
+			AttestationTester: thread AttestationTester.Impl;
+		connections
+			c1: port AttestationRequest -> AttestationTester.AttestationRequest;
+			c2: port AttestationTester.AttestationResponse -> AttestationResponse;
+	end AttestationTester_seL4.Impl;
 
 	process RadioDriver_Attestation_seL4
 		features
-			Alert: in event port;
+			AttestationTesterResponse: in event data port AttestationResponseMsg.Impl;
+			AttestationTesterRequest: out event data port AttestationRequestMsg.Impl;
 			MissionCommand: out event data port RF_Msg.Impl;
 			AttestationRequest: in event data port AttestationRequestMsg.Impl;
 			AttestationResponse: out event data port AttestationResponseMsg.Impl;
@@ -367,8 +393,9 @@ public
 		connections
 			c1: port RadioDriver_Attestation.AttestationResponse -> AttestationResponse;
 			c2: port AttestationRequest -> RadioDriver_Attestation.AttestationRequest;
-			c3: port Alert -> RadioDriver_Attestation.Alert;
-			c4: port RadioDriver_Attestation.MissionCommand -> MissionCommand;
+			c3: port RadioDriver_Attestation.MissionCommand -> MissionCommand;
+			c4: port RadioDriver_Attestation.AttestationTesterRequest -> AttestationTesterRequest;
+			c5: port AttestationTesterResponse -> RadioDriver_Attestation.AttestationTesterResponse;
 		annex agree {**
 			lift contract;
 		**};
@@ -394,6 +421,7 @@ public
 	process FlightController_seL4
 		features
 			FlightPlan: in event data port Mission;
+			Alert: in event port;
 	end FlightController_seL4;
 
 	process implementation FlightController_seL4.Impl
@@ -401,6 +429,7 @@ public
 			FlightController: thread FlightController.Impl;
 		connections
 			c1: port FlightPlan -> FlightController.FlightPlan;
+			c2: port Alert -> FlightController.Alert;
 		annex agree {**
 			lift contract;
 		**};
@@ -410,7 +439,7 @@ public
 		features
 			AttestationRequest: out event data port AttestationRequestMsg.Impl;
 			AttestationResponse: in event data port AttestationResponseMsg.Impl;
-			TrustedIds: out event data port Address.Impl;
+			TrustedIds: out event data port AllowList.Impl;
 		properties
 			CASE_Properties::Attesting => 100;
 	end AttestationManager_seL4;
@@ -431,7 +460,7 @@ public
 		features
 			MissionCommand_in: in event data port RF_Msg.Impl;
 			MissionCommand_out: out event data port RF_Msg.Impl;
-			TrustedIds: in event data port Address.Impl;
+			TrustedIds: in event data port AllowList.Impl;
 		properties
 			CASE_Properties::Gating => 100;
 	end AttestationGate_seL4;
@@ -492,6 +521,7 @@ public
 
 	system implementation SW_seL4.Impl
 		subcomponents
+			AttestationTester: process AttestationTester_seL4.Impl;
 			Radio: process RadioDriver_Attestation_seL4.Impl;
 			Monitor: process Monitor_seL4.Impl;
 			FlightController: process FlightController_seL4.Impl;
@@ -500,28 +530,28 @@ public
 			FlightPlanner: process FlightPlanner_seL4.Impl;
 			AttestationGate: process AttestationGate_seL4.Impl;
 		connections
-			c1: port Radio.MissionCommand -> AttestationGate.MissionCommand_in;
-			c2: port AttestationManager.TrustedIds -> AttestationGate.TrustedIds;
-			c3: port AttestationManager.AttestationRequest -> Radio.AttestationRequest;
-			c4: port Radio.AttestationResponse -> AttestationManager.AttestationResponse;
-			c5: port AttestationGate.MissionCommand_out -> Filter.Input;
-			c6: port Monitor.FlightPlan_out -> FlightController.FlightPlan;
-			c7: port Filter.Output -> FlightPlanner.MissionCommand;
-			c8: port FlightPlanner.FlightPlan -> Monitor.FlightPlan_in;
-			c9: port Monitor.Alert -> Radio.Alert;
+			c1: port Radio.AttestationTesterRequest -> AttestationTester.AttestationRequest;
+			c2: port AttestationTester.AttestationResponse -> Radio.AttestationTesterResponse;
+			c3: port Radio.MissionCommand -> AttestationGate.MissionCommand_in;
+			c4: port AttestationManager.TrustedIds -> AttestationGate.TrustedIds;
+			c5: port AttestationManager.AttestationRequest -> Radio.AttestationRequest;
+			c6: port Radio.AttestationResponse -> AttestationManager.AttestationResponse;
+			c7: port AttestationGate.MissionCommand_out -> Filter.Input;
+			c8: port Monitor.FlightPlan_out -> FlightController.FlightPlan;
+			c9: port Filter.Output -> FlightPlanner.MissionCommand;
+			c10: port FlightPlanner.FlightPlan -> Monitor.FlightPlan_in;
+			c11: port Monitor.Alert -> FlightController.Alert;
 	end SW_seL4.Impl;
 
 	annex agree {**
 		-- ID of this UAV
 		const CASE_UAV_ID : int = 42;
-		fun VALID_MESSAGE(msg : RF_Msg.Impl) : bool = (msg.header.src > 0 and msg.header.dst = CASE_UAV_ID and msg.header.HMAC);
-		fun TRUSTED_MESSAGE(msg : RF_Msg.Impl) : bool = msg.header.trusted;
+		fun VALID_MESSAGE(msg : RF_Msg.Impl) : bool = (msg.header.src > 0 and msg.header.dst = CASE_UAV_ID);
 		fun WELL_FORMED_MESSAGE(msg : RF_Msg.Impl) : bool = good_command(msg.payload);
 		-- These functions check the well-formedness of message structures
 		fun good_coordinate(coord : Coordinate.Impl) : bool = coord.Latitude >= -90 and coord.Latitude <= 90 and coord.Longitude >= -180 and coord.Longitude <= 180 and coord.Altitude >= 0 and coord.Altitude <= 15000;
 		fun good_map(map : Map) : bool = forall wp in map, good_coordinate(wp);
-		fun good_pattern(pattern : FlightPattern) : bool = (pattern = enum(FlightPattern, ZigZag)) or (pattern = enum(FlightPattern, StraightLine)) or (pattern = enum(FlightPattern, Perimeter));
-		fun good_command(cmd : Command.Impl) : bool = good_map(cmd.Map) and good_pattern(cmd.Pattern);
+		fun good_command(cmd : Command.Impl) : bool = good_map(cmd.Map);
 		fun good_mission(mission : Mission) : bool = forall wp in mission, good_coordinate(wp);
 	**};
 	
