@@ -1,0 +1,16 @@
+#ifndef FLIGHTCONTROLLER_IMPL_FLIGHTCONTROLLER_FLIGHTCONTROLLER_H
+#define FLIGHTCONTROLLER_IMPL_FLIGHTCONTROLLER_FLIGHTCONTROLLER_H
+
+#include <all.h>
+
+Unit HAMR_SW_FlightController_Impl_FlightController_FlightController_initialise_(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_FlightController_Impl_FlightController_FlightController_finalise_(STACK_FRAME_ONLY);
+
+Unit HAMR_SW_FlightController_Impl_FlightController_FlightController_handle_FlightPlan_(
+  STACK_FRAME
+  HAMR_SW_Mission value);
+
+Unit HAMR_SW_FlightController_Impl_FlightController_FlightController_handle_Alert_(STACK_FRAME_ONLY);
+
+#endif

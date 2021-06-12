@@ -11,8 +11,8 @@ import HAMR._
   def MissionCommand_Id : Art.PortId
   def FlightPlan_Id : Art.PortId
 
-  def put_FlightPlan(value : Base_Types.Bits) : Unit = {
-    Art.putValue(FlightPlan_Id, Base_Types.Bits_Payload(value))
+  def put_FlightPlan(value : SW.Mission) : Unit = {
+    Art.putValue(FlightPlan_Id, SW.Mission_Payload(value))
   }
 
   def logInfo(msg: String): Unit = {
@@ -38,13 +38,13 @@ import HAMR._
   val MissionCommand_Id : Art.PortId,
   val FlightPlan_Id : Art.PortId) extends FlightPlanner_Impl_Api {
 
-  def get_MissionCommand() : Option[Base_Types.Bits] = {
-    val value : Option[Base_Types.Bits] = Art.getValue(MissionCommand_Id) match {
-      case Some(Base_Types.Bits_Payload(v)) => Some(v)
+  def get_MissionCommand() : Option[SW.RF_Msg_Impl] = {
+    val value : Option[SW.RF_Msg_Impl] = Art.getValue(MissionCommand_Id) match {
+      case Some(SW.RF_Msg_Impl_Payload(v)) => Some(v)
       case Some(v) =>
-        Art.logError(id, s"Unexpected payload on port MissionCommand.  Expecting 'Base_Types.Bits_Payload' but received ${v}")
-        None[Base_Types.Bits]()
-      case _ => None[Base_Types.Bits]()
+        Art.logError(id, s"Unexpected payload on port MissionCommand.  Expecting 'SW.RF_Msg_Impl_Payload' but received ${v}")
+        None[SW.RF_Msg_Impl]()
+      case _ => None[SW.RF_Msg_Impl]()
     }
     return value
   }

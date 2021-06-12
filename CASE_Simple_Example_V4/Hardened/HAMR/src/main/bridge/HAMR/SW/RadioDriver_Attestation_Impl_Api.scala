@@ -8,17 +8,22 @@ import HAMR._
 
 @sig trait RadioDriver_Attestation_Impl_Api {
   def id: Art.BridgeId
+  def AttestationTesterResponse_Id : Art.PortId
+  def AttestationTesterRequest_Id : Art.PortId
   def MissionCommand_Id : Art.PortId
   def AttestationRequest_Id : Art.PortId
   def AttestationResponse_Id : Art.PortId
-  def Alert_Id : Art.PortId
 
-  def put_MissionCommand(value : Base_Types.Bits) : Unit = {
-    Art.putValue(MissionCommand_Id, Base_Types.Bits_Payload(value))
+  def put_AttestationTesterRequest(value : SW.AttestationRequestMsg_Impl) : Unit = {
+    Art.putValue(AttestationTesterRequest_Id, SW.AttestationRequestMsg_Impl_Payload(value))
   }
 
-  def put_AttestationResponse(value : Base_Types.Bits) : Unit = {
-    Art.putValue(AttestationResponse_Id, Base_Types.Bits_Payload(value))
+  def put_MissionCommand(value : SW.RF_Msg_Impl) : Unit = {
+    Art.putValue(MissionCommand_Id, SW.RF_Msg_Impl_Payload(value))
+  }
+
+  def put_AttestationResponse(value : SW.AttestationResponseMsg_Impl) : Unit = {
+    Art.putValue(AttestationResponse_Id, SW.AttestationResponseMsg_Impl_Payload(value))
   }
 
   def logInfo(msg: String): Unit = {
@@ -36,36 +41,38 @@ import HAMR._
 
 @datatype class RadioDriver_Attestation_Impl_Initialization_Api (
   val id: Art.BridgeId,
+  val AttestationTesterResponse_Id : Art.PortId,
+  val AttestationTesterRequest_Id : Art.PortId,
   val MissionCommand_Id : Art.PortId,
   val AttestationRequest_Id : Art.PortId,
-  val AttestationResponse_Id : Art.PortId,
-  val Alert_Id : Art.PortId) extends RadioDriver_Attestation_Impl_Api
+  val AttestationResponse_Id : Art.PortId) extends RadioDriver_Attestation_Impl_Api
 
 @datatype class RadioDriver_Attestation_Impl_Operational_Api (
   val id: Art.BridgeId,
+  val AttestationTesterResponse_Id : Art.PortId,
+  val AttestationTesterRequest_Id : Art.PortId,
   val MissionCommand_Id : Art.PortId,
   val AttestationRequest_Id : Art.PortId,
-  val AttestationResponse_Id : Art.PortId,
-  val Alert_Id : Art.PortId) extends RadioDriver_Attestation_Impl_Api {
+  val AttestationResponse_Id : Art.PortId) extends RadioDriver_Attestation_Impl_Api {
 
-  def get_AttestationRequest() : Option[Base_Types.Bits] = {
-    val value : Option[Base_Types.Bits] = Art.getValue(AttestationRequest_Id) match {
-      case Some(Base_Types.Bits_Payload(v)) => Some(v)
+  def get_AttestationTesterResponse() : Option[SW.AttestationResponseMsg_Impl] = {
+    val value : Option[SW.AttestationResponseMsg_Impl] = Art.getValue(AttestationTesterResponse_Id) match {
+      case Some(SW.AttestationResponseMsg_Impl_Payload(v)) => Some(v)
       case Some(v) =>
-        Art.logError(id, s"Unexpected payload on port AttestationRequest.  Expecting 'Base_Types.Bits_Payload' but received ${v}")
-        None[Base_Types.Bits]()
-      case _ => None[Base_Types.Bits]()
+        Art.logError(id, s"Unexpected payload on port AttestationTesterResponse.  Expecting 'SW.AttestationResponseMsg_Impl_Payload' but received ${v}")
+        None[SW.AttestationResponseMsg_Impl]()
+      case _ => None[SW.AttestationResponseMsg_Impl]()
     }
     return value
   }
 
-  def get_Alert() : Option[art.Empty] = {
-    val value : Option[art.Empty] = Art.getValue(Alert_Id) match {
-      case Some(Empty()) => Some(Empty())
+  def get_AttestationRequest() : Option[SW.AttestationRequestMsg_Impl] = {
+    val value : Option[SW.AttestationRequestMsg_Impl] = Art.getValue(AttestationRequest_Id) match {
+      case Some(SW.AttestationRequestMsg_Impl_Payload(v)) => Some(v)
       case Some(v) =>
-        Art.logError(id, s"Unexpected payload on port Alert.  Expecting 'Empty' but received ${v}")
-        None[art.Empty]()
-      case _ => None[art.Empty]()
+        Art.logError(id, s"Unexpected payload on port AttestationRequest.  Expecting 'SW.AttestationRequestMsg_Impl_Payload' but received ${v}")
+        None[SW.AttestationRequestMsg_Impl]()
+      case _ => None[SW.AttestationRequestMsg_Impl]()
     }
     return value
   }

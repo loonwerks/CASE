@@ -12,8 +12,8 @@ import HAMR._
   def MissionCommand_out_Id : Art.PortId
   def TrustedIds_Id : Art.PortId
 
-  def put_MissionCommand_out(value : Base_Types.Bits) : Unit = {
-    Art.putValue(MissionCommand_out_Id, Base_Types.Bits_Payload(value))
+  def put_MissionCommand_out(value : SW.RF_Msg_Impl) : Unit = {
+    Art.putValue(MissionCommand_out_Id, SW.RF_Msg_Impl_Payload(value))
   }
 
   def logInfo(msg: String): Unit = {
@@ -41,24 +41,24 @@ import HAMR._
   val MissionCommand_out_Id : Art.PortId,
   val TrustedIds_Id : Art.PortId) extends AttestationGate_Impl_Api {
 
-  def get_MissionCommand_in() : Option[Base_Types.Bits] = {
-    val value : Option[Base_Types.Bits] = Art.getValue(MissionCommand_in_Id) match {
-      case Some(Base_Types.Bits_Payload(v)) => Some(v)
+  def get_MissionCommand_in() : Option[SW.RF_Msg_Impl] = {
+    val value : Option[SW.RF_Msg_Impl] = Art.getValue(MissionCommand_in_Id) match {
+      case Some(SW.RF_Msg_Impl_Payload(v)) => Some(v)
       case Some(v) =>
-        Art.logError(id, s"Unexpected payload on port MissionCommand_in.  Expecting 'Base_Types.Bits_Payload' but received ${v}")
-        None[Base_Types.Bits]()
-      case _ => None[Base_Types.Bits]()
+        Art.logError(id, s"Unexpected payload on port MissionCommand_in.  Expecting 'SW.RF_Msg_Impl_Payload' but received ${v}")
+        None[SW.RF_Msg_Impl]()
+      case _ => None[SW.RF_Msg_Impl]()
     }
     return value
   }
 
-  def get_TrustedIds() : Option[Base_Types.Bits] = {
-    val value : Option[Base_Types.Bits] = Art.getValue(TrustedIds_Id) match {
-      case Some(Base_Types.Bits_Payload(v)) => Some(v)
+  def get_TrustedIds() : Option[SW.AllowList_Impl] = {
+    val value : Option[SW.AllowList_Impl] = Art.getValue(TrustedIds_Id) match {
+      case Some(SW.AllowList_Impl_Payload(v)) => Some(v)
       case Some(v) =>
-        Art.logError(id, s"Unexpected payload on port TrustedIds.  Expecting 'Base_Types.Bits_Payload' but received ${v}")
-        None[Base_Types.Bits]()
-      case _ => None[Base_Types.Bits]()
+        Art.logError(id, s"Unexpected payload on port TrustedIds.  Expecting 'SW.AllowList_Impl_Payload' but received ${v}")
+        None[SW.AllowList_Impl]()
+      case _ => None[SW.AllowList_Impl]()
     }
     return value
   }
