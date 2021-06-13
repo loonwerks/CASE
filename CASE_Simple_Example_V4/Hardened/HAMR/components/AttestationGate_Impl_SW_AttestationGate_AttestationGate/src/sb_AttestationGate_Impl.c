@@ -189,6 +189,7 @@ void post_init(void) {
   CALLBACKOP(sb_TrustedIds_notification_reg_callback(sb_TrustedIds_notification_handler, NULL));
 }
 
+#ifndef CAKEML_ASSEMBLIES_PRESENT
 /************************************************************************
  * int run(void)
  * Main active thread function.
@@ -204,3 +205,4 @@ int run(void) {
   }
   return 0;
 }
+#endif

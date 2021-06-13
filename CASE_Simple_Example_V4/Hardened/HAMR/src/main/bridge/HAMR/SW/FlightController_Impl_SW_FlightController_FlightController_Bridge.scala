@@ -15,17 +15,20 @@ import HAMR.SW.{FlightController_Impl_SW_FlightController_FlightController => co
   val dispatchProtocol: DispatchPropertyProtocol,
   val dispatchTriggers: Option[ISZ[Art.PortId]],
 
-  FlightPlan: Port[Base_Types.Bits]
+  FlightPlan: Port[Base_Types.Bits],
+  Alert: Port[art.Empty]
   ) extends Bridge {
 
   val ports : Bridge.Ports = Bridge.Ports(
-    all = ISZ(FlightPlan),
+    all = ISZ(FlightPlan,
+              Alert),
 
     dataIns = ISZ(),
 
     dataOuts = ISZ(),
 
-    eventIns = ISZ(FlightPlan),
+    eventIns = ISZ(FlightPlan,
+                   Alert),
 
     eventOuts = ISZ()
   )
@@ -33,7 +36,8 @@ import HAMR.SW.{FlightController_Impl_SW_FlightController_FlightController => co
   val initialization_api : FlightController_Impl_Initialization_Api = {
     val api = FlightController_Impl_Initialization_Api(
       id,
-      FlightPlan.id
+      FlightPlan.id,
+      Alert.id
     )
     FlightController_Impl_SW_FlightController_FlightController_Bridge.c_initialization_api = Some(api)
     api
@@ -42,7 +46,8 @@ import HAMR.SW.{FlightController_Impl_SW_FlightController_FlightController => co
   val operational_api : FlightController_Impl_Operational_Api = {
     val api = FlightController_Impl_Operational_Api(
       id,
-      FlightPlan.id
+      FlightPlan.id,
+      Alert.id
     )
     FlightController_Impl_SW_FlightController_FlightController_Bridge.c_operational_api = Some(api)
     api
@@ -53,6 +58,7 @@ import HAMR.SW.{FlightController_Impl_SW_FlightController_FlightController => co
       id,
 
       FlightPlan.id,
+      Alert.id,
 
       dispatchTriggers,
 
@@ -69,6 +75,7 @@ object FlightController_Impl_SW_FlightController_FlightController_Bridge {
     FlightController_Impl_SW_FlightController_FlightController_BridgeId : Art.BridgeId,
 
     FlightPlan_Id : Art.PortId,
+    Alert_Id : Art.PortId,
 
     dispatchTriggers : Option[ISZ[Art.PortId]],
 
@@ -77,7 +84,8 @@ object FlightController_Impl_SW_FlightController_FlightController_Bridge {
 
     val dataInPortIds: ISZ[Art.PortId] = ISZ()
 
-    val eventInPortIds: ISZ[Art.PortId] = ISZ(FlightPlan_Id)
+    val eventInPortIds: ISZ[Art.PortId] = ISZ(FlightPlan_Id,
+                                              Alert_Id)
 
     val dataOutPortIds: ISZ[Art.PortId] = ISZ()
 
@@ -112,6 +120,10 @@ object FlightController_Impl_SW_FlightController_FlightController_Bridge {
 
           // implement the following in 'component':  def handle_FlightPlan(api: FlightController_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
           component.handle_FlightPlan(operational_api, value)
+        }
+        else if(portId == Alert_Id) {
+          // implement the following in 'component':  def handle_Alert(api: FlightController_Impl_Operational_Api): Unit = {}
+          component.handle_Alert(operational_api)
         }
       }
 
@@ -148,6 +160,10 @@ object FlightController_Impl_SW_FlightController_FlightController_Bridge {
 
           // implement the following in 'component':  def handle_FlightPlan(api: FlightController_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
           component.handle_FlightPlan(operational_api, value)
+        }
+        else if(portId == Alert_Id) {
+          // implement the following in 'component':  def handle_Alert(api: FlightController_Impl_Operational_Api): Unit = {}
+          component.handle_Alert(operational_api)
         }
       }
 

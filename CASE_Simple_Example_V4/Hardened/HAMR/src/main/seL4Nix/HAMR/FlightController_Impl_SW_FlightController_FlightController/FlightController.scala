@@ -15,14 +15,16 @@ object FlightController extends App {
 
   val FlightControllerBridge : HAMR.SW.FlightController_Impl_SW_FlightController_FlightController_Bridge = {
     val FlightPlan = Port[Base_Types.Bits] (id = 0, name = "MissionComputer_Impl_Instance_SW_FlightController_FlightController_FlightPlan", mode = EventIn)
+    val Alert = Port[art.Empty] (id = 1, name = "MissionComputer_Impl_Instance_SW_FlightController_FlightController_Alert", mode = EventIn)
 
     HAMR.SW.FlightController_Impl_SW_FlightController_FlightController_Bridge(
       id = 0,
       name = "MissionComputer_Impl_Instance_SW_FlightController_FlightController",
-      dispatchProtocol = Sporadic(min = 1),
+      dispatchProtocol = Sporadic(min = 500),
       dispatchTriggers = None(),
 
-      FlightPlan = FlightPlan
+      FlightPlan = FlightPlan,
+      Alert = Alert
     )
   }
 
@@ -33,10 +35,17 @@ object FlightController extends App {
   val FlightPlan_id: Art.PortId = FlightControllerBridge.FlightPlan.id
   var FlightPlan_port: Option[DataContent] = noData
 
+  // Alert: In EventPort art.Empty
+  val Alert_id: Art.PortId = FlightControllerBridge.Alert.id
+  var Alert_port: Option[DataContent] = noData
+
   def dispatchStatus(bridgeId: Art.BridgeId): DispatchStatus = {
     var portIds: ISZ[Art.PortId] = ISZ()
     if(!FlightController_Impl_SW_FlightController_FlightController_seL4Nix.FlightPlan_IsEmpty()) {
       portIds = portIds :+ FlightPlan_id
+    }
+    if(!FlightController_Impl_SW_FlightController_FlightController_seL4Nix.Alert_IsEmpty()) {
+      portIds = portIds :+ Alert_id
     }
     return EventTriggered(portIds)
   }
@@ -44,6 +53,8 @@ object FlightController extends App {
   def getValue(portId: Art.PortId): Option[DataContent] = {
     if(portId == FlightPlan_id) {
       return FlightPlan_port
+    } else if(portId == Alert_id) {
+      return Alert_port
     } else {
       halt(s"Unexpected: FlightController.getValue called with: ${portId}")
     }
@@ -53,6 +64,8 @@ object FlightController extends App {
     // ignore params
 
     FlightPlan_port = FlightController_Impl_SW_FlightController_FlightController_seL4Nix.FlightPlan_Receive()
+
+    Alert_port = FlightController_Impl_SW_FlightController_FlightController_seL4Nix.Alert_Receive()
   }
 
   def putValue(portId: Art.PortId, data: DataContent): Unit = {
@@ -109,6 +122,7 @@ object FlightController extends App {
       HAMR.SW.FlightController_Impl_SW_FlightController_FlightController_Bridge.c_operational_api.get.logDebug("")
       HAMR.SW.FlightController_Impl_SW_FlightController_FlightController_Bridge.c_operational_api.get.logError("")
       val apiUsage_FlightPlan: Option[Base_Types.Bits] = HAMR.SW.FlightController_Impl_SW_FlightController_FlightController_Bridge.c_operational_api.get.get_FlightPlan()
+      val apiUsage_Alert: Option[art.Empty] = HAMR.SW.FlightController_Impl_SW_FlightController_FlightController_Bridge.c_operational_api.get.get_Alert()
     }
   }
 

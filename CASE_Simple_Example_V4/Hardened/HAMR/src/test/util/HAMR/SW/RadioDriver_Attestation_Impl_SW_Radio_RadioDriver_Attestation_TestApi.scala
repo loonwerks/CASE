@@ -8,35 +8,46 @@ import HAMR._
 abstract class RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_TestApi extends BridgeTestSuite[RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge](Arch.MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation) {
 
   /** helper function to set the values of all input ports.
+   * @param AttestationTesterResponse payloads for event data port AttestationTesterResponse.
+   *   ART currently supports single element event data queues so
+   *   only the last element of AttestationTesterResponse will be used
    * @param AttestationRequest payloads for event data port AttestationRequest.
    *   ART currently supports single element event data queues so
    *   only the last element of AttestationRequest will be used
-   * @param Alert the number of events to place in the Alert event port queue.
-   *   ART currently supports single element event queues so at most
-   *   one event will be placed in the queue.
    */
-  def put_concrete_inputs(AttestationRequest : ISZ[Base_Types.Bits],
-                          Alert : Z): Unit = {
+  def put_concrete_inputs(AttestationTesterResponse : ISZ[Base_Types.Bits],
+                          AttestationRequest : ISZ[Base_Types.Bits]): Unit = {
+    for(v <- AttestationTesterResponse){
+      put_AttestationTesterResponse(v)
+    }
     for(v <- AttestationRequest){
       put_AttestationRequest(v)
-    }
-    for(i <- 0 until Alert) {
-      put_Alert()
     }
   }
 
 
   /** helper function to check RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation's
    * output ports.  Use named arguments to check subsets of the output ports.
+   * @param AttestationTesterRequest method that will be called with the payloads to be sent
+   *        on the outgoing event data port 'AttestationTesterRequest'.
    * @param MissionCommand method that will be called with the payloads to be sent
    *        on the outgoing event data port 'MissionCommand'.
    * @param AttestationResponse method that will be called with the payloads to be sent
    *        on the outgoing event data port 'AttestationResponse'.
    */
-  def check_concrete_output(MissionCommand: ISZ[Base_Types.Bits] => B = MissionCommandParam => {T},
+  def check_concrete_output(AttestationTesterRequest: ISZ[Base_Types.Bits] => B = AttestationTesterRequestParam => {T},
+                            MissionCommand: ISZ[Base_Types.Bits] => B = MissionCommandParam => {T},
                             AttestationResponse: ISZ[Base_Types.Bits] => B = AttestationResponseParam => {T}): Unit = {
     var testFailures: ISZ[ST] = ISZ()
 
+    var AttestationTesterRequestValue: ISZ[Base_Types.Bits] = ISZ()
+    // TODO: event data port getter should return all of the events/payloads
+    //       received on event data ports when queue sizes > 1 support is added
+    //       to ART
+    if(get_AttestationTesterRequest().nonEmpty) AttestationTesterRequestValue = AttestationTesterRequestValue :+ get_AttestationTesterRequest().get
+    if(!AttestationTesterRequest(AttestationTesterRequestValue)) {
+      testFailures = testFailures :+ st"'AttestationTesterRequest' did not match expected: received ${AttestationTesterRequestValue.size} events with the following payloads ${AttestationTesterRequestValue}"
+    }
     var MissionCommandValue: ISZ[Base_Types.Bits] = ISZ()
     // TODO: event data port getter should return all of the events/payloads
     //       received on event data ports when queue sizes > 1 support is added
@@ -59,13 +70,28 @@ abstract class RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Tes
 
 
   // setter for in EventDataPort
+  def put_AttestationTesterResponse(value : Base_Types.Bits): Unit = {
+    ArtNative_Ext.insertInPortValue(bridge.operational_api.AttestationTesterResponse_Id, Base_Types.Bits_Payload(value))
+  }
+
+  // setter for in EventDataPort
   def put_AttestationRequest(value : Base_Types.Bits): Unit = {
     ArtNative_Ext.insertInPortValue(bridge.operational_api.AttestationRequest_Id, Base_Types.Bits_Payload(value))
   }
 
-  // setter for in EventPort
-  def put_Alert(): Unit = {
-    ArtNative_Ext.insertInPortValue(bridge.operational_api.Alert_Id, Empty())
+  // getter for out EventDataPort
+  def get_AttestationTesterRequest(): Option[Base_Types.Bits] = {
+    val value: Option[Base_Types.Bits] = get_AttestationTesterRequest_payload() match {
+      case Some(Base_Types.Bits_Payload(v)) => Some(v)
+      case Some(v) => fail(s"Unexpected payload on port AttestationTesterRequest.  Expecting 'Base_Types.Bits_Payload' but received ${v}")
+      case _ => None[Base_Types.Bits]()
+    }
+    return value
+  }
+
+  // payload getter for out EventDataPort
+  def get_AttestationTesterRequest_payload(): Option[Base_Types.Bits_Payload] = {
+    return ArtNative_Ext.observeOutPortValue(bridge.initialization_api.AttestationTesterRequest_Id).asInstanceOf[Option[Base_Types.Bits_Payload]]
   }
 
   // getter for out EventDataPort

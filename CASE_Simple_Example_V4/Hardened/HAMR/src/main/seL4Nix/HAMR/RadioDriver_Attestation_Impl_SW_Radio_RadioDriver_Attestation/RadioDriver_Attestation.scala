@@ -14,26 +14,36 @@ import HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL
 object RadioDriver_Attestation extends App {
 
   val RadioDriver_AttestationBridge : HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge = {
-    val MissionCommand = Port[Base_Types.Bits] (id = 0, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_MissionCommand", mode = EventOut)
-    val AttestationRequest = Port[Base_Types.Bits] (id = 1, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationRequest", mode = EventIn)
-    val AttestationResponse = Port[Base_Types.Bits] (id = 2, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationResponse", mode = EventOut)
-    val Alert = Port[art.Empty] (id = 3, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_Alert", mode = EventIn)
+    val AttestationTesterResponse = Port[Base_Types.Bits] (id = 0, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationTesterResponse", mode = EventIn)
+    val AttestationTesterRequest = Port[Base_Types.Bits] (id = 1, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationTesterRequest", mode = EventOut)
+    val MissionCommand = Port[Base_Types.Bits] (id = 2, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_MissionCommand", mode = EventOut)
+    val AttestationRequest = Port[Base_Types.Bits] (id = 3, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationRequest", mode = EventIn)
+    val AttestationResponse = Port[Base_Types.Bits] (id = 4, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationResponse", mode = EventOut)
 
     HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge(
       id = 0,
       name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation",
-      dispatchProtocol = Sporadic(min = 1),
+      dispatchProtocol = Sporadic(min = 500),
       dispatchTriggers = None(),
 
+      AttestationTesterResponse = AttestationTesterResponse,
+      AttestationTesterRequest = AttestationTesterRequest,
       MissionCommand = MissionCommand,
       AttestationRequest = AttestationRequest,
-      AttestationResponse = AttestationResponse,
-      Alert = Alert
+      AttestationResponse = AttestationResponse
     )
   }
 
   val entryPoints: Bridge.EntryPoints = RadioDriver_AttestationBridge.entryPoints
   val noData: Option[DataContent] = None()
+
+  // AttestationTesterResponse: In EventDataPort Base_Types.Bits
+  val AttestationTesterResponse_id: Art.PortId = RadioDriver_AttestationBridge.AttestationTesterResponse.id
+  var AttestationTesterResponse_port: Option[DataContent] = noData
+
+  // AttestationTesterRequest: Out EventDataPort Base_Types.Bits
+  val AttestationTesterRequest_id: Art.PortId = RadioDriver_AttestationBridge.AttestationTesterRequest.id
+  var AttestationTesterRequest_port: Option[DataContent] = noData
 
   // MissionCommand: Out EventDataPort Base_Types.Bits
   val MissionCommand_id: Art.PortId = RadioDriver_AttestationBridge.MissionCommand.id
@@ -47,26 +57,22 @@ object RadioDriver_Attestation extends App {
   val AttestationResponse_id: Art.PortId = RadioDriver_AttestationBridge.AttestationResponse.id
   var AttestationResponse_port: Option[DataContent] = noData
 
-  // Alert: In EventPort art.Empty
-  val Alert_id: Art.PortId = RadioDriver_AttestationBridge.Alert.id
-  var Alert_port: Option[DataContent] = noData
-
   def dispatchStatus(bridgeId: Art.BridgeId): DispatchStatus = {
     var portIds: ISZ[Art.PortId] = ISZ()
+    if(!RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL4Nix.AttestationTesterResponse_IsEmpty()) {
+      portIds = portIds :+ AttestationTesterResponse_id
+    }
     if(!RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL4Nix.AttestationRequest_IsEmpty()) {
       portIds = portIds :+ AttestationRequest_id
-    }
-    if(!RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL4Nix.Alert_IsEmpty()) {
-      portIds = portIds :+ Alert_id
     }
     return EventTriggered(portIds)
   }
 
   def getValue(portId: Art.PortId): Option[DataContent] = {
-    if(portId == AttestationRequest_id) {
+    if(portId == AttestationTesterResponse_id) {
+      return AttestationTesterResponse_port
+    } else if(portId == AttestationRequest_id) {
       return AttestationRequest_port
-    } else if(portId == Alert_id) {
-      return Alert_port
     } else {
       halt(s"Unexpected: RadioDriver_Attestation.getValue called with: ${portId}")
     }
@@ -75,13 +81,15 @@ object RadioDriver_Attestation extends App {
   def receiveInput(eventPortIds: ISZ[Art.PortId], dataPortIds: ISZ[Art.PortId]): Unit = {
     // ignore params
 
-    AttestationRequest_port = RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL4Nix.AttestationRequest_Receive()
+    AttestationTesterResponse_port = RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL4Nix.AttestationTesterResponse_Receive()
 
-    Alert_port = RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL4Nix.Alert_Receive()
+    AttestationRequest_port = RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL4Nix.AttestationRequest_Receive()
   }
 
   def putValue(portId: Art.PortId, data: DataContent): Unit = {
-    if(portId == MissionCommand_id) {
+    if(portId == AttestationTesterRequest_id) {
+      AttestationTesterRequest_port = Some(data)
+    } else if(portId == MissionCommand_id) {
       MissionCommand_port = Some(data)
     } else if(portId == AttestationResponse_id) {
       AttestationResponse_port = Some(data)
@@ -92,6 +100,11 @@ object RadioDriver_Attestation extends App {
 
   def sendOutput(eventPortIds: ISZ[Art.PortId], dataPortIds: ISZ[Art.PortId]): Unit = {
     // ignore params
+
+    if(AttestationTesterRequest_port.nonEmpty) {
+      RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL4Nix.AttestationTesterRequest_Send(AttestationTesterRequest_port.get)
+      AttestationTesterRequest_port = noData
+    }
 
     if(MissionCommand_port.nonEmpty) {
       RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_seL4Nix.MissionCommand_Send(MissionCommand_port.get)
@@ -147,12 +160,14 @@ object RadioDriver_Attestation extends App {
       HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.logInfo("")
       HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.logDebug("")
       HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.logError("")
+      val apiUsage_AttestationTesterResponse: Option[Base_Types.Bits] = HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.get_AttestationTesterResponse()
+      HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_initialization_api.get.put_AttestationTesterRequest(Base_Types.Bits_example())
+      HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.put_AttestationTesterRequest(Base_Types.Bits_example())
       HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_initialization_api.get.put_MissionCommand(Base_Types.Bits_example())
       HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.put_MissionCommand(Base_Types.Bits_example())
       val apiUsage_AttestationRequest: Option[Base_Types.Bits] = HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.get_AttestationRequest()
       HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_initialization_api.get.put_AttestationResponse(Base_Types.Bits_example())
       HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.put_AttestationResponse(Base_Types.Bits_example())
-      val apiUsage_Alert: Option[art.Empty] = HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api.get.get_Alert()
     }
   }
 

@@ -10,13 +10,13 @@ import art.DispatchPropertyProtocol._
 // This file was auto-generated.  Do not edit
 
 object Arch {
-  val SW_seL4_Impl_Instance_AttestationTester_AttestationTester : HAMR.SW.AttestationTester_Impl_AttestationTester_AttestationTester_Bridge = {
-    val AttestationRequest = Port[SW.AttestationRequestMsg_Impl] (id = 0, name = "SW_seL4_Impl_Instance_AttestationTester_AttestationTester_AttestationRequest", mode = EventIn)
-    val AttestationResponse = Port[SW.AttestationResponseMsg_Impl] (id = 1, name = "SW_seL4_Impl_Instance_AttestationTester_AttestationTester_AttestationResponse", mode = EventOut)
+  val MissionComputer_Impl_Instance_SW_AttestationTester_AttestationTester : HAMR.SW.AttestationTester_Impl_SW_AttestationTester_AttestationTester_Bridge = {
+    val AttestationRequest = Port[Base_Types.Bits] (id = 0, name = "MissionComputer_Impl_Instance_SW_AttestationTester_AttestationTester_AttestationRequest", mode = EventIn)
+    val AttestationResponse = Port[Base_Types.Bits] (id = 1, name = "MissionComputer_Impl_Instance_SW_AttestationTester_AttestationTester_AttestationResponse", mode = EventOut)
 
-    HAMR.SW.AttestationTester_Impl_AttestationTester_AttestationTester_Bridge(
+    HAMR.SW.AttestationTester_Impl_SW_AttestationTester_AttestationTester_Bridge(
       id = 0,
-      name = "SW_seL4_Impl_Instance_AttestationTester_AttestationTester",
+      name = "MissionComputer_Impl_Instance_SW_AttestationTester_AttestationTester",
       dispatchProtocol = Sporadic(min = 500),
       dispatchTriggers = None(),
 
@@ -24,16 +24,16 @@ object Arch {
       AttestationResponse = AttestationResponse
     )
   }
-  val SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation : HAMR.SW.RadioDriver_Attestation_Impl_Radio_RadioDriver_Attestation_Bridge = {
-    val AttestationTesterResponse = Port[SW.AttestationResponseMsg_Impl] (id = 2, name = "SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation_AttestationTesterResponse", mode = EventIn)
-    val AttestationTesterRequest = Port[SW.AttestationRequestMsg_Impl] (id = 3, name = "SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation_AttestationTesterRequest", mode = EventOut)
-    val MissionCommand = Port[SW.RF_Msg_Impl] (id = 4, name = "SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation_MissionCommand", mode = EventOut)
-    val AttestationRequest = Port[SW.AttestationRequestMsg_Impl] (id = 5, name = "SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation_AttestationRequest", mode = EventIn)
-    val AttestationResponse = Port[SW.AttestationResponseMsg_Impl] (id = 6, name = "SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation_AttestationResponse", mode = EventOut)
+  val MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation : HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge = {
+    val AttestationTesterResponse = Port[Base_Types.Bits] (id = 2, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationTesterResponse", mode = EventIn)
+    val AttestationTesterRequest = Port[Base_Types.Bits] (id = 3, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationTesterRequest", mode = EventOut)
+    val MissionCommand = Port[Base_Types.Bits] (id = 4, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_MissionCommand", mode = EventOut)
+    val AttestationRequest = Port[Base_Types.Bits] (id = 5, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationRequest", mode = EventIn)
+    val AttestationResponse = Port[Base_Types.Bits] (id = 6, name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation_AttestationResponse", mode = EventOut)
 
-    HAMR.SW.RadioDriver_Attestation_Impl_Radio_RadioDriver_Attestation_Bridge(
+    HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge(
       id = 1,
-      name = "SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation",
+      name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation",
       dispatchProtocol = Sporadic(min = 500),
       dispatchTriggers = None(),
 
@@ -44,14 +44,14 @@ object Arch {
       AttestationResponse = AttestationResponse
     )
   }
-  val SW_seL4_Impl_Instance_Monitor_Monitor : HAMR.SW.Monitor_Impl_Monitor_Monitor_Bridge = {
-    val FlightPlan_in = Port[SW.Mission] (id = 7, name = "SW_seL4_Impl_Instance_Monitor_Monitor_FlightPlan_in", mode = EventIn)
-    val FlightPlan_out = Port[SW.Mission] (id = 8, name = "SW_seL4_Impl_Instance_Monitor_Monitor_FlightPlan_out", mode = EventOut)
-    val Alert = Port[art.Empty] (id = 9, name = "SW_seL4_Impl_Instance_Monitor_Monitor_Alert", mode = EventOut)
+  val MissionComputer_Impl_Instance_SW_Monitor_Monitor : HAMR.SW.Monitor_Impl_SW_Monitor_Monitor_Bridge = {
+    val FlightPlan_in = Port[Base_Types.Bits] (id = 7, name = "MissionComputer_Impl_Instance_SW_Monitor_Monitor_FlightPlan_in", mode = EventIn)
+    val FlightPlan_out = Port[Base_Types.Bits] (id = 8, name = "MissionComputer_Impl_Instance_SW_Monitor_Monitor_FlightPlan_out", mode = EventOut)
+    val Alert = Port[art.Empty] (id = 9, name = "MissionComputer_Impl_Instance_SW_Monitor_Monitor_Alert", mode = EventOut)
 
-    HAMR.SW.Monitor_Impl_Monitor_Monitor_Bridge(
+    HAMR.SW.Monitor_Impl_SW_Monitor_Monitor_Bridge(
       id = 2,
-      name = "SW_seL4_Impl_Instance_Monitor_Monitor",
+      name = "MissionComputer_Impl_Instance_SW_Monitor_Monitor",
       dispatchProtocol = Sporadic(min = 500),
       dispatchTriggers = None(),
 
@@ -60,13 +60,13 @@ object Arch {
       Alert = Alert
     )
   }
-  val SW_seL4_Impl_Instance_FlightController_FlightController : HAMR.SW.FlightController_Impl_FlightController_FlightController_Bridge = {
-    val FlightPlan = Port[SW.Mission] (id = 10, name = "SW_seL4_Impl_Instance_FlightController_FlightController_FlightPlan", mode = EventIn)
-    val Alert = Port[art.Empty] (id = 11, name = "SW_seL4_Impl_Instance_FlightController_FlightController_Alert", mode = EventIn)
+  val MissionComputer_Impl_Instance_SW_FlightController_FlightController : HAMR.SW.FlightController_Impl_SW_FlightController_FlightController_Bridge = {
+    val FlightPlan = Port[Base_Types.Bits] (id = 10, name = "MissionComputer_Impl_Instance_SW_FlightController_FlightController_FlightPlan", mode = EventIn)
+    val Alert = Port[art.Empty] (id = 11, name = "MissionComputer_Impl_Instance_SW_FlightController_FlightController_Alert", mode = EventIn)
 
-    HAMR.SW.FlightController_Impl_FlightController_FlightController_Bridge(
+    HAMR.SW.FlightController_Impl_SW_FlightController_FlightController_Bridge(
       id = 3,
-      name = "SW_seL4_Impl_Instance_FlightController_FlightController",
+      name = "MissionComputer_Impl_Instance_SW_FlightController_FlightController",
       dispatchProtocol = Sporadic(min = 500),
       dispatchTriggers = None(),
 
@@ -74,14 +74,14 @@ object Arch {
       Alert = Alert
     )
   }
-  val SW_seL4_Impl_Instance_AttestationManager_AttestationManager : HAMR.SW.AttestationManager_Impl_AttestationManager_AttestationManager_Bridge = {
-    val AttestationRequest = Port[SW.AttestationRequestMsg_Impl] (id = 12, name = "SW_seL4_Impl_Instance_AttestationManager_AttestationManager_AttestationRequest", mode = EventOut)
-    val AttestationResponse = Port[SW.AttestationResponseMsg_Impl] (id = 13, name = "SW_seL4_Impl_Instance_AttestationManager_AttestationManager_AttestationResponse", mode = EventIn)
-    val TrustedIds = Port[SW.AllowList_Impl] (id = 14, name = "SW_seL4_Impl_Instance_AttestationManager_AttestationManager_TrustedIds", mode = EventOut)
+  val MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager : HAMR.SW.AttestationManager_Impl_SW_AttestationManager_AttestationManager_Bridge = {
+    val AttestationRequest = Port[Base_Types.Bits] (id = 12, name = "MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager_AttestationRequest", mode = EventOut)
+    val AttestationResponse = Port[Base_Types.Bits] (id = 13, name = "MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager_AttestationResponse", mode = EventIn)
+    val TrustedIds = Port[Base_Types.Bits] (id = 14, name = "MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager_TrustedIds", mode = EventOut)
 
-    HAMR.SW.AttestationManager_Impl_AttestationManager_AttestationManager_Bridge(
+    HAMR.SW.AttestationManager_Impl_SW_AttestationManager_AttestationManager_Bridge(
       id = 4,
-      name = "SW_seL4_Impl_Instance_AttestationManager_AttestationManager",
+      name = "MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager",
       dispatchProtocol = Sporadic(min = 500),
       dispatchTriggers = None(),
 
@@ -90,13 +90,13 @@ object Arch {
       TrustedIds = TrustedIds
     )
   }
-  val SW_seL4_Impl_Instance_Filter_Filter : HAMR.SW.Filter_Impl_Filter_Filter_Bridge = {
-    val Input = Port[SW.RF_Msg_Impl] (id = 15, name = "SW_seL4_Impl_Instance_Filter_Filter_Input", mode = EventIn)
-    val Output = Port[SW.RF_Msg_Impl] (id = 16, name = "SW_seL4_Impl_Instance_Filter_Filter_Output", mode = EventOut)
+  val MissionComputer_Impl_Instance_SW_Filter_Filter : HAMR.SW.Filter_Impl_SW_Filter_Filter_Bridge = {
+    val Input = Port[Base_Types.Bits] (id = 15, name = "MissionComputer_Impl_Instance_SW_Filter_Filter_Input", mode = EventIn)
+    val Output = Port[Base_Types.Bits] (id = 16, name = "MissionComputer_Impl_Instance_SW_Filter_Filter_Output", mode = EventOut)
 
-    HAMR.SW.Filter_Impl_Filter_Filter_Bridge(
+    HAMR.SW.Filter_Impl_SW_Filter_Filter_Bridge(
       id = 5,
-      name = "SW_seL4_Impl_Instance_Filter_Filter",
+      name = "MissionComputer_Impl_Instance_SW_Filter_Filter",
       dispatchProtocol = Sporadic(min = 500),
       dispatchTriggers = None(),
 
@@ -104,13 +104,13 @@ object Arch {
       Output = Output
     )
   }
-  val SW_seL4_Impl_Instance_FlightPlanner_FlightPlanner : HAMR.SW.FlightPlanner_Impl_FlightPlanner_FlightPlanner_Bridge = {
-    val MissionCommand = Port[SW.RF_Msg_Impl] (id = 17, name = "SW_seL4_Impl_Instance_FlightPlanner_FlightPlanner_MissionCommand", mode = EventIn)
-    val FlightPlan = Port[SW.Mission] (id = 18, name = "SW_seL4_Impl_Instance_FlightPlanner_FlightPlanner_FlightPlan", mode = EventOut)
+  val MissionComputer_Impl_Instance_SW_FlightPlanner_FlightPlanner : HAMR.SW.FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge = {
+    val MissionCommand = Port[Base_Types.Bits] (id = 17, name = "MissionComputer_Impl_Instance_SW_FlightPlanner_FlightPlanner_MissionCommand", mode = EventIn)
+    val FlightPlan = Port[Base_Types.Bits] (id = 18, name = "MissionComputer_Impl_Instance_SW_FlightPlanner_FlightPlanner_FlightPlan", mode = EventOut)
 
-    HAMR.SW.FlightPlanner_Impl_FlightPlanner_FlightPlanner_Bridge(
+    HAMR.SW.FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge(
       id = 6,
-      name = "SW_seL4_Impl_Instance_FlightPlanner_FlightPlanner",
+      name = "MissionComputer_Impl_Instance_SW_FlightPlanner_FlightPlanner",
       dispatchProtocol = Sporadic(min = 500),
       dispatchTriggers = None(),
 
@@ -118,14 +118,14 @@ object Arch {
       FlightPlan = FlightPlan
     )
   }
-  val SW_seL4_Impl_Instance_AttestationGate_AttestationGate : HAMR.SW.AttestationGate_Impl_AttestationGate_AttestationGate_Bridge = {
-    val MissionCommand_in = Port[SW.RF_Msg_Impl] (id = 19, name = "SW_seL4_Impl_Instance_AttestationGate_AttestationGate_MissionCommand_in", mode = EventIn)
-    val MissionCommand_out = Port[SW.RF_Msg_Impl] (id = 20, name = "SW_seL4_Impl_Instance_AttestationGate_AttestationGate_MissionCommand_out", mode = EventOut)
-    val TrustedIds = Port[SW.AllowList_Impl] (id = 21, name = "SW_seL4_Impl_Instance_AttestationGate_AttestationGate_TrustedIds", mode = EventIn)
+  val MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate : HAMR.SW.AttestationGate_Impl_SW_AttestationGate_AttestationGate_Bridge = {
+    val MissionCommand_in = Port[Base_Types.Bits] (id = 19, name = "MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate_MissionCommand_in", mode = EventIn)
+    val MissionCommand_out = Port[Base_Types.Bits] (id = 20, name = "MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate_MissionCommand_out", mode = EventOut)
+    val TrustedIds = Port[Base_Types.Bits] (id = 21, name = "MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate_TrustedIds", mode = EventIn)
 
-    HAMR.SW.AttestationGate_Impl_AttestationGate_AttestationGate_Bridge(
+    HAMR.SW.AttestationGate_Impl_SW_AttestationGate_AttestationGate_Bridge(
       id = 7,
-      name = "SW_seL4_Impl_Instance_AttestationGate_AttestationGate",
+      name = "MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate",
       dispatchProtocol = Sporadic(min = 500),
       dispatchTriggers = None(),
 
@@ -138,19 +138,19 @@ object Arch {
   val ad : ArchitectureDescription = {
 
     ArchitectureDescription(
-      components = ISZ (SW_seL4_Impl_Instance_AttestationTester_AttestationTester, SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation, SW_seL4_Impl_Instance_Monitor_Monitor, SW_seL4_Impl_Instance_FlightController_FlightController, SW_seL4_Impl_Instance_AttestationManager_AttestationManager, SW_seL4_Impl_Instance_Filter_Filter, SW_seL4_Impl_Instance_FlightPlanner_FlightPlanner, SW_seL4_Impl_Instance_AttestationGate_AttestationGate),
+      components = ISZ (MissionComputer_Impl_Instance_SW_AttestationTester_AttestationTester, MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation, MissionComputer_Impl_Instance_SW_Monitor_Monitor, MissionComputer_Impl_Instance_SW_FlightController_FlightController, MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager, MissionComputer_Impl_Instance_SW_Filter_Filter, MissionComputer_Impl_Instance_SW_FlightPlanner_FlightPlanner, MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate),
 
-      connections = ISZ (Connection(from = SW_seL4_Impl_Instance_AttestationTester_AttestationTester.AttestationResponse, to = SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation.AttestationTesterResponse),
-                         Connection(from = SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation.AttestationTesterRequest, to = SW_seL4_Impl_Instance_AttestationTester_AttestationTester.AttestationRequest),
-                         Connection(from = SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation.MissionCommand, to = SW_seL4_Impl_Instance_AttestationGate_AttestationGate.MissionCommand_in),
-                         Connection(from = SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation.AttestationResponse, to = SW_seL4_Impl_Instance_AttestationManager_AttestationManager.AttestationResponse),
-                         Connection(from = SW_seL4_Impl_Instance_Monitor_Monitor.FlightPlan_out, to = SW_seL4_Impl_Instance_FlightController_FlightController.FlightPlan),
-                         Connection(from = SW_seL4_Impl_Instance_Monitor_Monitor.Alert, to = SW_seL4_Impl_Instance_FlightController_FlightController.Alert),
-                         Connection(from = SW_seL4_Impl_Instance_AttestationManager_AttestationManager.AttestationRequest, to = SW_seL4_Impl_Instance_Radio_RadioDriver_Attestation.AttestationRequest),
-                         Connection(from = SW_seL4_Impl_Instance_AttestationManager_AttestationManager.TrustedIds, to = SW_seL4_Impl_Instance_AttestationGate_AttestationGate.TrustedIds),
-                         Connection(from = SW_seL4_Impl_Instance_Filter_Filter.Output, to = SW_seL4_Impl_Instance_FlightPlanner_FlightPlanner.MissionCommand),
-                         Connection(from = SW_seL4_Impl_Instance_FlightPlanner_FlightPlanner.FlightPlan, to = SW_seL4_Impl_Instance_Monitor_Monitor.FlightPlan_in),
-                         Connection(from = SW_seL4_Impl_Instance_AttestationGate_AttestationGate.MissionCommand_out, to = SW_seL4_Impl_Instance_Filter_Filter.Input))
+      connections = ISZ (Connection(from = MissionComputer_Impl_Instance_SW_AttestationTester_AttestationTester.AttestationResponse, to = MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation.AttestationTesterResponse),
+                         Connection(from = MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation.AttestationTesterRequest, to = MissionComputer_Impl_Instance_SW_AttestationTester_AttestationTester.AttestationRequest),
+                         Connection(from = MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation.MissionCommand, to = MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate.MissionCommand_in),
+                         Connection(from = MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation.AttestationResponse, to = MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager.AttestationResponse),
+                         Connection(from = MissionComputer_Impl_Instance_SW_Monitor_Monitor.FlightPlan_out, to = MissionComputer_Impl_Instance_SW_FlightController_FlightController.FlightPlan),
+                         Connection(from = MissionComputer_Impl_Instance_SW_Monitor_Monitor.Alert, to = MissionComputer_Impl_Instance_SW_FlightController_FlightController.Alert),
+                         Connection(from = MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager.AttestationRequest, to = MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation.AttestationRequest),
+                         Connection(from = MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager.TrustedIds, to = MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate.TrustedIds),
+                         Connection(from = MissionComputer_Impl_Instance_SW_Filter_Filter.Output, to = MissionComputer_Impl_Instance_SW_FlightPlanner_FlightPlanner.MissionCommand),
+                         Connection(from = MissionComputer_Impl_Instance_SW_FlightPlanner_FlightPlanner.FlightPlan, to = MissionComputer_Impl_Instance_SW_Monitor_Monitor.FlightPlan_in),
+                         Connection(from = MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate.MissionCommand_out, to = MissionComputer_Impl_Instance_SW_Filter_Filter.Input))
     )
   }
 }

@@ -13,4 +13,10 @@ import art._
 
   // returns result of dequeuing seL4's FlightPlan port 
   def FlightPlan_Receive(): Option[DataContent] = $
+
+  // returns T if seL4's Alert port is empty, F otherwise 
+  def Alert_IsEmpty(): B = $
+
+  // returns result of dequeuing seL4's Alert port 
+  def Alert_Receive(): Option[DataContent] = $
 }

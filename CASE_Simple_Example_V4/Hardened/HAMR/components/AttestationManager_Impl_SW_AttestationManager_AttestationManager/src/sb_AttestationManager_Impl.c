@@ -72,7 +72,7 @@ Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_se
   sb_AttestationRequest_enqueue(d);
 }
 
-// send TrustedIds: Out EventDataPort SW__Address_Impl
+// send TrustedIds: Out EventDataPort SW__AllowList_Impl
 Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_seL4Nix_TrustedIds_Send(
   STACK_FRAME
   art_DataContent d) {
@@ -136,6 +136,7 @@ void post_init(void) {
   CALLBACKOP(sb_AttestationResponse_notification_reg_callback(sb_AttestationResponse_notification_handler, NULL));
 }
 
+#ifndef CAKEML_ASSEMBLIES_PRESENT
 /************************************************************************
  * int run(void)
  * Main active thread function.
@@ -151,3 +152,4 @@ int run(void) {
   }
   return 0;
 }
+#endif

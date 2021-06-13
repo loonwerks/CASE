@@ -38,19 +38,19 @@ lazy val MissionComputer_Impl_Instance = slangEmbeddedProject("MissionComputer_I
 // to get the most recent versions of the following dependencies
 
 // versions.properties key: org.scala-lang%scala-library%
-val scalaVer = "2.13.5"
+val scalaVer = "2.13.6"
 
 // versions.properties key: org.scalatest%%scalatest%%
-val scalaTestVersion = "3.2.8"
+val scalaTestVersion = "3.2.9"
 
 // versions.properties key: org.sireum%%scalac-plugin%
-// https://github.com/sireum/scalac-plugin/tree/4.20210422.4fc8eee
-val sireumScalacVersion = "4.20210422.4fc8eee"
+// https://github.com/sireum/scalac-plugin/tree/4.20210518.efc9ab1
+val sireumScalacVersion = "4.20210518.efc9ab1"
 
 
 // refer to https://github.com/sireum/kekinian/releases to get the latest
-// Sireum Kekinian release: https://github.com/sireum/kekinian/tree/4.20210411.c273380
-val kekinianVersion = "4.20210411.c273380"
+// Sireum Kekinian release: https://github.com/sireum/kekinian/tree/4.20210512.a968fb3
+val kekinianVersion = "4.20210512.a968fb3"
 
 
 val inspectorVersion = "0.6-SNAPSHOT"

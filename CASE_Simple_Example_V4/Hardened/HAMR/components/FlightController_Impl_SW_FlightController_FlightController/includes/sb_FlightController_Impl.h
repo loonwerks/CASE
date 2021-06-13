@@ -7,4 +7,6 @@
 
 bool sb_FlightPlan_dequeue(union_art_DataContent *);
 
+bool sb_Alert_dequeue(void);
+
 #endif // SB_FLIGHTCONTROLLER_IMPL_H

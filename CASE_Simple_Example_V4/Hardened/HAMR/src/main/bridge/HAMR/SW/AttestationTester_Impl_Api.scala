@@ -11,8 +11,8 @@ import HAMR._
   def AttestationRequest_Id : Art.PortId
   def AttestationResponse_Id : Art.PortId
 
-  def put_AttestationResponse(value : SW.AttestationResponseMsg_Impl) : Unit = {
-    Art.putValue(AttestationResponse_Id, SW.AttestationResponseMsg_Impl_Payload(value))
+  def put_AttestationResponse(value : Base_Types.Bits) : Unit = {
+    Art.putValue(AttestationResponse_Id, Base_Types.Bits_Payload(value))
   }
 
   def logInfo(msg: String): Unit = {
@@ -38,13 +38,13 @@ import HAMR._
   val AttestationRequest_Id : Art.PortId,
   val AttestationResponse_Id : Art.PortId) extends AttestationTester_Impl_Api {
 
-  def get_AttestationRequest() : Option[SW.AttestationRequestMsg_Impl] = {
-    val value : Option[SW.AttestationRequestMsg_Impl] = Art.getValue(AttestationRequest_Id) match {
-      case Some(SW.AttestationRequestMsg_Impl_Payload(v)) => Some(v)
+  def get_AttestationRequest() : Option[Base_Types.Bits] = {
+    val value : Option[Base_Types.Bits] = Art.getValue(AttestationRequest_Id) match {
+      case Some(Base_Types.Bits_Payload(v)) => Some(v)
       case Some(v) =>
-        Art.logError(id, s"Unexpected payload on port AttestationRequest.  Expecting 'SW.AttestationRequestMsg_Impl_Payload' but received ${v}")
-        None[SW.AttestationRequestMsg_Impl]()
-      case _ => None[SW.AttestationRequestMsg_Impl]()
+        Art.logError(id, s"Unexpected payload on port AttestationRequest.  Expecting 'Base_Types.Bits_Payload' but received ${v}")
+        None[Base_Types.Bits]()
+      case _ => None[Base_Types.Bits]()
     }
     return value
   }

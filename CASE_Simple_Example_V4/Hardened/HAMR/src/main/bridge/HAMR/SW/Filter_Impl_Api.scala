@@ -11,8 +11,8 @@ import HAMR._
   def Input_Id : Art.PortId
   def Output_Id : Art.PortId
 
-  def put_Output(value : SW.RF_Msg_Impl) : Unit = {
-    Art.putValue(Output_Id, SW.RF_Msg_Impl_Payload(value))
+  def put_Output(value : Base_Types.Bits) : Unit = {
+    Art.putValue(Output_Id, Base_Types.Bits_Payload(value))
   }
 
   def logInfo(msg: String): Unit = {
@@ -38,13 +38,13 @@ import HAMR._
   val Input_Id : Art.PortId,
   val Output_Id : Art.PortId) extends Filter_Impl_Api {
 
-  def get_Input() : Option[SW.RF_Msg_Impl] = {
-    val value : Option[SW.RF_Msg_Impl] = Art.getValue(Input_Id) match {
-      case Some(SW.RF_Msg_Impl_Payload(v)) => Some(v)
+  def get_Input() : Option[Base_Types.Bits] = {
+    val value : Option[Base_Types.Bits] = Art.getValue(Input_Id) match {
+      case Some(Base_Types.Bits_Payload(v)) => Some(v)
       case Some(v) =>
-        Art.logError(id, s"Unexpected payload on port Input.  Expecting 'SW.RF_Msg_Impl_Payload' but received ${v}")
-        None[SW.RF_Msg_Impl]()
-      case _ => None[SW.RF_Msg_Impl]()
+        Art.logError(id, s"Unexpected payload on port Input.  Expecting 'Base_Types.Bits_Payload' but received ${v}")
+        None[Base_Types.Bits]()
+      case _ => None[Base_Types.Bits]()
     }
     return value
   }

@@ -35,13 +35,13 @@ import HAMR._
   val FlightPlan_Id : Art.PortId,
   val Alert_Id : Art.PortId) extends FlightController_Impl_Api {
 
-  def get_FlightPlan() : Option[SW.Mission] = {
-    val value : Option[SW.Mission] = Art.getValue(FlightPlan_Id) match {
-      case Some(SW.Mission_Payload(v)) => Some(v)
+  def get_FlightPlan() : Option[Base_Types.Bits] = {
+    val value : Option[Base_Types.Bits] = Art.getValue(FlightPlan_Id) match {
+      case Some(Base_Types.Bits_Payload(v)) => Some(v)
       case Some(v) =>
-        Art.logError(id, s"Unexpected payload on port FlightPlan.  Expecting 'SW.Mission_Payload' but received ${v}")
-        None[SW.Mission]()
-      case _ => None[SW.Mission]()
+        Art.logError(id, s"Unexpected payload on port FlightPlan.  Expecting 'Base_Types.Bits_Payload' but received ${v}")
+        None[Base_Types.Bits]()
+      case _ => None[Base_Types.Bits]()
     }
     return value
   }

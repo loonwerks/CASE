@@ -15,36 +15,40 @@ import HAMR.SW.{RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation =>
   val dispatchProtocol: DispatchPropertyProtocol,
   val dispatchTriggers: Option[ISZ[Art.PortId]],
 
+  AttestationTesterResponse: Port[Base_Types.Bits],
+  AttestationTesterRequest: Port[Base_Types.Bits],
   MissionCommand: Port[Base_Types.Bits],
   AttestationRequest: Port[Base_Types.Bits],
-  AttestationResponse: Port[Base_Types.Bits],
-  Alert: Port[art.Empty]
+  AttestationResponse: Port[Base_Types.Bits]
   ) extends Bridge {
 
   val ports : Bridge.Ports = Bridge.Ports(
-    all = ISZ(MissionCommand,
+    all = ISZ(AttestationTesterResponse,
+              AttestationTesterRequest,
+              MissionCommand,
               AttestationRequest,
-              AttestationResponse,
-              Alert),
+              AttestationResponse),
 
     dataIns = ISZ(),
 
     dataOuts = ISZ(),
 
-    eventIns = ISZ(AttestationRequest,
-                   Alert),
+    eventIns = ISZ(AttestationTesterResponse,
+                   AttestationRequest),
 
-    eventOuts = ISZ(MissionCommand,
+    eventOuts = ISZ(AttestationTesterRequest,
+                    MissionCommand,
                     AttestationResponse)
   )
 
   val initialization_api : RadioDriver_Attestation_Impl_Initialization_Api = {
     val api = RadioDriver_Attestation_Impl_Initialization_Api(
       id,
+      AttestationTesterResponse.id,
+      AttestationTesterRequest.id,
       MissionCommand.id,
       AttestationRequest.id,
-      AttestationResponse.id,
-      Alert.id
+      AttestationResponse.id
     )
     RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_initialization_api = Some(api)
     api
@@ -53,10 +57,11 @@ import HAMR.SW.{RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation =>
   val operational_api : RadioDriver_Attestation_Impl_Operational_Api = {
     val api = RadioDriver_Attestation_Impl_Operational_Api(
       id,
+      AttestationTesterResponse.id,
+      AttestationTesterRequest.id,
       MissionCommand.id,
       AttestationRequest.id,
-      AttestationResponse.id,
-      Alert.id
+      AttestationResponse.id
     )
     RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.c_operational_api = Some(api)
     api
@@ -66,10 +71,11 @@ import HAMR.SW.{RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation =>
     RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge.EntryPoints(
       id,
 
+      AttestationTesterResponse.id,
+      AttestationTesterRequest.id,
       MissionCommand.id,
       AttestationRequest.id,
       AttestationResponse.id,
-      Alert.id,
 
       dispatchTriggers,
 
@@ -85,10 +91,11 @@ object RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge {
   @datatype class EntryPoints(
     RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_BridgeId : Art.BridgeId,
 
+    AttestationTesterResponse_Id : Art.PortId,
+    AttestationTesterRequest_Id : Art.PortId,
     MissionCommand_Id : Art.PortId,
     AttestationRequest_Id : Art.PortId,
     AttestationResponse_Id : Art.PortId,
-    Alert_Id : Art.PortId,
 
     dispatchTriggers : Option[ISZ[Art.PortId]],
 
@@ -97,12 +104,13 @@ object RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge {
 
     val dataInPortIds: ISZ[Art.PortId] = ISZ()
 
-    val eventInPortIds: ISZ[Art.PortId] = ISZ(AttestationRequest_Id,
-                                              Alert_Id)
+    val eventInPortIds: ISZ[Art.PortId] = ISZ(AttestationTesterResponse_Id,
+                                              AttestationRequest_Id)
 
     val dataOutPortIds: ISZ[Art.PortId] = ISZ()
 
-    val eventOutPortIds: ISZ[Art.PortId] = ISZ(MissionCommand_Id,
+    val eventOutPortIds: ISZ[Art.PortId] = ISZ(AttestationTesterRequest_Id,
+                                               MissionCommand_Id,
                                                AttestationResponse_Id)
 
     def compute(): Unit = {
@@ -129,15 +137,17 @@ object RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge {
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
       for(portId <- dispatchableEventPorts) {
-        if(portId == AttestationRequest_Id){
+        if(portId == AttestationTesterResponse_Id){
+          val Some(Base_Types.Bits_Payload(value)) = Art.getValue(AttestationTesterResponse_Id)
+
+          // implement the following in 'component':  def handle_AttestationTesterResponse(api: RadioDriver_Attestation_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
+          component.handle_AttestationTesterResponse(operational_api, value)
+        }
+        else if(portId == AttestationRequest_Id){
           val Some(Base_Types.Bits_Payload(value)) = Art.getValue(AttestationRequest_Id)
 
           // implement the following in 'component':  def handle_AttestationRequest(api: RadioDriver_Attestation_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
           component.handle_AttestationRequest(operational_api, value)
-        }
-        else if(portId == Alert_Id) {
-          // implement the following in 'component':  def handle_Alert(api: RadioDriver_Attestation_Impl_Operational_Api): Unit = {}
-          component.handle_Alert(operational_api)
         }
       }
 
@@ -169,15 +179,17 @@ object RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge {
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
       for(portId <- dispatchableEventPorts) {
-        if(portId == AttestationRequest_Id){
+        if(portId == AttestationTesterResponse_Id){
+          val Some(Base_Types.Bits_Payload(value)) = Art.getValue(AttestationTesterResponse_Id)
+
+          // implement the following in 'component':  def handle_AttestationTesterResponse(api: RadioDriver_Attestation_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
+          component.handle_AttestationTesterResponse(operational_api, value)
+        }
+        else if(portId == AttestationRequest_Id){
           val Some(Base_Types.Bits_Payload(value)) = Art.getValue(AttestationRequest_Id)
 
           // implement the following in 'component':  def handle_AttestationRequest(api: RadioDriver_Attestation_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
           component.handle_AttestationRequest(operational_api, value)
-        }
-        else if(portId == Alert_Id) {
-          // implement the following in 'component':  def handle_Alert(api: RadioDriver_Attestation_Impl_Operational_Api): Unit = {}
-          component.handle_Alert(operational_api)
         }
       }
 
