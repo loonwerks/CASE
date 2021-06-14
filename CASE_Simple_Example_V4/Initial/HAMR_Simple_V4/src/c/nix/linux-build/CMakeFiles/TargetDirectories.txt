@@ -1,8 +1,0 @@
-/home/vagrant/git/CASE/CASE_Simple_Example_V4/Initial/HAMR_Simple_V4/src/c/nix/linux-build/CMakeFiles/rebuild_cache.dir
-/home/vagrant/git/CASE/CASE_Simple_Example_V4/Initial/HAMR_Simple_V4/src/c/nix/linux-build/CMakeFiles/edit_cache.dir
-/home/vagrant/git/CASE/CASE_Simple_Example_V4/Initial/HAMR_Simple_V4/src/c/nix/linux-build/CMakeFiles/Main-bin.dir
-/home/vagrant/git/CASE/CASE_Simple_Example_V4/Initial/HAMR_Simple_V4/src/c/nix/linux-build/CMakeFiles/FlightController_Impl_SW_FlightController_App-bin.dir
-/home/vagrant/git/CASE/CASE_Simple_Example_V4/Initial/HAMR_Simple_V4/src/c/nix/linux-build/CMakeFiles/FlightPlanner_Impl_SW_FlightPlanner_App-bin.dir
-/home/vagrant/git/CASE/CASE_Simple_Example_V4/Initial/HAMR_Simple_V4/src/c/nix/linux-build/CMakeFiles/RadioDriver_Impl_SW_Radio_App-bin.dir
-/home/vagrant/git/CASE/CASE_Simple_Example_V4/Initial/HAMR_Simple_V4/src/c/nix/linux-build/CMakeFiles/AttestationTester_Impl_SW_AttestationTester_App-bin.dir
-/home/vagrant/git/CASE/CASE_Simple_Example_V4/Initial/HAMR_Simple_V4/src/c/nix/linux-build/CMakeFiles/main.dir

@@ -1,4 +1,0 @@
-all.c:3:3:Type__eq	16	static
-all.c:85:6:Type_cprint	16	static
-all.c:168:6:Type_string_	16	static
-all.c:249:6:Z_apply	64	static

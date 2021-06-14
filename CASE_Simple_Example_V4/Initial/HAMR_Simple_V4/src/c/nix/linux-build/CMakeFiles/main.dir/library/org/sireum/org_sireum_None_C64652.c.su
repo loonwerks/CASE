@@ -1,7 +1,0 @@
-org_sireum_None_C64652.h:14:10:None_C64652__ne	8	static
-org_sireum_None_C64652.h:20:10:None_C64652__is	8	static
-org_sireum_None_C64652.h:24:20:None_C64652__as	16	static
-org_sireum_None_C64652.c:5:3:None_C64652__eq	8	static
-org_sireum_None_C64652.c:11:6:None_C64652_string_	64	static
-org_sireum_None_C64652.c:17:6:None_C64652_cprint	112	static
-org_sireum_None_C64652.c:27:6:None_C64652_apply	8	static

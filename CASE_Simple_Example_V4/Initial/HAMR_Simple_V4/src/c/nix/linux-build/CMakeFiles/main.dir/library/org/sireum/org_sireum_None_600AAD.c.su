@@ -1,7 +1,0 @@
-org_sireum_None_600AAD.h:14:10:None_600AAD__ne	8	static
-org_sireum_None_600AAD.h:20:10:None_600AAD__is	8	static
-org_sireum_None_600AAD.h:24:20:None_600AAD__as	16	static
-org_sireum_None_600AAD.c:5:3:None_600AAD__eq	8	static
-org_sireum_None_600AAD.c:11:6:None_600AAD_string_	64	static
-org_sireum_None_600AAD.c:17:6:None_600AAD_cprint	112	static
-org_sireum_None_600AAD.c:27:6:None_600AAD_apply	8	static
