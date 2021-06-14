@@ -146,9 +146,9 @@ This example illustrates "end-to-end" CASE cyber-resiliency concepts using a mor
 - C-programmed native components (e.g., a native implementation of the UxAS waypoint manager)
 - VM-based "boundary" components that implement low-level communication between the high-assurance system (the UAV software with cyber-resiliency) and untrusted context components (e.g., UAV ground stations)
 
-_Still need to resolve the VM+CakeML issue, and potentially determine how the "seamless" intgration of SPLAT + HAMR will work_
+_Still need to resolve the VM+CakeML issue_
 
-The work-in-progress version is [here](https://github.com/ku-sldg/CASETeam/tree/master/examples/ksu-proprietary/Phase-2-UAV-Experimental-Platform-June-step6-hamr)
+The work-in-progress version is [here](phase2)
 
 ### Debugging Note
 
