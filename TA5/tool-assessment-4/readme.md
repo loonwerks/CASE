@@ -52,7 +52,7 @@ for the simple producer/consumer example for AADL event data ports,
 (c) consult the other examples to understand additional supported
 features and more realistic system builds, and (d) experiment with
 building your own system (perhaps starting by making simple modifications of
-the provided examples).
+the provided examples). **TODO: Consider adding remark that references Phase II model as an end-to-end example**.
 
 ## Tool Installation
 
@@ -66,13 +66,13 @@ AADL can be used to support a variety of processing and communication styles.  T
 
 - The [CASE-Tool-Assessment-AADL-Guide](https://github.com/loonwerks/CASE/tree/master/TA5/tool-assessment-4/doc/CASE-Tool-Assessment-Guide.pdf) summarizes the currently supported CASE-supported AADL subset as well as CASE-specific AADL properties that are used to configure and direct CASE tools.
 
-- The CASE Resolint tool (**insert link to documentation**??) (essentially, a rule-based linter for AADL models) is used to check that models conform to the supported AADL subset.
+- The CASE Resolint tool (**TODO: insert link to documentation**??) (essentially, a rule-based linter for AADL models) is used to check that models conform to the supported AADL subset.
 
 Developers should follow the CASE style guidelines when building models, and Resolint should be run before HAMR code generation is performed.  There may be additional model restrictions that not enforced by Resolint that are indicated by warnings/errors during HAMR code generation.
 
 In CASE Phase II and III, Collins systems are focusing on using *periodic* AADL threads and *event data* ports.  This allows HAMR supported systems to align with ARINC 653 style real-time tasking and communication used in Collins product groups.   Thus, the deliverable documentation will focus on this type of tasking/communication.
 
-AADL supports modeling data types for data flowing across AADL ports.  Due to the fact that HAMR development is in the middle of switching from the data type strategy used on Phase II to the one to the used on Phase III, this deliverable only supports raw data (byte array) communication between components.  The size of the communicated byte array for each port is specified as an AADL port property (see Tutorial and examples).  In the current state of the tool, developers can use their preferred data type encoding scheme.  One approach using the Kansas State Sireum Bit-Codec framework is illustrated in [Bit-Codec](bit-codec/producer-filter-consumer) example below.  The final Phase III deliverable will support types specified using the AADL Data Model in addition to raw byte arrays.
+AADL supports modeling data types for data flowing across AADL ports.  Due to the fact that HAMR development is in the middle of switching from the data type strategy used on Phase II to the one to the used on Phase III, this deliverable only supports raw data (byte array) communication between components.  The size of the communicated byte array for each port is specified as an AADL port property (** TODO: see Tutorial and examples**).  In the current state of the tool, developers can use their preferred data type encoding scheme.  One approach using the Kansas State Sireum Bit-Codec framework is illustrated in [Bit-Codec](bit-codec/producer-filter-consumer) example below.  The final Phase III deliverable will support types specified using the AADL Data Model in addition to raw byte arrays.
 
 ## Tutorial Example
 
