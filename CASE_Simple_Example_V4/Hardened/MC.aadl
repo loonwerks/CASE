@@ -45,7 +45,7 @@ public
 		properties
 			Frame_Period => 1000ms;
             Clock_Period => 2ms;
-            CASE_Scheduling::Max_Domain => 9;
+            CASE_Scheduling::Max_Domain => 10;
             CASE_Scheduling::Schedule_Source_Text => "domain-schedule/schedule.c";		
 	end MC_Proc.Impl;
 

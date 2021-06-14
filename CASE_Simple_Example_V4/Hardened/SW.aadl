@@ -49,9 +49,10 @@ public
 
 	thread implementation Monitor.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 			Source_Text => ("./SW_Monitor/Monitor.S");
 			CASE_Properties::Component_Language => CakeML;
 	end Monitor.Impl;
@@ -75,9 +76,10 @@ public
 
 	thread implementation Filter.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 			Source_Text => ("./SW_Filter/Filter.S");
 			CASE_Properties::Component_Language => CakeML;
 	end Filter.Impl;
@@ -105,9 +107,10 @@ public
 
 	thread implementation AttestationGate.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 			Source_Text => ("./SW_AttestationGate/AttestationGate.S");
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationGate.Impl;
@@ -124,9 +127,10 @@ public
 	thread implementation AttestationManager.Impl
 		properties
 			CASE_Properties::Cache_Timeout => 5 min;
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 			Source_text => ("SW_AttestationManager/AttestationManager.S");
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationManager.Impl;
@@ -266,9 +270,10 @@ public
 	
 	thread implementation AttestationTester.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 			Source_text => ("SW_AttestationTester/AttestationTester.S");
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationTester.Impl;
@@ -288,8 +293,11 @@ public
 
 	thread implementation RadioDriver.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
+			Source_text => ("mocks/Radio.c");
 	end RadioDriver.Impl;
 
 	thread FlightPlanner
@@ -305,9 +313,10 @@ public
 
 	thread implementation FlightPlanner.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 			Source_text => ("mocks/FlightPlanner.c");
 	end FlightPlanner.Impl;
 
@@ -323,9 +332,10 @@ public
 
 	thread implementation FlightController.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 			Source_text => ("mocks/FlightController.c");
 	end FlightController.Impl;
 
@@ -345,10 +355,11 @@ public
 
 	thread implementation RadioDriver_Attestation.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
-			Source_text => ("mocks/radio.c");
+			Stack_size => 1048576 Bytes;
+			Source_text => ("mocks/Radio.c");
 	end RadioDriver_Attestation.Impl;
 
 	process SW
