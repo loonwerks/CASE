@@ -16,10 +16,15 @@
     * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
 <!--table-of-contents_end-->
 
-This example illustrates how to model and implement event data port communications between
-components. In this context, an event data port communication is a shared memory construct
-where the sending component has write-only permissions, to the designated block
-of memory, and the receiving component has read-only permissions. The data in the
+This example illustrates how to model and implement AADL event data port communications between
+components.  *** Overview of semantics of AADL event data ports.  Note that HAMR currently
+only supports queue sizes of 1.***.
+
+
+In HAMR code generation for seL4, the underlying representation of the communication
+channel between the sending and receiving port is a shared memory construct
+for which the sending component has write-only permissions and the receiving component 
+has read-only permissions. The data in the
 shared memory is queued, and each write operation is accompanied with an event signal
 that is forwarded to the receiving component, indicating that a new communication has
 been sent. If a write operation is invoked when the queue is full, then the oldest data entry
