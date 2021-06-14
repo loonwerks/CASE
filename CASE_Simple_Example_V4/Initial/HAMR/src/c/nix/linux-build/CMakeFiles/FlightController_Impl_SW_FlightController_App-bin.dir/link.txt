@@ -1,1 +1,0 @@
-/usr/bin/cc -O3 -DNDEBUG   CMakeFiles/FlightController_Impl_SW_FlightController_App-bin.dir/app-FlightController_Impl_SW_FlightController_App/FlightController_Impl_SW_FlightController_App.c.o  -o FlightController_Impl_SW_FlightController_App libmain.a -lm 

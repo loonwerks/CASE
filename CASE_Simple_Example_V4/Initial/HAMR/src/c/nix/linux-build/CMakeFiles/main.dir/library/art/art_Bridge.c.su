@@ -1,7 +1,0 @@
-art_Bridge.h:17:13:art_Bridge_string_	8	static
-art_Bridge.c:5:3:art_Bridge__is	8	static
-art_Bridge.c:14:12:art_Bridge__as	16	static
-art_Bridge.c:28:3:art_Bridge_id_	16	static
-art_Bridge.c:37:6:art_Bridge_dispatchProtocol_	16	static
-art_Bridge.c:46:6:art_Bridge_name_	16	static
-art_Bridge.c:55:6:art_Bridge_ports_	16	static

@@ -1,0 +1,55 @@
+#ifndef SIREUM_H_HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints
+#define SIREUM_H_HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <types.h>
+
+// HAMR_Simple_V4.SW.RadioDriver_Impl_SW_Radio_Bridge.EntryPoints
+
+#define HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_RadioDriver_Impl_SW_Radio_BridgeId_(this) ((this)->RadioDriver_Impl_SW_Radio_BridgeId)
+#define HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_AttestationTesterResponse_Id_(this) ((this)->AttestationTesterResponse_Id)
+#define HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_AttestationTesterRequest_Id_(this) ((this)->AttestationTesterRequest_Id)
+#define HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_MissionCommand_Id_(this) ((this)->MissionCommand_Id)
+#define HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_dispatchTriggers_(this) ((Option_9AF35E) &(this)->dispatchTriggers)
+#define HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_initialization_api_(this) ((HAMR_Simple_V4_SW_RadioDriver_Impl_Initialization_Api) &(this)->initialization_api)
+#define HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_operational_api_(this) ((HAMR_Simple_V4_SW_RadioDriver_Impl_Operational_Api) &(this)->operational_api)
+#define HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_dataInPortIds_(this) ((IS_82ABD8) &(this)->dataInPortIds)
+#define HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_eventInPortIds_(this) ((IS_82ABD8) &(this)->eventInPortIds)
+#define HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_dataOutPortIds_(this) ((IS_82ABD8) &(this)->dataOutPortIds)
+#define HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_eventOutPortIds_(this) ((IS_82ABD8) &(this)->eventOutPortIds)
+
+B HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints__eq(HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints this, HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints other);
+inline B HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints__ne(HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints this, HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints other) {
+  return !HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints__eq(this, other);
+};
+void HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_string_(STACK_FRAME String result, HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints this);
+void HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_cprint(HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints this, B isOut);
+
+inline B HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints__is(STACK_FRAME void* this) {
+  return ((HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints) this)->type == THAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints;
+}
+
+inline HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints__as(STACK_FRAME void *this) {
+  if (HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints__is(CALLER this)) return (HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints) this;
+  sfAbortImpl(CALLER "Invalid cast to HAMR_Simple_V4.SW.RadioDriver_Impl_SW_Radio_Bridge.EntryPoints.");
+  abort();
+}
+
+void HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_apply(STACK_FRAME HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints this, Z RadioDriver_Impl_SW_Radio_BridgeId, Z AttestationTesterResponse_Id, Z AttestationTesterRequest_Id, Z MissionCommand_Id, Option_9AF35E dispatchTriggers, HAMR_Simple_V4_SW_RadioDriver_Impl_Initialization_Api initialization_api, HAMR_Simple_V4_SW_RadioDriver_Impl_Operational_Api operational_api);
+
+Unit HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_initialise_(STACK_FRAME HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints this);
+
+void HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_filter_(STACK_FRAME IS_82ABD8 result, HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints this, IS_82ABD8 receivedEvents, IS_82ABD8 triggers);
+
+Unit HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_compute_(STACK_FRAME HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints this);
+
+Unit HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints_finalise_(STACK_FRAME HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints this);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

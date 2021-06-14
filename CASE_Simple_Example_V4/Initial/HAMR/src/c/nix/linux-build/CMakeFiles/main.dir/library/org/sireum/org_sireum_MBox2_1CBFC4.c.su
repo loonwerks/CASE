@@ -1,7 +1,0 @@
-org_sireum_MBox2_1CBFC4.h:24:10:MBox2_1CBFC4__is	8	static
-org_sireum_MBox2_1CBFC4.h:28:21:MBox2_1CBFC4__as	16	static
-org_sireum_MBox2_1CBFC4.c:5:3:MBox2_1CBFC4__eq	8	static
-org_sireum_MBox2_1CBFC4.h:18:10:MBox2_1CBFC4__ne	16	static
-org_sireum_MBox2_1CBFC4.c:13:6:MBox2_1CBFC4_string_	112	static
-org_sireum_MBox2_1CBFC4.c:23:6:MBox2_1CBFC4_cprint	160	static
-org_sireum_MBox2_1CBFC4.c:37:6:MBox2_1CBFC4_apply	8	static

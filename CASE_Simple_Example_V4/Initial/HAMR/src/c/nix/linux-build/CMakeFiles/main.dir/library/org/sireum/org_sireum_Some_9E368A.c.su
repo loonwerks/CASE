@@ -1,7 +1,0 @@
-org_sireum_Some_9E368A.h:21:10:Some_9E368A__is	8	static
-org_sireum_Some_9E368A.h:25:20:Some_9E368A__as	16	static
-org_sireum_Some_9E368A.c:5:3:Some_9E368A__eq	16	static
-org_sireum_Some_9E368A.h:15:10:Some_9E368A__ne	16	static
-org_sireum_Some_9E368A.c:12:6:Some_9E368A_string_	80	static
-org_sireum_Some_9E368A.c:19:6:Some_9E368A_cprint	128	static
-org_sireum_Some_9E368A.c:30:6:Some_9E368A_apply	8	static

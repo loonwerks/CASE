@@ -1,7 +1,0 @@
-org_sireum_Tuple2_EC3B57.h:16:10:Tuple2_EC3B57_1	8	static
-org_sireum_Tuple2_EC3B57.h:20:10:Tuple2_EC3B57_2	8	static
-org_sireum_Tuple2_EC3B57.c:10:6:Tuple2_EC3B57_apply	8	static
-org_sireum_Tuple2_EC3B57.c:16:3:Tuple2_EC3B57__eq	8	static
-org_sireum_Tuple2_EC3B57.h:24:10:Tuple2_EC3B57__ne	8	static
-org_sireum_Tuple2_EC3B57.c:22:6:Tuple2_EC3B57_cprint	160	static
-org_sireum_Tuple2_EC3B57.c:33:6:Tuple2_EC3B57_string_	112	static

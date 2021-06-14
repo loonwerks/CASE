@@ -1,7 +1,0 @@
-org_sireum_Some_FCFE69.h:21:10:Some_FCFE69__is	8	static
-org_sireum_Some_FCFE69.h:25:20:Some_FCFE69__as	16	static
-org_sireum_Some_FCFE69.c:5:3:Some_FCFE69__eq	16	static
-org_sireum_Some_FCFE69.h:15:10:Some_FCFE69__ne	16	static
-org_sireum_Some_FCFE69.c:12:6:Some_FCFE69_string_	80	static
-org_sireum_Some_FCFE69.c:19:6:Some_FCFE69_cprint	128	static
-org_sireum_Some_FCFE69.c:30:6:Some_FCFE69_apply	8	static

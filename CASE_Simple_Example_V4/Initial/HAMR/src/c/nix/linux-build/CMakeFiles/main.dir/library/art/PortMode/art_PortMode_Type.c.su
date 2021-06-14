@@ -1,7 +1,0 @@
-type-art_PortMode_Type.h:18:10:art_PortMode_Type__eq	8	static
-type-art_PortMode_Type.h:22:10:art_PortMode_Type__ne	8	static
-type-art_PortMode_Type.h:26:10:art_PortMode_Type__ordinal	8	static
-type-art_PortMode_Type.h:30:13:art_PortMode_Type_name_	128	static
-art_PortMode_Type.c:10:3:art_PortMode_Type_numOfElements	8	static
-art_PortMode_Type.c:14:6:art_PortMode_Type_cprint	224	static
-art_PortMode_Type.c:25:6:art_PortMode_Type_string_	128	static
