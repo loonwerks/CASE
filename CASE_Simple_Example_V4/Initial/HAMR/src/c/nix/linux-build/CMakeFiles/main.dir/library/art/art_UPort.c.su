@@ -1,6 +1,0 @@
-art_UPort.h:17:13:art_UPort_string_	8	static
-art_UPort.c:5:3:art_UPort__is	8	static
-art_UPort.c:12:11:art_UPort__as	16	static
-art_UPort.c:24:3:art_UPort_id_	16	static
-art_UPort.c:31:19:art_UPort_mode_	16	static
-art_UPort.c:38:6:art_UPort_name_	16	static

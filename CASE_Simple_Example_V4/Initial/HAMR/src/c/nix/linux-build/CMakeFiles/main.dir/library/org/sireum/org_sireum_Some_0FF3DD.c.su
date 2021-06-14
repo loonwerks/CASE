@@ -1,7 +1,0 @@
-org_sireum_Some_0FF3DD.h:21:10:Some_0FF3DD__is	8	static
-org_sireum_Some_0FF3DD.h:25:20:Some_0FF3DD__as	16	static
-org_sireum_Some_0FF3DD.c:5:3:Some_0FF3DD__eq	16	static
-org_sireum_Some_0FF3DD.h:15:10:Some_0FF3DD__ne	16	static
-org_sireum_Some_0FF3DD.c:12:6:Some_0FF3DD_string_	80	static
-org_sireum_Some_0FF3DD.c:19:6:Some_0FF3DD_cprint	128	static
-org_sireum_Some_0FF3DD.c:30:6:Some_0FF3DD_apply	8	static

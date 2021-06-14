@@ -1,7 +1,0 @@
-art_Connection.h:22:10:art_Connection__is	8	static
-art_Connection.h:26:23:art_Connection__as	16	static
-art_Connection.c:5:3:art_Connection__eq	32	static
-art_Connection.h:16:10:art_Connection__ne	16	static
-art_Connection.c:13:6:art_Connection_string_	112	static
-art_Connection.c:23:6:art_Connection_cprint	176	static
-art_Connection.c:37:6:art_Connection_apply	32	static

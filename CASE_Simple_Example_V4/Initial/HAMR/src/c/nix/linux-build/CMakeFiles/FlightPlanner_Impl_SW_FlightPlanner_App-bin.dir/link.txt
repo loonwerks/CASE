@@ -1,1 +1,0 @@
-/usr/bin/cc -O3 -DNDEBUG   CMakeFiles/FlightPlanner_Impl_SW_FlightPlanner_App-bin.dir/app-FlightPlanner_Impl_SW_FlightPlanner_App/FlightPlanner_Impl_SW_FlightPlanner_App.c.o  -o FlightPlanner_Impl_SW_FlightPlanner_App libmain.a -lm 

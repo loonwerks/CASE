@@ -1,7 +1,0 @@
-art_Empty.h:14:10:art_Empty__ne	8	static
-art_Empty.h:20:10:art_Empty__is	8	static
-art_Empty.h:24:18:art_Empty__as	16	static
-art_Empty.c:5:3:art_Empty__eq	8	static
-art_Empty.c:11:6:art_Empty_string_	64	static
-art_Empty.c:17:6:art_Empty_cprint	112	static
-art_Empty.c:27:6:art_Empty_apply	8	static
