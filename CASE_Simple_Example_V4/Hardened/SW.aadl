@@ -18,11 +18,11 @@ public
 		annex agree {**
 			const is_latched : bool = false;
 			
-			const bottom_left : Coordinate.Impl = Coordinate.Impl{Latitude = 30; Longitude = 30; Altitude = 10000};
-			const top_right : Coordinate.Impl = Coordinate.Impl{Latitude = 60; Longitude = 60; Altitude = 10000};
+			const bottom_left : Coordinate.Impl = Coordinate.Impl{Latitude = 45.300400; Longitude = -121.014730; Altitude = 1000.0};
+			const top_right : Coordinate.Impl = Coordinate.Impl{Latitude = 45.345315; Longitude = -120.912520; Altitude = 1000.0};
 			const keep_in_zone : KeepInZone.Impl = [| bottom_left, top_right |];
 			
-			fun IS_BOUNDED(pt : Base_Types::Integer_32, low : Base_Types::Integer_32, high : Base_Types::Integer_32) : bool =
+			fun IS_BOUNDED(pt : Base_Types::Float_32, low : Base_Types::Float_32, high : Base_Types::Float_32) : bool =
 				pt >= low and pt <= high;
 			
 			fun WAYPOINT_IN_ZONE(wp: Coordinate.Impl, kiz : KeepInZone.Impl) : bool =
@@ -142,9 +142,9 @@ public
 	data implementation Coordinate.Impl
 		-- This is the structure to hold the lat/long/alt values of a coordinate
 		subcomponents
-			Latitude: data Base_Types::Integer_32;
-			Longitude: data Base_Types::Integer_32;
-			Altitude: data Base_Types::Integer_32;
+			Latitude: data Base_Types::Float_32;
+			Longitude: data Base_Types::Float_32;
+			Altitude: data Base_Types::Float_32;
 		properties
 			HAMR::Bit_Codec_Max_Size => 12 Bytes;
 	end Coordinate.Impl;
@@ -553,7 +553,7 @@ public
 		fun VALID_MESSAGE(msg : RF_Msg.Impl) : bool = (msg.header.src > 0 and msg.header.dst = CASE_UAV_ID);
 		fun WELL_FORMED_MESSAGE(msg : RF_Msg.Impl) : bool = good_command(msg.payload);
 		-- These functions check the well-formedness of message structures
-		fun good_coordinate(coord : Coordinate.Impl) : bool = coord.Latitude >= -90 and coord.Latitude <= 90 and coord.Longitude >= -180 and coord.Longitude <= 180 and coord.Altitude >= 0 and coord.Altitude <= 15000;
+		fun good_coordinate(coord : Coordinate.Impl) : bool = coord.Latitude >= -90.0 and coord.Latitude <= 90.0 and coord.Longitude >= -180.0 and coord.Longitude <= 180.0 and coord.Altitude >= 0.0 and coord.Altitude <= 15000.0;
 		fun good_map(map : Map) : bool = forall wp in map, good_coordinate(wp);
 		fun good_command(cmd : Command.Impl) : bool = good_map(cmd.Map);
 		fun good_mission(mission : Mission) : bool = forall wp in mission, good_coordinate(wp);
