@@ -89,15 +89,15 @@
 
 <!--aadl-architecture_end-->
 
-** TODO explain the domain assignments**
+**  TODO explain the domain assignments**
 
 ## LMCP Integration
 
 **TODO: for now just note that examples of LMCP integration is available
 for both native components 
-(e.g. [Geofence Monitor](aadl/hamr/c/ext-c/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req.c#L29))
+(e.g. [Geofence Monitor](hamr/c/ext-c/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req.c#L29))
 as well as for VM components
-(e.g. [UXAS](aadl/hamr/camkes/components/VM/apps/vmUXAS/vmUXAS.c#L512))**
+(e.g. [UXAS](hamr/camkes/components/VM/apps/vmUXAS/vmUXAS.c#L512))**
 
 ## Linux
 
