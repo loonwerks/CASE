@@ -23,17 +23,29 @@ Unit hamr_SW_CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_final
 
 Unit hamr_SW_CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_timeTriggered_(STACK_FRAME_ONLY) {
   DeclNewStackFrame(caller, "CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST.c", "", "hamr_SW_CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_timeTriggered_", 0);
-/*
+  
+
+
   // examples of api getter usage
   uint8_t t0[numBytes_hamr_CMASI_LineSearchTask_i];
   size_t t0_numBits;
   if(api_get_filter_in__hamr_SW_CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST(SF &t0_numBits, t0)) {
     // sanity check
-    sfAssert(SF (Z) t0_numBits == numBits_hamr_CMASI_LineSearchTask_i, "numBits received does not match expected");
+    // FIXME: the attestation gate is not stripping off the address attributed part of messages so
+    // the received number of bits will be larger than expected
+    //    sfAssert(SF (Z) t0_numBits == numBits_hamr_CMASI_LineSearchTask_i, "numBits received does not match expected");
+
+    // just pass on the received message
+
+    api_logInfo__hamr_SW_CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST(SF string("Pretending to be CakeML - just forwarding the message on"));
+
+    api_put_filter_out__hamr_SW_CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST(SF t0_numBits, t0);
+    /*
     DeclNewString(filter_in_str);
     String__append(SF (String) &filter_in_str, string("Received on filter_in: "));
     byte_array_string(SF (String) &filter_in_str, t0, numBytes_hamr_CMASI_LineSearchTask_i);
     api_logInfo__hamr_SW_CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST(SF (String) &filter_in_str);
+    */
   }
-  */
+
 }

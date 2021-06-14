@@ -2,18 +2,27 @@
 
  Table of Contents
 <!--ts-->
-  * [AADL Architecture](#aadl-architecture)
-  * [Linux](#linux)
-    * [HAMR Configuration: Linux](#hamr-configuration-linux)
-    * [Behavior Code: Linux](#behavior-code-linux)
-    * [How to Build/Run: Linux](#how-to-buildrun-linux)
-  * [SeL4](#sel4)
-    * [HAMR Configuration: SeL4](#hamr-configuration-sel4)
-    * [Behavior Code: SeL4](#behavior-code-sel4)
-    * [How to Build/Run: SeL4](#how-to-buildrun-sel4)
-    * [Example Output: SeL4](#example-output-sel4)
-    * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
-    * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
+* [AADL Architecture](#aadl-architecture)
+* [Installing the Tools](#installing-the-tools)
+  * [Install CakeML](#install-cakeml)
+* [Modify the AADL Model for CakeML Integration](#modify-the-aadl-model-for-cakeml-integration)
+  * [Wire Protocol](#wire-protocol)
+  * [Specify Monitor/Filter components](#specify-monitorfilter-components)
+* [LMCP Integration](#lmcp-integration)
+* [Linux](#linux)
+  * [HAMR Configuration: Linux](#hamr-configuration-linux)
+  * [Behavior Code: Linux](#behavior-code-linux)
+  * [How to Build/Run: Linux](#how-to-buildrun-linux)
+* [SeL4](#sel4)
+  * [HAMR Configuration: SeL4](#hamr-configuration-sel4)
+  * [Behavior Code: SeL4](#behavior-code-sel4)
+  * [How to Build/Run: SeL4](#how-to-buildrun-sel4)
+    * [Generate the CakeML assemblies](#generate-the-cakeml-assemblies)
+    * [Install CAmkES + ARM VM](#install-camkes--arm-vm)
+    * [Build the Image and Simulate via QEMU](#build-the-image-and-simulate-via-qemu)
+  * [Example Output: SeL4](#example-output-sel4)
+  * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
+  * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
 <!--te-->
 
 
@@ -89,7 +98,40 @@
 
 <!--aadl-architecture_end-->
 
-**  TODO explain the domain assignments**
+
+## Installing the Tools
+
+The following assumes a case-env is used (see [https://github.com/loonwerks/CASE/tree/master/TA5/case-env](https://github.com/loonwerks/CASE/tree/master/TA5/case-env))
+
+### Install CakeML
+
+Run ``$HOME/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh``.  Note that installing HOL takes a long time and is optional <-- *Junaid/Eric feedback*
+
+Once installed, make sure the 64bit version is available from the command line.  E.g. in a directory available in my path I have the symlink ``cake -> /usr/local/bin/cake-x64-64/cake``
+
+**NOTE**: Cake seg faulted the first time I tried to run it from the command line.  Restarting the vagrant VM seemed to fix the issue.
+
+## Modify the AADL Model for CakeML Integration
+
+### Wire Protocol
+Only the wire protocol (ie. byte arrays) is supported for CakeML integration.
+
+  - Attach ``HAMR::Bit_Codec_Raw_Connections => true;`` to the top-level system [UAV.aadl](aadl/UAV/UAV.aadl#L46)
+  - Use the ``HAMR::Bit_Codec_Max_Size`` property to specify the encoded size of each data component that is used by an event data or data port.  For example, see 
+  [AddressAttributedMessage.i](aadl/UxAS/Message%20Definitions/CMASI.aadl#L52)
+  that is used by
+  [UARTDriver_thrRadioDriver_Attestation_thr.AutomationRequest](aadl/UAV/SW.aadl#L26)
+
+    - This property only needs to be attached to the top level data component (e.g. array subtypes and record field types do not need to be modified if they are not directly used by a port)
+
+    - HAMR will use the ``Memory_Properties::Data_Size`` annotation if present for types defined in [Base_Types](https://github.com/osate/osate2/blob/master/core/org.osate.contribution.sei/resources/packages/Base_Types.aadl).  The following unbounded types are not currently supported: ``Bases_Types::Boolean``, ``Base_Types::Character``, ``Base_Types::String``, ``Base_Types::Integer``, ``Base_Types::Float``
+
+### Specify Monitor/Filter components
+Attach ``CASE_Properties::Component_Type => CakeML`` to the filters or monitors - e.g. [CASE_AttestationGate_thr](aadl/UAV/SW.aadl#L82)
+
+Attach ``Source_Text`` to the filters or monitors indicating where the CakeML assemblies are - e.g. 
+[CASE_AttestationGate_thr](aadl/UAV/SW.aadl#L83).  For this example the assembly can be created by running the script 
+[compile-cakeml.cmd](aadl/cakeml/compile-cakeml.cmd)
 
 ## LMCP Integration
 
@@ -100,11 +142,8 @@ as well as for VM components
 (e.g. [UXAS](hamr/camkes/components/VM/apps/vmUXAS/vmUXAS.c#L512))**
 
 ## Linux
+CakeML integeration is not currently supported for the Linux platform. However, the behavior of the CakeML components can be mocked up and then the actual CakeML behavior code can be swapped in when deploying to seL4.
 
-**TODO it would be nice to explain how code/ideas could be
-tried out via Linux before deploying to sel4, but I don't know if we 
-now have time to do that before the delivarable.  So maybe just
-scrap this section???**
 
 <!--Linux_start--><!--Linux_end-->
 

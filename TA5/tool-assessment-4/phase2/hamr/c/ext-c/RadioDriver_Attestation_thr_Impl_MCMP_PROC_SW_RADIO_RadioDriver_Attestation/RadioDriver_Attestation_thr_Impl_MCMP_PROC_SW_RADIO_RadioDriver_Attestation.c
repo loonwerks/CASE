@@ -9,6 +9,8 @@
 
 // This file will not be overwritten so is safe to edit
 
+static const char *get_instance_name(void);
+
 // TODO: use LMCP directly.  For now just send some pre-baked byte arrays
 
 // https://github.com/loonwerks/case-ta6-experimental-platform-models/blob/master/Phase-2-UAV-Experimental-Platform-Transformed/hamr/src/c/ext-c/CASE_AttestationManager_thr_Impl_Impl/CASE_AttestationManager_thr_Impl_Impl.c#L5
@@ -36,19 +38,23 @@ Z numberOfChoices = 3;
 
 void testOutLMCP() {
   // TODO: no LMCP defs for trusted_ids, OperatingRegion, AutomationRequest 
-  
+
+  printf("Testing out LMCP for a pre-baked LineSearchTask\n");
+
   LineSearchTask *lineSearchTask = NULL;
   lmcp_init_LineSearchTask(&lineSearchTask);
 
-  printf("Testing out LMCP for a pre-baked LineSearchTask\n");
   if (lineSearchTask != NULL) {
-    uint8_t *payload = radioLineSearchTask;
-    int msg_result = lmcp_process_msg(&payload, numBitsLineSearchTask, (lmcp_object**)&lineSearchTask);
+      uint8_t *payload = radioLineSearchTask;
+      int msg_result = lmcp_process_msg(&payload, numBitsLineSearchTask, (lmcp_object**)&lineSearchTask);
 
-    if (msg_result != 0) {
-      printf("\tInvalid LineSearchTask byte-stream.\n");
+      if (msg_result != 0) {
+          printf("\tInvalid LineSearchTask byte-stream.\n");
     } else {
-       printf("Valid LineSearchTask\n");
+          lmcp_pp(&lineSearchTask->super.super.super);
+          printf("Valid LineSearchTask: l %s\n", lineSearchTask->super.super.label);
+          printf("Valid LineSearchTask: ee %li\n", *(lineSearchTask->super.super.eligibleentities));
+          printf("Valid LineSearchTask: tid %li\n", (lineSearchTask->super.super.taskid));
        //lmcp_pp_LineSearchTask(lineSearchTask);
     }
     
@@ -62,7 +68,7 @@ void testOutLMCP() {
 
 Unit hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_initialise_(STACK_FRAME_ONLY) {
   DeclNewStackFrame(caller, "RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation.c", "", "hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_initialise_", 0);
-  
+
   testOutLMCP();
   
   api_put_trusted_ids__hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation(SF numBitsAMTrusted_ids, AMTrusted_ids);
@@ -94,29 +100,43 @@ Unit hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Att
   DeclNewStackFrame(caller, "RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation.c", "", "hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_finalise_", 0);
 }
 
+int i = 0;
 Unit hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_timeTriggered_(STACK_FRAME_ONLY) {
   DeclNewStackFrame(caller, "RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation.c", "", "hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_timeTriggered_", 0);
   
-  Z i = rand() % numberOfChoices;
-  if(rand() % 2 == 0){
-    api_put_trusted_ids__hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation(SF numBitsAMTrusted_ids, AMTrusted_ids);
-  } else {
-    api_put_trusted_ids__hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation(SF numBitsAMTrusted_ids, AMUntrusted_ids);
-  }
   
-  if(i == 0) {
-    api_put_OperatingRegion__hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation(SF
-      numBitsOperatingRegion, radioOperatingRegion);
-  }
-  else if(i == 1){
-    api_put_LineSearchTask__hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation(SF
-      numBitsLineSearchTask, radioLineSearchTask);  
-  }
-  else if(i == 2) {
-    api_put_AutomationRequest__hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation(SF
-      numBitsAutomationRequest, radioAutomationRequest);
-  }
-   
+    if(i % 5 == 0) {
+      // send bad ids every 5th period
+      api_put_trusted_ids__hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation(SF 
+        numBitsAMTrusted_ids, AMUntrusted_ids);
+        
+        printf("%s: Sent bad trusted ids\n", get_instance_name());
+           
+    } else {
+      api_put_trusted_ids__hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation(SF 
+        numBitsAMTrusted_ids, AMTrusted_ids);
+    }
+    
+    // attestation gate only accepts/approves a single message per dispatch -- so uxas will need to accumulate them
+    // as it won't receive them all at once
+    
+    if(i % 3 == 0) {
+      api_put_OperatingRegion__hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation(SF
+        numBitsOperatingRegion, radioOperatingRegion);
+    }
+    
+    if(i % 3 == 1) {
+      api_put_LineSearchTask__hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation(SF
+        numBitsLineSearchTask, radioLineSearchTask);  
+    }
+    
+    if(i % 3 == 2) {
+      api_put_AutomationRequest__hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation(SF
+        numBitsAutomationRequest, radioAutomationRequest);
+    }
+    
+    i++;
+  
 /*
   // examples of api getter usage
   uint8_t t0[numBytes_hamr_CASE_Model_Transformations_CASE_RF_Msg_Impl];
@@ -130,4 +150,12 @@ Unit hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Att
     api_logInfo__hamr_SW_RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation(SF (String) &recv_data_str);
   }
   */
+}
+
+// we could use the logging method, which includes the component name, but those
+// weren't implemented for the vm's (for no real reason) so we need a simple way to get
+// the component's name -- the API should include this at some point
+static const char *get_instance_name(void) {
+    static const char name[] = "vmRADIO";
+    return name;
 }

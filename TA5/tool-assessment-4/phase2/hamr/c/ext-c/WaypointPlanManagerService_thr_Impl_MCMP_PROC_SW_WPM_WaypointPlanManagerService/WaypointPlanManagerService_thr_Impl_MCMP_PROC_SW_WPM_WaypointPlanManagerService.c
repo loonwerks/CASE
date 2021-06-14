@@ -112,7 +112,7 @@ Unit hamr_SW_WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanMa
 	if (msg_result == 0 && automationResponse->missioncommandlist_ai.length > 0) {
 		
 	  currentWaypoint = automationResponse->missioncommandlist[0]->firstwaypoint;
-	  sendMissionCommand();
+	  sendMissionCommand(SF_LAST);
 	} else {
 	  printf("%s: automation response rx handler: invalid automation response\n", get_instance_name()); fflush(stdout);
 	  lmcp_free_AutomationResponse(automationResponse, 1);

@@ -24,6 +24,29 @@ Unit hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_fin
 
 Unit hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_timeTriggered_(STACK_FRAME_ONLY) {
   DeclNewStackFrame(caller, "CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo.c", "", "hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_timeTriggered_", 0);
+  
+  uint8_t t2[numBytes_hamr_CMASI_AutomationResponse_i];
+  size_t t2_numBits;
+  if(api_get_observed__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo(SF &t2_numBits, t2)) {
+    // sanity check
+    // FIXME: attestation gate is not stripping off the address attributed part of messages so
+    // the received bit size will be larger than what is expected
+    //sfAssert(SF (Z) t2_numBits == numBits_hamr_CMASI_AutomationResponse_i, "numBits received does not match expected");
+    
+    // just pass the message onto the WPM
+
+    api_logInfo__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo(SF string("Pretending to be CakeML - just forwarding the message on"));
+
+    api_put_output__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo(SF t2_numBits, t2);
+    
+    /*
+    DeclNewString(observed_str);
+    String__append(SF (String) &observed_str, string("Received on observed: "));
+    byte_array_string(SF (String) &observed_str, t2, numBytes_hamr_CMASI_AutomationResponse_i);
+    api_logInfo__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo(SF (String) &observed_str);
+    */
+  }
+  
 /*
   // examples of api getter usage
   uint8_t t0[numBytes_hamr_CMASI_Polygon_i];

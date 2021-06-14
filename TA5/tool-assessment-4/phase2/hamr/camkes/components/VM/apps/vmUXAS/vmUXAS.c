@@ -30,13 +30,13 @@ void testOutLMCP(void);
 void sb_AutomationResponse_MON_GEO_1_notification_emit(); // would be provided via CAmkES if native
 void sb_AutomationResponse_MON_REQ_1_notification_emit(); // would be provided via CAmkES if native
 
-// the following api_get_X and api_send_X methods would be provided if the UXAS slang library was linked in
+// the following api_get_X and api_put_X methods would be provided if the UXAS slang library was linked in
 bool api_get_AutomationRequest__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t *numBits, uint8_t *byteArray);
 bool api_get_AirVehicleState__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t *numBits, uint8_t *byteArray);
 bool api_get_OperatingRegion__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t *numBits, uint8_t *byteArray);
 bool api_get_LineSearchTask__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t *numBits, uint8_t *byteArray);
-void api_send_AutomationResponse_MON_GEO__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t numBits, uint8_t *byteArray);
-void api_send_AutomationResponse_MON_REQ__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t numBits, uint8_t *byteArray);
+void api_put_AutomationResponse_MON_GEO__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t numBits, uint8_t *byteArray);
+void api_put_AutomationResponse_MON_REQ__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t numBits, uint8_t *byteArray);
 
 
 /************************************************************
@@ -174,10 +174,10 @@ int run(void) {
       
       // do some cool stuff ..., until then just ignore the incoming messages and just send pre-baked automation response
       
-      api_send_AutomationResponse_MON_GEO__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(
+      api_put_AutomationResponse_MON_GEO__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(
         numBitsUxASAutomationResponse, UxASAutomationResponse);
           
-      api_send_AutomationResponse_MON_REQ__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(
+      api_put_AutomationResponse_MON_REQ__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(
         numBitsUxASAutomationResponse, UxASAutomationResponse);
         
       printf("%s: Received expected messages from AM_Gate/FLT_ST so sent prebaked AutomationResponse\n", get_instance_name());
@@ -448,7 +448,7 @@ bool populateByteArray(hamr_Base_Types_Bits_Payload payload, size_t *numBits, ui
 }
  
 /**********************************************************************
- * the following api_send_X method are adapted from the non-vm versions
+ * the following api_put_X method are adapted from the non-vm versions
  * of radio's slang-embedded c-api's
  **********************************************************************/
 bool api_get_AutomationRequest__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t *numBits, uint8_t *byteArray){
@@ -495,13 +495,13 @@ bool api_get_LineSearchTask__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t
   }
 }
 
-void api_send_AutomationResponse_MON_GEO__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t numBits, uint8_t *byteArray){
+void api_put_AutomationResponse_MON_GEO__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t numBits, uint8_t *byteArray){
   DeclNewhamr_Base_Types_Bits_Payload(payload);
   populatePayload(numBits, byteArray, &payload);
   sb_AutomationResponse_MON_GEO_enqueue(&payload);
 }
 
-void api_send_AutomationResponse_MON_REQ__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t numBits, uint8_t *byteArray){
+void api_put_AutomationResponse_MON_REQ__hamr_SW_UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS(size_t numBits, uint8_t *byteArray){
   DeclNewhamr_Base_Types_Bits_Payload(payload);
   populatePayload(numBits, byteArray, &payload);
   sb_AutomationResponse_MON_REQ_enqueue(&payload);
