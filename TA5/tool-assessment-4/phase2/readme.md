@@ -135,11 +135,16 @@ Attach ``Source_Text`` to the filters or monitors indicating where the CakeML as
 
 ## LMCP Integration
 
-**TODO: for now just note that examples of LMCP integration is available
-for both native components 
-(e.g. [Geofence Monitor](hamr/c/ext-c/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req.c#L29))
+The data structures that realize the AADL types attached to the event data ports were
+constructed using the Lightweight Message Construction Protocol ([LMCP](https://github.com/afrl-rq/LmcpGen#introduction)).  LMCP, similar to 
+Bit-Codec, provides a framework for defining structured data and generates serializer/deserializers
+that enable the data to be transmitted and received regardless of the operating system, platform, or programming language used.
+
+The [location](aadl/c_libraries/CMASI) of the LMCP library was passed to HAMR (e.g. [here](aadl/bin/run-hamr-SeL4.sh#L34)) 
+and is therefore available to native components (e.g. 
+[Geofence Monitor](hamr/c/ext-c/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req.c#L29))
 as well as for VM components
-(e.g. [UXAS](hamr/camkes/components/VM/apps/vmUXAS/vmUXAS.c#L512))**
+(e.g. [UXAS](hamr/camkes/components/VM/apps/vmUXAS/vmUXAS.c#L512))
 
 ## Linux
 CakeML integeration is not currently supported for the Linux platform. However, the behavior of the CakeML components can be mocked up and then the actual CakeML behavior code can be swapped in when deploying to seL4.
@@ -217,6 +222,11 @@ refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
   * [CASE_Monitor_Geo](hamr/c/ext-c/CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo/CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo.c)
 <!--behavior-code-sel4_end-->
 
+\* _If CAKEML_ASSEMBLIES_PRESENT=ON is passed to run-camkes.sh (see below) then the behavior code for the attestation gate will come from the following CakeML files_
+
+  * [attestation_gate.cml](aadl/cakeml/attestation_gate/attestation_gate.cml)
+  * [geofence_monitor.cml](aadl/cakeml/geofence_monitor/geofence_monitor.cml)
+  * [line_search_task_filter.cml](aadl/cakeml/line_search_task_filter/line_search_task_filter.cml)
 
 ### How to Build/Run: SeL4
 
