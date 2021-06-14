@@ -1,0 +1,36 @@
+#ifndef SIREUM_H_HAMR_Simple_V4_IPCPorts
+#define SIREUM_H_HAMR_Simple_V4_IPCPorts
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <types.h>
+
+void HAMR_Simple_V4_IPCPorts_init(STACK_FRAME_ONLY);
+
+Z HAMR_Simple_V4_IPCPorts_AttestationTester_Impl_SW_AttestationTester_App(STACK_FRAME_ONLY);
+Z HAMR_Simple_V4_IPCPorts_RadioDriver_Impl_SW_Radio_App(STACK_FRAME_ONLY);
+Z HAMR_Simple_V4_IPCPorts_FlightPlanner_Impl_SW_FlightPlanner_App(STACK_FRAME_ONLY);
+Z HAMR_Simple_V4_IPCPorts_FlightController_Impl_SW_FlightController_App(STACK_FRAME_ONLY);
+Z HAMR_Simple_V4_IPCPorts_Main(STACK_FRAME_ONLY);
+
+void HAMR_Simple_V4_IPCPorts_emptyReceiveOut(STACK_FRAME MBox2_1CBFC4 result);
+
+void HAMR_Simple_V4_IPCPorts_emptyReceiveAsyncOut(STACK_FRAME MBox2_1029D1 result);
+
+void HAMR_Simple_V4_IPCPorts_init_AttestationTester_Impl_SW_AttestationTester_App(STACK_FRAME_ONLY);
+
+void HAMR_Simple_V4_IPCPorts_init_RadioDriver_Impl_SW_Radio_App(STACK_FRAME_ONLY);
+
+void HAMR_Simple_V4_IPCPorts_init_FlightPlanner_Impl_SW_FlightPlanner_App(STACK_FRAME_ONLY);
+
+void HAMR_Simple_V4_IPCPorts_init_FlightController_Impl_SW_FlightController_App(STACK_FRAME_ONLY);
+
+void HAMR_Simple_V4_IPCPorts_init_Main(STACK_FRAME_ONLY);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

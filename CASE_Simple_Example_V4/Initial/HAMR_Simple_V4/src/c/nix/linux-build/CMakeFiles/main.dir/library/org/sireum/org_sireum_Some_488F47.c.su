@@ -1,0 +1,7 @@
+org_sireum_Some_488F47.h:15:10:Some_488F47__ne	8	static
+org_sireum_Some_488F47.h:21:10:Some_488F47__is	8	static
+org_sireum_Some_488F47.h:25:20:Some_488F47__as	16	static
+org_sireum_Some_488F47.c:5:3:Some_488F47__eq	8	static
+org_sireum_Some_488F47.c:12:6:Some_488F47_string_	80	static
+org_sireum_Some_488F47.c:19:6:Some_488F47_cprint	112	static
+org_sireum_Some_488F47.c:30:6:Some_488F47_apply	8	static

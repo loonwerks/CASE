@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG   CMakeFiles/AttestationTester_Impl_SW_AttestationTester_App-bin.dir/app-AttestationTester_Impl_SW_AttestationTester_App/AttestationTester_Impl_SW_AttestationTester_App.c.o  -o AttestationTester_Impl_SW_AttestationTester_App libmain.a -lm 

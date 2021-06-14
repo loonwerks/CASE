@@ -1,0 +1,6 @@
+art_Bridge_EntryPoints.h:17:13:art_Bridge_EntryPoints_string_	8	static
+art_Bridge_EntryPoints.c:5:3:art_Bridge_EntryPoints__is	8	static
+art_Bridge_EntryPoints.c:15:24:art_Bridge_EntryPoints__as	16	static
+art_Bridge_EntryPoints.c:30:6:art_Bridge_EntryPoints_initialise_	16	static
+art_Bridge_EntryPoints.c:40:6:art_Bridge_EntryPoints_compute_	16	static
+art_Bridge_EntryPoints.c:50:6:art_Bridge_EntryPoints_finalise_	16	static

@@ -1,0 +1,3 @@
+art_DispatchStatus.h:17:13:art_DispatchStatus_string_	8	static
+art_DispatchStatus.c:5:3:art_DispatchStatus__is	8	static
+art_DispatchStatus.c:13:20:art_DispatchStatus__as	16	static

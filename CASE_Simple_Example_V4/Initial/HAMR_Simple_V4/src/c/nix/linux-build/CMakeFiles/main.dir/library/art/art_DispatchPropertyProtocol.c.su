@@ -1,0 +1,3 @@
+art_DispatchPropertyProtocol.h:17:13:art_DispatchPropertyProtocol_string_	8	static
+art_DispatchPropertyProtocol.c:5:3:art_DispatchPropertyProtocol__is	8	static
+art_DispatchPropertyProtocol.c:13:30:art_DispatchPropertyProtocol__as	16	static

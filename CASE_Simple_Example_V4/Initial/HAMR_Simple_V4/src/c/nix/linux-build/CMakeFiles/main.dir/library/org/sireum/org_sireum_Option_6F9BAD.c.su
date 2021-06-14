@@ -1,0 +1,4 @@
+org_sireum_Option_6F9BAD.h:17:13:Option_6F9BAD_string_	8	static
+org_sireum_Option_6F9BAD.c:5:3:Option_6F9BAD__is	8	static
+org_sireum_Option_6F9BAD.c:13:15:Option_6F9BAD__as	16	static
+org_sireum_Option_6F9BAD.c:26:6:Option_6F9BAD_get_	16	static

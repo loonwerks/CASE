@@ -1,0 +1,7 @@
+org_sireum_None_964667.h:14:10:None_964667__ne	8	static
+org_sireum_None_964667.h:20:10:None_964667__is	8	static
+org_sireum_None_964667.h:24:20:None_964667__as	16	static
+org_sireum_None_964667.c:5:3:None_964667__eq	8	static
+org_sireum_None_964667.c:11:6:None_964667_string_	64	static
+org_sireum_None_964667.c:17:6:None_964667_cprint	112	static
+org_sireum_None_964667.c:27:6:None_964667_apply	8	static

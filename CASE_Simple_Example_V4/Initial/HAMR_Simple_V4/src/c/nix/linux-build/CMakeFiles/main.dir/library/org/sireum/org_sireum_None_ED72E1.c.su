@@ -1,0 +1,7 @@
+org_sireum_None_ED72E1.h:14:10:None_ED72E1__ne	8	static
+org_sireum_None_ED72E1.h:20:10:None_ED72E1__is	8	static
+org_sireum_None_ED72E1.h:24:20:None_ED72E1__as	16	static
+org_sireum_None_ED72E1.c:5:3:None_ED72E1__eq	8	static
+org_sireum_None_ED72E1.c:11:6:None_ED72E1_string_	64	static
+org_sireum_None_ED72E1.c:17:6:None_ED72E1_cprint	112	static
+org_sireum_None_ED72E1.c:27:6:None_ED72E1_apply	8	static
