@@ -1,0 +1,5 @@
+art_UConnection.h:17:13:art_UConnection_string_	8	static
+art_UConnection.c:5:3:art_UConnection__is	8	static
+art_UConnection.c:12:17:art_UConnection__as	16	static
+art_UConnection.c:24:6:art_UConnection_from_	16	static
+art_UConnection.c:31:6:art_UConnection_to_	16	static

@@ -1,0 +1,122 @@
+#ifndef SIREUM_ALL_H
+#define SIREUM_ALL_H
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <types.h>
+#include <HAMR_Simple_V4_Arch.h>
+#include <HAMR_Simple_V4_ArtNix.h>
+#include <HAMR_Simple_V4_Base_Types.h>
+#include <HAMR_Simple_V4_Base_Types_Bits_Payload.h>
+#include <HAMR_Simple_V4_FlightController_Impl_SW_FlightController_App.h>
+#include <HAMR_Simple_V4_FlightPlanner_Impl_SW_FlightPlanner_App.h>
+#include <HAMR_Simple_V4_IPCPorts.h>
+#include <HAMR_Simple_V4_Main.h>
+#include <HAMR_Simple_V4_PlatformNix.h>
+#include <HAMR_Simple_V4_Process.h>
+#include <HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App.h>
+#include <HAMR_Simple_V4_SW_FlightController_Impl_Api.h>
+#include <HAMR_Simple_V4_SW_FlightController_Impl_Initialization_Api.h>
+#include <HAMR_Simple_V4_SW_FlightController_Impl_Operational_Api.h>
+#include <HAMR_Simple_V4_SW_FlightController_Impl_SW_FlightController.h>
+#include <HAMR_Simple_V4_SW_FlightController_Impl_SW_FlightController_Bridge.h>
+#include <HAMR_Simple_V4_SW_FlightController_Impl_SW_FlightController_Bridge_EntryPoints.h>
+#include <HAMR_Simple_V4_SW_FlightPlanner_Impl_Api.h>
+#include <HAMR_Simple_V4_SW_FlightPlanner_Impl_Initialization_Api.h>
+#include <HAMR_Simple_V4_SW_FlightPlanner_Impl_Operational_Api.h>
+#include <HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner.h>
+#include <HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_Bridge.h>
+#include <HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_Bridge_EntryPoints.h>
+#include <HAMR_Simple_V4_SW_RadioDriver_Impl_Api.h>
+#include <HAMR_Simple_V4_SW_RadioDriver_Impl_Initialization_Api.h>
+#include <HAMR_Simple_V4_SW_RadioDriver_Impl_Operational_Api.h>
+#include <HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio.h>
+#include <HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge.h>
+#include <HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_Bridge_EntryPoints.h>
+#include <HAMR_Simple_V4_SharedMemory.h>
+#include <HAMR_Simple_V4_TranspilerToucher.h>
+#include <art_ArchitectureDescription.h>
+#include <art_Art.h>
+#include <art_Bridge.h>
+#include <art_Bridge_EntryPoints.h>
+#include <art_Bridge_Ports.h>
+#include <art_Connection.h>
+#include <art_DataContent.h>
+#include <art_DispatchPropertyProtocol.h>
+#include <art_DispatchPropertyProtocol_Periodic.h>
+#include <art_DispatchPropertyProtocol_Sporadic.h>
+#include <art_DispatchStatus.h>
+#include <art_Empty.h>
+#include <art_EventTriggered.h>
+#include <art_PortMode_Type.h>
+#include <art_TimeTriggered.h>
+#include <art_UConnection.h>
+#include <art_UPort.h>
+#include <art_art_Port_45E54D.h>
+#include <org_sireum_IS_08117A.h>
+#include <org_sireum_IS_7E8796.h>
+#include <org_sireum_IS_820232.h>
+#include <org_sireum_IS_82ABD8.h>
+#include <org_sireum_IS_948B60.h>
+#include <org_sireum_IS_AA0F82.h>
+#include <org_sireum_IS_C4F575.h>
+#include <org_sireum_MBox2_1029D1.h>
+#include <org_sireum_MBox2_1CBFC4.h>
+#include <org_sireum_MS_2590FE.h>
+#include <org_sireum_MS_30A5B4.h>
+#include <org_sireum_MS_83D5EB.h>
+#include <org_sireum_MS_B5E3E6.h>
+#include <org_sireum_MS_E444B2.h>
+#include <org_sireum_MS_F55A18.h>
+#include <org_sireum_None.h>
+#include <org_sireum_None_2849BF.h>
+#include <org_sireum_None_3026C5.h>
+#include <org_sireum_None_39BC5F.h>
+#include <org_sireum_None_3F37D3.h>
+#include <org_sireum_None_43D596.h>
+#include <org_sireum_None_4E54E3.h>
+#include <org_sireum_None_5C1355.h>
+#include <org_sireum_None_734370.h>
+#include <org_sireum_None_76463B.h>
+#include <org_sireum_None_964667.h>
+#include <org_sireum_None_C64652.h>
+#include <org_sireum_None_E951B6.h>
+#include <org_sireum_Nothing.h>
+#include <org_sireum_Option_16C801.h>
+#include <org_sireum_Option_29F734.h>
+#include <org_sireum_Option_30119F.h>
+#include <org_sireum_Option_3A1F68.h>
+#include <org_sireum_Option_6239DB.h>
+#include <org_sireum_Option_6F9BAD.h>
+#include <org_sireum_Option_7BBFBE.h>
+#include <org_sireum_Option_7C94AD.h>
+#include <org_sireum_Option_882048.h>
+#include <org_sireum_Option_8E9F45.h>
+#include <org_sireum_Option_994630.h>
+#include <org_sireum_Option_9AF35E.h>
+#include <org_sireum_Some.h>
+#include <org_sireum_Some_0FF3DD.h>
+#include <org_sireum_Some_3E197E.h>
+#include <org_sireum_Some_482E57.h>
+#include <org_sireum_Some_488F47.h>
+#include <org_sireum_Some_8D03B1.h>
+#include <org_sireum_Some_9E368A.h>
+#include <org_sireum_Some_B4F3A8.h>
+#include <org_sireum_Some_D29615.h>
+#include <org_sireum_Some_DAEBD0.h>
+#include <org_sireum_Some_DDE9FD.h>
+#include <org_sireum_Some_FCFE69.h>
+#include <org_sireum_Tuple2_EC3B57.h>
+#include <org_sireum_U8.h>
+#include <org_sireum_ops_ISZOps.h>
+#include <org_sireum_ops_ops_ISZOps_A6D40E.h>
+
+void Z_apply(Option_882048 result, String s);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

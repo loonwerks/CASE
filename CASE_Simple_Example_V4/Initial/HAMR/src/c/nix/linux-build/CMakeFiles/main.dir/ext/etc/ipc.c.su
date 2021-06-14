@@ -1,0 +1,8 @@
+ipc.c:9:20:sem_op	32	static
+ipc.c:42:3:HAMR_Simple_V4_SharedMemory_create	16	static
+ipc.c:56:6:HAMR_Simple_V4_SharedMemory_receive	48	static
+ipc.c:79:6:HAMR_Simple_V4_SharedMemory_receiveAsync	32	static
+ipc.c:100:6:HAMR_Simple_V4_SharedMemory_send	48	static
+ipc.c:123:3:HAMR_Simple_V4_SharedMemory_sendAsync	32	static
+ipc.c:140:6:HAMR_Simple_V4_SharedMemory_remove	16	static
+ipc.c:145:6:HAMR_Simple_V4_Process_sleep	8	static

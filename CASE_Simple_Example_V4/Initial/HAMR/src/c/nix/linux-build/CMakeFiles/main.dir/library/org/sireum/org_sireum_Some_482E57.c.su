@@ -1,0 +1,7 @@
+org_sireum_Some_482E57.h:21:10:Some_482E57__is	8	static
+org_sireum_Some_482E57.h:25:20:Some_482E57__as	16	static
+org_sireum_Some_482E57.c:5:3:Some_482E57__eq	8	static
+org_sireum_Some_482E57.h:15:10:Some_482E57__ne	16	static
+org_sireum_Some_482E57.c:12:6:Some_482E57_string_	80	static
+org_sireum_Some_482E57.c:19:6:Some_482E57_cprint	128	static
+org_sireum_Some_482E57.c:30:6:Some_482E57_apply	8	static

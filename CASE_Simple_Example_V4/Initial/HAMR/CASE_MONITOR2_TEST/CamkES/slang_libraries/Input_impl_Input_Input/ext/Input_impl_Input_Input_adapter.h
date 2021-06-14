@@ -1,1 +1,0 @@
-../../../hamr/etc_seL4/adapters/Input_impl_Input_Input/Input_impl_Input_Input_adapter.h

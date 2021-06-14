@@ -1,0 +1,44 @@
+#ifndef SIREUM_H_HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App
+#define SIREUM_H_HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <types.h>
+
+void HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_init(STACK_FRAME_ONLY);
+
+art_Bridge_EntryPoints HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_entryPoints(STACK_FRAME_ONLY);
+Z HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_appPortId(STACK_FRAME_ONLY);
+Option_882048 HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_appPortIdOpt(STACK_FRAME_ONLY);
+
+Z HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_main(STACK_FRAME IS_948B60 args);
+
+Unit HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_atExit(STACK_FRAME_ONLY);
+
+Unit HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_initialiseArchitecture(STACK_FRAME Z seed);
+
+Unit HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_initialise(STACK_FRAME_ONLY);
+
+Unit HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_compute(STACK_FRAME_ONLY);
+
+Unit HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_exit(STACK_FRAME_ONLY);
+
+Unit HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_touch_printDataContent(STACK_FRAME art_DataContent a);
+
+Unit HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_touch(STACK_FRAME_ONLY);
+
+Unit HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_finalise(STACK_FRAME_ONLY);
+
+void HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_init_entryPoints(STACK_FRAME_ONLY);
+
+void HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_init_appPortId(STACK_FRAME_ONLY);
+
+void HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_App_init_appPortIdOpt(STACK_FRAME_ONLY);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

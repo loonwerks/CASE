@@ -1,0 +1,1 @@
+/usr/bin/cc -O3 -DNDEBUG   CMakeFiles/Main-bin.dir/app-Main/Main.c.o  -o Main libmain.a -lm 

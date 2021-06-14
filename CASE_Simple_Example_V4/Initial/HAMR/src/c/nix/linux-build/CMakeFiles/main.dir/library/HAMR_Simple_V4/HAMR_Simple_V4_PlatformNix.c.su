@@ -1,0 +1,12 @@
+HAMR_Simple_V4_PlatformNix.c:211:6:HAMR_Simple_V4_PlatformNix_init_seed	8	static
+HAMR_Simple_V4_PlatformNix.c:219:6:HAMR_Simple_V4_PlatformNix_init_ids	160	static
+HAMR_Simple_V4_PlatformNix.c:8:6:HAMR_Simple_V4_PlatformNix_init	8	static
+HAMR_Simple_V4_PlatformNix.c:16:3:HAMR_Simple_V4_PlatformNix_seed	16	static
+HAMR_Simple_V4_PlatformNix.c:46:6:HAMR_Simple_V4_PlatformNix_receive	384	static
+HAMR_Simple_V4_PlatformNix.c:95:6:HAMR_Simple_V4_PlatformNix_receiveAsync	384	static
+HAMR_Simple_V4_PlatformNix.c:182:3:HAMR_Simple_V4_PlatformNix_sendAsync	32	static
+HAMR_Simple_V4_PlatformNix.c:21:6:HAMR_Simple_V4_PlatformNix_seed_a	16	static
+HAMR_Simple_V4_PlatformNix.c:26:11:HAMR_Simple_V4_PlatformNix_ids	16	static
+HAMR_Simple_V4_PlatformNix.c:193:6:HAMR_Simple_V4_PlatformNix_finalise	32	static
+HAMR_Simple_V4_PlatformNix.c:31:6:HAMR_Simple_V4_PlatformNix_ids_a	16	static
+HAMR_Simple_V4_PlatformNix.c:139:6:HAMR_Simple_V4_PlatformNix_initialise	176	static

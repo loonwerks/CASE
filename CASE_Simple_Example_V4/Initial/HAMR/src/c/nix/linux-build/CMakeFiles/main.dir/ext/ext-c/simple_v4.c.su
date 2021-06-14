@@ -1,0 +1,8 @@
+simple_v4.c:10:6:print_Coordinate	8	static
+simple_v4.c:14:6:print_Map	16	static
+simple_v4.c:24:6:print_Command	8	static
+simple_v4.c:28:6:print_MsgHeader	8	static
+simple_v4.c:32:6:print_RFMsg	16	static
+simple_v4.c:37:6:print_Mission	32	static
+simple_v4.c:47:6:print_AttestationRequestMsg	32	static
+simple_v4.c:54:6:print_AttestationResponseMsg	32	static
