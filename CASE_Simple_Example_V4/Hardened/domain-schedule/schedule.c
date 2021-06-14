@@ -9,8 +9,6 @@
 
 const dschedule_t ksDomSchedule[] = {
   { .domain = 0, .length = 300 },
-  { .domain = 1, .length = 400 },
-  { .domain = 0, .length = 40 },
   { .domain = 2, .length = 400 },
   { .domain = 0, .length = 40 },
   { .domain = 3, .length = 400 },
@@ -18,12 +16,14 @@ const dschedule_t ksDomSchedule[] = {
   { .domain = 4, .length = 400 },
   { .domain = 0, .length = 40 },
   { .domain = 5, .length = 400 },
-  { .domain = 0, .length = 40 },  
+  { .domain = 0, .length = 40 },
   { .domain = 6, .length = 400 },
   { .domain = 0, .length = 40 },
   { .domain = 7, .length = 400 },
   { .domain = 0, .length = 40 },
-  { .domain = 8, .length = 400 }
+  { .domain = 8, .length = 400 },
+  { .domain = 0, .length = 40 },
+  { .domain = 9, .length = 400 }
 };
 
 const word_t ksDomScheduleLength = sizeof(ksDomSchedule) / sizeof(dschedule_t);
