@@ -4,8 +4,8 @@ public
 	with Data_Model;
 	with Base_Types;
 	with CASE_Properties;
+	with CASE_Scheduling;
 	with HAMR;
-
 
 	thread Monitor
 		features
@@ -13,6 +13,7 @@ public
 			FlightPlan_in: in event data port Mission;
 			FlightPlan_out: out event data port Mission;
 		properties
+			
 			CASE_Properties::Monitoring => 100;
 			CASE_Properties::Component_Spec => ("Monitor_Alert", "Monitor_FlightPlan_out");
 		annex agree {**
@@ -50,6 +51,7 @@ public
 		properties
 			Dispatch_Protocol => Sporadic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
 			Source_Text => ("./SW_Monitor/Monitor.S");
 			CASE_Properties::Component_Language => CakeML;
 	end Monitor.Impl;
@@ -75,6 +77,7 @@ public
 		properties
 			Dispatch_Protocol => Sporadic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
 			Source_Text => ("./SW_Filter/Filter.S");
 			CASE_Properties::Component_Language => CakeML;
 	end Filter.Impl;
@@ -104,6 +107,7 @@ public
 		properties
 			Dispatch_Protocol => Sporadic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
 			Source_Text => ("./SW_AttestationGate/AttestationGate.S");
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationGate.Impl;
@@ -122,6 +126,8 @@ public
 			CASE_Properties::Cache_Timeout => 5 min;
 			Dispatch_Protocol => Sporadic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Source_text => ("SW_AttestationManager/AttestationManager.S");
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationManager.Impl;
 	
@@ -262,6 +268,8 @@ public
 		properties
 			Dispatch_Protocol => Sporadic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Source_text => ("SW_AttestationTester/AttestationTester.S");
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationTester.Impl;
 
@@ -299,6 +307,8 @@ public
 		properties
 			Dispatch_Protocol => Sporadic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Source_text => ("mocks/FlightPlanner.c");
 	end FlightPlanner.Impl;
 
 	thread FlightController
@@ -315,6 +325,8 @@ public
 		properties
 			Dispatch_Protocol => Sporadic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Source_text => ("mocks/FlightController.c");
 	end FlightController.Impl;
 
 	thread RadioDriver_Attestation
@@ -335,6 +347,8 @@ public
 		properties
 			Dispatch_Protocol => Sporadic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Source_text => ("mocks/radio.c");
 	end RadioDriver_Attestation.Impl;
 
 	process SW
@@ -378,6 +392,8 @@ public
 		connections
 			c1: port AttestationRequest -> AttestationTester.AttestationRequest;
 			c2: port AttestationTester.AttestationResponse -> AttestationResponse;
+		properties
+			CASE_Scheduling::Domain => 2;
 	end AttestationTester_seL4.Impl;
 
 	process RadioDriver_Attestation_seL4
@@ -400,6 +416,8 @@ public
 			c3: port RadioDriver_Attestation.MissionCommand -> MissionCommand;
 			c4: port RadioDriver_Attestation.AttestationTesterRequest -> AttestationTesterRequest;
 			c5: port AttestationTesterResponse -> RadioDriver_Attestation.AttestationTesterResponse;
+		properties
+			CASE_Scheduling::Domain => 3;
 		annex agree {**
 			lift contract;
 		**};
@@ -417,6 +435,8 @@ public
 		connections
 			c1: port FlightPlanner.FlightPlan -> FlightPlan;
 			c2: port MissionCommand -> FlightPlanner.MissionCommand;
+		properties
+			CASE_Scheduling::Domain => 7;
 		annex agree {**
 			lift contract;
 		**};
@@ -434,6 +454,8 @@ public
 		connections
 			c1: port FlightPlan -> FlightController.FlightPlan;
 			c2: port Alert -> FlightController.Alert;
+		properties
+			CASE_Scheduling::Domain => 9;
 		annex agree {**
 			lift contract;
 		**};
@@ -458,6 +480,7 @@ public
 		properties
 			CASE_Properties::Cache_Timeout => 5 min;
 			CASE_Properties::Cache_Size => 3;
+			CASE_Scheduling::Domain => 4;
 	end AttestationManager_seL4.Impl;
 
 	process AttestationGate_seL4
@@ -476,6 +499,8 @@ public
 			c1: port MissionCommand_in -> AttestationGate.MissionCommand_in;
 			c2: port TrustedIds -> AttestationGate.TrustedIds;
 			c3: port AttestationGate.MissionCommand_out -> MissionCommand_out;
+		properties
+			CASE_Scheduling::Domain => 5;
 	end AttestationGate_seL4.Impl;
 
 	process Filter_seL4
@@ -493,6 +518,8 @@ public
 		connections
 			c1: port Input -> Filter.Input;
 			c2: port Filter.Output -> Output;
+		properties
+			CASE_Scheduling::Domain => 6;
 		annex agree {**
 			lift contract;
 		**};
@@ -515,6 +542,8 @@ public
 			c1: port Monitor.Alert -> Alert;
 			c2: port FlightPlan_in -> Monitor.FlightPlan_in;
 			c3: port Monitor.FlightPlan_out -> FlightPlan_out;
+		properties
+			CASE_Scheduling::Domain => 8;
 		annex agree {**
 			lift contract;
 		**};
