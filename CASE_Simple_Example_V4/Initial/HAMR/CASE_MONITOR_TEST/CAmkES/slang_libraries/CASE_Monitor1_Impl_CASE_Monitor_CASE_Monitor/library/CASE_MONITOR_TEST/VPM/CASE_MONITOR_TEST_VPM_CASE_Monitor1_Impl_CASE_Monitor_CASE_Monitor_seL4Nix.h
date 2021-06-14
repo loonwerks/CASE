@@ -1,0 +1,18 @@
+#ifndef SIREUM_H_CASE_MONITOR_TEST_VPM_CASE_Monitor1_Impl_CASE_Monitor_CASE_Monitor_seL4Nix
+#define SIREUM_H_CASE_MONITOR_TEST_VPM_CASE_Monitor1_Impl_CASE_Monitor_CASE_Monitor_seL4Nix
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <types.h>
+
+Unit CASE_MONITOR_TEST_VPM_CASE_Monitor1_Impl_CASE_Monitor_CASE_Monitor_seL4Nix_Suspect_Traffic_Out_Send(STACK_FRAME art_DataContent d);
+
+void CASE_MONITOR_TEST_VPM_CASE_Monitor1_Impl_CASE_Monitor_CASE_Monitor_seL4Nix_Observed_Receive(STACK_FRAME Option_8E9F45 result);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

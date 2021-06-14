@@ -1,0 +1,38 @@
+// This file will be regenerated, do not edit
+
+import <std_connector.camkes>;
+import "components/Input_impl_Input_Input/Input_impl_Input_Input.camkes";
+import "components/Output_impl_Output_Output/Output_impl_Output_Output.camkes";
+import "components/CASE_Monitor2_Impl_CASE_Monitor2_CASE_Monitor2/CASE_Monitor2_Impl_CASE_Monitor2_CASE_Monitor2.camkes";
+
+assembly {
+  composition {
+    component Input_impl_Input_Input Input_Input;
+    component Output_impl_Output_Output Output_Output;
+    component CASE_Monitor2_Impl_CASE_Monitor2_CASE_Monitor2 CASE_Monitor2_CASE_Monitor2;
+
+    connection seL4Notification conn1(from Input_Input.sb_Observed_1_notification, to CASE_Monitor2_CASE_Monitor2.sb_Observed_notification);
+    connection seL4SharedData conn2(from Input_Input.sb_Observed_queue_1, to CASE_Monitor2_CASE_Monitor2.sb_Observed_queue);
+    connection seL4Notification conn3(from CASE_Monitor2_CASE_Monitor2.sb_Suspect_Traffic_Out_1_notification, to Output_Output.sb_Suspect_Traffic_Out_notification);
+    connection seL4SharedData conn4(from CASE_Monitor2_CASE_Monitor2.sb_Suspect_Traffic_Out_queue_1, to Output_Output.sb_Suspect_Traffic_Out_queue);
+    connection seL4Notification conn5(from Input_Input.sb_self_pacer_tick, to Input_Input.sb_self_pacer_tock);
+    connection seL4Notification conn6(from Output_Output.sb_self_pacer_tick, to Output_Output.sb_self_pacer_tock);
+    connection seL4Notification conn7(from CASE_Monitor2_CASE_Monitor2.sb_self_pacer_tick, to CASE_Monitor2_CASE_Monitor2.sb_self_pacer_tock);
+  }
+
+  configuration {
+    Input_Input._stack_size = 122880;
+    Input_Input._domain = 2;
+    Output_Output._stack_size = 122880;
+    Output_Output._domain = 4;
+    CASE_Monitor2_CASE_Monitor2._stack_size = 122880;
+    CASE_Monitor2_CASE_Monitor2._domain = 3;
+    conn2.size = 36864;
+    Input_Input.sb_Observed_queue_1_access = "W";
+    CASE_Monitor2_CASE_Monitor2.sb_Observed_queue_access = "R";
+    conn4.size = 36864;
+    CASE_Monitor2_CASE_Monitor2.sb_Suspect_Traffic_Out_queue_1_access = "W";
+    Output_Output.sb_Suspect_Traffic_Out_queue_access = "R";
+
+  }
+}

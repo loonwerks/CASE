@@ -1,0 +1,12 @@
+#ifndef OUTPUT_IMPL_OUTPUT_OUTPUT_H
+#define OUTPUT_IMPL_OUTPUT_OUTPUT_H
+
+#include <all.h>
+
+Unit CASE_MONITOR_TEST_VPM_TEST_Output_impl_Output_Output_initialise_(STACK_FRAME_ONLY);
+
+Unit CASE_MONITOR_TEST_VPM_TEST_Output_impl_Output_Output_finalise_(STACK_FRAME_ONLY);
+
+Unit CASE_MONITOR_TEST_VPM_TEST_Output_impl_Output_Output_timeTriggered_(STACK_FRAME_ONLY);
+
+#endif

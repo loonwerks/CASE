@@ -1,0 +1,26 @@
+#ifndef SIREUM_H_CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Api
+#define SIREUM_H_CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Api
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <types.h>
+
+Unit CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Initialization_Api_logInfo_(STACK_FRAME CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Initialization_Api this, String msg);
+
+Unit CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Initialization_Api_logDebug_(STACK_FRAME CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Initialization_Api this, String msg);
+
+Unit CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Initialization_Api_logError_(STACK_FRAME CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Initialization_Api this, String msg);
+
+Unit CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Operational_Api_logInfo_(STACK_FRAME CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Operational_Api this, String msg);
+
+Unit CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Operational_Api_logDebug_(STACK_FRAME CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Operational_Api this, String msg);
+
+Unit CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Operational_Api_logError_(STACK_FRAME CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Operational_Api this, String msg);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

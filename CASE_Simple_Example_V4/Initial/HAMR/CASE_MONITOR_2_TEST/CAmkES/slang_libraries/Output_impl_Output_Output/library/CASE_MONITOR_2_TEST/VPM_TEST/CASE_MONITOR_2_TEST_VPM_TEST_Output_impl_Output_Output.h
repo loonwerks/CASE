@@ -1,0 +1,20 @@
+#ifndef SIREUM_H_CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Output_Output
+#define SIREUM_H_CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Output_Output
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <types.h>
+
+Unit CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Output_Output_initialise(STACK_FRAME CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Initialization_Api api);
+
+Unit CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Output_Output_timeTriggered(STACK_FRAME CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Operational_Api api);
+
+Unit CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Output_Output_finalise(STACK_FRAME CASE_MONITOR_2_TEST_VPM_TEST_Output_impl_Operational_Api api);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

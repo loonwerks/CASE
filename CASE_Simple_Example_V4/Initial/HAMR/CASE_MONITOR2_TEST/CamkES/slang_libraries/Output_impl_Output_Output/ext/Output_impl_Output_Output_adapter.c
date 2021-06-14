@@ -1,0 +1,1 @@
+../../../hamr/etc_seL4/adapters/Output_impl_Output_Output/Output_impl_Output_Output_adapter.c
