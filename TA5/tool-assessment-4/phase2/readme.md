@@ -1,7 +1,7 @@
 # phase2
 
  Table of Contents
-<!--table-of-contents_start-->
+<!--ts-->
   * [AADL Architecture](#aadl-architecture)
   * [Linux](#linux)
     * [HAMR Configuration: Linux](#hamr-configuration-linux)
@@ -14,7 +14,7 @@
     * [Example Output: SeL4](#example-output-sel4)
     * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
     * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
-<!--table-of-contents_end-->
+<!--te-->
 
 
 ## AADL Architecture
@@ -89,8 +89,23 @@
 
 <!--aadl-architecture_end-->
 
+** TODO explain the domain assignments**
+
+## LMCP Integration
+
+**TODO: for now just note that examples of LMCP integration is available
+for both native components 
+(e.g. [Geofence Monitor](aadl/hamr/c/ext-c/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req.c#L29))
+as well as for VM components
+(e.g. [UXAS](aadl/hamr/camkes/components/VM/apps/vmUXAS/vmUXAS.c#L512))**
 
 ## Linux
+
+**TODO it would be nice to explain how code/ideas could be
+tried out via Linux before deploying to sel4, but I don't know if we 
+now have time to do that before the delivarable.  So maybe just
+scrap this section???**
+
 <!--Linux_start--><!--Linux_end-->
 
 ### HAMR Configuration: Linux
@@ -142,6 +157,7 @@ refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
 
 
 ### Behavior Code: SeL4
+
 <!--behavior-code-sel4_start-->
   * [UARTDriver](hamr/c/ext-c/UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver/UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver.c)
 
@@ -164,18 +180,89 @@ refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
 
 
 ### How to Build/Run: SeL4
-<!--how-to-buildrun-sel4_start-->
+
+**NOTE: the following potentially needs a lot of rework depending on the status of the CakeML plugin, CASE tool transforms etc.**
+
+#### Generate the CakeML assemblies
+
+The AADL model was hand-modified so that the CakeML components point to the
+location of their CakeML assemblies (e.g 
+[AttestationGate](aadl/UAV/SW.aadl#L83)).
+For this example the 
+assemblies are created by running this Slash script 
+[compile-cakeml.cmd](aadl/cakeml/compile-cakeml.cmd).
+In the 
+future the CASE tranforms + the SPLAT plugin will automate these steps.
+
+Therefore the first build step is to run the Slash script to generate the
+CakeML assemblies
+
+```
+./aadl/cakeml/compile-cakeml.cmd --stripped --target=arm8
+```
+
+Note that two of the CakeML components (
+[filter](aadl/UAV/SW.aadl#L141) and 
+[monitor](aadl/UAV/SW.aadl#L416)
+) crash somewhere in the Contigs
+when run, so the Slash script 'strips' them via the ``--stripped`` option,
+which causes those CakeML components to act as simple pass throughs 
+(i.e. they're CakeML, but don't do anything interesting).
+
+The ``target=arm8`` may be the culprit for why the above are crashing.
+**TODO: add discussion regarding issues with the ``Double`` library
+if necessary**
+
+Another oddity is that the attestation gate's
+[interface](aadl/UAV/SW.aadl#L74-80)
+indicates it
+should be stripping the 'address attributed' part of messages before
+forwarding them onto, for example, the CakeML filter 
+[here](aadl/UAV/SW.aadl#137).  That
+issue also impacts non-CakeML downstream components like the UXAS as the
+messages flowing in are larger (ie. contain more bits) than expected.  
+
+**TODO: add more explanation if necessary**
+
+#### Install CAmkES + ARM VM
+
+**TODO explain this step**
+
+```
+./hamr/camkes/bin/setup-camkes-arm-vm.sh
+```
+
+#### Build the Image and Simulate via QEMU
+
+Now, run HAMR codegen
+
 ```
 ./aadl/bin/run-hamr-SeL4.sh
-./hamr/camkes/bin/setup-camkes-arm-vm.sh
-./hamr/camkes/bin/run-camkes.sh -o "-DCAKEML_ASSEMBLIES_PRESENT=ON;-DUSE_PRECONFIGURED_ROOTFS=ON" -s
 ```
-<!--how-to-buildrun-sel4_end-->
 
+**TODO: explain why the [CASE](aadl/CASE) directory needs to be deleted if running HAMR via FMIDE.  For now see this 
+[comment](aadl/CASE/README.md)**
+
+After running ``run-hamr-SeL4.sh`` you must run the command below
+in order to patch the code HAMR generates so that it is compatible with
+the legacy CakeML code that was produced for the phase 2 deliverable.
+**TODO: add more explanation if needed**
+
+
+```
+git apply-patch 0001-ffi-data-port-hack.patch
+```
+
+Now build the image and simulate it via QEMU
+
+```
+./hamr/camkes/bin/run-camkes.sh -o "-DCAKEML_ASSEMBLIES_PRESENT=ON -DUSE_PRECONFIGURED_ROOTFS=ON" -s
+```
+
+**TODO add instructions on how to start up the separate VM's unde QEMU -- for now, just look at the output below**
 
 ### Example Output: SeL4
 <!--example-output-sel4_start-->
-Timeout = 18 seconds
 ```
 Booting all finished, dropped to user space
 <<seL4(CPU 0) [decodeUntypedInvocation/212 T0xff807fc1c400 "rootserver" @4006f0]: Untyped Retype: Insufficient memory (1 * 2097152 bytes needed, 0 bytes available).>>
