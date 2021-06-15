@@ -60,14 +60,14 @@ fi
 if [[ -z "${CAMKES_DIR}" && -d "/host/camkes-project" ]]; then
   # docker location
   CAMKES_DIR="/host/camkes-project"
-elif [[ -z "$CAMKES_DIR" && -d "${HOME}/CASE/camkes" ]]; then
+elif [[ -z "$CAMKES_DIR" && -d "${HOME}/CASE/camkes-arm-vm" ]]; then
   # CASE Vagrant VM location
-  CAMKES_DIR="${HOME}/CASE/camkes"
+  CAMKES_DIR="${HOME}/CASE/camkes-arm-vm"
 fi
 
 if [[ -z "${CAMKES_DIR}" || ! -d "${CAMKES_DIR}" ]]; then
-  echo "Directory '${CAMKES_DIR}' does not exist.  Please specify the location of your camkes project directory."
-  echo "See https://docs.sel4.systems/projects/camkes"
+  echo "Directory '${CAMKES_DIR}' does not exist.  Please specify the location of your camkes-arm-vm project directory."
+  echo "See https://github.com/SEL4PROJ/camkes-arm-vm"
   exit -1
 fi
 
@@ -119,7 +119,10 @@ fi
 
 cd ${BUILD_DIR}
 
-../init-build.sh ${CAMKES_OPTIONS} -DCAMKES_APP=$HAMR_CAMKES_PROJ
+../init-build.sh ${CAMKES_OPTIONS} \
+    -DPLATFORM=qemu-arm-virt \
+    -DARM_HYP=ON \
+    -DCAMKES_APP=$HAMR_CAMKES_PROJ
 
 ninja
 
@@ -128,17 +131,10 @@ ninja
 ########################
 
 if [ "${SIMULATE}" = true ]; then
-  # ./simulate
-
-  # console output from simulation disappears when QEMU shuts down when run from
-  # generated ./simulate script. Instead call QEMU directly using the default
-  # values ./simulate would pass
-
-  qemu-system-x86_64 \
-      -cpu Nehalem,-vme,+pdpe1gb,-xsave,-xsaveopt,-xsavec,-fsgsbase,-invpcid,enforce \
+  qemu-system-aarch64 \
+      -machine virt,virtualization=on,highmem=off,secure=off \
+      -cpu cortex-a53 \
       -nographic \
-      -serial mon:stdio \
-      -m size=512M \
-      -kernel images/kernel-x86_64-pc99 \
-      -initrd images/capdl-loader-image-x86_64-pc99
+      -m size=1024 \
+      -kernel images/capdl-loader-image-arm-qemu-arm-virt
 fi

@@ -1,41 +1,75 @@
 // This file will be regenerated, do not edit
 
 import <std_connector.camkes>;
-import "components/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner.camkes";
-import "components/FlightController_Impl_SW_FlightController_FlightController/FlightController_Impl_SW_FlightController_FlightController.camkes";
-import "components/AttestationTester_Impl_SW_AttestationTester_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester.camkes";
+import <global-connectors.camkes>;
+import <seL4VMDTBPassthrough.idl4>;
+import <FileServerInterface.camkes>;
+import <FileServer/FileServer.camkes>;
+import <SerialServer/SerialServer.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <vm-connectors.camkes>;
+import <devices.camkes>;
+import "components/Pacer/Pacer.camkes";
 import "components/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver.camkes";
+import "components/VM_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/VM_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner.camkes";
+import "components/FlightController_Impl_SW_FlightController_FlightController/FlightController_Impl_SW_FlightController_FlightController.camkes";
 
 assembly {
   composition {
-    component FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner SW_FlightPlanner_FlightPlanner;
-    component FlightController_Impl_SW_FlightController_FlightController SW_FlightController_FlightController;
-    component AttestationTester_Impl_SW_AttestationTester_AttestationTester SW_AttestationTester_AttestationTester;
     component RadioDriver_Impl_SW_Radio_RadioDriver SW_Radio_RadioDriver;
+    component VM_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner vmFlightPlanner;
+    component FileServer fserv;
+    component SerialServer serial;
+    component TimeServer time_server;
+    component FlightController_Impl_SW_FlightController_FlightController SW_FlightController_FlightController;
+    component Pacer pacer;
 
-    connection seL4Notification conn1(from SW_FlightPlanner_FlightPlanner.sb_FlightPlan_1_notification, to SW_FlightController_FlightController.sb_FlightPlan_notification);
-    connection seL4SharedData conn2(from SW_FlightPlanner_FlightPlanner.sb_FlightPlan_queue_1, to SW_FlightController_FlightController.sb_FlightPlan_queue);
-    connection seL4Notification conn3(from SW_AttestationTester_AttestationTester.sb_AttestationResponse_1_notification, to SW_Radio_RadioDriver.sb_AttestationTesterResponse_notification);
-    connection seL4SharedData conn4(from SW_AttestationTester_AttestationTester.sb_AttestationResponse_queue_1, to SW_Radio_RadioDriver.sb_AttestationTesterResponse_queue);
-    connection seL4Notification conn5(from SW_Radio_RadioDriver.sb_AttestationTesterRequest_1_notification, to SW_AttestationTester_AttestationTester.sb_AttestationRequest_notification);
-    connection seL4SharedData conn6(from SW_Radio_RadioDriver.sb_AttestationTesterRequest_queue_1, to SW_AttestationTester_AttestationTester.sb_AttestationRequest_queue);
-    connection seL4Notification conn7(from SW_Radio_RadioDriver.sb_MissionCommand_1_notification, to SW_FlightPlanner_FlightPlanner.sb_MissionCommand_notification);
-    connection seL4SharedData conn8(from SW_Radio_RadioDriver.sb_MissionCommand_queue_1, to SW_FlightPlanner_FlightPlanner.sb_MissionCommand_queue);
+    connection seL4VMDTBPassthrough conn1(from vmFlightPlanner.dtb_self, to vmFlightPlanner.dtb);
+    connection seL4RPCDataport fsvmFlightPlanner(from vmFlightPlanner.fs, to fserv.fs_ctrl);
+    connection seL4GlobalAsynch notify_ready_vmFlightPlanner(from vmFlightPlanner.notification_ready_connector, to vmFlightPlanner.notification_ready);
+    connection seL4TimeServer serialserver_timer(from serial.timeout, to time_server.the_timer);
+    connection seL4SerialServer serial_vmFlightPlanner(from vmFlightPlanner.batch, to serial.processed_batch);
+    connection seL4SerialServer serial_input_vmFlightPlanner(from vmFlightPlanner.serial_getchar, to serial.getchar);
+    connection seL4GlobalAsynch conn2(from SW_Radio_RadioDriver.sb_MissionCommand_1_notification, to vmFlightPlanner.sb_MissionCommand_notification);
+    connection seL4SharedDataWithCaps conn3(from SW_Radio_RadioDriver.sb_MissionCommand_queue_1, to vmFlightPlanner.sb_MissionCommand_queue);
+    connection seL4Notification conn4(from vmFlightPlanner.sb_FlightPlan_1_notification, to SW_FlightController_FlightController.sb_FlightPlan_notification);
+    connection seL4SharedDataWithCaps conn5(from vmFlightPlanner.sb_FlightPlan_queue_1, to SW_FlightController_FlightController.sb_FlightPlan_queue);
+    connection seL4Notification conn6(from pacer.tick, to pacer.tock);
+    connection seL4Notification conn7(from pacer.period, to SW_Radio_RadioDriver.sb_pacer_notification);
+    connection seL4GlobalAsynch conn8(from pacer.period_to_vmFlightPlanner_notification, to vmFlightPlanner.sb_pacer_period_notification);
+    connection seL4SharedDataWithCaps conn9(from pacer.period_to_vmFlightPlanner_queue, to vmFlightPlanner.sb_pacer_period_queue);
+    connection seL4Notification conn10(from pacer.period, to SW_FlightController_FlightController.sb_pacer_notification);
   }
 
   configuration {
-    conn2.size = 16384;
-    SW_FlightPlanner_FlightPlanner.sb_FlightPlan_queue_1_access = "W";
-    SW_FlightController_FlightController.sb_FlightPlan_queue_access = "R";
-    conn4.size = 16384;
-    SW_AttestationTester_AttestationTester.sb_AttestationResponse_queue_1_access = "W";
-    SW_Radio_RadioDriver.sb_AttestationTesterResponse_queue_access = "R";
-    conn6.size = 16384;
-    SW_Radio_RadioDriver.sb_AttestationTesterRequest_queue_1_access = "W";
-    SW_AttestationTester_AttestationTester.sb_AttestationRequest_queue_access = "R";
-    conn8.size = 16384;
+    SW_Radio_RadioDriver._domain = 1;
+    vmFlightPlanner.cnode_size_bits = 18;
+    vmFlightPlanner.simple_untyped21_pool = 12;
+    vmFlightPlanner.simple_untyped12_pool = 12;
+    vmFlightPlanner.num_extra_frame_caps = 0;
+    vmFlightPlanner.extra_frame_map_address = 0;
+    vmFlightPlanner._domain = 3;
+    SW_FlightController_FlightController._domain = 4;
+    conn3.size = 16384;
     SW_Radio_RadioDriver.sb_MissionCommand_queue_1_access = "W";
-    SW_FlightPlanner_FlightPlanner.sb_MissionCommand_queue_access = "R";
+    vmFlightPlanner.sb_MissionCommand_notification_domain = 3;
+    conn5.size = 16384;
+    SW_FlightController_FlightController.sb_FlightPlan_queue_access = "R";
+    pacer._domain = 1;
 
+    fserv.heap_size = 165536;
+    vmFlightPlanner.fs_shmem_size = 0x100000;
+    vmFlightPlanner.global_endpoint_base = 1 << 27;
+    vmFlightPlanner.asid_pool = true;
+    vmFlightPlanner.simple = true;
+    vmFlightPlanner.base_prio = 100;
+    vmFlightPlanner._priority = 101;
+    vmFlightPlanner.sem_value = 0;
+    vmFlightPlanner.heap_size = 0x300000;
+    time_server.timers_per_client = 1;
+    time_server.priority = 255;
+    time_server.simple = true;
+    vmFlightPlanner.serial_getchar_shmem_size = 0x1000;
+    vmFlightPlanner.batch_shmem_size = 0x1000;
   }
 }

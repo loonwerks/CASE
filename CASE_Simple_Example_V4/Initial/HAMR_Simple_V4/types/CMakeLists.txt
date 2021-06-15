@@ -16,7 +16,8 @@ elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
 endif()
 
 add_library(SB_Type_Library
-            src/sb_queue_union_art_DataContent_1.c)
+            src/sb_queue_union_art_DataContent_1.c
+            src/sb_queue_int8_t_1.c)
 
 # Assume that if the muslc target exists then this project is in an seL4 native
 # component build environment, otherwise it is in a linux userlevel environment.

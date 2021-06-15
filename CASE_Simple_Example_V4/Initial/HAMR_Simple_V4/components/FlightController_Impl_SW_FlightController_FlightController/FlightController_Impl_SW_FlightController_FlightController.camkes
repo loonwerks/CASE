@@ -3,6 +3,6 @@ component FlightController_Impl_SW_FlightController_FlightController {
   include <sb_queue_union_art_DataContent_1.h>;
   control;
   consumes ReceiveEvent sb_FlightPlan_notification;
+  consumes Period sb_pacer_notification;
   dataport sb_queue_union_art_DataContent_1_t sb_FlightPlan_queue;
-  has semaphore sb_dispatch_sem;
 }

@@ -34,20 +34,6 @@ bool sb_FlightPlan_is_empty(){
   return sb_queue_union_art_DataContent_1_is_empty(&sb_FlightPlan_recv_queue);
 }
 
-/************************************************************************
- * sb_FlightPlan_notification_handler:
- * Invoked by: seL4 notification callback
- *
- * This is the function invoked by an seL4 notification callback to 
- * dispatch the component due to the arrival of an event on port
- * sb_FlightPlan
- *
- ************************************************************************/
-static void sb_FlightPlan_notification_handler(void * unused) {
-  MUTEXOP(sb_dispatch_sem_post())
-  CALLBACKOP(sb_FlightPlan_notification_reg_callback(sb_FlightPlan_notification_handler, NULL));
-}
-
 // is_empty FlightPlan: In EventDataPort
 B HAMR_Simple_V4_SW_FlightController_Impl_SW_FlightController_FlightController_seL4Nix_FlightPlan_IsEmpty(STACK_FRAME_ONLY) {
   return sb_FlightPlan_is_empty();
@@ -108,13 +94,6 @@ void pre_init(void) {
   printf("Leaving pre-init of FlightController_Impl_SW_FlightController_FlightController\n");
 }
 
-void post_init(void) {
-  DeclNewStackFrame(NULL, "sb_FlightController_Impl.c", "", "post_init", 0);
-
-  // register callback for EventDataPort port FlightPlan
-  CALLBACKOP(sb_FlightPlan_notification_reg_callback(sb_FlightPlan_notification_handler, NULL));
-}
-
 /************************************************************************
  * int run(void)
  * Main active thread function.
@@ -122,9 +101,9 @@ void post_init(void) {
 int run(void) {
   DeclNewStackFrame(NULL, "sb_FlightController_Impl.c", "", "run", 0);
 
-  MUTEXOP(sb_dispatch_sem_wait())
+  sb_pacer_notification_wait();
   for(;;) {
-    MUTEXOP(sb_dispatch_sem_wait())
+    sb_pacer_notification_wait();
     // call the component's compute entrypoint
     HAMR_Simple_V4_SW_FlightController_Impl_SW_FlightController_FlightController_adapter_computeEntryPoint(SF_LAST);
   }

@@ -16,6 +16,28 @@ if [ -n "$COMSPEC" -a -x "$COMSPEC" ]; then
   PATH_SEP=";"
 fi
 
+OUTPUT_DIR="${SCRIPT_HOME}/../slang_libraries/RadioDriver_Impl_SW_Radio_RadioDriver"
+
+${SIREUM_HOME}/bin/sireum slang transpilers c \
+  --sourcepath "${SCRIPT_HOME}/../src/main/bridge${PATH_SEP}${SCRIPT_HOME}/../src/main/component${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/HAMR_Simple_V4/SW${PATH_SEP}${SCRIPT_HOME}/../src/main/art${PATH_SEP}${SCRIPT_HOME}/../src/main/data${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/HAMR_Simple_V4/RadioDriver_Impl_SW_Radio_RadioDriver" \
+  --output-dir "${OUTPUT_DIR}" \
+  --name "RadioDriver_Impl_SW_Radio_RadioDriver" \
+  --apps "HAMR_Simple_V4.RadioDriver_Impl_SW_Radio_RadioDriver.RadioDriver" \
+  --fingerprint 3 \
+  --bits 32 \
+  --string-size 256 \
+  --sequence-size 16 \
+  --sequence "IS[Z,art.Bridge]=1;MS[Z,Option[art.Bridge]]=1;IS[Z,art.UPort]=3;IS[Z,art.UConnection]=1;IS[Z,B]=16384" \
+  --constants "art.Art.maxComponents=1;art.Art.maxPorts=3" \
+  --cmake-includes "+${SCRIPT_HOME}/settings_RadioDriver_Impl_SW_Radio_RadioDriver.cmake" \
+  --forward "art.ArtNative=HAMR_Simple_V4.RadioDriver_Impl_SW_Radio_RadioDriver.RadioDriver" \
+  --stack-size "16777216" \
+  --stable-type-id \
+  --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/etc_seL4/adapters/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/etc_seL4/adapters/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver_adapter.c" \
+  --exclude-build "HAMR_Simple_V4.SW.RadioDriver_Impl_SW_Radio_RadioDriver,HAMR_Simple_V4.SW.FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner,HAMR_Simple_V4.SW.FlightController_Impl_SW_FlightController_FlightController" \
+  --lib-only \
+  --verbose
+
 OUTPUT_DIR="${SCRIPT_HOME}/../slang_libraries/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner"
 
 ${SIREUM_HOME}/bin/sireum slang transpilers c \
@@ -34,7 +56,7 @@ ${SIREUM_HOME}/bin/sireum slang transpilers c \
   --stack-size "16777216" \
   --stable-type-id \
   --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/etc_seL4/adapters/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/etc_seL4/adapters/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_adapter.c" \
-  --exclude-build "HAMR_Simple_V4.SW.FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner,HAMR_Simple_V4.SW.FlightController_Impl_SW_FlightController_FlightController,HAMR_Simple_V4.SW.AttestationTester_Impl_SW_AttestationTester_AttestationTester,HAMR_Simple_V4.SW.RadioDriver_Impl_SW_Radio_RadioDriver" \
+  --exclude-build "HAMR_Simple_V4.SW.RadioDriver_Impl_SW_Radio_RadioDriver,HAMR_Simple_V4.SW.FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner,HAMR_Simple_V4.SW.FlightController_Impl_SW_FlightController_FlightController" \
   --lib-only \
   --verbose
 
@@ -56,51 +78,7 @@ ${SIREUM_HOME}/bin/sireum slang transpilers c \
   --stack-size "16777216" \
   --stable-type-id \
   --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/FlightController_Impl_SW_FlightController_FlightController/FlightController_Impl_SW_FlightController_FlightController.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/FlightController_Impl_SW_FlightController_FlightController/FlightController_Impl_SW_FlightController_FlightController.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/FlightController_Impl_SW_FlightController_FlightController/FlightController_Impl_SW_FlightController_FlightController_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/FlightController_Impl_SW_FlightController_FlightController/FlightController_Impl_SW_FlightController_FlightController_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/etc_seL4/adapters/FlightController_Impl_SW_FlightController_FlightController/FlightController_Impl_SW_FlightController_FlightController_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/etc_seL4/adapters/FlightController_Impl_SW_FlightController_FlightController/FlightController_Impl_SW_FlightController_FlightController_adapter.c" \
-  --exclude-build "HAMR_Simple_V4.SW.FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner,HAMR_Simple_V4.SW.FlightController_Impl_SW_FlightController_FlightController,HAMR_Simple_V4.SW.AttestationTester_Impl_SW_AttestationTester_AttestationTester,HAMR_Simple_V4.SW.RadioDriver_Impl_SW_Radio_RadioDriver" \
-  --lib-only \
-  --verbose
-
-OUTPUT_DIR="${SCRIPT_HOME}/../slang_libraries/AttestationTester_Impl_SW_AttestationTester_AttestationTester"
-
-${SIREUM_HOME}/bin/sireum slang transpilers c \
-  --sourcepath "${SCRIPT_HOME}/../src/main/bridge${PATH_SEP}${SCRIPT_HOME}/../src/main/component${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/HAMR_Simple_V4/SW${PATH_SEP}${SCRIPT_HOME}/../src/main/art${PATH_SEP}${SCRIPT_HOME}/../src/main/data${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/HAMR_Simple_V4/AttestationTester_Impl_SW_AttestationTester_AttestationTester" \
-  --output-dir "${OUTPUT_DIR}" \
-  --name "AttestationTester_Impl_SW_AttestationTester_AttestationTester" \
-  --apps "HAMR_Simple_V4.AttestationTester_Impl_SW_AttestationTester_AttestationTester.AttestationTester" \
-  --fingerprint 3 \
-  --bits 32 \
-  --string-size 256 \
-  --sequence-size 16 \
-  --sequence "IS[Z,art.Bridge]=1;MS[Z,Option[art.Bridge]]=1;IS[Z,art.UPort]=2;IS[Z,art.UConnection]=1;IS[Z,B]=16384" \
-  --constants "art.Art.maxComponents=1;art.Art.maxPorts=2" \
-  --cmake-includes "+${SCRIPT_HOME}/settings_AttestationTester_Impl_SW_AttestationTester_AttestationTester.cmake" \
-  --forward "art.ArtNative=HAMR_Simple_V4.AttestationTester_Impl_SW_AttestationTester_AttestationTester.AttestationTester" \
-  --stack-size "16777216" \
-  --stable-type-id \
-  --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/AttestationTester_Impl_SW_AttestationTester_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/AttestationTester_Impl_SW_AttestationTester_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/AttestationTester_Impl_SW_AttestationTester_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/AttestationTester_Impl_SW_AttestationTester_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/etc_seL4/adapters/AttestationTester_Impl_SW_AttestationTester_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/etc_seL4/adapters/AttestationTester_Impl_SW_AttestationTester_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester_adapter.c" \
-  --exclude-build "HAMR_Simple_V4.SW.FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner,HAMR_Simple_V4.SW.FlightController_Impl_SW_FlightController_FlightController,HAMR_Simple_V4.SW.AttestationTester_Impl_SW_AttestationTester_AttestationTester,HAMR_Simple_V4.SW.RadioDriver_Impl_SW_Radio_RadioDriver" \
-  --lib-only \
-  --verbose
-
-OUTPUT_DIR="${SCRIPT_HOME}/../slang_libraries/RadioDriver_Impl_SW_Radio_RadioDriver"
-
-${SIREUM_HOME}/bin/sireum slang transpilers c \
-  --sourcepath "${SCRIPT_HOME}/../src/main/bridge${PATH_SEP}${SCRIPT_HOME}/../src/main/component${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/HAMR_Simple_V4/SW${PATH_SEP}${SCRIPT_HOME}/../src/main/art${PATH_SEP}${SCRIPT_HOME}/../src/main/data${PATH_SEP}${SCRIPT_HOME}/../src/main/seL4Nix/HAMR_Simple_V4/RadioDriver_Impl_SW_Radio_RadioDriver" \
-  --output-dir "${OUTPUT_DIR}" \
-  --name "RadioDriver_Impl_SW_Radio_RadioDriver" \
-  --apps "HAMR_Simple_V4.RadioDriver_Impl_SW_Radio_RadioDriver.RadioDriver" \
-  --fingerprint 3 \
-  --bits 32 \
-  --string-size 256 \
-  --sequence-size 16 \
-  --sequence "IS[Z,art.Bridge]=1;MS[Z,Option[art.Bridge]]=1;IS[Z,art.UPort]=3;IS[Z,art.UConnection]=1;IS[Z,B]=16384" \
-  --constants "art.Art.maxComponents=1;art.Art.maxPorts=3" \
-  --cmake-includes "+${SCRIPT_HOME}/settings_RadioDriver_Impl_SW_Radio_RadioDriver.cmake" \
-  --forward "art.ArtNative=HAMR_Simple_V4.RadioDriver_Impl_SW_Radio_RadioDriver.RadioDriver" \
-  --stack-size "16777216" \
-  --stable-type-id \
-  --exts "${SCRIPT_HOME}/../src/c/ext-c/ext.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/ext.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver.c${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver_api.h${PATH_SEP}${SCRIPT_HOME}/../src/c/ext-c/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver_api.c${PATH_SEP}${SCRIPT_HOME}/../src/c/etc_seL4/adapters/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver_adapter.h${PATH_SEP}${SCRIPT_HOME}/../src/c/etc_seL4/adapters/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver_adapter.c" \
-  --exclude-build "HAMR_Simple_V4.SW.FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner,HAMR_Simple_V4.SW.FlightController_Impl_SW_FlightController_FlightController,HAMR_Simple_V4.SW.AttestationTester_Impl_SW_AttestationTester_AttestationTester,HAMR_Simple_V4.SW.RadioDriver_Impl_SW_Radio_RadioDriver" \
+  --exclude-build "HAMR_Simple_V4.SW.RadioDriver_Impl_SW_Radio_RadioDriver,HAMR_Simple_V4.SW.FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner,HAMR_Simple_V4.SW.FlightController_Impl_SW_FlightController_FlightController" \
   --lib-only \
   --verbose
 

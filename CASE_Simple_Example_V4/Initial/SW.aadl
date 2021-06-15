@@ -5,6 +5,7 @@ public
 	with Base_Types;
 	with CASE_Properties;
 	with HAMR;
+	with CASE_Scheduling;
 
 	data KeepInZone
 		properties
@@ -13,8 +14,8 @@ public
 			Data_Model::Dimension => (2);
 			HAMR::Bit_Codec_Max_Size => 24 Bytes;
 	end KeepInZone;
-	
-	data implementation KeepInZone.Impl		
+
+	data implementation KeepInZone.Impl
 	end KeepInZone.Impl;
 
 	data Coordinate
@@ -73,7 +74,7 @@ public
 		properties
 			HAMR::Bit_Codec_Max_Size => 32 Bytes;
 	end RF_Msg.Impl;
-	
+
 	-- This is the structure of an Attestation Request message
 	-- that the Attestation Manager sends to the comm driver
 	data AttestationRequestMsg
@@ -112,9 +113,9 @@ public
 	data implementation AddressArray.Impl
 	end AddressArray.Impl;
 
-	data AllowList	
+	data AllowList
 	end AllowList;
-	
+
 	data implementation AllowList.Impl
 		subcomponents
 			value: data AddressArray.Impl;
@@ -130,7 +131,7 @@ public
 			Data_Model::Dimension => (3);
 			HAMR::Bit_Codec_Max_Size => 36 Bytes;
 	end Mission;
-	
+
 	thread AttestationTester
 		features
 			AttestationRequest: in event data port AttestationRequestMsg.Impl;
@@ -138,10 +139,10 @@ public
 		properties
 			CASE_Properties::Attesting => 100;
 	end AttestationTester;
-	
+
 	thread implementation AttestationTester.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationTester.Impl;
@@ -161,8 +162,9 @@ public
 
 	thread implementation RadioDriver.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
-			Period => 500ms;
+			Dispatch_Protocol => Periodic;
+			Compute_Execution_Time => 10ms .. 10ms;
+			Period => 1000ms;
 	end RadioDriver.Impl;
 
 	thread FlightPlanner
@@ -170,6 +172,10 @@ public
 		features
 			MissionCommand: in event data port RF_Msg.Impl;
 			FlightPlan: out event data port Mission;
+		properties
+			Dispatch_Protocol => Periodic;
+			Compute_Execution_Time => 200ms .. 200ms;
+			Period => 1000ms;
 		annex agree {**
 			assume Req001_FlightPlanner "The Flight Planner shall receive a valid message from the Ground Station" : VALID_MESSAGE(MissionCommand);
 			guarantee Req002_FlightPlanner "The Flight Planner shall generate a valid mission" : good_mission(FlightPlan);
@@ -178,24 +184,26 @@ public
 
 	thread implementation FlightPlanner.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
-			Period => 500ms;
+			Dispatch_Protocol => Periodic;
+			Compute_Execution_Time => 100ms .. 100ms;
+			Period => 1000ms;
 	end FlightPlanner.Impl;
 
 	thread FlightController
 		-- The FlightController is the software that flies the UAV
 		features
 			Alert: in event port;
-		FlightPlan: in event data port Mission;
-			annex agree {**
+			FlightPlan: in event data port Mission;
+		properties
+			Dispatch_Protocol => Periodic;
+			Compute_Execution_Time => 100ms .. 100ms;
+			Period => 1000ms;
+		annex agree {**
 			assume Req001_FlightController "Well-formed mission window" : good_mission(FlightPlan);
 		**};
 	end FlightController;
 
 	thread implementation FlightController.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
-			Period => 500ms;
 	end FlightController.Impl;
 
 	process SW
@@ -225,8 +233,8 @@ public
 		fun good_command(cmd : Command.Impl) : bool = good_map(cmd.Map);
 		fun good_mission(mission : Mission) : bool = forall wp in mission, good_coordinate(wp);
 	**};
-	
-process AttestationTester_seL4
+
+	process AttestationTester_seL4
 		features
 			AttestationRequest: in event data port AttestationRequestMsg.Impl;
 			AttestationResponse: out event data port AttestationResponseMsg.Impl;
@@ -252,6 +260,7 @@ process AttestationTester_seL4
 			MissionCommand: out event data port RF_Msg.Impl;
 		properties
 			CASE_Properties::Comm_Driver => true;
+			CASE_Scheduling::Domain => 1; -- pacer 1, radio 2, FLPN 3, FC 4
 	end RadioDriver_seL4;
 
 	process implementation RadioDriver_seL4.Impl
@@ -261,8 +270,6 @@ process AttestationTester_seL4
 			c1: port AttestationTesterResponse -> RadioDriver.AttestationTesterResponse;
 			c2: port RadioDriver.AttestationTesterRequest -> AttestationTesterRequest;
 			c3: port RadioDriver.MissionCommand -> MissionCommand;
-		properties
-			Period => 500ms;
 		annex agree {**
 lift contract;
 **};
@@ -272,6 +279,9 @@ lift contract;
 		features
 			MissionCommand: in event data port RF_Msg.Impl;
 			FlightPlan: out event data port Mission;
+		properties
+			CASE_Scheduling::Domain => 3; -- pacer 1, radio 2, FLPN 3, FC 4
+			HAMR::Component_Type => VIRTUAL_MACHINE;
 	end FlightPlanner_seL4;
 
 	process implementation FlightPlanner_seL4.Impl
@@ -280,8 +290,6 @@ lift contract;
 		connections
 			c1: port FlightPlanner.FlightPlan -> FlightPlan;
 			c2: port MissionCommand -> FlightPlanner.MissionCommand;
-		properties
-			Period => 500ms;
 		annex agree {**
 lift contract;
 **};
@@ -300,7 +308,7 @@ lift contract;
 			c1: port Alert -> FlightController.Alert;
 			c2: port FlightPlan -> FlightController.FlightPlan;
 		properties
-			Period => 500ms;
+			CASE_Scheduling::Domain => 4; -- pacer 1, radio 2, FLPN 3, FC 4
 		annex agree {**
 lift contract;
 **};
@@ -311,14 +319,16 @@ lift contract;
 
 	system implementation SW_seL4.Impl
 		subcomponents
+			Radio: process RadioDriver_seL4.Impl;
 			FlightPlanner: process FlightPlanner_seL4.Impl;
 			FlightController: process FlightController_seL4.Impl;
-			AttestationTester: process AttestationTester_seL4.Impl;
-			Radio: process RadioDriver_seL4.Impl;
+			--AttestationTester: process AttestationTester_seL4.Impl;
 		connections
-			c1: port Radio.AttestationTesterRequest -> AttestationTester.AttestationRequest;
-			c2: port AttestationTester.AttestationResponse -> Radio.AttestationTesterResponse;
+			--c1: port Radio.AttestationTesterRequest -> AttestationTester.AttestationRequest;
+			--c2: port AttestationTester.AttestationResponse -> Radio.AttestationTesterResponse;
 			c3: port Radio.MissionCommand -> FlightPlanner.MissionCommand;
 			c4: port FlightPlanner.FlightPlan -> FlightController.FlightPlan;
+		properties
+			HAMR::Platform => (seL4);
 	end SW_seL4.Impl;
 end SW;

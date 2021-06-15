@@ -5,6 +5,7 @@ public
 	with CASE_Model_Transformations;
 	with HAMR;
 	with CASE_Properties;
+	with CASE_Scheduling;
 
 	-- The radio communication hardware
 	device Radio
@@ -107,6 +108,10 @@ public
 			HAMR::Bit_Codec_Raw_Connections => true;
 			CASE_Properties::OS => seL4 applies to Proc_HW;
 			Actual_Processor_Binding => (reference (VirtualMachine)) applies to SW.FlightPlanner;
+			CASE_Scheduling::Max_Domain => 5 applies to Proc_HW;
+			CASE_Scheduling::Schedule_Source_Text => "domain_schedule.c"  applies to Proc_HW;
+			Frame_Period => 1000ms applies to Proc_HW;
+			Clock_Period => 2ms applies to Proc_HW;
 		annex resolute {**
 			check HAMR_Guidelines
 			prove Req_Attestation(this.SW.Radio)

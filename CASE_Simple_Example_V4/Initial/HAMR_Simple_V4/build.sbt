@@ -44,13 +44,13 @@ val scalaVer = "2.13.6"
 val scalaTestVersion = "3.2.9"
 
 // versions.properties key: org.sireum%%scalac-plugin%
-// https://github.com/sireum/scalac-plugin/tree/4.20210518.efc9ab1
-val sireumScalacVersion = "4.20210518.efc9ab1"
+// https://github.com/sireum/scalac-plugin/tree/4.20210605.5d93825
+val sireumScalacVersion = "4.20210605.5d93825"
 
 
 // refer to https://github.com/sireum/kekinian/releases to get the latest
-// Sireum Kekinian release: https://github.com/sireum/kekinian/tree/4.20210512.a968fb3
-val kekinianVersion = "4.20210512.a968fb3"
+// Sireum Kekinian release: https://github.com/sireum/kekinian/tree/4.20210607.d204053
+val kekinianVersion = "4.20210607.d204053"
 
 
 val inspectorVersion = "0.6-SNAPSHOT"
