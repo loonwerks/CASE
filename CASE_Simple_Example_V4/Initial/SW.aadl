@@ -144,6 +144,8 @@ public
 		properties
 			Dispatch_Protocol => Periodic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationTester.Impl;
 
@@ -163,8 +165,9 @@ public
 	thread implementation RadioDriver.Impl
 		properties
 			Dispatch_Protocol => Periodic;
-			Compute_Execution_Time => 10ms .. 10ms;
 			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 	end RadioDriver.Impl;
 
 	thread FlightPlanner
@@ -185,8 +188,9 @@ public
 	thread implementation FlightPlanner.Impl
 		properties
 			Dispatch_Protocol => Periodic;
-			Compute_Execution_Time => 100ms .. 100ms;
 			Period => 1000ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 	end FlightPlanner.Impl;
 
 	thread FlightController
@@ -204,6 +208,11 @@ public
 	end FlightController;
 
 	thread implementation FlightController.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 	end FlightController.Impl;
 
 	process SW
@@ -251,6 +260,7 @@ public
 		properties
 			Period => 500ms;
 			CASE_Properties::Component_Language => CakeML;
+			CASE_Scheduling::Domain => 2;
 	end AttestationTester_seL4.Impl;
 
 	process RadioDriver_seL4
@@ -260,7 +270,7 @@ public
 			MissionCommand: out event data port RF_Msg.Impl;
 		properties
 			CASE_Properties::Comm_Driver => true;
-			CASE_Scheduling::Domain => 1; -- pacer 1, radio 2, FLPN 3, FC 4
+			CASE_Scheduling::Domain => 2; -- pacer 1, radio 2, FLPN 3, FC 4
 	end RadioDriver_seL4;
 
 	process implementation RadioDriver_seL4.Impl
@@ -271,8 +281,8 @@ public
 			c2: port RadioDriver.AttestationTesterRequest -> AttestationTesterRequest;
 			c3: port RadioDriver.MissionCommand -> MissionCommand;
 		annex agree {**
-lift contract;
-**};
+			lift contract;
+		**};
 	end RadioDriver_seL4.Impl;
 
 	process FlightPlanner_seL4
@@ -291,8 +301,8 @@ lift contract;
 			c1: port FlightPlanner.FlightPlan -> FlightPlan;
 			c2: port MissionCommand -> FlightPlanner.MissionCommand;
 		annex agree {**
-lift contract;
-**};
+			lift contract;
+		**};
 	end FlightPlanner_seL4.Impl;
 
 	process FlightController_seL4
@@ -310,8 +320,8 @@ lift contract;
 		properties
 			CASE_Scheduling::Domain => 4; -- pacer 1, radio 2, FLPN 3, FC 4
 		annex agree {**
-lift contract;
-**};
+			lift contract;
+		**};
 	end FlightController_seL4.Impl;
 
 	system SW_seL4
