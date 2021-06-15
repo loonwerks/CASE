@@ -12,7 +12,7 @@ object Art {
   val z16max: PortId = org.sireum.conversions.Z16.toZ(Z16.Max) // 32,767
 
   val maxComponents: BridgeId = 4
-  val maxPorts: PortId = 14
+  val maxPorts: PortId = 9
 
   val logTitle: String = "Art"
   val bridges: MS[BridgeId, Option[Bridge]] = MS.create[BridgeId, Option[Bridge]](maxComponents, None[Bridge]())

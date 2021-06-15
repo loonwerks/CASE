@@ -1,0 +1,41 @@
+// This file will be regenerated, do not edit
+
+import <std_connector.camkes>;
+import "components/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner.camkes";
+import "components/FlightController_Impl_SW_FlightController_FlightController/FlightController_Impl_SW_FlightController_FlightController.camkes";
+import "components/AttestationTester_Impl_SW_AttestationTester_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester.camkes";
+import "components/RadioDriver_Impl_SW_Radio_RadioDriver/RadioDriver_Impl_SW_Radio_RadioDriver.camkes";
+
+assembly {
+  composition {
+    component FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner SW_FlightPlanner_FlightPlanner;
+    component FlightController_Impl_SW_FlightController_FlightController SW_FlightController_FlightController;
+    component AttestationTester_Impl_SW_AttestationTester_AttestationTester SW_AttestationTester_AttestationTester;
+    component RadioDriver_Impl_SW_Radio_RadioDriver SW_Radio_RadioDriver;
+
+    connection seL4Notification conn1(from SW_FlightPlanner_FlightPlanner.sb_FlightPlan_1_notification, to SW_FlightController_FlightController.sb_FlightPlan_notification);
+    connection seL4SharedData conn2(from SW_FlightPlanner_FlightPlanner.sb_FlightPlan_queue_1, to SW_FlightController_FlightController.sb_FlightPlan_queue);
+    connection seL4Notification conn3(from SW_AttestationTester_AttestationTester.sb_AttestationResponse_1_notification, to SW_Radio_RadioDriver.sb_AttestationTesterResponse_notification);
+    connection seL4SharedData conn4(from SW_AttestationTester_AttestationTester.sb_AttestationResponse_queue_1, to SW_Radio_RadioDriver.sb_AttestationTesterResponse_queue);
+    connection seL4Notification conn5(from SW_Radio_RadioDriver.sb_AttestationTesterRequest_1_notification, to SW_AttestationTester_AttestationTester.sb_AttestationRequest_notification);
+    connection seL4SharedData conn6(from SW_Radio_RadioDriver.sb_AttestationTesterRequest_queue_1, to SW_AttestationTester_AttestationTester.sb_AttestationRequest_queue);
+    connection seL4Notification conn7(from SW_Radio_RadioDriver.sb_MissionCommand_1_notification, to SW_FlightPlanner_FlightPlanner.sb_MissionCommand_notification);
+    connection seL4SharedData conn8(from SW_Radio_RadioDriver.sb_MissionCommand_queue_1, to SW_FlightPlanner_FlightPlanner.sb_MissionCommand_queue);
+  }
+
+  configuration {
+    conn2.size = 16384;
+    SW_FlightPlanner_FlightPlanner.sb_FlightPlan_queue_1_access = "W";
+    SW_FlightController_FlightController.sb_FlightPlan_queue_access = "R";
+    conn4.size = 16384;
+    SW_AttestationTester_AttestationTester.sb_AttestationResponse_queue_1_access = "W";
+    SW_Radio_RadioDriver.sb_AttestationTesterResponse_queue_access = "R";
+    conn6.size = 16384;
+    SW_Radio_RadioDriver.sb_AttestationTesterRequest_queue_1_access = "W";
+    SW_AttestationTester_AttestationTester.sb_AttestationRequest_queue_access = "R";
+    conn8.size = 16384;
+    SW_Radio_RadioDriver.sb_MissionCommand_queue_1_access = "W";
+    SW_FlightPlanner_FlightPlanner.sb_MissionCommand_queue_access = "R";
+
+  }
+}

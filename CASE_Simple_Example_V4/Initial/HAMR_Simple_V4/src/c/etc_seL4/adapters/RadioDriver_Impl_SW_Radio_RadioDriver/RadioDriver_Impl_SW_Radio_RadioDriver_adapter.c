@@ -1,0 +1,25 @@
+#include <RadioDriver_Impl_SW_Radio_RadioDriver_adapter.h>
+
+Unit HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_RadioDriver_adapter_initialiseArchitecture(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "RadioDriver_Impl_SW_Radio_RadioDriver_adapter.c", "", "HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_RadioDriver_adapter_initialiseArchitecture", 0);
+
+  HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_RadioDriver_RadioDriver_initialiseArchitecture(SF_LAST);
+}
+
+Unit HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_RadioDriver_adapter_initialiseEntryPoint(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "RadioDriver_Impl_SW_Radio_RadioDriver_adapter.c", "", "HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_RadioDriver_adapter_initialiseEntryPoint", 0);
+
+  HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_RadioDriver_RadioDriver_initialiseEntryPoint(SF_LAST);
+}
+
+Unit HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_RadioDriver_adapter_computeEntryPoint(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "RadioDriver_Impl_SW_Radio_RadioDriver_adapter.c", "", "HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_RadioDriver_adapter_computeEntryPoint", 0);
+
+  HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_RadioDriver_RadioDriver_computeEntryPoint(SF_LAST);
+}
+
+art_Bridge_EntryPoints HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_RadioDriver_adapter_entryPoints(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "RadioDriver_Impl_SW_Radio_RadioDriver_adapter.c", "", "HAMR_Simple_V4_SW_RadioDriver_Impl_SW_Radio_RadioDriver_adapter_entryPoints", 0);
+
+  return HAMR_Simple_V4_RadioDriver_Impl_SW_Radio_RadioDriver_RadioDriver_entryPoints(SF_LAST);
+}

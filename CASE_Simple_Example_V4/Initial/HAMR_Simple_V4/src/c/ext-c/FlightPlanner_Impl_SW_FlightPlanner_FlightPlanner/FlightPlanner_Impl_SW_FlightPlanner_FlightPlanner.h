@@ -1,0 +1,14 @@
+#ifndef FLIGHTPLANNER_IMPL_SW_FLIGHTPLANNER_FLIGHTPLANNER_H
+#define FLIGHTPLANNER_IMPL_SW_FLIGHTPLANNER_FLIGHTPLANNER_H
+
+#include <all.h>
+
+Unit HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_initialise_(STACK_FRAME_ONLY);
+
+Unit HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_finalise_(STACK_FRAME_ONLY);
+
+Unit HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand_(
+  STACK_FRAME
+  IS_C4F575 value);
+
+#endif

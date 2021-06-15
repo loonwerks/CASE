@@ -1,0 +1,12 @@
+component RadioDriver_Impl_SW_Radio_RadioDriver {
+  include <sb_types.h>;
+  include <sb_queue_union_art_DataContent_1.h>;
+  control;
+  emits ReceiveEvent sb_AttestationTesterRequest_1_notification;
+  emits ReceiveEvent sb_MissionCommand_1_notification;
+  consumes ReceiveEvent sb_AttestationTesterResponse_notification;
+  dataport sb_queue_union_art_DataContent_1_t sb_AttestationTesterResponse_queue;
+  dataport sb_queue_union_art_DataContent_1_t sb_AttestationTesterRequest_queue_1;
+  dataport sb_queue_union_art_DataContent_1_t sb_MissionCommand_queue_1;
+  has semaphore sb_dispatch_sem;
+}
