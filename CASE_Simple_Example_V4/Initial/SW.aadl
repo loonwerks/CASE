@@ -141,8 +141,10 @@ public
 	
 	thread implementation AttestationTester.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationTester.Impl;
 
@@ -161,8 +163,10 @@ public
 
 	thread implementation RadioDriver.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 	end RadioDriver.Impl;
 
 	thread FlightPlanner
@@ -178,8 +182,10 @@ public
 
 	thread implementation FlightPlanner.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 	end FlightPlanner.Impl;
 
 	thread FlightController
@@ -194,8 +200,10 @@ public
 
 	thread implementation FlightController.Impl
 		properties
-			Dispatch_Protocol => Sporadic;
+			Dispatch_Protocol => Periodic;
 			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
 	end FlightController.Impl;
 
 	process SW
@@ -226,7 +234,7 @@ public
 		fun good_mission(mission : Mission) : bool = forall wp in mission, good_coordinate(wp);
 	**};
 	
-process AttestationTester_seL4
+	process AttestationTester_seL4
 		features
 			AttestationRequest: in event data port AttestationRequestMsg.Impl;
 			AttestationResponse: out event data port AttestationResponseMsg.Impl;
@@ -243,6 +251,7 @@ process AttestationTester_seL4
 		properties
 			Period => 500ms;
 			CASE_Properties::Component_Language => CakeML;
+			CASE_Scheduling::Domain => 2;
 	end AttestationTester_seL4.Impl;
 
 	process RadioDriver_seL4
@@ -263,9 +272,10 @@ process AttestationTester_seL4
 			c3: port RadioDriver.MissionCommand -> MissionCommand;
 		properties
 			Period => 500ms;
+			CASE_Scheduling::Domain => 3;
 		annex agree {**
-lift contract;
-**};
+			lift contract;
+		**};
 	end RadioDriver_seL4.Impl;
 
 	process FlightPlanner_seL4
@@ -282,9 +292,10 @@ lift contract;
 			c2: port MissionCommand -> FlightPlanner.MissionCommand;
 		properties
 			Period => 500ms;
+			CASE_Scheduling::Domain => 4;
 		annex agree {**
-lift contract;
-**};
+			lift contract;
+		**};
 	end FlightPlanner_seL4.Impl;
 
 	process FlightController_seL4
@@ -301,9 +312,10 @@ lift contract;
 			c2: port FlightPlan -> FlightController.FlightPlan;
 		properties
 			Period => 500ms;
+			CASE_Scheduling::Domain => 5;
 		annex agree {**
-lift contract;
-**};
+			lift contract;
+		**};
 	end FlightController_seL4.Impl;
 
 	system SW_seL4
