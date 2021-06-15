@@ -222,7 +222,7 @@ refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
   * [CASE_Monitor_Geo](hamr/c/ext-c/CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo/CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo.c)
 <!--behavior-code-sel4_end-->
 
-\* _If CAKEML_ASSEMBLIES_PRESENT=ON is passed to run-camkes.sh (see below) then the behavior code for the attestation gate will come from the following CakeML files_
+\* _If CAKEML_ASSEMBLIES_PRESENT=ON is passed to run-camkes.sh (see below) then the behavior code for the CakeML components will come from the following CakeML files_
 
   * [attestation_gate.cml](aadl/cakeml/attestation_gate/attestation_gate.cml)
   * [geofence_monitor.cml](aadl/cakeml/geofence_monitor/geofence_monitor.cml)
