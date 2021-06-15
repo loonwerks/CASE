@@ -185,9 +185,9 @@ public
 	thread FlightController
 		-- The FlightController is the software that flies the UAV
 		features
-			FlightPlan: in event data port Mission;
 			Alert: in event port;
-		annex agree {**
+		FlightPlan: in event data port Mission;
+			annex agree {**
 			assume Req001_FlightController "Well-formed mission window" : good_mission(FlightPlan);
 		**};
 	end FlightController;
@@ -226,4 +226,99 @@ public
 		fun good_mission(mission : Mission) : bool = forall wp in mission, good_coordinate(wp);
 	**};
 	
+process AttestationTester_seL4
+		features
+			AttestationRequest: in event data port AttestationRequestMsg.Impl;
+			AttestationResponse: out event data port AttestationResponseMsg.Impl;
+		properties
+			CASE_Properties::Attesting => 100;
+	end AttestationTester_seL4;
+
+	process implementation AttestationTester_seL4.Impl
+		subcomponents
+			AttestationTester: thread AttestationTester.Impl;
+		connections
+			c1: port AttestationTester.AttestationResponse -> AttestationResponse;
+			c2: port AttestationRequest -> AttestationTester.AttestationRequest;
+		properties
+			Period => 500ms;
+			CASE_Properties::Component_Language => CakeML;
+	end AttestationTester_seL4.Impl;
+
+	process RadioDriver_seL4
+		features
+			AttestationTesterResponse: in event data port AttestationResponseMsg.Impl;
+			AttestationTesterRequest: out event data port AttestationRequestMsg.Impl;
+			MissionCommand: out event data port RF_Msg.Impl;
+		properties
+			CASE_Properties::Comm_Driver => true;
+	end RadioDriver_seL4;
+
+	process implementation RadioDriver_seL4.Impl
+		subcomponents
+			RadioDriver: thread RadioDriver.Impl;
+		connections
+			c1: port AttestationTesterResponse -> RadioDriver.AttestationTesterResponse;
+			c2: port RadioDriver.AttestationTesterRequest -> AttestationTesterRequest;
+			c3: port RadioDriver.MissionCommand -> MissionCommand;
+		properties
+			Period => 500ms;
+		annex agree {**
+lift contract;
+**};
+	end RadioDriver_seL4.Impl;
+
+	process FlightPlanner_seL4
+		features
+			MissionCommand: in event data port RF_Msg.Impl;
+			FlightPlan: out event data port Mission;
+	end FlightPlanner_seL4;
+
+	process implementation FlightPlanner_seL4.Impl
+		subcomponents
+			FlightPlanner: thread FlightPlanner.Impl;
+		connections
+			c1: port FlightPlanner.FlightPlan -> FlightPlan;
+			c2: port MissionCommand -> FlightPlanner.MissionCommand;
+		properties
+			Period => 500ms;
+		annex agree {**
+lift contract;
+**};
+	end FlightPlanner_seL4.Impl;
+
+	process FlightController_seL4
+		features
+			Alert: in event port;
+			FlightPlan: in event data port Mission;
+	end FlightController_seL4;
+
+	process implementation FlightController_seL4.Impl
+		subcomponents
+			FlightController: thread FlightController.Impl;
+		connections
+			c1: port Alert -> FlightController.Alert;
+			c2: port FlightPlan -> FlightController.FlightPlan;
+		properties
+			Period => 500ms;
+		annex agree {**
+lift contract;
+**};
+	end FlightController_seL4.Impl;
+
+	system SW_seL4
+	end SW_seL4;
+
+	system implementation SW_seL4.Impl
+		subcomponents
+			FlightPlanner: process FlightPlanner_seL4.Impl;
+			FlightController: process FlightController_seL4.Impl;
+			AttestationTester: process AttestationTester_seL4.Impl;
+			Radio: process RadioDriver_seL4.Impl;
+		connections
+			c1: port Radio.AttestationTesterRequest -> AttestationTester.AttestationRequest;
+			c2: port AttestationTester.AttestationResponse -> Radio.AttestationTesterResponse;
+			c3: port Radio.MissionCommand -> FlightPlanner.MissionCommand;
+			c4: port FlightPlanner.FlightPlan -> FlightController.FlightPlan;
+	end SW_seL4.Impl;
 end SW;
