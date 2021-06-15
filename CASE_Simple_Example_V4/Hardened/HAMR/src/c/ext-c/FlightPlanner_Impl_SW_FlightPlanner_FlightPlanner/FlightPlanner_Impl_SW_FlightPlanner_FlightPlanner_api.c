@@ -122,11 +122,10 @@ Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_finalise(
   HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_finalise_(SF_LAST);
 }
 
-Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand(
+Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_timeTriggered(
   STACK_FRAME
-  HAMR_SW_FlightPlanner_Impl_Operational_Api api,
-  IS_C4F575 value) {
-  DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_api.c", "", "HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand", 0);
+  HAMR_SW_FlightPlanner_Impl_Operational_Api api) {
+  DeclNewStackFrame(caller, "FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_api.c", "", "HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_timeTriggered", 0);
 
-  HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand_(SF value);
+  HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_timeTriggered_(SF_LAST);
 }

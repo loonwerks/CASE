@@ -10,9 +10,7 @@ object RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation {
 
   def initialise(api: RadioDriver_Attestation_Impl_Initialization_Api): Unit = { }
 
-  def handle_AttestationTesterResponse(api: RadioDriver_Attestation_Impl_Operational_Api, value : Base_Types.Bits): Unit = { }
-
-  def handle_AttestationRequest(api: RadioDriver_Attestation_Impl_Operational_Api, value : Base_Types.Bits): Unit = { }
+  def timeTriggered(api: RadioDriver_Attestation_Impl_Operational_Api): Unit = { }
 
   def activate(api: RadioDriver_Attestation_Impl_Operational_Api): Unit = { }
 

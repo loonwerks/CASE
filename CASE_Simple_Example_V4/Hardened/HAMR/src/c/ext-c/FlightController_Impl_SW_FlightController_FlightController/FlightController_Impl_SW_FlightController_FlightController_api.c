@@ -117,19 +117,10 @@ Unit HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_finalise
   HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_finalise_(SF_LAST);
 }
 
-Unit HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_handle_FlightPlan(
-  STACK_FRAME
-  HAMR_SW_FlightController_Impl_Operational_Api api,
-  IS_C4F575 value) {
-  DeclNewStackFrame(caller, "FlightController_Impl_SW_FlightController_FlightController_api.c", "", "HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_handle_FlightPlan", 0);
-
-  HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_handle_FlightPlan_(SF value);
-}
-
-Unit HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_handle_Alert(
+Unit HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_timeTriggered(
   STACK_FRAME
   HAMR_SW_FlightController_Impl_Operational_Api api) {
-  DeclNewStackFrame(caller, "FlightController_Impl_SW_FlightController_FlightController_api.c", "", "HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_handle_Alert", 0);
+  DeclNewStackFrame(caller, "FlightController_Impl_SW_FlightController_FlightController_api.c", "", "HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_timeTriggered", 0);
 
-  HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_handle_Alert_(SF_LAST);
+  HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_timeTriggered_(SF_LAST);
 }

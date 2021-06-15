@@ -122,11 +122,10 @@ Unit HAMR_SW_Filter_Impl_SW_Filter_Filter_finalise(
   HAMR_SW_Filter_Impl_SW_Filter_Filter_finalise_(SF_LAST);
 }
 
-Unit HAMR_SW_Filter_Impl_SW_Filter_Filter_handle_Input(
+Unit HAMR_SW_Filter_Impl_SW_Filter_Filter_timeTriggered(
   STACK_FRAME
-  HAMR_SW_Filter_Impl_Operational_Api api,
-  IS_C4F575 value) {
-  DeclNewStackFrame(caller, "Filter_Impl_SW_Filter_Filter_api.c", "", "HAMR_SW_Filter_Impl_SW_Filter_Filter_handle_Input", 0);
+  HAMR_SW_Filter_Impl_Operational_Api api) {
+  DeclNewStackFrame(caller, "Filter_Impl_SW_Filter_Filter_api.c", "", "HAMR_SW_Filter_Impl_SW_Filter_Filter_timeTriggered", 0);
 
-  HAMR_SW_Filter_Impl_SW_Filter_Filter_handle_Input_(SF value);
+  HAMR_SW_Filter_Impl_SW_Filter_Filter_timeTriggered_(SF_LAST);
 }

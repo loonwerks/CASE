@@ -21,7 +21,7 @@ object AttestationGate extends App {
     HAMR.SW.AttestationGate_Impl_SW_AttestationGate_AttestationGate_Bridge(
       id = 0,
       name = "MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       MissionCommand_in = MissionCommand_in,
@@ -46,14 +46,7 @@ object AttestationGate extends App {
   var TrustedIds_port: Option[DataContent] = noData
 
   def dispatchStatus(bridgeId: Art.BridgeId): DispatchStatus = {
-    var portIds: ISZ[Art.PortId] = ISZ()
-    if(!AttestationGate_Impl_SW_AttestationGate_AttestationGate_seL4Nix.MissionCommand_in_IsEmpty()) {
-      portIds = portIds :+ MissionCommand_in_id
-    }
-    if(!AttestationGate_Impl_SW_AttestationGate_AttestationGate_seL4Nix.TrustedIds_IsEmpty()) {
-      portIds = portIds :+ TrustedIds_id
-    }
-    return EventTriggered(portIds)
+    return TimeTriggered()
   }
 
   def getValue(portId: Art.PortId): Option[DataContent] = {

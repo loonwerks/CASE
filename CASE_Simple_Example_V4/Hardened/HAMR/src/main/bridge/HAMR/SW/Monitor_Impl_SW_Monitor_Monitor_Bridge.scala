@@ -98,72 +98,20 @@ object Monitor_Impl_SW_Monitor_Monitor_Bridge {
                                                Alert_Id)
 
     def compute(): Unit = {
-      // transpiler friendly filter
-      def filter(receivedEvents: ISZ[Art.PortId], triggers: ISZ[Art.PortId]): ISZ[Art.PortId] = {
-        var r = ISZ[Art.PortId]()
-        val opsTriggers = ops.ISZOps(triggers)
-        for(e <- receivedEvents) {
-          if(opsTriggers.contains(e)) {
-            r = r :+ e
-          }
-        }
-        return r
-      }
-
-      // fetch received events ordered by highest urgency then earliest arrival-time
-      val EventTriggered(receivedEvents) = Art.dispatchStatus(Monitor_Impl_SW_Monitor_Monitor_BridgeId)
-
-      // remove non-dispatching event ports
-      val dispatchableEventPorts: ISZ[Art.PortId] =
-        if(dispatchTriggers.isEmpty) receivedEvents
-        else filter(receivedEvents, dispatchTriggers.get)
-
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
-      for(portId <- dispatchableEventPorts) {
-        if(portId == FlightPlan_in_Id){
-          val Some(Base_Types.Bits_Payload(value)) = Art.getValue(FlightPlan_in_Id)
-
-          // implement the following in 'component':  def handle_FlightPlan_in(api: Monitor_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
-          component.handle_FlightPlan_in(operational_api, value)
-        }
-      }
+      // implement the following in 'component':  def timeTriggered(api: Monitor_Impl_Operational_Api): Unit = {}
+      component.timeTriggered(operational_api)
 
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
     }
 
     override
     def testCompute(): Unit = {
-      // transpiler friendly filter
-      def filter(receivedEvents: ISZ[Art.PortId], triggers: ISZ[Art.PortId]): ISZ[Art.PortId] = {
-        var r = ISZ[Art.PortId]()
-        val opsTriggers = ops.ISZOps(triggers)
-        for(e <- receivedEvents) {
-          if(opsTriggers.contains(e)) {
-            r = r :+ e
-          }
-        }
-        return r
-      }
-
-      // fetch received events ordered by highest urgency then earliest arrival-time
-      val EventTriggered(receivedEvents) = Art.dispatchStatus(Monitor_Impl_SW_Monitor_Monitor_BridgeId)
-
-      // remove non-dispatching event ports
-      val dispatchableEventPorts: ISZ[Art.PortId] =
-        if(dispatchTriggers.isEmpty) receivedEvents
-        else filter(receivedEvents, dispatchTriggers.get)
-
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
-      for(portId <- dispatchableEventPorts) {
-        if(portId == FlightPlan_in_Id){
-          val Some(Base_Types.Bits_Payload(value)) = Art.getValue(FlightPlan_in_Id)
-
-          // implement the following in 'component':  def handle_FlightPlan_in(api: Monitor_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
-          component.handle_FlightPlan_in(operational_api, value)
-        }
-      }
+      // implement the following in 'component':  def timeTriggered(api: Monitor_Impl_Operational_Api): Unit = {}
+      component.timeTriggered(operational_api)
 
       Art.releaseOutput(eventOutPortIds, dataOutPortIds)
     }

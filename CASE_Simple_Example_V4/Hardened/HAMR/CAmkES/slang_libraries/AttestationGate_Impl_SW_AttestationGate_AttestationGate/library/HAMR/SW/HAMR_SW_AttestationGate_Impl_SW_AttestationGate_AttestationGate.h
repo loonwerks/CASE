@@ -1,0 +1,20 @@
+#ifndef SIREUM_H_HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate
+#define SIREUM_H_HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <types.h>
+
+Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_initialise(STACK_FRAME HAMR_SW_AttestationGate_Impl_Initialization_Api api);
+
+Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_timeTriggered(STACK_FRAME HAMR_SW_AttestationGate_Impl_Operational_Api api);
+
+Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_finalise(STACK_FRAME HAMR_SW_AttestationGate_Impl_Operational_Api api);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

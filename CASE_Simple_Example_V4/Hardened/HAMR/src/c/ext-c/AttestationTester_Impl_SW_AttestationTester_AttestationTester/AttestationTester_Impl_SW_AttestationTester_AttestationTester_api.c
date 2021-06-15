@@ -122,11 +122,10 @@ Unit HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_final
   HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_finalise_(SF_LAST);
 }
 
-Unit HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_handle_AttestationRequest(
+Unit HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_timeTriggered(
   STACK_FRAME
-  HAMR_SW_AttestationTester_Impl_Operational_Api api,
-  IS_C4F575 value) {
-  DeclNewStackFrame(caller, "AttestationTester_Impl_SW_AttestationTester_AttestationTester_api.c", "", "HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_handle_AttestationRequest", 0);
+  HAMR_SW_AttestationTester_Impl_Operational_Api api) {
+  DeclNewStackFrame(caller, "AttestationTester_Impl_SW_AttestationTester_AttestationTester_api.c", "", "HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_timeTriggered", 0);
 
-  HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_handle_AttestationRequest_(SF value);
+  HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_timeTriggered_(SF_LAST);
 }

@@ -64,7 +64,7 @@ void print_AttestationResponseMsg(const char* const bytes) {
 /*****************************************************************************/
 const Coordinate startingCoordinate = {45.31010191362929, -121.0083254511704,1000.0};
 const Coordinate endingCoordinate = {45.34120895091226, -120.9377622731235, 1000.0};
-const Coordinate badCoordinate = {-91.0,181.0};
+const Coordinate badCoordinate = {-91.0,181.0, 999.0};
 
 const Map goodMap = {{startingCoordinate,endingCoordinate}};
 const Map badMap = {{badCoordinate, endingCoordinate}};
@@ -89,7 +89,7 @@ uint8_t* getRadioOutput() {
     output = (uint8_t *)(&goodHeaderBadCmd);
   } else if (i >= 13) {
     output = (uint8_t*)(&goodHeaderGoodCmd);
-		i = 11;
+    i = 10;
   }
 
   if (i < 13) {
@@ -179,6 +179,6 @@ uint8_t isFenced(Mission *mission) {
 
 uint8_t getMonitorAlertOutput(uint8_t* msg) {
 	Mission* mission = (Mission *)msg;
-	alert = isFenced(mission);
+	alert = !isFenced(mission);
 	return alert; 
 }

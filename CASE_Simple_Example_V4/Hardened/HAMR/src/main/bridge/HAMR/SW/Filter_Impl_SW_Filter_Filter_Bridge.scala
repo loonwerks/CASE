@@ -90,72 +90,20 @@ object Filter_Impl_SW_Filter_Filter_Bridge {
     val eventOutPortIds: ISZ[Art.PortId] = ISZ(Output_Id)
 
     def compute(): Unit = {
-      // transpiler friendly filter
-      def filter(receivedEvents: ISZ[Art.PortId], triggers: ISZ[Art.PortId]): ISZ[Art.PortId] = {
-        var r = ISZ[Art.PortId]()
-        val opsTriggers = ops.ISZOps(triggers)
-        for(e <- receivedEvents) {
-          if(opsTriggers.contains(e)) {
-            r = r :+ e
-          }
-        }
-        return r
-      }
-
-      // fetch received events ordered by highest urgency then earliest arrival-time
-      val EventTriggered(receivedEvents) = Art.dispatchStatus(Filter_Impl_SW_Filter_Filter_BridgeId)
-
-      // remove non-dispatching event ports
-      val dispatchableEventPorts: ISZ[Art.PortId] =
-        if(dispatchTriggers.isEmpty) receivedEvents
-        else filter(receivedEvents, dispatchTriggers.get)
-
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
-      for(portId <- dispatchableEventPorts) {
-        if(portId == Input_Id){
-          val Some(Base_Types.Bits_Payload(value)) = Art.getValue(Input_Id)
-
-          // implement the following in 'component':  def handle_Input(api: Filter_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
-          component.handle_Input(operational_api, value)
-        }
-      }
+      // implement the following in 'component':  def timeTriggered(api: Filter_Impl_Operational_Api): Unit = {}
+      component.timeTriggered(operational_api)
 
       Art.sendOutput(eventOutPortIds, dataOutPortIds)
     }
 
     override
     def testCompute(): Unit = {
-      // transpiler friendly filter
-      def filter(receivedEvents: ISZ[Art.PortId], triggers: ISZ[Art.PortId]): ISZ[Art.PortId] = {
-        var r = ISZ[Art.PortId]()
-        val opsTriggers = ops.ISZOps(triggers)
-        for(e <- receivedEvents) {
-          if(opsTriggers.contains(e)) {
-            r = r :+ e
-          }
-        }
-        return r
-      }
-
-      // fetch received events ordered by highest urgency then earliest arrival-time
-      val EventTriggered(receivedEvents) = Art.dispatchStatus(Filter_Impl_SW_Filter_Filter_BridgeId)
-
-      // remove non-dispatching event ports
-      val dispatchableEventPorts: ISZ[Art.PortId] =
-        if(dispatchTriggers.isEmpty) receivedEvents
-        else filter(receivedEvents, dispatchTriggers.get)
-
       Art.receiveInput(eventInPortIds, dataInPortIds)
 
-      for(portId <- dispatchableEventPorts) {
-        if(portId == Input_Id){
-          val Some(Base_Types.Bits_Payload(value)) = Art.getValue(Input_Id)
-
-          // implement the following in 'component':  def handle_Input(api: Filter_Impl_Operational_Api, value: Base_Types.Bits): Unit = {}
-          component.handle_Input(operational_api, value)
-        }
-      }
+      // implement the following in 'component':  def timeTriggered(api: Filter_Impl_Operational_Api): Unit = {}
+      component.timeTriggered(operational_api)
 
       Art.releaseOutput(eventOutPortIds, dataOutPortIds)
     }

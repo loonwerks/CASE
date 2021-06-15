@@ -7,8 +7,6 @@ Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_initialise_(STACK
 
 Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_finalise_(STACK_FRAME_ONLY);
 
-Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_handle_MissionCommand_(
-  STACK_FRAME
-  IS_C4F575 value);
+Unit HAMR_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_timeTriggered_(STACK_FRAME_ONLY);
 
 #endif

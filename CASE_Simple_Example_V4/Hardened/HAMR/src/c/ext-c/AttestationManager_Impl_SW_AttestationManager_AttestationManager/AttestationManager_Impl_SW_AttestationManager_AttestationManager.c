@@ -8,7 +8,7 @@ Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_in
   DeclNewStackFrame(caller, "AttestationManager_Impl_SW_AttestationManager_AttestationManager.c", "", "HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_initialise_", 0);
 
   // examples of api setter and logging usage
-
+/*
   uint8_t t0[numBytes_HAMR_SW_AttestationRequestMsg_Impl];
   byte_array_default(SF t0, numBits_HAMR_SW_AttestationRequestMsg_Impl, numBytes_HAMR_SW_AttestationRequestMsg_Impl);
   api_put_AttestationRequest__HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager(SF numBits_HAMR_SW_AttestationRequestMsg_Impl, t0);
@@ -22,34 +22,18 @@ Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_in
   api_logDebug__HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager(SF string("Example logDebug"));
 
   api_logError__HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager(SF string("Example logError"));
+  */
 }
 
 Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_finalise_(STACK_FRAME_ONLY) {
   DeclNewStackFrame(caller, "AttestationManager_Impl_SW_AttestationManager_AttestationManager.c", "", "HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_finalise_", 0);
 }
 
-Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_handle_AttestationResponse_raw(
-  STACK_FRAME
-  size_t numBits,
-  uint8_t *byteArray) {
-  DeclNewStackFrame(caller, "AttestationManager_Impl_SW_AttestationManager_AttestationManager_api.c", "", "HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_handle_AttestationResponse_raw", 0);
-
-  size_t numBytes = numBits == 0 ? 0 : (numBits - 1) / 8 + 1;
-  DeclNewString(AttestationResponseString);
-  String__append(SF (String) &AttestationResponseString, string("HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_handle_AttestationResponse_raw called"));
-  byte_array_string(SF (String) &AttestationResponseString, byteArray, numBytes);
-  api_logInfo__HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager (SF (String) &AttestationResponseString);
-}
-
-Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_handle_AttestationResponse_(
-  STACK_FRAME
-  IS_C4F575 value) {
-  DeclNewStackFrame(caller, "AttestationManager_Impl_SW_AttestationManager_AttestationManager.c", "", "HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_handle_AttestationResponse_", 0);
-
-  HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_handle_AttestationResponse_raw(SF value->size, value->value);
+Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_timeTriggered_(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "AttestationManager_Impl_SW_AttestationManager_AttestationManager.c", "", "HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_timeTriggered_", 0);
 
   // examples of api getter usage
-
+/*
   uint8_t t0[numBytes_HAMR_SW_AttestationResponseMsg_Impl];
   size_t t0_numBits;
   if(api_get_AttestationResponse__HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager(SF &t0_numBits, t0)) {
@@ -61,4 +45,8 @@ Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_ha
     byte_array_string(SF (String) &AttestationResponse_str, t0, numBytes_HAMR_SW_AttestationResponseMsg_Impl);
     api_logInfo__HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager(SF (String) &AttestationResponse_str);
   }
+  */
+  static uint32_t t1[numBytes_HAMR_SW_AllowList_Impl/4] = {1, 0, 0, 0};
+  api_put_TrustedIds__HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager(SF numBits_HAMR_SW_AllowList_Impl, (uint8_t *)t1);
+
 }

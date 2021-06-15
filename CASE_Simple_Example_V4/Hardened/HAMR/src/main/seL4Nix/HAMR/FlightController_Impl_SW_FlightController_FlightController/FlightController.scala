@@ -20,7 +20,7 @@ object FlightController extends App {
     HAMR.SW.FlightController_Impl_SW_FlightController_FlightController_Bridge(
       id = 0,
       name = "MissionComputer_Impl_Instance_SW_FlightController_FlightController",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       FlightPlan = FlightPlan,
@@ -40,14 +40,7 @@ object FlightController extends App {
   var Alert_port: Option[DataContent] = noData
 
   def dispatchStatus(bridgeId: Art.BridgeId): DispatchStatus = {
-    var portIds: ISZ[Art.PortId] = ISZ()
-    if(!FlightController_Impl_SW_FlightController_FlightController_seL4Nix.FlightPlan_IsEmpty()) {
-      portIds = portIds :+ FlightPlan_id
-    }
-    if(!FlightController_Impl_SW_FlightController_FlightController_seL4Nix.Alert_IsEmpty()) {
-      portIds = portIds :+ Alert_id
-    }
-    return EventTriggered(portIds)
+    return TimeTriggered()
   }
 
   def getValue(portId: Art.PortId): Option[DataContent] = {

@@ -134,11 +134,10 @@ Unit HAMR_SW_Monitor_Impl_SW_Monitor_Monitor_finalise(
   HAMR_SW_Monitor_Impl_SW_Monitor_Monitor_finalise_(SF_LAST);
 }
 
-Unit HAMR_SW_Monitor_Impl_SW_Monitor_Monitor_handle_FlightPlan_in(
+Unit HAMR_SW_Monitor_Impl_SW_Monitor_Monitor_timeTriggered(
   STACK_FRAME
-  HAMR_SW_Monitor_Impl_Operational_Api api,
-  IS_C4F575 value) {
-  DeclNewStackFrame(caller, "Monitor_Impl_SW_Monitor_Monitor_api.c", "", "HAMR_SW_Monitor_Impl_SW_Monitor_Monitor_handle_FlightPlan_in", 0);
+  HAMR_SW_Monitor_Impl_Operational_Api api) {
+  DeclNewStackFrame(caller, "Monitor_Impl_SW_Monitor_Monitor_api.c", "", "HAMR_SW_Monitor_Impl_SW_Monitor_Monitor_timeTriggered", 0);
 
-  HAMR_SW_Monitor_Impl_SW_Monitor_Monitor_handle_FlightPlan_in_(SF value);
+  HAMR_SW_Monitor_Impl_SW_Monitor_Monitor_timeTriggered_(SF_LAST);
 }

@@ -20,7 +20,7 @@ object Filter extends App {
     HAMR.SW.Filter_Impl_SW_Filter_Filter_Bridge(
       id = 0,
       name = "MissionComputer_Impl_Instance_SW_Filter_Filter",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       Input = Input,
@@ -40,11 +40,7 @@ object Filter extends App {
   var Output_port: Option[DataContent] = noData
 
   def dispatchStatus(bridgeId: Art.BridgeId): DispatchStatus = {
-    var portIds: ISZ[Art.PortId] = ISZ()
-    if(!Filter_Impl_SW_Filter_Filter_seL4Nix.Input_IsEmpty()) {
-      portIds = portIds :+ Input_id
-    }
-    return EventTriggered(portIds)
+    return TimeTriggered()
   }
 
   def getValue(portId: Art.PortId): Option[DataContent] = {
