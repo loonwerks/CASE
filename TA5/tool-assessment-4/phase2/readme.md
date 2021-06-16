@@ -1,7 +1,7 @@
 # phase2
 
  Table of Contents
-<!--ts-->
+<!--table-of-contents_start-->
 * [AADL Architecture](#aadl-architecture)
 * [Installing the Tools](#installing-the-tools)
   * [Install CakeML](#install-cakeml)
@@ -23,79 +23,81 @@
   * [Example Output: SeL4](#example-output-sel4)
   * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
   * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
-<!--te-->
+<!--table-of-contents_end-->
 
 
 ## AADL Architecture
 <!--aadl-architecture_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.png)
-|System Properties|
+|System: [UAV_Impl_Instance](aadl/UAV/UAV.aadl#L16) Properties|
 |--|
 |Domain Scheduling|
 |Wire Protocol|
 
-|RadioDriver_Attestation Properties|
+|[RadioDriver_Attestation](aadl/UAV/SW.aadl#L18) Properties|
 |--|
 |Virtual Machine|
 |Periodic: 500 ms|
 |Domain: 2|
 
 
-|CASE_AttestationGate Properties|
+|[CASE_AttestationGate](aadl/UAV/SW.aadl#L69) Properties|
 |--|
 |CakeML|
 |Periodic: 500 ms|
 |Domain: 3|
 
 
-|FlyZonesDatabase Properties|
+|[FlyZonesDatabase](aadl/UAV/SW.aadl#L369) Properties|
 |--|
 |Native|
 |Periodic: 500 ms|
 |Domain: 4|
 
 
-|CASE_Filter_LST Properties|
+|[CASE_Filter_LST](aadl/UAV/SW.aadl#L134) Properties|
 |--|
 |CakeML|
 |Periodic: 500 ms|
 |Domain: 5|
 
 
-|UxAS Properties|
+|[UxAS](aadl/UAV/SW.aadl#L254) Properties|
 |--|
 |Virtual Machine|
 |Periodic: 500 ms|
 |Domain: 6|
 
 
-|CASE_Monitor_Geo Properties|
+|[CASE_Monitor_Geo](aadl/UAV/SW.aadl#L406) Properties|
 |--|
 |CakeML|
 |Periodic: 500 ms|
 |Domain: 7|
 
 
-|WaypointPlanManagerService Properties|
+|[WaypointPlanManagerService](aadl/UAV/SW.aadl#L502) Properties|
 |--|
 |Native|
 |Periodic: 500 ms|
 |Domain: 8|
 
 
-|UARTDriver Properties|
+|[UARTDriver](aadl/UAV/Drivers.aadl#L32) Properties|
 |--|
 |Native|
 |Periodic: 500 ms|
 |Domain: 9|
 
 
-|CASE_Monitor_Req Properties|
+|[CASE_Monitor_Req](aadl/UAV/SW.aadl#L302) Properties|
 |--|
 |Native|
 |Periodic: 500 ms|
 |Domain: 10|
 
+
+**Schedule:** [domain_schedule.c](aadl/kernel/domain_schedule.c)
 <!--aadl-architecture_end-->
 
 
@@ -155,28 +157,39 @@ CakeML integeration is not currently supported for the Linux platform. However, 
 ### HAMR Configuration: Linux
 <!--hamr-configuration-linux_start-->
 refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
+<details>
+<summary>Click for an example showing how HAMR's plugin dialog box relates to the CLI options</summary>
+<!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
+     editor (e.g. vscode) in order to see the following image -->
+
+![dialog_cli](../doc/dialog_cli.jpg)
+
+The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
+options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+The last two CLI options are set by the HAMR plugin.
+</details>
 <!--hamr-configuration-linux_end-->
 
 
 ### Behavior Code: Linux
 <!--behavior-code-linux_start-->
-  * [UARTDriver](hamr/c/ext-c/UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver/UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver.c)
-
   * [RadioDriver_Attestation](hamr/c/ext-c/RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation/RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation.c)
-
-  * [FlyZonesDatabase](hamr/c/ext-c/FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase/FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase.c)
-
-  * [UxAS](hamr/c/ext-c/UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS/UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS.c)
-
-  * [WaypointPlanManagerService](hamr/c/ext-c/WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService/WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService.c)
 
   * [CASE_AttestationGate](hamr/c/ext-c/CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate/CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate.c)
 
+  * [FlyZonesDatabase](hamr/c/ext-c/FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase/FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase.c)
+
   * [CASE_Filter_LST](hamr/c/ext-c/CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST/CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST.c)
 
-  * [CASE_Monitor_Req](hamr/c/ext-c/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req.c)
+  * [UxAS](hamr/c/ext-c/UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS/UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS.c)
 
   * [CASE_Monitor_Geo](hamr/c/ext-c/CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo/CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo.c)
+
+  * [WaypointPlanManagerService](hamr/c/ext-c/WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService/WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService.c)
+
+  * [UARTDriver](hamr/c/ext-c/UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver/UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver.c)
+
+  * [CASE_Monitor_Req](hamr/c/ext-c/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req.c)
 <!--behavior-code-linux_end-->
 
 
@@ -197,29 +210,40 @@ refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
 ### HAMR Configuration: SeL4
 <!--hamr-configuration-sel4_start-->
 refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
+<details>
+<summary>Click for an example showing how HAMR's plugin dialog box relates to the CLI options</summary>
+<!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
+     editor (e.g. vscode) in order to see the following image -->
+
+![dialog_cli](../doc/dialog_cli.jpg)
+
+The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
+options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+The last two CLI options are set by the HAMR plugin.
+</details>
 <!--hamr-configuration-sel4_end-->
 
 
 ### Behavior Code: SeL4
 
 <!--behavior-code-sel4_start-->
-  * [UARTDriver](hamr/c/ext-c/UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver/UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver.c)
-
   * [RadioDriver_Attestation (includes VM glue code)](hamr/camkes/components/VM/apps/vmRADIO/vmRADIO.c)
-
-  * [FlyZonesDatabase](hamr/c/ext-c/FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase/FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase.c)
-
-  * [UxAS (includes VM glue code)](hamr/camkes/components/VM/apps/vmUXAS/vmUXAS.c)
-
-  * [WaypointPlanManagerService](hamr/c/ext-c/WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService/WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService.c)
 
   * [CASE_AttestationGate](hamr/c/ext-c/CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate/CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate.c)
 
+  * [FlyZonesDatabase](hamr/c/ext-c/FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase/FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase.c)
+
   * [CASE_Filter_LST](hamr/c/ext-c/CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST/CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST.c)
 
-  * [CASE_Monitor_Req](hamr/c/ext-c/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req.c)
+  * [UxAS (includes VM glue code)](hamr/camkes/components/VM/apps/vmUXAS/vmUXAS.c)
 
   * [CASE_Monitor_Geo](hamr/c/ext-c/CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo/CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo.c)
+
+  * [WaypointPlanManagerService](hamr/c/ext-c/WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService/WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService.c)
+
+  * [UARTDriver](hamr/c/ext-c/UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver/UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver.c)
+
+  * [CASE_Monitor_Req](hamr/c/ext-c/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req/CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req.c)
 <!--behavior-code-sel4_end-->
 
 \* _If CAKEML_ASSEMBLIES_PRESENT=ON is passed to run-camkes.sh (see below) then the behavior code for the CakeML components will come from the following CakeML files_

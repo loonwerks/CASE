@@ -6,8 +6,8 @@ set -e
 export SCRIPT_HOME=$( cd "$( dirname "$0" )" &> /dev/null && pwd )
 cd ${SCRIPT_HOME}
 mkdir -p linux-build
-mkdir -p ${SCRIPT_HOME}/../../c/nix/linux-build
-cd ${SCRIPT_HOME}/../../c/nix/linux-build
+mkdir -p ${SCRIPT_HOME}/../nix/linux-build
+cd ${SCRIPT_HOME}/../nix/linux-build
 BOUND_CHECK=${BOUND_CHECK:-OFF}
 NO_PRINT=${NO_PRINT:-OFF}
 RANGE_CHECK=${RANGE_CHECK:-OFF}

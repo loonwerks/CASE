@@ -2,18 +2,26 @@
 
  Table of Contents
 <!--table-of-contents_start-->
-  * [AADL Architecture](#aadl-architecture)
-  * [Linux](#linux)
-    * [HAMR Configuration: Linux](#hamr-configuration-linux)
-    * [Behavior Code: Linux](#behavior-code-linux)
-    * [How to Build/Run: Linux](#how-to-buildrun-linux)
-  * [SeL4](#sel4)
-    * [HAMR Configuration: SeL4](#hamr-configuration-sel4)
-    * [Behavior Code: SeL4](#behavior-code-sel4)
-    * [How to Build/Run: SeL4](#how-to-buildrun-sel4)
-    * [Example Output: SeL4](#example-output-sel4)
-    * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
-    * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
+* [AADL Architecture](#aadl-architecture)
+* [Linux](#linux)
+  * [HAMR Configuration: Linux](#hamr-configuration-linux)
+  * [Behavior Code: Linux](#behavior-code-linux)
+  * [How to Build/Run: Linux](#how-to-buildrun-linux)
+* [SeL4](#sel4)
+  * [HAMR Configuration: SeL4](#hamr-configuration-sel4)
+  * [Behavior Code: SeL4](#behavior-code-sel4)
+  * [How to Build/Run: SeL4](#how-to-buildrun-sel4)
+  * [Example Output: SeL4](#example-output-sel4)
+  * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
+  * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
+* [Background](#background)
+  * [Threading](#threading)
+  * [Port-based Communication](#port-based-communication)
+    * [AADL Semantics](#aadl-semantics)
+    * [Underlying Representation in seL4](#underlying-representation-in-sel4)
+* [Structure of Generated Code](#structure-of-generated-code)
+  * [Compile and Execute Scripts](#compile-and-execute-scripts)
+  * [Overview of Auto-generated Application Code Templates and Port-Communication APIs](#overview-of-auto-generated-application-code-templates-and-port-communication-apis)
 <!--table-of-contents_end-->
 
 This example supports the tutorial video **TODO: Insert Link** provided for this tool assessment.  The example is a minor adaptation of the Event Data Port example provided in the Basic examples folder.
@@ -25,24 +33,26 @@ This ReadMe file provides a text-based walkthrough of the example to complement 
 ## AADL Architecture
 <!--aadl-architecture_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.png)
-|System Properties|
+|System: [top_impl_Instance](aadl/test_event_data_port_periodic_domains.aadl#L76) Properties|
 |--|
 |Domain Scheduling|
 |Wire Protocol|
 
-|producer Properties|
+|[producer](aadl/test_event_data_port_periodic_domains.aadl#L6) Properties|
 |--|
-|Periodic: 1000 ms|
 |Native|
+|Periodic: 1000 ms|
+|Domain: 2|
 
 
-
-|consumer Properties|
+|[consumer](aadl/test_event_data_port_periodic_domains.aadl#L34) Properties|
 |--|
-|Periodic: 1000 ms|
 |Native|
+|Periodic: 1000 ms|
+|Domain: 3|
 
 
+**Schedule:** [domain_schedule.c](aadl/domain_schedule.c)
 <!--aadl-architecture_end-->
 
 
@@ -52,6 +62,17 @@ This ReadMe file provides a text-based walkthrough of the example to complement 
 ### HAMR Configuration: Linux
 <!--hamr-configuration-linux_start-->
 refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
+<details>
+<summary>Click for an example showing how HAMR's plugin dialog box relates to the CLI options</summary>
+<!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
+     editor (e.g. vscode) in order to see the following image -->
+
+![dialog_cli](../../doc/dialog_cli.jpg)
+
+The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
+options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+The last two CLI options are set by the HAMR plugin.
+</details>
 <!--hamr-configuration-linux_end-->
 
 
@@ -80,6 +101,17 @@ refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
 ### HAMR Configuration: SeL4
 <!--hamr-configuration-sel4_start-->
 refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
+<details>
+<summary>Click for an example showing how HAMR's plugin dialog box relates to the CLI options</summary>
+<!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
+     editor (e.g. vscode) in order to see the following image -->
+
+![dialog_cli](../../doc/dialog_cli.jpg)
+
+The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
+options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+The last two CLI options are set by the HAMR plugin.
+</details>
 <!--hamr-configuration-sel4_end-->
 
 
@@ -415,21 +447,21 @@ Unit base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_f
 
 Unit base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_timeTriggered_(STACK_FRAME_ONLY) {
   DeclNewStackFrame(caller, "producer_t_i_producer_producer.c", "", "base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_timeTriggered_", 0);
-  
+
   uint8_t t0[numBytes_S32];
   t0[0] = (sent >> 24) & 0xFF;
   t0[1] = (sent >> 16) & 0xFF;
   t0[2] = (sent >> 8) & 0xFF;
   t0[3] = sent & 0xFF;
-  
+
   printf("Sent %i\n", sent);
   hex_dump(t0, 4);
   printf("\n");
-  
+
   sent++;
-    
+
   api_put_write_port__base_test_event_data_port_periodic_domains_producer_t_i_producer_producer(SF numBits_S32, t0);
-  
+
 }
 ```
 
@@ -451,7 +483,7 @@ Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_f
 
 Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered_(STACK_FRAME_ONLY) {
   DeclNewStackFrame(caller, "consumer_t_i_consumer_consumer.c", "", "base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_timeTriggered_", 0);
-  
+
   uint8_t t0[numBytes_S32];
   size_t t0_numBits;
   if(api_get_read_port__base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer(SF &t0_numBits, t0)) {
@@ -460,14 +492,14 @@ Unit base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer_t
 
     int32_t value = t0[0] << 24 | t0[1] << 16 | t0[2] << 8 | t0[3];
     printf("Received %i\n", value);
-    
+
     DeclNewString(read_port_str);
     String__append(SF (String) &read_port_str, string("Received "));
     Z_string_(SF (String) &read_port_str, t0_numBits);
     String__append(SF (String) &read_port_str, string(" bits on port read_port: [ "));
     byte_array_string(SF (String) &read_port_str, t0, numBytes_S32);
     String__append(SF (String) &read_port_str, string("]\n"));
-    
+
     api_logInfo__base_test_event_data_port_periodic_domains_consumer_t_i_consumer_consumer(SF (String) &read_port_str);
   }
 }

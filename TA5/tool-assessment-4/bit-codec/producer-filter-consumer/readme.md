@@ -2,50 +2,52 @@
 
  Table of Contents
 <!--table-of-contents_start-->
-  * [AADL Architecture](#aadl-architecture)
-  * [Bit-Codec Spec](#bit-codec-spec)
-  * [Linux](#linux)
-    * [HAMR Configuration: Linux](#hamr-configuration-linux)
-    * [Behavior Code: Linux](#behavior-code-linux)
-    * [How to Build/Run: Linux](#how-to-buildrun-linux)
-  * [SeL4](#sel4)
-    * [HAMR Configuration: SeL4](#hamr-configuration-sel4)
-    * [Behavior Code: SeL4](#behavior-code-sel4)
-    * [How to Build/Run: SeL4](#how-to-buildrun-sel4)
-    * [Example Output: SeL4](#example-output-sel4)
-    * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
-    * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
+* [AADL Architecture](#aadl-architecture)
+* [Bit-Codec Spec](#bit-codec-spec)
+* [Linux](#linux)
+  * [HAMR Configuration: Linux](#hamr-configuration-linux)
+  * [Behavior Code: Linux](#behavior-code-linux)
+  * [How to Build/Run: Linux](#how-to-buildrun-linux)
+* [SeL4](#sel4)
+  * [HAMR Configuration: SeL4](#hamr-configuration-sel4)
+  * [Behavior Code: SeL4](#behavior-code-sel4)
+  * [How to Build/Run: SeL4](#how-to-buildrun-sel4)
+  * [Example Output: SeL4](#example-output-sel4)
+  * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
+  * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
 <!--table-of-contents_end-->
 
 
 ## AADL Architecture
 <!--aadl-architecture_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.png)
-|System Properties|
+|System: [PFC_Sys_Impl_Instance](aadl/PFC.aadl#L28) Properties|
 |--|
 |Domain Scheduling|
 |Wire Protocol|
 
-|producer Properties|
+|[producer](aadl/PFC.aadl#L114) Properties|
 |--|
-|Periodic: 1000 ms|
 |Native|
+|Periodic: 1000 ms|
+|Domain: 2|
 
 
-
-|filter Properties|
+|[filter](aadl/PFC.aadl#L126) Properties|
 |--|
-|Periodic: 1000 ms|
 |Native|
+|Periodic: 1000 ms|
+|Domain: 3|
 
 
-
-|consumer Properties|
+|[consumer](aadl/PFC.aadl#L139) Properties|
 |--|
-|Periodic: 1000 ms|
 |Native|
+|Periodic: 1000 ms|
+|Domain: 4|
 
 
+**Schedule:** [domain_schedule.c](aadl/domain_schedule.c)
 <!--aadl-architecture_end-->
 
 ## Bit-Codec Spec
@@ -78,6 +80,17 @@ All these steps will be automated once HAMR integrates bit-codec generation as p
 ### HAMR Configuration: Linux
 <!--hamr-configuration-linux_start-->
 refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
+<details>
+<summary>Click for an example showing how HAMR's plugin dialog box relates to the CLI options</summary>
+<!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
+     editor (e.g. vscode) in order to see the following image -->
+
+![dialog_cli](../../doc/dialog_cli.jpg)
+
+The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
+options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+The last two CLI options are set by the HAMR plugin.
+</details>
 <!--hamr-configuration-linux_end-->
 
 
@@ -108,6 +121,17 @@ refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
 ### HAMR Configuration: SeL4
 <!--hamr-configuration-sel4_start-->
 refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
+<details>
+<summary>Click for an example showing how HAMR's plugin dialog box relates to the CLI options</summary>
+<!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
+     editor (e.g. vscode) in order to see the following image -->
+
+![dialog_cli](../../doc/dialog_cli.jpg)
+
+The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
+options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+The last two CLI options are set by the HAMR plugin.
+</details>
 <!--hamr-configuration-sel4_end-->
 
 

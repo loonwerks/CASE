@@ -1,7 +1,7 @@
 # attestation-gate
 
  Table of Contents
-<!--ts-->
+<!--table-of-contents_start-->
 * [AADL Architecture](#aadl-architecture)
 * [Installing the Tools](#installing-the-tools)
   * [Install CakeML](#install-cakeml)
@@ -19,37 +19,39 @@
   * [Example Output: SeL4](#example-output-sel4)
   * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
   * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
-<!--te-->
+<!--table-of-contents_end-->
 
 
 ## AADL Architecture
 <!--aadl-architecture_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.png)
-|System Properties|
+|System: [top_Impl_Instance](aadl/SysContext.aadl#L88) Properties|
 |--|
 |Domain Scheduling|
 |Wire Protocol|
 
-|UxAS_thread Properties|
+|[RadioDriver](aadl/RadioDriver.aadl#L11) Properties|
 |--|
-|Periodic: 1000 ms|
 |Native|
-
-
-
-|RadioDriver Properties|
-|--|
 |Periodic: 500 ms|
-|Native|
+|Domain: 2|
 
 
-
-|CASE_AttestationGate Properties|
+|[CASE_AttestationGate](aadl/CASE_AttesationGate.aadl#L12) Properties|
 |--|
-|Periodic: 500 ms|
 |CakeML|
+|Periodic: 500 ms|
+|Domain: 5|
 
 
+|[UxAS_thread](aadl/SysContext.aadl#L23) Properties|
+|--|
+|Native|
+|Periodic: 1000 ms|
+|Domain: 9|
+
+
+**Schedule:** [domain_schedule.c](aadl/kernel/domain_schedule.c)
 <!--aadl-architecture_end-->
 
 ## Installing the Tools
@@ -95,16 +97,27 @@ CakeML integeration is not currently supported for the Linux platform.  However,
 ### HAMR Configuration: Linux
 <!--hamr-configuration-linux_start-->
 refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
+<details>
+<summary>Click for an example showing how HAMR's plugin dialog box relates to the CLI options</summary>
+<!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
+     editor (e.g. vscode) in order to see the following image -->
+
+![dialog_cli](../../doc/dialog_cli.jpg)
+
+The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
+options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+The last two CLI options are set by the HAMR plugin.
+</details>
 <!--hamr-configuration-linux_end-->
 
 
 ### Behavior Code: Linux
 <!--behavior-code-linux_start-->
-  * [UxAS_thread](hamr/c/ext-c/UxAS_thr_Impl_uxas_UxAS_thread/UxAS_thr_Impl_uxas_UxAS_thread.c)
-
   * [RadioDriver](hamr/c/ext-c/RadioDriver_thr_Impl_radio_RadioDriver/RadioDriver_thr_Impl_radio_RadioDriver.c)
 
   * [CASE_AttestationGate](hamr/c/ext-c/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate.c)
+
+  * [UxAS_thread](hamr/c/ext-c/UxAS_thr_Impl_uxas_UxAS_thread/UxAS_thr_Impl_uxas_UxAS_thread.c)
 <!--behavior-code-linux_end-->
 
 
@@ -125,16 +138,27 @@ refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
 ### HAMR Configuration: SeL4
 <!--hamr-configuration-sel4_start-->
 refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
+<details>
+<summary>Click for an example showing how HAMR's plugin dialog box relates to the CLI options</summary>
+<!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
+     editor (e.g. vscode) in order to see the following image -->
+
+![dialog_cli](../../doc/dialog_cli.jpg)
+
+The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
+options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+The last two CLI options are set by the HAMR plugin.
+</details>
 <!--hamr-configuration-sel4_end-->
 
 
 ### Behavior Code: SeL4
 <!--behavior-code-sel4_start-->
-  * [UxAS_thread](hamr/c/ext-c/UxAS_thr_Impl_uxas_UxAS_thread/UxAS_thr_Impl_uxas_UxAS_thread.c)
-
   * [RadioDriver](hamr/c/ext-c/RadioDriver_thr_Impl_radio_RadioDriver/RadioDriver_thr_Impl_radio_RadioDriver.c)
 
   * [CASE_AttestationGate](hamr/c/ext-c/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate.c)
+
+  * [UxAS_thread](hamr/c/ext-c/UxAS_thr_Impl_uxas_UxAS_thread/UxAS_thr_Impl_uxas_UxAS_thread.c)
 <!--behavior-code-sel4_end-->
 
 \* _If ``CAKEML_ASSEMBLIES_PRESENT=ON`` is passed to ``run-camkes.sh`` (see below) then the behavior code for the attestation gate will come from the CakeML file 

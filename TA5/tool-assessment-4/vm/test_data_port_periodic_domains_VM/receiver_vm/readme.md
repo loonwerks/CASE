@@ -2,14 +2,14 @@
 
  Table of Contents
 <!--table-of-contents_start-->
-  * [AADL Architecture](#aadl-architecture)
-  * [SeL4](#sel4)
-    * [HAMR Configuration: SeL4](#hamr-configuration-sel4)
-    * [Behavior Code: SeL4](#behavior-code-sel4)
-    * [How to Build/Run: SeL4](#how-to-buildrun-sel4)
-    * [Example Output: SeL4](#example-output-sel4)
-    * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
-    * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
+* [AADL Architecture](#aadl-architecture)
+* [SeL4](#sel4)
+  * [HAMR Configuration: SeL4](#hamr-configuration-sel4)
+  * [Behavior Code: SeL4](#behavior-code-sel4)
+  * [How to Build/Run: SeL4](#how-to-buildrun-sel4)
+  * [Example Output: SeL4](#example-output-sel4)
+  * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
+  * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
 <!--table-of-contents_end-->
 
 This example illustrates how to model and implement data port communications between
@@ -54,24 +54,26 @@ and HAMR integration can be found in the [CASE-Tool-Assessment-Guide](https://gi
 ## AADL Architecture
 <!--aadl-architecture_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.png)
-|System Properties|
+|System: [top_impl_Instance](aadl/test_data_port_periodic_domains.aadl#L84) Properties|
 |--|
 |Domain Scheduling|
 |Wire Protocol|
 
-|producer Properties|
+|[producer](aadl/test_data_port_periodic_domains.aadl#L12) Properties|
 |--|
-|Periodic: 1000 ms|
 |Native|
-
-
-
-|consumer Properties|
-|--|
 |Periodic: 1000 ms|
+|Domain: 2|
+
+
+|[consumer](aadl/test_data_port_periodic_domains.aadl#L40) Properties|
+|--|
 |Virtual Machine|
+|Periodic: 1000 ms|
+|Domain: 3|
 
 
+**Schedule:** [domain_schedule.c](aadl/domain_schedule.c)
 <!--aadl-architecture_end-->
 
 
@@ -81,6 +83,17 @@ and HAMR integration can be found in the [CASE-Tool-Assessment-Guide](https://gi
 ### HAMR Configuration: SeL4
 <!--hamr-configuration-sel4_start-->
 refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
+<details>
+<summary>Click for an example showing how HAMR's plugin dialog box relates to the CLI options</summary>
+<!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
+     editor (e.g. vscode) in order to see the following image -->
+
+![dialog_cli](../../../doc/dialog_cli.jpg)
+
+The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
+options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+The last two CLI options are set by the HAMR plugin.
+</details>
 <!--hamr-configuration-sel4_end-->
 
 

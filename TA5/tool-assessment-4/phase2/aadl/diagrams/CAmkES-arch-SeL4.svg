@@ -226,7 +226,7 @@
 <text text-anchor="middle" x="3069.0349" y="-595.8208" font-family="Times,serif" font-size="14.00" fill="#000000">serial_input_vmRADIO.serial_input_vmUXAS</text>
 </g>
 <!-- vmRADIO&#45;&gt;serial_input_vmRADIO.serial_input_vmUXAS -->
-<g id="edge79" class="edge">
+<g id="edge80" class="edge">
 <title>vmRADIO&#45;&gt;serial_input_vmRADIO.serial_input_vmUXAS</title>
 <path fill="none" stroke="#000000" d="M2427.4707,-1388.5277C2484.6396,-1383.2707 2546.2067,-1377.1469 2603.0349,-1370.549 2678.923,-1361.7382 2767.0349,-1395.4498 2767.0349,-1319.0519 2767.0349,-1319.0519 2767.0349,-1319.0519 2767.0349,-834.5548 2767.0349,-778.6996 2834.1588,-811.4167 2880.0349,-779.5548 2899.0056,-766.3792 2917.9142,-751.3136 2936.0334,-735.6328"/>
 <polygon fill="#000000" stroke="#000000" points="2938.5298,-738.0991 2943.7483,-728.8786 2933.9188,-732.8323 2938.5298,-738.0991"/>
@@ -392,7 +392,7 @@
 <polygon fill="#000000" stroke="#000000" points="2662.3864,-725.2283 2666.1727,-715.3331 2657.0421,-720.7074 2662.3864,-725.2283"/>
 </g>
 <!-- vmUXAS&#45;&gt;serial_input_vmRADIO.serial_input_vmUXAS -->
-<g id="edge80" class="edge">
+<g id="edge79" class="edge">
 <title>vmUXAS&#45;&gt;serial_input_vmRADIO.serial_input_vmUXAS</title>
 <path fill="none" stroke="#000000" d="M2196.7767,-825.5709C2447.6363,-813.7786 2849.2317,-793.0035 2880.0349,-779.5548 2902.0271,-769.9529 2923.008,-756.6201 2942.4549,-741.5107"/>
 <polygon fill="#000000" stroke="#000000" points="2944.7694,-744.1417 2950.4042,-735.1695 2940.4041,-738.6695 2944.7694,-744.1417"/>
@@ -846,7 +846,7 @@
 <polygon fill="#000000" stroke="#000000" points="3072.535,-378.5376 3069.0349,-368.5376 3065.535,-378.5376 3072.535,-378.5376"/>
 </g>
 <!-- conn38.conn41.conn44.conn45.conn46.conn47.conn48&#45;&gt;MCMP_PROC_SW_FC_UART_UARTDriver -->
-<g id="edge88" class="edge">
+<g id="edge83" class="edge">
 <title>conn38.conn41.conn44.conn45.conn46.conn47.conn48&#45;&gt;MCMP_PROC_SW_FC_UART_UARTDriver</title>
 <path fill="none" stroke="#000000" d="M1145.1243,-1301.0181C1130.1,-1255.1773 1090.3583,-1133.9213 1072.254,-1078.6832"/>
 <polygon fill="#000000" stroke="#000000" points="1075.4761,-1077.2762 1069.0356,-1068.8636 1068.8242,-1079.4564 1075.4761,-1077.2762"/>
@@ -858,25 +858,25 @@
 <polygon fill="#000000" stroke="#000000" points="440.1816,-622.0592 430.5375,-617.6727 435.3412,-627.1159 440.1816,-622.0592"/>
 </g>
 <!-- conn38.conn41.conn44.conn45.conn46.conn47.conn48&#45;&gt;MCMP_PROC_SW_WPM_WaypointPlanManagerService -->
-<g id="edge87" class="edge">
+<g id="edge86" class="edge">
 <title>conn38.conn41.conn44.conn45.conn46.conn47.conn48&#45;&gt;MCMP_PROC_SW_WPM_WaypointPlanManagerService</title>
 <path fill="none" stroke="#000000" d="M1040.3212,-1307.8778C909.6885,-1293.1598 710.0349,-1265.1672 710.0349,-1231.5548 710.0349,-1231.5548 710.0349,-1231.5548 710.0349,-1104.5548 710.0349,-935.1835 853.5416,-939.577 909.0349,-779.5548 965.2491,-617.4537 928.0349,-565.5583 928.0349,-393.9867 928.0349,-393.9867 928.0349,-393.9867 928.0349,-220.7434 928.0349,-169.3493 877.1423,-133.9916 834.2537,-113.3194"/>
 <polygon fill="#000000" stroke="#000000" points="835.5092,-110.0435 824.9653,-109.0056 832.5606,-116.3923 835.5092,-110.0435"/>
 </g>
 <!-- conn38.conn41.conn44.conn45.conn46.conn47.conn48&#45;&gt;MCMP_PROC_SW_AM_Gate_CASE_AttestationGate -->
-<g id="edge83" class="edge">
+<g id="edge88" class="edge">
 <title>conn38.conn41.conn44.conn45.conn46.conn47.conn48&#45;&gt;MCMP_PROC_SW_AM_Gate_CASE_AttestationGate</title>
 <path fill="none" stroke="#000000" d="M1232.5634,-1306.0254C1309.5555,-1294.2007 1428.3553,-1277.1843 1532.0349,-1267.5548 1623.9843,-1259.0147 1722.8631,-1252.3865 1816.6827,-1247.2836"/>
 <polygon fill="#000000" stroke="#000000" points="1817.1204,-1250.7652 1826.9175,-1246.7319 1816.7436,-1243.7753 1817.1204,-1250.7652"/>
 </g>
 <!-- conn38.conn41.conn44.conn45.conn46.conn47.conn48&#45;&gt;MCMP_PROC_SW_FLT_LST_CASE_Filter_LST -->
-<g id="edge89" class="edge">
+<g id="edge87" class="edge">
 <title>conn38.conn41.conn44.conn45.conn46.conn47.conn48&#45;&gt;MCMP_PROC_SW_FLT_LST_CASE_Filter_LST</title>
 <path fill="none" stroke="#000000" d="M1255.3919,-1307.4407C1321.7285,-1298.6821 1400.4948,-1285.3178 1430.0349,-1268.5548 1458.2526,-1252.5422 1451.5042,-1232.2301 1478.0349,-1213.5548 1580.5935,-1141.3623 1719.5491,-1095.3399 1808.0132,-1071.2282"/>
 <polygon fill="#000000" stroke="#000000" points="1808.9981,-1074.5878 1817.7446,-1068.6088 1807.1785,-1067.8284 1808.9981,-1074.5878"/>
 </g>
 <!-- conn38.conn41.conn44.conn45.conn46.conn47.conn48&#45;&gt;MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req -->
-<g id="edge86" class="edge">
+<g id="edge89" class="edge">
 <title>conn38.conn41.conn44.conn45.conn46.conn47.conn48&#45;&gt;MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req</title>
 <path fill="none" stroke="#000000" d="M1241.4917,-1306.6018C1318.2601,-1293.4145 1416.0349,-1269.2246 1416.0349,-1231.5548 1416.0349,-1231.5548 1416.0349,-1231.5548 1416.0349,-599.5208 1416.0349,-457.7741 1580.2147,-396.6943 1719.2763,-370.3823"/>
 <polygon fill="#000000" stroke="#000000" points="1720.0418,-373.8003 1729.2427,-368.5473 1718.7742,-366.916 1720.0418,-373.8003"/>
