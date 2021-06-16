@@ -48,18 +48,18 @@ in the [CASE-Tool-Assessment-Guide](https://github.com/loonwerks/CASE/tree/maste
 ## AADL Architecture
 <!--aadl-architecture_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.png)
-|System: [top_impl_Instance](aadl/test_event_port_periodic_domains.aadl#L79) Properties|
+|System: [top_impl_Instance](aadl/test_event_port_periodic_domains.aadl#L80) Properties|
 |--|
 |Domain Scheduling|
 
-|[producer](aadl/test_event_port_periodic_domains.aadl#L11) Properties|
+|[producer](aadl/test_event_port_periodic_domains.aadl#L12) Properties|
 |--|
 |Native|
 |Periodic: 1000 ms|
 |Domain: 2|
 
 
-|[consumer](aadl/test_event_port_periodic_domains.aadl#L38) Properties|
+|[consumer](aadl/test_event_port_periodic_domains.aadl#L39) Properties|
 |--|
 |Native|
 |Periodic: 1000 ms|

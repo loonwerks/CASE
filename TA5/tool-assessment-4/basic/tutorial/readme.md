@@ -33,19 +33,19 @@ This ReadMe file provides a text-based walkthrough of the example to complement 
 ## AADL Architecture
 <!--aadl-architecture_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.png)
-|System: [top_impl_Instance](aadl/test_event_data_port_periodic_domains.aadl#L76) Properties|
+|System: [top_impl_Instance](aadl/test_event_data_port_periodic_domains.aadl#L77) Properties|
 |--|
 |Domain Scheduling|
 |Wire Protocol|
 
-|[producer](aadl/test_event_data_port_periodic_domains.aadl#L6) Properties|
+|[producer](aadl/test_event_data_port_periodic_domains.aadl#L7) Properties|
 |--|
 |Native|
 |Periodic: 1000 ms|
 |Domain: 2|
 
 
-|[consumer](aadl/test_event_data_port_periodic_domains.aadl#L34) Properties|
+|[consumer](aadl/test_event_data_port_periodic_domains.aadl#L35) Properties|
 |--|
 |Native|
 |Periodic: 1000 ms|

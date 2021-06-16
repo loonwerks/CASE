@@ -21,26 +21,26 @@
 ## AADL Architecture
 <!--aadl-architecture_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.png)
-|System: [PFC_Sys_Impl_Instance](aadl/PFC.aadl#L28) Properties|
+|System: [PFC_Sys_Impl_Instance](aadl/PFC.aadl#L29) Properties|
 |--|
 |Domain Scheduling|
 |Wire Protocol|
 
-|[producer](aadl/PFC.aadl#L114) Properties|
+|[producer](aadl/PFC.aadl#L115) Properties|
 |--|
 |Native|
 |Periodic: 1000 ms|
 |Domain: 2|
 
 
-|[filter](aadl/PFC.aadl#L126) Properties|
+|[filter](aadl/PFC.aadl#L127) Properties|
 |--|
 |Native|
 |Periodic: 1000 ms|
 |Domain: 3|
 
 
-|[consumer](aadl/PFC.aadl#L139) Properties|
+|[consumer](aadl/PFC.aadl#L140) Properties|
 |--|
 |Native|
 |Periodic: 1000 ms|

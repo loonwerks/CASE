@@ -29,68 +29,68 @@
 ## AADL Architecture
 <!--aadl-architecture_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.png)
-|System: [UAV_Impl_Instance](aadl/UAV/UAV.aadl#L16) Properties|
+|System: [UAV_Impl_Instance](aadl/UAV/UAV.aadl#L17) Properties|
 |--|
 |Domain Scheduling|
 |Wire Protocol|
 
-|[RadioDriver_Attestation](aadl/UAV/SW.aadl#L18) Properties|
+|[RadioDriver_Attestation](aadl/UAV/SW.aadl#L19) Properties|
 |--|
 |Virtual Machine|
 |Periodic: 500 ms|
 |Domain: 2|
 
 
-|[CASE_AttestationGate](aadl/UAV/SW.aadl#L69) Properties|
+|[CASE_AttestationGate](aadl/UAV/SW.aadl#L70) Properties|
 |--|
 |CakeML|
 |Periodic: 500 ms|
 |Domain: 3|
 
 
-|[FlyZonesDatabase](aadl/UAV/SW.aadl#L369) Properties|
+|[FlyZonesDatabase](aadl/UAV/SW.aadl#L370) Properties|
 |--|
 |Native|
 |Periodic: 500 ms|
 |Domain: 4|
 
 
-|[CASE_Filter_LST](aadl/UAV/SW.aadl#L134) Properties|
+|[CASE_Filter_LST](aadl/UAV/SW.aadl#L135) Properties|
 |--|
 |CakeML|
 |Periodic: 500 ms|
 |Domain: 5|
 
 
-|[UxAS](aadl/UAV/SW.aadl#L254) Properties|
+|[UxAS](aadl/UAV/SW.aadl#L255) Properties|
 |--|
 |Virtual Machine|
 |Periodic: 500 ms|
 |Domain: 6|
 
 
-|[CASE_Monitor_Geo](aadl/UAV/SW.aadl#L406) Properties|
+|[CASE_Monitor_Geo](aadl/UAV/SW.aadl#L407) Properties|
 |--|
 |CakeML|
 |Periodic: 500 ms|
 |Domain: 7|
 
 
-|[WaypointPlanManagerService](aadl/UAV/SW.aadl#L502) Properties|
+|[WaypointPlanManagerService](aadl/UAV/SW.aadl#L503) Properties|
 |--|
 |Native|
 |Periodic: 500 ms|
 |Domain: 8|
 
 
-|[UARTDriver](aadl/UAV/Drivers.aadl#L32) Properties|
+|[UARTDriver](aadl/UAV/Drivers.aadl#L33) Properties|
 |--|
 |Native|
 |Periodic: 500 ms|
 |Domain: 9|
 
 
-|[CASE_Monitor_Req](aadl/UAV/SW.aadl#L302) Properties|
+|[CASE_Monitor_Req](aadl/UAV/SW.aadl#L303) Properties|
 |--|
 |Native|
 |Periodic: 500 ms|

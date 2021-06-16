@@ -25,26 +25,26 @@
 ## AADL Architecture
 <!--aadl-architecture_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.png)
-|System: [top_Impl_Instance](aadl/SysContext.aadl#L88) Properties|
+|System: [top_Impl_Instance](aadl/SysContext.aadl#L89) Properties|
 |--|
 |Domain Scheduling|
 |Wire Protocol|
 
-|[RadioDriver](aadl/RadioDriver.aadl#L11) Properties|
+|[RadioDriver](aadl/RadioDriver.aadl#L12) Properties|
 |--|
 |Native|
 |Periodic: 500 ms|
 |Domain: 2|
 
 
-|[CASE_AttestationGate](aadl/CASE_AttesationGate.aadl#L12) Properties|
+|[CASE_AttestationGate](aadl/CASE_AttesationGate.aadl#L13) Properties|
 |--|
 |CakeML|
 |Periodic: 500 ms|
 |Domain: 5|
 
 
-|[UxAS_thread](aadl/SysContext.aadl#L23) Properties|
+|[UxAS_thread](aadl/SysContext.aadl#L24) Properties|
 |--|
 |Native|
 |Periodic: 1000 ms|
