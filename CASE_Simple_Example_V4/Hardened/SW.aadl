@@ -38,7 +38,7 @@ public
 				event(FlightPlan_in) => WAYPOINTS_IN_ZONE(FlightPlan_in, keep_in_zone);
 				
 			property alerted = (not Monitor_policy) -> ((is_latched and pre(alerted)) or (event(FlightPlan_in) and not Monitor_policy));
-			guarantee Monitor_Alert "A violation of the monitor policy shall trigger an alert" : alerted <=> event(Alert);
+			guarantee Monitor_Alert "A violation of the monitor policy shall trigger an alert" : event(Alert) <=> alerted;
 			guarantee Monitor_FlightPlan_out "A violation of the monitor policy shall prevent propagation of the Observed input." : 
 				if alerted then 
 					not event(FlightPlan_out) 
