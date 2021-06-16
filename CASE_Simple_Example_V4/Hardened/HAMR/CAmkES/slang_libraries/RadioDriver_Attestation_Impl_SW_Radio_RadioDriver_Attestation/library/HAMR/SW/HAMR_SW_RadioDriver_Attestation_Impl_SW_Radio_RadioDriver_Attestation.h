@@ -1,0 +1,20 @@
+#ifndef SIREUM_H_HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation
+#define SIREUM_H_HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <types.h>
+
+Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_initialise(STACK_FRAME HAMR_SW_RadioDriver_Attestation_Impl_Initialization_Api api);
+
+Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_timeTriggered(STACK_FRAME HAMR_SW_RadioDriver_Attestation_Impl_Operational_Api api);
+
+Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_finalise(STACK_FRAME HAMR_SW_RadioDriver_Attestation_Impl_Operational_Api api);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

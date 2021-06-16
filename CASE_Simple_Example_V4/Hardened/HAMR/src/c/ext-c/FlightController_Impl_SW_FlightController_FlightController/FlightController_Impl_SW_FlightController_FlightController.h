@@ -7,10 +7,6 @@ Unit HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_initiali
 
 Unit HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_finalise_(STACK_FRAME_ONLY);
 
-Unit HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_handle_FlightPlan_(
-  STACK_FRAME
-  IS_C4F575 value);
-
-Unit HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_handle_Alert_(STACK_FRAME_ONLY);
+Unit HAMR_SW_FlightController_Impl_SW_FlightController_FlightController_timeTriggered_(STACK_FRAME_ONLY);
 
 #endif

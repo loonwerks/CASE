@@ -7,8 +7,6 @@ Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_in
 
 Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_finalise_(STACK_FRAME_ONLY);
 
-Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_handle_AttestationResponse_(
-  STACK_FRAME
-  IS_C4F575 value);
+Unit HAMR_SW_AttestationManager_Impl_SW_AttestationManager_AttestationManager_timeTriggered_(STACK_FRAME_ONLY);
 
 #endif

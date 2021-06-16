@@ -10,7 +10,7 @@ object FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner {
 
   def initialise(api: FlightPlanner_Impl_Initialization_Api): Unit = { }
 
-  def handle_MissionCommand(api: FlightPlanner_Impl_Operational_Api, value : Base_Types.Bits): Unit = { }
+  def timeTriggered(api: FlightPlanner_Impl_Operational_Api): Unit = { }
 
   def activate(api: FlightPlanner_Impl_Operational_Api): Unit = { }
 

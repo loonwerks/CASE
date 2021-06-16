@@ -24,25 +24,8 @@ Unit HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_final
   DeclNewStackFrame(caller, "AttestationTester_Impl_SW_AttestationTester_AttestationTester.c", "", "HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_finalise_", 0);
 }
 
-Unit HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_handle_AttestationRequest_raw(
-  STACK_FRAME
-  size_t numBits,
-  uint8_t *byteArray) {
-  DeclNewStackFrame(caller, "AttestationTester_Impl_SW_AttestationTester_AttestationTester_api.c", "", "HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_handle_AttestationRequest_raw", 0);
-
-  size_t numBytes = numBits == 0 ? 0 : (numBits - 1) / 8 + 1;
-  DeclNewString(AttestationRequestString);
-  String__append(SF (String) &AttestationRequestString, string("HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_handle_AttestationRequest_raw called"));
-  byte_array_string(SF (String) &AttestationRequestString, byteArray, numBytes);
-  api_logInfo__HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester (SF (String) &AttestationRequestString);
-}
-
-Unit HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_handle_AttestationRequest_(
-  STACK_FRAME
-  IS_C4F575 value) {
-  DeclNewStackFrame(caller, "AttestationTester_Impl_SW_AttestationTester_AttestationTester.c", "", "HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_handle_AttestationRequest_", 0);
-
-  HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_handle_AttestationRequest_raw(SF value->size, value->value);
+Unit HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_timeTriggered_(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "AttestationTester_Impl_SW_AttestationTester_AttestationTester.c", "", "HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_timeTriggered_", 0);
 
   // examples of api getter usage
 

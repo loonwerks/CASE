@@ -7,12 +7,6 @@ Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_initi
 
 Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_finalise_(STACK_FRAME_ONLY);
 
-Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationTesterResponse_(
-  STACK_FRAME
-  IS_C4F575 value);
-
-Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_handle_AttestationRequest_(
-  STACK_FRAME
-  IS_C4F575 value);
+Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_timeTriggered_(STACK_FRAME_ONLY);
 
 #endif

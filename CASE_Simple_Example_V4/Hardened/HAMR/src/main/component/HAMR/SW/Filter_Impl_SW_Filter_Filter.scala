@@ -10,7 +10,7 @@ object Filter_Impl_SW_Filter_Filter {
 
   def initialise(api: Filter_Impl_Initialization_Api): Unit = { }
 
-  def handle_Input(api: Filter_Impl_Operational_Api, value : Base_Types.Bits): Unit = { }
+  def timeTriggered(api: Filter_Impl_Operational_Api): Unit = { }
 
   def activate(api: Filter_Impl_Operational_Api): Unit = { }
 

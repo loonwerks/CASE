@@ -17,7 +17,7 @@ object Arch {
     HAMR.SW.AttestationTester_Impl_SW_AttestationTester_AttestationTester_Bridge(
       id = 0,
       name = "MissionComputer_Impl_Instance_SW_AttestationTester_AttestationTester",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       AttestationRequest = AttestationRequest,
@@ -34,7 +34,7 @@ object Arch {
     HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_Bridge(
       id = 1,
       name = "MissionComputer_Impl_Instance_SW_Radio_RadioDriver_Attestation",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       AttestationTesterResponse = AttestationTesterResponse,
@@ -52,7 +52,7 @@ object Arch {
     HAMR.SW.Monitor_Impl_SW_Monitor_Monitor_Bridge(
       id = 2,
       name = "MissionComputer_Impl_Instance_SW_Monitor_Monitor",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       FlightPlan_in = FlightPlan_in,
@@ -67,7 +67,7 @@ object Arch {
     HAMR.SW.FlightController_Impl_SW_FlightController_FlightController_Bridge(
       id = 3,
       name = "MissionComputer_Impl_Instance_SW_FlightController_FlightController",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       FlightPlan = FlightPlan,
@@ -82,7 +82,7 @@ object Arch {
     HAMR.SW.AttestationManager_Impl_SW_AttestationManager_AttestationManager_Bridge(
       id = 4,
       name = "MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       AttestationRequest = AttestationRequest,
@@ -97,7 +97,7 @@ object Arch {
     HAMR.SW.Filter_Impl_SW_Filter_Filter_Bridge(
       id = 5,
       name = "MissionComputer_Impl_Instance_SW_Filter_Filter",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       Input = Input,
@@ -111,7 +111,7 @@ object Arch {
     HAMR.SW.FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_Bridge(
       id = 6,
       name = "MissionComputer_Impl_Instance_SW_FlightPlanner_FlightPlanner",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       MissionCommand = MissionCommand,
@@ -126,7 +126,7 @@ object Arch {
     HAMR.SW.AttestationGate_Impl_SW_AttestationGate_AttestationGate_Bridge(
       id = 7,
       name = "MissionComputer_Impl_Instance_SW_AttestationGate_AttestationGate",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       MissionCommand_in = MissionCommand_in,

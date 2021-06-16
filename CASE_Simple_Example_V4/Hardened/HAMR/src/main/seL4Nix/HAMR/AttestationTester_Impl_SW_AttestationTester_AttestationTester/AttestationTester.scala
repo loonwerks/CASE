@@ -20,7 +20,7 @@ object AttestationTester extends App {
     HAMR.SW.AttestationTester_Impl_SW_AttestationTester_AttestationTester_Bridge(
       id = 0,
       name = "MissionComputer_Impl_Instance_SW_AttestationTester_AttestationTester",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       AttestationRequest = AttestationRequest,
@@ -40,11 +40,7 @@ object AttestationTester extends App {
   var AttestationResponse_port: Option[DataContent] = noData
 
   def dispatchStatus(bridgeId: Art.BridgeId): DispatchStatus = {
-    var portIds: ISZ[Art.PortId] = ISZ()
-    if(!AttestationTester_Impl_SW_AttestationTester_AttestationTester_seL4Nix.AttestationRequest_IsEmpty()) {
-      portIds = portIds :+ AttestationRequest_id
-    }
-    return EventTriggered(portIds)
+    return TimeTriggered()
   }
 
   def getValue(portId: Art.PortId): Option[DataContent] = {

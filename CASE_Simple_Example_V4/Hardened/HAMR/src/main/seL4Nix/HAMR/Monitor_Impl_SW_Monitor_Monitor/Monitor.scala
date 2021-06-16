@@ -21,7 +21,7 @@ object Monitor extends App {
     HAMR.SW.Monitor_Impl_SW_Monitor_Monitor_Bridge(
       id = 0,
       name = "MissionComputer_Impl_Instance_SW_Monitor_Monitor",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       FlightPlan_in = FlightPlan_in,
@@ -46,11 +46,7 @@ object Monitor extends App {
   var Alert_port: Option[DataContent] = noData
 
   def dispatchStatus(bridgeId: Art.BridgeId): DispatchStatus = {
-    var portIds: ISZ[Art.PortId] = ISZ()
-    if(!Monitor_Impl_SW_Monitor_Monitor_seL4Nix.FlightPlan_in_IsEmpty()) {
-      portIds = portIds :+ FlightPlan_in_id
-    }
-    return EventTriggered(portIds)
+    return TimeTriggered()
   }
 
   def getValue(portId: Art.PortId): Option[DataContent] = {

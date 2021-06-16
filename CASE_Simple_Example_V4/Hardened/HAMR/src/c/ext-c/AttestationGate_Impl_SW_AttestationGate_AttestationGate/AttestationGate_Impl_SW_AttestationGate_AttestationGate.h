@@ -7,12 +7,6 @@ Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_initialise_
 
 Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_finalise_(STACK_FRAME_ONLY);
 
-Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_handle_MissionCommand_in_(
-  STACK_FRAME
-  IS_C4F575 value);
-
-Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_handle_TrustedIds_(
-  STACK_FRAME
-  IS_C4F575 value);
+Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_timeTriggered_(STACK_FRAME_ONLY);
 
 #endif

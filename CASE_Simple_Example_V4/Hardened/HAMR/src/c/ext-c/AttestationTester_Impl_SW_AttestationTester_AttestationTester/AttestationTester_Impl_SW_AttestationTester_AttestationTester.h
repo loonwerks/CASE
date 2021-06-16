@@ -7,8 +7,6 @@ Unit HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_initi
 
 Unit HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_finalise_(STACK_FRAME_ONLY);
 
-Unit HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_handle_AttestationRequest_(
-  STACK_FRAME
-  IS_C4F575 value);
+Unit HAMR_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_timeTriggered_(STACK_FRAME_ONLY);
 
 #endif

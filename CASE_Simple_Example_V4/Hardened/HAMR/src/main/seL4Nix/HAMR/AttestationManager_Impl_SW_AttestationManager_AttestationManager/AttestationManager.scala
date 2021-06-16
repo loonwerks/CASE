@@ -21,7 +21,7 @@ object AttestationManager extends App {
     HAMR.SW.AttestationManager_Impl_SW_AttestationManager_AttestationManager_Bridge(
       id = 0,
       name = "MissionComputer_Impl_Instance_SW_AttestationManager_AttestationManager",
-      dispatchProtocol = Sporadic(min = 500),
+      dispatchProtocol = Periodic(period = 500),
       dispatchTriggers = None(),
 
       AttestationRequest = AttestationRequest,
@@ -46,11 +46,7 @@ object AttestationManager extends App {
   var TrustedIds_port: Option[DataContent] = noData
 
   def dispatchStatus(bridgeId: Art.BridgeId): DispatchStatus = {
-    var portIds: ISZ[Art.PortId] = ISZ()
-    if(!AttestationManager_Impl_SW_AttestationManager_AttestationManager_seL4Nix.AttestationResponse_IsEmpty()) {
-      portIds = portIds :+ AttestationResponse_id
-    }
-    return EventTriggered(portIds)
+    return TimeTriggered()
   }
 
   def getValue(portId: Art.PortId): Option[DataContent] = {

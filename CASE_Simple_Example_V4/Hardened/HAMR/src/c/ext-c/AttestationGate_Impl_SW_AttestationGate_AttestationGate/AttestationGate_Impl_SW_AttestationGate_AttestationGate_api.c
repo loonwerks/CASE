@@ -153,20 +153,10 @@ Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_finalise(
   HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_finalise_(SF_LAST);
 }
 
-Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_handle_MissionCommand_in(
+Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_timeTriggered(
   STACK_FRAME
-  HAMR_SW_AttestationGate_Impl_Operational_Api api,
-  IS_C4F575 value) {
-  DeclNewStackFrame(caller, "AttestationGate_Impl_SW_AttestationGate_AttestationGate_api.c", "", "HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_handle_MissionCommand_in", 0);
+  HAMR_SW_AttestationGate_Impl_Operational_Api api) {
+  DeclNewStackFrame(caller, "AttestationGate_Impl_SW_AttestationGate_AttestationGate_api.c", "", "HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_timeTriggered", 0);
 
-  HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_handle_MissionCommand_in_(SF value);
-}
-
-Unit HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_handle_TrustedIds(
-  STACK_FRAME
-  HAMR_SW_AttestationGate_Impl_Operational_Api api,
-  IS_C4F575 value) {
-  DeclNewStackFrame(caller, "AttestationGate_Impl_SW_AttestationGate_AttestationGate_api.c", "", "HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_handle_TrustedIds", 0);
-
-  HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_handle_TrustedIds_(SF value);
+  HAMR_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_timeTriggered_(SF_LAST);
 }

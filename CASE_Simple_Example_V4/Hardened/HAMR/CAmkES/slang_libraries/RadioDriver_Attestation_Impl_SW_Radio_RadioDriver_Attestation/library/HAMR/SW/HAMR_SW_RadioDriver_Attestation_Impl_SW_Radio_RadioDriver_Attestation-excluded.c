@@ -1,0 +1,13 @@
+#include <all.h>
+
+Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_initialise(STACK_FRAME HAMR_SW_RadioDriver_Attestation_Impl_Initialization_Api api) {
+  DeclNewStackFrame(caller, "RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation.scala", "HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation", "initialise", 0);
+}
+
+Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_timeTriggered(STACK_FRAME HAMR_SW_RadioDriver_Attestation_Impl_Operational_Api api) {
+  DeclNewStackFrame(caller, "RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation.scala", "HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation", "timeTriggered", 0);
+}
+
+Unit HAMR_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_finalise(STACK_FRAME HAMR_SW_RadioDriver_Attestation_Impl_Operational_Api api) {
+  DeclNewStackFrame(caller, "RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation.scala", "HAMR.SW.RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation", "finalise", 0);
+}

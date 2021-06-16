@@ -10,7 +10,7 @@ object AttestationManager_Impl_SW_AttestationManager_AttestationManager {
 
   def initialise(api: AttestationManager_Impl_Initialization_Api): Unit = { }
 
-  def handle_AttestationResponse(api: AttestationManager_Impl_Operational_Api, value : Base_Types.Bits): Unit = { }
+  def timeTriggered(api: AttestationManager_Impl_Operational_Api): Unit = { }
 
   def activate(api: AttestationManager_Impl_Operational_Api): Unit = { }
 
