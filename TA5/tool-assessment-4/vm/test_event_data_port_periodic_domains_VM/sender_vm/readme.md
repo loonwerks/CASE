@@ -116,6 +116,7 @@ The last two CLI options are set by the HAMR plugin.
 ```
 <!--how-to-buildrun-sel4_end-->
 
+Eventually you'll see ``buildroot login``.  Type ``root`` and at the ``#`` prompt type ``vmproducer``.
 
 ### Example Output: SeL4
 <!--example-output-sel4_start-->
