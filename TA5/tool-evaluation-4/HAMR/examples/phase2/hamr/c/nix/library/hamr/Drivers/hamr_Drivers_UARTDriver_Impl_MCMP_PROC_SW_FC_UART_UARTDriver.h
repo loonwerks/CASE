@@ -1,0 +1,20 @@
+#ifndef SIREUM_H_hamr_Drivers_UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver
+#define SIREUM_H_hamr_Drivers_UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <types.h>
+
+Unit hamr_Drivers_UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_initialise(STACK_FRAME hamr_Drivers_UARTDriver_Impl_Initialization_Api api);
+
+Unit hamr_Drivers_UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_timeTriggered(STACK_FRAME hamr_Drivers_UARTDriver_Impl_Operational_Api api);
+
+Unit hamr_Drivers_UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_finalise(STACK_FRAME hamr_Drivers_UARTDriver_Impl_Operational_Api api);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

@@ -1,19 +1,14 @@
 # CASE Tool Assessment #4
-<!--ts-->
-   * [Tool Installation](#tool-installation)
-   * [Background](#background)
-   * [Tutorial Example](#tutorial-example)
-   * [Additional Examples](#additional-examples)
-      * [Producer-Consumer Illustrating AADL Port Kinds](#producer-consumer-illustrating-aadl-port-kinds)
-      * [Bit-Codec](#bit-codec)
-      * [Virtual Machine](#virtual-machine)
-      * [CakeML](#cakeml)
-      * [Phase 1 Example](#phase-1-example)
-      * [Phase 2 Example](#phase-2-example)
-
-<!-- Added by: vagrant, at: Mon 07 Jun 2021 07:27:23 PM UTC -->
-
-<!--te-->
+<!--table-of-contents_start-->
+* [Tool Installation](#tool-installation)
+* [Background](#background)
+* [Tutorial Example](#tutorial-example)
+* [Additional Examples](#additional-examples)
+  * [Producer-Consumer Illustrating AADL Port Kinds](#producer-consumer-illustrating-aadl-port-kinds)
+  * [Bit-Codec](#bit-codec)
+  * [Virtual Machine](#virtual-machine)
+  * [CakeML](#cakeml)
+<!--table-of-contents_end-->
 
 This page summarizes the deliverables for Tool Assessment #4 from the
 Collins Aerospace TA5 team.  TA5 deliverable scope includes (a) the
@@ -52,7 +47,7 @@ for the simple producer/consumer example for AADL event data ports,
 (c) consult the other examples to understand additional supported
 features and more realistic system builds, and (d) experiment with
 building your own system (perhaps starting by making simple modifications of
-the provided examples). **TODO: Consider adding remark that references Phase II model as an end-to-end example**.
+the provided examples).
 
 ## Tool Installation
 
@@ -130,28 +125,3 @@ This example illustrates use of the high assurance CakeML programming language t
 
 [Attestation Gate](cakeml/attestation-gate)
 
-### Phase 1 Example
-
-The purpose of this example is to "end-to-end" CASE cyber-resiliency concepts in a simple but domain-relevant example.   The system used is an enhancement of the simple UAV software example used in CASE Phase I.   The example illustrates C-programmed application components along with filter cyber-resiliency components automatically inserted by CASE transforms.
-
-_Get this from Isaac?_
-
-### Phase 2 Example
-
-This example illustrates "end-to-end" CASE cyber-resiliency concepts using a more complex example.  The system used is the end-of-phase deliverable for Phase II, based on the AFRL UxAS "water ways" example.   The example includes:
-
-- incorporation of C-programmed legacy application components based on the AFRL UxAs framwork hosted in a Linux VM
-- CASE tool-generated cyber-resiliency filter components that weed out malformed messages that might be used in cyber-attacks
-- CASE tool-generated cyber-resiliency monitor components that monitor system examples for anomalous behaviors that might be indicative of cyber-attacks
-- C-programmed native components (e.g., a native implementation of the UxAS waypoint manager)
-- VM-based "boundary" components that implement low-level communication between the high-assurance system (the UAV software with cyber-resiliency) and untrusted context components (e.g., UAV ground stations)
-
-_Still need to resolve the VM+CakeML issue_
-
-The work-in-progress version is [here](phase2)
-
-### Debugging Note
-
-A common issue when debugging the execution of the CASE applications is a limitation on thread stack size.
-Refer to the additional [notes](https://github.com/loonwerks/CASE/tree/master/TA5/tool-assessment-4/doc/debug_camkes_stacksize.md)
-to address this run-time issue.

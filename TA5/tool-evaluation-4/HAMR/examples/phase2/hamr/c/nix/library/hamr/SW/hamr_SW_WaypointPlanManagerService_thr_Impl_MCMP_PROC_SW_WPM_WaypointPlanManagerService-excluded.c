@@ -1,0 +1,13 @@
+#include <all.h>
+
+Unit hamr_SW_WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_initialise(STACK_FRAME hamr_SW_WaypointPlanManagerService_thr_Impl_Initialization_Api api) {
+  DeclNewStackFrame(caller, "WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService.scala", "hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService", "initialise", 0);
+}
+
+Unit hamr_SW_WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_timeTriggered(STACK_FRAME hamr_SW_WaypointPlanManagerService_thr_Impl_Operational_Api api) {
+  DeclNewStackFrame(caller, "WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService.scala", "hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService", "timeTriggered", 0);
+}
+
+Unit hamr_SW_WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_finalise(STACK_FRAME hamr_SW_WaypointPlanManagerService_thr_Impl_Operational_Api api) {
+  DeclNewStackFrame(caller, "WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService.scala", "hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService", "finalise", 0);
+}
