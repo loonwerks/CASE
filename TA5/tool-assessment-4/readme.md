@@ -61,7 +61,7 @@ AADL can be used to support a variety of processing and communication styles.  T
 
 - The [CASE-Tool-Assessment-AADL-Guide](https://github.com/loonwerks/CASE/tree/master/TA5/tool-assessment-4/doc/CASE-Tool-Assessment-Guide.pdf) summarizes the currently supported CASE-supported AADL subset as well as CASE-specific AADL properties that are used to configure and direct CASE tools.
 
-- The CASE Resolint tool (**TODO: insert link to documentation**??) (essentially, a rule-based linter for AADL models) is used to check that models conform to the supported AADL subset.
+- The CASE Resolint tool (essentially, a rule-based linter for AADL models) is used to check that models conform to the supported AADL subset.  Refer to the [Resolint User's Guide](https://github.com/loonwerks/formal-methods-workbench/blob/master/documentation/resolute/Resolint_Users_Guide.pdf) for more information.
 
 Developers should follow the CASE style guidelines when building models, and Resolint should be run before HAMR code generation is performed.  There may be additional model restrictions that not enforced by Resolint that are indicated by warnings/errors during HAMR code generation.
 
