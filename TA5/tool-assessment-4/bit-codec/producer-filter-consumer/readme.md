@@ -4,6 +4,7 @@
 <!--table-of-contents_start-->
 * [AADL Architecture](#aadl-architecture)
 * [Bit-Codec Spec](#bit-codec-spec)
+* [Modify the AADL Model to Use Wire Protocol](#modify-the-aadl-model-to-use-wire-protocol)
 * [Linux](#linux)
   * [HAMR Configuration: Linux](#hamr-configuration-linux)
   * [Behavior Code: Linux](#behavior-code-linux)
@@ -73,6 +74,19 @@ Developer 'touches' bit-codec artifacts and then runs the transpiler like below.
 ```
 
 All these steps will be automated once HAMR integrates bit-codec generation as part of codegen.
+
+## Modify the AADL Model to Use Wire Protocol
+
+The following modifications must be made since bit-codec is not currently integrated as part of HAMR Codegen
+
+  - Attach ``HAMR::Bit_Codec_Raw_Connections => true;`` to the top-level system [PFC.aadl](aadl/PFC.aadl#L46)
+  - Use the ``HAMR::Bit_Codec_Max_Size`` property to specify the encoded size of each data component that is used by an event data or data port.  For example, see [Mission](aadl/PFC.aadl#L22) that is used by [producer_t.to_filter](aadl/PFC.aadl#L117)
+
+    - This property only needs to be attached to the top level data component (e.g. array subtypes and record field types do not need to be modified if they are not directly used by a port)
+
+    - HAMR will use the ``Memory_Properties::Data_Size`` annotation if present for types defined in [Base_Types](https://github.com/osate/osate2/blob/master/core/org.osate.contribution.sei/resources/packages/Base_Types.aadl).  The following unbounded types are not currently supported: ``Bases_Types::Boolean``, ``Base_Types::Character``, ``Base_Types::String``, ``Base_Types::Integer``, ``Base_Types::Float``
+
+  \* _Note: HAMR does not currently process the ``HAMR::Bit_Codec_Spec`` property annotation as seen [here](aadl/PFC.aadl#L21)_
 
 ## Linux
 <!--Linux_start--><!--Linux_end-->
