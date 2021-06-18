@@ -54,18 +54,6 @@
 **Schedule:** [domain_schedule.c](aadl/kernel/domain_schedule.c)
 <!--aadl-architecture_end-->
 
-## Installing the Tools
-
-The following assumes a case-env is used (see [https://github.com/loonwerks/CASE/tree/master/TA5/case-env](https://github.com/loonwerks/CASE/tree/master/TA5/case-env))
-
-### Install CakeML
-
-Run ``$HOME/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh``.  Note that installing HOL takes a long time and is optional <-- *Junaid/Eric feedback*
-
-Once installed, make sure the 64bit version is available from the command line.  E.g. in a directory available in my path I have the symlink ``cake -> /usr/local/bin/cake-x64-64/cake``
-
-**NOTE**: Cake seg faulted the first time I tried to run it from the command line.  Restarting the vagrant VM seemed to fix the issue.
-
 ## Modify the AADL Model for CakeML Integration
 
 ### Wire Protocol
