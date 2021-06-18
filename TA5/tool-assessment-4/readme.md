@@ -91,7 +91,7 @@ The example uses a simple two-component producer/consumer system -- with periodi
 - [Written tutorial](basic/tutorial)
 - [AADL Model for the system](basic/tutorial/aadl)
 - [Initial HAMR generated code (w/ application code skeletons)](basic/tutorial/hamr-initial/c/ext-c) (see written tutorial for explanation/discussion)
-- [Completed system code](basic/tutorial/hamr/c/ext-c) (see written tutorial for explanation/discussion)
+- [Completed application code](basic/tutorial/hamr/c/ext-c) (see written tutorial for explanation/discussion)
 
 Consult the examples below for illustration of additional concepts.
 
