@@ -89,14 +89,6 @@ See [Post Setup](#post-setup) below for additional instructions.
 
 ## Post Setup
 
-### Installing CakeML Dependencies
-
-To install CakeML dependencies using seL4 setup scripts:
-
-```bash
-bash ~/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh
-```
-
 ### Updating Installed CASE Tools & Artifacts
 
 * To update FMIDE, simply (re-)run the following in the VM:
