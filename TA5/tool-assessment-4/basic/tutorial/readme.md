@@ -24,7 +24,7 @@
   * [Overview of Auto-generated Application Code Templates and Port-Communication APIs](#overview-of-auto-generated-application-code-templates-and-port-communication-apis)
 <!--table-of-contents_end-->
 
-This example supports the tutorial video **TODO: Insert Link** provided for this tool assessment.  The example is a minor adaptation of the Event Data Port example provided in the Basic examples folder.
+This example supports the tutorial video **TODO: Insert Link** provided for this tool assessment.  The example is a minor adaptation of the [Event Data Port](../test_event_data_port_periodic_domains) example provided in the Basic Examples folder.
 
 This ReadMe file provides a text-based walkthrough of the example to complement the tutorial video (the walk-through is presented after the artifact overview below).
 
@@ -222,23 +222,27 @@ and must be invoked regularly to maintain operational flow). The user-written sc
 
 For seL4 targets, the static cyclic scheduler maintains temporal isolation
 between the components, assuming the domain schedule has been correctly engineered.
-It is the responsibility of the system designer to define a schedule, and the usual goal is to define a schedule in which the components *execute to completion within their assigned slots*.  A component execution that exceeds the length of a time slot will resume from where it left off when its next assigned time slot is invoked. However, utilizing this behavior is not recommended since it will often lead to incoming messages being lost.  The threading paradigm emphasized by the AADL standard supports a *Receive-Input/Compute/Send-Output* structure, and once a thread begins the *Compute* actions, new input cannot be processed until the task has finished the *Compute* and *Send-Output* phases and is dispatched again.  For Linux targets, the components follow the 
+It is the responsibility of the system designer to define a schedule, and the usual goal is to define a schedule in which the components *execute to completion within their assigned slots*.  A component execution that exceeds the length of a time slot will resume from where it left off when its next assigned time slot is invoked. However, utilizing this behavior is not recommended since it will often lead to incoming messages being lost.  The threading paradigm emphasized by the AADL standard supports a *Receive-Input/Compute/Send-Output* structure, and once a thread begins the *Compute* actions, new input cannot be processed until the task has finished the *Compute* and *Send-Output* phases and is dispatched again.  With this paradigm, run-to-complete compute actions are emphasized.   For Linux targets, the components follow the 
 same default *Receive-Input/Compute/Send-Output* structure, but scheduling is supported by a round-robin periodic scheduler executed by the Linux operating system.  Note: upcoming releases of HAMR will support a simplistic static scheduling approach for Linux to align with the seL4 approach -- Linux cannot enforce temporal separation as achieved by the seL4 domain scheduler, so the Linux static scheduling will be primarily a prototyping aid used before transitioning to seL4 deployments.
 
-For more motivation and information about the AADL threading approach, including the *Receive-Input/Compute/Send-Output* emphasis, see the chapter on **TODO: AADL concepts** in the HAMR documentation.
+For more motivation and information about the AADL threading approach, including the *Receive-Input/Compute/Send-Output* emphasis, see the chapter on [AADL Concepts](http://hamr.sireum.org/hamr-doc/ch04-hamr-aadl-fundamental-concepts.html) in the HAMR documentation.
 
-**TODO: Explain thread component types, implementations, and instances**  Note that code generate will generate a skeleton for each instance (so no code sharing across component instances currently).
 
 ### Port-based Communication
 
 #### AADL Semantics
 
-* uses AADL event data port communications between components.  
-* one way, asynochrous
-* buffered
-* Note that HAMR currently only supports queue sizes of 1.
-* During each compute cycle, 
-* During each compute cycle, thread can send 0 or 1 messages out each output port
+AADL provides several types of port-based communication that correspond to common communication patterns used in real-time embedded system.  This tool assessment focuses on models which use AADL's *event data* ports with input and output buffers of *size 1*.   AADL event data ports provide *one-way asynchronous communication* as opposed to e.g., a *remote procedure call (RPC)* or *request/response* communication pattern which embody two-phase (message from caller to receive, response from receiver to caller),  synchronous (caller blocks until receiving a response from the receiver) communication.   Two-phased, blocking communication is often more difficult to reason about in real-time embedded systems, since it is more difficult to estimate the required time for blocking, computing result, and getting a result back.   More, two-phased communication inherently represents a bi-directional flow of information.  Focusing on one-way, asynchronous communication enables tighter control and easier reasoning about information flow and also makes reasoning about timing and schedulability easier.
+Using AADL event data ports with buffers of size one (as opposed to unbuffered AADL data ports) allows application code to more easily distinguish between situations in which new data has arrived (there is data in the queue) versus situations where no new data has arrived since the thread was last dispatched (the queue is empty).
+
+HAMR currently supports fan-out for event data ports (a single component port can be connected to multiple consuming component ports) but not fan-in (having multiple output ports connected to a single input port is not allowed).
+
+With an input queue size of 1, if a sending component is dispatched twice before a receiving component is dispatch, the queue of the receiving component may overflow.
+HAMR supports an AADL overflow policy in which the oldest message is overwritten and there is no error signaled.
+
+AADL output buffers are always of size 1, and so a thread can put at most one message on a specific output event data port during each dispatch.  However, if it has multiple output event data ports, it can put a value of each of the output ports.
+
+Due to the design of AADL tasking and communication, when a component is dispatched at the beginning of its period, all available input port values are dequeued and (from the point of view of the application code), the values of the input ports are "frozen" while the user's Compute entry point time-triggered function executes to completion.   This means that the user code does not have to worry about locking the input port queues or dealing with any race conditions on the port values once the thread is dispatched.   Similarly, all values that the application code puts on output ports are held until the time-triggered method completes, and then are released to the communication infrastructure.   This enables an AADL Compute entry point to be viewed as a function from Inport Port Values and component local state to Output Port Values and updated component local state.   System execution then becomes an interleaving of these functions (atomic, if each compute entry point runs to completion) where the interleaving order is controlled by the provided static schedule.  This highly structured real-time tasking is what enables various forms of AADL model-level verification (e.g., using AGREE specifications) and analysis on the CASE program.
 
 #### Underlying Representation in seL4
 
@@ -311,6 +315,8 @@ stop.sh
 
 ### Overview of Auto-generated Application Code Templates and Port-Communication APIs
 
+#### Auto-generated Application Code Templates for Threads
+
 For each AADL thread component instance, HAMR will generate a skeleton file indicated by the `<component Cn>.c` files in the code organization diagram above.
 To show the state of the code as it is initially generated (in contrast to the completed code), 
 we have added a special folder hierarchy for the tutorial example named [hamr-initial](hamr-initial)
@@ -322,7 +328,7 @@ name mangling is used, based on the position of the thread instance within the A
 * the first `producer` of `producer_producer` is derived from the name of the process instance `producer` in the system implementation `top.impl`
 * the second `producer` of `producer_producer` is derived from the name of the thread instance `producer` in the process implementation `
 
-The relevant [thread implementation](https://github.com/loonwerks/CASE/blob/14c97ebd4257ac5021707c85a93851098a40bb58/TA5/tool-assessment-4/basic/tutorial/aadl/test_event_data_port_periodic_domains.aadl#L16) `producer_t.i` is shown below
+The relevant [thread implementation](aadl/test_event_data_port_periodic_domains.aadl#L16) `producer_t.i` is shown below
 ```
 thread producer_t
   ...
@@ -332,7 +338,7 @@ thread implementation producer_t.i  -- thread implementation name
 end producer_t.i;
 ```
 
-The relevant [process instance](https://github.com/loonwerks/CASE/blob/14c97ebd4257ac5021707c85a93851098a40bb58/TA5/tool-assessment-4/basic/tutorial/aadl/test_event_data_port_periodic_domains.aadl#L80) (first `producer` in `producer_producer`) is shown below
+The relevant [process instance](aadl/test_event_data_port_periodic_domains.aadl#L80) (first `producer` in `producer_producer`) is shown below
 ```
 process implementation producer_p.i
 		subcomponents
@@ -342,7 +348,7 @@ process implementation producer_p.i
 end producer_p.i;
 ```
 
-The relevant [thread instance](https://github.com/loonwerks/CASE/blob/14c97ebd4257ac5021707c85a93851098a40bb58/TA5/tool-assessment-4/basic/tutorial/aadl/test_event_data_port_periodic_domains.aadl#L29) (second `producer` in `producer_producer`) is shown below
+The relevant [thread instance](aadl/test_event_data_port_periodic_domains.aadl#L29) (second `producer` in `producer_producer`) is shown below
 ```
 system implementation top.impl
 		subcomponents
@@ -352,7 +358,7 @@ system implementation top.impl
 ```
 
 
-The listing below illustrates the auto-generated skeleton file for the produer thread.  See
+The listing below illustrates the auto-generated skeleton file for the producer thread.  See
 [hamr_initial/c/ext-c/producer_t_i_producer_producer/producer_t_i_producer_producer.c](hamr-initial/c/ext-c/producer_t_i_producer_producer/producer_t_i_producer_producer.c), 
 for the actual file.  In the listing below, for pedagogical purpose, we have added comments explaining the content.
 
@@ -518,6 +524,7 @@ When enabled the macros expand as follows:
 |SF|Adds the symbol ``sf`` (i.e. the variable introduced by ``DeclNewStackFrame``) followed by a comma|
 |SF_ONLY|Adds the symbol ``sf``|
 
+#### Auto-generated APIs for Port Communication
 
 HAMR will generate APIs that application can call for *getting* values from input ports (`api_get_***` functions) and *putting* values on output ports (`api_put_***` functions).  These APIs are platform-indepdent -- behind the scenes, HAMR will generate an appropriate realization for either seL4 or Linux.   
 
@@ -558,7 +565,7 @@ void api_logError__base_test_event_data_port_periodic_domains_producer_t_i_produ
 #endif
 ```
 
-As noted earlier, HAMR will support port type declarations using the AADL data model, but due to a transition in the implementation of data types that is not yet completed, this tool assessment uses another HAMR-supported approach:  the ability to generate "raw" byte arrays as the types for port-based communication, which is useful for when the application logic needs custom representations and encodings/decodings for data.   The capability is selected by including the [Byte_Codec_Raw_Connections]([write_port](aadl/test_event_data_port_periodic_domains.aadl#L87)) property in the top-level system implementation (excerpt shown below).  This causes the [declared port data types such as Base_Types::Integer_32](aadl/test_event_data_port_periodic_domains.aadl#L9)) to be ignored in the code generation; types for raw byte arrays are used for each port data type instead.
+As noted earlier, HAMR will support port type declarations using the AADL data model, but due to a transition in the implementation of data types that is not yet completed, this tool assessment uses another HAMR-supported approach:  the ability to generate "raw" byte arrays as the types for port-based communication, which is useful for when the application logic needs custom representations and encodings/decodings for data.   The capability is selected by including the [Byte_Codec_Raw_Connections](aadl/test_event_data_port_periodic_domains.aadl#L87) property in the top-level system implementation (excerpt shown below).  This causes the [declared port data types such as Base_Types::Integer_32](aadl/test_event_data_port_periodic_domains.aadl#L9)) to be ignored in the code generation; types for raw byte arrays are used for each port data type instead.
 
 
 ```
