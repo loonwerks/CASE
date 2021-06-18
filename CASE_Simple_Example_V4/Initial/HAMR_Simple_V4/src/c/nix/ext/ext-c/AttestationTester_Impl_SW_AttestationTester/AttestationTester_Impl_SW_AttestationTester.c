@@ -1,1 +1,0 @@
-../../../../ext-c/AttestationTester_Impl_SW_AttestationTester/AttestationTester_Impl_SW_AttestationTester.c
