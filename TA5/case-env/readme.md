@@ -104,17 +104,23 @@ bash ~/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh
 * To update FMIDE, simply (re-)run the following in the VM:
 
   ```bash
-  $SIREUM_HOME/bin/install/fmide.cmd [<tag-name>] # Optional release tag name; latest nightly release is used if unspecified 
+  $HOME/bin/fmide.sh
   ```
-
-  If the installation somehow did not finish (e.g., due to a network issue), remove the problematic file in Sireum's cache directory 
-  (``~/Downloads/sireum``) and re-run the above.
 
 * To update Sireum:
 
   ```bash
-  ~/bin/sireum-install.sh [<COMMIT>] # Optional SHA commit of https://github.com/sireum/kekinian; the tip of master is used if unspecified
+  ~/bin/sireum-install.sh <INIT_RELEASE> <COMMIT>
   ```
+  
+  where:
+  
+  * `<INIT_RELEASE>` is `SIREUM_INIT_V` in [case-setup.sh](case-setup.sh)
+  
+  * `<COMMIT>` is `SIREUM_V` in [case-setup.sh](case-setup.sh)
+
+  If the installation somehow did not finish (e.g., due to a network issue), remove the problematic file in Sireum's cache directory 
+  (``~/Downloads/sireum``) and re-run the above.
 
 * To update seL4 and friends (cache, etc.):
 
