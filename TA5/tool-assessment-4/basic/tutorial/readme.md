@@ -14,17 +14,21 @@
   * [Example Output: SeL4](#example-output-sel4)
   * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
   * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
-* [Background](#background)
+* [Tutorial: Background](#tutorial-background)
   * [Threading](#threading)
   * [Port-based Communication](#port-based-communication)
     * [AADL Semantics](#aadl-semantics)
     * [Underlying Representation in seL4](#underlying-representation-in-sel4)
-* [Structure of Generated Code](#structure-of-generated-code)
+* [Tutorial: Structure of Generated Code](#tutorial-structure-of-generated-code)
   * [Compile and Execute Scripts](#compile-and-execute-scripts)
   * [Overview of Auto-generated Application Code Templates and Port-Communication APIs](#overview-of-auto-generated-application-code-templates-and-port-communication-apis)
+    * [Auto-generated Application Code Templates for Threads](#auto-generated-application-code-templates-for-threads)
+    * [Auto-generated APIs for Port Communication](#auto-generated-apis-for-port-communication)
+  * [Tutorial: Coding the Application Logic](#tutorial-coding-the-application-logic)
 <!--table-of-contents_end-->
 
-This example supports the tutorial video **TODO: Insert Link** provided for this tool assessment.  The example is a minor adaptation of the [Event Data Port](../test_event_data_port_periodic_domains) example provided in the Basic Examples folder.
+This example supports the tutorial video provided for this tool assessment that is available 
+[here](https://youtu.be/zkhgn7jcXXE).  The example is a minor adaptation of the [Event Data Port](../test_event_data_port_periodic_domains) example provided in the Basic Examples folder.
 
 This ReadMe file provides a text-based walkthrough of the example to complement the tutorial video (the walk-through is presented after the artifact overview below).
 
@@ -61,17 +65,37 @@ This ReadMe file provides a text-based walkthrough of the example to complement 
 
 ### HAMR Configuration: Linux
 <!--hamr-configuration-linux_start-->
-refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
+The following are the options that were used in HAMR's FMIDE dialog box (_&lt;example-dir&gt;_ is the directory that contains this readme file)
+
+Option Name|Value |
+|--|--|
+Platform|Linux|
+Output Directory|_&lt;example-dir&gt;_/hamr/slang|
+Base Package Name|base|
+|Exclude Slang Component Implementations|True/Checked|
+|Bit Width|32|
+|Max Sequence Size|1|
+|Max String Size|256|
+|C Output Directory|_&lt;example-dir&gt;_/hamr/c|
+
+You can have HAMR's FMIDE plugin generate verbose output and run the transpiler by setting the ``Verbose output`` and ``Run Transpiler``
+options that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+
+
+
 <details>
-<summary>Click for an example showing how HAMR's plugin dialog box relates to the CLI options</summary>
-<!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
-     editor (e.g. vscode) in order to see the following image -->
 
-![dialog_cli](../../doc/dialog_cli.jpg)
+<summary>Click for instructions on how to run HAMR Codegen via the command line</summary>
 
-The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
-options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
-The last two CLI options are set by the HAMR plugin.
+The script [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh) uses an experimental OSATE/FMIDE plugin we've developed that
+allows you to run HAMR's OSATE/FMIDE plugin via the command line.  It has primarily been used/tested
+when installed in OSATE (not FMIDE) and under Linux so may not work as expected in FMIDE or
+under a different operating system. The script contains instructions on how to install the plugin.
+
+```
+./aadl/bin/run-hamr-Linux.sh
+```
+
 </details>
 <!--hamr-configuration-linux_end-->
 
@@ -86,8 +110,12 @@ The last two CLI options are set by the HAMR plugin.
 
 ### How to Build/Run: Linux
 <!--how-to-buildrun-linux_start-->
+If you didn't configure HAMR's FMIDE plugin to run the transpiler automatically then first run
 ```
-./aadl/bin/run-hamr-Linux.sh
+./hamr/slang/bin/transpile.sh
+```
+then 
+```
 ./hamr/c/bin/compile-linux.sh
 ./hamr/c/bin/run-linux.sh
 ./hamr/c/bin/stop.sh
@@ -100,17 +128,38 @@ The last two CLI options are set by the HAMR plugin.
 
 ### HAMR Configuration: SeL4
 <!--hamr-configuration-sel4_start-->
-refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
+The following are the options that were used in HAMR's FMIDE dialog box (_&lt;example-dir&gt;_ is the directory that contains this readme file)
+
+Option Name|Value |
+|--|--|
+Platform|SeL4|
+Output Directory|_&lt;example-dir&gt;_/hamr/slang|
+Base Package Name|base|
+|Exclude Slang Component Implementations|True/Checked|
+|Bit Width|32|
+|Max Sequence Size|1|
+|Max String Size|256|
+|C Output Directory|_&lt;example-dir&gt;_/hamr/c|
+|seL4/CAmkES Output Directory|_&lt;example-dir&gt;_/hamr/camkes
+
+You can have HAMR's FMIDE plugin generate verbose output and run the transpiler by setting the ``Verbose output`` and ``Run Transpiler``
+options that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+
+
+
 <details>
-<summary>Click for an example showing how HAMR's plugin dialog box relates to the CLI options</summary>
-<!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
-     editor (e.g. vscode) in order to see the following image -->
 
-![dialog_cli](../../doc/dialog_cli.jpg)
+<summary>Click for instructions on how to run HAMR Codegen via the command line</summary>
 
-The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
-options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
-The last two CLI options are set by the HAMR plugin.
+The script [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh) uses an experimental OSATE/FMIDE plugin we've developed that
+allows you to run HAMR's OSATE/FMIDE plugin via the command line.  It has primarily been used/tested
+when installed in OSATE (not FMIDE) and under Linux so may not work as expected in FMIDE or
+under a different operating system. The script contains instructions on how to install the plugin.
+
+```
+./aadl/bin/run-hamr-SeL4.sh
+```
+
 </details>
 <!--hamr-configuration-sel4_end-->
 
@@ -125,8 +174,13 @@ The last two CLI options are set by the HAMR plugin.
 
 ### How to Build/Run: SeL4
 <!--how-to-buildrun-sel4_start-->
+If you didn't configure HAMR's FMIDE plugin to run the transpiler automatically then run
 ```
-./aadl/bin/run-hamr-SeL4.sh
+./hamr/slang/bin/transpile-sel4.sh
+```
+then
+
+```
 ./hamr/camkes/bin/run-camkes.sh -s
 ```
 <!--how-to-buildrun-sel4_end-->
@@ -396,7 +450,7 @@ The listing below also includes a special comment block indicating the placement
 //----------------------------------------------
 
  // declare component local variables (e.g., variables whose values persist between dispatches of the thread)
- 
+
 //----------------------------------------------
 // I n i t i a l i z e    E n t r y  p o i n t
 //
@@ -417,7 +471,7 @@ Unit base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_i
   // The developer codes the Initialize Entry Point by filling in this method.  
   // HAMR auto-generates example uses of the port APIs and logging APIs.  These
   // can be removed when coding the actual application logic.
-  
+
   uint8_t t0[numBytes_S32]; // declare a functional local variable to hold message payload
   byte_array_default(SF t0, numBits_S32, numBytes_S32);  // use helper macro to initial byte array to default value
   // use put_*** API to put the contents of the payload variable on the output port.  The port value will not actually

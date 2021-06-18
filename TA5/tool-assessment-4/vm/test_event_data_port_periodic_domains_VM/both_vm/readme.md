@@ -83,17 +83,38 @@ and HAMR integration can be found in the [CASE-Tool-Assessment-Guide](https://gi
 
 ### HAMR Configuration: SeL4
 <!--hamr-configuration-sel4_start-->
-refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
+The following are the options that were used in HAMR's FMIDE dialog box (_&lt;example-dir&gt;_ is the directory that contains this readme file)
+
+Option Name|Value |
+|--|--|
+Platform|SeL4|
+Output Directory|_&lt;example-dir&gt;_/hamr/slang|
+Base Package Name|base|
+|Exclude Slang Component Implementations|True/Checked|
+|Bit Width|32|
+|Max Sequence Size|1|
+|Max String Size|256|
+|C Output Directory|_&lt;example-dir&gt;_/hamr/c|
+|seL4/CAmkES Output Directory|_&lt;example-dir&gt;_/hamr/camkes
+
+You can have HAMR's FMIDE plugin generate verbose output and run the transpiler by setting the ``Verbose output`` and ``Run Transpiler``
+options that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+
+
+
 <details>
-<summary>Click for an example showing how HAMR's plugin dialog box relates to the CLI options</summary>
-<!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
-     editor (e.g. vscode) in order to see the following image -->
 
-![dialog_cli](../../../doc/dialog_cli.jpg)
+<summary>Click for instructions on how to run HAMR Codegen via the command line</summary>
 
-The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
-options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
-The last two CLI options are set by the HAMR plugin.
+The script [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh) uses an experimental OSATE/FMIDE plugin we've developed that
+allows you to run HAMR's OSATE/FMIDE plugin via the command line.  It has primarily been used/tested
+when installed in OSATE (not FMIDE) and under Linux so may not work as expected in FMIDE or
+under a different operating system. The script contains instructions on how to install the plugin.
+
+```
+./aadl/bin/run-hamr-SeL4.sh
+```
+
 </details>
 <!--hamr-configuration-sel4_end-->
 
@@ -108,8 +129,13 @@ The last two CLI options are set by the HAMR plugin.
 
 ### How to Build/Run: SeL4
 <!--how-to-buildrun-sel4_start-->
+If you didn't configure HAMR's FMIDE plugin to run the transpiler automatically then run
 ```
-./aadl/bin/run-hamr-SeL4.sh
+./hamr/slang/bin/transpile-sel4.sh
+```
+then
+
+```
 ./hamr/camkes/bin/setup-camkes-arm-vm.sh
 ./hamr/camkes/bin/run-camkes.sh -o "-DUSE_PRECONFIGURED_ROOTFS=ON" -s
 ```

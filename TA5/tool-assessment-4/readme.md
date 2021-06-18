@@ -87,7 +87,7 @@ The tutorial assumes that
 
 The example uses a simple two-component producer/consumer system -- with periodic threads and event data ports, which is the type of threading/ports that will be used on the Collins TA6 Phase III systems.
 
-- ** ADD VIDEO LINK**
+- [Tutorial Video](https://youtu.be/zkhgn7jcXXE)
 - [Written tutorial](basic/tutorial)
 - [AADL Model for the system](basic/tutorial/aadl)
 - [Initial HAMR generated code (w/ application code skeletons)](basic/tutorial/hamr-initial/c/ext-c) (see written tutorial for explanation/discussion)
