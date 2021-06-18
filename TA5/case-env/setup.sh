@@ -1,4 +1,7 @@
 #!/bin/bash -ex
+vagrant destroy
+#vagrant plugin repair
+#vagrant plugin expunge --reinstall
 export FIRST_RUN='true'
 vagrant up --no-provision
 vagrant ssh -c 'bash /vagrant/snapshot.sh'

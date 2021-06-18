@@ -70,4 +70,7 @@ echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin" >> "$HOME/.bashrc"
 
 # FMIDE
 bash $HOME/bin/fmide.sh
-echo "export PATH=\$PATH:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
+
+
+# HAMR Examples
+bash $HOME/bin/hamr-examples.sh

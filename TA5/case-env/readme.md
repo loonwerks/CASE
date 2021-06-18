@@ -45,7 +45,7 @@ in your local repo/folder ``case-env``).
 
 ### Requirements
 
-* [VirtualBox](https://www.virtualbox.org/) **6.1.2** or above
+* [VirtualBox](https://www.virtualbox.org/) **6.1.8** or above
 
 * [Vagrant](https://www.vagrantup.com/) **2.2.7** or above
 
