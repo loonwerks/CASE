@@ -115,9 +115,9 @@ bash ~/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh
   
   where:
   
-  * `<INIT_RELEASE>` is `SIREUM_INIT_V` in [case-setup.sh](case-setup.sh)
+  * `<INIT_RELEASE>` is `SIREUM_INIT_V` in [case-setup.sh](case-setup.sh) (use `latest` for the latest version)
   
-  * `<COMMIT>` is `SIREUM_V` in [case-setup.sh](case-setup.sh)
+  * `<COMMIT>` is `SIREUM_V` in [case-setup.sh](case-setup.sh) (use `master` for the latest version)
 
   If the installation somehow did not finish (e.g., due to a network issue), remove the problematic file in Sireum's cache directory 
   (``~/Downloads/sireum``) and re-run the above.
