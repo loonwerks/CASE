@@ -74,3 +74,7 @@ bash $HOME/bin/fmide.sh
 
 # HAMR Examples
 bash $HOME/bin/hamr-examples.sh
+
+# BriefCASE Examples
+bash $HOME/bin/transform-examples.sh
+bash $HOME/bin/uav-example.sh
