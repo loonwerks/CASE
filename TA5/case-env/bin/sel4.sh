@@ -27,6 +27,8 @@ bash $SEL4_SCRIPTS/base_tools.sh
 
 bash $SEL4_SCRIPTS/sel4.sh
 
+bash $SEL4_SCRIPTS/cakeml.sh
+
 . $SEL4_SCRIPTS/utils/common.sh
 
 bash $SEL4_SCRIPTS/camkes.sh
