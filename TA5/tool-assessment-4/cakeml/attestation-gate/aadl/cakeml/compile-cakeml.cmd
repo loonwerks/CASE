@@ -36,6 +36,12 @@ val attestation_gate = container(
 
 val stripped = ops.ISZOps(Os.cliArgs).contains("--stripped") // cakeml doesn't care if '--stripped' is passed in
 
+val cakeml64: Os.Path = Os.path("/usr/local/bin/cake-x64-64/cake")
+if(!cakeml64.exists) {
+  cprintln(T, s"Error: ${cakeml64.canon} not found. It can be installed via /home/vagrant/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh")
+  Os.exit(1)
+}
+
 for(c <- ISZ(attestation_gate)){
   assert(c.cakemlDir.exists, c.cakemlDir.value)
   assert(c.destDir.exists, c.destDir.value)
@@ -58,7 +64,7 @@ for(c <- ISZ(attestation_gate)){
 
   val cakeOptions = ops.ISZOps(Os.cliArgs).foldLeft[String]((a, b) => s"$a $b", "")
   
-  val results = Os.proc(ISZ("bash", "-c", s"cake ${cakeOptions} --heap_size=4 --stack_size=4 < ${dest.canon}")).runCheck()
+  val results = Os.proc(ISZ("bash", "-c", s"${cakeml64.canon} ${cakeOptions} --heap_size=4 --stack_size=4 < ${dest.canon}")).runCheck()
 
   //val contents = ops.StringOps(results.out).replaceAllLiterally("main", "run")
   destS.writeOver(results.out)
