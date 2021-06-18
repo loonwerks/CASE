@@ -228,6 +228,8 @@ same default *Receive-Input/Compute/Send-Output* structure, but scheduling is su
 
 For more motivation and information about the AADL threading approach, including the *Receive-Input/Compute/Send-Output* emphasis, see the chapter on **TODO: AADL concepts** in the HAMR documentation.
 
+**TODO: Explain thread component types, implementations, and instances**  Note that code generate will generate a skeleton for each instance (so no code sharing across component instances currently).
+
 ### Port-based Communication
 
 #### AADL Semantics
@@ -241,20 +243,26 @@ For more motivation and information about the AADL threading approach, including
 
 #### Underlying Representation in seL4
 
-In HAMR code generation for seL4, the underlying representation of the communication
+In HAMR code generation for seL4, the underlying representation of the *AADL event data port* communication
 channel between the sending and receiving port is a shared memory construct
 for which the sending component has write-only permissions and the receiving component 
-has read-only permissions. The data in the
+has read-only permissions. These representation aspects are all hidden from the application developer -- the developer
+just uses the port APIs described in the following sections.  The representation hiding in the APIs facilitates
+the reuse of code across seL4 and Linux.  It what allows us in the provided examples to have a single application code 
+for each component that can be deployed on both seL4 and Linux.   The data transferred via the port communication APIs
+has a designated data type (e.g., integer, real, boolean, array, struct).
+
+Behind the scenes, in the seL4 deployment, the data in the
 shared memory is queued, and each write operation is accompanied with an event signal
 that is forwarded to the receiving component, indicating that a new communication has
 been sent. If a write operation is invoked when the queue is full, then the oldest data entry
-is overwritten. The data transferred via the port communication 
-has a designated data type (e.g., integer, real, boolean, array, struct).
+is overwritten. 
 Both write and read operations are non-blocking.
 
 ## Structure of Generated Code
 
-HAMR examples use the following convention for directory structure.  The diagram below expands the folders most relevant for programming HAMR applications on seL4 and Linux platforms.
+Consult the tutorial video for the steps needed to generate code from AADL models for seL4 and Linux.  HAMR examples use the following convention for directory structure.  The diagram below expands the folders most relevant for programming HAMR applications on seL4 and Linux platforms.
+
 ```
 aadl/                            // aadl models
 hamr/                            // target directories for HAMR code generation
@@ -280,11 +288,11 @@ hamr/                            // target directories for HAMR code generation
 └── slang/
 ```
 
-Consult the tutorial video for the steps needed to generate code from AADL models for seL4 and Linux.
 
-The developer codes the system by
 
-* filling in the templates for the thread entry points in each `<component Cx>.c` files.  The most important is the *compute entry point* represented by the `time-triggered` function.
+The developer codes the system by carrying out the following general activities:
+
+* filling in the templates for the thread entry points in each `<component Cx>.c` files.  The most important is the *compute entry point* represented by the `time-triggered` function (example code below will illustrate this).
 * utilizing the port communication api's in the `<component Cx>_api.h` files to `get` values from input ports and `put` values on output ports.
 * specifying the static schedule for seL4 in `camkes/kernel/domain_schedule.c`.
 
@@ -304,8 +312,66 @@ stop.sh
 
 ### Overview of Auto-generated Application Code Templates and Port-Communication APIs
 
+For each AADL thread component instance, HAMR will generate a skeleton file indicated by the `<component Cn>.c` files in the code organization diagram above.
+To show the state of the code as it is initially generated (in contrast to the completed code), 
+we have added a special folder hierarchy for the tutorial example named [hamr_initial](hamr_initial)
 
-**TODO: Jason: Explain stack frame stuff**
+In the `<component Cn>.c` C files holding the thread component application code, e.g., [hamr_initial/c/ext-c/producer_t_i_producer_producer/producer_t_i_producer_producer.c](hamr_initial/c/ext-c/producer_t_i_producer_producer/producer_t_i_producer_producer.c), 
+name mangling is used, based on the position of the thread instance within the AADL-specified architecture, to guarantee that the name `<component Cn>.c` of the component instance file is unique across the entire system.  For example, for the `producer_t_i_producer_producer.c` file, the generated name is derived from the following three segments in the system instance architecture traversal.
+
+* `producer_t_i` is derived from the name of the AADL thread component implementation `thread implementation producer_t.i` (with an underscore `_` replacing the `.`)
+* the first `producer` of `producer_producer` is derived from the name of the process instance `producer` in the system implementation `top.impl`
+* the second `producer` of `producer_producer` is derived from the name of the thread instance `producer` in the process implementation `
+
+The relevant [thread implementation](https://github.com/loonwerks/CASE/blob/14c97ebd4257ac5021707c85a93851098a40bb58/TA5/tool-assessment-4/basic/tutorial/aadl/test_event_data_port_periodic_domains.aadl#L16) `producer_t.i` is shown below
+```
+thread producer_t
+  ...
+end producer_t;
+
+thread implementation producer_t.i  -- thread implementation name
+end producer_t.i;
+```
+
+The relevant [process instance](https://github.com/loonwerks/CASE/blob/14c97ebd4257ac5021707c85a93851098a40bb58/TA5/tool-assessment-4/basic/tutorial/aadl/test_event_data_port_periodic_domains.aadl#L80) (first `producer` in `producer_producer`) is shown below
+```
+process implementation producer_p.i
+		subcomponents
+			producer: thread producer_t.i;   // process instance name
+		connections
+			c1: port producer.write_port -> write_port;
+end producer_p.i;
+```
+
+The relevant [thread instance](https://github.com/loonwerks/CASE/blob/14c97ebd4257ac5021707c85a93851098a40bb58/TA5/tool-assessment-4/basic/tutorial/aadl/test_event_data_port_periodic_domains.aadl#L29) (second `producer` in `producer_producer`) is shown below
+```
+system implementation top.impl
+		subcomponents
+			proc: processor proc.impl;
+			producer: process producer_p.i;   // thread instance name
+			consumer: process consumer_p.i;
+```
+
+
+The listing below illustrates the auto-generated skeleton file for the produer thread.  See
+[hamr_initial/c/ext-c/producer_t_i_producer_producer/producer_t_i_producer_producer.c](hamr_initial/c/ext-c/producer_t_i_producer_producer/producer_t_i_producer_producer.c), 
+for the actual file.  In the listing below, for pedagogical purpose, we have added comments explaining the content.
+
+Notice that the file includes the comment `// This file will not be overwritten so is safe to edit`.  All applicational files that the developer codes (typically the `<component Cn>.c` files) will contain this comment (generated by HAMR).  If the developer runs HAMR code generation is again, e.g., due to some changes in the model, such files will not be overwritten, but all other auto-generated files will be (these files will typically have a corresponding comment indicating that the user should NOT edit the files).  If for some reason the port names of a component are changed after initial code generation and HAMR is re-run, the port access methods in the API files will have their names updated (because the files are auto-generated), but the usage of the APIs in the application code files will not be updated.  When using a C IDE, syntax errors marked in the files should indicate the need for the developer to manual change the API functional calls in the application code file to align with the new port names.
+
+The listing illustrates that the skeleton file has three methods representing the standard AADL entry points:
+* the Initialize entry point method, (note that `initialise` (with an `s`) is used to name the Initialize Entry Point to avoid conflicts with the reserved word `initialize` in some of the other HAMR-supported languages, similarly for `finalise`), 
+* the Finalize entry point method, and
+* the Compute entry point method (named `time_triggered` for periodic components).
+
+Of these, the Compute entry point is most important as it contains the application logic that will be run on each period of the thread.
+
+The Initialize entry point method should be used to initialize any component local variables and put any initial values on out ports.   Following the AADL standard, values of input ports are not initialized here.   Event data ports and event ports don't need to be initialized such they are created with the underlying queue representation being empty.
+*in data ports* need to be initialized, but they are not initialized here.  Instead, according to the AADL standard, any component that has an *out data port* must provide an initial output value for the port in the sending component's Initialize entry point, and that value will be propagated at the end of the system initialization phase to the connected component in data port to provide its initial value.  Most of these issues are irrelevant for the current tool assessment since the assessment emphasizes *event data* ports.
+
+The Finalize entry point should be used to tear down any data structures, or close any open services, etc.  In most of the examples, the deliverables the Finalize entrypoints are not used.
+
+The listing below also includes a special comment block indicating the placement of declarations for component local state variables.   Such variables hold their values between activations/dispatches of the entry points.   These might be used to hold data such as the most recent sensor value read, some history of actions or data computed, data received on a port during a previous dispatch (e.g., a new set of waypoints, or setpoints for a control module, etc).   This comment is not included in the actual auto-generated skeleton but is used in this tutorial listing to highlight the concept.
 
 ```c
 // File: producer_t_i_producer_producer.c (auto-generated template)
@@ -317,21 +383,42 @@ stop.sh
 // This file will not be overwritten so is safe to edit
 
 //----------------------------------------------
+// L o c a l    S t a t e    D e c l a r a t i o n s
+//
+// Declare any component local variables to be 
+// used in component application logic here.
+//----------------------------------------------
+
+ // declare component local variables (e.g., variables whose values persist between dispatches of the thread)
+ 
+//----------------------------------------------
 // I n i t i a l i z e    E n t r y  p o i n t
 //
 //  Called once by AADL run-time scheduling infrastructure during
 //  the initialization phase of the system.
+//
+//   Use this entry point to fully initialize component local state
+//   and send any initial values out output ports.
+//   Typically initial values are only sent out for data ports,
+//   whereas output for event data ports and event ports is left
+//   for the Compute Entry Point.
 //----------------------------------------------
 
 Unit base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_initialise_(STACK_FRAME_ONLY) {
+  // The purpose of this stack frame content is explained following the code listing.   
   DeclNewStackFrame(caller, "producer_t_i_producer_producer.c", "", "base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_initialise_", 0);
 
-  // examples of api setter and logging usage
-
-  uint8_t t0[numBytes_S32];
-  byte_array_default(SF t0, numBits_S32, numBytes_S32);
+  // The developer codes the Initialize Entry Point by filling in this method.  
+  // HAMR auto-generates example uses of the port APIs and logging APIs.  These
+  // can be removed when coding the actual application logic.
+  
+  uint8_t t0[numBytes_S32]; // declare a functional local variable to hold message payload
+  byte_array_default(SF t0, numBits_S32, numBytes_S32);  // use helper macro to initial byte array to default value
+  // use put_*** API to put the contents of the payload variable on the output port.  The port value will not actually
+  // be propagated until the method completes.
   api_put_write_port__base_test_event_data_port_periodic_domains_producer_t_i_producer_producer(SF numBits_S32, t0);
 
+  // example uses of the logging APIs
   api_logInfo__base_test_event_data_port_periodic_domains_producer_t_i_producer_producer(SF string("Example logInfo"));
 
   api_logDebug__base_test_event_data_port_periodic_domains_producer_t_i_producer_producer(SF string("Example logDebug"));
@@ -340,14 +427,18 @@ Unit base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_i
 }
 
 //----------------------------------------------
-// I n i t i a l i z e    E n t r y  p o i n t
+// F i n a l i z e   E n t r y  p o i n t
 //
 //  Called once by AADL run-time scheduling infrastructure during
-//  the initialization phase of the system.
+//  the finalization (shutdown) phase of the system.
 //----------------------------------------------
 
 Unit base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_finalise_(STACK_FRAME_ONLY) {
+  // The purpose of this stack frame content is explained following the code listing. 
   DeclNewStackFrame(caller, "producer_t_i_producer_producer.c", "", "base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_finalise_", 0);
+
+  // The developer codes the Finalize Entry Point by filling in this method.  
+  // It can be left empty if there is nothing to clean up.
 }
 
 //----------------------------------------------
@@ -361,10 +452,66 @@ Unit base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_f
 //----------------------------------------------
 
 Unit base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_timeTriggered_(STACK_FRAME_ONLY) {
+  // The purpose of this stack frame content is explained following the code listing. 
   DeclNewStackFrame(caller, "producer_t_i_producer_producer.c", "", "base_test_event_data_port_periodic_domains_producer_t_i_producer_producer_timeTriggered_", 0);
 
+  // The developer codes the Compute Entry Point by filling in this method.  
+  // The typical pattern for periodic components / time-triggered method is:
+  //
+  //   (1) check/read input ports into function local variables using get_*** APIs
+  //     (behind the scenes, the infrastructure "freezes" the input ports to make sure that they 
+  //      are not modified during the execution of the entry point.  This avoids the need
+  //      for locking and prevents race conditions between communication actions and threading logic).
+  //   (2) perform application logic
+  //   (3) set values for output ports using the set_*** APIs. (this can be interleaved with step (2) above).
+  //      Output values are not immediately sent.  After the time-triggered function completes, the
+  //      set output port values will be propagated to consumer components.
+  //   
 }
 ```
+
+Recall the HAMR code generation architecture supports multiple languages and multiple platforms, and this is facilitated by having several stages in the code generation architecture.  One of those stages uses the Kansas State University Slang language (high assurance subset of Scala) to code AADL run-time infrastructure and the set the structure of the application code for all platforms.  In CASE workflows, the Slang is then translated behind the scenes to C by a stage called the "transpiler".
+Some of the artifacts and style of coding in the generated C files are the result of factoring the translation through Slang.
+In particular, a notion of stack frames is introduced into the code to aid traceability back to the Slang code (this would be needed in any eventual certification of the framework).
+
+The symbols ``STACK_FRAME``, ``STACK_FRAME_ONLY``, ``SF``, ``SF_ONLY``, ``DeclNewStackFrame``, and ``caller``
+are C macros introduced by the transpiler.  By default these are disabled meaning they do not add 
+any additional code.  So typically that can be ignored in CASE work flows, since the development focus is on C and not Slang. 
+When enabled they add code that allows C error stack traces to refer to 
+Slang resource information rather than to the C code those resources get transpiled into.
+For example, the error trace below shows the trace started from a method in the Slang file ``consumer_thread_i_consumer_consumer_App.scala`` and ends in the time_triggered method located in the
+C file ``consumer_thread_i_consumer_consumer.c``
+
+```
+base_test_data_port_periodic_domains_consumer_thread_i_consumer_consumer_timeTriggered_(consumer_thread_i_consumer_consumer.c)
+base_test_data_port_periodic_domains_consumer_thread_i_consumer_consumer_timeTriggered(consumer_thread_i_consumer_consumer_api.c)
+base.test_data_port_periodic_domains.consumer_thread_i_consumer_consumer_Bridge.EntryPoints.compute(consumer_thread_i_consumer_consumer_Bridge.scala:90)
+base.consumer_thread_i_consumer_consumer_App.compute(consumer_thread_i_consumer_consumer_App.scala:40)
+base.consumer_thread_i_consumer_consumer_App.main(consumer_thread_i_consumer_consumer_App.scala:74)
+base.consumer_thread_i_consumer_consumer_App.<App>(consumer_thread_i_consumer_consumer_App.scala)
+```
+
+To enable the macros for Linux, run the compile script with the CMake option ``WITH_LOC`` enabled.  For example,
+
+```
+WITH_LOC=ON ./hamr/c/bin/compile-linux.sh
+```
+and similarly for CAmkES, 
+```
+WITH_LOC=ON ./hamr/camkes/bin/run-camkes.sh -s
+``` 
+
+When enabled the macros expand as follows:
+
+|||
+|--:|--|
+|DeclNewStackFrame|Adds a local variable called ``sf`` that holds a ``StackFrame``.  A StackFrame stores information about the current method, e.g. the method name, the name of the file it belongs in, and a pointer to the method that called it |
+|STACK_FRAME|Adds the parameter ``StackFrame caller`` followed by a comma|
+|STACK_FRAME_ONLY|Adds the parameter ``StackFrame Caller``|
+|caller|Adds the symbol ``caller`` (i.e. the parameter added by ``STACK_FRAME``/``STACK_FRAME_ONLY``)|
+|SF|Adds the symbol ``sf`` (i.e. the variable introduced by ``DeclNewStackFrame``) followed by a comma|
+|SF_ONLY|Adds the symbol ``sf``|
+
 
 
 ```c
