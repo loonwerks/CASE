@@ -14,7 +14,7 @@ In the Vagrant provisioned VM, additional tools and scripts are installed in ``~
 fmide&
 ```
 
-The above will launch ``fmide`` installed in ``~/CASE/Sireum/bin/linux/fmide``.
+The above will launch ``fmide`` installed in ``~/CASE/FMIDE``.
 
 :warning: | The CASE env setup scripts freeze all Linux packages to a certain time/snapshot (as part of seL4 dependency requirements); thus, any OS security update after the freeze time/snapshot will not be installed (see `SNAPSHOT_DATE` in [snapshot.sh](snapshot.sh)).
 :---: | :---
@@ -45,7 +45,7 @@ in your local repo/folder ``case-env``).
 
 ### Requirements
 
-* [VirtualBox](https://www.virtualbox.org/) **6.1.8** or above
+* [VirtualBox](https://www.virtualbox.org/) **6.1.8** (up to **6.1.18**)
 
 * [Vagrant](https://www.vagrantup.com/) **2.2.7** or above
 

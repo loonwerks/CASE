@@ -1,3 +1,4 @@
+vagrant destroy
 set FIRST_RUN=true
 vagrant up --no-provision
 vagrant ssh -c 'bash /vagrant/snapshot.sh'
