@@ -1,0 +1,2 @@
+/usr/bin/ar cr libtests.cake.a  CMakeFiles/tests.cake.dir/__/__/tests.cake.cake.S.o 
+/usr/bin/ranlib libtests.cake.a 

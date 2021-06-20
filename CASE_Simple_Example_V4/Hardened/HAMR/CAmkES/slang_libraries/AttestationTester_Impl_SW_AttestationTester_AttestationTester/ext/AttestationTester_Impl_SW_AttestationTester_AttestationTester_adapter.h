@@ -1,1 +1,0 @@
-../../../../src/c/etc_seL4/adapters/AttestationTester_Impl_SW_AttestationTester_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester_adapter.h

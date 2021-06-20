@@ -19,7 +19,8 @@ public
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
 			Stack_size => 1048576 Bytes;
-			Source_text => ("Component_Source/SW_AttestationTester/AttestationTester.S");
+			Source_Text => ("Component_Source/Hardened/SW_AttestationTester/Pass/user_am.S",
+				"Component_Source/Hardened/SW_AttestationTester/Pass/libuser_am_c.a");
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationTester.Impl;
 
@@ -48,9 +49,6 @@ public
 			MissionCommand: out event data port Data_Types::RF_Msg.Impl;
 		properties
 			CASE_Properties::Comm_Driver => true;
-		annex agree {**
-			guarantee Req001_RadioDriver "Only valid command messages shall be forwarded to message destination components" : VALID_MESSAGE(MissionCommand);
-		**};
 	end RadioDriver;
 
 	thread implementation RadioDriver.Impl
@@ -59,7 +57,6 @@ public
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
 			Stack_size => 1048576 Bytes;
-			Source_text => ("Component_Source/SW_Radio/Radio.c");
 	end RadioDriver.Impl;
 
 	thread FlightPlanner
@@ -76,7 +73,6 @@ public
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
 			Stack_size => 1048576 Bytes;
-			Source_text => ("Component_Source/SW_FlightPlanner/FlightPlanner.c");
 	end FlightPlanner.Impl;
 
 	thread FlightController
@@ -92,7 +88,6 @@ public
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
 			Stack_size => 1048576 Bytes;
-			Source_text => ("Component_Source/SW_FlightController/FlightController.c");
 	end FlightController.Impl;
 
 	process SW

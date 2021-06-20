@@ -25,7 +25,6 @@ public
 			
 		-- ID of this UAV
 		const CASE_UAV_ID : int = 42;
-		fun VALID_MESSAGE(msg : Data_Types::RF_Msg.Impl) : bool = (msg.header.src > 0 and msg.header.dst = CASE_UAV_ID);
 		fun WELL_FORMED_MESSAGE(msg : Data_Types::RF_Msg.Impl) : bool = good_command(msg.payload);
 		fun WELL_FORMED_MISSION_COMMAND(msg : Data_Types::RF_Msg.Impl) : bool = good_command(msg.payload);
 		fun WELL_FORMED_MISSION(msg : Data_Types::Mission) : bool = good_mission(msg);

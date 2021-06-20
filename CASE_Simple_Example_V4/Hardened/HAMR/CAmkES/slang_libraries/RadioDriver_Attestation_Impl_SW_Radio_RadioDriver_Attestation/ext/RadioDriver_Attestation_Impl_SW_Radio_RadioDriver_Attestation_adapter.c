@@ -1,1 +1,0 @@
-../../../../src/c/etc_seL4/adapters/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation_adapter.c

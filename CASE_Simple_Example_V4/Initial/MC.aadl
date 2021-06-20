@@ -40,9 +40,6 @@ public
 	end MC_Proc;
 
 	processor implementation MC_Proc.Impl
-		properties
-			Frame_Period => 1000ms;
-			Clock_Period => 2ms;
 	end MC_Proc.Impl;
 
 	-- The Mission Computer RAM

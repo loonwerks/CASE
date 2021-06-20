@@ -1,1 +1,0 @@
-../../../../src/c/etc_seL4/adapters/AttestationManager_Impl_SW_AttestationManager_AttestationManager/AttestationManager_Impl_SW_AttestationManager_AttestationManager_adapter.h

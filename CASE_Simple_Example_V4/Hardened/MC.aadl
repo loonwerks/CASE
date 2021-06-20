@@ -3,8 +3,8 @@ public
 	with SW;
 	with UAS_Buses;
 	with CASE_Model_Transformations;
-	with CASE_Properties;
 	with HAMR;
+	with CASE_Properties;
 	with CASE_Scheduling;
 
 	-- The radio communication hardware
@@ -42,11 +42,6 @@ public
 	end MC_Proc;
 
 	processor implementation MC_Proc.Impl
-		properties
-			Frame_Period => 1000ms;
-            Clock_Period => 2ms;
-            CASE_Scheduling::Max_Domain => 10;
-            CASE_Scheduling::Schedule_Source_Text => "domain-schedule/schedule.c";		
 	end MC_Proc.Impl;
 
 	-- The Mission Computer RAM
@@ -93,6 +88,7 @@ public
 			Proc_HW: processor MC_Proc.Impl;
 			Mem_HW: memory MC_Mem.Impl;
 			Bus_HW: bus MC_Bus.Impl;
+
 			SW: system SW::SW_seL4.Impl;
 			VirtualMachine: virtual processor VirtualMachine.Impl;
 		connections
@@ -109,14 +105,19 @@ public
 		properties
 			Actual_Processor_Binding => (reference (Proc_HW)) applies to SW, VirtualMachine;
 			Actual_Memory_Binding => (reference (Mem_HW)) applies to SW;
-			CASE_Properties::OS => seL4 applies to Proc_HW;
 			Actual_Processor_Binding => (reference (VirtualMachine)) applies to SW.FlightPlanner;
 			HAMR::Bit_Codec_Raw_Connections => true;
+			CASE_Properties::OS => seL4 applies to Proc_HW;
+			Frame_Period => 1000ms applies to Proc_HW;
+			Clock_Period => 2ms applies to Proc_HW;
+			CASE_Scheduling::Max_Domain => 10 applies to Proc_HW;
+			CASE_Scheduling::Schedule_Source_Text => "domain-schedule/schedule.c" applies to Proc_HW;
+			HAMR::Platform => (seL4);
 		annex resolute {**
 			check HAMR_Guidelines
 			prove Req_Attestation(this.SW.Radio, this.SW.AttestationManager, this.SW.AttestationGate)
-			prove Req_WellFormed_MissionCommand(this.SW.FlightPlanner, "Req_Wellformed_MissionCommand", this.SW.Filter, this.SW.c7, SW::RF_Msg.Impl)
-			prove Req_FlightPlanner_Geofence(this.SW.FlightPlanner, this.SW.Monitor, this.SW.Monitor.Alert, this.SW.FlightController, SW::Mission)
+			prove Req_Wellformed_MissionCommand(this.SW.FlightPlanner, "Req_Wellformed_MissionCommand", this.SW.Filter, this.SW.c7, Data_Types::RF_Msg.Impl)
+			prove Req_FlightPlanner_Geofence(this.SW.FlightPlanner, this.SW.Monitor, this.SW.Monitor.Alert, this.SW.FlightController, Data_Types::Mission)
 			prove Req_Virtualization(this.SW.FlightPlanner, {this.SW.FlightPlanner}, this.VirtualMachine)
 		**};
 	end MissionComputer.Impl;
