@@ -5,6 +5,8 @@ public
 	with CASE_Properties;
 	renames AGREE_Definitions::all;
 
+	with CASE_Scheduling;
+
 	thread AttestationTester
 		features
 			AttestationRequest: in event data port Data_Types::AttestationRequestMsg.Impl;
@@ -39,6 +41,7 @@ public
 			c1: port AttestationRequest -> AttestationTester.AttestationRequest;
 			c2: port AttestationTester.AttestationResponse -> AttestationResponse;
 		properties
+			CASE_Scheduling::Domain => 2;
 			Period => 500ms;
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationTester_seL4.Impl;
@@ -139,6 +142,7 @@ public
 			c2: port MissionCommand -> FlightPlanner.MissionCommand;
 		properties
 			CASE_Properties::Trust_Level => 0;
+			CASE_Scheduling::Domain => 7;
 			Period => 500ms;
 		annex agree {**
 			lift contract;
@@ -158,6 +162,7 @@ public
 			c1: port Alert -> FlightController.Alert;
 			c2: port FlightPlan -> FlightController.FlightPlan;
 		properties
+			CASE_Scheduling::Domain => 9;
 			Period => 500ms;
 	end FlightController_seL4.Impl;
 
@@ -201,6 +206,7 @@ public
 			c4: port AttestationTesterResponse -> RadioDriver.AttestationTesterResponse;
 			c5: port RadioDriver.AttestationTesterRequest -> AttestationTesterRequest;
 		properties
+			CASE_Scheduling::Domain => 3;
 			Period => 500ms;
 	end RadioDriver_Attestation_seL4.Impl;
 
@@ -241,6 +247,7 @@ public
 			c2: port AttestationResponse -> AttestationManager.AttestationResponse;
 			c3: port AttestationManager.TrustedIds -> TrustedIds;
 		properties
+			CASE_Scheduling::Domain => 4;
 			Period => 500ms;
 			CASE_Properties::Component_Language => CakeML;
 			Source_Text => ("Component_Source/Attestation/build/heli_am.S",
@@ -299,6 +306,7 @@ public
 			c2: port AttestationGate.MissionCommand_out -> MissionCommand_out;
 			c3: port MissionCommand_in -> AttestationGate.MissionCommand_in;
 		properties
+			CASE_Scheduling::Domain => 5;
 			Period => 500ms;
 	end AttestationGate_seL4.Impl;
 
@@ -344,6 +352,7 @@ public
 			c1: port Input -> Filter.Input;
 			c2: port Filter.Output -> Output;
 		properties
+			CASE_Scheduling::Domain => 6;
 			Period => 500ms;
 		annex agree {**
 			lift contract;
@@ -394,6 +403,7 @@ public
 			c2: port FlightPlan_in -> Monitor.FlightPlan_in;
 			c3: port Monitor.FlightPlan_out -> FlightPlan_out;
 		properties
+			CASE_Scheduling::Domain => 8;
 			Period => 500ms;
 		annex agree {**
 			lift contract;
