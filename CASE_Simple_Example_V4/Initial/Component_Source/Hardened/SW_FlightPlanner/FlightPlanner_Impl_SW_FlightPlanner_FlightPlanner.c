@@ -9,9 +9,9 @@ Unit HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_initial
 
   // examples of api setter and logging usage
 /*
-  uint8_t t0[numBytes_HAMR_Simple_V4_SW_Mission];
-  byte_array_default(SF t0, numBits_HAMR_Simple_V4_SW_Mission, numBytes_HAMR_Simple_V4_SW_Mission);
-  api_put_FlightPlan__HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF numBits_HAMR_Simple_V4_SW_Mission, t0);
+  uint8_t t0[numBytes_HAMR_Data_Types_Mission];
+  byte_array_default(SF t0, numBits_HAMR_Data_Types_Mission, numBytes_HAMR_Data_Types_Mission);
+  api_put_FlightPlan__HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF numBits_HAMR_Data_Types_Mission, t0);
 
   api_logInfo__HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF string("Example logInfo"));
 
@@ -30,21 +30,21 @@ Unit HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_timeTri
 
   // examples of api getter usage
 
-  uint8_t t0[numBytes_HAMR_Simple_V4_SW_RF_Msg_Impl];
+  uint8_t t0[numBytes_HAMR_Data_Types_RF_Msg_Impl];
   size_t t0_numBits;
   if(api_get_MissionCommand__HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF &t0_numBits, t0)) {
     // sanity check
-    sfAssert(SF (Z) t0_numBits == numBits_HAMR_Simple_V4_SW_RF_Msg_Impl, "numBits received does not match expected");
+    sfAssert(SF (Z) t0_numBits == numBits_HAMR_Data_Types_RF_Msg_Impl, "numBits received does not match expected");
     uint8_t* output = getFlightPlannerOutput(t0);
     if (output != NULL) {
       printf("FLIGHTPLANNER SEND\n");
       print_Mission((const Mission*)output);
-      api_put_FlightPlan__HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF numBits_HAMR_Simple_V4_SW_Mission, output);
+      api_put_FlightPlan__HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF numBits_HAMR_Data_Types_Mission, output);
     }
 /*
     DeclNewString(MissionCommand_str);
     String__append(SF (String) &MissionCommand_str, string("Received on MissionCommand: "));
-    byte_array_string(SF (String) &MissionCommand_str, t0, numBytes_HAMR_Simple_V4_SW_RF_Msg_Impl);
+    byte_array_string(SF (String) &MissionCommand_str, t0, numBytes_HAMR_Data_Types_RF_Msg_Impl);
     api_logInfo__HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF (String) &MissionCommand_str);
 */
   }

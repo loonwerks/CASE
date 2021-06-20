@@ -26,18 +26,18 @@ Unit HAMR_Simple_V4_SW_FlightController_Impl_SW_FlightController_FlightControlle
 
   // examples of api getter usage
 
-  uint8_t t0[numBytes_HAMR_Simple_V4_SW_Mission];
+  uint8_t t0[numBytes_HAMR_Data_Types_Mission];
   size_t t0_numBits;
   if(api_get_FlightPlan__HAMR_Simple_V4_SW_FlightController_Impl_SW_FlightController_FlightController(SF &t0_numBits, t0)) {
     // sanity check
-    sfAssert(SF (Z) t0_numBits == numBits_HAMR_Simple_V4_SW_Mission, "numBits received does not match expected");
+    sfAssert(SF (Z) t0_numBits == numBits_HAMR_Data_Types_Mission, "numBits received does not match expected");
     printf("FLIGHTCONTROLLER RECEIVE\n");
     print_Mission((const Mission *)t0);
     printf("\n");
 /*
     DeclNewString(FlightPlan_str);
     String__append(SF (String) &FlightPlan_str, string("Received on FlightPlan: "));
-    byte_array_string(SF (String) &FlightPlan_str, t0, numBytes_HAMR_Simple_V4_SW_Mission);
+    byte_array_string(SF (String) &FlightPlan_str, t0, numBytes_HAMR_Data_Types_Mission);
     api_logInfo__HAMR_Simple_V4_SW_FlightController_Impl_SW_FlightController_FlightController(SF (String) &FlightPlan_str);
 */
   }

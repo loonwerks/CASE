@@ -5,13 +5,13 @@
 
 #include <all.h>
 
-// bit-codec size for HAMR_Simple_V4_SW_AttestationRequestMsg_Impl
-#define numBits_HAMR_Simple_V4_SW_AttestationRequestMsg_Impl 128
-#define numBytes_HAMR_Simple_V4_SW_AttestationRequestMsg_Impl ((numBits_HAMR_Simple_V4_SW_AttestationRequestMsg_Impl - 1) / 8 + 1)
+// bit-codec size for HAMR_Data_Types_AttestationRequestMsg_Impl
+#define numBits_HAMR_Data_Types_AttestationRequestMsg_Impl 128
+#define numBytes_HAMR_Data_Types_AttestationRequestMsg_Impl ((numBits_HAMR_Data_Types_AttestationRequestMsg_Impl - 1) / 8 + 1)
 
-// bit-codec size for HAMR_Simple_V4_SW_AttestationResponseMsg_Impl
-#define numBits_HAMR_Simple_V4_SW_AttestationResponseMsg_Impl 16384
-#define numBytes_HAMR_Simple_V4_SW_AttestationResponseMsg_Impl ((numBits_HAMR_Simple_V4_SW_AttestationResponseMsg_Impl - 1) / 8 + 1)
+// bit-codec size for HAMR_Data_Types_AttestationResponseMsg_Impl
+#define numBits_HAMR_Data_Types_AttestationResponseMsg_Impl 16384
+#define numBytes_HAMR_Data_Types_AttestationResponseMsg_Impl ((numBits_HAMR_Data_Types_AttestationResponseMsg_Impl - 1) / 8 + 1)
 
 void byte_array_default(STACK_FRAME uint8_t* byteArray, size_t numBits, size_t numBytes);
 
@@ -19,17 +19,17 @@ void byte_array_string(STACK_FRAME String str, uint8_t* byteArray, size_t numByt
 
 void hex_dump(STACK_FRAME uint8_t* byte_array, size_t numBytes);
 
-// bit-codec size for HAMR_Simple_V4_SW_RF_Msg_Impl
-#define numBits_HAMR_Simple_V4_SW_RF_Msg_Impl 256
-#define numBytes_HAMR_Simple_V4_SW_RF_Msg_Impl ((numBits_HAMR_Simple_V4_SW_RF_Msg_Impl - 1) / 8 + 1)
+// bit-codec size for HAMR_Data_Types_RF_Msg_Impl
+#define numBits_HAMR_Data_Types_RF_Msg_Impl 256
+#define numBytes_HAMR_Data_Types_RF_Msg_Impl ((numBits_HAMR_Data_Types_RF_Msg_Impl - 1) / 8 + 1)
 
-// bit-codec size for HAMR_Simple_V4_SW_Mission
-#define numBits_HAMR_Simple_V4_SW_Mission 288
-#define numBytes_HAMR_Simple_V4_SW_Mission ((numBits_HAMR_Simple_V4_SW_Mission - 1) / 8 + 1)
+// bit-codec size for HAMR_Data_Types_Mission
+#define numBits_HAMR_Data_Types_Mission 288
+#define numBytes_HAMR_Data_Types_Mission ((numBits_HAMR_Data_Types_Mission - 1) / 8 + 1)
 
-// ************************************
-//  Assuming all data is little-endian
-// ************************************
+// bit-codec size for HAMR_Data_Types_AllowList_Impl
+#define numBits_HAMR_Data_Types_AllowList_Impl 128
+#define numBytes_HAMR_Data_Types_AllowList_Impl ((numBits_HAMR_Data_Types_AllowList_Impl - 1) / 8 + 1)
 
 typedef struct {
 	float latitude;
@@ -78,5 +78,10 @@ void print_Mission(const Mission* const bytes);
 void print_AttestationRequestMsg(const char* const bytes);
 void print_AttestationResponseMsg(const char* const bytes);
 
+uint8_t* getRadioOutput();
+uint8_t isTrusted(uint8_t* msg, uint8_t* ids);
+uint8_t isBounded(uint8_t* msg);
+uint8_t* getFlightPlannerOutput(uint8_t* msg);
+uint8_t getMonitorAlertOutput(uint8_t* msg);
 
 #endif
