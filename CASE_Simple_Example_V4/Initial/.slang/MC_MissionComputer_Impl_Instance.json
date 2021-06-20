@@ -14,12 +14,12 @@
               "type" : "Some",
               "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
             },
-            "beginLine" : 75,
+            "beginLine" : 72,
             "beginColumn" : 2,
-            "endLine" : 101,
+            "endLine" : 98,
             "endColumn" : 27,
-            "offset" : 1849,
-            "length" : 957
+            "offset" : 1779,
+            "length" : 955
           }
         }
       },
@@ -44,11 +44,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 71,
+                "beginLine" : 68,
                 "beginColumn" : 4,
-                "endLine" : 71,
+                "endLine" : 68,
                 "endColumn" : 58,
-                "offset" : 1718,
+                "offset" : 1648,
                 "length" : 54
               }
             }
@@ -89,11 +89,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 72,
+                "beginLine" : 69,
                 "beginColumn" : 4,
-                "endLine" : 72,
+                "endLine" : 69,
                 "endColumn" : 52,
-                "offset" : 1776,
+                "offset" : 1706,
                 "length" : 48
               }
             }
@@ -134,11 +134,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 67,
+                "beginLine" : 64,
                 "beginColumn" : 4,
-                "endLine" : 67,
+                "endLine" : 64,
                 "endColumn" : 34,
-                "offset" : 1582,
+                "offset" : 1512,
                 "length" : 30
               }
             }
@@ -171,11 +171,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 68,
+                "beginLine" : 65,
                 "beginColumn" : 4,
-                "endLine" : 68,
+                "endLine" : 65,
                 "endColumn" : 35,
-                "offset" : 1616,
+                "offset" : 1546,
                 "length" : 31
               }
             }
@@ -208,11 +208,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 69,
+                "beginLine" : 66,
                 "beginColumn" : 4,
-                "endLine" : 69,
+                "endLine" : 66,
                 "endColumn" : 33,
-                "offset" : 1651,
+                "offset" : 1581,
                 "length" : 29
               }
             }
@@ -245,11 +245,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 70,
+                "beginLine" : 67,
                 "beginColumn" : 4,
-                "endLine" : 70,
+                "endLine" : 67,
                 "endColumn" : 34,
-                "offset" : 1684,
+                "offset" : 1614,
                 "length" : 30
               }
             }
@@ -284,11 +284,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 81,
+                "beginLine" : 78,
                 "beginColumn" : 4,
-                "endLine" : 81,
+                "endLine" : 78,
                 "endColumn" : 28,
-                "offset" : 2040,
+                "offset" : 1970,
                 "length" : 24
               }
             }
@@ -362,11 +362,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 77,
+                "beginLine" : 74,
                 "beginColumn" : 4,
-                "endLine" : 77,
+                "endLine" : 74,
                 "endColumn" : 32,
-                "offset" : 1911,
+                "offset" : 1841,
                 "length" : 28
               }
             }
@@ -686,11 +686,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 78,
+                "beginLine" : 75,
                 "beginColumn" : 4,
-                "endLine" : 78,
+                "endLine" : 75,
                 "endColumn" : 30,
-                "offset" : 1943,
+                "offset" : 1873,
                 "length" : 26
               }
             }
@@ -1010,11 +1010,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 80,
+                "beginLine" : 77,
                 "beginColumn" : 4,
-                "endLine" : 80,
+                "endLine" : 77,
                 "endColumn" : 31,
-                "offset" : 2009,
+                "offset" : 1939,
                 "length" : 27
               }
             }
@@ -1044,11 +1044,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 51,
+                    "beginLine" : 48,
                     "beginColumn" : 4,
-                    "endLine" : 51,
+                    "endLine" : 48,
                     "endColumn" : 41,
-                    "offset" : 1283,
+                    "offset" : 1213,
                     "length" : 37
                   }
                 }
@@ -1133,11 +1133,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 82,
+                "beginLine" : 79,
                 "beginColumn" : 4,
-                "endLine" : 82,
+                "endLine" : 79,
                 "endColumn" : 28,
-                "offset" : 2068,
+                "offset" : 1998,
                 "length" : 24
               }
             }
@@ -1169,11 +1169,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                     },
-                    "beginLine" : 103,
+                    "beginLine" : 98,
                     "beginColumn" : 4,
-                    "endLine" : 103,
+                    "endLine" : 98,
                     "endColumn" : 35,
-                    "offset" : 3301,
+                    "offset" : 2997,
                     "length" : 31
                   }
                 }
@@ -1203,11 +1203,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 48,
+                        "beginLine" : 49,
                         "beginColumn" : 4,
-                        "endLine" : 48,
+                        "endLine" : 49,
                         "endColumn" : 64,
-                        "offset" : 1557,
+                        "offset" : 1635,
                         "length" : 60
                       }
                     }
@@ -1260,37 +1260,6 @@
                               "type" : "None"
                             }
                           }
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
-                    },
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["MissionComputer_Impl_Instance", "SW", "Radio", "MissionCommand", "Programming_Properties::Source_Text"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
-                            },
-                            "beginLine" : 235,
-                            "beginColumn" : 2,
-                            "endLine" : 237,
-                            "endColumn" : 76,
-                            "offset" : 17093,
-                            "length" : 224
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "ValueProp",
-                          "value" : "Component_Source\/SW_Radio\/Radio.c"
                         }
                       ],
                       "appliesTo" : [
@@ -1532,37 +1501,6 @@
                   "type" : "Property",
                   "name" : {
                     "type" : "Name",
-                    "name" : ["MissionComputer_Impl_Instance", "SW", "Radio", "Programming_Properties::Source_Text"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
-                        },
-                        "beginLine" : 235,
-                        "beginColumn" : 2,
-                        "endLine" : 237,
-                        "endColumn" : 76,
-                        "offset" : 17093,
-                        "length" : 224
-                      }
-                    }
-                  },
-                  "propertyValues" : [
-                    {
-                      "type" : "ValueProp",
-                      "value" : "Component_Source\/SW_Radio\/Radio.c"
-                    }
-                  ],
-                  "appliesTo" : [
-                  ]
-                },
-                {
-                  "type" : "Property",
-                  "name" : {
-                    "type" : "Name",
                     "name" : ["MissionComputer_Impl_Instance", "SW", "Radio", "CASE_Properties::Comm_Driver"],
                     "pos" : {
                       "type" : "Some",
@@ -1639,11 +1577,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                     },
-                    "beginLine" : 104,
+                    "beginLine" : 99,
                     "beginColumn" : 4,
-                    "endLine" : 104,
+                    "endLine" : 99,
                     "endColumn" : 45,
-                    "offset" : 3336,
+                    "offset" : 3032,
                     "length" : 41
                   }
                 }
@@ -1673,11 +1611,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 68,
+                        "beginLine" : 65,
                         "beginColumn" : 4,
-                        "endLine" : 68,
+                        "endLine" : 65,
                         "endColumn" : 63,
-                        "offset" : 2274,
+                        "offset" : 2122,
                         "length" : 59
                       }
                     }
@@ -1734,37 +1672,6 @@
                       ],
                       "appliesTo" : [
                       ]
-                    },
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["MissionComputer_Impl_Instance", "SW", "FlightPlanner", "MissionCommand", "Programming_Properties::Source_Text"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
-                            },
-                            "beginLine" : 235,
-                            "beginColumn" : 2,
-                            "endLine" : 237,
-                            "endColumn" : 76,
-                            "offset" : 17093,
-                            "length" : 224
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "ValueProp",
-                          "value" : "Component_Source\/SW_FlightPlanner\/FlightPlanner.c"
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
                     }
                   ],
                   "uriFrag" : "platform:\/resource\/CASE_Simple_Example_V4_Initial\/instances\/MC_MissionComputer_Impl_Instance.aaxl2#\/\/@componentInstance.4\/@componentInstance.1\/@featureInstance.0"
@@ -1782,11 +1689,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 69,
+                        "beginLine" : 66,
                         "beginColumn" : 4,
-                        "endLine" : 69,
+                        "endLine" : 66,
                         "endColumn" : 56,
-                        "offset" : 2337,
+                        "offset" : 2185,
                         "length" : 52
                       }
                     }
@@ -1839,37 +1746,6 @@
                               "type" : "None"
                             }
                           }
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
-                    },
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["MissionComputer_Impl_Instance", "SW", "FlightPlanner", "FlightPlan", "Programming_Properties::Source_Text"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
-                            },
-                            "beginLine" : 235,
-                            "beginColumn" : 2,
-                            "endLine" : 237,
-                            "endColumn" : 76,
-                            "offset" : 17093,
-                            "length" : 224
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "ValueProp",
-                          "value" : "Component_Source\/SW_FlightPlanner\/FlightPlanner.c"
                         }
                       ],
                       "appliesTo" : [
@@ -2207,37 +2083,6 @@
                   "type" : "Property",
                   "name" : {
                     "type" : "Name",
-                    "name" : ["MissionComputer_Impl_Instance", "SW", "FlightPlanner", "Programming_Properties::Source_Text"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
-                        },
-                        "beginLine" : 235,
-                        "beginColumn" : 2,
-                        "endLine" : 237,
-                        "endColumn" : 76,
-                        "offset" : 17093,
-                        "length" : 224
-                      }
-                    }
-                  },
-                  "propertyValues" : [
-                    {
-                      "type" : "ValueProp",
-                      "value" : "Component_Source\/SW_FlightPlanner\/FlightPlanner.c"
-                    }
-                  ],
-                  "appliesTo" : [
-                  ]
-                },
-                {
-                  "type" : "Property",
-                  "name" : {
-                    "type" : "Name",
                     "name" : ["MissionComputer_Impl_Instance", "SW", "FlightPlanner", "CASE_Properties::Trust_Level"],
                     "pos" : {
                       "type" : "Some",
@@ -2317,11 +2162,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                     },
-                    "beginLine" : 105,
+                    "beginLine" : 100,
                     "beginColumn" : 4,
-                    "endLine" : 105,
+                    "endLine" : 100,
                     "endColumn" : 51,
-                    "offset" : 3381,
+                    "offset" : 3077,
                     "length" : 47
                   }
                 }
@@ -2351,11 +2196,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 86,
+                        "beginLine" : 82,
                         "beginColumn" : 4,
-                        "endLine" : 86,
+                        "endLine" : 82,
                         "endColumn" : 55,
-                        "offset" : 2857,
+                        "offset" : 2632,
                         "length" : 51
                       }
                     }
@@ -2408,37 +2253,6 @@
                               "type" : "None"
                             }
                           }
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
-                    },
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["MissionComputer_Impl_Instance", "SW", "FlightController", "FlightPlan", "Programming_Properties::Source_Text"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
-                            },
-                            "beginLine" : 235,
-                            "beginColumn" : 2,
-                            "endLine" : 237,
-                            "endColumn" : 76,
-                            "offset" : 17093,
-                            "length" : 224
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "ValueProp",
-                          "value" : "Component_Source\/SW_FlightController\/FlightController.c"
                         }
                       ],
                       "appliesTo" : [
@@ -2556,11 +2370,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 85,
+                        "beginLine" : 81,
                         "beginColumn" : 4,
-                        "endLine" : 85,
+                        "endLine" : 81,
                         "endColumn" : 25,
-                        "offset" : 2832,
+                        "offset" : 2607,
                         "length" : 21
                       }
                     }
@@ -2577,37 +2391,6 @@
                     "type" : "None"
                   },
                   "properties" : [
-                    {
-                      "type" : "Property",
-                      "name" : {
-                        "type" : "Name",
-                        "name" : ["MissionComputer_Impl_Instance", "SW", "FlightController", "Alert", "Programming_Properties::Source_Text"],
-                        "pos" : {
-                          "type" : "Some",
-                          "value" : {
-                            "type" : "Position",
-                            "uriOpt" : {
-                              "type" : "Some",
-                              "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
-                            },
-                            "beginLine" : 235,
-                            "beginColumn" : 2,
-                            "endLine" : 237,
-                            "endColumn" : 76,
-                            "offset" : 17093,
-                            "length" : 224
-                          }
-                        }
-                      },
-                      "propertyValues" : [
-                        {
-                          "type" : "ValueProp",
-                          "value" : "Component_Source\/SW_FlightController\/FlightController.c"
-                        }
-                      ],
-                      "appliesTo" : [
-                      ]
-                    }
                   ],
                   "uriFrag" : "platform:\/resource\/CASE_Simple_Example_V4_Initial\/instances\/MC_MissionComputer_Impl_Instance.aaxl2#\/\/@componentInstance.4\/@componentInstance.2\/@featureInstance.1"
                 }
@@ -2839,37 +2622,6 @@
                   ],
                   "appliesTo" : [
                   ]
-                },
-                {
-                  "type" : "Property",
-                  "name" : {
-                    "type" : "Name",
-                    "name" : ["MissionComputer_Impl_Instance", "SW", "FlightController", "Programming_Properties::Source_Text"],
-                    "pos" : {
-                      "type" : "Some",
-                      "value" : {
-                        "type" : "Position",
-                        "uriOpt" : {
-                          "type" : "Some",
-                          "value" : "\/org.osate.aadl2.contrib\/resources\/properties\/Predeclared_Property_Sets\/Programming_Properties.aadl"
-                        },
-                        "beginLine" : 235,
-                        "beginColumn" : 2,
-                        "endLine" : 237,
-                        "endColumn" : 76,
-                        "offset" : 17093,
-                        "length" : 224
-                      }
-                    }
-                  },
-                  "propertyValues" : [
-                    {
-                      "type" : "ValueProp",
-                      "value" : "Component_Source\/SW_FlightController\/FlightController.c"
-                    }
-                  ],
-                  "appliesTo" : [
-                  ]
                 }
               ],
               "flows" : [
@@ -2922,11 +2674,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                     },
-                    "beginLine" : 107,
+                    "beginLine" : 102,
                     "beginColumn" : 4,
-                    "endLine" : 107,
+                    "endLine" : 102,
                     "endColumn" : 66,
-                    "offset" : 3446,
+                    "offset" : 3142,
                     "length" : 62
                   }
                 }
@@ -2945,11 +2697,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 103,
+                        "beginLine" : 98,
                         "beginColumn" : 4,
-                        "endLine" : 103,
+                        "endLine" : 98,
                         "endColumn" : 35,
-                        "offset" : 3301,
+                        "offset" : 2997,
                         "length" : 31
                       }
                     }
@@ -2967,11 +2719,11 @@
                             "type" : "Some",
                             "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                           },
-                          "beginLine" : 48,
+                          "beginLine" : 49,
                           "beginColumn" : 4,
-                          "endLine" : 48,
+                          "endLine" : 49,
                           "endColumn" : 64,
-                          "offset" : 1557,
+                          "offset" : 1635,
                           "length" : 60
                         }
                       }
@@ -3000,11 +2752,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 104,
+                        "beginLine" : 99,
                         "beginColumn" : 4,
-                        "endLine" : 104,
+                        "endLine" : 99,
                         "endColumn" : 45,
-                        "offset" : 3336,
+                        "offset" : 3032,
                         "length" : 41
                       }
                     }
@@ -3022,11 +2774,11 @@
                             "type" : "Some",
                             "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                           },
-                          "beginLine" : 68,
+                          "beginLine" : 65,
                           "beginColumn" : 4,
-                          "endLine" : 68,
+                          "endLine" : 65,
                           "endColumn" : 63,
-                          "offset" : 2274,
+                          "offset" : 2122,
                           "length" : 59
                         }
                       }
@@ -3072,11 +2824,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                     },
-                    "beginLine" : 108,
+                    "beginLine" : 103,
                     "beginColumn" : 4,
-                    "endLine" : 108,
+                    "endLine" : 103,
                     "endColumn" : 69,
-                    "offset" : 3512,
+                    "offset" : 3208,
                     "length" : 65
                   }
                 }
@@ -3095,11 +2847,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 104,
+                        "beginLine" : 99,
                         "beginColumn" : 4,
-                        "endLine" : 104,
+                        "endLine" : 99,
                         "endColumn" : 45,
-                        "offset" : 3336,
+                        "offset" : 3032,
                         "length" : 41
                       }
                     }
@@ -3117,11 +2869,11 @@
                             "type" : "Some",
                             "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                           },
-                          "beginLine" : 69,
+                          "beginLine" : 66,
                           "beginColumn" : 4,
-                          "endLine" : 69,
+                          "endLine" : 66,
                           "endColumn" : 56,
-                          "offset" : 2337,
+                          "offset" : 2185,
                           "length" : 52
                         }
                       }
@@ -3150,11 +2902,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 105,
+                        "beginLine" : 100,
                         "beginColumn" : 4,
-                        "endLine" : 105,
+                        "endLine" : 100,
                         "endColumn" : 51,
-                        "offset" : 3381,
+                        "offset" : 3077,
                         "length" : 47
                       }
                     }
@@ -3172,11 +2924,11 @@
                             "type" : "Some",
                             "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                           },
-                          "beginLine" : 86,
+                          "beginLine" : 82,
                           "beginColumn" : 4,
-                          "endLine" : 86,
+                          "endLine" : 82,
                           "endColumn" : 55,
-                          "offset" : 2857,
+                          "offset" : 2632,
                           "length" : 51
                         }
                       }
@@ -3224,11 +2976,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                     },
-                    "beginLine" : 107,
+                    "beginLine" : 102,
                     "beginColumn" : 4,
-                    "endLine" : 107,
+                    "endLine" : 102,
                     "endColumn" : 66,
-                    "offset" : 3446,
+                    "offset" : 3142,
                     "length" : 62
                   }
                 }
@@ -3246,11 +2998,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                       },
-                      "beginLine" : 103,
+                      "beginLine" : 98,
                       "beginColumn" : 4,
-                      "endLine" : 103,
+                      "endLine" : 98,
                       "endColumn" : 35,
-                      "offset" : 3301,
+                      "offset" : 2997,
                       "length" : 31
                     }
                   }
@@ -3268,11 +3020,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 48,
+                        "beginLine" : 49,
                         "beginColumn" : 4,
-                        "endLine" : 48,
+                        "endLine" : 49,
                         "endColumn" : 64,
-                        "offset" : 1557,
+                        "offset" : 1635,
                         "length" : 60
                       }
                     }
@@ -3299,11 +3051,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                       },
-                      "beginLine" : 104,
+                      "beginLine" : 99,
                       "beginColumn" : 4,
-                      "endLine" : 104,
+                      "endLine" : 99,
                       "endColumn" : 45,
-                      "offset" : 3336,
+                      "offset" : 3032,
                       "length" : 41
                     }
                   }
@@ -3321,11 +3073,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 68,
+                        "beginLine" : 65,
                         "beginColumn" : 4,
-                        "endLine" : 68,
+                        "endLine" : 65,
                         "endColumn" : 63,
-                        "offset" : 2274,
+                        "offset" : 2122,
                         "length" : 59
                       }
                     }
@@ -3357,11 +3109,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 107,
+                        "beginLine" : 102,
                         "beginColumn" : 4,
-                        "endLine" : 107,
+                        "endLine" : 102,
                         "endColumn" : 66,
-                        "offset" : 3446,
+                        "offset" : 3142,
                         "length" : 62
                       }
                     }
@@ -3377,11 +3129,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                         },
-                        "beginLine" : 82,
+                        "beginLine" : 79,
                         "beginColumn" : 4,
-                        "endLine" : 82,
+                        "endLine" : 79,
                         "endColumn" : 28,
-                        "offset" : 2068,
+                        "offset" : 1998,
                         "length" : 24
                       }
                     }
@@ -3405,11 +3157,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                     },
-                    "beginLine" : 108,
+                    "beginLine" : 103,
                     "beginColumn" : 4,
-                    "endLine" : 108,
+                    "endLine" : 103,
                     "endColumn" : 69,
-                    "offset" : 3512,
+                    "offset" : 3208,
                     "length" : 65
                   }
                 }
@@ -3427,11 +3179,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                       },
-                      "beginLine" : 104,
+                      "beginLine" : 99,
                       "beginColumn" : 4,
-                      "endLine" : 104,
+                      "endLine" : 99,
                       "endColumn" : 45,
-                      "offset" : 3336,
+                      "offset" : 3032,
                       "length" : 41
                     }
                   }
@@ -3449,11 +3201,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 69,
+                        "beginLine" : 66,
                         "beginColumn" : 4,
-                        "endLine" : 69,
+                        "endLine" : 66,
                         "endColumn" : 56,
-                        "offset" : 2337,
+                        "offset" : 2185,
                         "length" : 52
                       }
                     }
@@ -3480,11 +3232,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                       },
-                      "beginLine" : 105,
+                      "beginLine" : 100,
                       "beginColumn" : 4,
-                      "endLine" : 105,
+                      "endLine" : 100,
                       "endColumn" : 51,
-                      "offset" : 3381,
+                      "offset" : 3077,
                       "length" : 47
                     }
                   }
@@ -3502,11 +3254,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 86,
+                        "beginLine" : 82,
                         "beginColumn" : 4,
-                        "endLine" : 86,
+                        "endLine" : 82,
                         "endColumn" : 55,
-                        "offset" : 2857,
+                        "offset" : 2632,
                         "length" : 51
                       }
                     }
@@ -3538,11 +3290,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/SW.aadl"
                         },
-                        "beginLine" : 108,
+                        "beginLine" : 103,
                         "beginColumn" : 4,
-                        "endLine" : 108,
+                        "endLine" : 103,
                         "endColumn" : 69,
-                        "offset" : 3512,
+                        "offset" : 3208,
                         "length" : 65
                       }
                     }
@@ -3558,11 +3310,11 @@
                           "type" : "Some",
                           "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                         },
-                        "beginLine" : 82,
+                        "beginLine" : 79,
                         "beginColumn" : 4,
-                        "endLine" : 82,
+                        "endLine" : 79,
                         "endColumn" : 28,
-                        "offset" : 2068,
+                        "offset" : 1998,
                         "length" : 24
                       }
                     }
@@ -3698,11 +3450,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 79,
+                "beginLine" : 76,
                 "beginColumn" : 4,
-                "endLine" : 79,
+                "endLine" : 76,
                 "endColumn" : 36,
-                "offset" : 1973,
+                "offset" : 1903,
                 "length" : 32
               }
             }
@@ -3823,11 +3575,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 89,
+                "beginLine" : 86,
                 "beginColumn" : 4,
-                "endLine" : 89,
+                "endLine" : 86,
                 "endColumn" : 45,
-                "offset" : 2328,
+                "offset" : 2258,
                 "length" : 41
               }
             }
@@ -3846,12 +3598,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -3868,11 +3620,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                       },
-                      "beginLine" : 71,
+                      "beginLine" : 68,
                       "beginColumn" : 4,
-                      "endLine" : 71,
+                      "endLine" : 68,
                       "endColumn" : 58,
-                      "offset" : 1718,
+                      "offset" : 1648,
                       "length" : 54
                     }
                   }
@@ -3901,11 +3653,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 78,
+                    "beginLine" : 75,
                     "beginColumn" : 4,
-                    "endLine" : 78,
+                    "endLine" : 75,
                     "endColumn" : 30,
-                    "offset" : 1943,
+                    "offset" : 1873,
                     "length" : 26
                   }
                 }
@@ -3980,11 +3732,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 88,
+                "beginLine" : 85,
                 "beginColumn" : 4,
-                "endLine" : 88,
+                "endLine" : 85,
                 "endColumn" : 42,
-                "offset" : 2286,
+                "offset" : 2216,
                 "length" : 38
               }
             }
@@ -4003,12 +3755,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -4025,11 +3777,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                       },
-                      "beginLine" : 72,
+                      "beginLine" : 69,
                       "beginColumn" : 4,
-                      "endLine" : 72,
+                      "endLine" : 69,
                       "endColumn" : 52,
-                      "offset" : 1776,
+                      "offset" : 1706,
                       "length" : 48
                     }
                   }
@@ -4058,11 +3810,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 77,
+                    "beginLine" : 74,
                     "beginColumn" : 4,
-                    "endLine" : 77,
+                    "endLine" : 74,
                     "endColumn" : 32,
-                    "offset" : 1911,
+                    "offset" : 1841,
                     "length" : 28
                   }
                 }
@@ -4137,11 +3889,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 90,
+                "beginLine" : 87,
                 "beginColumn" : 4,
-                "endLine" : 90,
+                "endLine" : 87,
                 "endColumn" : 42,
-                "offset" : 2373,
+                "offset" : 2303,
                 "length" : 38
               }
             }
@@ -4160,12 +3912,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -4182,11 +3934,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                       },
-                      "beginLine" : 67,
+                      "beginLine" : 64,
                       "beginColumn" : 4,
-                      "endLine" : 67,
+                      "endLine" : 64,
                       "endColumn" : 34,
-                      "offset" : 1582,
+                      "offset" : 1512,
                       "length" : 30
                     }
                   }
@@ -4215,11 +3967,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 77,
+                    "beginLine" : 74,
                     "beginColumn" : 4,
-                    "endLine" : 77,
+                    "endLine" : 74,
                     "endColumn" : 32,
-                    "offset" : 1911,
+                    "offset" : 1841,
                     "length" : 28
                   }
                 }
@@ -4287,11 +4039,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 92,
+                "beginLine" : 89,
                 "beginColumn" : 4,
-                "endLine" : 92,
+                "endLine" : 89,
                 "endColumn" : 40,
-                "offset" : 2458,
+                "offset" : 2388,
                 "length" : 36
               }
             }
@@ -4310,12 +4062,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -4332,11 +4084,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                       },
-                      "beginLine" : 69,
+                      "beginLine" : 66,
                       "beginColumn" : 4,
-                      "endLine" : 69,
+                      "endLine" : 66,
                       "endColumn" : 33,
-                      "offset" : 1651,
+                      "offset" : 1581,
                       "length" : 29
                     }
                   }
@@ -4365,11 +4117,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 78,
+                    "beginLine" : 75,
                     "beginColumn" : 4,
-                    "endLine" : 78,
+                    "endLine" : 75,
                     "endColumn" : 30,
-                    "offset" : 1943,
+                    "offset" : 1873,
                     "length" : 26
                   }
                 }
@@ -4437,11 +4189,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 84,
+                "beginLine" : 81,
                 "beginColumn" : 4,
-                "endLine" : 84,
+                "endLine" : 81,
                 "endColumn" : 45,
-                "offset" : 2110,
+                "offset" : 2040,
                 "length" : 41
               }
             }
@@ -4460,11 +4212,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 77,
+                    "beginLine" : 74,
                     "beginColumn" : 4,
-                    "endLine" : 77,
+                    "endLine" : 74,
                     "endColumn" : 32,
-                    "offset" : 1911,
+                    "offset" : 1841,
                     "length" : 28
                   }
                 }
@@ -4515,11 +4267,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 81,
+                    "beginLine" : 78,
                     "beginColumn" : 4,
-                    "endLine" : 81,
+                    "endLine" : 78,
                     "endColumn" : 28,
-                    "offset" : 2040,
+                    "offset" : 1970,
                     "length" : 24
                   }
                 }
@@ -4574,11 +4326,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 85,
+                "beginLine" : 82,
                 "beginColumn" : 4,
-                "endLine" : 85,
+                "endLine" : 82,
                 "endColumn" : 44,
-                "offset" : 2155,
+                "offset" : 2085,
                 "length" : 40
               }
             }
@@ -4597,11 +4349,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 78,
+                    "beginLine" : 75,
                     "beginColumn" : 4,
-                    "endLine" : 78,
+                    "endLine" : 75,
                     "endColumn" : 30,
-                    "offset" : 1943,
+                    "offset" : 1873,
                     "length" : 26
                   }
                 }
@@ -4652,11 +4404,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 81,
+                    "beginLine" : 78,
                     "beginColumn" : 4,
-                    "endLine" : 81,
+                    "endLine" : 78,
                     "endColumn" : 28,
-                    "offset" : 2040,
+                    "offset" : 1970,
                     "length" : 24
                   }
                 }
@@ -4711,11 +4463,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 86,
+                "beginLine" : 83,
                 "beginColumn" : 4,
-                "endLine" : 86,
+                "endLine" : 83,
                 "endColumn" : 44,
-                "offset" : 2199,
+                "offset" : 2129,
                 "length" : 40
               }
             }
@@ -4734,11 +4486,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 79,
+                    "beginLine" : 76,
                     "beginColumn" : 4,
-                    "endLine" : 79,
+                    "endLine" : 76,
                     "endColumn" : 36,
-                    "offset" : 1973,
+                    "offset" : 1903,
                     "length" : 32
                   }
                 }
@@ -4789,11 +4541,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 81,
+                    "beginLine" : 78,
                     "beginColumn" : 4,
-                    "endLine" : 81,
+                    "endLine" : 78,
                     "endColumn" : 28,
-                    "offset" : 2040,
+                    "offset" : 1970,
                     "length" : 24
                   }
                 }
@@ -4848,11 +4600,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 87,
+                "beginLine" : 84,
                 "beginColumn" : 4,
-                "endLine" : 87,
+                "endLine" : 84,
                 "endColumn" : 43,
-                "offset" : 2243,
+                "offset" : 2173,
                 "length" : 39
               }
             }
@@ -4871,11 +4623,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 80,
+                    "beginLine" : 77,
                     "beginColumn" : 4,
-                    "endLine" : 80,
+                    "endLine" : 77,
                     "endColumn" : 31,
-                    "offset" : 2009,
+                    "offset" : 1939,
                     "length" : 27
                   }
                 }
@@ -4893,11 +4645,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                       },
-                      "beginLine" : 51,
+                      "beginLine" : 48,
                       "beginColumn" : 4,
-                      "endLine" : 51,
+                      "endLine" : 48,
                       "endColumn" : 41,
-                      "offset" : 1283,
+                      "offset" : 1213,
                       "length" : 37
                     }
                   }
@@ -4926,11 +4678,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 81,
+                    "beginLine" : 78,
                     "beginColumn" : 4,
-                    "endLine" : 81,
+                    "endLine" : 78,
                     "endColumn" : 28,
-                    "offset" : 2040,
+                    "offset" : 1970,
                     "length" : 24
                   }
                 }
@@ -4985,11 +4737,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 91,
+                "beginLine" : 88,
                 "beginColumn" : 4,
-                "endLine" : 91,
+                "endLine" : 88,
                 "endColumn" : 43,
-                "offset" : 2415,
+                "offset" : 2345,
                 "length" : 39
               }
             }
@@ -5008,11 +4760,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 77,
+                    "beginLine" : 74,
                     "beginColumn" : 4,
-                    "endLine" : 77,
+                    "endLine" : 74,
                     "endColumn" : 32,
-                    "offset" : 1911,
+                    "offset" : 1841,
                     "length" : 28
                   }
                 }
@@ -5063,12 +4815,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -5085,11 +4837,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                       },
-                      "beginLine" : 68,
+                      "beginLine" : 65,
                       "beginColumn" : 4,
-                      "endLine" : 68,
+                      "endLine" : 65,
                       "endColumn" : 35,
-                      "offset" : 1616,
+                      "offset" : 1546,
                       "length" : 31
                     }
                   }
@@ -5135,11 +4887,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 84,
+                "beginLine" : 81,
                 "beginColumn" : 4,
-                "endLine" : 84,
+                "endLine" : 81,
                 "endColumn" : 45,
-                "offset" : 2110,
+                "offset" : 2040,
                 "length" : 41
               }
             }
@@ -5158,11 +4910,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 77,
+                    "beginLine" : 74,
                     "beginColumn" : 4,
-                    "endLine" : 77,
+                    "endLine" : 74,
                     "endColumn" : 32,
-                    "offset" : 1911,
+                    "offset" : 1841,
                     "length" : 28
                   }
                 }
@@ -5213,11 +4965,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 81,
+                    "beginLine" : 78,
                     "beginColumn" : 4,
-                    "endLine" : 81,
+                    "endLine" : 78,
                     "endColumn" : 28,
-                    "offset" : 2040,
+                    "offset" : 1970,
                     "length" : 24
                   }
                 }
@@ -5272,11 +5024,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 88,
+                "beginLine" : 85,
                 "beginColumn" : 4,
-                "endLine" : 88,
+                "endLine" : 85,
                 "endColumn" : 42,
-                "offset" : 2286,
+                "offset" : 2216,
                 "length" : 38
               }
             }
@@ -5295,11 +5047,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 77,
+                    "beginLine" : 74,
                     "beginColumn" : 4,
-                    "endLine" : 77,
+                    "endLine" : 74,
                     "endColumn" : 32,
-                    "offset" : 1911,
+                    "offset" : 1841,
                     "length" : 28
                   }
                 }
@@ -5350,12 +5102,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -5372,11 +5124,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                       },
-                      "beginLine" : 72,
+                      "beginLine" : 69,
                       "beginColumn" : 4,
-                      "endLine" : 72,
+                      "endLine" : 69,
                       "endColumn" : 52,
-                      "offset" : 1776,
+                      "offset" : 1706,
                       "length" : 48
                     }
                   }
@@ -5429,11 +5181,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 93,
+                "beginLine" : 90,
                 "beginColumn" : 4,
-                "endLine" : 93,
+                "endLine" : 90,
                 "endColumn" : 41,
-                "offset" : 2498,
+                "offset" : 2428,
                 "length" : 37
               }
             }
@@ -5452,11 +5204,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 78,
+                    "beginLine" : 75,
                     "beginColumn" : 4,
-                    "endLine" : 78,
+                    "endLine" : 75,
                     "endColumn" : 30,
-                    "offset" : 1943,
+                    "offset" : 1873,
                     "length" : 26
                   }
                 }
@@ -5507,12 +5259,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -5529,11 +5281,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                       },
-                      "beginLine" : 70,
+                      "beginLine" : 67,
                       "beginColumn" : 4,
-                      "endLine" : 70,
+                      "endLine" : 67,
                       "endColumn" : 34,
-                      "offset" : 1684,
+                      "offset" : 1614,
                       "length" : 30
                     }
                   }
@@ -5579,11 +5331,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 85,
+                "beginLine" : 82,
                 "beginColumn" : 4,
-                "endLine" : 85,
+                "endLine" : 82,
                 "endColumn" : 44,
-                "offset" : 2155,
+                "offset" : 2085,
                 "length" : 40
               }
             }
@@ -5602,11 +5354,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 78,
+                    "beginLine" : 75,
                     "beginColumn" : 4,
-                    "endLine" : 78,
+                    "endLine" : 75,
                     "endColumn" : 30,
-                    "offset" : 1943,
+                    "offset" : 1873,
                     "length" : 26
                   }
                 }
@@ -5657,11 +5409,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 81,
+                    "beginLine" : 78,
                     "beginColumn" : 4,
-                    "endLine" : 81,
+                    "endLine" : 78,
                     "endColumn" : 28,
-                    "offset" : 2040,
+                    "offset" : 1970,
                     "length" : 24
                   }
                 }
@@ -5716,11 +5468,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 89,
+                "beginLine" : 86,
                 "beginColumn" : 4,
-                "endLine" : 89,
+                "endLine" : 86,
                 "endColumn" : 45,
-                "offset" : 2328,
+                "offset" : 2258,
                 "length" : 41
               }
             }
@@ -5739,11 +5491,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 78,
+                    "beginLine" : 75,
                     "beginColumn" : 4,
-                    "endLine" : 78,
+                    "endLine" : 75,
                     "endColumn" : 30,
-                    "offset" : 1943,
+                    "offset" : 1873,
                     "length" : 26
                   }
                 }
@@ -5794,12 +5546,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -5816,11 +5568,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                       },
-                      "beginLine" : 71,
+                      "beginLine" : 68,
                       "beginColumn" : 4,
-                      "endLine" : 71,
+                      "endLine" : 68,
                       "endColumn" : 58,
-                      "offset" : 1718,
+                      "offset" : 1648,
                       "length" : 54
                     }
                   }
@@ -5873,11 +5625,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 87,
+                "beginLine" : 84,
                 "beginColumn" : 4,
-                "endLine" : 87,
+                "endLine" : 84,
                 "endColumn" : 43,
-                "offset" : 2243,
+                "offset" : 2173,
                 "length" : 39
               }
             }
@@ -5896,11 +5648,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 80,
+                    "beginLine" : 77,
                     "beginColumn" : 4,
-                    "endLine" : 80,
+                    "endLine" : 77,
                     "endColumn" : 31,
-                    "offset" : 2009,
+                    "offset" : 1939,
                     "length" : 27
                   }
                 }
@@ -5918,11 +5670,11 @@
                         "type" : "Some",
                         "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                       },
-                      "beginLine" : 51,
+                      "beginLine" : 48,
                       "beginColumn" : 4,
-                      "endLine" : 51,
+                      "endLine" : 48,
                       "endColumn" : 41,
-                      "offset" : 1283,
+                      "offset" : 1213,
                       "length" : 37
                     }
                   }
@@ -5951,11 +5703,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 81,
+                    "beginLine" : 78,
                     "beginColumn" : 4,
-                    "endLine" : 81,
+                    "endLine" : 78,
                     "endColumn" : 28,
-                    "offset" : 2040,
+                    "offset" : 1970,
                     "length" : 24
                   }
                 }
@@ -6010,11 +5762,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 86,
+                "beginLine" : 83,
                 "beginColumn" : 4,
-                "endLine" : 86,
+                "endLine" : 83,
                 "endColumn" : 44,
-                "offset" : 2199,
+                "offset" : 2129,
                 "length" : 40
               }
             }
@@ -6033,11 +5785,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 79,
+                    "beginLine" : 76,
                     "beginColumn" : 4,
-                    "endLine" : 79,
+                    "endLine" : 76,
                     "endColumn" : 36,
-                    "offset" : 1973,
+                    "offset" : 1903,
                     "length" : 32
                   }
                 }
@@ -6088,11 +5840,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 81,
+                    "beginLine" : 78,
                     "beginColumn" : 4,
-                    "endLine" : 81,
+                    "endLine" : 78,
                     "endColumn" : 28,
-                    "offset" : 2040,
+                    "offset" : 1970,
                     "length" : 24
                   }
                 }
@@ -6149,11 +5901,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 89,
+                "beginLine" : 86,
                 "beginColumn" : 4,
-                "endLine" : 89,
+                "endLine" : 86,
                 "endColumn" : 45,
-                "offset" : 2328,
+                "offset" : 2258,
                 "length" : 41
               }
             }
@@ -6171,12 +5923,12 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 75,
+                  "beginLine" : 72,
                   "beginColumn" : 2,
-                  "endLine" : 101,
+                  "endLine" : 98,
                   "endColumn" : 27,
-                  "offset" : 1849,
-                  "length" : 957
+                  "offset" : 1779,
+                  "length" : 955
                 }
               }
             },
@@ -6193,11 +5945,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 71,
+                    "beginLine" : 68,
                     "beginColumn" : 4,
-                    "endLine" : 71,
+                    "endLine" : 68,
                     "endColumn" : 58,
-                    "offset" : 1718,
+                    "offset" : 1648,
                     "length" : 54
                   }
                 }
@@ -6224,11 +5976,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 78,
+                  "beginLine" : 75,
                   "beginColumn" : 4,
-                  "endLine" : 78,
+                  "endLine" : 75,
                   "endColumn" : 30,
-                  "offset" : 1943,
+                  "offset" : 1873,
                   "length" : 26
                 }
               }
@@ -6282,11 +6034,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 89,
+                    "beginLine" : 86,
                     "beginColumn" : 4,
-                    "endLine" : 89,
+                    "endLine" : 86,
                     "endColumn" : 45,
-                    "offset" : 2328,
+                    "offset" : 2258,
                     "length" : 41
                   }
                 }
@@ -6302,12 +6054,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -6330,11 +6082,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 88,
+                "beginLine" : 85,
                 "beginColumn" : 4,
-                "endLine" : 88,
+                "endLine" : 85,
                 "endColumn" : 42,
-                "offset" : 2286,
+                "offset" : 2216,
                 "length" : 38
               }
             }
@@ -6352,12 +6104,12 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 75,
+                  "beginLine" : 72,
                   "beginColumn" : 2,
-                  "endLine" : 101,
+                  "endLine" : 98,
                   "endColumn" : 27,
-                  "offset" : 1849,
-                  "length" : 957
+                  "offset" : 1779,
+                  "length" : 955
                 }
               }
             },
@@ -6374,11 +6126,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 72,
+                    "beginLine" : 69,
                     "beginColumn" : 4,
-                    "endLine" : 72,
+                    "endLine" : 69,
                     "endColumn" : 52,
-                    "offset" : 1776,
+                    "offset" : 1706,
                     "length" : 48
                   }
                 }
@@ -6405,11 +6157,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 77,
+                  "beginLine" : 74,
                   "beginColumn" : 4,
-                  "endLine" : 77,
+                  "endLine" : 74,
                   "endColumn" : 32,
-                  "offset" : 1911,
+                  "offset" : 1841,
                   "length" : 28
                 }
               }
@@ -6463,11 +6215,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 88,
+                    "beginLine" : 85,
                     "beginColumn" : 4,
-                    "endLine" : 88,
+                    "endLine" : 85,
                     "endColumn" : 42,
-                    "offset" : 2286,
+                    "offset" : 2216,
                     "length" : 38
                   }
                 }
@@ -6483,12 +6235,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -6511,11 +6263,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 90,
+                "beginLine" : 87,
                 "beginColumn" : 4,
-                "endLine" : 90,
+                "endLine" : 87,
                 "endColumn" : 42,
-                "offset" : 2373,
+                "offset" : 2303,
                 "length" : 38
               }
             }
@@ -6533,12 +6285,12 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 75,
+                  "beginLine" : 72,
                   "beginColumn" : 2,
-                  "endLine" : 101,
+                  "endLine" : 98,
                   "endColumn" : 27,
-                  "offset" : 1849,
-                  "length" : 957
+                  "offset" : 1779,
+                  "length" : 955
                 }
               }
             },
@@ -6555,11 +6307,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 67,
+                    "beginLine" : 64,
                     "beginColumn" : 4,
-                    "endLine" : 67,
+                    "endLine" : 64,
                     "endColumn" : 34,
-                    "offset" : 1582,
+                    "offset" : 1512,
                     "length" : 30
                   }
                 }
@@ -6586,11 +6338,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 77,
+                  "beginLine" : 74,
                   "beginColumn" : 4,
-                  "endLine" : 77,
+                  "endLine" : 74,
                   "endColumn" : 32,
-                  "offset" : 1911,
+                  "offset" : 1841,
                   "length" : 28
                 }
               }
@@ -6644,11 +6396,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 90,
+                    "beginLine" : 87,
                     "beginColumn" : 4,
-                    "endLine" : 90,
+                    "endLine" : 87,
                     "endColumn" : 42,
-                    "offset" : 2373,
+                    "offset" : 2303,
                     "length" : 38
                   }
                 }
@@ -6664,12 +6416,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -6692,11 +6444,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 92,
+                "beginLine" : 89,
                 "beginColumn" : 4,
-                "endLine" : 92,
+                "endLine" : 89,
                 "endColumn" : 40,
-                "offset" : 2458,
+                "offset" : 2388,
                 "length" : 36
               }
             }
@@ -6714,12 +6466,12 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 75,
+                  "beginLine" : 72,
                   "beginColumn" : 2,
-                  "endLine" : 101,
+                  "endLine" : 98,
                   "endColumn" : 27,
-                  "offset" : 1849,
-                  "length" : 957
+                  "offset" : 1779,
+                  "length" : 955
                 }
               }
             },
@@ -6736,11 +6488,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 69,
+                    "beginLine" : 66,
                     "beginColumn" : 4,
-                    "endLine" : 69,
+                    "endLine" : 66,
                     "endColumn" : 33,
-                    "offset" : 1651,
+                    "offset" : 1581,
                     "length" : 29
                   }
                 }
@@ -6767,11 +6519,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 78,
+                  "beginLine" : 75,
                   "beginColumn" : 4,
-                  "endLine" : 78,
+                  "endLine" : 75,
                   "endColumn" : 30,
-                  "offset" : 1943,
+                  "offset" : 1873,
                   "length" : 26
                 }
               }
@@ -6825,11 +6577,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 92,
+                    "beginLine" : 89,
                     "beginColumn" : 4,
-                    "endLine" : 92,
+                    "endLine" : 89,
                     "endColumn" : 40,
-                    "offset" : 2458,
+                    "offset" : 2388,
                     "length" : 36
                   }
                 }
@@ -6845,12 +6597,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -6873,11 +6625,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 84,
+                "beginLine" : 81,
                 "beginColumn" : 4,
-                "endLine" : 84,
+                "endLine" : 81,
                 "endColumn" : 45,
-                "offset" : 2110,
+                "offset" : 2040,
                 "length" : 41
               }
             }
@@ -6895,11 +6647,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 81,
+                  "beginLine" : 78,
                   "beginColumn" : 4,
-                  "endLine" : 81,
+                  "endLine" : 78,
                   "endColumn" : 28,
-                  "offset" : 2040,
+                  "offset" : 1970,
                   "length" : 24
                 }
               }
@@ -6924,11 +6676,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 77,
+                  "beginLine" : 74,
                   "beginColumn" : 4,
-                  "endLine" : 77,
+                  "endLine" : 74,
                   "endColumn" : 32,
-                  "offset" : 1911,
+                  "offset" : 1841,
                   "length" : 28
                 }
               }
@@ -6982,11 +6734,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 84,
+                    "beginLine" : 81,
                     "beginColumn" : 4,
-                    "endLine" : 84,
+                    "endLine" : 81,
                     "endColumn" : 45,
-                    "offset" : 2110,
+                    "offset" : 2040,
                     "length" : 41
                   }
                 }
@@ -7002,12 +6754,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -7030,11 +6782,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 85,
+                "beginLine" : 82,
                 "beginColumn" : 4,
-                "endLine" : 85,
+                "endLine" : 82,
                 "endColumn" : 44,
-                "offset" : 2155,
+                "offset" : 2085,
                 "length" : 40
               }
             }
@@ -7052,11 +6804,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 81,
+                  "beginLine" : 78,
                   "beginColumn" : 4,
-                  "endLine" : 81,
+                  "endLine" : 78,
                   "endColumn" : 28,
-                  "offset" : 2040,
+                  "offset" : 1970,
                   "length" : 24
                 }
               }
@@ -7081,11 +6833,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 78,
+                  "beginLine" : 75,
                   "beginColumn" : 4,
-                  "endLine" : 78,
+                  "endLine" : 75,
                   "endColumn" : 30,
-                  "offset" : 1943,
+                  "offset" : 1873,
                   "length" : 26
                 }
               }
@@ -7139,11 +6891,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 85,
+                    "beginLine" : 82,
                     "beginColumn" : 4,
-                    "endLine" : 85,
+                    "endLine" : 82,
                     "endColumn" : 44,
-                    "offset" : 2155,
+                    "offset" : 2085,
                     "length" : 40
                   }
                 }
@@ -7159,12 +6911,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -7187,11 +6939,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 86,
+                "beginLine" : 83,
                 "beginColumn" : 4,
-                "endLine" : 86,
+                "endLine" : 83,
                 "endColumn" : 44,
-                "offset" : 2199,
+                "offset" : 2129,
                 "length" : 40
               }
             }
@@ -7209,11 +6961,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 81,
+                  "beginLine" : 78,
                   "beginColumn" : 4,
-                  "endLine" : 81,
+                  "endLine" : 78,
                   "endColumn" : 28,
-                  "offset" : 2040,
+                  "offset" : 1970,
                   "length" : 24
                 }
               }
@@ -7238,11 +6990,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 79,
+                  "beginLine" : 76,
                   "beginColumn" : 4,
-                  "endLine" : 79,
+                  "endLine" : 76,
                   "endColumn" : 36,
-                  "offset" : 1973,
+                  "offset" : 1903,
                   "length" : 32
                 }
               }
@@ -7296,11 +7048,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 86,
+                    "beginLine" : 83,
                     "beginColumn" : 4,
-                    "endLine" : 86,
+                    "endLine" : 83,
                     "endColumn" : 44,
-                    "offset" : 2199,
+                    "offset" : 2129,
                     "length" : 40
                   }
                 }
@@ -7316,12 +7068,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -7344,11 +7096,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 87,
+                "beginLine" : 84,
                 "beginColumn" : 4,
-                "endLine" : 87,
+                "endLine" : 84,
                 "endColumn" : 43,
-                "offset" : 2243,
+                "offset" : 2173,
                 "length" : 39
               }
             }
@@ -7366,11 +7118,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 81,
+                  "beginLine" : 78,
                   "beginColumn" : 4,
-                  "endLine" : 81,
+                  "endLine" : 78,
                   "endColumn" : 28,
-                  "offset" : 2040,
+                  "offset" : 1970,
                   "length" : 24
                 }
               }
@@ -7395,11 +7147,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 80,
+                  "beginLine" : 77,
                   "beginColumn" : 4,
-                  "endLine" : 80,
+                  "endLine" : 77,
                   "endColumn" : 31,
-                  "offset" : 2009,
+                  "offset" : 1939,
                   "length" : 27
                 }
               }
@@ -7417,11 +7169,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 51,
+                    "beginLine" : 48,
                     "beginColumn" : 4,
-                    "endLine" : 51,
+                    "endLine" : 48,
                     "endColumn" : 41,
-                    "offset" : 1283,
+                    "offset" : 1213,
                     "length" : 37
                   }
                 }
@@ -7453,11 +7205,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 87,
+                    "beginLine" : 84,
                     "beginColumn" : 4,
-                    "endLine" : 87,
+                    "endLine" : 84,
                     "endColumn" : 43,
-                    "offset" : 2243,
+                    "offset" : 2173,
                     "length" : 39
                   }
                 }
@@ -7473,12 +7225,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -7501,11 +7253,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 91,
+                "beginLine" : 88,
                 "beginColumn" : 4,
-                "endLine" : 91,
+                "endLine" : 88,
                 "endColumn" : 43,
-                "offset" : 2415,
+                "offset" : 2345,
                 "length" : 39
               }
             }
@@ -7523,11 +7275,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 77,
+                  "beginLine" : 74,
                   "beginColumn" : 4,
-                  "endLine" : 77,
+                  "endLine" : 74,
                   "endColumn" : 32,
-                  "offset" : 1911,
+                  "offset" : 1841,
                   "length" : 28
                 }
               }
@@ -7576,12 +7328,12 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 75,
+                  "beginLine" : 72,
                   "beginColumn" : 2,
-                  "endLine" : 101,
+                  "endLine" : 98,
                   "endColumn" : 27,
-                  "offset" : 1849,
-                  "length" : 957
+                  "offset" : 1779,
+                  "length" : 955
                 }
               }
             },
@@ -7598,11 +7350,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 68,
+                    "beginLine" : 65,
                     "beginColumn" : 4,
-                    "endLine" : 68,
+                    "endLine" : 65,
                     "endColumn" : 35,
-                    "offset" : 1616,
+                    "offset" : 1546,
                     "length" : 31
                   }
                 }
@@ -7634,11 +7386,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 91,
+                    "beginLine" : 88,
                     "beginColumn" : 4,
-                    "endLine" : 91,
+                    "endLine" : 88,
                     "endColumn" : 43,
-                    "offset" : 2415,
+                    "offset" : 2345,
                     "length" : 39
                   }
                 }
@@ -7654,12 +7406,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -7682,11 +7434,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 84,
+                "beginLine" : 81,
                 "beginColumn" : 4,
-                "endLine" : 84,
+                "endLine" : 81,
                 "endColumn" : 45,
-                "offset" : 2110,
+                "offset" : 2040,
                 "length" : 41
               }
             }
@@ -7704,11 +7456,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 77,
+                  "beginLine" : 74,
                   "beginColumn" : 4,
-                  "endLine" : 77,
+                  "endLine" : 74,
                   "endColumn" : 32,
-                  "offset" : 1911,
+                  "offset" : 1841,
                   "length" : 28
                 }
               }
@@ -7757,11 +7509,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 81,
+                  "beginLine" : 78,
                   "beginColumn" : 4,
-                  "endLine" : 81,
+                  "endLine" : 78,
                   "endColumn" : 28,
-                  "offset" : 2040,
+                  "offset" : 1970,
                   "length" : 24
                 }
               }
@@ -7791,11 +7543,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 84,
+                    "beginLine" : 81,
                     "beginColumn" : 4,
-                    "endLine" : 84,
+                    "endLine" : 81,
                     "endColumn" : 45,
-                    "offset" : 2110,
+                    "offset" : 2040,
                     "length" : 41
                   }
                 }
@@ -7811,12 +7563,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -7839,11 +7591,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 88,
+                "beginLine" : 85,
                 "beginColumn" : 4,
-                "endLine" : 88,
+                "endLine" : 85,
                 "endColumn" : 42,
-                "offset" : 2286,
+                "offset" : 2216,
                 "length" : 38
               }
             }
@@ -7861,11 +7613,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 77,
+                  "beginLine" : 74,
                   "beginColumn" : 4,
-                  "endLine" : 77,
+                  "endLine" : 74,
                   "endColumn" : 32,
-                  "offset" : 1911,
+                  "offset" : 1841,
                   "length" : 28
                 }
               }
@@ -7914,12 +7666,12 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 75,
+                  "beginLine" : 72,
                   "beginColumn" : 2,
-                  "endLine" : 101,
+                  "endLine" : 98,
                   "endColumn" : 27,
-                  "offset" : 1849,
-                  "length" : 957
+                  "offset" : 1779,
+                  "length" : 955
                 }
               }
             },
@@ -7936,11 +7688,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 72,
+                    "beginLine" : 69,
                     "beginColumn" : 4,
-                    "endLine" : 72,
+                    "endLine" : 69,
                     "endColumn" : 52,
-                    "offset" : 1776,
+                    "offset" : 1706,
                     "length" : 48
                   }
                 }
@@ -7972,11 +7724,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 88,
+                    "beginLine" : 85,
                     "beginColumn" : 4,
-                    "endLine" : 88,
+                    "endLine" : 85,
                     "endColumn" : 42,
-                    "offset" : 2286,
+                    "offset" : 2216,
                     "length" : 38
                   }
                 }
@@ -7992,12 +7744,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -8020,11 +7772,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 93,
+                "beginLine" : 90,
                 "beginColumn" : 4,
-                "endLine" : 93,
+                "endLine" : 90,
                 "endColumn" : 41,
-                "offset" : 2498,
+                "offset" : 2428,
                 "length" : 37
               }
             }
@@ -8042,11 +7794,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 78,
+                  "beginLine" : 75,
                   "beginColumn" : 4,
-                  "endLine" : 78,
+                  "endLine" : 75,
                   "endColumn" : 30,
-                  "offset" : 1943,
+                  "offset" : 1873,
                   "length" : 26
                 }
               }
@@ -8095,12 +7847,12 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 75,
+                  "beginLine" : 72,
                   "beginColumn" : 2,
-                  "endLine" : 101,
+                  "endLine" : 98,
                   "endColumn" : 27,
-                  "offset" : 1849,
-                  "length" : 957
+                  "offset" : 1779,
+                  "length" : 955
                 }
               }
             },
@@ -8117,11 +7869,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 70,
+                    "beginLine" : 67,
                     "beginColumn" : 4,
-                    "endLine" : 70,
+                    "endLine" : 67,
                     "endColumn" : 34,
-                    "offset" : 1684,
+                    "offset" : 1614,
                     "length" : 30
                   }
                 }
@@ -8153,11 +7905,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 93,
+                    "beginLine" : 90,
                     "beginColumn" : 4,
-                    "endLine" : 93,
+                    "endLine" : 90,
                     "endColumn" : 41,
-                    "offset" : 2498,
+                    "offset" : 2428,
                     "length" : 37
                   }
                 }
@@ -8173,12 +7925,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -8201,11 +7953,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 85,
+                "beginLine" : 82,
                 "beginColumn" : 4,
-                "endLine" : 85,
+                "endLine" : 82,
                 "endColumn" : 44,
-                "offset" : 2155,
+                "offset" : 2085,
                 "length" : 40
               }
             }
@@ -8223,11 +7975,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 78,
+                  "beginLine" : 75,
                   "beginColumn" : 4,
-                  "endLine" : 78,
+                  "endLine" : 75,
                   "endColumn" : 30,
-                  "offset" : 1943,
+                  "offset" : 1873,
                   "length" : 26
                 }
               }
@@ -8276,11 +8028,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 81,
+                  "beginLine" : 78,
                   "beginColumn" : 4,
-                  "endLine" : 81,
+                  "endLine" : 78,
                   "endColumn" : 28,
-                  "offset" : 2040,
+                  "offset" : 1970,
                   "length" : 24
                 }
               }
@@ -8310,11 +8062,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 85,
+                    "beginLine" : 82,
                     "beginColumn" : 4,
-                    "endLine" : 85,
+                    "endLine" : 82,
                     "endColumn" : 44,
-                    "offset" : 2155,
+                    "offset" : 2085,
                     "length" : 40
                   }
                 }
@@ -8330,12 +8082,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -8358,11 +8110,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 89,
+                "beginLine" : 86,
                 "beginColumn" : 4,
-                "endLine" : 89,
+                "endLine" : 86,
                 "endColumn" : 45,
-                "offset" : 2328,
+                "offset" : 2258,
                 "length" : 41
               }
             }
@@ -8380,11 +8132,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 78,
+                  "beginLine" : 75,
                   "beginColumn" : 4,
-                  "endLine" : 78,
+                  "endLine" : 75,
                   "endColumn" : 30,
-                  "offset" : 1943,
+                  "offset" : 1873,
                   "length" : 26
                 }
               }
@@ -8433,12 +8185,12 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 75,
+                  "beginLine" : 72,
                   "beginColumn" : 2,
-                  "endLine" : 101,
+                  "endLine" : 98,
                   "endColumn" : 27,
-                  "offset" : 1849,
-                  "length" : 957
+                  "offset" : 1779,
+                  "length" : 955
                 }
               }
             },
@@ -8455,11 +8207,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 71,
+                    "beginLine" : 68,
                     "beginColumn" : 4,
-                    "endLine" : 71,
+                    "endLine" : 68,
                     "endColumn" : 58,
-                    "offset" : 1718,
+                    "offset" : 1648,
                     "length" : 54
                   }
                 }
@@ -8491,11 +8243,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 89,
+                    "beginLine" : 86,
                     "beginColumn" : 4,
-                    "endLine" : 89,
+                    "endLine" : 86,
                     "endColumn" : 45,
-                    "offset" : 2328,
+                    "offset" : 2258,
                     "length" : 41
                   }
                 }
@@ -8511,12 +8263,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -8539,11 +8291,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 87,
+                "beginLine" : 84,
                 "beginColumn" : 4,
-                "endLine" : 87,
+                "endLine" : 84,
                 "endColumn" : 43,
-                "offset" : 2243,
+                "offset" : 2173,
                 "length" : 39
               }
             }
@@ -8561,11 +8313,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 80,
+                  "beginLine" : 77,
                   "beginColumn" : 4,
-                  "endLine" : 80,
+                  "endLine" : 77,
                   "endColumn" : 31,
-                  "offset" : 2009,
+                  "offset" : 1939,
                   "length" : 27
                 }
               }
@@ -8583,11 +8335,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 51,
+                    "beginLine" : 48,
                     "beginColumn" : 4,
-                    "endLine" : 51,
+                    "endLine" : 48,
                     "endColumn" : 41,
-                    "offset" : 1283,
+                    "offset" : 1213,
                     "length" : 37
                   }
                 }
@@ -8614,11 +8366,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 81,
+                  "beginLine" : 78,
                   "beginColumn" : 4,
-                  "endLine" : 81,
+                  "endLine" : 78,
                   "endColumn" : 28,
-                  "offset" : 2040,
+                  "offset" : 1970,
                   "length" : 24
                 }
               }
@@ -8648,11 +8400,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 87,
+                    "beginLine" : 84,
                     "beginColumn" : 4,
-                    "endLine" : 87,
+                    "endLine" : 84,
                     "endColumn" : 43,
-                    "offset" : 2243,
+                    "offset" : 2173,
                     "length" : 39
                   }
                 }
@@ -8668,12 +8420,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -8696,11 +8448,11 @@
                   "type" : "Some",
                   "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                 },
-                "beginLine" : 86,
+                "beginLine" : 83,
                 "beginColumn" : 4,
-                "endLine" : 86,
+                "endLine" : 83,
                 "endColumn" : 44,
-                "offset" : 2199,
+                "offset" : 2129,
                 "length" : 40
               }
             }
@@ -8718,11 +8470,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 79,
+                  "beginLine" : 76,
                   "beginColumn" : 4,
-                  "endLine" : 79,
+                  "endLine" : 76,
                   "endColumn" : 36,
-                  "offset" : 1973,
+                  "offset" : 1903,
                   "length" : 32
                 }
               }
@@ -8771,11 +8523,11 @@
                     "type" : "Some",
                     "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                   },
-                  "beginLine" : 81,
+                  "beginLine" : 78,
                   "beginColumn" : 4,
-                  "endLine" : 81,
+                  "endLine" : 78,
                   "endColumn" : 28,
-                  "offset" : 2040,
+                  "offset" : 1970,
                   "length" : 24
                 }
               }
@@ -8805,11 +8557,11 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 86,
+                    "beginLine" : 83,
                     "beginColumn" : 4,
-                    "endLine" : 86,
+                    "endLine" : 83,
                     "endColumn" : 44,
-                    "offset" : 2199,
+                    "offset" : 2129,
                     "length" : 40
                   }
                 }
@@ -8825,12 +8577,12 @@
                       "type" : "Some",
                       "value" : "\/CASE_Simple_Example_V4_Initial\/MC.aadl"
                     },
-                    "beginLine" : 75,
+                    "beginLine" : 72,
                     "beginColumn" : 2,
-                    "endLine" : 101,
+                    "endLine" : 98,
                     "endColumn" : 27,
-                    "offset" : 1849,
-                    "length" : 957
+                    "offset" : 1779,
+                    "length" : 955
                   }
                 }
               },
@@ -8842,6 +8594,37 @@
         }
       ],
       "properties" : [
+        {
+          "type" : "Property",
+          "name" : {
+            "type" : "Name",
+            "name" : ["MissionComputer_Impl_Instance", "HAMR::Bit_Codec_Raw_Connections"],
+            "pos" : {
+              "type" : "Some",
+              "value" : {
+                "type" : "Position",
+                "uriOpt" : {
+                  "type" : "Some",
+                  "value" : "\/org.sireum.aadl.osate.hamr\/resources\/HAMR.aadl"
+                },
+                "beginLine" : 64,
+                "beginColumn" : 3,
+                "endLine" : 64,
+                "endColumn" : 65,
+                "offset" : 2907,
+                "length" : 62
+              }
+            }
+          },
+          "propertyValues" : [
+            {
+              "type" : "ValueProp",
+              "value" : "true"
+            }
+          ],
+          "appliesTo" : [
+          ]
+        }
       ],
       "flows" : [
       ],
