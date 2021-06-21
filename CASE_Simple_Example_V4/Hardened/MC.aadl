@@ -88,7 +88,6 @@ public
 			Proc_HW: processor MC_Proc.Impl;
 			Mem_HW: memory MC_Mem.Impl;
 			Bus_HW: bus MC_Bus.Impl;
-
 			SW: system SW::SW_seL4.Impl;
 			VirtualMachine: virtual processor VirtualMachine.Impl;
 		connections
