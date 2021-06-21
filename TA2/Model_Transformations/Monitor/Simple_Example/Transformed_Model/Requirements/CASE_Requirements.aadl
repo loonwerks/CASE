@@ -1,21 +1,22 @@
 package CASE_Requirements
 private
 	annex resolute {**
-		goal Req_Response(comp_context : component, monitor : component) <=
+		
+		goal Req_Response(comp_context : component, monitor : component, alert_port : feature) <=
 			** "[response_monitor] Component Comp_A shall be monitored for responsiveness" **
 			context Generated_By : "GearCASE";
 			context Generated_On : "Jan 29, 2020";
 			context Req_Component : "Monitor::SW.Impl.Comp_A";
 			context Formalized : "False";
-			add_monitor(comp_context, monitor)
+			add_monitor(comp_context, monitor, alert_port)
 		
-		goal Req_CorrectOutput(comp_context : component, monitor : component, gate_context : component, message_type : data) <=
+		goal Req_CorrectOutput(comp_context : component, monitor : component, alert_port : feature, gate_context : component, message_type : data) <=
 			** "[correctness_monitor] Component Comp_A shall be monitored for correct output" **
 			context Generated_By : "GearCASE";
 			context Generated_On : "Jan 29, 2020";
 			context Req_Component : "Monitor::SW.Impl.Comp_A";
 			context Formalized : "False";
-			add_monitor_gate(comp_context, monitor, gate_context, message_type)
+			add_monitor_gate(comp_context, monitor, alert_port, gate_context, message_type)
 		
 	**};
 end CASE_Requirements;

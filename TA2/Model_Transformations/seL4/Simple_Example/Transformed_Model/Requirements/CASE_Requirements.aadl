@@ -1,6 +1,7 @@
 package CASE_Requirements
 private
 	annex resolute {**
+		
 		goal Req_seL4(comp_context : component, transformed_component : component) <=
 			** "[seL4] Software should run on a secure kernel" **
 			context Generated_By : "GearCASE";

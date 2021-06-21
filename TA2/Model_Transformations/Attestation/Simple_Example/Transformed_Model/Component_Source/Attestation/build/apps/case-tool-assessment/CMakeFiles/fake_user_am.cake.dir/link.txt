@@ -1,0 +1,2 @@
+/usr/bin/ar cr libfake_user_am.cake.a  CMakeFiles/fake_user_am.cake.dir/__/__/fake_user_am.cake.cake.S.o 
+/usr/bin/ranlib libfake_user_am.cake.a 

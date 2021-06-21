@@ -1,15 +1,12 @@
 package MissionComputer
 public
 	with Software;
-	with CASE_Properties;
 
 	-- The Mission Computer processor
 	processor MC_Proc
 	end MC_Proc;
 
 	processor implementation MC_Proc.Impl
-		properties
-			CASE_Properties::OS => seL4;
 	end MC_Proc.Impl;
 
 	-- The MissionComputer

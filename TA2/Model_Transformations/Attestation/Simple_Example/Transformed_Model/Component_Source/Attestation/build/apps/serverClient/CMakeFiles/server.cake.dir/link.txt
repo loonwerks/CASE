@@ -1,0 +1,2 @@
+/usr/bin/ar cr libserver.cake.a  CMakeFiles/server.cake.dir/__/__/server.cake.cake.S.o 
+/usr/bin/ranlib libserver.cake.a 
