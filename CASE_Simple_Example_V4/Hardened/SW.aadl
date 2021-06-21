@@ -21,8 +21,7 @@ public
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("Component_Source/Hardened/SW_AttestationTester/Pass/user_am.S",
-				"Component_Source/Hardened/SW_AttestationTester/Pass/libuser_am_c.a");
+			Source_Text => ("Component_Source/Hardened/SW_AttestationTester/Pass/user_am.S");
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationTester.Impl;
 
@@ -226,8 +225,7 @@ public
 			Compute_Execution_Time => 10ms .. 50ms;
 			Stack_Size => 1048576 Bytes;
 			CASE_Properties::Component_Language => CakeML;
-			Source_Text => ("Component_Source/Attestation/build/heli_am.S",
-				"Component_Source/Attestation/build/apps/case-tool-assessment/libheli_am_c.a");
+			Source_Text => ("Component_Source/Attestation/build/heli_am.S");
 	end AttestationManager.Impl;
 
 	process AttestationManager_seL4
@@ -249,9 +247,9 @@ public
 		properties
 			CASE_Scheduling::Domain => 4;
 			Period => 500ms;
-			CASE_Properties::Component_Language => CakeML;
-			Source_Text => ("Component_Source/Attestation/build/heli_am.S",
-				"Component_Source/Attestation/build/apps/case-tool-assessment/libheli_am_c.a");
+--			CASE_Properties::Component_Language => CakeML;
+--			Source_Text => ("Component_Source/Attestation/build/heli_am.S",
+--				"Component_Source/Attestation/build/apps/case-tool-assessment/libheli_am_c.a");
 	end AttestationManager_seL4.Impl;
 
 	thread AttestationGate
