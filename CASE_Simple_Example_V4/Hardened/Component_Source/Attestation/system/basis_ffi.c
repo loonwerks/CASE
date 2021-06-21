@@ -23,10 +23,12 @@ unsigned int argc;
 char **argv;
 
 /* exported in cake.S */
+/*
 extern void cml_main(void);
 extern void *cml_heap;
 extern void *cml_stack;
 extern void *cml_stackend;
+*/
 
 void ffiget_arg_count (unsigned char *c, long clen, unsigned char *a, long alen) {
   a[0] = (char) argc;
@@ -253,6 +255,24 @@ void ffidouble_toString (unsigned char *c, long clen, unsigned char *a, long ale
   assert (bytes_written <= 255);
 }
 
+  /**
+   *  CakeML and its default assembly wrapper expects the following memory layout:
+   *
+   *  cml_heap      cml_stack      cml_stackend
+   *  |             |              |
+   *  V             v              v
+   *  |--- heap ---||--- stack ---|
+   *
+   *  The heap/stack are assumed to be in contiguous memory,
+   *  cml_heap points to the first address of the heap,
+   *  cml_stack points to 1 address past the end of the heap (i.e., the first address of the stack),
+   *  cml_stackend points to 1 address past the end of the stack.
+   *
+   *  All cml_* pointers must be word aligned.
+   *  The position cml_stack may be (slightly) dynamically adjusted by CakeML,
+   *  see `get_stack_heap_limit` in stack_removeProof
+   **/
+/*
 void main (int local_argc, char **local_argv) {
 
   argc = local_argc;
@@ -296,24 +316,6 @@ void main (int local_argc, char **local_argv) {
     exit(3);
   }
 
-  /**
-   *  CakeML and its default assembly wrapper expects the following memory layout:
-   *
-   *  cml_heap      cml_stack      cml_stackend
-   *  |             |              |
-   *  V             v              v
-   *  |--- heap ---||--- stack ---|
-   *
-   *  The heap/stack are assumed to be in contiguous memory,
-   *  cml_heap points to the first address of the heap,
-   *  cml_stack points to 1 address past the end of the heap (i.e., the first address of the stack),
-   *  cml_stackend points to 1 address past the end of the stack.
-   *
-   *  All cml_* pointers must be word aligned.
-   *  The position cml_stack may be (slightly) dynamically adjusted by CakeML,
-   *  see `get_stack_heap_limit` in stack_removeProof
-   **/
-
   cml_heap = malloc(cml_heap_sz + cml_stack_sz); // allocate both heap and stack at once
 
   if(cml_heap == NULL)
@@ -329,3 +331,4 @@ void main (int local_argc, char **local_argv) {
 
   cml_main(); // Passing control to CakeML
 }
+*/
