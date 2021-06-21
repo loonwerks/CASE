@@ -1,0 +1,12 @@
+#ifndef RADIODRIVER_ATTESTATION_IMPL_SW_RADIO_RADIODRIVER_H
+#define RADIODRIVER_ATTESTATION_IMPL_SW_RADIO_RADIODRIVER_H
+
+#include <all.h>
+
+Unit HAMR_Simple_V4_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_initialise_(STACK_FRAME_ONLY);
+
+Unit HAMR_Simple_V4_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_finalise_(STACK_FRAME_ONLY);
+
+Unit HAMR_Simple_V4_SW_RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_timeTriggered_(STACK_FRAME_ONLY);
+
+#endif

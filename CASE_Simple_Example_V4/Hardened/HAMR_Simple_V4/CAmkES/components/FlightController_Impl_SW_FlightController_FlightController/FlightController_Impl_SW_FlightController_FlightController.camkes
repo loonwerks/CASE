@@ -1,0 +1,12 @@
+component FlightController_Impl_SW_FlightController_FlightController {
+  include <sb_types.h>;
+  include <sb_queue_union_art_DataContent_1.h>;
+  include <sb_event_counter.h>;
+  control;
+  emits TickTock sb_self_pacer_tick;
+  consumes ReceiveEvent sb_FlightPlan_notification;
+  consumes ReceiveEvent sb_Alert;
+  consumes TickTock sb_self_pacer_tock;
+  dataport sb_queue_union_art_DataContent_1_t sb_FlightPlan_queue;
+  dataport sb_event_counter_t sb_Alert_counter;
+}
