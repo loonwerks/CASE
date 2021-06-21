@@ -99,22 +99,33 @@ void print_AttestationResponseMsg(const char* const bytes) {
 /*****************************************************************************/
 /*                       RadioDriver_Attestation                             */
 /*****************************************************************************/
-const Coordinate startingCoordinate = {45.31010191362929, -121.0083254511704,1000.0};
-const Coordinate endingCoordinate = {45.34120895091226, -120.9377622731235, 1000.0};
-const Coordinate badCoordinate = {-91.0,181.0, 999.0};
 
-const Map goodMap = {{startingCoordinate,endingCoordinate}};
-const Map badMap = {{badCoordinate, endingCoordinate}};
+#define STARTING_COORDINATE {45.31010191362929, -121.0083254511704,1000.0}
+#define ENDING_COORDINATE {45.34120895091226, -120.9377622731235, 1000.0}
+#define BAD_COORDINATE {-91.0,181.0, 999.0}
+#define GOOD_COORDINATE_MAP { { STARTING_COORDINATE, ENDING_COORDINATE } }
+#define BAD_COORDINATE_MAP { { BAD_COORDINATE, ENDING_COORDINATE } }
+#define GOOD_COMMAND { GOOD_COORDINATE_MAP }
+#define BAD_COMMAND { BAD_COORDINATE_MAP }
+#define GOOD_HEADER { 1, 0 }
+#define BAD_HEADER { 2, 2 }
 
-const Command goodCmd = {goodMap};
-const Command badCmd = {badMap};
+const Coordinate startingCoordinate = STARTING_COORDINATE;
+const Coordinate endingCoordinate = ENDING_COORDINATE;
+const Coordinate badCoordinate = BAD_COORDINATE;
 
-const MsgHeader goodHeader = {1,0};
-const MsgHeader badHeader = {2,2};
+const Map goodMap = GOOD_COORDINATE_MAP;
+const Map badMap = BAD_COORDINATE_MAP;
 
-const RFMsg  goodHeaderGoodCmd = {goodHeader, goodCmd};
-const RFMsg  goodHeaderBadCmd = {goodHeader, badCmd};
-const RFMsg  badHeaderBadCmd = {badHeader, badCmd};
+const Command goodCmd = GOOD_COMMAND;
+const Command badCmd = BAD_COMMAND;
+
+const MsgHeader goodHeader = GOOD_HEADER;
+const MsgHeader badHeader = BAD_HEADER;
+
+const RFMsg  goodHeaderGoodCmd = { GOOD_HEADER, GOOD_COMMAND };
+const RFMsg  goodHeaderBadCmd = { GOOD_HEADER, BAD_COMMAND };
+const RFMsg  badHeaderBadCmd = { BAD_HEADER, BAD_COMMAND };
 
 uint8_t* getRadioOutput() {
   static int i = 0;
