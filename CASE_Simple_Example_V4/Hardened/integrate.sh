@@ -8,12 +8,16 @@ pushd HAMR_Simple_V4; patch -p0 < ../integrate.patch; popd
 cp -f Component_Source/Attestation/build/apps/case-tool-assessment/libheli_am_c.a \
       HAMR_Simple_V4/CAmkES/components/AttestationManager_Impl_SW_AttestationManager_AttestationManager/src
 
+# Insert attestation tester library
+cp -f Component_Source/Attestation/build/apps/case-tool-assessment/libheli_am_c.a \
+      HAMR_Simple_V4/CAmkES/components/AttestationTester_Impl_SW_AttestationTester_AttestationTester/src
+
 # Add basis_ffi to Filter
 cp -f Component_Source/SW_Filter/basis_ffi.c \
       HAMR_Simple_V4/CAmkES/components/Filter_Impl_SW_Filter_Filter/src/
 
 # Add basis_ffi to AttestationGate
-cp -f Component_Source/AttestationGate/basis_ffi.c \
+cp -f Component_Source/SW_AttestationGate/basis_ffi.c \
       HAMR_Simple_V4/CAmkES/components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/
 
 # Add basis_ffi to Monitor
