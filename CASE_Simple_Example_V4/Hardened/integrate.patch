@@ -1,0 +1,98 @@
+diff -Naur ./CAmkES/CMakeLists.txt ../HAMR_Simple_V4-patched/CAmkES/CMakeLists.txt
+--- ./CAmkES/CMakeLists.txt	2021-06-21 13:55:37.766487834 -0500
++++ ../HAMR_Simple_V4-patched/CAmkES/CMakeLists.txt	2021-06-21 13:54:48.393734766 -0500
+@@ -58,23 +58,24 @@
+ DeclareCAmkESComponent(AttestationManager_Impl_SW_AttestationManager_AttestationManager
+   SOURCES components/AttestationManager_Impl_SW_AttestationManager_AttestationManager/src/sb_AttestationManager_Impl_ffi.c components/AttestationManager_Impl_SW_AttestationManager_AttestationManager/src/heli_am.S components/AttestationManager_Impl_SW_AttestationManager_AttestationManager/src/sb_AttestationManager_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+   INCLUDES components/AttestationManager_Impl_SW_AttestationManager_AttestationManager/includes/ types/includes
+-  LIBS AttestationManager_Impl_SW_AttestationManager_AttestationManager
++  LIBS heli_am_c AttestationManager_Impl_SW_AttestationManager_AttestationManager
++  LD_FLAGS -L ${CMAKE_CURRENT_LIST_DIR}/components/AttestationManager_Impl_SW_AttestationManager_AttestationManager/src
+ )
+ 
+ DeclareCAmkESComponent(AttestationGate_Impl_SW_AttestationGate_AttestationGate
+-  SOURCES components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl_ffi.c components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/AttestationGate.S components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
++  SOURCES components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl_ffi.c components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/basis_ffi.c components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/AttestationGate.S components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+   INCLUDES components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/includes/ types/includes
+   LIBS AttestationGate_Impl_SW_AttestationGate_AttestationGate
+ )
+ 
+ DeclareCAmkESComponent(Filter_Impl_SW_Filter_Filter
+-  SOURCES components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c components/Filter_Impl_SW_Filter_Filter/src/Filter.S components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
++  SOURCES components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c components/Filter_Impl_SW_Filter_Filter/src/basis_ffi.c components/Filter_Impl_SW_Filter_Filter/src/Filter.S components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+   INCLUDES components/Filter_Impl_SW_Filter_Filter/includes/ types/includes
+   LIBS Filter_Impl_SW_Filter_Filter
+ )
+ 
+ DeclareCAmkESComponent(Monitor_Impl_SW_Monitor_Monitor
+-  SOURCES components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl_ffi.c components/Monitor_Impl_SW_Monitor_Monitor/src/Monitor.S components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
++  SOURCES components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl_ffi.c components/Monitor_Impl_SW_Monitor_Monitor/src/basis_ffi.c components/Monitor_Impl_SW_Monitor_Monitor/src/Monitor.S components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+   INCLUDES components/Monitor_Impl_SW_Monitor_Monitor/includes/ types/includes
+   LIBS Monitor_Impl_SW_Monitor_Monitor
+ )
+diff -Naur ./CAmkES/components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl_ffi.c ../HAMR_Simple_V4-patched/CAmkES/components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl_ffi.c
+--- ./CAmkES/components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl_ffi.c	2021-06-21 13:55:37.766487834 -0500
++++ ../HAMR_Simple_V4-patched/CAmkES/components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl_ffi.c	2021-06-21 13:54:48.317733605 -0500
+@@ -158,18 +158,6 @@
+  * Required by the FFI framework
+  */
+ 
+-void ffiwrite (unsigned char *parameter, long parameterSizeBytes, unsigned char *output, long outputSizeBytes){
+-}
+-
+-void cml_exit(int arg) {
+-  #ifdef DEBUG_FFI
+-  {
+-    fprintf(stderr,"GCNum: %d, GCTime(us): %ld\n",numGC,microsecs);
+-  }
+-  #endif
+-  exit(arg);
+-}
+-
+ // convert big-endian 32-bit float to little-endian 64 bit double
+ void ffifloat2double(unsigned char *parameter, long parameterSizeBytes,
+                      unsigned char *output,    long outputSizeBytes) {
+diff -Naur ./CAmkES/components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c ../HAMR_Simple_V4-patched/CAmkES/components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c
+--- ./CAmkES/components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c	2021-06-21 13:55:37.766487834 -0500
++++ ../HAMR_Simple_V4-patched/CAmkES/components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c	2021-06-21 13:54:48.317733605 -0500
+@@ -148,18 +148,6 @@
+  * Required by the FFI framework
+  */
+ 
+-void ffiwrite (unsigned char *parameter, long parameterSizeBytes, unsigned char *output, long outputSizeBytes){
+-}
+-
+-void cml_exit(int arg) {
+-  #ifdef DEBUG_FFI
+-  {
+-    fprintf(stderr,"GCNum: %d, GCTime(us): %ld\n",numGC,microsecs);
+-  }
+-  #endif
+-  exit(arg);
+-}
+-
+ // convert big-endian 32-bit float to little-endian 64 bit double
+ void ffifloat2double(unsigned char *parameter, long parameterSizeBytes,
+                      unsigned char *output,    long outputSizeBytes) {
+diff -Naur ./CAmkES/components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl_ffi.c ../HAMR_Simple_V4-patched/CAmkES/components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl_ffi.c
+--- ./CAmkES/components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl_ffi.c	2021-06-21 13:55:37.766487834 -0500
++++ ../HAMR_Simple_V4-patched/CAmkES/components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl_ffi.c	2021-06-21 13:54:48.321733666 -0500
+@@ -155,18 +155,6 @@
+  * Required by the FFI framework
+  */
+ 
+-void ffiwrite (unsigned char *parameter, long parameterSizeBytes, unsigned char *output, long outputSizeBytes){
+-}
+-
+-void cml_exit(int arg) {
+-  #ifdef DEBUG_FFI
+-  {
+-    fprintf(stderr,"GCNum: %d, GCTime(us): %ld\n",numGC,microsecs);
+-  }
+-  #endif
+-  exit(arg);
+-}
+-
+ // convert big-endian 32-bit float to little-endian 64 bit double
+ void ffifloat2double(unsigned char *parameter, long parameterSizeBytes,
+                      unsigned char *output,    long outputSizeBytes) {
