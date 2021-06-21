@@ -3,25 +3,6 @@ public
 	with Base_Types;
 	with CASE_Properties;
 
-	thread CASE_Filter
-		features
-			Input: in event data port Coordinate.Impl;
-			Output: out event data port Coordinate.Impl;
-		properties
-			CASE_Properties::Filtering => 100;
-			CASE_Properties::Component_Spec => ("Req_Filter_LatLong", "Req_Filter_Alt");
-	
-		annex agree {**
-				guarantee Req_Filter_LatLong "The Consumer shall only receive well-formed lat-long values" : WELL_FORMED_LAT_LONG(Output);
-				guarantee Req_Filter_Alt "The Consumer shall only receive well-formed altitude values" : WELL_FORMED_ALT(Output);
-			**};
-	end CASE_Filter;
-
-	thread implementation CASE_Filter.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
-	end CASE_Filter.Impl;
-
 	data Coordinate
 	end Coordinate;
 
@@ -51,8 +32,7 @@ public
 			status: out event data port Base_types::Boolean;
 		annex agree {**
 			-- This is the formalized version of the well-formed requirement from the TA1 tool
-			assume Req_Wellformed_LatLong "The Consumer shall only receive well-formed lat-long values" : WELL_FORMED_LAT_LONG(msg_in);
-			assume Req_Wellformed_Alt "The Consumer shall only receive well-formed alt values" : WELL_FORMED_ALT(msg_in);
+			assume Req_Wellformed_LatLong "The Consumer shall only receive well-formed lat-long values" : event(msg_in) => WELL_FORMED_LAT_LONG(msg_in);
 			guarantee "Consumer status shall never be false" : status;
 		**};
 	end Consumer;
@@ -62,6 +42,27 @@ public
 			Dispatch_Protocol => Sporadic;
 			Source_Text => ("Consumer.c");
 	end Consumer.Impl;
+
+	thread Filter
+		features
+			Input: in event data port Coordinate.Impl;
+			Output: out event data port Coordinate.Impl;
+		properties
+			CASE_Properties::Filtering => 100;
+			CASE_Properties::Component_Spec => ("Filter_Output");
+		annex agree {**
+			guarantee Filter_Output "The filter output shall be well-formed" :
+				if event(Input) and WELL_FORMED_LAT_LONG(Input) then
+					event(Output) and Output = Input
+				else
+					not event(Output);
+		**};
+	end Filter;
+
+	thread implementation Filter.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+	end Filter.Impl;
 
 	process SW
 		features
@@ -76,15 +77,14 @@ public
 		subcomponents
 			Producer: thread Producer.Impl;
 			Consumer: thread Consumer.Impl;
-			Filter: thread CASE_Filter.Impl;
+			Filter: thread Filter.Impl;
 		connections
 			c0: port input -> Producer.trigger;
 			c1: port Producer.msg_out -> Filter.Input;
-			c3: port Filter.Output -> Consumer.msg_in;
 			c2: port Consumer.status -> output;
+			c3: port Filter.Output -> Consumer.msg_in;
 		annex resolute {**
 			prove Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong", this.Filter, this.c3, Coordinate.Impl)
-			prove Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt", this.Filter, this.c3, Coordinate.Impl)
 		**};
 	end SW.Impl;
 
@@ -116,7 +116,6 @@ public
 	annex agree {**
 		-- This is the filter spec
 		fun WELL_FORMED_LAT_LONG(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180;
-		fun WELL_FORMED_ALT(coord : Coordinate.Impl) : bool = coord.altitude >= 0 and coord.altitude <= 15000;
 	**};
-	
+
 end Producer_Consumer;

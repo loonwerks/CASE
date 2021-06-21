@@ -1,0 +1,43 @@
+{
+	"sources" : 
+	[
+		{
+			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/CMakeFiles/hacl-star"
+		},
+		{
+			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/CMakeFiles/hacl-star.rule"
+		},
+		{
+			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/CMakeFiles/hacl-star-complete.rule"
+		},
+		{
+			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-install.rule"
+		},
+		{
+			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-mkdir.rule"
+		},
+		{
+			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-download.rule"
+		},
+		{
+			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-update.rule"
+		},
+		{
+			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-patch.rule"
+		},
+		{
+			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-configure.rule"
+		},
+		{
+			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-build.rule"
+		}
+	],
+	"target" : 
+	{
+		"labels" : 
+		[
+			"hacl-star"
+		],
+		"name" : "hacl-star"
+	}
+}

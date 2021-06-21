@@ -7,6 +7,6 @@ private
 			context Generated_On : "Jul 20, 2020";
 			context Req_Component : "MissionComputer::MissionComputer.Impl.PROC_HW";
 			context Formalized : "False";
-			false
+			undeveloped
 	**};
 end CASE_Requirements;

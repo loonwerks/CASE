@@ -8,8 +8,6 @@ public
 	end MC_Proc;
 
 	processor implementation MC_Proc.Impl
-		properties
-			CASE_Properties::OS => seL4;
 	end MC_Proc.Impl;
 
 	-- The MissionComputer
@@ -22,6 +20,7 @@ public
 			SW_Sys: system Software::SW_Sys.Impl;
 		properties
 			Actual_Processor_Binding => (reference (PROC_HW)) applies to SW_Sys;
+			CASE_Properties::OS => seL4 applies to PROC_HW;
 		annex resolute {**
 			prove Req_seL4(this.PROC_HW, this.SW_Sys.Critical)
 		**};

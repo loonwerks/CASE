@@ -67,7 +67,7 @@ public
 			guarantee Req002_E "Output is positive" : POSITIVE(output);
 		**};
 	end Component_E;
-	
+
 	thread group implementation Component_E.Impl
 		subcomponents
 			Component_B: thread Component_B.Impl;
@@ -99,28 +99,28 @@ public
 			c2: port Component_A.output -> Component_E.input;
 			c3: port Component_E.output -> output;
 	end Critical.Impl;
-	
+
 	process Non_Critical
 	end Non_Critical;
-	
+
 	process implementation Non_Critical.Impl
 	end Non_Critical.Impl;
-	
+
 	system SW_Sys
 	end SW_Sys;
-	
+
 	system implementation SW_Sys.Impl
 		subcomponents
 
 			NonCritical: process Non_Critical.Impl;
-	Critical: system Critical_seL4.Impl;
+			Critical: system Critical_seL4.Impl;
 	end SW_Sys.Impl;
 
 	annex agree {**
 		fun POSITIVE(num : Base_Types::Integer) : bool = (num > 0);
 	**};
-	
-process Component_A_seL4
+
+	process Component_A_seL4
 		features
 			input: in event data port Base_Types::Integer;
 			output: out event data port Base_Types::Integer;
@@ -132,8 +132,8 @@ process Component_A_seL4
 		subcomponents
 			Component_A: thread Component_A.Impl;
 		connections
-			c1: port Component_A.output -> output;
-			c2: port input -> Component_A.input;
+			c1: port input -> Component_A.input;
+			c2: port Component_A.output -> output;
 		annex agree {**
 			lift contract;
 		**};
@@ -203,8 +203,8 @@ process Component_A_seL4
 	system implementation Component_E_seL4.Impl
 		subcomponents
 			Component_C: process Component_C_seL4.Impl;
-			Component_D: process Component_D_seL4.Impl;
 			Component_B: process Component_B_seL4.Impl;
+			Component_D: process Component_D_seL4.Impl;
 		connections
 			c1: port input -> Component_B.input;
 			c2: port Component_B.output -> Component_C.input;
