@@ -93,7 +93,8 @@ The following modifications must be made since bit-codec is not currently integr
 
 ### HAMR Configuration: Linux
 <!--hamr-configuration-linux_start-->
-The following are the options that were used in HAMR's FMIDE dialog box (_&lt;example-dir&gt;_ is the directory that contains this readme file)
+To run HAMR Codegen, select [this](aadl/PFC.aadl#L29) system implementation in FMIDE's outline view and then click the
+HAMR button in the toolbar.  Use the following values in the dialog box that opens up (_&lt;example-dir&gt;_ is the directory that contains this readme file)
 
 Option Name|Value |
 |--|--|
@@ -158,7 +159,8 @@ then
 
 ### HAMR Configuration: SeL4
 <!--hamr-configuration-sel4_start-->
-The following are the options that were used in HAMR's FMIDE dialog box (_&lt;example-dir&gt;_ is the directory that contains this readme file)
+To run HAMR Codegen, select [this](aadl/PFC.aadl#L29) system implementation in FMIDE's outline view and then click the
+HAMR button in the toolbar.  Use the following values in the dialog box that opens up (_&lt;example-dir&gt;_ is the directory that contains this readme file)
 
 Option Name|Value |
 |--|--|
