@@ -203,7 +203,7 @@ Generate the CakeML assembly by running this script [compile-cakeml.cmd](aadl/ca
 ./aadl/cakeml/compile-cakeml.cmd
 ```
 
-then
+then, run HAMR Codegen.  This, in addition to the normal code generation process, will copy the generated CakeML assemblies into the CAmkES project. 
 
 <!--how-to-buildrun-sel4_start-->
 If you didn't configure HAMR's FMIDE plugin to run the transpiler automatically then run
