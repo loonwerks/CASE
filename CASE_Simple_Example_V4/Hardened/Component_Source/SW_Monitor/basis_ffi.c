@@ -247,3 +247,11 @@ void ffidouble_toString (unsigned char *c, long clen, unsigned char *a, long ale
   // for the 0 byte
   assert (bytes_written <= 255);
 }
+
+// Promotes a float two a double for the current architecture.
+void ffifloat2doublePromote(unsigned char *parameter, long parameterSizeBytes,
+                     unsigned char *output,    long outputSizeBytes) {
+
+  double result = *((float*)parameter);
+  memcpy(output, (unsigned char*) &result, sizeof(double));
+}
