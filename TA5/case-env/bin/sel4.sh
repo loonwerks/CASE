@@ -27,8 +27,6 @@ bash $SEL4_SCRIPTS/base_tools.sh
 
 bash $SEL4_SCRIPTS/sel4.sh
 
-bash $SEL4_SCRIPTS/cakeml.sh
-
 . $SEL4_SCRIPTS/utils/common.sh
 
 bash $SEL4_SCRIPTS/camkes.sh
@@ -36,6 +34,8 @@ echo "export PATH=\$PATH:$BASE_DIR/camkes/build/capDL-tool" >> "$HOME/.bashrc"
 
 bash $HOME/bin/sel4-cache.sh $SEL4_V
 bash $HOME/bin/camkes-cache.sh $CAMKES_V
+
+bash $SEL4_SCRIPTS/cakeml.sh
 
 git config --global --unset user.name $GIT_USER
 git config --global --unset user.email $GIT_EMAIL
