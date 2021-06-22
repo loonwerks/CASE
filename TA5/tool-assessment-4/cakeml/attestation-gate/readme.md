@@ -147,6 +147,10 @@ then
 <!--SeL4_start--><!--SeL4_end-->
 
 ### HAMR Configuration: SeL4
+
+**NOTE:** you must run [compile-cakeml.cmd](aadl/cakeml/compile-cakeml.cmd) before 
+running HAMR Codegen.  Refer to the next section for more detail
+
 <!--hamr-configuration-sel4_start-->
 To run HAMR Codegen, select [this](aadl/SysContext.aadl#L89) system implementation in FMIDE's outline view and then click the
 HAMR button in the toolbar.  Use the following values in the dialog box that opens up (_&lt;example-dir&gt;_ is the directory that contains this readme file)
