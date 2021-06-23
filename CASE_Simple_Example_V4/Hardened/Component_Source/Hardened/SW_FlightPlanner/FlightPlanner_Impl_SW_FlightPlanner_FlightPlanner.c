@@ -19,7 +19,7 @@ Unit HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner_timeTri
   size_t t0_numBits;
   if(api_get_MissionCommand__HAMR_Simple_V4_SW_FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner(SF &t0_numBits, t0)) {
     // sanity check
-    sfAssert(SF (Z) t0_numBits == numBytes_HAMR_Simple_V4_Data_Types_RF_Msg_Impl, "numBits received does not match expected");
+    sfAssert(SF (Z) t0_numBits == numBits_HAMR_Simple_V4_Data_Types_RF_Msg_Impl, "numBits received does not match expected");
     uint8_t* output = getFlightPlannerOutput(t0);
     if (output != NULL) {
       printf("FLIGHTPLANNER SEND\n");
