@@ -11,7 +11,7 @@ set -Eeuxo pipefail
 : "${AGREE_FEATURE_ID:=com.rockwellcollins.atc.agree.feature.feature.group}"
 : "${RESOLUTE_UPDATE_SITE:=https://raw.githubusercontent.com/loonwerks/Resolute-Updates/master/resolute_2.7.0/}"
 : "${RESOLUTE_FEATURE_ID:=com.rockwellcollins.atc.resolute.feature.feature.group}"
-: "${BRIEFCASE_UPDATE_SITE:=https://download.eclipse.org/releases/$eclipseRelease,http://ca-trustedsystems-dev-us-east-1.s3-website-us-east-1.amazonaws.com/p2/snapshots/briefcase/}"
+: "${BRIEFCASE_UPDATE_SITE:=https://download.eclipse.org/releases/$eclipseRelease,https://raw.githubusercontent.com/loonwerks/BriefCASE-Updates/master/briefcase_0.5.0/}"
 : "${BRIEFCASE_FEATURE_ID:=com.collins.trustedsystems.briefcase.feature.feature.group}"
 : "${HAMR_UPDATE_SITE:=https://raw.githubusercontent.com/sireum/hamr-plugin-update-site/CASE-Tool-Assessment-4}"
 : "${HAMR_FEATURE_ID:=org.sireum.aadl.osate.hamr.feature.feature.group}"
