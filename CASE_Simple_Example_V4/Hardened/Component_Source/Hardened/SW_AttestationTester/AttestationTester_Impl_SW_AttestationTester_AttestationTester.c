@@ -28,6 +28,7 @@ Unit HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTe
   DeclNewStackFrame(caller, "AttestationTester_Impl_SW_AttestationTester_AttestationTester.c", "", "HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_timeTriggered_", 0);
 
   // examples of api getter usage
+  printf("WARNING: in C AttestationTester\n");
 
   uint8_t t0[numBytes_HAMR_Simple_V4_Data_Types_AttestationRequestMsg_Impl];
   size_t t0_numBits;
