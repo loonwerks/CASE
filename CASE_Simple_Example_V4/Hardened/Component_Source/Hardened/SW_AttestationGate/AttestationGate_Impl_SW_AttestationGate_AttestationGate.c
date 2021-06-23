@@ -28,6 +28,8 @@ Unit HAMR_Simple_V4_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_t
   DeclNewStackFrame(caller, "AttestationGate_Impl_SW_AttestationGate_AttestationGate.c", "", "HAMR_Simple_V4_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate_timeTriggered_", 0);
 
   // examples of api getter usage
+  printf("WARNING: in C AttestationGate\n");
+
   uint8_t t1[numBytes_HAMR_Simple_V4_Data_Types_AllowList_Impl];
   size_t t1_numBits;
   if(api_get_TrustedIds__HAMR_Simple_V4_SW_AttestationGate_Impl_SW_AttestationGate_AttestationGate(SF &t1_numBits, t1)) {
