@@ -34,7 +34,7 @@ cp -f Component_Source/Hardened/ext.c \
 cp -f Component_Source/Hardened/SW_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester.c \
       HAMR_Simple_V4/src/c/ext-c/AttestationTester_Impl_SW_AttestationTester_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester.c
 
-cp -f Component_Source/Hardened/SW_AttestationTester/PASS/user_am.S \
+cp -f Component_Source/Hardened/SW_AttestationTester/Pass/user_am.S \
       HAMR_Simple_V4/CAmkES/components/AttestationTester_Impl_SW_AttestationTester_AttestationTester/src/user_am.S
 
 # Insert radio driver attestation implementation
