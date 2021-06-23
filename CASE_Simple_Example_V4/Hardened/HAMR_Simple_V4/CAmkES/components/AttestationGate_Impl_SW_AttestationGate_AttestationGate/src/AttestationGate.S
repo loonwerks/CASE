@@ -87,9 +87,9 @@ cake_ffiwrite:
      jmp     wcdecl(ffiwrite)
      .p2align 4
 
-cake_ffifloat2double:
+cake_ffifloat2doublePromote:
      pushq   %rax
-     jmp     wcdecl(ffifloat2double)
+     jmp     wcdecl(ffifloat2doublePromote)
      .p2align 4
 
 cake_ffiapi_get_MissionCommand_in:
@@ -21907,12 +21907,12 @@ windows_ffiwrite:
      movq    %rdi, %rcx
      jmp     cdecl(ffiwrite)
 
-windows_ffifloat2double:
+windows_ffifloat2doublePromote:
      movq    %rcx, %r9
      movq    %rdx, %r8
      movq    %rsi, %rdx
      movq    %rdi, %rcx
-     jmp     cdecl(ffifloat2double)
+     jmp     cdecl(ffifloat2doublePromote)
 
 windows_ffiapi_get_MissionCommand_in:
      movq    %rcx, %r9
