@@ -30,17 +30,37 @@ cp -f Component_Source/Hardened/ext.h \
 cp -f Component_Source/Hardened/ext.c \
       HAMR_Simple_V4/src/c/ext-c/ext.c
 
-# Insert flight controller implementation
-cp -f Component_Source/Hardened/SW_FlightController/FlightController_Impl_SW_FlightController_FlightController.c \
-      HAMR_Simple_V4/src/c/ext-c/FlightController_Impl_SW_FlightController_FlightController/FlightController_Impl_SW_FlightController_FlightController.c
+# Insert attestation tester implementation
+cp -f Component_Source/Hardened/SW_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester.c \
+      HAMR_Simple_V4/src/c/ext-c/AttestationTester_Impl_SW_AttestationTester_AttestationTester/AttestationTester_Impl_SW_AttestationTester_AttestationTester.c
+
+# Insert radio driver attestation implementation
+cp -f Component_Source/Hardened/SW_Radio_Attestation/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation.c \
+      HAMR_Simple_V4/src/c/ext-c/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver.c
+
+# Insert attestation manager implementation
+cp -f Component_Source/Hardened/SW_AttestationManager/AttestationManager_Impl_SW_AttestationManager_AttestationManager.c \
+      HAMR_Simple_V4/src/c/ext-c/AttestationManager_Impl_SW_AttestationManager_AttestationManager/AttestationManager_Impl_SW_AttestationManager_AttestationManager.c
+
+# Insert attestation gate implementation
+cp -f Component_Source/Hardened/SW_AttestationGate/AttestationGate_Impl_SW_AttestationGate_AttestationGate.c \
+      HAMR_Simple_V4/src/c/ext-c/AttestationGate_Impl_SW_AttestationGate_AttestationGate/AttestationGate_Impl_SW_AttestationGate_AttestationGate.c
+
+# Insert filter implementation
+cp -f Component_Source/Hardened/SW_Filter/Filter_Impl_SW_Filter_Filter.c \
+      HAMR_Simple_V4/src/c/ext-c/Filter_Impl_SW_Filter_Filter/Filter_Impl_SW_Filter_Filter.c
 
 # Insert flight planner implementation
 cp -f Component_Source/Hardened/SW_FlightPlanner/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner.c \
       HAMR_Simple_V4/src/c/ext-c/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner.c
 
-# Insert radio driver attestation implementation
-cp -f Component_Source/Hardened/SW_Radio_Attestation/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver_Attestation.c \
-      HAMR_Simple_V4/src/c/ext-c/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver.c
+# Insert monitor implementation
+cp -f Component_Source/Hardened/SW_Monitor/Monitor_Impl_SW_Monitor_Monitor.c \
+      HAMR_Simple_V4/src/c/ext-c/Monitor_Impl_SW_Monitor_Monitor/Monitor_Impl_SW_Monitor_Monitor.c
+
+# Insert flight controller implementation
+cp -f Component_Source/Hardened/SW_FlightController/FlightController_Impl_SW_FlightController_FlightController.c \
+      HAMR_Simple_V4/src/c/ext-c/FlightController_Impl_SW_FlightController_FlightController/FlightController_Impl_SW_FlightController_FlightController.c
 
 # Build in CAmkES
 rm -rf ~/CASE/camkes/build_CAmkES/* && ./compile-camkes.sh 
