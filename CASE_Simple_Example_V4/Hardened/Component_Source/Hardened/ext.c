@@ -131,13 +131,13 @@ uint8_t* getRadioOutput() {
   static int i = 0;
   uint8_t* output = NULL;
 
-  if (i == 11) {
+  if (i == 6) {
     output = (uint8_t *)(&badHeaderBadCmd);
-  } else if (i == 12) {
+  } else if (i == 7) {
     output = (uint8_t *)(&goodHeaderBadCmd);
-  } else if (i >= 13) {
+  } else if (i >= 8) {
     output = (uint8_t*)(&goodHeaderGoodCmd);
-    i = 10;
+    i = 5;
   }
 
   ++i;
