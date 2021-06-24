@@ -1,0 +1,2 @@
+/usr/bin/ar qc libuser_am_nocrypto_c.a  CMakeFiles/user_am_nocrypto_c.dir/fake_crypto_ffi.c.o
+/usr/bin/ranlib libuser_am_nocrypto_c.a

@@ -1,0 +1,2 @@
+/usr/bin/ar cr libtemplate_test.cake.a  CMakeFiles/template_test.cake.dir/__/__/template_test.cake.cake.S.o 
+/usr/bin/ranlib libtemplate_test.cake.a 
