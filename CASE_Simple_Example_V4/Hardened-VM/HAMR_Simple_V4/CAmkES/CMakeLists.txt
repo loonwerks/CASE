@@ -1,0 +1,91 @@
+# This file will be regenerated, do not edit
+
+cmake_minimum_required(VERSION 3.8.2)
+
+project (MissionComputer_Impl_Instance C)
+
+add_definitions(-DCAMKES)
+
+include(${CMAKE_CURRENT_LIST_DIR}/CMake_CakeMLOptions.cmake)
+
+include(${CMAKE_CURRENT_LIST_DIR}/CMake_TranspilerOptions.cmake)
+
+include(${CMAKE_CURRENT_LIST_DIR}/CMake_CAmkES_VM_Options.cmake)
+
+if ("${CMAKE_CXX_COMPILER_ID}" MATCHES "(C|c?)lang")
+  add_compile_options("$<$<CONFIG:Release>:-Oz>")
+elseif ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+  add_compile_options(-fstack-usage)
+  add_compile_options("$<$<CONFIG:Release>:-Os>")
+endif()
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/FlightPlanner_Impl_SW_FlightPlanner_FlightPlanner)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/FlightController_Impl_SW_FlightController_FlightController)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/AttestationManager_Impl_SW_AttestationManager_AttestationManager)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/AttestationGate_Impl_SW_AttestationGate_AttestationGate)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/Filter_Impl_SW_Filter_Filter)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/Monitor_Impl_SW_Monitor_Monitor)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/AttestationTester_Impl_SW_AttestationTester_AttestationTester)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/slang_libraries/SlangTypeLibrary)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/types)
+
+add_subdirectory(${CMAKE_CURRENT_LIST_DIR}/components/VM)
+
+DeclareCAmkESComponent(RadioDriver_Attestation_Impl_SW_Radio_RadioDriver
+  SOURCES components/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver/src/sb_RadioDriver_Attestation_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/RadioDriver_Attestation_Impl_SW_Radio_RadioDriver/includes/ types/includes
+  LIBS RadioDriver_Attestation_Impl_SW_Radio_RadioDriver
+)
+
+DeclareCAmkESComponent(FlightController_Impl_SW_FlightController_FlightController
+  SOURCES components/FlightController_Impl_SW_FlightController_FlightController/src/sb_FlightController_Impl.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/FlightController_Impl_SW_FlightController_FlightController/includes/ types/includes
+  LIBS FlightController_Impl_SW_FlightController_FlightController
+)
+
+DeclareCAmkESComponent(AttestationManager_Impl_SW_AttestationManager_AttestationManager
+  SOURCES components/AttestationManager_Impl_SW_AttestationManager_AttestationManager/src/sb_AttestationManager_Impl_ffi.c components/AttestationManager_Impl_SW_AttestationManager_AttestationManager/src/heli_am.S components/AttestationManager_Impl_SW_AttestationManager_AttestationManager/src/sb_AttestationManager_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/AttestationManager_Impl_SW_AttestationManager_AttestationManager/includes/ types/includes
+  LIBS AttestationManager_Impl_SW_AttestationManager_AttestationManager
+)
+
+DeclareCAmkESComponent(AttestationGate_Impl_SW_AttestationGate_AttestationGate
+  SOURCES components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl_ffi.c components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/AttestationGate.S components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/includes/ types/includes
+  LIBS AttestationGate_Impl_SW_AttestationGate_AttestationGate
+)
+
+DeclareCAmkESComponent(Filter_Impl_SW_Filter_Filter
+  SOURCES components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c components/Filter_Impl_SW_Filter_Filter/src/Filter.S components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/Filter_Impl_SW_Filter_Filter/includes/ types/includes
+  LIBS Filter_Impl_SW_Filter_Filter
+)
+
+DeclareCAmkESComponent(Monitor_Impl_SW_Monitor_Monitor
+  SOURCES components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl_ffi.c components/Monitor_Impl_SW_Monitor_Monitor/src/Monitor.S components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/Monitor_Impl_SW_Monitor_Monitor/includes/ types/includes
+  LIBS Monitor_Impl_SW_Monitor_Monitor
+)
+
+DeclareCAmkESComponent(AttestationTester_Impl_SW_AttestationTester_AttestationTester
+  SOURCES components/AttestationTester_Impl_SW_AttestationTester_AttestationTester/src/sb_AttestationTester_Impl_ffi.c components/AttestationTester_Impl_SW_AttestationTester_AttestationTester/src/user_am.S components/AttestationTester_Impl_SW_AttestationTester_AttestationTester/src/sb_AttestationTester_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  INCLUDES components/AttestationTester_Impl_SW_AttestationTester_AttestationTester/includes/ types/includes
+  LIBS AttestationTester_Impl_SW_AttestationTester_AttestationTester
+)
+
+DeclareCAmkESComponent(Pacer
+  SOURCES components/Pacer/src/Pacer.c
+  LIBS SB_Type_Library SlangTypeLibrary
+)
+
+DeclareCAmkESRootserver(MissionComputer_Impl_Instance.camkes)
