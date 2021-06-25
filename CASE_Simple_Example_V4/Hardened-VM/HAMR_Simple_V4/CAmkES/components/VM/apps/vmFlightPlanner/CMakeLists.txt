@@ -8,7 +8,10 @@ add_subdirectory(${SlangTypeLibrary_DIR} SlangTypeLibrary)
 
 add_subdirectory(${SB_Type_Library_DIR} SB_Type_Library)
 
-add_executable(vmFlightPlanner vmFlightPlanner.c)
+add_executable(vmFlightPlanner 
+               vmFlightPlanner.c
+               hardened_V4.c
+               hardened_V4.h)
 
 target_link_libraries(vmFlightPlanner
                       SB_Type_Library
