@@ -135,6 +135,9 @@ if [ "${SIMULATE}" = true ]; then
       -machine virt,virtualization=on,highmem=off,secure=off \
       -cpu cortex-a53 \
       -nographic \
+      -chardev stdio,id=char0,mux=on,logfile=serial.log,signal=off \
+      -serial chardev:char0 \
+      -mon chardev=char0 \
       -m size=1024 \
       -kernel images/capdl-loader-image-arm-qemu-arm-virt
 fi

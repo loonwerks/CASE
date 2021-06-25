@@ -143,7 +143,8 @@ char* setupIncomingEventDataPort(
     printf("mmap %s failed\n", portName);
     close(*portQueue_fd);
     return NULL;
-  }    
+  }
+  printf("Successfully setup %s\n", portName); 
   return raw_port_queue;
 }
 
@@ -247,6 +248,8 @@ void run(void){
   for(;;) {
     sb_pacer_notification_wait();
     
+    printf("FLIGHTPLANNER");
+    fflush(stdout);
     uint8_t t0[numBytes_RF_Msg]; // producer will send 1-byte/8-bits
     size_t t0_numBits;
     if(api_get_MissionCommand(&t0_numBits, t0)) {      
@@ -268,8 +271,8 @@ void tearDownPort(char* raw_fd, int fd, int size) {
 
 int main(int argc, char *argv[]) {
   char* defaults[] = {get_instance_name(), 
-                      "/dev/uio0", "8192", // read_port 
-                      "/dev/uio1", "8192", // write_port 
+                      "/dev/uio0", "4096", // read_port 
+                      "/dev/uio1", "4096", // write_port 
                       "/dev/uio2", "4096"  // pacer 
                     };
 
