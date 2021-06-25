@@ -67,7 +67,7 @@ DeclareCAmkESComponent(AttestationGate_Impl_SW_AttestationGate_AttestationGate
 )
 
 DeclareCAmkESComponent(Filter_Impl_SW_Filter_Filter
-  SOURCES omponents/Filter_Impl_SW_Filter_Filter/src/basis_ffi.c components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c components/Filter_Impl_SW_Filter_Filter/src/Filter.S components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
+  SOURCES components/Filter_Impl_SW_Filter_Filter/src/basis_ffi.c components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c components/Filter_Impl_SW_Filter_Filter/src/Filter.S components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl.c types/src/sb_queue_union_art_DataContent_1.c types/src/sb_queue_union_art_DataContent_1.c
   INCLUDES components/Filter_Impl_SW_Filter_Filter/includes/ types/includes
   LIBS Filter_Impl_SW_Filter_Filter
 )
