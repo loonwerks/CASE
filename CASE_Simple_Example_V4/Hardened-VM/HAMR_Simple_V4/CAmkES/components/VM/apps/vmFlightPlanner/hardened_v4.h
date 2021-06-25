@@ -3,6 +3,8 @@
 
 // ADD THE BELOW TO ext.h
 
+#include <inttypes.h>
+
 // ************************************
 //  Assuming all data is little-endian
 // ************************************

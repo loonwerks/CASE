@@ -119,22 +119,6 @@ void ffiread (unsigned char *c, long clen, unsigned char *a, long alen) {
   }
 }
 
-void ffiwrite (unsigned char *c, long clen, unsigned char *a, long alen){
-  assert(clen == 8);
-  int fd = byte8_to_int(c);
-  int n = byte2_to_int(a);
-  int off = byte2_to_int(&a[2]);
-  assert(alen >= n + off + 4);
-  int nw = write(fd, &a[4 + off], n);
-  if(nw < 0){
-      a[0] = 1;
-  }
-  else{
-    a[0] = 0;
-    int_to_byte2(nw,&a[1]);
-  }
-}
-
 void fficlose (unsigned char *c, long clen, unsigned char *a, long alen) {
   assert(alen >= 1);
   assert(clen == 8);
@@ -150,31 +134,10 @@ long microsecs = 0;
 int numGC = 0;
 int hasT = 0;
 
-void cml_exit(int arg) {
-
-  #ifdef STDERR_MEM_EXHAUST
-  if(arg == 1) {
-    fprintf(stderr,"CakeML heap space exhausted.\n");
-  }
-  else if(arg == 2) {
-    fprintf(stderr,"CakeML stack space exhausted.\n");
-  }
-  #endif
-
-  #ifdef DEBUG_FFI
-  {
-    fprintf(stderr,"GCNum: %d, GCTime(us): %ld\n",numGC,microsecs);
-  }
-  #endif
-
-  exit(arg);
-}
-
 void ffiexit (unsigned char *c, long clen, unsigned char *a, long alen) {
   assert(alen == 1);
   exit((int)a[0]);
 }
-
 
 /* empty FFI (assumed to do nothing, but can be used for tracing/logging) */
 void ffi (unsigned char *c, long clen, unsigned char *a, long alen) {

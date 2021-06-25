@@ -16,13 +16,121 @@
 
 // This file will not be overwritten so is safe to edit
 #include <sb_queue_union_art_DataContent_1.h>
+#include <inttypes.h>
 #include "hardened_v4.h"
 
-char* setupIncomingDataPort(
+/************************************************************
+ * VARIABLES  
+ *   The *sb_xx* versions would be provided via camkes.h for
+ *   native components
+ ***********************************************************/
+
+int sb_read_port_fd;
+sb_queue_union_art_DataContent_1_t *sb_read_port_queue;
+sb_queue_union_art_DataContent_1_Recv_t sb_read_port_recv_queue;
+
+int sb_write_port_fd;
+sb_queue_union_art_DataContent_1_t *sb_write_port_queue_1;
+int *sb_write_port_emit;
+
+int sb_pacer_period_fd;
+sb_queue_int8_t_1_t *sb_pacer_period_queue;
+sb_queue_int8_t_1_Recv_t sb_pacer_period_recv_queue;
+
+// camkes.h would have provided this method
+char *get_instance_name(void) {
+    static char name[] = "vmFlightPlanner";
+    return name;
+}
+
+// this is the guts of one of the hamr generated api_get... methods.  Separating out so it can be reused
+bool populateByteArray(HAMR_Simple_V4_Base_Types_Bits_Payload payload, size_t *numBits, uint8_t *byteArray) {
+  
+  *numBits = payload->value.size;
+  if(*numBits > 0) {
+  	size_t numBytes = (*numBits - 1) / 8 + 1;
+  	memcpy(byteArray, payload->value.value, numBytes);
+  }
+  return true;
+}
+
+/** this is the guts of one of the hamr generated RADIO api_send... methods which wraps 
+ *  a byte array into a payload struct.  Separating it out so that it can be reused for the
+ *  other outgoing send methods */
+void populatePayload(
+  size_t numBits,
+  uint8_t *byteArray,
+  HAMR_Simple_V4_Base_Types_Bits_Payload payload // note base_Base_Types_Bits_Payload is typedef'ed as a pointer to a 'struct hamr_Base_Types_Payload' 
+  ){ 
+  sfAssert(SF (Z) numBits >= 0, "numBits must be non-negative for IS[Z, B].");
+  sfAssert(SF (Z) numBits <= MaxIS_C4F575, "numBits too large for IS[Z, B].");
+
+  // NOTE:
+  // when using the wire-protocol (i.e. byte-arrays) HAMR passes around the Slang type
+  //  
+  //    @datatype class Bits_Payload(value: ISZ[B]) extends art.DataContent
+  // 
+  // The fingerprint for ISZ[B] is IS_C4575 (e.g. ISZ[String] yields a different fingerprint).
+  
+  // declare a new IS_C4F575 on the stack
+  DeclNewIS_C4F575(t_0);
+
+  // IS (immutable sequences) have two fields; size and value -- value is an U8 array
+  t_0.size = numBits;
+  if(numBits > 0) {
+    size_t numBytes = (numBits - 1) / 8 + 1;
+    memcpy(&t_0.value, byteArray, numBytes);
+  }
+
+  // FIXME: using the apply method causes a linking error related to missing
+  //        fmod, fmodl methods (muslc related?) coming from Slang F32/F64 methods.
+  //        So instead just do what the apply method does directly.
+  //        i.e. uses Type_assign to copy the IS into the bits payload value field
+  // base_Base_Types_Bits_Payload_apply(SF payload, (IS_C4F575) &t_0);
+  
+  Type_assign(&payload->value, &t_0, sizeof(struct IS_C4F575));
+}
+
+/********************************************************************************
+ * replicate the behavior of a native seL4 versions of outgoing event data 
+ * notification emit methods
+ ********************************************************************************/
+void sb_write_port_1_notification_emit() { sb_write_port_emit[0] = 1; }
+
+/************************************************************************
+ * replicate the behavior of a native seL4 versions of outgoing event data 
+ * notification emit methods
+ ************************************************************************/
+bool sb_read_port_dequeue_poll(sb_event_counter_t *numDropped, union_art_DataContent *data) {
+  return sb_queue_union_art_DataContent_1_dequeue(&sb_read_port_recv_queue, numDropped, data);
+}
+
+/********************************************************************************
+ * seL4 enqueue methods
+ * the following are direct copies of the seL4 enqueue methods HAMR would generate
+ * for a native component's outgoing event data ports 
+ ********************************************************************************/
+bool sb_write_port_enqueue(const union_art_DataContent *data) {
+  sb_queue_union_art_DataContent_1_enqueue(sb_write_port_queue_1, (union_art_DataContent*) data);
+  sb_write_port_1_notification_emit();
+
+  return true;
+}
+
+/************************************************************************
+ * seL4 dequeue methods
+ * the following are direct copies of the seL4 enqueue methods HAMR would generate
+ * for a native component's outgoing event data ports 
+ ************************************************************************/
+bool sb_read_port_dequeue(union_art_DataContent *data) {
+  sb_event_counter_t numDropped;
+  return sb_read_port_dequeue_poll(&numDropped, data);
+}
+
+char* setupIncomingEventDataPort(
   char* portName, 
   int portSize, 
-  int* portQueue_fd, 
-  bool isEventPort) {
+  int* portQueue_fd) {
   *portQueue_fd = open(portName, O_RDWR);
   assert(*portQueue_fd >= 0 && portName);
 
@@ -35,10 +143,7 @@ char* setupIncomingDataPort(
     printf("mmap %s failed\n", portName);
     close(*portQueue_fd);
     return NULL;
-  }
-
-  printf("Successfully setup incoming %sdata port %s\n", isEventPort ? "event " : "", portName);
-    
+  }    
   return raw_port_queue;
 }
 
@@ -116,7 +221,7 @@ void sb_pacer_notification_wait() {
  bool api_get_MissionCommand(size_t *numBits, uint8_t *byteArray){
   DeclNewart_DataContent(payload);
   if(sb_read_port_dequeue(&payload)) {
-  	return populateByteArray(&payload.base_Base_Types_Bits_Payload, numBits, byteArray);
+  	return populateByteArray(&payload.HAMR_Simple_V4_Base_Types_Bits_Payload, numBits, byteArray);
   } else {
     return false;
   }    
@@ -127,7 +232,7 @@ void sb_pacer_notification_wait() {
  * of slang-embedded c-api's
  **********************************************************************/
 void api_put_FlightPlan(size_t numBits, uint8_t *byteArray){
-  DeclNewbase_Base_Types_Bits_Payload(payload);
+  DeclNewHAMR_Simple_V4_Base_Types_Bits_Payload(payload);
   populatePayload(SF numBits, byteArray, &payload);
   sb_write_port_enqueue((const union art_DataContent *) &payload);
 }

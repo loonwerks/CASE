@@ -10,8 +10,8 @@ add_subdirectory(${SB_Type_Library_DIR} SB_Type_Library)
 
 add_executable(vmFlightPlanner 
                vmFlightPlanner.c
-               hardened_V4.c
-               hardened_V4.h)
+               hardened_v4.c
+               hardened_v4.h)
 
 target_link_libraries(vmFlightPlanner
                       SB_Type_Library
