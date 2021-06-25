@@ -9,15 +9,15 @@ Unit HAMR_Simple_V4_SW_Filter_Impl_SW_Filter_Filter_initialise_(STACK_FRAME_ONLY
 
   // examples of api setter and logging usage
 
-  uint8_t t0[numBytes_HAMR_Simple_V4_Data_Types_RF_Msg_Impl];
-  byte_array_default(SF t0, numBits_HAMR_Simple_V4_Data_Types_RF_Msg_Impl, numBytes_HAMR_Simple_V4_Data_Types_RF_Msg_Impl);
-  api_put_Output__HAMR_Simple_V4_SW_Filter_Impl_SW_Filter_Filter(SF numBits_HAMR_Simple_V4_Data_Types_RF_Msg_Impl, t0);
+  // uint8_t t0[numBytes_HAMR_Simple_V4_Data_Types_RF_Msg_Impl];
+  // byte_array_default(SF t0, numBits_HAMR_Simple_V4_Data_Types_RF_Msg_Impl, numBytes_HAMR_Simple_V4_Data_Types_RF_Msg_Impl);
+  // api_put_Output__HAMR_Simple_V4_SW_Filter_Impl_SW_Filter_Filter(SF numBits_HAMR_Simple_V4_Data_Types_RF_Msg_Impl, t0);
 
-  api_logInfo__HAMR_Simple_V4_SW_Filter_Impl_SW_Filter_Filter(SF string("Example logInfo"));
+  // api_logInfo__HAMR_Simple_V4_SW_Filter_Impl_SW_Filter_Filter(SF string("Example logInfo"));
 
-  api_logDebug__HAMR_Simple_V4_SW_Filter_Impl_SW_Filter_Filter(SF string("Example logDebug"));
+  // api_logDebug__HAMR_Simple_V4_SW_Filter_Impl_SW_Filter_Filter(SF string("Example logDebug"));
 
-  api_logError__HAMR_Simple_V4_SW_Filter_Impl_SW_Filter_Filter(SF string("Example logError"));
+  // api_logError__HAMR_Simple_V4_SW_Filter_Impl_SW_Filter_Filter(SF string("Example logError"));
 }
 
 Unit HAMR_Simple_V4_SW_Filter_Impl_SW_Filter_Filter_finalise_(STACK_FRAME_ONLY) {

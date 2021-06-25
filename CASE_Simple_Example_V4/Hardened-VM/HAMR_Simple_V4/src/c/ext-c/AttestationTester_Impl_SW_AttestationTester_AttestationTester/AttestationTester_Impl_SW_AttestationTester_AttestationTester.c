@@ -9,15 +9,15 @@ Unit HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTe
 
   // examples of api setter and logging usage
 
-  uint8_t t0[numBytes_HAMR_Simple_V4_Data_Types_AttestationResponseMsg_Impl];
-  byte_array_default(SF t0, numBits_HAMR_Simple_V4_Data_Types_AttestationResponseMsg_Impl, numBytes_HAMR_Simple_V4_Data_Types_AttestationResponseMsg_Impl);
-  api_put_AttestationResponse__HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester(SF numBits_HAMR_Simple_V4_Data_Types_AttestationResponseMsg_Impl, t0);
+  // uint8_t t0[numBytes_HAMR_Simple_V4_Data_Types_AttestationResponseMsg_Impl];
+  // byte_array_default(SF t0, numBits_HAMR_Simple_V4_Data_Types_AttestationResponseMsg_Impl, numBytes_HAMR_Simple_V4_Data_Types_AttestationResponseMsg_Impl);
+  // api_put_AttestationResponse__HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester(SF numBits_HAMR_Simple_V4_Data_Types_AttestationResponseMsg_Impl, t0);
 
-  api_logInfo__HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester(SF string("Example logInfo"));
+  // api_logInfo__HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester(SF string("Example logInfo"));
 
-  api_logDebug__HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester(SF string("Example logDebug"));
+  // api_logDebug__HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester(SF string("Example logDebug"));
 
-  api_logError__HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester(SF string("Example logError"));
+  // api_logError__HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester(SF string("Example logError"));
 }
 
 Unit HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_finalise_(STACK_FRAME_ONLY) {
@@ -28,6 +28,7 @@ Unit HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTe
   DeclNewStackFrame(caller, "AttestationTester_Impl_SW_AttestationTester_AttestationTester.c", "", "HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester_timeTriggered_", 0);
 
   // examples of api getter usage
+  printf("WARNING: in C AttestationTester\n");
 
   uint8_t t0[numBytes_HAMR_Simple_V4_Data_Types_AttestationRequestMsg_Impl];
   size_t t0_numBits;
@@ -35,9 +36,9 @@ Unit HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTe
     // sanity check
     sfAssert(SF (Z) t0_numBits == numBits_HAMR_Simple_V4_Data_Types_AttestationRequestMsg_Impl, "numBits received does not match expected");
 
-    DeclNewString(AttestationRequest_str);
-    String__append(SF (String) &AttestationRequest_str, string("Received on AttestationRequest: "));
-    byte_array_string(SF (String) &AttestationRequest_str, t0, numBytes_HAMR_Simple_V4_Data_Types_AttestationRequestMsg_Impl);
-    api_logInfo__HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester(SF (String) &AttestationRequest_str);
+    // DeclNewString(AttestationRequest_str);
+    // String__append(SF (String) &AttestationRequest_str, string("Received on AttestationRequest: "));
+    // byte_array_string(SF (String) &AttestationRequest_str, t0, numBytes_HAMR_Simple_V4_Data_Types_AttestationRequestMsg_Impl);
+    // api_logInfo__HAMR_Simple_V4_SW_AttestationTester_Impl_SW_AttestationTester_AttestationTester(SF (String) &AttestationRequest_str);
   }
 }

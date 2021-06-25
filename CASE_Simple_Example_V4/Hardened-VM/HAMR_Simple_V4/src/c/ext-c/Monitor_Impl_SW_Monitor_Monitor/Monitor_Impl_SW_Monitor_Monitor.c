@@ -9,17 +9,17 @@ Unit HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor_initialise_(STACK_FRAME_O
 
   // examples of api setter and logging usage
 
-  uint8_t t0[numBytes_HAMR_Simple_V4_Data_Types_Mission];
-  byte_array_default(SF t0, numBits_HAMR_Simple_V4_Data_Types_Mission, numBytes_HAMR_Simple_V4_Data_Types_Mission);
-  api_put_FlightPlan_out__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF numBits_HAMR_Simple_V4_Data_Types_Mission, t0);
+  // uint8_t t0[numBytes_HAMR_Simple_V4_Data_Types_Mission];
+  // byte_array_default(SF t0, numBits_HAMR_Simple_V4_Data_Types_Mission, numBytes_HAMR_Simple_V4_Data_Types_Mission);
+  // api_put_FlightPlan_out__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF numBits_HAMR_Simple_V4_Data_Types_Mission, t0);
 
-  api_put_Alert__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF_LAST);
+  // api_put_Alert__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF_LAST);
 
-  api_logInfo__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF string("Example logInfo"));
+  // api_logInfo__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF string("Example logInfo"));
 
-  api_logDebug__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF string("Example logDebug"));
+  // api_logDebug__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF string("Example logDebug"));
 
-  api_logError__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF string("Example logError"));
+  // api_logError__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF string("Example logError"));
 }
 
 Unit HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor_finalise_(STACK_FRAME_ONLY) {
