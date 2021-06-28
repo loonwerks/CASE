@@ -3,10 +3,7 @@
 datatype logType = Info | Debug | Error
 
 (* logType -> string -> () *)
-fun log lType msg = case lType of
-      Info  => #(api_logInfo)  msg Word8ArrayExtra.empty
-    | Debug => #(api_logDebug) msg Word8ArrayExtra.empty
-    | Error => #(api_logError) msg Word8ArrayExtra.empty
+fun log lType msg = ()
 
 structure Control = struct 
     (* ffi -> int -> bstring -> bstring option *)
