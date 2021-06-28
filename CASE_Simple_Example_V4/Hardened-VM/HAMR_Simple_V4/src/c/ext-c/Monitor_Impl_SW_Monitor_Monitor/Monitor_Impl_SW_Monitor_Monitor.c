@@ -15,7 +15,7 @@ Unit HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor_initialise_(STACK_FRAME_O
 
   // api_put_Alert__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF_LAST);
 
-  // api_logInfo__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF string("Example logInfo"));
+  api_logInfo__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF string("Example logInfo"));
 
   // api_logDebug__HAMR_Simple_V4_SW_Monitor_Impl_SW_Monitor_Monitor(SF string("Example logDebug"));
 

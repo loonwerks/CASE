@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vagrant/git/am-cakeml
+CMAKE_SOURCE_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vagrant/git/am-cakeml/build
+CMAKE_BINARY_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/git/am-cakeml/build/CMakeFiles /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment/CMakeFiles/progress.marks
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/git/am-cakeml/build/CMakeFiles 0
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment/CMakeFiles/progress.marks
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/clean
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,22 +97,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/preinstall
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/preinstall
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/tool_assessment.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/tool_assessment.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/tool_assessment.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/tool_assessment.dir/rule
 
 # Convenience name for target.
@@ -122,12 +122,12 @@ tool_assessment: apps/case-tool-assessment/CMakeFiles/tool_assessment.dir/rule
 
 # fast build rule for target.
 tool_assessment/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/tool_assessment.dir/build.make apps/case-tool-assessment/CMakeFiles/tool_assessment.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/tool_assessment.dir/build.make apps/case-tool-assessment/CMakeFiles/tool_assessment.dir/build
 .PHONY : tool_assessment/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/tool_assessment_nocrypto.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/tool_assessment_nocrypto.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/tool_assessment_nocrypto.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/tool_assessment_nocrypto.dir/rule
 
 # Convenience name for target.
@@ -137,12 +137,12 @@ tool_assessment_nocrypto: apps/case-tool-assessment/CMakeFiles/tool_assessment_n
 
 # fast build rule for target.
 tool_assessment_nocrypto/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/tool_assessment_nocrypto.dir/build.make apps/case-tool-assessment/CMakeFiles/tool_assessment_nocrypto.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/tool_assessment_nocrypto.dir/build.make apps/case-tool-assessment/CMakeFiles/tool_assessment_nocrypto.dir/build
 .PHONY : tool_assessment_nocrypto/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/rule
 
 # Convenience name for target.
@@ -152,12 +152,12 @@ fake_user_am: apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/rule
 
 # fast build rule for target.
 fake_user_am/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build
 .PHONY : fake_user_am/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/rule
 
 # Convenience name for target.
@@ -167,12 +167,12 @@ fake_user_am.cake: apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/ru
 
 # fast build rule for target.
 fake_user_am.cake/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/build
 .PHONY : fake_user_am.cake/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.cake.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.cake.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.cake.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.cake.dir/rule
 
 # Convenience name for target.
@@ -182,12 +182,12 @@ heli_am_nocrypto.cake: apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.cak
 
 # fast build rule for target.
 heli_am_nocrypto.cake/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.cake.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.cake.dir/build
 .PHONY : heli_am_nocrypto.cake/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.dir/rule
 
 # Convenience name for target.
@@ -197,12 +197,12 @@ user_am_nocrypto: apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.dir/rule
 
 # fast build rule for target.
 user_am_nocrypto/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.dir/build
 .PHONY : user_am_nocrypto/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/rule
 
 # Convenience name for target.
@@ -212,12 +212,12 @@ heli_am_nocrypto_c: apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/
 
 # fast build rule for target.
 heli_am_nocrypto_c/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/build
 .PHONY : heli_am_nocrypto_c/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/user_am.cake.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/user_am.cake.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/user_am.cake.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/user_am.cake.dir/rule
 
 # Convenience name for target.
@@ -227,12 +227,12 @@ user_am.cake: apps/case-tool-assessment/CMakeFiles/user_am.cake.dir/rule
 
 # fast build rule for target.
 user_am.cake/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am.cake.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am.cake.dir/build
 .PHONY : user_am.cake/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.dir/rule
 
 # Convenience name for target.
@@ -242,12 +242,12 @@ heli_am_nocrypto: apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.dir/rule
 
 # fast build rule for target.
 heli_am_nocrypto/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto.dir/build
 .PHONY : heli_am_nocrypto/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/rule
 
 # Convenience name for target.
@@ -257,12 +257,12 @@ heli_am_c: apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/rule
 
 # fast build rule for target.
 heli_am_c/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build
 .PHONY : heli_am_c/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/heli_am.cake.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/heli_am.cake.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/heli_am.cake.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/heli_am.cake.dir/rule
 
 # Convenience name for target.
@@ -272,12 +272,12 @@ heli_am.cake: apps/case-tool-assessment/CMakeFiles/heli_am.cake.dir/rule
 
 # fast build rule for target.
 heli_am.cake/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am.cake.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am.cake.dir/build
 .PHONY : heli_am.cake/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/heli_am.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/heli_am.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/heli_am.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/heli_am.dir/rule
 
 # Convenience name for target.
@@ -287,12 +287,12 @@ heli_am: apps/case-tool-assessment/CMakeFiles/heli_am.dir/rule
 
 # fast build rule for target.
 heli_am/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am.dir/build
 .PHONY : heli_am/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/rule
 
 # Convenience name for target.
@@ -302,12 +302,12 @@ fake_heli_am.cake: apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/ru
 
 # fast build rule for target.
 fake_heli_am.cake/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/build
 .PHONY : fake_heli_am.cake/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/rule
 
 # Convenience name for target.
@@ -317,12 +317,12 @@ fake_heli_am: apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/rule
 
 # fast build rule for target.
 fake_heli_am/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build
 .PHONY : fake_heli_am/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/user_am.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/user_am.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/user_am.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/user_am.dir/rule
 
 # Convenience name for target.
@@ -332,12 +332,12 @@ user_am: apps/case-tool-assessment/CMakeFiles/user_am.dir/rule
 
 # fast build rule for target.
 user_am/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am.dir/build
 .PHONY : user_am/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/rule
 
 # Convenience name for target.
@@ -347,12 +347,12 @@ user_am_nocrypto.cake: apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cak
 
 # fast build rule for target.
 user_am_nocrypto.cake/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/build
 .PHONY : user_am_nocrypto.cake/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/rule
 
 # Convenience name for target.
@@ -362,12 +362,12 @@ user_am_nocrypto_c: apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/
 
 # fast build rule for target.
 user_am_nocrypto_c/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/build
 .PHONY : user_am_nocrypto_c/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/fake_tool_assessment.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/fake_tool_assessment.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/fake_tool_assessment.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/fake_tool_assessment.dir/rule
 
 # Convenience name for target.
@@ -377,12 +377,12 @@ fake_tool_assessment: apps/case-tool-assessment/CMakeFiles/fake_tool_assessment.
 
 # fast build rule for target.
 fake_tool_assessment/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_tool_assessment.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_tool_assessment.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_tool_assessment.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_tool_assessment.dir/build
 .PHONY : fake_tool_assessment/fast
 
 # Convenience name for target.
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/rule
 .PHONY : apps/case-tool-assessment/CMakeFiles/user_am_c.dir/rule
 
 # Convenience name for target.
@@ -392,7 +392,7 @@ user_am_c: apps/case-tool-assessment/CMakeFiles/user_am_c.dir/rule
 
 # fast build rule for target.
 user_am_c/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build
 .PHONY : user_am_c/fast
 
 __/__/fake_heli_am.cake.cake.o: __/__/fake_heli_am.cake.cake.S.o
@@ -401,7 +401,7 @@ __/__/fake_heli_am.cake.cake.o: __/__/fake_heli_am.cake.cake.S.o
 
 # target to build an object file
 __/__/fake_heli_am.cake.cake.S.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/__/__/fake_heli_am.cake.cake.S.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.cake.dir/__/__/fake_heli_am.cake.cake.S.o
 .PHONY : __/__/fake_heli_am.cake.cake.S.o
 
 __/__/fake_user_am.cake.cake.o: __/__/fake_user_am.cake.cake.S.o
@@ -410,7 +410,7 @@ __/__/fake_user_am.cake.cake.o: __/__/fake_user_am.cake.cake.S.o
 
 # target to build an object file
 __/__/fake_user_am.cake.cake.S.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/__/__/fake_user_am.cake.cake.S.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.cake.dir/__/__/fake_user_am.cake.cake.S.o
 .PHONY : __/__/fake_user_am.cake.cake.S.o
 
 __/__/system/basis_ffi.o: __/__/system/basis_ffi.c.o
@@ -419,8 +419,8 @@ __/__/system/basis_ffi.o: __/__/system/basis_ffi.c.o
 
 # target to build an object file
 __/__/system/basis_ffi.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/basis_ffi.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/basis_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/basis_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/basis_ffi.c.o
 .PHONY : __/__/system/basis_ffi.c.o
 
 __/__/system/basis_ffi.i: __/__/system/basis_ffi.c.i
@@ -429,8 +429,8 @@ __/__/system/basis_ffi.i: __/__/system/basis_ffi.c.i
 
 # target to preprocess a source file
 __/__/system/basis_ffi.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/basis_ffi.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/basis_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/basis_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/basis_ffi.c.i
 .PHONY : __/__/system/basis_ffi.c.i
 
 __/__/system/basis_ffi.s: __/__/system/basis_ffi.c.s
@@ -439,8 +439,8 @@ __/__/system/basis_ffi.s: __/__/system/basis_ffi.c.s
 
 # target to generate assembly for a file
 __/__/system/basis_ffi.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/basis_ffi.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/basis_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/basis_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/basis_ffi.c.s
 .PHONY : __/__/system/basis_ffi.c.s
 
 __/__/system/crypto/crypto_ffi.o: __/__/system/crypto/crypto_ffi.c.o
@@ -449,10 +449,10 @@ __/__/system/crypto/crypto_ffi.o: __/__/system/crypto/crypto_ffi.c.o
 
 # target to build an object file
 __/__/system/crypto/crypto_ffi.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/crypto_ffi.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/crypto_ffi.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/crypto_ffi.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/crypto_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/crypto_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/crypto_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.o
 .PHONY : __/__/system/crypto/crypto_ffi.c.o
 
 __/__/system/crypto/crypto_ffi.i: __/__/system/crypto/crypto_ffi.c.i
@@ -461,10 +461,10 @@ __/__/system/crypto/crypto_ffi.i: __/__/system/crypto/crypto_ffi.c.i
 
 # target to preprocess a source file
 __/__/system/crypto/crypto_ffi.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/crypto_ffi.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/crypto_ffi.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/crypto_ffi.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/crypto_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/crypto_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/crypto_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.i
 .PHONY : __/__/system/crypto/crypto_ffi.c.i
 
 __/__/system/crypto/crypto_ffi.s: __/__/system/crypto/crypto_ffi.c.s
@@ -473,10 +473,10 @@ __/__/system/crypto/crypto_ffi.s: __/__/system/crypto/crypto_ffi.c.s
 
 # target to generate assembly for a file
 __/__/system/crypto/crypto_ffi.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/crypto_ffi.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/crypto_ffi.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/crypto_ffi.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/crypto_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/crypto_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/crypto_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.s
 .PHONY : __/__/system/crypto/crypto_ffi.c.s
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.o: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
@@ -485,10 +485,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.o: __/__/system/
 
 # target to build an object file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.i: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
@@ -497,10 +497,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.i: __/__/system/
 
 # target to preprocess a source file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.s: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
@@ -509,10 +509,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.s: __/__/system/
 
 # target to generate assembly for a file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.o: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
@@ -521,10 +521,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.o: __/__/s
 
 # target to build an object file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.i: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
@@ -533,10 +533,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.i: __/__/s
 
 # target to preprocess a source file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.s: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
@@ -545,10 +545,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.s: __/__/s
 
 # target to generate assembly for a file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.o: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
@@ -557,10 +557,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.o: __/__/sy
 
 # target to build an object file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.i: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
@@ -569,10 +569,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.i: __/__/sy
 
 # target to preprocess a source file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.s: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
@@ -581,10 +581,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.s: __/__/sy
 
 # target to generate assembly for a file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.o: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
@@ -593,10 +593,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.o: __/__/system/c
 
 # target to build an object file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.i: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
@@ -605,10 +605,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.i: __/__/system/c
 
 # target to preprocess a source file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.s: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
@@ -617,10 +617,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.s: __/__/system/c
 
 # target to generate assembly for a file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.o: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
@@ -629,10 +629,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.o: __/__/system/cryp
 
 # target to build an object file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.i: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
@@ -641,10 +641,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.i: __/__/system/cryp
 
 # target to preprocess a source file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.s: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
@@ -653,10 +653,10 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.s: __/__/system/cryp
 
 # target to generate assembly for a file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
 
 fake_crypto_ffi.o: fake_crypto_ffi.c.o
@@ -665,8 +665,8 @@ fake_crypto_ffi.o: fake_crypto_ffi.c.o
 
 # target to build an object file
 fake_crypto_ffi.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/fake_crypto_ffi.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/fake_crypto_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/fake_crypto_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/fake_crypto_ffi.c.o
 .PHONY : fake_crypto_ffi.c.o
 
 fake_crypto_ffi.i: fake_crypto_ffi.c.i
@@ -675,8 +675,8 @@ fake_crypto_ffi.i: fake_crypto_ffi.c.i
 
 # target to preprocess a source file
 fake_crypto_ffi.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/fake_crypto_ffi.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/fake_crypto_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/fake_crypto_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/fake_crypto_ffi.c.i
 .PHONY : fake_crypto_ffi.c.i
 
 fake_crypto_ffi.s: fake_crypto_ffi.c.s
@@ -685,8 +685,8 @@ fake_crypto_ffi.s: fake_crypto_ffi.c.s
 
 # target to generate assembly for a file
 fake_crypto_ffi.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/fake_crypto_ffi.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/fake_crypto_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/heli_am_nocrypto_c.dir/fake_crypto_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/build.make apps/case-tool-assessment/CMakeFiles/user_am_nocrypto_c.dir/fake_crypto_ffi.c.s
 .PHONY : fake_crypto_ffi.c.s
 
 fake_hamr_standard.o: fake_hamr_standard.c.o
@@ -695,8 +695,8 @@ fake_hamr_standard.o: fake_hamr_standard.c.o
 
 # target to build an object file
 fake_hamr_standard.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/fake_hamr_standard.c.o
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/fake_hamr_standard.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/fake_hamr_standard.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/fake_hamr_standard.c.o
 .PHONY : fake_hamr_standard.c.o
 
 fake_hamr_standard.i: fake_hamr_standard.c.i
@@ -705,8 +705,8 @@ fake_hamr_standard.i: fake_hamr_standard.c.i
 
 # target to preprocess a source file
 fake_hamr_standard.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/fake_hamr_standard.c.i
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/fake_hamr_standard.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/fake_hamr_standard.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/fake_hamr_standard.c.i
 .PHONY : fake_hamr_standard.c.i
 
 fake_hamr_standard.s: fake_hamr_standard.c.s
@@ -715,8 +715,8 @@ fake_hamr_standard.s: fake_hamr_standard.c.s
 
 # target to generate assembly for a file
 fake_hamr_standard.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/fake_hamr_standard.c.s
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/fake_hamr_standard.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/fake_hamr_standard.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/fake_hamr_standard.c.s
 .PHONY : fake_hamr_standard.c.s
 
 fake_heli_hamr.o: fake_heli_hamr.c.o
@@ -725,7 +725,7 @@ fake_heli_hamr.o: fake_heli_hamr.c.o
 
 # target to build an object file
 fake_heli_hamr.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/fake_heli_hamr.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/fake_heli_hamr.c.o
 .PHONY : fake_heli_hamr.c.o
 
 fake_heli_hamr.i: fake_heli_hamr.c.i
@@ -734,7 +734,7 @@ fake_heli_hamr.i: fake_heli_hamr.c.i
 
 # target to preprocess a source file
 fake_heli_hamr.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/fake_heli_hamr.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/fake_heli_hamr.c.i
 .PHONY : fake_heli_hamr.c.i
 
 fake_heli_hamr.s: fake_heli_hamr.c.s
@@ -743,7 +743,7 @@ fake_heli_hamr.s: fake_heli_hamr.c.s
 
 # target to generate assembly for a file
 fake_heli_hamr.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/fake_heli_hamr.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_heli_am.dir/fake_heli_hamr.c.s
 .PHONY : fake_heli_hamr.c.s
 
 fake_user_hamr.o: fake_user_hamr.c.o
@@ -752,7 +752,7 @@ fake_user_hamr.o: fake_user_hamr.c.o
 
 # target to build an object file
 fake_user_hamr.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/fake_user_hamr.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/fake_user_hamr.c.o
 .PHONY : fake_user_hamr.c.o
 
 fake_user_hamr.i: fake_user_hamr.c.i
@@ -761,7 +761,7 @@ fake_user_hamr.i: fake_user_hamr.c.i
 
 # target to preprocess a source file
 fake_user_hamr.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/fake_user_hamr.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/fake_user_hamr.c.i
 .PHONY : fake_user_hamr.c.i
 
 fake_user_hamr.s: fake_user_hamr.c.s
@@ -770,7 +770,7 @@ fake_user_hamr.s: fake_user_hamr.c.s
 
 # target to generate assembly for a file
 fake_user_hamr.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/fake_user_hamr.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/build.make apps/case-tool-assessment/CMakeFiles/fake_user_am.dir/fake_user_hamr.c.s
 .PHONY : fake_user_hamr.c.s
 
 # Help Target
@@ -846,6 +846,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -80,8 +80,8 @@ cake_ffiwrite:
      b     cdecl(ffiwrite)
      .p2align 4
 
-cake_ffifloat2doublePromote:
-     b     cdecl(ffifloat2doublePromote)
+cake_ffifloat2double:
+     b     cdecl(ffifloat2double)
      .p2align 4
 
 cake_ffiapi_get_FlightPlan_in:

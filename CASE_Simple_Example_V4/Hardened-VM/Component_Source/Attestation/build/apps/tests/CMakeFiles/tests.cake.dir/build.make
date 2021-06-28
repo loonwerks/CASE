@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vagrant/git/am-cakeml
+CMAKE_SOURCE_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vagrant/git/am-cakeml/build
+CMAKE_BINARY_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build
 
 # Include any dependencies generated for this target.
 include apps/tests/CMakeFiles/tests.cake.dir/depend.make
@@ -58,9 +58,9 @@ include apps/tests/CMakeFiles/tests.cake.dir/progress.make
 include apps/tests/CMakeFiles/tests.cake.dir/flags.make
 
 tests.cake.cake.S: tests.cake.cml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ../../tests.cake.cake.S"
-	cd /home/vagrant/git/am-cakeml/build/apps/tests && /usr/local/bin/cake-x64-64/cake --stack_size=10 --heap_size=10 < /home/vagrant/git/am-cakeml/build/tests.cake.cml > /home/vagrant/git/am-cakeml/build/tests.cake.cake.S
-	cd /home/vagrant/git/am-cakeml/build/apps/tests && sed -i\".orig\" "s/cdecl(main)/cdecl(main)/g" /home/vagrant/git/am-cakeml/build/tests.cake.cake.S
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ../../tests.cake.cake.S"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/tests && /usr/local/bin/cake-x64-64/cake --stack_size=10 --heap_size=10 --target=arm8 < /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/tests.cake.cml > /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/tests.cake.cake.S
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/tests && sed -i\".orig\" "s/cdecl(main)/cdecl(main)/g" /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/tests.cake.cake.S
 
 tests.cake.cml: ../util/Json.sml
 tests.cake.cml: ../util/Extra.sml
@@ -81,13 +81,13 @@ tests.cake.cml: ../am/Measurements.sml
 tests.cake.cml: ../am/CommTypes.sml
 tests.cake.cml: ../am/ServerAm.sml
 tests.cake.cml: ../apps/tests/Main.sml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating ../../tests.cake.cml"
-	cd /home/vagrant/git/am-cakeml/build/apps/tests && cat /home/vagrant/git/am-cakeml/util/Json.sml /home/vagrant/git/am-cakeml/util/Extra.sml /home/vagrant/git/am-cakeml/util/ByteString.sml /home/vagrant/git/am-cakeml/util/Misc.sml /home/vagrant/git/am-cakeml/util/CoqDefaults.sml /home/vagrant/git/am-cakeml/copland/Instr.sml /home/vagrant/git/am-cakeml/copland/AM.sml /home/vagrant/git/am-cakeml/copland/VM.sml /home/vagrant/git/am-cakeml/copland/json/CoplandToJson.sml /home/vagrant/git/am-cakeml/copland/json/JsonToCopland.sml /home/vagrant/git/am-cakeml/system/crypto/CryptoFFI.sml /home/vagrant/git/am-cakeml/system/crypto/Random.sml /home/vagrant/git/am-cakeml/system/posix/sockets/SocketFFI.sml /home/vagrant/git/am-cakeml/system/posix/time/TimeFFI.sml /home/vagrant/git/am-cakeml/system/posix/meas/MeasFFI.sml /home/vagrant/git/am-cakeml/am/Measurements.sml /home/vagrant/git/am-cakeml/am/CommTypes.sml /home/vagrant/git/am-cakeml/am/ServerAm.sml /home/vagrant/git/am-cakeml/apps/tests/Main.sml > /home/vagrant/git/am-cakeml/build/tests.cake.cml
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating ../../tests.cake.cml"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/tests && cat /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/util/Json.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/util/Extra.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/util/ByteString.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/util/Misc.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/util/CoqDefaults.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/copland/Instr.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/copland/AM.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/copland/VM.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/copland/json/CoplandToJson.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/copland/json/JsonToCopland.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/crypto/CryptoFFI.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/crypto/Random.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/posix/sockets/SocketFFI.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/posix/time/TimeFFI.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/posix/meas/MeasFFI.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/am/Measurements.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/am/CommTypes.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/am/ServerAm.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/apps/tests/Main.sml > /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/tests.cake.cml
 
 apps/tests/CMakeFiles/tests.cake.dir/__/__/tests.cake.cake.S.o: apps/tests/CMakeFiles/tests.cake.dir/flags.make
 apps/tests/CMakeFiles/tests.cake.dir/__/__/tests.cake.cake.S.o: tests.cake.cake.S
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building ASM object apps/tests/CMakeFiles/tests.cake.dir/__/__/tests.cake.cake.S.o"
-	cd /home/vagrant/git/am-cakeml/build/apps/tests && /usr/bin/cc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/tests.cake.dir/__/__/tests.cake.cake.S.o -c /home/vagrant/git/am-cakeml/build/tests.cake.cake.S
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building ASM object apps/tests/CMakeFiles/tests.cake.dir/__/__/tests.cake.cake.S.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/tests && /usr/bin/cc $(ASM_DEFINES) $(ASM_INCLUDES) $(ASM_FLAGS) -o CMakeFiles/tests.cake.dir/__/__/tests.cake.cake.S.o -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/tests.cake.cake.S
 
 # Object files for target tests.cake
 tests_cake_OBJECTS = \
@@ -99,9 +99,9 @@ tests_cake_EXTERNAL_OBJECTS =
 apps/tests/libtests.cake.a: apps/tests/CMakeFiles/tests.cake.dir/__/__/tests.cake.cake.S.o
 apps/tests/libtests.cake.a: apps/tests/CMakeFiles/tests.cake.dir/build.make
 apps/tests/libtests.cake.a: apps/tests/CMakeFiles/tests.cake.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking ASM static library libtests.cake.a"
-	cd /home/vagrant/git/am-cakeml/build/apps/tests && $(CMAKE_COMMAND) -P CMakeFiles/tests.cake.dir/cmake_clean_target.cmake
-	cd /home/vagrant/git/am-cakeml/build/apps/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tests.cake.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking ASM static library libtests.cake.a"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/tests && $(CMAKE_COMMAND) -P CMakeFiles/tests.cake.dir/cmake_clean_target.cmake
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/tests && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/tests.cake.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 apps/tests/CMakeFiles/tests.cake.dir/build: apps/tests/libtests.cake.a
@@ -109,11 +109,11 @@ apps/tests/CMakeFiles/tests.cake.dir/build: apps/tests/libtests.cake.a
 .PHONY : apps/tests/CMakeFiles/tests.cake.dir/build
 
 apps/tests/CMakeFiles/tests.cake.dir/clean:
-	cd /home/vagrant/git/am-cakeml/build/apps/tests && $(CMAKE_COMMAND) -P CMakeFiles/tests.cake.dir/cmake_clean.cmake
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/tests && $(CMAKE_COMMAND) -P CMakeFiles/tests.cake.dir/cmake_clean.cmake
 .PHONY : apps/tests/CMakeFiles/tests.cake.dir/clean
 
 apps/tests/CMakeFiles/tests.cake.dir/depend: tests.cake.cake.S
 apps/tests/CMakeFiles/tests.cake.dir/depend: tests.cake.cml
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vagrant/git/am-cakeml /home/vagrant/git/am-cakeml/apps/tests /home/vagrant/git/am-cakeml/build /home/vagrant/git/am-cakeml/build/apps/tests /home/vagrant/git/am-cakeml/build/apps/tests/CMakeFiles/tests.cake.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/apps/tests /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/tests /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/tests/CMakeFiles/tests.cake.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : apps/tests/CMakeFiles/tests.cake.dir/depend
 

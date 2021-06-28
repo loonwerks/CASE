@@ -64,7 +64,6 @@ fun parseResp resp =
         val evStr = BString.toString (snd split)
         val strToEv  = jsonToEv o JsonExtra.parse
      in log Info ("Received id: " ^ BString.show id);
-        log Info ("Received response: " ^ evStr);
         Some (id, strToEv evStr)
     end handle _ => None
 
@@ -122,7 +121,6 @@ in
           )
         | GettingResponse nonce => case getResponse () of
               Some resp => (
-                log Info ("Received response: " ^ BString.toString resp);
                 case parseResp resp of
                     Some (id, ev) =>
                         if appraise nonce ev then (

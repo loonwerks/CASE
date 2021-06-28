@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vagrant/git/am-cakeml
+CMAKE_SOURCE_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vagrant/git/am-cakeml/build
+CMAKE_BINARY_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build
 
 # Include any dependencies generated for this target.
 include system/crypto/CMakeFiles/keyGen.dir/depend.make
@@ -59,94 +59,94 @@ include system/crypto/CMakeFiles/keyGen.dir/flags.make
 
 system/crypto/CMakeFiles/keyGen.dir/key_gen.c.o: system/crypto/CMakeFiles/keyGen.dir/flags.make
 system/crypto/CMakeFiles/keyGen.dir/key_gen.c.o: ../system/crypto/key_gen.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object system/crypto/CMakeFiles/keyGen.dir/key_gen.c.o"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/key_gen.c.o   -c /home/vagrant/git/am-cakeml/system/crypto/key_gen.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object system/crypto/CMakeFiles/keyGen.dir/key_gen.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/key_gen.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/crypto/key_gen.c
 
 system/crypto/CMakeFiles/keyGen.dir/key_gen.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/keyGen.dir/key_gen.c.i"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/system/crypto/key_gen.c > CMakeFiles/keyGen.dir/key_gen.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/crypto/key_gen.c > CMakeFiles/keyGen.dir/key_gen.c.i
 
 system/crypto/CMakeFiles/keyGen.dir/key_gen.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/keyGen.dir/key_gen.c.s"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/system/crypto/key_gen.c -o CMakeFiles/keyGen.dir/key_gen.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/crypto/key_gen.c -o CMakeFiles/keyGen.dir/key_gen.c.s
 
 system/crypto/CMakeFiles/keyGen.dir/crypto_ffi.c.o: system/crypto/CMakeFiles/keyGen.dir/flags.make
 system/crypto/CMakeFiles/keyGen.dir/crypto_ffi.c.o: ../system/crypto/crypto_ffi.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object system/crypto/CMakeFiles/keyGen.dir/crypto_ffi.c.o"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/crypto_ffi.c.o   -c /home/vagrant/git/am-cakeml/system/crypto/crypto_ffi.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object system/crypto/CMakeFiles/keyGen.dir/crypto_ffi.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/crypto_ffi.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/crypto/crypto_ffi.c
 
 system/crypto/CMakeFiles/keyGen.dir/crypto_ffi.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/keyGen.dir/crypto_ffi.c.i"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/system/crypto/crypto_ffi.c > CMakeFiles/keyGen.dir/crypto_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/crypto/crypto_ffi.c > CMakeFiles/keyGen.dir/crypto_ffi.c.i
 
 system/crypto/CMakeFiles/keyGen.dir/crypto_ffi.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/keyGen.dir/crypto_ffi.c.s"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/system/crypto/crypto_ffi.c -o CMakeFiles/keyGen.dir/crypto_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/crypto/crypto_ffi.c -o CMakeFiles/keyGen.dir/crypto_ffi.c.s
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o: system/crypto/CMakeFiles/keyGen.dir/flags.make
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o: system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o   -c /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c > CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c > CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o: system/crypto/CMakeFiles/keyGen.dir/flags.make
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o: system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o   -c /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c > CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c > CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o: system/crypto/CMakeFiles/keyGen.dir/flags.make
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o: system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o   -c /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c > CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c > CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o: system/crypto/CMakeFiles/keyGen.dir/flags.make
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o: system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o   -c /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c > CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c > CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o: system/crypto/CMakeFiles/keyGen.dir/flags.make
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o: system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o   -c /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building C object system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c > CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c > CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
 
 system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c -o CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
 
 # Object files for target keyGen
 keyGen_OBJECTS = \
@@ -170,8 +170,8 @@ system/crypto/keyGen: system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-com
 system/crypto/keyGen: system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
 system/crypto/keyGen: system/crypto/CMakeFiles/keyGen.dir/build.make
 system/crypto/keyGen: system/crypto/CMakeFiles/keyGen.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable keyGen"
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/keyGen.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking C executable keyGen"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/keyGen.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 system/crypto/CMakeFiles/keyGen.dir/build: system/crypto/keyGen
@@ -179,10 +179,10 @@ system/crypto/CMakeFiles/keyGen.dir/build: system/crypto/keyGen
 .PHONY : system/crypto/CMakeFiles/keyGen.dir/build
 
 system/crypto/CMakeFiles/keyGen.dir/clean:
-	cd /home/vagrant/git/am-cakeml/build/system/crypto && $(CMAKE_COMMAND) -P CMakeFiles/keyGen.dir/cmake_clean.cmake
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto && $(CMAKE_COMMAND) -P CMakeFiles/keyGen.dir/cmake_clean.cmake
 .PHONY : system/crypto/CMakeFiles/keyGen.dir/clean
 
 system/crypto/CMakeFiles/keyGen.dir/depend:
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vagrant/git/am-cakeml /home/vagrant/git/am-cakeml/system/crypto /home/vagrant/git/am-cakeml/build /home/vagrant/git/am-cakeml/build/system/crypto /home/vagrant/git/am-cakeml/build/system/crypto/CMakeFiles/keyGen.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/crypto /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/CMakeFiles/keyGen.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : system/crypto/CMakeFiles/keyGen.dir/depend
 

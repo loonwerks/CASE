@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vagrant/git/am-cakeml
+CMAKE_SOURCE_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vagrant/git/am-cakeml/build
+CMAKE_BINARY_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/git/am-cakeml/build/CMakeFiles /home/vagrant/git/am-cakeml/build/system/crypto/CMakeFiles/progress.marks
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 system/crypto/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/git/am-cakeml/build/CMakeFiles 0
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/CMakeFiles/progress.marks
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 system/crypto/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 system/crypto/clean
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 system/crypto/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,22 +97,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 system/crypto/preinstall
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 system/crypto/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 system/crypto/preinstall
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 system/crypto/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 system/crypto/CMakeFiles/keyGen.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 system/crypto/CMakeFiles/keyGen.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 system/crypto/CMakeFiles/keyGen.dir/rule
 .PHONY : system/crypto/CMakeFiles/keyGen.dir/rule
 
 # Convenience name for target.
@@ -122,12 +122,12 @@ keyGen: system/crypto/CMakeFiles/keyGen.dir/rule
 
 # fast build rule for target.
 keyGen/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/build
 .PHONY : keyGen/fast
 
 # Convenience name for target.
 system/crypto/CMakeFiles/hacl-star.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 system/crypto/CMakeFiles/hacl-star.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 system/crypto/CMakeFiles/hacl-star.dir/rule
 .PHONY : system/crypto/CMakeFiles/hacl-star.dir/rule
 
 # Convenience name for target.
@@ -137,7 +137,7 @@ hacl-star: system/crypto/CMakeFiles/hacl-star.dir/rule
 
 # fast build rule for target.
 hacl-star/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/hacl-star.dir/build.make system/crypto/CMakeFiles/hacl-star.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/hacl-star.dir/build.make system/crypto/CMakeFiles/hacl-star.dir/build
 .PHONY : hacl-star/fast
 
 crypto_ffi.o: crypto_ffi.c.o
@@ -146,7 +146,7 @@ crypto_ffi.o: crypto_ffi.c.o
 
 # target to build an object file
 crypto_ffi.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/crypto_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/crypto_ffi.c.o
 .PHONY : crypto_ffi.c.o
 
 crypto_ffi.i: crypto_ffi.c.i
@@ -155,7 +155,7 @@ crypto_ffi.i: crypto_ffi.c.i
 
 # target to preprocess a source file
 crypto_ffi.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/crypto_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/crypto_ffi.c.i
 .PHONY : crypto_ffi.c.i
 
 crypto_ffi.s: crypto_ffi.c.s
@@ -164,7 +164,7 @@ crypto_ffi.s: crypto_ffi.c.s
 
 # target to generate assembly for a file
 crypto_ffi.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/crypto_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/crypto_ffi.c.s
 .PHONY : crypto_ffi.c.s
 
 hacl-star/dist/gcc-compatible/Hacl_Chacha20.o: hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
@@ -173,7 +173,7 @@ hacl-star/dist/gcc-compatible/Hacl_Chacha20.o: hacl-star/dist/gcc-compatible/Hac
 
 # target to build an object file
 hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
 
 hacl-star/dist/gcc-compatible/Hacl_Chacha20.i: hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
@@ -182,7 +182,7 @@ hacl-star/dist/gcc-compatible/Hacl_Chacha20.i: hacl-star/dist/gcc-compatible/Hac
 
 # target to preprocess a source file
 hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
 
 hacl-star/dist/gcc-compatible/Hacl_Chacha20.s: hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
@@ -191,7 +191,7 @@ hacl-star/dist/gcc-compatible/Hacl_Chacha20.s: hacl-star/dist/gcc-compatible/Hac
 
 # target to generate assembly for a file
 hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
 
 hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.o: hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
@@ -200,7 +200,7 @@ hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.o: hacl-star/dist/gcc-compatib
 
 # target to build an object file
 hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
 
 hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.i: hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
@@ -209,7 +209,7 @@ hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.i: hacl-star/dist/gcc-compatib
 
 # target to preprocess a source file
 hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
 
 hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.s: hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
@@ -218,7 +218,7 @@ hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.s: hacl-star/dist/gcc-compatib
 
 # target to generate assembly for a file
 hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
 
 hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.o: hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
@@ -227,7 +227,7 @@ hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.o: hacl-star/dist/gcc-compatibl
 
 # target to build an object file
 hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
 
 hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.i: hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
@@ -236,7 +236,7 @@ hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.i: hacl-star/dist/gcc-compatibl
 
 # target to preprocess a source file
 hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
 
 hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.s: hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
@@ -245,7 +245,7 @@ hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.s: hacl-star/dist/gcc-compatibl
 
 # target to generate assembly for a file
 hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
 
 hacl-star/dist/gcc-compatible/Hacl_Ed25519.o: hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
@@ -254,7 +254,7 @@ hacl-star/dist/gcc-compatible/Hacl_Ed25519.o: hacl-star/dist/gcc-compatible/Hacl
 
 # target to build an object file
 hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
 
 hacl-star/dist/gcc-compatible/Hacl_Ed25519.i: hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
@@ -263,7 +263,7 @@ hacl-star/dist/gcc-compatible/Hacl_Ed25519.i: hacl-star/dist/gcc-compatible/Hacl
 
 # target to preprocess a source file
 hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
 
 hacl-star/dist/gcc-compatible/Hacl_Ed25519.s: hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
@@ -272,7 +272,7 @@ hacl-star/dist/gcc-compatible/Hacl_Ed25519.s: hacl-star/dist/gcc-compatible/Hacl
 
 # target to generate assembly for a file
 hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
 
 hacl-star/dist/gcc-compatible/Hacl_Hash.o: hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
@@ -281,7 +281,7 @@ hacl-star/dist/gcc-compatible/Hacl_Hash.o: hacl-star/dist/gcc-compatible/Hacl_Ha
 
 # target to build an object file
 hacl-star/dist/gcc-compatible/Hacl_Hash.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
 
 hacl-star/dist/gcc-compatible/Hacl_Hash.i: hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
@@ -290,7 +290,7 @@ hacl-star/dist/gcc-compatible/Hacl_Hash.i: hacl-star/dist/gcc-compatible/Hacl_Ha
 
 # target to preprocess a source file
 hacl-star/dist/gcc-compatible/Hacl_Hash.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
 
 hacl-star/dist/gcc-compatible/Hacl_Hash.s: hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
@@ -299,7 +299,7 @@ hacl-star/dist/gcc-compatible/Hacl_Hash.s: hacl-star/dist/gcc-compatible/Hacl_Ha
 
 # target to generate assembly for a file
 hacl-star/dist/gcc-compatible/Hacl_Hash.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
 .PHONY : hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
 
 key_gen.o: key_gen.c.o
@@ -308,7 +308,7 @@ key_gen.o: key_gen.c.o
 
 # target to build an object file
 key_gen.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/key_gen.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/key_gen.c.o
 .PHONY : key_gen.c.o
 
 key_gen.i: key_gen.c.i
@@ -317,7 +317,7 @@ key_gen.i: key_gen.c.i
 
 # target to preprocess a source file
 key_gen.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/key_gen.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/key_gen.c.i
 .PHONY : key_gen.c.i
 
 key_gen.s: key_gen.c.s
@@ -326,7 +326,7 @@ key_gen.s: key_gen.c.s
 
 # target to generate assembly for a file
 key_gen.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/key_gen.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f system/crypto/CMakeFiles/keyGen.dir/build.make system/crypto/CMakeFiles/keyGen.dir/key_gen.c.s
 .PHONY : key_gen.c.s
 
 # Help Target
@@ -371,6 +371,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

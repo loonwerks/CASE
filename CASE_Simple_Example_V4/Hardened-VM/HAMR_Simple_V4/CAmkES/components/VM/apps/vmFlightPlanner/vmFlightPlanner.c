@@ -248,7 +248,7 @@ void run(void){
   for(;;) {
     sb_pacer_notification_wait();
     
-    printf("FLIGHTPLANNER");
+    printf("FLIGHTPLANNER\n");
     fflush(stdout);
     uint8_t t0[numBytes_RF_Msg]; // producer will send 1-byte/8-bits
     size_t t0_numBits;

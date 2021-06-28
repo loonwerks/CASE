@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vagrant/git/am-cakeml
+CMAKE_SOURCE_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vagrant/git/am-cakeml/build
+CMAKE_BINARY_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build
 
 # Include any dependencies generated for this target.
 include apps/case-tool-assessment/CMakeFiles/user_am_c.dir/depend.make
@@ -59,81 +59,81 @@ include apps/case-tool-assessment/CMakeFiles/user_am_c.dir/flags.make
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.o: apps/case-tool-assessment/CMakeFiles/user_am_c.dir/flags.make
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.o: ../system/crypto/crypto_ffi.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.o"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.o   -c /home/vagrant/git/am-cakeml/system/crypto/crypto_ffi.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/crypto/crypto_ffi.c
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.i"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/system/crypto/crypto_ffi.c > CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/crypto/crypto_ffi.c > CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.i
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.s"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/system/crypto/crypto_ffi.c -o CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/system/crypto/crypto_ffi.c -o CMakeFiles/user_am_c.dir/__/__/system/crypto/crypto_ffi.c.s
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o: apps/case-tool-assessment/CMakeFiles/user_am_c.dir/flags.make
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o: system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o   -c /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c > CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c > CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o: apps/case-tool-assessment/CMakeFiles/user_am_c.dir/flags.make
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o: system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o   -c /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c > CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c > CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o: apps/case-tool-assessment/CMakeFiles/user_am_c.dir/flags.make
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o: system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o   -c /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c > CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c > CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o: apps/case-tool-assessment/CMakeFiles/user_am_c.dir/flags.make
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o: system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o   -c /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c > CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c > CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o: apps/case-tool-assessment/CMakeFiles/user_am_c.dir/flags.make
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o: system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o   -c /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o   -c /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c > CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c > CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/git/am-cakeml/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/bin/aarch64-linux-gnu-gcc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c -o CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
 
 # Object files for target user_am_c
 user_am_c_OBJECTS = \
@@ -155,9 +155,9 @@ apps/case-tool-assessment/libuser_am_c.a: apps/case-tool-assessment/CMakeFiles/u
 apps/case-tool-assessment/libuser_am_c.a: apps/case-tool-assessment/CMakeFiles/user_am_c.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
 apps/case-tool-assessment/libuser_am_c.a: apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build.make
 apps/case-tool-assessment/libuser_am_c.a: apps/case-tool-assessment/CMakeFiles/user_am_c.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C static library libuser_am_c.a"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && $(CMAKE_COMMAND) -P CMakeFiles/user_am_c.dir/cmake_clean_target.cmake
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/user_am_c.dir/link.txt --verbose=$(VERBOSE)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C static library libuser_am_c.a"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && $(CMAKE_COMMAND) -P CMakeFiles/user_am_c.dir/cmake_clean_target.cmake
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/user_am_c.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build: apps/case-tool-assessment/libuser_am_c.a
@@ -165,10 +165,10 @@ apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build: apps/case-tool-assessm
 .PHONY : apps/case-tool-assessment/CMakeFiles/user_am_c.dir/build
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/clean:
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && $(CMAKE_COMMAND) -P CMakeFiles/user_am_c.dir/cmake_clean.cmake
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && $(CMAKE_COMMAND) -P CMakeFiles/user_am_c.dir/cmake_clean.cmake
 .PHONY : apps/case-tool-assessment/CMakeFiles/user_am_c.dir/clean
 
 apps/case-tool-assessment/CMakeFiles/user_am_c.dir/depend:
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vagrant/git/am-cakeml /home/vagrant/git/am-cakeml/apps/case-tool-assessment /home/vagrant/git/am-cakeml/build /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment/CMakeFiles/user_am_c.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/apps/case-tool-assessment /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment/CMakeFiles/user_am_c.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : apps/case-tool-assessment/CMakeFiles/user_am_c.dir/depend
 

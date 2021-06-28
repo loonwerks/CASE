@@ -4,21 +4,21 @@ endif()
 
 set(run 0)
 
-if("/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-gitinfo.txt" IS_NEWER_THAN "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-gitclone-lastrun.txt")
+if("/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-gitinfo.txt" IS_NEWER_THAN "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-gitclone-lastrun.txt")
   set(run 1)
 endif()
 
 if(NOT run)
-  message(STATUS "Avoiding repeated git clone, stamp file is up to date: '/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-gitclone-lastrun.txt'")
+  message(STATUS "Avoiding repeated git clone, stamp file is up to date: '/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-gitclone-lastrun.txt'")
   return()
 endif()
 
 execute_process(
-  COMMAND ${CMAKE_COMMAND} -E remove_directory "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star"
+  COMMAND ${CMAKE_COMMAND} -E remove_directory "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star"
   RESULT_VARIABLE error_code
   )
 if(error_code)
-  message(FATAL_ERROR "Failed to remove directory: '/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star'")
+  message(FATAL_ERROR "Failed to remove directory: '/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star'")
 endif()
 
 set(git_options)
@@ -53,7 +53,7 @@ set(number_of_tries 0)
 while(error_code AND number_of_tries LESS 3)
   execute_process(
     COMMAND "/usr/bin/git" ${git_options} clone ${git_clone_options} --origin "origin" "https://github.com/project-everest/hacl-star/" "hacl-star"
-    WORKING_DIRECTORY "/home/vagrant/git/am-cakeml/build/system/crypto"
+    WORKING_DIRECTORY "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto"
     RESULT_VARIABLE error_code
     )
   math(EXPR number_of_tries "${number_of_tries} + 1")
@@ -68,7 +68,7 @@ endif()
 
 execute_process(
   COMMAND "/usr/bin/git" ${git_options} checkout 50db8e4147258a5dc8e18c940c1b045ce5558723 --
-  WORKING_DIRECTORY "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star"
+  WORKING_DIRECTORY "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star"
   RESULT_VARIABLE error_code
   )
 if(error_code)
@@ -77,32 +77,32 @@ endif()
 
 execute_process(
   COMMAND "/usr/bin/git" ${git_options} submodule init 
-  WORKING_DIRECTORY "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star"
+  WORKING_DIRECTORY "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star"
   RESULT_VARIABLE error_code
   )
 if(error_code)
-  message(FATAL_ERROR "Failed to init submodules in: '/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star'")
+  message(FATAL_ERROR "Failed to init submodules in: '/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star'")
 endif()
 
 execute_process(
   COMMAND "/usr/bin/git" ${git_options} submodule update --recursive --init 
-  WORKING_DIRECTORY "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star"
+  WORKING_DIRECTORY "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star"
   RESULT_VARIABLE error_code
   )
 if(error_code)
-  message(FATAL_ERROR "Failed to update submodules in: '/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star'")
+  message(FATAL_ERROR "Failed to update submodules in: '/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star'")
 endif()
 
 # Complete success, update the script-last-run stamp file:
 #
 execute_process(
   COMMAND ${CMAKE_COMMAND} -E copy
-    "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-gitinfo.txt"
-    "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-gitclone-lastrun.txt"
-  WORKING_DIRECTORY "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star"
+    "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-gitinfo.txt"
+    "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-gitclone-lastrun.txt"
+  WORKING_DIRECTORY "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star"
   RESULT_VARIABLE error_code
   )
 if(error_code)
-  message(FATAL_ERROR "Failed to copy script-last-run stamp file: '/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-gitclone-lastrun.txt'")
+  message(FATAL_ERROR "Failed to copy script-last-run stamp file: '/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-gitclone-lastrun.txt'")
 endif()
 

@@ -2,34 +2,34 @@
 	"sources" : 
 	[
 		{
-			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/CMakeFiles/hacl-star"
+			"file" : "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/CMakeFiles/hacl-star"
 		},
 		{
-			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/CMakeFiles/hacl-star.rule"
+			"file" : "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/CMakeFiles/hacl-star.rule"
 		},
 		{
-			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/CMakeFiles/hacl-star-complete.rule"
+			"file" : "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/CMakeFiles/hacl-star-complete.rule"
 		},
 		{
-			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-install.rule"
+			"file" : "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-install.rule"
 		},
 		{
-			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-mkdir.rule"
+			"file" : "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-mkdir.rule"
 		},
 		{
-			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-download.rule"
+			"file" : "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-download.rule"
 		},
 		{
-			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-update.rule"
+			"file" : "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-update.rule"
 		},
 		{
-			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-patch.rule"
+			"file" : "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-patch.rule"
 		},
 		{
-			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-configure.rule"
+			"file" : "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-configure.rule"
 		},
 		{
-			"file" : "/home/vagrant/git/am-cakeml/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-build.rule"
+			"file" : "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/hacl-star-prefix/src/hacl-star-stamp/hacl-star-build.rule"
 		}
 	],
 	"target" : 

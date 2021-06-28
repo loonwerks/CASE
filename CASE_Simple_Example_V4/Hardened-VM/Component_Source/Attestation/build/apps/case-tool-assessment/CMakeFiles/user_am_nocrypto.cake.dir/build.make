@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vagrant/git/am-cakeml
+CMAKE_SOURCE_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vagrant/git/am-cakeml/build
+CMAKE_BINARY_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build
 
 # Utility rule file for user_am_nocrypto.cake.
 
@@ -57,9 +57,9 @@ apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake: user_am_nocrypto.S
 
 
 user_am_nocrypto.S: user_am_nocrypto.cml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ../../user_am_nocrypto.S"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && /usr/local/bin/cake-x64-64/cake --stack_size=10 --heap_size=10 < /home/vagrant/git/am-cakeml/build/user_am_nocrypto.cml > /home/vagrant/git/am-cakeml/build/user_am_nocrypto.S
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && sed -i\".orig\" "s/cdecl(main)/cdecl(run)/g" /home/vagrant/git/am-cakeml/build/user_am_nocrypto.S
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Generating ../../user_am_nocrypto.S"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && /usr/local/bin/cake-x64-64/cake --stack_size=10 --heap_size=10 --target=arm8 < /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/user_am_nocrypto.cml > /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/user_am_nocrypto.S
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && sed -i\".orig\" "s/cdecl(main)/cdecl(run)/g" /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/user_am_nocrypto.S
 
 user_am_nocrypto.cml: ../apps/case-tool-assessment/Config.sml
 user_am_nocrypto.cml: ../util/Json.sml
@@ -76,8 +76,8 @@ user_am_nocrypto.cml: ../apps/case-tool-assessment/HamrStandard.sml
 user_am_nocrypto.cml: ../apps/case-tool-assessment/GoldenHashes.sml
 user_am_nocrypto.cml: ../apps/case-tool-assessment/FakeCrypto.sml
 user_am_nocrypto.cml: ../apps/case-tool-assessment/User.sml
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vagrant/git/am-cakeml/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating ../../user_am_nocrypto.cml"
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && cat /home/vagrant/git/am-cakeml/apps/case-tool-assessment/Config.sml /home/vagrant/git/am-cakeml/util/Json.sml /home/vagrant/git/am-cakeml/util/Extra.sml /home/vagrant/git/am-cakeml/util/ByteString.sml /home/vagrant/git/am-cakeml/util/Misc.sml /home/vagrant/git/am-cakeml/util/CoqDefaults.sml /home/vagrant/git/am-cakeml/copland/Instr.sml /home/vagrant/git/am-cakeml/copland/AM.sml /home/vagrant/git/am-cakeml/copland/VM.sml /home/vagrant/git/am-cakeml/copland/json/CoplandToJson.sml /home/vagrant/git/am-cakeml/copland/json/JsonToCopland.sml /home/vagrant/git/am-cakeml/apps/case-tool-assessment/HamrStandard.sml /home/vagrant/git/am-cakeml/apps/case-tool-assessment/GoldenHashes.sml /home/vagrant/git/am-cakeml/apps/case-tool-assessment/FakeCrypto.sml /home/vagrant/git/am-cakeml/apps/case-tool-assessment/User.sml > /home/vagrant/git/am-cakeml/build/user_am_nocrypto.cml
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating ../../user_am_nocrypto.cml"
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && cat /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/apps/case-tool-assessment/Config.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/util/Json.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/util/Extra.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/util/ByteString.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/util/Misc.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/util/CoqDefaults.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/copland/Instr.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/copland/AM.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/copland/VM.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/copland/json/CoplandToJson.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/copland/json/JsonToCopland.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/apps/case-tool-assessment/HamrStandard.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/apps/case-tool-assessment/GoldenHashes.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/apps/case-tool-assessment/FakeCrypto.sml /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/apps/case-tool-assessment/User.sml > /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/user_am_nocrypto.cml
 
 user_am_nocrypto.cake: apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake
 user_am_nocrypto.cake: user_am_nocrypto.S
@@ -92,10 +92,10 @@ apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/build: user_am_no
 .PHONY : apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/build
 
 apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/clean:
-	cd /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment && $(CMAKE_COMMAND) -P CMakeFiles/user_am_nocrypto.cake.dir/cmake_clean.cmake
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment && $(CMAKE_COMMAND) -P CMakeFiles/user_am_nocrypto.cake.dir/cmake_clean.cmake
 .PHONY : apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/clean
 
 apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/depend:
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vagrant/git/am-cakeml /home/vagrant/git/am-cakeml/apps/case-tool-assessment /home/vagrant/git/am-cakeml/build /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment /home/vagrant/git/am-cakeml/build/apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/apps/case-tool-assessment /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : apps/case-tool-assessment/CMakeFiles/user_am_nocrypto.cake.dir/depend
 

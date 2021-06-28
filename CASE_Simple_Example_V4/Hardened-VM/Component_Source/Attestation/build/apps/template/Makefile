@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/vagrant/git/am-cakeml
+CMAKE_SOURCE_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/vagrant/git/am-cakeml/build
+CMAKE_BINARY_DIR = /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,14 +80,14 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/git/am-cakeml/build/CMakeFiles /home/vagrant/git/am-cakeml/build/apps/template/CMakeFiles/progress.marks
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/template/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/git/am-cakeml/build/CMakeFiles 0
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/template/CMakeFiles/progress.marks
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/template/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
 clean:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/template/clean
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/template/clean
 .PHONY : clean
 
 # The main clean target
@@ -97,22 +97,22 @@ clean/fast: clean
 
 # Prepare targets for installation.
 preinstall: all
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/template/preinstall
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/template/preinstall
 .PHONY : preinstall
 
 # Prepare targets for installation.
 preinstall/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/template/preinstall
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/template/preinstall
 .PHONY : preinstall/fast
 
 # clear depends
 depend:
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
 # Convenience name for target.
 apps/template/CMakeFiles/template_test.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/template/CMakeFiles/template_test.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/template/CMakeFiles/template_test.dir/rule
 .PHONY : apps/template/CMakeFiles/template_test.dir/rule
 
 # Convenience name for target.
@@ -122,12 +122,12 @@ template_test: apps/template/CMakeFiles/template_test.dir/rule
 
 # fast build rule for target.
 template_test/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/build
 .PHONY : template_test/fast
 
 # Convenience name for target.
 apps/template/CMakeFiles/template_test.cake.dir/rule:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f CMakeFiles/Makefile2 apps/template/CMakeFiles/template_test.cake.dir/rule
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f CMakeFiles/Makefile2 apps/template/CMakeFiles/template_test.cake.dir/rule
 .PHONY : apps/template/CMakeFiles/template_test.cake.dir/rule
 
 # Convenience name for target.
@@ -137,7 +137,7 @@ template_test.cake: apps/template/CMakeFiles/template_test.cake.dir/rule
 
 # fast build rule for target.
 template_test.cake/fast:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.cake.dir/build.make apps/template/CMakeFiles/template_test.cake.dir/build
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.cake.dir/build.make apps/template/CMakeFiles/template_test.cake.dir/build
 .PHONY : template_test.cake/fast
 
 __/__/system/basis_ffi.o: __/__/system/basis_ffi.c.o
@@ -146,7 +146,7 @@ __/__/system/basis_ffi.o: __/__/system/basis_ffi.c.o
 
 # target to build an object file
 __/__/system/basis_ffi.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/basis_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/basis_ffi.c.o
 .PHONY : __/__/system/basis_ffi.c.o
 
 __/__/system/basis_ffi.i: __/__/system/basis_ffi.c.i
@@ -155,7 +155,7 @@ __/__/system/basis_ffi.i: __/__/system/basis_ffi.c.i
 
 # target to preprocess a source file
 __/__/system/basis_ffi.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/basis_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/basis_ffi.c.i
 .PHONY : __/__/system/basis_ffi.c.i
 
 __/__/system/basis_ffi.s: __/__/system/basis_ffi.c.s
@@ -164,7 +164,7 @@ __/__/system/basis_ffi.s: __/__/system/basis_ffi.c.s
 
 # target to generate assembly for a file
 __/__/system/basis_ffi.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/basis_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/basis_ffi.c.s
 .PHONY : __/__/system/basis_ffi.c.s
 
 __/__/system/crypto/crypto_ffi.o: __/__/system/crypto/crypto_ffi.c.o
@@ -173,7 +173,7 @@ __/__/system/crypto/crypto_ffi.o: __/__/system/crypto/crypto_ffi.c.o
 
 # target to build an object file
 __/__/system/crypto/crypto_ffi.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/crypto_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/crypto_ffi.c.o
 .PHONY : __/__/system/crypto/crypto_ffi.c.o
 
 __/__/system/crypto/crypto_ffi.i: __/__/system/crypto/crypto_ffi.c.i
@@ -182,7 +182,7 @@ __/__/system/crypto/crypto_ffi.i: __/__/system/crypto/crypto_ffi.c.i
 
 # target to preprocess a source file
 __/__/system/crypto/crypto_ffi.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/crypto_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/crypto_ffi.c.i
 .PHONY : __/__/system/crypto/crypto_ffi.c.i
 
 __/__/system/crypto/crypto_ffi.s: __/__/system/crypto/crypto_ffi.c.s
@@ -191,7 +191,7 @@ __/__/system/crypto/crypto_ffi.s: __/__/system/crypto/crypto_ffi.c.s
 
 # target to generate assembly for a file
 __/__/system/crypto/crypto_ffi.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/crypto_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/crypto_ffi.c.s
 .PHONY : __/__/system/crypto/crypto_ffi.c.s
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.o: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
@@ -200,7 +200,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.o: __/__/system/
 
 # target to build an object file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.o
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.i: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
@@ -209,7 +209,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.i: __/__/system/
 
 # target to preprocess a source file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.i
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.s: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
@@ -218,7 +218,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.s: __/__/system/
 
 # target to generate assembly for a file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20.c.s
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.o: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
@@ -227,7 +227,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.o: __/__/s
 
 # target to build an object file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.o
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.i: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
@@ -236,7 +236,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.i: __/__/s
 
 # target to preprocess a source file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.i
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.s: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
@@ -245,7 +245,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.s: __/__/s
 
 # target to generate assembly for a file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Chacha20_Vec32.c.s
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.o: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
@@ -254,7 +254,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.o: __/__/sy
 
 # target to build an object file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.o
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.i: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
@@ -263,7 +263,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.i: __/__/sy
 
 # target to preprocess a source file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.i
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.s: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
@@ -272,7 +272,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.s: __/__/sy
 
 # target to generate assembly for a file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Curve25519_51.c.s
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.o: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
@@ -281,7 +281,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.o: __/__/system/c
 
 # target to build an object file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.o
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.i: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
@@ -290,7 +290,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.i: __/__/system/c
 
 # target to preprocess a source file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.i
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.s: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
@@ -299,7 +299,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.s: __/__/system/c
 
 # target to generate assembly for a file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Ed25519.c.s
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.o: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
@@ -308,7 +308,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.o: __/__/system/cryp
 
 # target to build an object file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.o
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.i: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
@@ -317,7 +317,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.i: __/__/system/cryp
 
 # target to preprocess a source file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.i
 
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.s: __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
@@ -326,7 +326,7 @@ __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.s: __/__/system/cryp
 
 # target to generate assembly for a file
 __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
 .PHONY : __/__/system/crypto/hacl-star/dist/gcc-compatible/Hacl_Hash.c.s
 
 __/__/system/misc_ffi.o: __/__/system/misc_ffi.c.o
@@ -335,7 +335,7 @@ __/__/system/misc_ffi.o: __/__/system/misc_ffi.c.o
 
 # target to build an object file
 __/__/system/misc_ffi.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/misc_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/misc_ffi.c.o
 .PHONY : __/__/system/misc_ffi.c.o
 
 __/__/system/misc_ffi.i: __/__/system/misc_ffi.c.i
@@ -344,7 +344,7 @@ __/__/system/misc_ffi.i: __/__/system/misc_ffi.c.i
 
 # target to preprocess a source file
 __/__/system/misc_ffi.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/misc_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/misc_ffi.c.i
 .PHONY : __/__/system/misc_ffi.c.i
 
 __/__/system/misc_ffi.s: __/__/system/misc_ffi.c.s
@@ -353,7 +353,7 @@ __/__/system/misc_ffi.s: __/__/system/misc_ffi.c.s
 
 # target to generate assembly for a file
 __/__/system/misc_ffi.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/misc_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/misc_ffi.c.s
 .PHONY : __/__/system/misc_ffi.c.s
 
 __/__/system/posix/meas/meas_ffi.o: __/__/system/posix/meas/meas_ffi.c.o
@@ -362,7 +362,7 @@ __/__/system/posix/meas/meas_ffi.o: __/__/system/posix/meas/meas_ffi.c.o
 
 # target to build an object file
 __/__/system/posix/meas/meas_ffi.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/meas/meas_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/meas/meas_ffi.c.o
 .PHONY : __/__/system/posix/meas/meas_ffi.c.o
 
 __/__/system/posix/meas/meas_ffi.i: __/__/system/posix/meas/meas_ffi.c.i
@@ -371,7 +371,7 @@ __/__/system/posix/meas/meas_ffi.i: __/__/system/posix/meas/meas_ffi.c.i
 
 # target to preprocess a source file
 __/__/system/posix/meas/meas_ffi.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/meas/meas_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/meas/meas_ffi.c.i
 .PHONY : __/__/system/posix/meas/meas_ffi.c.i
 
 __/__/system/posix/meas/meas_ffi.s: __/__/system/posix/meas/meas_ffi.c.s
@@ -380,7 +380,7 @@ __/__/system/posix/meas/meas_ffi.s: __/__/system/posix/meas/meas_ffi.c.s
 
 # target to generate assembly for a file
 __/__/system/posix/meas/meas_ffi.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/meas/meas_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/meas/meas_ffi.c.s
 .PHONY : __/__/system/posix/meas/meas_ffi.c.s
 
 __/__/system/posix/sockets/socket_ffi.o: __/__/system/posix/sockets/socket_ffi.c.o
@@ -389,7 +389,7 @@ __/__/system/posix/sockets/socket_ffi.o: __/__/system/posix/sockets/socket_ffi.c
 
 # target to build an object file
 __/__/system/posix/sockets/socket_ffi.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/sockets/socket_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/sockets/socket_ffi.c.o
 .PHONY : __/__/system/posix/sockets/socket_ffi.c.o
 
 __/__/system/posix/sockets/socket_ffi.i: __/__/system/posix/sockets/socket_ffi.c.i
@@ -398,7 +398,7 @@ __/__/system/posix/sockets/socket_ffi.i: __/__/system/posix/sockets/socket_ffi.c
 
 # target to preprocess a source file
 __/__/system/posix/sockets/socket_ffi.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/sockets/socket_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/sockets/socket_ffi.c.i
 .PHONY : __/__/system/posix/sockets/socket_ffi.c.i
 
 __/__/system/posix/sockets/socket_ffi.s: __/__/system/posix/sockets/socket_ffi.c.s
@@ -407,7 +407,7 @@ __/__/system/posix/sockets/socket_ffi.s: __/__/system/posix/sockets/socket_ffi.c
 
 # target to generate assembly for a file
 __/__/system/posix/sockets/socket_ffi.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/sockets/socket_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/sockets/socket_ffi.c.s
 .PHONY : __/__/system/posix/sockets/socket_ffi.c.s
 
 __/__/system/posix/time/time_ffi.o: __/__/system/posix/time/time_ffi.c.o
@@ -416,7 +416,7 @@ __/__/system/posix/time/time_ffi.o: __/__/system/posix/time/time_ffi.c.o
 
 # target to build an object file
 __/__/system/posix/time/time_ffi.c.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/time/time_ffi.c.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/time/time_ffi.c.o
 .PHONY : __/__/system/posix/time/time_ffi.c.o
 
 __/__/system/posix/time/time_ffi.i: __/__/system/posix/time/time_ffi.c.i
@@ -425,7 +425,7 @@ __/__/system/posix/time/time_ffi.i: __/__/system/posix/time/time_ffi.c.i
 
 # target to preprocess a source file
 __/__/system/posix/time/time_ffi.c.i:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/time/time_ffi.c.i
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/time/time_ffi.c.i
 .PHONY : __/__/system/posix/time/time_ffi.c.i
 
 __/__/system/posix/time/time_ffi.s: __/__/system/posix/time/time_ffi.c.s
@@ -434,7 +434,7 @@ __/__/system/posix/time/time_ffi.s: __/__/system/posix/time/time_ffi.c.s
 
 # target to generate assembly for a file
 __/__/system/posix/time/time_ffi.c.s:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/time/time_ffi.c.s
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.dir/build.make apps/template/CMakeFiles/template_test.dir/__/__/system/posix/time/time_ffi.c.s
 .PHONY : __/__/system/posix/time/time_ffi.c.s
 
 __/__/template_test.cake.cake.o: __/__/template_test.cake.cake.S.o
@@ -443,7 +443,7 @@ __/__/template_test.cake.cake.o: __/__/template_test.cake.cake.S.o
 
 # target to build an object file
 __/__/template_test.cake.cake.S.o:
-	cd /home/vagrant/git/am-cakeml/build && $(MAKE) -f apps/template/CMakeFiles/template_test.cake.dir/build.make apps/template/CMakeFiles/template_test.cake.dir/__/__/template_test.cake.cake.S.o
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(MAKE) -f apps/template/CMakeFiles/template_test.cake.dir/build.make apps/template/CMakeFiles/template_test.cake.dir/__/__/template_test.cake.cake.S.o
 .PHONY : __/__/template_test.cake.cake.S.o
 
 # Help Target
@@ -501,6 +501,6 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	cd /home/vagrant/git/am-cakeml/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
+	cd /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build && $(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/vagrant/git/am-cakeml/apps/template
+# Install script for directory: /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/apps/template
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

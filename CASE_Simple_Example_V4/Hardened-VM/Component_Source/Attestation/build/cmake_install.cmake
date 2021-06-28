@@ -1,4 +1,4 @@
-# Install script for directory: /home/vagrant/git/am-cakeml
+# Install script for directory: /home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -39,11 +39,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/vagrant/git/am-cakeml/build/system/crypto/cmake_install.cmake")
-  include("/home/vagrant/git/am-cakeml/build/apps/case-tool-assessment/cmake_install.cmake")
-  include("/home/vagrant/git/am-cakeml/build/apps/serverClient/cmake_install.cmake")
-  include("/home/vagrant/git/am-cakeml/build/apps/template/cmake_install.cmake")
-  include("/home/vagrant/git/am-cakeml/build/apps/tests/cmake_install.cmake")
+  include("/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/system/crypto/cmake_install.cmake")
+  include("/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/case-tool-assessment/cmake_install.cmake")
+  include("/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/serverClient/cmake_install.cmake")
+  include("/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/template/cmake_install.cmake")
+  include("/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/apps/tests/cmake_install.cmake")
 
 endif()
 
@@ -55,5 +55,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/vagrant/git/am-cakeml/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/vagrant/Documents/rockwellcollins/CASE/CASE_Simple_Example_V4/Hardened-VM/Component_Source/Attestation/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
