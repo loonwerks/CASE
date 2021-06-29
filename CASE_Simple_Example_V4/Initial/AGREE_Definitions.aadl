@@ -1,0 +1,37 @@
+package AGREE_Definitions
+public
+	
+	with Data_Types;
+	with Base_Types;
+	
+	annex agree {**
+			
+		const default_trustedid_list : Data_Types::AllowList.Impl = Data_Types::AllowList.Impl { value = [| 0, 0, 0, 0 |] };
+			
+		const bottom_left : Data_Types::Coordinate.Impl = Data_Types::Coordinate.Impl{Latitude = 45.300400; Longitude = -121.014730; Altitude = 1000.0};
+		const top_right : Data_Types::Coordinate.Impl = Data_Types::Coordinate.Impl{Latitude = 45.345315; Longitude = -120.912520; Altitude = 1000.0};
+		const keep_in_zone : Data_Types::KeepInZone.Impl = [| bottom_left, top_right |];
+		
+		fun IS_BOUNDED(pt : Base_Types::Float_32, low : Base_Types::Float_32, high : Base_Types::Float_32) : bool =
+			pt >= low and pt <= high;
+		
+		fun WAYPOINT_IN_ZONE(wp: Data_Types::Coordinate.Impl, kiz : Data_Types::KeepInZone.Impl) : bool =
+			IS_BOUNDED(wp.Latitude, (kiz[1]).Latitude, (kiz[2]).Latitude) and 
+			IS_BOUNDED(wp.Longitude, (kiz[1]).Longitude, (kiz[2]).Longitude) and 
+			IS_BOUNDED(wp.Altitude, (kiz[1]).Altitude, (kiz[2]).Altitude);
+			
+		fun WAYPOINTS_IN_ZONE(plan: Data_Types::Mission, kiz : Data_Types::KeepInZone.Impl) : bool =
+			forall i in plan, WAYPOINT_IN_ZONE(i, kiz);
+			
+		-- ID of this UAV
+		fun WELL_FORMED_MESSAGE(msg : Data_Types::RF_Msg.Impl) : bool = good_command(msg.payload);
+		fun WELL_FORMED_MISSION_COMMAND(msg : Data_Types::RF_Msg.Impl) : bool = good_command(msg.payload);
+		fun WELL_FORMED_MISSION(msg : Data_Types::Mission) : bool = good_mission(msg);
+		-- These functions check the well-formedness of message structures
+		fun good_coordinate(coord : Data_Types::Coordinate.Impl) : bool = coord.Latitude >= -90.0 and coord.Latitude <= 90.0 and coord.Longitude >= -180.0 and coord.Longitude <= 180.0 and coord.Altitude >= 0.0 and coord.Altitude <= 15000.0;
+		fun good_map(map : Data_Types::Map) : bool = forall wp in map, good_coordinate(wp);
+		fun good_command(cmd : Data_Types::Command.Impl) : bool = good_map(cmd.Map);
+		fun good_mission(mission : Data_Types::Mission) : bool = forall wp in mission, good_coordinate(wp);
+	**};
+	
+end AGREE_Definitions;

@@ -1,0 +1,33 @@
+package FC
+public
+	
+	with UAS_Buses;
+	
+	-- GPS receiver hardware
+	-- We are not yet modeling incoming satellite signals here
+	device GPS_Receiver
+		features
+			Position: out event data port;
+	end GPS_Receiver;
+	
+	device implementation GPS_Receiver.Impl
+	end GPS_Receiver.Impl;
+	
+	
+	-- Flight controller
+	system FlightController
+		features
+			UartRecv: in event data port;
+			UartSend: out event data port;
+			UARTA: requires bus access UAS_Buses::Serial_Bus.Impl;
+	end FlightController;
+	
+	
+	system implementation FlightController.Impl
+		subcomponents
+			GPS: device GPS_Receiver.Impl;
+		connections
+			c1: port GPS.Position -> UartSend;
+	end FlightController.Impl;
+	
+end FC;

@@ -1,0 +1,1551 @@
+(* UserAM config: *)
+(* This is the ID number reported by the UserAM *)
+val id_num = 1
+
+(* HeliAM config *)
+(* This determines how frequently the HeliAM requests a reattestation.
+   The frequency of attestation is approximately (reattestation_period + 1) * pacer frequency *)
+val reattestation_period = 9(*---------------------------------------------------------------------------*)
+(* Type of Json expressions plus parser. Does not yet handle floating point  *)
+(* numbers, or utf-8 strings.                                                *)
+(*---------------------------------------------------------------------------*)
+
+structure Json =
+struct
+
+(* type substring = String.substring *)
+
+exception ERR string string
+
+fun fst p = case p of (x,y) =>  x
+fun snd p = case p of (x,y) =>  y
+
+fun eRR_MESG pair = print (fst pair^": "^snd pair)
+
+datatype number
+   = Int int
+   (* | Float of real (* Not totally sure about exact representation desired *) *) (* There are no floating points in CakeML *)
+
+datatype json
+    = Null
+    | LBRACK  (* stack symbol only *)
+    | LBRACE  (* stack symbol only *)
+    | Boolean bool
+    | Number number     (* ints and floats *)
+    | String string     (* should be unicode strings, per JSON spec *)
+    | List (json list)
+    | AList ((string * json) list)
+
+fun print_json js t =
+    case js
+     of LBRACK => "LBRACK"
+      | LBRACE => "LBRACE"
+      | Boolean b => String.concat ["\"", if b then "True" else "False", "\""]
+      | Number (Int n) => Int.toString n
+      | String s => String.concat ["\"",s,"\""]
+      | List js' => String.concat ["[\n", print_json_list js' (t + 1), "]"]
+      | AList js' => String.concat ["{\n", print_json_alist js' (t + 1), "\n}"]
+
+and print_json_list js t =
+	case js
+	 of [] => ""
+      | [j] => print_json j t
+	  | (j::js') => String.concat [print_json j t, ", ", print_json_list js' t]
+
+and print_json_alist js t =
+	let
+		val spacing = String.concat (List.tabulate t (fn x => "  "))
+	in
+		case js
+		 of [] => ""
+		  | [(s,j)] => String.concat [spacing, "\"", s, "\" : ", print_json j t, ""]
+		  | ((s,j)::js') => String.concat [spacing, "\"", s, "\" : "
+		                                  , print_json j t, ",\n", print_json_alist js' t]
+    end
+
+
+(*---------------------------------------------------------------------------*)
+(* Lexer                                                                     *)
+(*---------------------------------------------------------------------------*)
+
+
+datatype lexeme
+  = Lbrace
+  | Rbrace
+  | Lbrack
+  | Rbrack
+  | Colon
+  | Comma
+  | NullLit
+  | BoolLit bool
+  | NumLit number
+  | StringLit string
+
+fun isEmpty s = s = ""
+
+fun isDigit c = let val x = Char.ord c in x > 47 andalso x < 58 end
+
+fun isAlpha c = let val x = Char.ord c in (x > 64 andalso x < 91) orelse (x > 96 andalso x < 123) end
+
+fun getc strm =
+    let
+        val lstr = String.explode strm
+    in
+        case lstr
+         of [] => None
+         | x::xs => Some (x, String.implode xs)
+    end
+
+fun takeWhile prop ss =
+    let
+        val (ls, ss') = String.split prop ss
+    in
+        if isEmpty ls
+        then None
+        else Some (ls, ss')
+    end
+
+fun compose f opt =
+    case opt of
+        None => None
+      | Some (x,y) => f x y
+
+fun getNum ss =
+    let fun toInt s =
+            if s = ""
+            then None
+            else if String.sub s 0 = #"-"
+                 then (case Int.fromString (String.extract s 1 None)
+                        of Some i => Some (Int.~(i))
+                        |  None => None)
+                 else Int.fromString s
+    in compose
+           (fn s => fn ss' =>
+               case toInt s
+                of Some i => Some (NumLit (Int i),ss')
+                |  None => None)
+           (takeWhile (fn c => isDigit c orelse c = #"-") ss)
+    end
+
+
+fun getKeyword ss =
+ compose (fn s => fn ss' =>
+   case s
+    of "null"  => Some (NullLit,ss')
+     | "True"  => Some (BoolLit True, ss')
+     | "False" => Some (BoolLit False, ss')
+     |  other  => None)
+  (takeWhile isAlpha ss);
+
+fun getString strm list =
+    case getc strm
+     of None => raise ERR "lex (in getString)" "end of input, looking for \""
+      | Some (#"\"",strm') => Some (StringLit (String.implode(List.rev list)), strm')
+      | Some (#"\\",strm') => (* backslashed chars possible *)
+          (case getc strm'
+            of None => raise ERR "lex (in getString)" "unexpected end of input"
+             | Some (ch,strm'') => getString strm'' (ch :: #"\\"::list)
+          )
+      | Some (ch,strm') =>  getString strm' (ch :: list)
+
+fun lex strm =
+    case getc strm
+     of None => None
+      | Some (#"{",strm') => Some (Lbrace,strm')
+      | Some (#"}",strm') => Some (Rbrace,strm')
+      | Some (#"[",strm') => Some (Lbrack,strm')
+      | Some (#"]",strm') => Some (Rbrack,strm')
+      | Some (#",",strm') => Some (Comma,strm')
+      | Some (#":",strm') => Some (Colon,strm')
+      | Some (#"n",strm') => getKeyword strm  (* null *)
+      | Some (#"t",strm') => getKeyword strm  (* True *)
+      | Some (#"f",strm') => getKeyword strm  (* False *)
+      | Some (#"\"",strm') => getString strm' []
+      | Some (ch,strm') =>
+        if Char.isSpace ch
+        then lex strm'
+        else if isDigit ch orelse ch = #"-"
+             then getNum strm
+	           else raise ERR "lex"
+		               ("unexpected character starts remaining input:\n" ^ strm)
+
+fun lexemes ss =
+  (case lex ss
+    of None => []
+     | Some(l,ss') => l::lexemes ss')
+  handle ERR f s =>
+	 (eRR_MESG ("lexemes",f^": "^s);
+          []);
+
+
+(* let _ = lexemes "null [ \"foo\" : \"bar\" ]" *)
+(* lexemes "{ \"foo\" : 12, \"bar\" : 13  }"; *)
+(* lexemes "[True,False, null, 123, -23, \"foo\"] "; *)
+
+
+(* --------------------------------------------------------------------------- *)
+(* Parsing *)
+(* --------------------------------------------------------------------------- *)
+
+fun pARSE_ERR s ss =
+ let
+     val estring = String.concat ["Json parser failed!\n   ", s
+                                  ,"\n   Remaining input: ", ss, ".\n"]
+ in
+     raise ERR "PARSE_ERR" estring
+ end
+
+fun toList p acc = case p
+                    of (LBRACK::t,ss) => (List acc::t,ss)
+                    |  (h::t,ss) => toList (t,ss) (h::acc)
+                    |  ([],ss) =>
+                       raise pARSE_ERR "toList: empty stack when trying to build a compound" ss
+
+fun toAList p acc = case p
+                    of (LBRACE::t,ss) => (AList acc::t,ss)
+                     | (j::(String s)::t,ss) => toAList (t,ss) ((s,j)::acc)
+                     | (_::_::_,ss) =>
+                       raise pARSE_ERR "toAList: expected string literal in key-value pair" ss
+                     | ([_],ss) =>
+                       raise pARSE_ERR "toAList: unexpected key-value pair structure" ss
+                     | ([],ss) =>
+                       raise pARSE_ERR "toAList: empty stack when trying to build an object" ss
+
+(*---------------------------------------------------------------------------*)
+(* The main parsing loop. Returns the final stack and the remaining input.   *)
+(* The stack should be of length 1, and it will have a json element. The     *)
+(* remaining input should be empty, or consist of whitespace.                *)
+(*---------------------------------------------------------------------------*)
+fun dropl f s =
+    let
+        val (_, s') = String.split f s
+    in
+        s'
+    end
+
+fun parse p =
+    case p
+     of (stk,ss) =>
+        case lex ss
+         of None => (List.rev stk, dropl Char.isSpace ss)
+          | Some (NullLit,ss')     => (Null::stk,ss')
+          | Some (BoolLit b,ss')   => (Boolean b::stk,ss')
+          | Some (NumLit i,ss')    => (Number i::stk,ss')
+          | Some (StringLit s,ss') => (String s::stk,ss')
+          | Some (Lbrack,ss') => parse_list (LBRACK::stk,ss')
+          | Some (Lbrace,ss') => parse_alist (LBRACE::stk,ss')
+          | Some other  => raise pARSE_ERR "unexpected lexeme" ss
+    and
+    parse_list p = (* list --> eps | elt (, elts)* *)
+    case p
+     of (stk,ss) =>
+            case lex ss
+             of None => raise pARSE_ERR "parse_list: unexpected end of input" ss
+              | Some (Rbrack,ss') => toList (stk,ss') []
+              | Some other => elts (stk,ss)
+    and
+    parse_alist p = (* alist --> eps | strLit : val (, strLit : val)* *)
+    case p
+     of (stk,ss) =>
+        case lex ss
+         of None => raise pARSE_ERR "parse_alist: unexpected end of input" ss
+          | Some (Rbrace,ss') => toAList (stk,ss') []
+          | Some (StringLit _,_) => bindings (stk,ss)
+          | other => raise pARSE_ERR "parse_alist: unexpected lexeme" ss
+    and
+    elts p =
+    case p
+     of (stk,ss) =>
+        let val (stk',ss') = parse (stk,ss)
+        in case lex ss'
+            of Some (Comma,ss'') => elts (stk',ss'')
+             | Some (Rbrack,ss'') => toList (stk',ss'') []
+             | Some other => raise pARSE_ERR "parse_list: unexpected lexeme" ss'
+             | None => raise pARSE_ERR "parse_list: unexpected end of input" ss'
+        end
+    and
+    bindings p =
+    case p
+     of (stk,ss) =>
+        case lex ss
+         of Some (StringLit s,ss') =>
+            (case lex ss'
+              of Some (Colon, ss'') =>
+	               let val (stk',ss3) = parse (String s::stk,ss'')
+                 in case lex ss3
+	                   of Some (Comma,ss4) => bindings (stk',ss4)
+		                  | Some (Rbrace,ss4) => toAList (stk',ss4) []
+                      | other => raise pARSE_ERR "parse_alist: unexpected lexeme" ss3
+	               end
+	             | other => raise pARSE_ERR
+			                          "parse_alist: expect a colon after a string literal" ss'
+            )
+          | other => raise pARSE_ERR "parse_alist: expected a key-value pair" ss
+
+fun parseMany p =
+    let
+        val (bs, ss') = parse p
+    in
+        if (isEmpty ss')
+        then bs
+        else case bs
+              of [] => parseMany ([], ss')
+               | [al]  => al::(parseMany ([], ss'))
+               | als => List.concat [als, (parseMany ([], ss'))]
+    end
+
+(* simple tests. *)
+(* val _ = parse ([], "") *)
+(* val _ = print "I did not fail\n" *)
+(* val _ = parse ([], "     ") *)
+(* val _ = print "I also did not fail\n" *)
+(* val _ = parse ([], "[1, 23, 4]"); *)
+(* parse ([], "{\"foo\" : 1, \"bar\" : 2}"); *)
+(* parse ([], "{\"foo\" : [1, 23, 4], \"bar\" : 2}"); *)
+
+(*---------------------------------------------------------------------------*)
+(* Wrapped-up versions ready to use on a variety of types (substrings,       *)
+(* strings, and files). These return (json list * substring)                 *)
+(*---------------------------------------------------------------------------*)
+
+(* fun fromSubstring ss = parse ([], ss); *)
+(* We don't have substring *)
+(* val fromString = fromSubstring o Substring.full; *)
+
+fun fromFile filename =
+ let
+     val istrm = TextIO.openIn filename
+     val ss = TextIO.inputAll istrm
+     val _ = TextIO.closeIn istrm
+ in
+     parse ([], ss)
+ end
+
+fun fromFileMany filename =
+    let
+        val istrm = TextIO.openIn filename
+        val ss = TextIO.inputAll istrm
+        val _ = TextIO.closeIn istrm
+    in
+        ((parseMany ([], ss)), "")
+    end
+end
+(* Depends on Json *)
+
+(* Extensions to structures in the standard library *)
+
+structure ListExtra = struct
+    (* int -> 'a -> 'a list *)
+    fun replicate len a = List.genlist (const a) len
+
+    (* 'a list -> 'b list -> ('a * 'b) list *)
+    fun zip a b = List.zip (a, b)
+
+    (* ('a -> 'b -> 'c) -> 'a list -> 'b list -> 'c list *)
+    fun zipWith f al bl = List.map (uncurry f) (zip al bl)
+
+    (* 'a -> 'a list -> 'a list *)
+    fun intersperse a alist = case alist of
+          h1 :: h2 :: t => h1 :: a :: (intersperse a (h2 :: t))
+        | _ => alist
+end
+
+structure OptionExtra = struct 
+    (* 'b -> ('a -> 'b) 'a option -> 'b *)
+    fun option b f opt = case opt of 
+          Some a => f a 
+        | None   => b
+end
+
+structure CharExtra = struct 
+    val null = Char.chr 0
+end
+
+structure StringExtra = struct
+    (* int -> string -> string * string *)
+    fun splitAt i s =
+        if i <= 0 then 
+            ("", s)
+        else if i >= String.size s - 1 then 
+            (s, "")
+        else
+            (String.substring s 0 i, String.extract s i None)
+
+    (* string -> string *)
+    val rev = String.implode o List.rev o String.explode
+
+    (* string -> string *)
+    (* Cuts the string off at the first null char *)
+    val toCString = String.implode o List.takeUntil ((op =) CharExtra.null) o String.explode
+
+    (* (char -> char) -> string -> string *)
+    val map = String.translate
+
+    (* (char -> 'a -> 'a) -> 'a -> string -> 'a *)
+    fun foldr f z s = List.foldr f z (String.explode s)
+
+    (* (int -> char -> 'a -> 'a) -> 'a -> string -> 'a *)
+    fun foldri f z s = List.foldri f z (String.explode s)
+
+    (* ('a -> char -> 'a) -> 'a -> string -> 'a *)
+    fun foldl f z s = List.foldl f z (String.explode s)
+
+    (* (int -> 'a -> char -> 'a) -> 'a -> string -> 'a *)
+    (* Seems to be a typo in the standard library. Should be "List.foldli" *)
+    fun foldli f z s = List.foldi f z (String.explode s)
+end
+
+structure Word8Extra = struct 
+    val null = Word8.fromInt 0
+
+    local
+        val maskUpper = Word8.fromInt 15 (* = 0x0F = 0b00001111 *)
+        val hexits = Array.fromList ["0","1","2","3","4","5","6","7","8","9",
+                                     "A","B","C","D","E","F"]
+        val getHexit = Array.sub hexits
+    in
+        (* word8 -> string *)
+        fun toHex w =
+            let val top = Word8.toInt (Word8.>> w 4)
+                val bot = Word8.toInt (Word8.andb w maskUpper)
+             in getHexit top ^ getHexit bot
+            end
+    end
+
+    exception InvalidHex
+    local
+        val bytes = Array.tabulate 16 Word8.fromInt
+        fun hexMap h = case h
+          of #"0" => 0  | #"1" => 1  | #"2" => 2  | #"3" => 3  | #"4" => 4
+           | #"5" => 5  | #"6" => 6  | #"7" => 7  | #"8" => 8  | #"9" => 9
+           | #"a" => 10 | #"A" => 10 | #"b" => 11 | #"B" => 11
+           | #"c" => 12 | #"C" => 12 | #"d" => 13 | #"D" => 13
+           | #"e" => 14 | #"E" => 14 | #"f" => 15 | #"F" => 15
+           |   _  => raise InvalidHex
+        val getHalfByte = Array.sub bytes o hexMap
+    in
+        fun fromHex s =
+            let val top = String.sub s 0
+                val bot = String.sub s 1
+             in Word8.orb (Word8.<< (getHalfByte top) 4) (getHalfByte bot)
+            end
+    end
+end
+
+structure Word8ArrayExtra = struct 
+    fun nulls len = Word8Array.array len Word8Extra.null
+
+    val empty = Word8Array.array 0 Word8Extra.null
+end
+
+structure TextIOExtra = struct 
+    (* string -> () *)
+    fun printLn s = TextIO.print (s ^ "\n")
+
+    (* string -> () *)
+    fun printLn_err s = TextIO.print_err (s ^ "\n")
+end
+
+structure JsonExtra = struct 
+    (* string -> Json.json *)
+    fun parse str = List.hd (fst (Json.parse ([], str)))
+
+    (* Json.json -> string *)
+    fun toString js = Json.print_json js 0
+end
+(* Depends on Extra *)
+
+(*
+This is an implementation for ByteStrings which somewhat resembles the Haskell
+ByteString library.
+*)
+
+structure BString = struct 
+    local 
+        datatype bstring = Bs string
+        
+        (* (string -> a) -> bstring -> a *)
+        fun applyStr f bs = case bs of Bs s => f s
+
+        (* (string -> string) -> bstring -> bstring *)
+        fun mapStr f bs = case bs of Bs s => Bs (f s)
+
+        val nullChar = Char.chr 0
+        val nullCharStr = String.str nullChar
+
+        (* word8 -> char *)
+        val word8ToChar = Char.chr o Word8.toInt
+
+        (* char -> word8 *)
+        val charToWord8 = Word8.fromInt o Char.ord
+    in 
+        type bstring = bstring
+
+        datatype endianness = BigEndian | LittleEndian
+
+        val empty = Bs ""
+        val nullByte = Bs nullCharStr
+
+        (* word8 -> bstring *)
+        fun singleton w = Bs (String.str (word8ToChar w))
+
+        (* word8 list -> bstring *)
+        fun implode l = Bs (String.implode (List.map word8ToChar l))
+
+        (* bstring -> word8 list *)
+        val explode = applyStr (List.map charToWord8 o String.explode)
+ 
+        (* endianness -> word8 list -> bstring *)
+        fun implodeEnd endian = case endian of
+              LittleEndian => implode o List.rev
+            | BigEndian    => implode
+
+        (* endianness -> bstring -> word8 list *)
+        fun explodeEnd endian = case endian of 
+              LittleEndian => List.rev o explode
+            | BigEndian    => explode
+
+        (* int -> word8 -> bstring *)
+        fun replicate len w = implode (ListExtra.replicate len w)
+
+        (* int -> bstring *)
+        fun nulls len = replicate len Word8Extra.null
+
+        (* bstring -> int *)
+        val length = applyStr String.size
+
+        (* bstring -> int -> word8 *)
+        fun sub bs i = case bs of Bs s => charToWord8 (String.sub s i)
+
+        (* bstring -> bstring *)
+        val rev = mapStr StringExtra.rev
+
+        (* int -> int -> bstring -> bstring *)
+        fun substring i j = mapStr (fn s => String.substring s i j)
+
+        (* bstring -> bstring -> bstring *)
+        fun concat bs1 bs2 = case (bs1, bs2) of (Bs s1, Bs s2) => Bs (s1 ^ s2)
+
+        (* bstring list -> bstring *)
+        val concatList = List.foldr concat empty
+
+        (* bstring -> bool *)
+        fun isEmpty bs = bs = empty
+
+        (* bstring -> word8 *)
+        val hd = List.hd o explode
+
+        (* bstring -> bstring *)
+        val tl = implode o List.tl o explode
+
+        (* bstring -> string *)
+        (* Note that this is a "naive cast". The resulting string may contain
+           non-printable characters. Use `show` for printing purposes. *)
+        val toString = applyStr id
+
+        (* string -> bstring *)
+        fun fromString s = Bs s
+
+        (* bstring -> string *)
+        val toCString = applyStr StringExtra.toCString
+
+        (* string -> bstring *)
+        fun fromCString s = Bs (StringExtra.toCString s)
+
+        (* (word8 -> bool) -> bstring -> bstring list *)
+        fun tokens f = List.map fromString o applyStr (String.tokens (f o charToWord8))
+
+        (* bstring -> string *)
+        val show = String.concat o List.map Word8Extra.toHex o explode
+
+        (* string -> bstring *)
+        fun unshow s = case String.size s of 
+              0 => empty
+            | 1 => raise Word8Extra.InvalidHex
+            | _ => case StringExtra.splitAt 2 s of 
+                  (hexByte, s') => concat (singleton (Word8Extra.fromHex hexByte)) (unshow s')
+
+        (* (word8 -> word8) -> bstring -> bstring *)
+        fun map f = mapStr (StringExtra.map (word8ToChar o f o charToWord8))
+
+        (* (word8 -> 'a -> 'a) -> 'a -> bstring -> 'a *)
+        fun foldr f = applyStr o StringExtra.foldr (f o charToWord8)
+
+        (* (int -> word8 -> 'a -> 'a) -> 'a -> bstring -> 'a *)
+        fun foldri f = applyStr o StringExtra.foldri (fn i => f i o charToWord8)
+
+        (* ('a -> word8 -> 'a) -> 'a -> bstring -> 'a *)
+        fun foldl f = applyStr o StringExtra.foldl (fn a => f a o charToWord8)
+
+        (* (int -> 'a -> word8 -> 'a) -> 'a -> bstring -> 'a *)
+        fun foldli f = applyStr o StringExtra.foldli (fn i => fn a => f i a o charToWord8)
+
+        (* bstring -> byte_array *)
+        fun toByteArray bs = case bs of Bs s =>
+            let val len = String.size s
+                val arr = Word8Array.array len Word8Extra.null
+             in Word8Array.copyVec s 0 len arr 0;
+                arr
+            end 
+
+        (* byte_array -> bstring *)
+        fun fromByteArray arr = Bs (Word8Array.substring arr 0 (Word8Array.length arr))
+
+        (* int -> bstring -> bstring * bstring *)
+        fun splitAt i bs =
+            case bs of Bs s =>
+                case StringExtra.splitAt i s of (s1, s2) =>
+                    (Bs s1, Bs s2)
+
+        (* endianness -> int -> bstring -> bstring *)
+        fun toLength endian toLen bs = 
+            let val bsLen = length bs
+                fun toLengthLittle () = case Int.compare toLen bsLen of 
+                      Less    => substring 0 toLen bs
+                    | Equal   => bs
+                    | Greater => concat bs (nulls (toLen - bsLen))
+                fun toLengthBig () = case Int.compare toLen bsLen of 
+                      Less    => substring (bsLen - toLen - 1) (bsLen - 1) bs
+                    | Equal   => bs
+                    | Greater => concat (nulls (toLen - bsLen)) bs
+             in case endian of 
+                      LittleEndian => toLengthLittle ()
+                    | BigEndian    => toLengthBig ()
+            end
+
+        (* endianness -> bstring -> bstring -> bstring *)
+        fun xor endian bs1 bs2 = 
+            let val len = max (length bs1) (length bs2)
+                val padded_bs1 = toLength endian len bs1
+                val padded_bs2 = toLength endian len bs1
+             in implode (ListExtra.zipWith Word8.xorb (explode padded_bs1) (explode padded_bs2))
+            end
+
+        (* endian -> bstring -> int *)
+        (* Interprets bs as an unsigned integer *)
+        fun toInt endian bs =
+            let val toIntLittle = foldr (fn w => fn n => (Word8.toInt w) + (n * 256)) 0
+             in case endian of 
+                      LittleEndian => toIntLittle bs
+                    | BigEndian    => toIntLittle (rev bs)
+            end
+
+        (* endian -> int -> bstring *)
+        (* Assumes non-negative i *)
+        fun fromInt endian i = 
+            let fun fromNatLittle i = 
+                    if i = 0 then 
+                        empty 
+                    else
+                        concat (singleton (Word8.fromInt (i mod 256)))
+                               (fromNatLittle (i div 256))
+             in if i <= 0 then empty else
+                case endian of 
+                      LittleEndian => fromNatLittle i 
+                    | BigEndian    => rev (fromNatLittle i)
+            end
+
+        (* int -> endian -> int -> bstring *)
+        fun fromIntLength len endian = toLength endian len o fromInt endian
+    end
+end(* Depends on Extra, ByteString *)
+
+exception Undef
+
+(* () -> 'a *)
+fun undefined () = (
+    TextIO.print_err "Undefined value encountered";
+    raise Undef
+)
+
+datatype ('a, 'e) result = 
+      Ok  'a
+    | Err 'e
+
+structure Result = struct 
+    (* ('a -> 'c) -> ('b -> 'c) -> ('a, 'b) result -> 'c *)
+    fun result fo fe res = case res of 
+          Ok  a => fo a
+        | Err e => fe e
+
+    (* ('a -> 'b) -> ('a, 'e) result -> ('b, 'e) result *)
+    fun map f res = case res of 
+          Ok  a => Ok (f a)
+        | Err e => Err e
+
+    (* (('a, 'e) result, 'e) result -> ('a, 'e) result *)
+    fun join res = case res of 
+          Ok  res' => res' 
+        | Err e    => Err e
+
+    (* ('a -> ('b, 'e) result) -> ('a, 'e) result -> ('b, 'e) result *)
+    fun bind f = join o map f
+end
+
+structure FFI = struct 
+    type ffi = string -> byte_array -> unit
+
+    val success = Word8.fromInt 0
+    val failure = Word8.fromInt 1
+    val bufferTooSmall = Word8.fromInt 2
+
+    (* ffi -> int -> bstring -> bstring *)
+    fun call ffi len input = 
+        let val out = Word8ArrayExtra.nulls len 
+        in ffi (BString.toString input) out;
+            BString.fromByteArray out 
+        end
+
+    (* ffi -> bstring -> () *)
+    fun callNoOut ffi input = (call ffi 0 input; ())
+
+    (* ffi -> int -> bstring -> bstring option *)
+    fun callOpt ffi len input = 
+        let val result = call ffi (len+1) input
+         in if BString.hd result = success then 
+                Some (BString.tl result)
+            else 
+                None
+        end
+
+    (* ffi -> int -> bstring -> bstring option *)
+    fun callOptFlex ffi defaultLen input = 
+        let fun callOptFlex_aux len = 
+                let val result = call ffi len input
+                    val status = BString.hd result
+                 in if status = success then 
+                        Some (BString.tl result)
+                    else if status = failure then 
+                        None
+                    else 
+                        callOptFlex_aux (len*2)
+                end
+         in callOptFlex_aux defaultLen
+        end
+    
+    (* ffi -> bstring -> bool *)
+    fun callBool ffi input = BString.hd (call ffi 1 input) = success
+
+    local 
+        val wbuf = Word8ArrayExtra.nulls 2
+    in
+        (* int -> bstring *)
+        fun n2w2 i = (
+            Marshalling.n2w2 i wbuf 0;
+            BString.fromByteArray wbuf
+        )
+    end
+
+    (* string list -> bstring *)
+    val nullSeparated = BString.concatList
+                      o ListExtra.intersperse BString.nullByte
+                      o List.map BString.fromString
+end
+
+(* bool -> (() -> ()) -> () *)
+fun when cond io = if cond then io () else ()
+
+(* 'a option -> ('a -> ()) -> () *)
+fun whenSome opt io = OptionExtra.option () io opt
+
+(* ('a, 'e) result -> ('a -> ()) -> () *)
+fun whenOk res io = Result.result io (const ()) res
+
+(* ('a -> 'b) -> 'a -> 'c *)
+fun loop io x = (
+    io x;
+    loop io x
+)(* No external dependencies *)
+
+(* Default Coq *)
+
+datatype nat = O
+             | S nat
+
+fun natToInt n =
+    case n
+     of O => 0
+      | S n' => 1 + natToInt n'
+
+fun natFromInt i = if i < 0
+                   then O
+                   else if i = 0
+                        then O
+                        else S (natFromInt (i - 1))
+
+val natToString = Int.toString o natToInt
+
+fun nat_plus n m =
+    case n of O => m
+            | S n' => S (nat_plus n' m)
+
+fun nat_minus n m =
+    case n of O => O
+            | S n' => case m of O => n
+                              | S m' => (nat_minus n' m')
+
+fun nat_eq n m =
+    case n of O => (case m of O => True | _ => False)
+            | S n' => (case m of S m' => nat_eq n' m' | _ => False)
+
+fun nat_leb n m =
+    case n of O => True
+            | S n' => (case m of S m' => nat_leb n' m' | O => False)
+
+fun nat_compare n m = case (n, m)
+    of (S n', S m') => nat_compare n' m'
+     | (S n', O) => Greater
+     | (O, S m') => Less
+     | (O, O) => Equal
+
+fun nat_length l =
+    case l of
+        [] => O
+      | h::t => S (nat_length t)
+
+val one = S O
+
+(* List functions *)
+fun list_at l (n : nat) =
+    case l of [] => None
+            | h :: t => (case n of O => Some h
+                                 | S n' => list_at t n')
+
+fun listToString l f = String.concat [ "[", listToStringInner l f, "]" ]
+and listToStringInner l f =
+    case l
+     of [] => ""
+      | x::[] => f x
+      | x::xs => String.concat [(f x), ", ", (listToStringInner xs f)]
+
+fun concatWith s l =
+    case l
+     of [] => ""
+      | x::[] => x
+      | x::xs => x ^ s ^ (concatWith s xs)
+
+(* Map functions *)
+
+type ('a, 'b) mymap = ('a * 'b) list
+
+val map_empty = []
+
+fun map_get m x = case m
+                   of [] => None
+                    | ((k,v)::ms) => if k = x then Some v else map_get ms x
+
+fun map_set m k v = (k,v)::m
+
+fun map_dom m = case m
+                 of [] => []
+                  | ((i,a)::ms) => i :: map_dom ms
+
+(* It'd be nice if this could work *)
+(* 'f = 'a -> 'a -> order *)
+(* type ('a, 'b, 'f) map = ('a * 'b) list * 'f *)
+
+(* fun map_empty cmp_f = ([], cmp_f) *)
+
+(* fun map_get m x = *)
+(*     (* case m of *) *)
+(*         (* (m' f) => Map.lookup f *) *)
+(*     let val (m', f) = m *)
+(*     in case m' *)
+(*         of [] => None *)
+(*          | _  => let val m'' = Map.fromList f m' in Map.lookup f x m'' end *)
+(*     end *)
+
+(* fun map_set m i v = let val (m', f) = m *)
+(*                     in let val m'' = Map.fromList f m' *)
+(*                        in let val m''' = Map.toAscList (Map.insert f i v m'') *)
+(*                           in (m''', f) *)
+(*                           end *)
+(*                        end *)
+(*                     end *)
+
+(* fun map_dom m = let val (m', f) = m *)
+(*                 in case m' *)
+(*                     of [] => [] *)
+(*                      | ((i,a)::ms) => i :: map_dom (ms, f) *)
+(*                 end *)
+
+(* Pair functions *)
+fun pair_compare p f1 f2 = let val (p1, p2) = p in
+                               let val fst_cmp = f1 p1 in
+                                   if fst_cmp = Equal
+                                   then f2 p2
+                                   else fst_cmp
+                               end
+                           end
+(* Depends on: util *)
+
+datatype id = Id nat
+fun id_compare (Id i) (Id j) = nat_compare i j
+fun idToString (Id i) = "Id " ^ natToString i
+
+type pl = nat
+val plToString = natToString
+
+type asp_id = id
+val aspIdToString = idToString
+
+type arg = string
+fun argToString a = a
+
+datatype sp = ALL | NONE
+fun spToString s = case s of
+      ALL  => "ALL"
+    | NONE => "NONE"
+
+(* ASTs *)
+
+datatype asp =
+      Cpy
+    | Aspc asp_id (arg list)
+    | Sig
+    | Hsh
+
+datatype term =
+      Asp asp
+    | Att pl term
+    | Lseq term term
+    | Bseq (sp * sp) term term
+    | Bpar (sp * sp) term term
+
+datatype primInstr =
+      Copy
+    | Umeas asp_id (arg list)
+    | Sign
+    | Hash
+
+datatype instr =
+      PrimInstr primInstr
+    | Split sp sp
+    | Joins
+    | Joinp
+    | Reqrpy pl term
+    | Besr
+    | Bep (instr list) (instr list)
+
+fun aspToString asp = case asp of
+      Cpy => "Cpy"
+    | Sig => "Sig"
+    | Hsh => "Hsh"
+    | Aspc aid al => concatWith " " ["(Aspc", aspIdToString aid, listToString al argToString, ")"]
+
+fun termToString t = concatWith " "
+    let fun parens t = "(" ^ termToString t ^ ")"
+        fun pairToString s1 s2 = "(" ^ s1 ^ ", " ^ s2 ^ ")"
+     in case t of
+          Asp a => ["Asp", aspToString a]
+        | Att p t => ["Att", plToString p, parens t]
+        | Lseq t1 t2 => ["Lseq", parens t1, parens t2]
+        | Bseq (s1, s2) t1 t2 => ["Bseq", pairToString (spToString s1) (spToString s2), parens t1, parens t2]
+        | Bpar (s1, s2) t1 t2 => ["Bpar", pairToString (spToString s1) (spToString s2), parens t1, parens t2]
+    end
+
+(* Evidence *)
+
+type n_id = id
+val nIdToString = idToString
+
+local type bs = BString.bstring in
+datatype ev =
+      Mt
+    | U asp_id (arg list) bs ev
+    | G bs ev
+    | H bs
+    | N n_id bs ev
+    | SS ev ev
+    | PP ev ev
+end
+
+fun evToString e = concatWith " "
+    let fun parens e = "(" ^ evToString e ^ ")"
+     in case e of
+          Mt           => ["Mt"]
+        | U i al bs ev => ["U", aspIdToString i, listToString al argToString, BString.show bs, parens ev]
+        | G bs ev      => ["G", BString.show bs, parens ev]
+        | H bs         => ["H", BString.show bs]
+        | N i bs ev    => ["N", nIdToString i, BString.show bs, parens ev]
+        | SS ev1 ev2   => ["SS", parens ev1, parens ev2]
+        | PP ev1 ev2   => ["PP", parens ev1, parens ev2]
+    end
+
+(* ev -> bstring *)
+val encodeEv =
+    let fun evList ev = case ev of
+          Mt         => [BString.empty]
+        | U _ _ bs e => bs :: evList e
+        | G bs e     => bs :: evList e
+        | H bs       => [bs]
+        | N _ bs e   => bs :: evList e
+        | SS e1 e2   => evList e1 @ evList e2
+        | PP e1 e2   => evList e1 @ evList e2
+     in BString.concatList o evList
+    end
+(* Depends on: util, copland/Instr *)
+
+local type bs = BString.bstring in
+type copEval = ev -> term -> ev
+type key = bs
+type usm = arg list -> bs
+
+(* Does am need both key and sign? Sign could just be specialized
+   to `bs -> bs`. *)
+datatype am = Am
+    pl                (* me *)
+    (pl -> copEval)   (* remote dispatcher *)
+    ((id, usm) map)   (* usm map *)
+    key               (* private key *)
+    (key -> bs -> bs) (* sign function *)
+    (bs -> bs)        (* hash function *)
+end
+
+fun me       (Am x _ _ _ _ _) = x
+fun dispatch (Am _ x _ _ _ _) = x
+fun usmMap   (Am _ _ x _ _ _) = x
+fun privKey  (Am _ _ _ x _ _) = x
+fun sign     (Am _ _ _ _ x _) = x
+fun hash     (Am _ _ _ _ _ x) = x
+
+fun setMe       (Am _ d u p s h) m = Am m d u p s h
+fun setDispatch (Am m _ u p s h) d = Am m d u p s h
+fun setUsmMap   (Am m d _ p s h) u = Am m d u p s h
+fun setPrivKey  (Am m d u _ s h) p = Am m d u p s h
+fun setSign     (Am m d u p _ h) s = Am m d u p s h
+fun setHash     (Am m d u p s _) h = Am m d u p s h
+
+fun signEv am priv = sign am priv o encodeEv
+fun genHash am = hash am o encodeEv
+
+exception USMexpn string
+fun measureUsm map id args = case Map.lookup map id of
+      Some f => f args
+    | None   => raise USMexpn "USM id not found"
+(* Depends on: util, Instr.sml, AM.sml *)
+
+(* sp -> ev -> ev *)
+fun splitEv s e = case s of
+      ALL  => e
+    | NONE => Mt
+
+(* asp -> primInstr *)
+fun aspInstr a = case a of
+      Cpy         => Copy
+    | Aspc i args => Umeas i args
+    | Sig         => Sign
+    | Hsh         => Hash
+
+(* term -> instr list *)
+fun instrCompiler t = case t of
+      Asp a      => [PrimInstr (aspInstr a)]
+    | Att q t'   => [Reqrpy q t']
+    | Lseq t1 t2 => instrCompiler t1 @ instrCompiler t2
+    | Bseq (sp1, sp2) t1 t2 =>
+        Split sp1 sp2 :: instrCompiler t1 @ Besr :: instrCompiler t2 @ [Joins]
+    | Bpar (sp1, sp2) t1 t2 =>
+        [Split sp1 sp2, Bep (instrCompiler t1) (instrCompiler t2), Joinp]
+
+(* primInstr -> ev -> ev *)
+fun primEv am i e = case i of
+      Umeas id args => U id args (measureUsm (usmMap am) id args) e
+    | Copy => e
+    | Sign => G (signEv am (privKey am) e) e
+    | Hash => H (genHash am e)
+
+(* This function diverges significantly from the Coq implementation.
+   It may prove necessary to rewrite it in the original's monadic style. *)
+(* am -> ev -> instr list -> ev*)
+fun evalVm am e =
+    let val parallel_att_vm_thread = evalVm am
+        (* ev * ev list -> instr -> ev * ev list*)
+        fun vmStep (e, stack) i = case i of
+              PrimInstr p => (primEv am p e, stack)
+            | Split s1 s2 => (splitEv s1 e, (splitEv s2 e)::stack)
+            | Joins => (SS (List.hd stack) e, List.tl stack)
+            | Joinp => (PP (List.hd stack) e, List.tl stack)
+            | Reqrpy pl' t => (dispatch am pl' e t, stack)
+            | Besr => (List.hd stack, e::(List.tl stack))
+            | Bep il1 il2 => (parallel_att_vm_thread e il1,
+                (parallel_att_vm_thread (List.hd stack) il2)::(List.tl stack))
+
+     in fst o List.foldl vmStep (e, []) end
+
+(* am -> CopEval *)
+fun evalTerm am e = evalVm am e o instrCompiler
+(* Depends on: util, copland/Instr *)
+
+fun intToJson n = Json.Number (Json.Int n)
+
+fun stringToJson s = Json.String s
+
+fun stringListToJsonList args  =  Json.List (List.map stringToJson args)
+
+fun byteStringToJson bs = Json.String (BString.show bs)
+
+fun idToJson (Id a) = Json.Number (Json.Int (natToInt a))
+
+fun placeToJson pl = Json.Number (Json.Int (natToInt pl))
+
+fun spPairToJson (sp1, sp2) = Json.List [ Json.String  (spToString sp1), Json.String (spToString sp2)]
+
+fun nsMapToJson map =
+    let fun jsonify (pl, addr) = (plToString pl, Json.String addr)
+     in Json.AList (List.map jsonify (Map.toAscList map))
+    end
+
+fun noArgConstructor cName = Json.AList [("constructor", stringToJson cName )]
+
+fun constructorWithArgs cName arglist = Json.AList [("constructor", stringToJson cName),
+                                                    ("data", Json.List arglist)]
+
+fun aspToJson asp = case asp of
+      Cpy => noArgConstructor "Cpy"
+    | Aspc aspid args => constructorWithArgs "Aspc" [idToJson aspid, stringListToJsonList args]
+    | Sig => noArgConstructor "Sig"
+    | Hsh => noArgConstructor "Hsh"
+
+fun termToJson term = case term of
+      Asp asp      => constructorWithArgs "Asp"  [aspToJson asp]
+    | Att pl t     => constructorWithArgs "Att"  [placeToJson pl, termToJson t]
+    | Lseq t1 t2   => constructorWithArgs "Lseq" [termToJson t1, termToJson t2]
+    | Bseq p t1 t2 => constructorWithArgs "Bseq" [spPairToJson p, termToJson t1, termToJson t2]
+    | Bpar p t1 t2 => constructorWithArgs "Bpar" [spPairToJson p, termToJson t1, termToJson t2]
+    |  _ =>  raise  Json.ERR "termToJson" "Unexpected constructor for APDT term: "
+
+fun evToJson e = case e of
+      Mt => noArgConstructor "Mt"
+    | U aid args bs ev => constructorWithArgs "U" [idToJson aid, stringListToJsonList args, byteStringToJson bs, evToJson ev]
+    | G bs ev => constructorWithArgs "G" [byteStringToJson bs, evToJson ev]
+    | H bs => constructorWithArgs "H" [byteStringToJson bs]
+    | N id bs ev => constructorWithArgs "N" [idToJson id, byteStringToJson bs, evToJson ev]
+    | SS ev1 ev2 => constructorWithArgs "SS" [evToJson ev1, evToJson ev2]
+    | PP ev1 ev2 => constructorWithArgs "PP" [evToJson ev1, evToJson ev2]
+(* Depends on: util, copland/Instr *)
+
+fun stringToSp n =
+    case n
+    of  "ALL" => ALL
+    |   "NONE" => NONE
+
+fun jsonStringToString (Json.String s) = s
+fun jsonStringListToList (Json.List args)  = List.map jsonStringToString args
+
+fun jsonStringToBS (Json.String s) = BString.unshow s
+
+(* json object to apdt object *)
+fun jsonToTerm js = case js of
+      Json.AList js' => fromAList js'
+    | _ => raise Json.ERR "jsonToTerm" "Copland term does not begin as an AList"
+
+    and
+    fromAList pairs = case pairs of
+          [("constructor", constructorVal), ("data", args)] => getTerm constructorVal args
+        | [("data", args), ("constructor", constructorVal)] => getTerm constructorVal args
+        | _ => raise Json.ERR "fromAList" "does not contain just constructor and data pairs"
+
+    and
+    getTerm (Json.String constructor) (Json.List args) = case constructor of
+          "Asp"  => Asp (getAsp args)
+        | "Att"  => getAtt  args
+        | "Lseq" => getLseq args
+        | "Bseq" => getBseq args
+        | "Bpar" => getBpar args
+        |  _ => raise Json.ERR "getTerm" ("Unexpected constructor for Copland term: " ^ constructor)
+
+    and
+    getAsp data = case data of
+          [Json.AList js'] => getAspFromAList js'
+        | _ => raise Json.ERR "getAsp" "Copland Asp term does not begin as an AList"
+
+    and
+    getAspFromAList data = case data of
+          [("constructor", constructorVal)] => getAspNullaryConstructor constructorVal
+        | [("constructor", Json.String "Aspc"), ("data", args)] => getAspc args
+        | [("data", args), ("constructor", Json.String "Aspc")] => getAspc args
+        | _ => raise Json.ERR "getAspFromAList" "does not contain just constructor and data pairs"
+
+    and
+    getAspNullaryConstructor (Json.String constructor) = case constructor of
+          "Cpy" => Cpy
+        | "Sig" => Sig
+        | "Hsh" => Hsh
+        | _ => raise Json.ERR "getAspNullaryConstructor" ("Unexpected constructor for Copland Asp term: " ^ constructor)
+
+    and
+    getAspc (Json.List args) = case args of
+          [Json.Number (Json.Int aspId), args] => Aspc (Id (natFromInt aspId)) (jsonStringListToList args)
+        | _ => raise Json.ERR "getAspc" "unexpected argument list"
+
+    and
+    getAtt data = case data of
+          [ Json.Number (Json.Int place), term] => Att(natFromInt place) (jsonToTerm term)
+        | _ => raise  Json.ERR "getAtt" "unexpected argument list"
+
+    and
+    getLseq data = case data of
+          [term1, term2] => Lseq (jsonToTerm term1) (jsonToTerm term2)
+        | _ => raise  Json.ERR "getLseq" "unexpected argument list"
+
+    and
+    getBseq data = case data of
+          [ Json.List [ (Json.String sp1), (Json.String sp2)], term1, term2] =>
+            Bseq (stringToSp sp1, stringToSp sp2) (jsonToTerm term1) (jsonToTerm term2)
+        | _ => raise  Json.ERR "getBseq" "unexpected argument list"
+
+    and
+    getBpar data = case data of
+          [ Json.List [ (Json.String sp1), (Json.String sp2)], term1, term2] =>
+            Bpar (stringToSp sp1, stringToSp sp2) (jsonToTerm term1) (jsonToTerm term2)
+        | _ => raise  Json.ERR "getBpar" "unexpected argument list"
+
+
+(* json object to ev object *)
+fun jsonToEv js =case js of
+      Json.AList js' => fromAList js'
+    | _ =>  raise  Json.ERR "JsonToEv" "Copland evidence does not begin as an AList"
+
+    and
+    fromAList pairs = case pairs of
+          [("constructor", constructorVal)] => handleNullConstructor constructorVal
+        | [("constructor", constructorVal), ("data", args)] => handleConstructorWithArgs constructorVal args
+        | [("data", args),  ("constructor", constructorVal)]  => handleConstructorWithArgs constructorVal args
+        | _ =>  raise  Json.ERR "fromAList" "does not contain just constructor and data pairs"
+
+    and
+    handleNullConstructor (Json.String constructor) = case constructor of
+          "Mt" => Mt
+        | _ => raise Json.ERR "handleNullConstructor"  ("Unexpected Null constructor for Copland evidence: " ^constructor)
+
+    and
+    handleConstructorWithArgs (Json.String constructor) (Json.List args) = case constructor of
+          "U"  => getU  args
+        | "G"  => getG  args
+        | "H"  => getH  args
+        | "N"  => getN  args
+        | "SS" => getSS args
+        | "PP" => getPP args
+        |  _ => raise Json.ERR "handleConstructorWithArgs" ("Unexpected constructor for Copland evidence: "^ constructor)
+
+    and
+    getU data = case data of
+          [Json.Number (Json.Int aspId), args, bs, ev] =>
+            U (Id (natFromInt aspId)) (jsonStringListToList args) (jsonStringToBS bs) (jsonToEv ev)
+        | _ => raise Json.ERR "getU" "unexpected argument list"
+
+    and
+    getG data = case data of
+          [bs, ev] => G (jsonStringToBS bs) (jsonToEv ev)
+        | _ => raise Json.ERR "getG" "unexpected argument list"
+
+    and
+    getH data = case data of
+          [bs] => H (jsonStringToBS bs)
+        | _ => raise Json.ERR "getH" "unexpected argument list"
+
+    and
+    getN data = case data of
+          [Json.Number (Json.Int index), bs, ev] =>
+            N (Id (natFromInt index)) (jsonStringToBS bs) (jsonToEv ev)
+        | _ => raise Json.ERR "getN" "unexpected argument list"
+
+    and
+    getSS data = case data of
+          [ev1, ev2] => SS (jsonToEv ev1) (jsonToEv ev2)
+        | _ => raise Json.ERR "getSS" "unexpected argument list"
+
+    and
+    getPP data = case data of
+          [ev1, ev2] => PP (jsonToEv ev1) (jsonToEv ev2)
+        | _ => raise Json.ERR "getPP" "unexpected argument list"
+(* Depends on: Util *)
+
+(* Safe wrappers to FFI crypto functions *)
+structure Crypto = struct
+    exception Err string
+
+    local
+        fun ffi_sha512           x y = #(sha512)           x y
+        fun ffi_signMsg          x y = #(signMsg)          x y
+        fun ffi_sigCheck         x y = #(sigCheck)         x y
+        fun ffi_chacha20_encrypt x y = #(chacha20_encrypt) x y
+    in
+        (* bstring -> bstring *)
+        val hash = FFI.call ffi_sha512 64
+
+        (* bstring -> bstring -> bstring *)
+        fun signMsg priv msg =
+            if BString.length priv <> 32 then
+                raise (Err "Wrong private key size, Error in signMsg FFI")
+            else 
+                FFI.call ffi_signMsg 64 (BString.concat priv msg)
+
+
+        (* bstring -> bstring -> bstring -> bstring *)
+        fun sigCheck pub sign msg = 
+            if BString.length pub <> 64 then
+                raise (Err "Wrong public key size, Error in sigCheck FFI")
+            else
+                FFI.callBool ffi_sigCheck (BString.concatList [pub, sign, msg])
+
+        (* bstring -> bstring -> int -> bstring -> bstring *)
+        fun encrypt key nonce ctr text = 
+            let val ctr_bstring = BString.fromIntLength 4 BString.LittleEndian ctr
+                val payload = BString.concatList [key, nonce, ctr_bstring, text]
+             in FFI.call ffi_chacha20_encrypt (BString.length text) payload
+            end
+    end
+end
+(* Depends on: CryptoFFI *)
+
+structure Random = struct 
+    local 
+        datatype rng = Rng
+            BString.bstring (* key,   32 bytes *)
+            BString.bstring (* nonce, 12 bytes *)
+            (int ref)       (* ctr *)
+    in 
+        type rng = rng
+
+        (* bstring -> rng *)
+        (* argument should be 32 bytes *)
+        fun seed bs = Rng (BString.toLength BString.LittleEndian 32 bs) (BString.nulls 12) (Ref 0)
+
+        (* rng -> int -> bstring *)
+        fun random rng len = case rng of Rng key nonce ctr => 
+            let val result = Crypto.encrypt key nonce (!ctr) (BString.nulls len)
+             in ctr := !ctr + 1;
+                result
+            end
+    end
+end(* Depends on util *)
+
+datatype logType = Info | Debug | Error
+
+(* logType -> string -> () *)
+fun log lType msg =  case lType of
+      Info  => #(api_logInfo)  msg Word8ArrayExtra.empty
+    | Debug => #(api_logDebug) msg Word8ArrayExtra.empty
+    | Error => #(api_logError) msg Word8ArrayExtra.empty
+
+structure Control = struct 
+    (* ffi -> int -> bstring -> bstring option *)
+    fun getDataEvent ffi len input =
+        let val result = FFI.call ffi (len+1) input
+         in if BString.hd result <> (Word8.fromInt 0) then 
+                Some (BString.tl result)
+            else 
+                None
+        end
+
+    (* ffi -> bstring -> bool *)
+    fun getEvent ffi input = BString.hd (FFI.call ffi 1 input) <> (Word8.fromInt 0)
+
+    local 
+        fun receiveInput_ffi arg out = #(api_receiveInput)           arg out
+        fun sendOutput_ffi   arg out = #(api_sendOutput)             arg out
+        fun pacer_emit_ffi   arg out = #(sb_pacer_notification_emit) arg out
+        fun pacer_wait_ffi   arg out = #(sb_pacer_notification_wait) arg out
+
+        (* () -> () *)
+        fun receiveInput () = FFI.callNoOut receiveInput_ffi BString.empty
+
+        (* () -> () *)
+        fun sendOutput () = FFI.callNoOut sendOutput_ffi BString.empty
+
+        (* () -> bool *)
+        fun pacer_emit () = getEvent pacer_emit_ffi BString.empty
+
+        (* () -> bool *)
+        fun pacer_wait () = getEvent pacer_wait_ffi BString.empty
+
+        (* (() -> ()) -> 'a *)
+        fun controlLoop doStep = 
+            if pacer_wait () then (
+                receiveInput ();
+                doStep ();
+                sendOutput ();
+                pacer_emit ();
+                controlLoop doStep
+            ) else controlLoop doStep
+    in
+        (* TODO: rewrite to add to list of functions called in controlLoop? *)
+
+        (* Do not call more than once! *)
+        (* (() -> ()) -> 'a *)
+        fun entry doStep = (
+            pacer_emit ();
+            controlLoop doStep
+        )
+	end
+end
+val goldenHashes = List.map BString.unshow ["38A717D8F4F7C41B0B5570FF1B789339F9AF88D86547D220BCE6F2AFA8899719EDA3E58CE0AE44E1E7C02C49F279BD93D8373169418A01948D2229FA6B1E3D7F"](* Depends on util, copland, system/crypto *)
+
+(* UserAM dependencies *)
+fun dummyDispatch pl ev term = Mt
+val dummyUsmMap : (id, usm) map = Map.empty id_compare
+
+fun user_am priv = Am 
+    O 
+    dummyDispatch 
+    dummyUsmMap
+    priv 
+    Crypto.signMsg
+    Crypto.hash
+
+(* HeliAM dependencies *)
+(* term -> bstring -> bool option *)
+fun verifySig g pub =
+    case g
+      of G bs ev => Some (Crypto.sigCheck pub bs (encodeEv ev))
+       | _ => None
+
+local
+    val rng = Random.seed (BString.fromInt BString.LittleEndian 42)
+in 
+    fun genNonce () = Random.random rng 16
+end(* Depends on util, copland, HamrStandard, GoldenHashes, Fake/RealCrypto *)
+
+val pub = BString.unshow "490E2422528F14AC6A48DDB9D72CB30B8345AF2E939003BC7A33A6057F2FFB0101000000000000002DD0B7F53A560000A049D882A37F00000000000000000000"
+
+(* Hamr app-specific FFI functions *)
+local 
+    fun sendRequest_ffi    arg out = #(api_send_AttestationRequest) arg out
+    fun getResponse_ffi    arg out = #(api_get_AttestationResponse) arg out
+    fun sendTrustedIds_ffi arg out = #(api_send_TrustedIds)         arg out
+in
+    (* bstring -> () *)
+    fun sendRequest req = FFI.callNoOut sendRequest_ffi req
+
+    (* () -> bstring *)
+    fun getResponse () = Control.getDataEvent getResponse_ffi 2048 BString.empty
+
+    (* bstring -> () *)
+    fun sendTrustedIds trustedIds = 
+        let val length = BString.length trustedIds
+         in if length = 16 then
+                FFI.callNoOut sendTrustedIds_ffi trustedIds
+            else
+                log Error ("sendTrustedIds called with a " ^
+                           Int.toString length ^
+                           "-byte argument, but expected 16 bytes.")
+        end
+end
+
+val emptyId = BString.nulls 4
+local
+    val trusted_ids = Array.array 4 emptyId
+    val flatten_ids = Array.foldl BString.concat BString.empty
+in
+    (* bstring -> () *)
+    (* idempotent *)
+    fun addToWhitelist id = (
+        log Info ("Adding 0x" ^ BString.show id ^ " to the whitelist");
+        if Array.exists ((op =) id) trusted_ids then
+            log Info ("0x" ^ BString.show id ^ " already in the whitelist")
+        else case Array.findi (const ((op =) emptyId)) trusted_ids of
+                Some (i, _) => Array.update trusted_ids i id
+            | None => (
+                log Error "No room in the whitelist, overwriting first entry";
+                Array.update trusted_ids 0 id
+            );
+        sendTrustedIds (flatten_ids trusted_ids)
+    )
+
+    (* bstring -> () *)
+    (* idempotent *)
+    fun removeFromWhitelist id = (
+        log Info ("Removing 0x" ^ BString.show id ^ " from the whitelist");
+        case Array.findi (const ((op =) id)) trusted_ids of
+              Some (i, _) => Array.update trusted_ids i emptyId
+            | None => log Info "Connection not in the whitelist";
+        sendTrustedIds (flatten_ids trusted_ids)
+    )
+end
+
+(* bstring -> ev option *)
+fun parseResp resp = 
+    let val split = BString.splitAt 4 resp
+        val id    = fst split
+        val evStr = BString.toString (snd split)
+        val strToEv  = jsonToEv o JsonExtra.parse
+     in log Info ("Received id: " ^ BString.show id);
+        Some (id, strToEv evStr)
+    end handle _ => None
+
+(* bstring -> ev -> bool *)
+(* true if appraisal succeeds *)
+fun appraise nonce ev = case ev of
+      G evSign (SS (H evHash) (N _ evNonce Mt)) => 
+          if evNonce <> nonce then
+              (log Info "Appraisal failed, bad nonce"; False)
+          else if not (List.member evHash goldenHashes) then
+              (log Info "Appraisal failed, bad hash"; False)
+          else if not (Option.valOf (verifySig ev pub)) then
+              (log Info "Appraisal failed, bad signature"; False)
+          else
+              (log Info "Appraisal succeeded"; True)
+    | _ => (log Info "Unexpected evidence structure"; False)
+
+
+(* () -> bstring *)
+fun sendAttRequest () =
+    let val nonce = genNonce ()
+     in sendRequest nonce;
+        log Info ("Sending request: 0x" ^ BString.show nonce);
+        nonce
+    end
+
+datatype am_state =
+      SendingRequest
+    | GettingResponse BString.bstring (* nonce *)
+
+local
+    val att_len = 9 (* ~5 second attestation period *)
+    val pacer_count = Ref 0
+    fun incr count = count := (!count + 1) mod reattestation_period
+
+    val curr_state = Ref SendingRequest
+    val curr_id = Ref emptyId
+
+    fun reset () = (
+        if !curr_id <> emptyId then 
+            removeFromWhitelist (!curr_id)
+        else ();
+        curr_id := emptyId;
+        curr_state := SendingRequest;
+        pacer_count := 0
+    )
+in 
+    (* () -> () *)
+    fun attestation_step () = case !curr_state of
+          SendingRequest => (
+            if !pacer_count = 0 then 
+                curr_state := GettingResponse (sendAttRequest ())
+            else ();
+            incr pacer_count
+          )
+        | GettingResponse nonce => case getResponse () of
+              Some resp => (
+                case parseResp resp of
+                    Some (id, ev) =>
+                        if appraise nonce ev then (
+                            addToWhitelist id;
+                            curr_state := SendingRequest;
+                            incr pacer_count
+                        ) else reset ()
+                    | None => (
+                        log Info "Response failed to parse";
+                        reset ()
+                    )
+            )
+            | None => 
+                if !pacer_count = 0 then
+                    reset ()
+                else 
+                    incr pacer_count
+end
+
+(* Hamr entry point *)
+val _ = Control.entry attestation_step

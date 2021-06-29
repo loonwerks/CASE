@@ -1,0 +1,1338 @@
+structure Utils =
+struct
+
+exception ERR string string;
+
+fun stub s = raise ERR s "stub";
+
+fun total f x = Some (f x) handle _ => None;
+
+fun assert b s = if b then () else raise ERR s "assertion failure";
+
+val debugLevel = Ref 0;
+
+fun print s = if !debugLevel < 1 then () else TextIO.print s;
+
+fun println s = print (s^"\n");
+
+fun cons h t = h::t;
+
+fun first pred list =
+ case list
+  of [] => raise ERR "first" ""
+   | h::t => if pred h then h else first pred t;
+
+fun quote s = String.concat ["\"",s,"\""];
+
+fun take_drop n list =
+ if n <= List.length list
+  then Some(List.take list n,List.drop list n)
+  else None;
+
+fun front_last list =
+ let val _ = assert (not (List.null list)) "front_last: null input list"
+     fun flacc l acc =
+      case l
+       of [x] => (List.rev acc,x)
+        | h::t => flacc t (h::acc)
+ in flacc list []
+ end
+
+val w8char = Char.chr o Word8.toInt;
+val charw8 = Word8.fromInt o Char.ord;
+
+fun divmod i n = (Int.div i n, Int.mod i n);
+
+fun rev_itlist f list acc =
+ case list
+  of [] => acc
+   | h::t => rev_itlist f t (f h acc);
+
+fun itlist f list b =
+ case list
+  of [] => b
+   | h::t => f h (itlist f t b);
+
+fun upto lo hi = if lo > hi then [] else lo::upto(lo+1) hi;
+
+fun mapArray f array =
+  let val elts = Array.foldr cons [] array
+  in List.map f elts
+  end;
+
+fun mapByteArray f array =
+  let val top = Word8Array.length array
+      fun itFn i acc =
+          if i < top then
+	     itFn (i+1) (f (Word8Array.sub array i)::acc)
+          else List.rev acc
+  in itFn 0 []
+  end;
+
+fun firstOpt f list =
+ case list
+  of [] => None
+   | h::t =>
+ case f h
+  of None => firstOpt f t
+   | Some x => Some h;
+
+fun concatOpts optlist =
+    Some(List.concat(List.map Option.valOf optlist)) handle _ => None;
+
+fun strcatOpts optlist =
+    Some(String.concat(List.map Option.valOf optlist)) handle _ => None;
+
+fun filterOpt pred list = let
+   fun accFn list acc =
+    case list
+     of [] => Some (List.rev acc)
+      | h::t =>
+        case pred h
+         of None => None
+          | Some True => accFn t (h::acc)
+          | Some False => accFn t acc
+ in
+   accFn list []
+ end;
+
+(*---------------------------------------------------------------------------*)
+(* move from 'a option option to 'a option                                   *)
+(*---------------------------------------------------------------------------*)
+
+fun dropOpt errstring optOpt =
+ case optOpt
+  of None => None
+   | Some(Some x) => Some x
+   | Some None => raise ERR "dropOpt" errstring;
+
+fun pow b k =
+ let fun accFn k acc = if k <= 0 then acc else accFn (k-1) (acc * b)
+ in accFn k 1
+ end
+
+local
+   val pow2Arr = Array.fromList (List.map (pow 2) (upto 0 512));
+in
+fun twoExp n = Array.sub pow2Arr n handle _ => pow 2 n
+end;
+
+val w8zero = Word8.fromInt 0;
+val w64FF = Word64.fromInt 255;
+
+fun bytes2string bytes = String.implode (List.map w8char bytes);
+
+fun byte_array_fromList list =
+ let val arr = Word8Array.array (List.length list) w8zero
+     fun appFn i list =
+        case list
+         of [] => ()
+          | h::t => (Word8Array.update arr i h; appFn (i+1) t)
+ in appFn 0 list;
+    arr
+ end;
+
+val emptybuf = Word8Array.array 0 w8zero;
+val singlebuf = Word8Array.array 1 (Word8.fromInt 0);
+
+fun clear_buf buffer =
+ let val len = Word8Array.length buffer
+     fun zero i = Word8Array.update buffer i w8zero
+     fun loop j = if j < len then (zero j; loop (j+1)) else ()
+ in
+    loop 0
+ end;
+
+fun buf2string buf = Word8Array.substring buf 0 (Word8Array.length buf);
+
+fun string2buf s buf =
+ if String.size s <= Word8Array.length buf then
+   Word8Array.copyVec s 0 (String.size s) buf 0
+ else
+   raise ERR "string2buf" "string too big for buffer";
+
+fun file2buf fileName buf =
+    let val istrm = TextIO.openIn fileName
+        val () = print(String.concat
+                     ["Taking input from file : ",fileName,".\n"])
+        val s = TextIO.inputAll istrm
+        val () = TextIO.closeIn istrm
+    in
+       string2buf s buf
+    end
+
+fun tilde_to_uminus ch = if ch = #"~" then #"-" else ch;
+
+fun i2d i =
+ let val s = Int.toString i
+     val s' = String.translate tilde_to_uminus s
+ in
+  Double.fromString (s' ^ ".0")
+ end
+
+fun array_existsI pred arr =
+ let val len = Array.length arr
+ in if len = 0 then False
+    else List.exists pred (upto 0 (len - 1))
+ end
+
+fun copies x n = if n <= 0 then [] else x::copies x (n-1);
+
+fun boolVal n =
+  if n = 0 then False else
+  if n = 1 then True
+  else raise ERR "boolVal" "";
+
+fun byteAt w n =
+  Word8.fromInt
+    (Word64.toInt
+      (Word64.andb (Word64.>> w (n*8)) w64FF));
+
+fun pack_double buf index d =
+ let fun write n x = Word8Array.update buf n x
+ in
+    write index (byteAt d 0)
+  ; write (index+1) (byteAt d 1)
+  ; write (index+2) (byteAt d 2)
+  ; write (index+3) (byteAt d 3)
+  ; write (index+4) (byteAt d 4)
+  ; write (index+5) (byteAt d 5)
+  ; write (index+6) (byteAt d 6)
+  ; write (index+7) (byteAt d 7)
+ end;
+
+fun unpack_double buf index =
+ let fun elt n = Word8Array.sub buf n
+ in  Word64.concatAll
+       (elt index)     (elt (index+1)) (elt (index+2)) (elt (index+3))
+       (elt (index+4)) (elt (index+5)) (elt (index+6)) (elt (index+7))
+ end;
+
+fun int2octal n =
+let fun divAcc n acc =
+      if n < 8 then n::acc
+      else let val (d,r) = divmod n 8 in divAcc d (r::acc) end
+in String.concat
+        (List.map Int.toString (divAcc n []))
+end
+
+fun pack_u8 n = String.str (Char.chr n);
+
+fun pad_left x n list =
+ let val d = n - List.length list
+     val _ = assert (d >= 0) "pad_left: list too long"
+ in copies x d @ list
+ end
+
+fun divAcc n acc =
+ if n < 256 then n::acc
+ else
+   let val (d,r) = divmod n 256 in divAcc d (r::acc) end
+
+fun pack_u16 n =
+let val ilist = pad_left 0 2 (divAcc n [])
+in
+  String.implode (List.map Char.chr ilist)
+end
+
+fun pack_u32 n =
+let val ilist = pad_left 0 4 (divAcc n [])
+in
+  String.implode (List.map Char.chr ilist)
+end
+
+fun pack_u64 n =
+let val ilist = pad_left 0 8 (divAcc n [])
+in
+  String.implode (List.map Char.chr ilist)
+end
+
+fun pack_u16LE n =
+let val ilist = pad_left 0 2 (divAcc n [])
+in
+  String.implode
+    (List.map Char.chr (List.rev ilist))
+end
+
+fun pack_u32LE n =
+let val ilist = pad_left 0 4 (divAcc n [])
+in
+  String.implode
+     (List.map Char.chr (List.rev ilist))
+end
+
+fun pack_u64LE n =
+let val ilist = pad_left 0 8 (divAcc n [])
+in
+  String.implode
+    (List.map Char.chr (List.rev ilist))
+end
+
+fun pack_byte_array bA = Word8Array.substring bA 0 (Word8Array.length bA);
+
+end (* Utils *)
+structure ByteContig =
+struct
+
+datatype lval
+  = VarName string
+  | RecdProj lval string
+  | ArraySub lval exp
+and exp
+  = Loc lval
+  | IntLit int
+  | ConstName string
+  | Add exp exp
+  | Mult exp exp
+;
+
+datatype bexp
+  = BoolLit bool
+  | BLoc lval
+  | Bnot bexp
+  | Bor  bexp bexp
+  | Band bexp bexp
+  | Beq  exp exp
+  | Blt  exp exp
+  | Bgt  exp exp
+  | Ble  exp exp
+  | Bge  exp exp
+  | DleA Double.double exp
+  | DleB exp Double.double
+;
+
+datatype atom
+  = Bool
+  | Char
+  | Float
+  | Double
+  | Signed int
+  | Unsigned int
+  | Blob;
+
+
+datatype contig
+  = Void
+  | Basic atom
+  | Declared string
+  | Raw exp
+  | Assert bexp
+  | Recd ((string * contig) list)
+  | Array contig exp
+  | Union ((bexp * contig) list)
+
+datatype ptree
+  = LEAF atom (Word8.word list)
+  | RECD ((string * ptree) list)
+  | ARRAY (ptree list)
+;
+
+datatype ('a,'b) verdict = PASS 'a | FAIL 'b;
+
+fun lval_to_string lval =
+ case lval
+  of VarName s => s
+   | RecdProj lval s => lval_to_string lval^"."^s
+   | ArraySub lval (IntLit i) => lval_to_string lval^"["^Int.toString i^"]"
+
+(*---------------------------------------------------------------------------*)
+(* Support for lval-map                                                      *)
+(*---------------------------------------------------------------------------*)
+
+fun lval_compare x y =
+ case (x,y)
+  of (VarName s1, VarName s2) => String.compare s1 s2
+   | (VarName _, _) => Less
+   | (RecdProj a b, VarName _) => Greater
+   | (RecdProj e1 s1,RecdProj e2 s2) =>
+       (case lval_compare e1 e2
+         of Equal => String.compare s1 s2
+	  | other => other)
+   | (RecdProj a b,_) => Less
+   | (ArraySub a b, ArraySub c d) =>
+       (case lval_compare a c
+         of Equal => exp_compare b d
+	  | other => other)
+   | (ArraySub a b, _) => Greater
+and
+ exp_compare x y =
+ case (x,y)
+  of (Loc lv1, Loc lv2) => lval_compare lv1 lv2
+   | (Loc lv1, _) => Less
+   | (IntLit _, Loc _) => Greater
+   | (IntLit i, IntLit j) => Int.compare i j
+   | (IntLit i, other) => Less
+   | (ConstName _, Loc _) => Greater
+   | (ConstName _, IntLit _) => Greater
+   | (ConstName s1, ConstName s2) => String.compare s1 s2
+   | (ConstName s, _) => Less
+   | (Add a b, Mult c d) => Less
+   | (Add a b, Add c d) =>
+       (case exp_compare a c
+         of Equal => exp_compare b d
+	  | other => other)
+   | (Add a b, _) => Greater
+   | (Mult a b, Mult c d) =>
+       (case exp_compare a c
+         of Equal => exp_compare b d
+	  | other => other)
+   | (Mult a b, _) => Greater
+;
+
+(*---------------------------------------------------------------------------*)
+(* Map from lvals to (atom,(offset,width)) pairs, where atom signals what    *)
+(* kind of type the string between offset and offset+width should be         *)
+(* interpeted as.                                                            *)
+(*---------------------------------------------------------------------------*)
+
+fun empty_lvalMap() = Map.empty lval_compare;
+
+fun unopFn f g e = Option.map f (g e);
+
+fun binopFn f g e1 e2 =
+  case (g e1, g e2)
+   of (Some v1, Some v2) => Some (f v1 v2)
+    | otherwise => None;
+
+fun total_bytes_of arr i w =
+ let val top = i+w
+     fun accFn n acc =
+       if n < top then accFn (n+1) (Word8Array.sub arr n::acc)
+       else List.rev acc
+ in if top <= Word8Array.length arr
+    then Some (accFn i [])
+    else None
+ end;
+
+
+fun evalExp env bytes =
+ let val (envDelta,lvalMap,valFn) = env
+     fun locVal (a,(i,width)) =
+         Option.mapPartial (valFn a)
+           (total_bytes_of bytes i width)
+   fun evalE exp =
+    case exp
+     of Loc lval => Option.mapPartial locVal (Map.lookup lvalMap lval)
+      | IntLit i => Some i
+      | ConstName s =>
+          (case Alist.lookup envDelta s
+            of Some i => i
+             | None => None)
+      | Add e1 e2  => binopFn Int.+ evalE e1 e2
+      | Mult e1 e2 => binopFn Int.* evalE e1 e2
+ in
+   evalE
+ end
+;
+
+fun equal x y = (x = y);
+fun orOp x y = (x orelse y);
+fun andOp x y = (x andalso y);
+
+fun evalBexp env bytes =
+ let val (envDelta,lvalMap,valFn,dvalFn) = env
+     val evalE = evalExp (envDelta,lvalMap,valFn) bytes
+     fun blocVal tuple =
+       case tuple
+        of (Bool,(i,width)) =>
+             Option.map Utils.boolVal
+              (Option.mapPartial (valFn Bool)
+                (total_bytes_of bytes i width))
+         | otherwise => None
+   fun evalB bexp =
+    case bexp
+     of BoolLit b => Some b
+      | BLoc lval => Option.mapPartial blocVal (Map.lookup lvalMap lval)
+      | Bnot b     => Option.map not (evalB b)
+      | Bor  b1 b2 => binopFn orOp evalB b1 b2
+      | Band b1 b2 => binopFn andOp evalB b1 b2
+      | Beq e1 e2  => binopFn equal evalE e1 e2
+      | Blt e1 e2  => binopFn Int.< evalE e1 e2
+      | Bgt e1 e2  => binopFn Int.> evalE e1 e2
+      | Ble e1 e2  => binopFn Int.<= evalE e1 e2
+      | Bge e1 e2  => binopFn Int.>= evalE e1 e2
+      | otherwise  => None
+ in
+  evalB
+ end;
+
+
+fun lval_append p lval =
+ case lval
+  of VarName s => RecdProj p s
+   | RecdProj q s => RecdProj (lval_append p q) s
+   | ArraySub q dim => ArraySub (lval_append p q) dim
+;
+
+fun path_prefixes lval =
+ case lval
+  of VarName _ => [lval]
+   | RecdProj p s => lval :: path_prefixes p
+   | ArraySub (VarName _) d => [lval]
+   | ArraySub (RecdProj p s) dim => lval :: path_prefixes p
+   | ArraySub arr dim => lval :: path_prefixes arr
+;
+
+fun resolve_lval lvalMap path lval =
+ let val prefixes = path_prefixes path
+     val prospects = List.map (flip lval_append lval) prefixes @ [lval]
+ in Utils.firstOpt (Map.lookup lvalMap) prospects
+ end
+
+fun mk_Loc x = Loc x;
+fun mk_Add x y = Add x y;
+fun mk_Mult x y = Mult x y;
+
+fun resolveExp lvalMap p exp =
+ case exp
+  of Loc lval   => unopFn mk_Loc (resolve_lval lvalMap p) lval
+   | Add  e1 e2 => binopFn mk_Add (resolveExp lvalMap p) e1 e2
+   | Mult e1 e2 => binopFn mk_Mult (resolveExp lvalMap p) e1 e2
+   | otherwise  => Some exp
+
+
+fun mk_BLoc x = BLoc x
+fun mk_Bnot x = Bnot x
+fun mk_Bor x y = Bor x y
+fun mk_Band x y = Band x y
+fun mk_Beq x y = Beq x y
+fun mk_Blt x y = Blt x y
+fun mk_Bgt x y = Bgt x y
+fun mk_Ble x y = Ble x y
+fun mk_Bge x y = Bge x y
+fun mk_dleA r1 r2 = DleA r1 r2;
+fun mk_dleB r1 r2 = DleB r1 r2;
+
+fun resolveBexp lvalMap p bexp =
+ case bexp
+  of BoolLit _  => Some bexp
+   | BLoc lval  => unopFn mk_BLoc (resolve_lval lvalMap p) lval
+   | Bnot b     => unopFn mk_Bnot(resolveBexp lvalMap p) b
+   | Bor b1 b2  => binopFn mk_Bor(resolveBexp lvalMap p) b1 b2
+   | Band b1 b2 => binopFn mk_Band(resolveBexp lvalMap p) b1 b2
+   | Beq e1 e2  => binopFn mk_Beq(resolveExp lvalMap p) e1 e2
+   | Blt e1 e2  => binopFn mk_Blt(resolveExp lvalMap p) e1 e2
+   | Bgt e1 e2  => binopFn mk_Bgt(resolveExp lvalMap p) e1 e2
+   | Ble e1 e2  => binopFn mk_Ble(resolveExp lvalMap p) e1 e2
+   | Bge e1 e2  => binopFn mk_Bge(resolveExp lvalMap p) e1 e2
+   | DleA r e   => unopFn (mk_dleA r) (resolveExp lvalMap p) e
+   | DleB e r   => unopFn (fn x => mk_dleB x r) (resolveExp lvalMap p) e
+;
+
+(*---------------------------------------------------------------------------*)
+(* substFn is given an assignment for a contig and applies it to the contig, *)
+(* yielding a string.                                                        *)
+(*---------------------------------------------------------------------------*)
+
+fun substFn env byteArr theta path contig =
+ let val (consts,decls,atomWidth,valFn,dvalFn) = env
+     fun thetaFn lval =
+         (case Map.lookup theta lval
+           of None => None
+            | Some (a,(i,width)) =>
+                Option.map Utils.bytes2string
+	            (total_bytes_of byteArr i width))
+ in
+  case contig
+   of Void     => None
+    | Basic _  => thetaFn path
+    | Raw _    => thetaFn path
+    | Assert b =>
+       (case resolveBexp theta path b
+         of None => None
+          | Some b' =>
+        case evalBexp (consts,theta,valFn,dvalFn) byteArr b'
+         of Some true => Some ""
+          | otherwise => None)
+    | Declared name => Option.mapPartial (substFn env byteArr theta path)
+                                         (Alist.lookup decls name)
+    | Recd fields =>
+       let fun fieldFn (fName,c) = substFn env byteArr theta (RecdProj path fName) c
+       in Utils.strcatOpts (List.map fieldFn fields)
+       end
+    | Array c exp =>
+       (case resolveExp theta path exp
+         of None => None
+          | Some exp' =>
+        let val dim = Option.valOf (evalExp (consts,theta,valFn) byteArr exp')
+            fun indexFn i = substFn env byteArr theta (ArraySub path (IntLit i)) c
+        in Utils.strcatOpts (List.map indexFn (Utils.upto 0 (dim - 1)))
+        end)
+   | Union choices =>
+       let fun choiceFn(bexp,c) =
+             Option.mapPartial
+               (evalBexp (consts,theta,valFn,dvalFn) byteArr)
+               (resolveBexp theta path bexp)
+       in case Utils.filterOpt choiceFn choices
+           of Some [(_,c)] => substFn env byteArr theta path c
+            | otherwise => None
+       end
+end
+;
+
+fun fieldFn path (fName,c) = (RecdProj path fName, c)
+fun indexFn path c i = (ArraySub path (IntLit i),c)
+
+fun matchFn env byteArr state =
+ let val (worklist,pos,theta) = state
+     val (consts,decls,atomWidth,valFn,dvalFn) = env
+     val arrlen = Word8Array.length byteArr
+ in
+ case worklist
+  of [] => Some (pos,theta)
+   | (_,Void)::_ => None
+   | (path,Basic a)::t =>
+     let val width = atomWidth a
+         val nextpos = pos + width
+     in if arrlen < nextpos then
+          None
+        else
+          matchFn env byteArr (t,nextpos,Map.insert theta path (a,(pos,width)))
+     end
+   | (path,Declared name)::t =>
+       (case Alist.lookup decls name
+        of None => None
+	 | Some c => matchFn env byteArr ((path,c)::t,pos,theta))
+   | (path,Raw exp)::t =>
+       (case resolveExp theta path exp
+         of None => None
+          | Some exp' =>
+        case evalExp (consts,theta,valFn) byteArr exp'
+         of None => None
+          | Some width =>
+        let val nextpos = pos + width
+        in if arrlen < nextpos then
+              None
+            else
+              matchFn env byteArr
+                  (t,nextpos, Map.insert theta path (Blob,(pos,width)))
+        end)
+   | (path,Assert bexp)::t =>
+       (case resolveBexp theta path bexp
+        of None => None
+         | Some bexp' =>
+        case evalBexp (consts,theta,valFn,dvalFn) byteArr bexp'
+         of None => None
+          | Some False => None
+          | Some True => matchFn env byteArr (t,pos,theta))
+   | (path,Recd fields)::t =>
+         matchFn env byteArr (List.map (fieldFn path) fields @ t,pos,theta)
+   | (path,Array c exp)::t =>
+       (case resolveExp theta path exp
+         of None => None
+          | Some exp'=>
+        case evalExp (consts,theta,valFn) byteArr exp'
+         of None => None
+          | Some dim =>
+        matchFn env byteArr
+           (List.map (indexFn path c) (Utils.upto 0 (dim - 1)) @ t,pos,theta))
+   | (path,Union choices)::t =>
+       let fun choiceFn(bexp,c) =
+             Option.mapPartial
+                (evalBexp (consts,theta,valFn,dvalFn) byteArr)
+                (resolveBexp theta path bexp)
+       in case Utils.filterOpt choiceFn choices
+           of Some[(_,c)] => matchFn env byteArr ((path,c)::t,pos,theta)
+            | otherwise => None
+       end
+ end
+;
+
+fun match env contig byteArr =
+  matchFn env byteArr ([(VarName"root",contig)],0,empty_lvalMap());
+
+(*
+fun check_match env contig byteArr =
+ case match env contig byteArr
+  of None => raise ERR "check_match" "no match"
+  |  Some(pos,theta) =>
+      case substFn env byteArr theta (VarName"root") contig
+       of Some bits => (s1^s2 = s)
+       |  None => raise ERR "check_match" "substFn failed"
+*)
+
+(*---------------------------------------------------------------------------*)
+(* Version of matchFn that checks assertions, acting as a predicate on       *)
+(* messages.                                                                 *)
+(*---------------------------------------------------------------------------*)
+
+fun predFn env byteArr state =
+ let val (worklist,pos,theta) = state
+     val (consts,decls,atomWidth,valFn,dvalFn) = env
+     val arrlen = Word8Array.length byteArr
+ in
+ case worklist
+  of [] => PASS (pos,theta)
+   | (path,Void)::t => FAIL state
+   | (path,Basic a)::t =>
+     let val width = atomWidth a
+         val nextpos = pos + width
+     in if arrlen < nextpos then
+           FAIL state
+        else
+          predFn env byteArr (t,nextpos,Map.insert theta path (a,(pos,width)))
+     end
+   | (path,Declared name)::t =>
+       (case Alist.lookup decls name
+         of None => FAIL state
+          | Some c => predFn env byteArr ((path,c)::t,pos,theta))
+   | (path,Raw exp)::t =>
+       (case resolveExp theta path exp
+         of None => FAIL state
+          | Some exp' =>
+        case evalExp (consts,theta,valFn) byteArr exp'
+         of None => FAIL state
+          | Some width =>
+        let val nextpos = pos + width
+        in if arrlen < nextpos then
+              FAIL state
+           else
+             predFn env byteArr
+              (t, nextpos, Map.insert theta path (Blob,(pos,width)))
+        end)
+   | (path,Assert bexp)::t =>
+       (case resolveBexp theta path bexp
+        of None => FAIL state
+         | Some bexp' =>
+        case evalBexp (consts,theta,valFn,dvalFn) byteArr bexp'
+         of Some true => predFn env byteArr (t,pos,theta)
+          | otherwise => FAIL state)
+   | (path,Recd fields)::t =>
+       predFn env byteArr (List.map (fieldFn path) fields @ t,pos,theta)
+   | (path,Array c exp)::t =>
+       (case resolveExp theta path exp
+         of None => FAIL state
+          | Some exp'=>
+        case evalExp (consts,theta,valFn) byteArr exp'
+         of None => FAIL state
+          | Some dim =>
+         predFn env byteArr
+           (List.map (indexFn path c) (Utils.upto 0 (dim - 1)) @ t,pos,theta))
+   | (path,Union choices)::t =>
+       let fun choiceFn(bexp,c) =
+             Option.mapPartial
+               (evalBexp (consts,theta,valFn,dvalFn) byteArr)
+               (resolveBexp theta path bexp)
+       in case Utils.filterOpt choiceFn choices
+           of Some[(_,c)] => predFn env byteArr ((path,c)::t,pos,theta)
+            | otherwise => FAIL state
+       end
+end
+;
+
+
+fun debug env contig byteArr =
+  predFn env byteArr ([(VarName"root",contig)],0,empty_lvalMap());
+
+fun wellformed env contig byteArr =
+ case predFn env byteArr ([(VarName"root",contig)],0,empty_lvalMap())
+  of PASS _ => True
+   | FAIL _ => False;
+
+(*---------------------------------------------------------------------------*)
+(* Parsing into the ptree type. It provides record and array structure, but  *)
+(* leaves leaf elements uninterpreted.                                       *)
+(*---------------------------------------------------------------------------*)
+
+(*---------------------------------------------------------------------------*)
+(* Environments:                                                             *)
+(*                                                                           *)
+(*   consts : maps constant names to integers                                *)
+(*   decls  : maps names to previously declared contigs                      *)
+(*   atomWidth : gives width info for basic types                            *)
+(*   valFn  : function for computing an integer value                        *)
+(*            stored at the designated location in the string.               *)
+(*   dvalFn : function for computing a double value                          *)
+(*            stored at the designated location in the string.               *)
+(*                                                                           *)
+(* parseFn operates on a state tuple (stk,s,lvmap)                           *)
+(*                                                                           *)
+(*  stk  : ptree list         ;;; parser stack                               *)
+(*  s    : string             ;;; remainder of string                        *)
+(* lvmap : (lval |-> string)  ;;; previously seen values, accessed by path   *)
+(*                                                                           *)
+(* which is wrapped in the error monad.                                      *)
+(*---------------------------------------------------------------------------*)
+
+
+fun parseFn env byteArr path contig state =
+ let val (consts,decls,atomWidth,valFn,dvalFn) = env
+     val (stk,pos,theta) = state
+     val arrlen = Word8Array.length byteArr
+ in
+ case contig
+  of Void => None
+   | Basic a =>
+       let val width = atomWidth a
+           val nextpos = pos + width
+       in if arrlen < nextpos then
+          None
+          else
+           Some(LEAF a (Option.valOf (total_bytes_of byteArr pos width))::stk,
+                nextpos,
+                Map.insert theta path (a,(pos,width)))
+       end
+   | Declared name =>
+       (case Alist.lookup decls name
+         of None => None
+          | Some c => parseFn env byteArr path c state)
+   | Raw exp =>
+       (case resolveExp theta path exp
+         of None => None
+          | Some exp' =>
+        case evalExp (consts,theta,valFn) byteArr exp'
+         of None => None
+          | Some width =>
+        let val nextpos = pos + width
+        in if arrlen < nextpos then
+              None
+           else
+            Some (LEAF Blob (Option.valOf(total_bytes_of byteArr pos width))::stk,
+                  nextpos,
+                  Map.insert theta path (Blob,(pos,width)))
+        end)
+   | Assert bexp =>
+       (case resolveBexp theta path bexp
+         of None => None
+	  | Some  bexp' =>
+         case evalBexp (consts,theta,valFn,dvalFn) byteArr bexp'
+          of None => None
+           | Some tval =>
+         if tval then Some state
+         else (print "Assertion failure"; None))
+   | Recd fields =>
+       let fun fieldFn field stOpt =
+             let val (fName,c) = field
+             in case stOpt
+                 of None => None
+                  | Some st => parseFn env byteArr (RecdProj path fName) c st
+             end
+          fun is_assert pair = (case snd pair of Assert _ => True | otherwise => False)
+          val fields' = List.filter (not o is_assert) fields
+       in case Utils.rev_itlist fieldFn fields (Some state)
+           of None => None
+            | Some (stk',pos',theta') =>
+          case Utils.take_drop (List.length fields') stk'
+           of None => None
+            | Some(elts,stk'') =>
+              Some(RECD (List.zip (List.map fst fields', List.rev elts))::stk'',
+                   pos', theta')
+       end
+   | Array c exp =>
+       let fun indexFn i stOpt =
+            (case stOpt
+             of None => None
+              | Some st => parseFn env byteArr (ArraySub path (IntLit i)) c st)
+       in case resolveExp theta path exp
+           of None => None
+	    | Some exp' =>
+          case evalExp (consts,theta,valFn) byteArr exp'
+           of None => None
+            | Some dim =>
+          case Utils.rev_itlist indexFn (Utils.upto 0 (dim - 1)) (Some state)
+           of None => None
+            | Some (stk',pos',theta') =>
+          case Utils.take_drop dim stk'
+           of None => None
+            | Some(elts,stk'') => Some(ARRAY (List.rev elts)::stk'', pos', theta')
+       end
+   | Union choices =>
+       let fun choiceFn(bexp,c) =
+             Option.mapPartial
+               (evalBexp (consts,theta,valFn,dvalFn) byteArr)
+               (resolveBexp theta path bexp)
+       in case Utils.filterOpt choiceFn choices
+           of Some[(_,c)] => parseFn env byteArr path c state
+            | otherwise => None
+       end
+ end
+;
+
+fun parse env contig byteArr =
+ case parseFn env byteArr (VarName"root") contig ([],0,empty_lvalMap())
+  of Some ([ptree],pos,theta) => (ptree,pos,theta)
+   | Some otherwise => raise Utils.ERR "parse" "expected stack of size 1"
+   | None => raise Utils.ERR "parse" ""
+;
+
+fun add_contig_decl (s,d) env =
+ let val (consts,decls,aW,vFn,dvFn) = env
+ in (consts,(s,d)::decls,aW,vFn,dvFn)
+ end
+
+end (* ByteContig *)
+
+structure SW_Types =
+struct
+
+datatype Coordinate = CoordinateRecd Double.double Double.double Double.double;
+
+datatype MsgHeader = MsgHeaderRecd int int;
+
+type AttestationRequestMsg = int array;
+
+type AttestationResponseMsg = int array;
+
+type AddressArray = (int array);
+
+type KeepInZone = Coordinate array;
+
+type Map = Coordinate array;
+
+datatype AllowList = AllowListRecd AddressArray;
+
+type Mission = Coordinate array;
+
+datatype Command = CommandRecd Map;
+
+datatype RF_Msg = RF_MsgRecd MsgHeader Command;
+
+end;
+
+structure SW_Functions =
+struct
+
+fun lcCoordinate_Latitude_of recd =
+ case recd of SW_Types.CoordinateRecd v1 v2 v3 => v1;
+
+fun lcCoordinate_Longitude_of recd =
+ case recd of SW_Types.CoordinateRecd v1 v2 v3 => v2;
+
+fun lcCoordinate_Altitude_of recd =
+ case recd of SW_Types.CoordinateRecd v1 v2 v3 => v3;
+
+fun lcMsgHeader_src_of recd =
+ case recd of SW_Types.MsgHeaderRecd v1 v2 => v1;
+
+fun lcMsgHeader_dst_of recd =
+ case recd of SW_Types.MsgHeaderRecd v1 v2 => v2;
+
+fun lcAllowList_value_of recd =
+ case recd of SW_Types.AllowListRecd v1 => v1;
+
+fun lcCommand_Map_of recd =
+ case recd of SW_Types.CommandRecd v1 => v1;
+
+fun lcRF_Msg_header_of recd =
+ case recd of SW_Types.RF_MsgRecd v1 v2 => v1;
+
+fun lcRF_Msg_payload_of recd =
+ case recd of SW_Types.RF_MsgRecd v1 v2 => v2;
+
+val lcCASE_UAV_ID = 42;
+
+(*****************************************************************************)
+(* Simple example showing issue with good_coordinate                         *)
+(*****************************************************************************)
+
+fun logInfo s = #(api_logInfo) s Utils.emptybuf;
+
+(* Works as expected passing everything                                      *)
+fun good_coordinate coord = True;
+
+(* Crashes on call to Double.>=                                              *)
+(*
+fun good_coordinate coord =
+  let
+    val lat = (lcCoordinate_Latitude_of coord)
+    val _ = logInfo ("lat = "^(Double.toString lat))
+    val latLow = (Utils.i2d ~90)
+    val _ = logInfo ("latLow = "^(Double.toString latLow))
+    val x = (Double.>= lat latLow)
+    val _ = logInfo ("x = "^(Bool.toString x))
+  in
+    x
+  end;
+*)
+  (*
+  Double.>= (lcCoordinate_Latitude_of coord) (Double.~(Utils.i2d 90)) andalso
+  Double.<= (lcCoordinate_Latitude_of coord) (Utils.i2d 90) andalso
+  Double.>= (lcCoordinate_Longitude_of coord) (Double.~(Utils.i2d 180)) andalso
+  Double.<= (lcCoordinate_Longitude_of coord) (Utils.i2d 180) andalso
+  Double.>= (lcCoordinate_Altitude_of coord)  (Utils.i2d 0) andalso
+  Double.<= (lcCoordinate_Altitude_of coord) (Utils.i2d 15000);
+  *)
+
+fun lcVALID_MESSAGE msg =
+  lcMsgHeader_src_of (lcRF_Msg_header_of msg) > 0
+  andalso
+  (lcMsgHeader_dst_of (lcRF_Msg_header_of msg) = lcCASE_UAV_ID);
+
+fun good_map map = Array.all (fn wp => (good_coordinate wp)) map;
+
+fun good_mission mission = Array.all (fn wp => (good_coordinate wp)) mission;
+
+fun good_command cmd = good_map (lcCommand_Map_of cmd);
+
+fun lcWELL_FORMED_MESSAGE msg = good_command (lcRF_Msg_payload_of msg);
+
+end
+
+structure SW_Parse =
+struct
+
+fun atomic_width atom =
+ case atom
+  of ByteContig.Bool       => 1
+   | ByteContig.Char       => 1
+   | ByteContig.Float      => 4
+   | ByteContig.Double     => 8
+   | ByteContig.Signed n   => n
+   | ByteContig.Unsigned n => n
+   | other => raise Utils.ERR "atomic_width" "Blob: unknown width"
+
+fun atom_string atom =
+ case atom
+  of ByteContig.Bool       => "Bool"
+   | ByteContig.Char       => "Char"
+   | ByteContig.Float      => "Float"
+   | ByteContig.Double     => "Double"
+   | ByteContig.Signed n   => "Signed"
+   | ByteContig.Unsigned n => "Unsigned"
+   | ByteContig.Blob       => "Blob";
+
+(*---------------------------------------------------------------------------*)
+(* Interpretation support                                                    *)
+(*---------------------------------------------------------------------------*)
+
+fun unsignedBE bytes =
+ let fun accFn list acc =
+         case list
+          of [] => acc
+           | byte::t => accFn t (Word8.toInt byte + 256 * acc)
+ in accFn bytes 0
+ end
+
+fun twos_compBE bytes =
+ let val sup = Utils.twoExp (List.length bytes)
+     val half = sup div 2
+     val n = unsignedBE bytes
+  in
+    if n < half then n else n - sup
+ end;
+
+fun valFnBE atm bytes =
+ case atm
+  of ByteContig.Signed i => Some (twos_compBE bytes)
+   | ByteContig.Unsigned i => Some (unsignedBE bytes)
+   | otherwise => Some (unsignedBE bytes);
+
+fun unsignedLE bytes = unsignedBE (List.rev bytes)
+fun twos_compLE bytes = twos_compBE (List.rev bytes)
+
+fun valFnLE atm bytes =
+ case atm
+  of ByteContig.Signed i   => Some (twos_compLE bytes)
+   | ByteContig.Unsigned i => Some (unsignedLE bytes)
+   | otherwise             => Some (unsignedLE bytes);
+
+(* val () = print ("dvalFnLE: value = "^Double.toString dval^"\n") *)
+local
+  val buf = Word8Array.array 8 (Word8.fromInt 0)
+in
+fun dvalFnLE atm bytes =
+ case atm
+  of ByteContig.Float =>
+     let val s = String.implode (List.map Utils.w8char bytes)
+         val () = Utils.clear_buf buf
+         val () = #(float2doublePromote) s buf
+         val a = Word8Array.sub buf 0
+         val b = Word8Array.sub buf 1
+         val c = Word8Array.sub buf 2
+         val d = Word8Array.sub buf 3
+         val e = Word8Array.sub buf 4
+         val f = Word8Array.sub buf 5
+         val g = Word8Array.sub buf 6
+         val h = Word8Array.sub buf 7
+         val dval = Word64.concatAll a b c d e f g h
+     in dval
+     end
+   | ByteContig.Double =>
+     (case bytes
+       of [a,b,c,d,e,f,g,h] => Word64.concatAll a b c d e f g h
+        | otherwise =>
+	  raise Utils.ERR "dvalFnLE" "expected exactly 8 bytes for a Double")
+   | otherwise =>
+      (Utils.println ("dvalFnLE: atm is unexpected: "^atom_string atm);
+       raise Utils.ERR "dvalFnLE" "expected Float or Double")
+end
+
+val exampleV4Env = ([],[],atomic_width,valFnLE,dvalFnLE);
+
+fun mk_intBE ptree =
+ case ptree
+  of ByteContig.LEAF a string => Option.valOf (valFnBE a string)
+   | otherwise => raise Utils.ERR "Gate_Parse.mk_int" "expected a LEAF";
+
+fun mk_intLE ptree =
+ case ptree
+  of ByteContig.LEAF a string => Option.valOf (valFnLE a string)
+   | otherwise => raise Utils.ERR "Gate_Parse.mk_int" "expected a LEAF";
+
+fun mk_floatLE ptree =
+ case ptree
+  of ByteContig.LEAF a bytes => dvalFnLE a bytes
+   | otherwise => raise Utils.ERR "Gate_Parse.mk_floatLE" "expected a LEAF";
+
+fun mk_doubleLE ptree =
+ case ptree
+  of ByteContig.LEAF a bytes => dvalFnLE a bytes
+   | otherwise => raise Utils.ERR "Gate_Parse.mk_doubleLE" "expected a LEAF";
+
+fun mk_byte ptree =
+ case ptree
+  of ByteContig.LEAF a string => Word8.fromInt(Option.valOf (valFnBE a string))
+   | otherwise => raise Utils.ERR "Gate_Parse.mk_byte" "expected a LEAF";
+
+val mk_bool = Utils.boolVal o mk_intBE;
+
+fun mk_raw ptree =
+ case ptree
+   of ByteContig.LEAF ByteContig.Blob bytes => Utils.byte_array_fromList bytes
+    | otherwise => raise Utils.ERR "mk_raw" "expected a LEAF";
+
+fun mk_string ptree =
+ case ptree
+  of ByteContig.ARRAY elts => String.implode (List.map (Char.chr o mk_intBE) elts)
+   | otherwise  => raise Utils.ERR "mk_string" "";
+
+fun mk_array eltFn ptree =
+ case ptree
+  of ByteContig.ARRAY elts => Array.fromList (List.map eltFn elts)
+   | otherwise  => raise Utils.ERR "mk_array" "";
+
+fun mk_byte_array ptree =
+ case ptree
+  of ByteContig.ARRAY elts => Utils.byte_array_fromList (List.map mk_byte elts)
+   | otherwise  => raise Utils.ERR "mk_byte_array" "";
+
+(*---------------------------------------------------------------------------*)
+(* Contig stuff                                                              *)
+(*---------------------------------------------------------------------------*)
+
+fun intLit i   = ByteContig.IntLit i;
+fun unsigned n = ByteContig.Basic(ByteContig.Unsigned n);
+fun signed n   = ByteContig.Basic(ByteContig.Signed n);
+
+fun mkArray c1 c2 = ByteContig.Array c1 c2;
+fun mkRecd list   = ByteContig.Recd list;
+fun mkUnion list  = ByteContig.Union list;
+
+(* -------------------------------------------------------------------------- *)
+(* Some basic contig types.                                                   *)
+(* -------------------------------------------------------------------------- *)
+
+val bool = ByteContig.Basic ByteContig.Bool;
+val u8   = unsigned 1;
+val char = unsigned 1;
+val u16  = unsigned 2;
+val u32  = unsigned 4;
+val i32  = signed 4;
+val i64  = signed 8;
+val f32  = ByteContig.Basic(ByteContig.Float);
+val f64  = ByteContig.Basic(ByteContig.Double);
+
+
+val contig_MsgHeader =
+  ByteContig.Recd [
+    ("src", u32),
+    ("dst", u32)
+ ];
+
+val contig_Coord =
+  ByteContig.Recd [
+    ("Latitude", f32),
+    ("Longitude", f32),
+    ("Altitude",f32)
+ ]
+;
+val contig_Command =
+  ByteContig.Recd [
+    ("Map", mkArray contig_Coord (intLit 2))
+  ];
+
+val contig_RF_Msg =
+ ByteContig.Recd [
+   ("header", contig_MsgHeader),
+   ("payload", contig_Command)
+ ];
+
+(*---------------------------------------------------------------------------*)
+(* Map from parse trees to data                                              *)
+(*---------------------------------------------------------------------------*)
+
+fun mk_coord ptree =
+ case ptree
+  of ByteContig.RECD [("Latitude",  lat), ("Longitude", lon), ("Altitude",  alt)]
+     => SW_Types.CoordinateRecd (mk_floatLE lat) (mk_floatLE lon) (mk_floatLE alt)
+   | otherwise => raise Utils.ERR "mk_coord" "unexpected parse tree";
+
+fun mk_payload ptree =
+ case ptree
+  of ByteContig.RECD [("Map", mp)]
+     => SW_Types.CommandRecd (mk_array mk_coord mp)
+   | otherwise => raise Utils.ERR "mk_payload" "unexpected parse tree";
+
+fun mk_header ptree =
+ case ptree
+  of ByteContig.RECD [("src", src), ("dst",dst)]
+     => SW_Types.MsgHeaderRecd (mk_intLE src) (mk_intLE dst)
+   | otherwise => raise Utils.ERR "mk_header" "unexpected parse tree";
+
+fun mk_RF_Msg ptree =
+ case ptree
+  of ByteContig.RECD [("header", header), ("payload",payload)]
+      => SW_Types.RF_MsgRecd (mk_header header) (mk_payload payload)
+   | otherwise => raise Utils.ERR "mk_RF_Msg" "unexpected parse tree";
+
+fun is_event byteA =
+  0 < Word8Array.length byteA andalso
+  Word8Array.sub byteA 0 = Word8.fromInt 1;
+
+fun eventParse p byteA =
+ if not(is_event byteA) then
+    None
+ else
+  let val (contig,mk_data) = p
+  in case ByteContig.parseFn
+            exampleV4Env byteA (ByteContig.VarName"root") contig
+              ([],1,ByteContig.empty_lvalMap())
+      of Some([ptree],_,_) => Some (Utils.total mk_data ptree)
+       | otherwise => Some None
+  end;
+
+val parse_RF_Msg    = eventParse (contig_RF_Msg,mk_RF_Msg);
+
+end
+
+
+structure API =
+struct
+
+val input_buffer = Word8Array.array (1 + 8*4) Utils.w8zero;
+
+(*---------------------------------------------------------------------------*)
+(* Clear buffer, read port into buffer                                       *)
+(*---------------------------------------------------------------------------*)
+
+fun fill_Input_buffer () =
+  let val () = Utils.clear_buf input_buffer
+  in  #(api_get_Input) "" input_buffer
+  end;
+
+fun send_Output string = #(api_send_Output) string Utils.emptybuf;
+
+fun logInfo s = #(api_logInfo) s Utils.emptybuf;
+
+end (* API *)
+
+structure Filter =
+struct
+
+val valOf = Option.valOf;
+
+val initStep = Ref True;
+
+fun stepFn inports stateVars =
+ let val inOpt = inports
+     val event_input = Option.isSome inOpt
+     val filter_policy = stateVars
+
+     (*--------------------------*)
+     (* Compute new state values *)
+     (*--------------------------*)
+
+     val newStateVars =
+       if !initStep then
+          let val filter_policy =
+                if event_input then
+                   SW_Functions.lcWELL_FORMED_MESSAGE (Option.valOf inOpt)
+                else False
+              val () = (initStep := False)
+          in
+            filter_policy
+          end
+       else
+          let val filter_policy = valOf filter_policy  (* previous value; not used *)
+              val filter_policy =
+                if event_input then
+                   SW_Functions.lcWELL_FORMED_MESSAGE (Option.valOf inOpt)
+                else False
+          in
+            filter_policy
+          end
+
+     val filter_policy = newStateVars
+
+     (*-----------------------*)
+     (* Compute output values *)
+     (*-----------------------*)
+
+     val outOpt =
+        if event_input andalso filter_policy then
+           Some (valOf inOpt)
+        else None
+
+     val newStateVarOpts = Some filter_policy
+  in
+    (newStateVarOpts, outOpt)
+  end
+
+val initState = None : bool option;
+
+val theState = Ref initState;
+
+
+fun parse_Input () =
+ let val () = API.fill_Input_buffer ()
+     val inputOpt2 = SW_Parse.parse_RF_Msg API.input_buffer
+ in
+     Utils.dropOpt "Filter: Parsing of Input port failed" inputOpt2
+ end;
+
+fun filterFn () =
+ let val inOpt = parse_Input()
+     val (newState,outOpt) = stepFn inOpt (!theState)
+     val () = (theState := newState)
+ in
+  case outOpt
+   of None => ()
+    | Some rf_msg =>
+        let val len = Word8Array.length API.input_buffer
+        in API.send_Output
+             (Word8Array.substring API.input_buffer 1 (len-1))
+        end
+ end
+
+end (* Filter *)
+
+structure Control =
+struct
+
+fun pacer_emit() =
+    (#(sb_pacer_notification_emit) "" Utils.singlebuf;
+     Word8Array.sub Utils.singlebuf 0 <> Word8.fromInt 0);
+
+fun pacer_wait() =
+    (#(sb_pacer_notification_wait) "" Utils.singlebuf;
+     Word8Array.sub Utils.singlebuf 0 <> Word8.fromInt 0);
+
+fun receiveInput() = #(api_receiveInput) "" Utils.emptybuf;
+fun sendOutput()   = #(api_sendOutput) "" Utils.emptybuf;
+
+fun loop () =
+  if pacer_wait() then
+    ( receiveInput();
+      Filter.filterFn();
+      sendOutput();
+      pacer_emit();
+      loop()
+    )
+  else
+    loop();
+
+fun start () = (pacer_emit(); loop());
+
+end (* Control *)
+
+val _ = Control.start();

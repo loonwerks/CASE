@@ -14,12 +14,10 @@ In the Vagrant provisioned VM, additional tools and scripts are installed in ``~
 fmide&
 ```
 
-The above will launch ``fmide`` installed in ``~/CASE/Sireum/bin/linux/fmide``.
+The above will launch ``fmide`` installed in ``~/CASE/FMIDE``.
 
 :warning: | The CASE env setup scripts freeze all Linux packages to a certain time/snapshot (as part of seL4 dependency requirements); thus, any OS security update after the freeze time/snapshot will not be installed (see `SNAPSHOT_DATE` in [snapshot.sh](snapshot.sh)).
 :---: | :---
-
-If you are interested to also setup FMIDE and HAMR directly in your machine running either Windows, Linux, or macOS, please see the instructions at [the bottom of this page](#setting-up-fmide-and-hamr-only).
 
 ## Setting Up A Dedicated Linux Machine
 
@@ -45,7 +43,7 @@ in your local repo/folder ``case-env``).
 
 ### Requirements
 
-* [VirtualBox](https://www.virtualbox.org/) **6.1.2** or above
+* [VirtualBox](https://www.virtualbox.org/) **6.1.8** (up to **6.1.18**)
 
 * [Vagrant](https://www.vagrantup.com/) **2.2.7** or above
 
@@ -91,30 +89,28 @@ See [Post Setup](#post-setup) below for additional instructions.
 
 ## Post Setup
 
-### Installing CakeML Dependencies
-
-To install CakeML dependencies using seL4 setup scripts:
-
-```bash
-bash ~/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh
-```
-
 ### Updating Installed CASE Tools & Artifacts
 
 * To update FMIDE, simply (re-)run the following in the VM:
 
   ```bash
-  $SIREUM_HOME/bin/install/fmide.cmd [<tag-name>] # Optional release tag name; latest nightly release is used if unspecified 
+  $HOME/bin/fmide.sh
   ```
-
-  If the installation somehow did not finish (e.g., due to a network issue), remove the problematic file in Sireum's cache directory 
-  (``~/Downloads/sireum``) and re-run the above.
 
 * To update Sireum:
 
   ```bash
-  ~/bin/sireum-install.sh [<COMMIT>] # Optional SHA commit of https://github.com/sireum/kekinian; the tip of master is used if unspecified
+  ~/bin/sireum-install.sh <INIT_RELEASE> <COMMIT>
   ```
+  
+  where:
+  
+  * `<INIT_RELEASE>` is `SIREUM_INIT_V` in [case-setup.sh](case-setup.sh) (use `latest` for the latest version)
+  
+  * `<COMMIT>` is `SIREUM_V` in [case-setup.sh](case-setup.sh) (use `master` for the latest version)
+
+  If the installation somehow did not finish (e.g., due to a network issue), remove the problematic file in Sireum's cache directory 
+  (``~/Downloads/sireum``) and re-run the above.
 
 * To update seL4 and friends (cache, etc.):
 
@@ -155,42 +151,4 @@ bash ~/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh
 
   ```bash
   $SIREUM_HOME/bin/install/compcert.cmd
-  ```
- 
-## Setting Up FMIDE and HAMR Only
-
-* Windows:
-
-  ```batch
-  git clone https://github.com/sireum/kekinian Sireum
-  cd Sireum
-  git checkout <commit> & REM^; SHA commit of https://github.com/sireum/kekinian, see SIREUM_V in case-setup.sh; optional step
-  git submodule update --init --recursive
-  bin\build.cmd setup
-  bin\install\fmide.cmd [<tag-name>] & REM^; Optional release tag name; latest nightly release is used if unspecified
-  start /B bin\win\fmide\fmide.exe
-  ```
-
-* Linux:
-
-  ```bash
-  git clone https://github.com/sireum/kekinian Sireum
-  cd Sireum
-  git checkout <commit> # SHA commit of https://github.com/sireum/kekinian, see SIREUM_V in case-setup.sh; optional step
-  git submodule update --init --recursive
-  bin/build.cmd setup
-  bin/install/fmide.cmd [<tag-name>] # Optional release tag name; latest nightly release is used if unspecified 
-  bin/linux/fmide/fmide&
-  ```
-
-* macOS:
-
-  ```bash
-  git clone https://github.com/sireum/kekinian Sireum
-  cd Sireum
-  git checkout <commit> # SHA commit of https://github.com/sireum/kekinian, see SIREUM_V in case-setup.sh; optional step
-  git submodule update --init --recursive
-  bin/build.cmd setup
-  bin/install/fmide.cmd [<tag-name>] # Optional release tag name; latest nightly release is used if unspecified 
-  open bin/mac/fmide.app
   ```

@@ -1,0 +1,2 @@
+/usr/bin/ar cr libfake_heli_am.cake.a  CMakeFiles/fake_heli_am.cake.dir/__/__/fake_heli_am.cake.cake.S.o 
+/usr/bin/ranlib libfake_heli_am.cake.a 

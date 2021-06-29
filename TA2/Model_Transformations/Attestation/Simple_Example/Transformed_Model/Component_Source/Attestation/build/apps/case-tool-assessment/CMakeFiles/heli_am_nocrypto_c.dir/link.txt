@@ -1,0 +1,2 @@
+/usr/bin/ar qc libheli_am_nocrypto_c.a  CMakeFiles/heli_am_nocrypto_c.dir/fake_crypto_ffi.c.o
+/usr/bin/ranlib libheli_am_nocrypto_c.a

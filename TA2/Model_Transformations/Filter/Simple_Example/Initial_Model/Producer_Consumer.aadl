@@ -32,8 +32,7 @@ public
 			status: out event data port Base_types::Boolean;
 		annex agree {**
 			-- This is the formalized version of the well-formed requirement from the TA1 tool
-			assume Req_Wellformed_LatLong "The Consumer shall only receive well-formed lat-long values" : WELL_FORMED_LAT_LONG(msg_in);
-			assume Req_Wellformed_Alt "The Consumer shall only receive well-formed alt values" : WELL_FORMED_ALT(msg_in);
+			assume Req_Wellformed_LatLong "The Consumer shall only receive well-formed lat-long values" : event(msg_in) => WELL_FORMED_LAT_LONG(msg_in);
 			guarantee "Consumer status shall never be false" : status;
 		**};
 	end Consumer;
@@ -63,7 +62,6 @@ public
 			c2: port Consumer.status -> output;
 		annex resolute {**
 			prove(Req_Wellformed_LatLong(this.Consumer, "Req_Wellformed_LatLong"))
-			prove(Req_Wellformed_Alt(this.Consumer, "Req_Wellformed_Alt"))
 		**};
 	end SW.Impl;
 
@@ -95,7 +93,6 @@ public
 	annex agree {**
 		-- This is the filter spec
 		fun WELL_FORMED_LAT_LONG(coord : Coordinate.Impl) : bool = coord.latitude >= -90 and coord.latitude <= 90 and coord.longitude >= -180 and coord.longitude <= 180;
-		fun WELL_FORMED_ALT(coord : Coordinate.Impl) : bool = coord.altitude >= 0 and coord.altitude <= 15000;
 	**};
 	
 end Producer_Consumer;

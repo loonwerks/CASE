@@ -6,7 +6,7 @@ public
 
 	data Address
 	end Address;
-	
+
 	data implementation Address.Impl
 		subcomponents
 			value: data Base_Types::Integer[4];
@@ -42,7 +42,7 @@ public
 			Dispatch_Protocol => Sporadic;
 			Source_Text => ("Critical_A.c");
 	end Critical_A.Impl;
-	
+
 	thread Critical_B
 		features
 			recv_message: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
@@ -77,21 +77,21 @@ public
 			prove(Req_Attestation(this.Radio))
 		**};
 	end SW.Impl;
-	
+
 	processor Proc
- 	end Proc;
+	end Proc;
 
 	processor implementation Proc.Impl
 		properties
 			CASE_Properties::OS => Linux;
 	end Proc.Impl;
-	
+
 	system Sys
 		features
 			input: in event data port;
 			output: out event data port Base_Types::Boolean;
 	end Sys;
-	
+
 	system implementation Sys.Impl
 		subcomponents
 			SW: process SW.Impl;

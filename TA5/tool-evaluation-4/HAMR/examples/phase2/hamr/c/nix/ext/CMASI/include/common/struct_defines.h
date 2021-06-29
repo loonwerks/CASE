@@ -1,0 +1,1 @@
+../../../../../../../aadl/c_libraries/CMASI/include/common/struct_defines.h

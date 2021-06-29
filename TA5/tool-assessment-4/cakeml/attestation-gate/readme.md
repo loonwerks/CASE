@@ -1,10 +1,8 @@
 # attestation-gate
 
  Table of Contents
-<!--ts-->
+<!--table-of-contents_start-->
 * [AADL Architecture](#aadl-architecture)
-* [Installing the Tools](#installing-the-tools)
-  * [Install CakeML](#install-cakeml)
 * [Modify the AADL Model for CakeML Integration](#modify-the-aadl-model-for-cakeml-integration)
   * [Wire Protocol](#wire-protocol)
   * [Specify Monitor/Filter components](#specify-monitorfilter-components)
@@ -19,50 +17,40 @@
   * [Example Output: SeL4](#example-output-sel4)
   * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
   * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
-<!--te-->
+<!--table-of-contents_end-->
 
 
 ## AADL Architecture
 <!--aadl-architecture_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.png)
-|System Properties|
+|System: [top_Impl_Instance](aadl/SysContext.aadl#L89) Properties|
 |--|
 |Domain Scheduling|
 |Wire Protocol|
 
-|UxAS_thread Properties|
+|[RadioDriver](aadl/RadioDriver.aadl#L12) Properties|
 |--|
-|Periodic: 1000 ms|
 |Native|
-
-
-
-|RadioDriver Properties|
-|--|
 |Periodic: 500 ms|
-|Native|
+|Domain: 2|
 
 
-
-|CASE_AttestationGate Properties|
+|[CASE_AttestationGate](aadl/CASE_AttesationGate.aadl#L13) Properties|
 |--|
-|Periodic: 500 ms|
 |CakeML|
+|Periodic: 500 ms|
+|Domain: 5|
 
 
+|[UxAS_thread](aadl/SysContext.aadl#L24) Properties|
+|--|
+|Native|
+|Periodic: 1000 ms|
+|Domain: 9|
+
+
+**Schedule:** [domain_schedule.c](aadl/kernel/domain_schedule.c)
 <!--aadl-architecture_end-->
-
-## Installing the Tools
-
-The following assumes a case-env is used (see [https://github.com/loonwerks/CASE/tree/master/TA5/case-env](https://github.com/loonwerks/CASE/tree/master/TA5/case-env))
-
-### Install CakeML
-
-Run ``$HOME/CASE/seL4-CAmkES-L4v-dockerfiles/scripts/cakeml.sh``.  Note that installing HOL takes a long time and is optional <-- *Junaid/Eric feedback*
-
-Once installed, make sure the 64bit version is available from the command line.  E.g. in a directory available in my path I have the symlink ``cake -> /usr/local/bin/cake-x64-64/cake``
-
-**NOTE**: Cake seg faulted the first time I tried to run it from the command line.  Restarting the vagrant VM seemed to fix the issue.
 
 ## Modify the AADL Model for CakeML Integration
 
@@ -94,24 +82,60 @@ CakeML integeration is not currently supported for the Linux platform.  However,
 
 ### HAMR Configuration: Linux
 <!--hamr-configuration-linux_start-->
-refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
+To run HAMR Codegen, select [this](aadl/SysContext.aadl#L89) system implementation in FMIDE's outline view and then click the
+HAMR button in the toolbar.  Use the following values in the dialog box that opens up (_&lt;example-dir&gt;_ is the directory that contains this readme file)
+
+Option Name|Value |
+|--|--|
+Platform|Linux|
+Output Directory|_&lt;example-dir&gt;_/hamr/slang|
+Base Package Name|attestation-gate|
+|Exclude Slang Component Implementations|True/Checked|
+|Bit Width|32|
+|Max Sequence Size|1|
+|Max String Size|256|
+|C Output Directory|_&lt;example-dir&gt;_/hamr/c|
+
+You can have HAMR's FMIDE plugin generate verbose output and run the transpiler by setting the ``Verbose output`` and ``Run Transpiler``
+options that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+
+
+
+<details>
+
+<summary>Click for instructions on how to run HAMR Codegen via the command line</summary>
+
+The script [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh) uses an experimental OSATE/FMIDE plugin we've developed that
+allows you to run HAMR's OSATE/FMIDE plugin via the command line.  It has primarily been used/tested
+when installed in OSATE (not FMIDE) and under Linux so may not work as expected in FMIDE or
+under a different operating system. The script contains instructions on how to install the plugin.
+
+```
+./aadl/bin/run-hamr-Linux.sh
+```
+
+</details>
 <!--hamr-configuration-linux_end-->
 
 
 ### Behavior Code: Linux
 <!--behavior-code-linux_start-->
-  * [UxAS_thread](hamr/c/ext-c/UxAS_thr_Impl_uxas_UxAS_thread/UxAS_thr_Impl_uxas_UxAS_thread.c)
-
   * [RadioDriver](hamr/c/ext-c/RadioDriver_thr_Impl_radio_RadioDriver/RadioDriver_thr_Impl_radio_RadioDriver.c)
 
   * [CASE_AttestationGate](hamr/c/ext-c/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate.c)
+
+  * [UxAS_thread](hamr/c/ext-c/UxAS_thr_Impl_uxas_UxAS_thread/UxAS_thr_Impl_uxas_UxAS_thread.c)
 <!--behavior-code-linux_end-->
 
 
 ### How to Build/Run: Linux
 <!--how-to-buildrun-linux_start-->
+If you didn't configure HAMR's FMIDE plugin to run the transpiler automatically then first run
 ```
-./aadl/bin/run-hamr-Linux.sh
+./hamr/slang/bin/transpile.sh
+```
+then 
+```
 ./hamr/c/bin/compile-linux.sh
 ./hamr/c/bin/run-linux.sh
 ./hamr/c/bin/stop.sh
@@ -123,18 +147,55 @@ refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
 <!--SeL4_start--><!--SeL4_end-->
 
 ### HAMR Configuration: SeL4
+
+**NOTE:** you must run [compile-cakeml.cmd](aadl/cakeml/compile-cakeml.cmd) before 
+running HAMR Codegen.  Refer to the next section for more detail
+
 <!--hamr-configuration-sel4_start-->
-refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
+To run HAMR Codegen, select [this](aadl/SysContext.aadl#L89) system implementation in FMIDE's outline view and then click the
+HAMR button in the toolbar.  Use the following values in the dialog box that opens up (_&lt;example-dir&gt;_ is the directory that contains this readme file)
+
+Option Name|Value |
+|--|--|
+Platform|SeL4|
+Output Directory|_&lt;example-dir&gt;_/hamr/slang|
+Base Package Name|attestation-gate|
+|Exclude Slang Component Implementations|True/Checked|
+|Bit Width|32|
+|Max Sequence Size|1|
+|Max String Size|256|
+|C Output Directory|_&lt;example-dir&gt;_/hamr/c|
+|seL4/CAmkES Output Directory|_&lt;example-dir&gt;_/hamr/camkes
+
+You can have HAMR's FMIDE plugin generate verbose output and run the transpiler by setting the ``Verbose output`` and ``Run Transpiler``
+options that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+
+
+
+<details>
+
+<summary>Click for instructions on how to run HAMR Codegen via the command line</summary>
+
+The script [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh) uses an experimental OSATE/FMIDE plugin we've developed that
+allows you to run HAMR's OSATE/FMIDE plugin via the command line.  It has primarily been used/tested
+when installed in OSATE (not FMIDE) and under Linux so may not work as expected in FMIDE or
+under a different operating system. The script contains instructions on how to install the plugin.
+
+```
+./aadl/bin/run-hamr-SeL4.sh
+```
+
+</details>
 <!--hamr-configuration-sel4_end-->
 
 
 ### Behavior Code: SeL4
 <!--behavior-code-sel4_start-->
-  * [UxAS_thread](hamr/c/ext-c/UxAS_thr_Impl_uxas_UxAS_thread/UxAS_thr_Impl_uxas_UxAS_thread.c)
-
   * [RadioDriver](hamr/c/ext-c/RadioDriver_thr_Impl_radio_RadioDriver/RadioDriver_thr_Impl_radio_RadioDriver.c)
 
   * [CASE_AttestationGate](hamr/c/ext-c/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate.c)
+
+  * [UxAS_thread](hamr/c/ext-c/UxAS_thr_Impl_uxas_UxAS_thread/UxAS_thr_Impl_uxas_UxAS_thread.c)
 <!--behavior-code-sel4_end-->
 
 \* _If ``CAKEML_ASSEMBLIES_PRESENT=ON`` is passed to ``run-camkes.sh`` (see below) then the behavior code for the attestation gate will come from the CakeML file 
@@ -148,11 +209,16 @@ Generate the CakeML assembly by running this script [compile-cakeml.cmd](aadl/ca
 ./aadl/cakeml/compile-cakeml.cmd
 ```
 
-then
+then, run HAMR Codegen.  This, in addition to the normal code generation process, will copy the generated CakeML assemblies into the CAmkES project. 
 
 <!--how-to-buildrun-sel4_start-->
+If you didn't configure HAMR's FMIDE plugin to run the transpiler automatically then run
 ```
-./aadl/bin/run-hamr-SeL4.sh
+./hamr/slang/bin/transpile-sel4.sh
+```
+then
+
+```
 ./hamr/camkes/bin/run-camkes.sh -o "-DCAKEML_ASSEMBLIES_PRESENT=ON" -s
 ```
 <!--how-to-buildrun-sel4_end-->
@@ -161,7 +227,7 @@ Passing ``CAKEML_ASSEMBLIES_PRESENT=ON`` will remove the run method generated by
 [here](hamr/camkes/components/CASE_AttestationGate_thr_Impl_am_gate_CASE_AttestationGate/src/sb_CASE_AttestationGate_thr_Impl.c#L295) 
 so that the run method provided\* by the CakeML assembly will be used instead. 
 
-\* _Note that the [script](aadl/cakeml/compile-cakeml.cmd#L65) changes the name of the ``main`` method to ``run`` in the generated CakeML assembly_
+\* _Note that the [script](aadl/cakeml/compile-cakeml.cmd#L71) changes the name of the ``main`` method to ``run`` in the generated CakeML assembly_
 
 ### Example Output: SeL4
 <!--example-output-sel4_start-->

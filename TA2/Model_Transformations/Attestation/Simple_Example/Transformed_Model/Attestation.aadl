@@ -4,38 +4,6 @@ public
 	with CASE_Properties;
 	with Base_Types;
 
-	thread CASE_AttestationGate
-		features
-			command_message_in: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			command_message_out: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			other_message_in: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			other_message_out: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
-			TrustedIds: in event data port Address.Impl;
-		properties
-			CASE_Properties::Gating => 100;
-	end CASE_AttestationGate;
-
-	thread implementation CASE_AttestationGate.Impl
-		properties
-			Dispatch_Protocol => Sporadic;
-	end CASE_AttestationGate.Impl;
-
-	thread CASE_AttestationManager
-		features
-			AttestationRequest: out event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
-			AttestationResponse: in event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
-			TrustedIds: out event data port Address.Impl;
-		properties
-			CASE_Properties::Attesting => 100;
-	end CASE_AttestationManager;
-
-	thread implementation CASE_AttestationManager.Impl
-		properties
-			CASE_Properties::Cache_Timeout => 5 min;
-			CASE_Properties::Cache_Size => 3;
-			Dispatch_Protocol => Sporadic;
-	end CASE_AttestationManager.Impl;
-
 	data Address
 	end Address;
 
@@ -103,6 +71,39 @@ public
 			Source_Text => ("RadioDriver.c");
 	end RadioDriver_Attestation.Impl;
 
+	thread AttestationManager
+		features
+			AttestationRequest: out event data port CASE_Model_Transformations::CASE_AttestationRequestMsg.Impl;
+			AttestationResponse: in event data port CASE_Model_Transformations::CASE_AttestationResponseMsg.Impl;
+			TrustedIds: out event data port Address.Impl;
+		properties
+			CASE_Properties::Attesting => 100;
+	end AttestationManager;
+
+	thread implementation AttestationManager.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+			CASE_Properties::Component_Language => CakeML;
+			Source_Text => ("Component_Source/Attestation/build/heli_am.S",
+				"Component_Source/Attestation/build/apps/case-tool-assessment/libheli_am_c.a");
+	end AttestationManager.Impl;
+
+	thread AttestationGate
+		features
+			command_message_in: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			command_message_out: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			other_message_in: in event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			other_message_out: out event data port CASE_Model_Transformations::CASE_RF_Msg.Impl;
+			TrustedIds: in event data port Address.Impl;
+		properties
+			CASE_Properties::Gating => 100;
+	end AttestationGate;
+
+	thread implementation AttestationGate.Impl
+		properties
+			Dispatch_Protocol => Sporadic;
+	end AttestationGate.Impl;
+
 	process SW
 		features
 			input: in event data port;
@@ -117,8 +118,8 @@ public
 			Radio: thread RadioDriver_Attestation.Impl;
 			Crit_A: thread Critical_A.Impl;
 			Crit_B: thread Critical_B.Impl;
-			AttestationManager: thread CASE_AttestationManager.Impl;
-			AttestationGate: thread CASE_AttestationGate.Impl;
+			AttestationManager: thread AttestationManager.Impl;
+			AttestationGate: thread AttestationGate.Impl;
 		connections
 			c1: port input -> Radio.recv_message;
 			c5: port Radio.command_message -> AttestationGate.command_message_in;
@@ -158,5 +159,5 @@ public
 		properties
 			Actual_Processor_Binding => (reference (PROC)) applies to SW;
 	end Sys.Impl;
-	
+
 end Attestation;

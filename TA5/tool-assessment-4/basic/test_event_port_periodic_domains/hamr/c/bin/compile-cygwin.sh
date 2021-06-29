@@ -6,8 +6,8 @@ set -e
 export SCRIPT_HOME=$( cd "$( dirname "$0" )" &> /dev/null && pwd )
 cd ${SCRIPT_HOME}
 mkdir -p cygwin-build
-mkdir -p ${SCRIPT_HOME}/../../c/nix/cygwin-build
-cd ${SCRIPT_HOME}/../../c/nix/cygwin-build
+mkdir -p ${SCRIPT_HOME}/../nix/cygwin-build
+cd ${SCRIPT_HOME}/../nix/cygwin-build
 BOUND_CHECK=${BOUND_CHECK:-OFF}
 NO_PRINT=${NO_PRINT:-OFF}
 RANGE_CHECK=${RANGE_CHECK:-OFF}

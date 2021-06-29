@@ -4,9 +4,8 @@
 set -Eeuxo pipefail
 
 : "${BASE_DIR:=$HOME/CASE}"
-: "${SIREUM_INIT_V:=20210608.1645}"
-: "${SIREUM_V:=7c5c18f72a0383e677b90a527f974fbc3814a2bc}"
-: "${FMIDE_V:=nightly}" # use nightly release by default
+: "${SIREUM_INIT_V:=20210615.1954}"
+: "${SIREUM_V:=0edac3ab200af7c5d05bc033e6c9d7a17683dced}"
 
 export DEBIAN_FRONTEND=noninteractive
 export SIREUM_HOME=$BASE_DIR/Sireum
@@ -69,6 +68,13 @@ echo "export JAVA_HOME=\$SIREUM_HOME/bin/linux/java" >> "$HOME/.bashrc"
 echo "export PATH=\$PATH:\$JAVA_HOME/bin:\$SIREUM_HOME/bin" >> "$HOME/.bashrc"
 
 
-# FMIDE (latest nightly/release)
-$SIREUM_HOME/bin/install/fmide.cmd $FMIDE_V
-echo "export PATH=\$PATH:\$SIREUM_HOME/bin/linux/fmide" >> "$HOME/.bashrc"
+# FMIDE
+bash $HOME/bin/fmide.sh
+
+
+# HAMR Examples
+bash $HOME/bin/hamr-examples.sh
+
+# BriefCASE Examples
+bash $HOME/bin/transform-examples.sh
+bash $HOME/bin/uav-example.sh

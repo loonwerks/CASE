@@ -55,4 +55,8 @@ void print_AttestationRequestMsg(const char* const bytes);
 void print_AttestationResponseMsg(const char* const bytes);
 
 uint8_t* getRadioOutput();
+uint8_t isTrusted(uint8_t* msg, uint8_t* ids);
+uint8_t isBounded(uint8_t* msg);
+uint8_t* getFlightPlannerOutput(uint8_t* msg);
+uint8_t getMonitorAlertOutput(uint8_t* msg);
 #endif

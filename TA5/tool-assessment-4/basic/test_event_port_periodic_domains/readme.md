@@ -2,18 +2,18 @@
 
  Table of Contents
 <!--table-of-contents_start-->
-  * [AADL Architecture](#aadl-architecture)
-  * [Linux](#linux)
-    * [HAMR Configuration: Linux](#hamr-configuration-linux)
-    * [Behavior Code: Linux](#behavior-code-linux)
-    * [How to Build/Run: Linux](#how-to-buildrun-linux)
-  * [SeL4](#sel4)
-    * [HAMR Configuration: SeL4](#hamr-configuration-sel4)
-    * [Behavior Code: SeL4](#behavior-code-sel4)
-    * [How to Build/Run: SeL4](#how-to-buildrun-sel4)
-    * [Example Output: SeL4](#example-output-sel4)
-    * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
-    * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
+* [AADL Architecture](#aadl-architecture)
+* [Linux](#linux)
+  * [HAMR Configuration: Linux](#hamr-configuration-linux)
+  * [Behavior Code: Linux](#behavior-code-linux)
+  * [How to Build/Run: Linux](#how-to-buildrun-linux)
+* [SeL4](#sel4)
+  * [HAMR Configuration: SeL4](#hamr-configuration-sel4)
+  * [Behavior Code: SeL4](#behavior-code-sel4)
+  * [How to Build/Run: SeL4](#how-to-buildrun-sel4)
+  * [Example Output: SeL4](#example-output-sel4)
+  * [CAmkES Architecture: SeL4](#camkes-architecture-sel4)
+  * [HAMR CAmkES Architecture: SeL4](#hamr-camkes-architecture-sel4)
 <!--table-of-contents_end-->
 
 This example illustrates how to model and implement event port communications between
@@ -48,23 +48,25 @@ in the [CASE-Tool-Assessment-Guide](https://github.com/loonwerks/CASE/tree/maste
 ## AADL Architecture
 <!--aadl-architecture_start-->
 ![AADL Arch](aadl/diagrams/aadl-arch.png)
-|System Properties|
+|System: [top_impl_Instance](aadl/test_event_port_periodic_domains.aadl#L80) Properties|
 |--|
 |Domain Scheduling|
 
-|producer Properties|
+|[producer](aadl/test_event_port_periodic_domains.aadl#L12) Properties|
 |--|
-|Periodic: 1000 ms|
 |Native|
+|Periodic: 1000 ms|
+|Domain: 2|
 
 
-
-|consumer Properties|
+|[consumer](aadl/test_event_port_periodic_domains.aadl#L39) Properties|
 |--|
-|Periodic: 1000 ms|
 |Native|
+|Periodic: 1000 ms|
+|Domain: 3|
 
 
+**Schedule:** [domain_schedule.c](aadl/domain_schedule.c)
 <!--aadl-architecture_end-->
 
 
@@ -73,7 +75,39 @@ in the [CASE-Tool-Assessment-Guide](https://github.com/loonwerks/CASE/tree/maste
 
 ### HAMR Configuration: Linux
 <!--hamr-configuration-linux_start-->
-refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
+To run HAMR Codegen, select [this](aadl/test_event_port_periodic_domains.aadl#L80) system implementation in FMIDE's outline view and then click the
+HAMR button in the toolbar.  Use the following values in the dialog box that opens up (_&lt;example-dir&gt;_ is the directory that contains this readme file)
+
+Option Name|Value |
+|--|--|
+Platform|Linux|
+Output Directory|_&lt;example-dir&gt;_/hamr/slang|
+Base Package Name|base|
+|Exclude Slang Component Implementations|True/Checked|
+|Bit Width|32|
+|Max Sequence Size|1|
+|Max String Size|256|
+|C Output Directory|_&lt;example-dir&gt;_/hamr/c|
+
+You can have HAMR's FMIDE plugin generate verbose output and run the transpiler by setting the ``Verbose output`` and ``Run Transpiler``
+options that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+
+
+
+<details>
+
+<summary>Click for instructions on how to run HAMR Codegen via the command line</summary>
+
+The script [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh) uses an experimental OSATE/FMIDE plugin we've developed that
+allows you to run HAMR's OSATE/FMIDE plugin via the command line.  It has primarily been used/tested
+when installed in OSATE (not FMIDE) and under Linux so may not work as expected in FMIDE or
+under a different operating system. The script contains instructions on how to install the plugin.
+
+```
+./aadl/bin/run-hamr-Linux.sh
+```
+
+</details>
 <!--hamr-configuration-linux_end-->
 
 
@@ -87,8 +121,12 @@ refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
 
 ### How to Build/Run: Linux
 <!--how-to-buildrun-linux_start-->
+If you didn't configure HAMR's FMIDE plugin to run the transpiler automatically then first run
 ```
-./aadl/bin/run-hamr-Linux.sh
+./hamr/slang/bin/transpile.sh
+```
+then 
+```
 ./hamr/c/bin/compile-linux.sh
 ./hamr/c/bin/run-linux.sh
 ./hamr/c/bin/stop.sh
@@ -101,7 +139,40 @@ refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
 
 ### HAMR Configuration: SeL4
 <!--hamr-configuration-sel4_start-->
-refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
+To run HAMR Codegen, select [this](aadl/test_event_port_periodic_domains.aadl#L80) system implementation in FMIDE's outline view and then click the
+HAMR button in the toolbar.  Use the following values in the dialog box that opens up (_&lt;example-dir&gt;_ is the directory that contains this readme file)
+
+Option Name|Value |
+|--|--|
+Platform|SeL4|
+Output Directory|_&lt;example-dir&gt;_/hamr/slang|
+Base Package Name|base|
+|Exclude Slang Component Implementations|True/Checked|
+|Bit Width|32|
+|Max Sequence Size|1|
+|Max String Size|256|
+|C Output Directory|_&lt;example-dir&gt;_/hamr/c|
+|seL4/CAmkES Output Directory|_&lt;example-dir&gt;_/hamr/camkes
+
+You can have HAMR's FMIDE plugin generate verbose output and run the transpiler by setting the ``Verbose output`` and ``Run Transpiler``
+options that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
+
+
+
+<details>
+
+<summary>Click for instructions on how to run HAMR Codegen via the command line</summary>
+
+The script [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh) uses an experimental OSATE/FMIDE plugin we've developed that
+allows you to run HAMR's OSATE/FMIDE plugin via the command line.  It has primarily been used/tested
+when installed in OSATE (not FMIDE) and under Linux so may not work as expected in FMIDE or
+under a different operating system. The script contains instructions on how to install the plugin.
+
+```
+./aadl/bin/run-hamr-SeL4.sh
+```
+
+</details>
 <!--hamr-configuration-sel4_end-->
 
 
@@ -115,8 +186,13 @@ refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
 
 ### How to Build/Run: SeL4
 <!--how-to-buildrun-sel4_start-->
+If you didn't configure HAMR's FMIDE plugin to run the transpiler automatically then run
 ```
-./aadl/bin/run-hamr-SeL4.sh
+./hamr/slang/bin/transpile-sel4.sh
+```
+then
+
+```
 ./hamr/camkes/bin/run-camkes.sh -s
 ```
 <!--how-to-buildrun-sel4_end-->

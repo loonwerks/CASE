@@ -1,0 +1,29 @@
+{
+	"tool" : "GearCASE",
+	"implementation" : "MissionComputer_Impl_Instance",
+	"date" : 1596839988,
+	"hash" : "00000000",
+	"requirements" : 
+	[
+		{
+			"type" : "monitor_correctness",
+			"text" : "Output of uncontrolled component shall be monitored for incorrect behavior",
+			"context" : "SW.FlightPlanner"
+		},
+		{
+			"type" : "permit_well_formed_data",
+			"text" : "Messages shall be well-formed",
+			"context" : "SW.FlightPlanner"
+		},
+		{
+			"type" : "application_sandboxing",
+			"text" : "Applications shall have sandboxing protections (e.g. memory isolation)",
+			"context" : "SW.FlightPlanner"
+		},
+		{
+			"type" : "attestation",
+			"text" : "Communication sources shall be trusted",
+			"context" : "SW.Radio"
+		}
+	]
+}

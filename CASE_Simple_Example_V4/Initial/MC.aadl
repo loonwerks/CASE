@@ -94,10 +94,6 @@ public
 			HAMR::Bit_Codec_Raw_Connections => true;
 		annex resolute {**
 			check HAMR_Guidelines
-			prove Req_Attestation(this.SW.Radio)
-			prove Req_WellFormed_MissionCommand(this.SW.FlightPlanner, "Req_Wellformed_MissionCommand")
-			prove Req_FlightPlanner_Geofence(this.SW.FlightPlanner)
-			prove Req_Virtualization(this.SW.FlightPlanner)
 		**};
 	end MissionComputer.Impl;
 

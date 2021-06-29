@@ -1,0 +1,441 @@
+package SW
+public
+
+	with Data_Types;
+	with CASE_Properties;
+	renames AGREE_Definitions::all;
+
+	with CASE_Scheduling;
+	with HAMR;
+
+	thread AttestationTester
+		features
+			AttestationRequest: in event data port Data_Types::AttestationRequestMsg.Impl;
+			AttestationResponse: out event data port Data_Types::AttestationResponseMsg.Impl;
+		properties
+			CASE_Properties::Attesting => 100;
+	end AttestationTester;
+
+	thread implementation AttestationTester.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
+			Source_Text => ("Component_Source/Hardened/SW_AttestationTester/Pass/user_am.S");
+			CASE_Properties::Component_Language => CakeML;
+	end AttestationTester.Impl;
+
+	process AttestationTester_seL4
+		features
+			AttestationRequest: in event data port Data_Types::AttestationRequestMsg.Impl;
+			AttestationResponse: out event data port Data_Types::AttestationResponseMsg.Impl;
+		properties
+			CASE_Properties::Attesting => 100;
+	end AttestationTester_seL4;
+
+	process implementation AttestationTester_seL4.Impl
+		subcomponents
+			AttestationTester: thread AttestationTester.Impl;
+		connections
+			c1: port AttestationRequest -> AttestationTester.AttestationRequest;
+			c2: port AttestationTester.AttestationResponse -> AttestationResponse;
+		properties
+			CASE_Scheduling::Domain => 2;
+			Period => 500ms;
+			CASE_Properties::Component_Language => CakeML;
+	end AttestationTester_seL4.Impl;
+
+	thread RadioDriver
+		-- The RadioDriver is the software that enables other SW components to communicate to other systems over RF
+		features
+			MissionCommand: out event data port Data_Types::RF_Msg.Impl;
+		properties
+			CASE_Properties::Comm_Driver => true;
+	end RadioDriver;
+
+	thread implementation RadioDriver.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
+	end RadioDriver.Impl;
+
+	thread FlightPlanner
+		-- The FlightPlanner accepts a command message containing a map and flight pattern, and generates a mission.
+		features
+			MissionCommand: in event data port Data_Types::RF_Msg.Impl;
+			FlightPlan: out event data port Data_Types::Mission;
+		annex agree {**
+			assume Req_WellFormed_MissionCommand "Messages shall be well-formed" : event(MissionCommand) => WELL_FORMED_MISSION_COMMAND(MissionCommand);
+		**};
+	end FlightPlanner;
+
+	thread implementation FlightPlanner.Impl
+		properties
+			CASE_Properties::Trust_Level => 0;
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
+			HAMR::Component_Type => VIRTUAL_MACHINE;
+	end FlightPlanner.Impl;
+
+	thread FlightController
+		-- The FlightController is the software that flies the UAV
+		features
+			Alert: in event port;
+			FlightPlan: in event data port Data_Types::Mission;
+	end FlightController;
+
+	thread implementation FlightController.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
+	end FlightController.Impl;
+
+	process SW
+	end SW;
+
+	process implementation SW.Impl
+		subcomponents
+			Radio: thread RadioDriver.Impl;
+			FlightPlanner: thread FlightPlanner.Impl;
+			FlightController: thread FlightController.Impl;
+		connections
+			c1: port Radio.MissionCommand -> FlightPlanner.MissionCommand;
+			c2: port FlightPlanner.FlightPlan -> FlightController.FlightPlan;
+	end SW.Impl;
+
+	process RadioDriver_seL4
+		features
+			MissionCommand: out event data port Data_Types::RF_Msg.Impl;
+		properties
+			CASE_Properties::Comm_Driver => true;
+	end RadioDriver_seL4;
+
+	process implementation RadioDriver_seL4.Impl
+		subcomponents
+			RadioDriver: thread RadioDriver.Impl;
+		connections
+			c1: port RadioDriver.MissionCommand -> MissionCommand;
+		properties
+			Period => 500ms;
+		annex agree {**
+			lift contract;
+		**};
+	end RadioDriver_seL4.Impl;
+
+	process FlightPlanner_seL4
+		features
+			MissionCommand: in event data port Data_Types::RF_Msg.Impl;
+			FlightPlan: out event data port Data_Types::Mission;
+	end FlightPlanner_seL4;
+
+	process implementation FlightPlanner_seL4.Impl
+		subcomponents
+			FlightPlanner: thread FlightPlanner.Impl;
+		connections
+			c1: port FlightPlanner.FlightPlan -> FlightPlan;
+			c2: port MissionCommand -> FlightPlanner.MissionCommand;
+		properties
+			CASE_Properties::Trust_Level => 0;
+			CASE_Scheduling::Domain => 7;
+			Period => 500ms;
+			HAMR::Component_Type => VIRTUAL_MACHINE;
+		annex agree {**
+			lift contract;
+		**};
+	end FlightPlanner_seL4.Impl;
+
+	process FlightController_seL4
+		features
+			Alert: in event port;
+			FlightPlan: in event data port Data_Types::Mission;
+	end FlightController_seL4;
+
+	process implementation FlightController_seL4.Impl
+		subcomponents
+			FlightController: thread FlightController.Impl;
+		connections
+			c1: port Alert -> FlightController.Alert;
+			c2: port FlightPlan -> FlightController.FlightPlan;
+		properties
+			CASE_Scheduling::Domain => 9;
+			Period => 500ms;
+	end FlightController_seL4.Impl;
+
+	thread RadioDriver_Attestation
+		features
+			MissionCommand: out event data port Data_Types::RF_Msg.Impl;
+			AttestationRequest: in event data port Data_Types::AttestationRequestMsg.Impl;
+			AttestationResponse: out event data port Data_Types::AttestationResponseMsg.Impl;
+			AttestationTesterResponse: in event data port Data_Types::AttestationResponseMsg.Impl;
+			AttestationTesterRequest: out event data port Data_Types::AttestationRequestMsg.Impl;
+		properties
+			CASE_Properties::Comm_Driver => true;
+	end RadioDriver_Attestation;
+
+	thread implementation RadioDriver_Attestation.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_Size => 1048576 Bytes;
+	end RadioDriver_Attestation.Impl;
+
+	process RadioDriver_Attestation_seL4
+		features
+			MissionCommand: out event data port Data_Types::RF_Msg.Impl;
+			AttestationRequest: in event data port Data_Types::AttestationRequestMsg.Impl;
+			AttestationResponse: out event data port Data_Types::AttestationResponseMsg.Impl;
+			AttestationTesterResponse: in event data port Data_Types::AttestationResponseMsg.Impl;
+			AttestationTesterRequest: out event data port Data_Types::AttestationRequestMsg.Impl;
+		properties
+			CASE_Properties::Comm_Driver => true;
+	end RadioDriver_Attestation_seL4;
+
+	process implementation RadioDriver_Attestation_seL4.Impl
+		subcomponents
+			RadioDriver: thread RadioDriver_Attestation.Impl;
+		connections
+			c1: port RadioDriver.AttestationResponse -> AttestationResponse;
+			c2: port AttestationRequest -> RadioDriver.AttestationRequest;
+			c3: port RadioDriver.MissionCommand -> MissionCommand;
+			c4: port AttestationTesterResponse -> RadioDriver.AttestationTesterResponse;
+			c5: port RadioDriver.AttestationTesterRequest -> AttestationTesterRequest;
+		properties
+			CASE_Scheduling::Domain => 3;
+			Period => 500ms;
+	end RadioDriver_Attestation_seL4.Impl;
+
+	thread AttestationManager
+		features
+			AttestationRequest: out event data port Data_Types::AttestationRequestMsg.Impl;
+			AttestationResponse: in event data port Data_Types::AttestationResponseMsg.Impl;
+			TrustedIds: out event data port Data_Types::AllowList.Impl;
+		properties
+			CASE_Properties::Attesting => 100;
+	end AttestationManager;
+
+	thread implementation AttestationManager.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_Size => 1048576 Bytes;
+			CASE_Properties::Component_Language => CakeML;
+			Source_Text => ("Component_Source/Attestation/build/heli_am.S");
+	end AttestationManager.Impl;
+
+	process AttestationManager_seL4
+		features
+			AttestationRequest: out event data port Data_Types::AttestationRequestMsg.Impl;
+			AttestationResponse: in event data port Data_Types::AttestationResponseMsg.Impl;
+			TrustedIds: out event data port Data_Types::AllowList.Impl;
+		properties
+			CASE_Properties::Attesting => 100;
+	end AttestationManager_seL4;
+
+	process implementation AttestationManager_seL4.Impl
+		subcomponents
+			AttestationManager: thread AttestationManager.Impl;
+		connections
+			c1: port AttestationManager.AttestationRequest -> AttestationRequest;
+			c2: port AttestationResponse -> AttestationManager.AttestationResponse;
+			c3: port AttestationManager.TrustedIds -> TrustedIds;
+		properties
+			CASE_Scheduling::Domain => 4;
+			Period => 500ms;
+--			CASE_Properties::Component_Language => CakeML;
+--			Source_Text => ("Component_Source/Attestation/build/heli_am.S",
+--				"Component_Source/Attestation/build/apps/case-tool-assessment/libheli_am_c.a");
+	end AttestationManager_seL4.Impl;
+
+	thread AttestationGate
+		features
+			MissionCommand_in: in event data port Data_Types::RF_Msg.Impl;
+			MissionCommand_out: out event data port Data_Types::RF_Msg.Impl;
+			TrustedIds: in event data port Data_Types::AllowList.Impl;
+		properties
+			CASE_Properties::Gating => 100;
+			CASE_Properties::Component_Spec => ("MissionCommand_Output");
+		annex agree {**
+			eq trusted_ids : Data_Types::AllowList.Impl = 
+						if event(TrustedIds) then 
+						TrustedIds 
+						else 
+						default_trustedid_list -> pre(trusted_ids);
+			fun IS_TRUSTED(command : Data_Types::RF_Msg.Impl, ids : Data_Types::AllowList.Impl) :
+						bool = exists i in ids.value, command.header.src = i;
+			guarantee MissionCommand_Output "The gate shall output only data from trusted sources" :
+								if event(MissionCommand_in) and IS_TRUSTED(MissionCommand_in, trusted_ids) then
+									event(MissionCommand_out) and MissionCommand_out = MissionCommand_in
+								else
+									not event(MissionCommand_out);
+		**};
+
+	end AttestationGate;
+
+	thread implementation AttestationGate.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_Size => 1048576 Bytes;
+			Source_Text => ("Component_Source/SW_AttestationGate/AttestationGate.S");
+			CASE_Properties::Component_Language => CakeML;
+	end AttestationGate.Impl;
+
+	process AttestationGate_seL4
+		features
+			MissionCommand_in: in event data port Data_Types::RF_Msg.Impl;
+			MissionCommand_out: out event data port Data_Types::RF_Msg.Impl;
+			TrustedIds: in event data port Data_Types::AllowList.Impl;
+		properties
+			CASE_Properties::Gating => 100;
+	end AttestationGate_seL4;
+
+	process implementation AttestationGate_seL4.Impl
+		subcomponents
+			AttestationGate: thread AttestationGate.Impl;
+		connections
+			c1: port TrustedIds -> AttestationGate.TrustedIds;
+			c2: port AttestationGate.MissionCommand_out -> MissionCommand_out;
+			c3: port MissionCommand_in -> AttestationGate.MissionCommand_in;
+		properties
+			CASE_Scheduling::Domain => 5;
+			Period => 500ms;
+	end AttestationGate_seL4.Impl;
+
+	thread Filter
+		features
+			Input: in event data port Data_Types::RF_Msg.Impl;
+			Output: out event data port Data_Types::RF_Msg.Impl;
+		properties
+			CASE_Properties::Filtering => 100;
+			CASE_Properties::Component_Spec => ("Filter_Output");
+		annex agree {**
+			guarantee Filter_Output "The filter output shall be well-formed" :
+						if event(Input) and WELL_FORMED_MISSION_COMMAND(Input) then
+						event(Output) and Output = Input
+						else
+						not event(Output);
+		**};
+	end Filter;
+
+	thread implementation Filter.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
+			Source_Text => ("Component_Source/SW_Filter/Filter.S");
+			CASE_Properties::Component_Language => CakeML;
+	end Filter.Impl;
+
+	process Filter_seL4
+		features
+			Input: in event data port Data_Types::RF_Msg.Impl;
+			Output: out event data port Data_Types::RF_Msg.Impl;
+		properties
+			CASE_Properties::Filtering => 100;
+			CASE_Properties::Component_Spec => ("Filter_Output");
+	end Filter_seL4;
+
+	process implementation Filter_seL4.Impl
+		subcomponents
+			Filter: thread Filter.Impl;
+		connections
+			c1: port Input -> Filter.Input;
+			c2: port Filter.Output -> Output;
+		properties
+			CASE_Scheduling::Domain => 6;
+			Period => 500ms;
+		annex agree {**
+			lift contract;
+		**};
+	end Filter_seL4.Impl;
+
+	thread Monitor
+		features
+			Alert: out event port;
+			FlightPlan_in: in event data port Data_Types::Mission;
+			FlightPlan_out: out event data port Data_Types::Mission;
+		properties
+			CASE_Properties::Monitoring => 100;
+			CASE_Properties::Component_Spec => ("Monitor_Alert", "Monitor_FlightPlan_out");
+		annex agree {**
+			const is_latched : bool = false;
+			property alerted = (not WAYPOINTS_IN_ZONE(FlightPlan_in, keep_in_zone)) -> ((is_latched and pre(alerted)) or (event(FlightPlan_in) and not WAYPOINTS_IN_ZONE(FlightPlan_in, keep_in_zone)));
+			guarantee Monitor_Alert "A violation of the monitor policy shall trigger an alert" : event(Alert) <=> alerted;
+			guarantee Monitor_FlightPlan_out "A violation of the monitor policy shall prevent propagation of the observed input." : if alerted then not event(FlightPlan_out) else event(FlightPlan_out) and FlightPlan_out = FlightPlan_in;
+		**};
+	end Monitor;
+
+	thread implementation Monitor.Impl
+		properties
+			Dispatch_Protocol => Periodic;
+			Period => 500ms;
+			Compute_Execution_Time => 10ms .. 50ms;
+			Stack_size => 1048576 Bytes;
+			Source_Text => ("./Component_Source/SW_Monitor/Monitor.S");
+			CASE_Properties::Component_Language => CakeML;
+	end Monitor.Impl;
+
+	process Monitor_seL4
+		features
+			Alert: out event port;
+			FlightPlan_in: in event data port Data_Types::Mission;
+			FlightPlan_out: out event data port Data_Types::Mission;
+		properties
+			CASE_Properties::Monitoring => 100;
+			CASE_Properties::Component_Spec => ("Monitor_Alert", "Monitor_FlightPlan_out");
+	end Monitor_seL4;
+
+	process implementation Monitor_seL4.Impl
+		subcomponents
+			Monitor: thread Monitor.Impl;
+		connections
+			c1: port Monitor.Alert -> Alert;
+			c2: port FlightPlan_in -> Monitor.FlightPlan_in;
+			c3: port Monitor.FlightPlan_out -> FlightPlan_out;
+		properties
+			CASE_Scheduling::Domain => 8;
+			Period => 500ms;
+		annex agree {**
+			lift contract;
+		**};
+	end Monitor_seL4.Impl;
+
+	system SW_seL4
+	end SW_seL4;
+
+	system implementation SW_seL4.Impl
+		subcomponents
+			FlightPlanner: process FlightPlanner_seL4.Impl;
+			Radio: process RadioDriver_Attestation_seL4.Impl;
+			FlightController: process FlightController_seL4.Impl;
+			AttestationManager: process AttestationManager_seL4.Impl;
+			AttestationGate: process AttestationGate_seL4.Impl;
+			Filter: process Filter_seL4.Impl;
+			Monitor: process Monitor_seL4.Impl;
+			AttestationTester: process AttestationTester_seL4.Impl;
+		connections
+			c3: port Radio.MissionCommand -> AttestationGate.MissionCommand_in;
+			c4: port AttestationManager.TrustedIds -> AttestationGate.TrustedIds;
+			c5: port AttestationManager.AttestationRequest -> Radio.AttestationRequest;
+			c6: port Radio.AttestationResponse -> AttestationManager.AttestationResponse;
+			c1: port AttestationGate.MissionCommand_out -> Filter.Input;
+			c2: port Monitor.FlightPlan_out -> FlightController.FlightPlan;
+			c7: port Filter.Output -> FlightPlanner.MissionCommand;
+			c8: port FlightPlanner.FlightPlan -> Monitor.FlightPlan_in;
+			c9: port Monitor.Alert -> FlightController.Alert;
+			c10: port Radio.AttestationTesterRequest -> AttestationTester.AttestationRequest;
+			c11: port AttestationTester.AttestationResponse -> Radio.AttestationTesterResponse;
+	end SW_seL4.Impl;
+	
+end SW;

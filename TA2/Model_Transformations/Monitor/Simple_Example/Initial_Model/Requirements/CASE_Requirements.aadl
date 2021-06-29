@@ -7,7 +7,7 @@ private
 			context Generated_On : "Jan 29, 2020";
 			context Req_Component : "Monitor::SW.Impl.Comp_A";
 			context Formalized : "False";
-			false
+			undeveloped
 			
 		goal Req_CorrectOutput(comp_context : component) <=
 			** "[correctness_monitor] Component Comp_A shall be monitored for correct output" **
@@ -15,7 +15,7 @@ private
 			context Generated_On : "Jan 29, 2020";
 			context Req_Component : "Monitor::SW.Impl.Comp_A";
 			context Formalized : "False";
-			false
+			undeveloped
 		
 	**};
 end CASE_Requirements;

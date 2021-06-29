@@ -1,0 +1,20 @@
+#ifndef SIREUM_H_hamr_SW_CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate
+#define SIREUM_H_hamr_SW_CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include <types.h>
+
+Unit hamr_SW_CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_initialise(STACK_FRAME hamr_SW_CASE_AttestationGate_thr_Impl_Initialization_Api api);
+
+Unit hamr_SW_CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_timeTriggered(STACK_FRAME hamr_SW_CASE_AttestationGate_thr_Impl_Operational_Api api);
+
+Unit hamr_SW_CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_finalise(STACK_FRAME hamr_SW_CASE_AttestationGate_thr_Impl_Operational_Api api);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif

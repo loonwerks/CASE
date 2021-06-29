@@ -1,0 +1,91 @@
+package GS
+
+public
+	
+	with UAS_Buses;
+	
+	-- Radio hardware on the Ground Station
+	device Radio
+		features
+			GSA: requires bus access GS_Bus.Impl;
+			RFA: requires bus access UAS_Buses::RF_Bus.Impl;
+			RecvIn: in event data port;
+			RecvOut: out event data port;
+			SendIn: in event data port;
+			SendOut: out event data port;
+	end Radio;
+	
+	device implementation Radio.Impl	
+	end Radio.Impl;
+	
+	
+	-- Processor for Ground Station communication system
+	processor GS_Proc
+		features
+			GSA: requires bus access GS_Bus.Impl;			
+	end GS_Proc;
+	
+	processor implementation GS_Proc.Impl
+	end GS_Proc.Impl;
+	
+	
+	-- Memory for Ground Station communication system
+	memory GS_Mem
+		features
+			GSA: requires bus access GS_Bus.Impl;		
+	end GS_Mem;
+	
+	memory implementation GS_Mem.Impl	
+	end GS_Mem.Impl;
+	
+	
+	-- Ground station communication system HW bus
+	bus GS_Bus
+	end GS_Bus;
+	
+	bus implementation GS_Bus.Impl	
+	end GS_Bus.Impl;
+	
+	
+	-- Ground Station communication SW
+	process GS_SW
+		features
+			RecvData: in event data port;
+			SendData: out event data port;
+	end GS_SW;
+	
+	process implementation GS_SW.Impl
+	end GS_SW.Impl;
+	
+	
+	-- The Ground Station communication system
+	system GroundStation
+		features
+			RadioRecv: in event data port;
+			RadioSend: out event data port;
+			RFA: requires bus access UAS_Buses::RF_Bus.Impl;
+	end GroundStation;
+	
+	system implementation GroundStation.Impl
+		subcomponents
+			Radio_HW: device Radio.Impl;
+			Proc_HW: processor GS_Proc.Impl;
+			Mem_HW: memory GS_Mem.Impl;
+			Bus_HW: bus GS_Bus.Impl;
+			Proc_SW: process GS_SW.Impl;
+		connections
+			bac1: bus access Radio_HW.GSA <-> Bus_HW;
+			bac3: bus access Proc_HW.GSA <-> Bus_HW;
+			bac4: bus access Mem_HW.GSA <-> Bus_HW;
+			bac6: bus access Radio_HW.RFA <-> RFA;
+			c1: port Proc_SW.SendData -> Radio_HW.SendIn;
+			c2: port Radio_HW.SendOut -> RadioSend;
+			c3: port RadioRecv -> Radio_HW.RecvIn;
+			c4: port Radio_HW.RecvOut -> Proc_SW.RecvData;
+		properties
+			Actual_Processor_Binding => (reference (Proc_HW)) applies to Proc_SW;
+			Actual_Memory_Binding => (reference (Mem_HW)) applies to Proc_SW;
+			Actual_Connection_Binding => (reference (Bus_HW)) applies to c1, c4;
+	end GroundStation.Impl;
+	
+end GS;
