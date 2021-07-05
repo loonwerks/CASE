@@ -79,7 +79,7 @@ public
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
 			Stack_size => 1048576 Bytes;
-			HAMR::Component_Type => VIRTUAL_MACHINE;
+			-- HAMR::Component_Type => VIRTUAL_MACHINE;
 	end FlightPlanner.Impl;
 
 	thread FlightController
@@ -145,7 +145,7 @@ public
 			CASE_Properties::Trust_Level => 0;
 			CASE_Scheduling::Domain => 7;
 			Period => 500ms;
-			HAMR::Component_Type => VIRTUAL_MACHINE;
+			-- HAMR::Component_Type => VIRTUAL_MACHINE;
 		annex agree {**
 			lift contract;
 		**};
