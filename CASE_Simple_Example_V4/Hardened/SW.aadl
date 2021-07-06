@@ -365,7 +365,7 @@ public
 			CASE_Properties::Component_Spec => ("Monitor_Alert", "Monitor_FlightPlan_out");
 		annex agree {**
 			const is_latched : bool = false;
-			property alerted = (not WAYPOINTS_IN_ZONE(FlightPlan_in, keep_in_zone)) -> ((is_latched and pre(alerted)) or (event(FlightPlan_in) and not WAYPOINTS_IN_ZONE(FlightPlan_in, keep_in_zone)));
+			property alerted = (event(FlightPlan_in) and not WAYPOINTS_IN_ZONE(FlightPlan_in, keep_in_zone)) -> ((is_latched and pre(alerted)) or (event(FlightPlan_in) and not WAYPOINTS_IN_ZONE(FlightPlan_in, keep_in_zone)));
 			guarantee Monitor_Alert "A violation of the monitor policy shall trigger an alert" : event(Alert) <=> alerted;
 			guarantee Monitor_FlightPlan_out "A violation of the monitor policy shall prevent propagation of the Observed input." :
 				if event(FlightPlan_in) and not (alerted) then
