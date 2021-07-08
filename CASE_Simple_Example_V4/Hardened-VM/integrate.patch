@@ -148,3 +148,19 @@ diff -Naur ./CAmkES/components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Im
  void ffiraw_print_buffer(unsigned char *parameter, long parameterSizeBytes, unsigned char *output, long outputSizeBytes) {
  
    int elideAfter = 20; // stop printing after this many consecutive 0's seen
+diff -Naur ./CAmkES/components/VM/apps/vmFlightPlanner/CMakeLists.txt ../HAMR_Simple_V4-patched/CAmkES/components/VM/apps/vmFlightPlanner/CMakeLists.txt
+--- ./CAmkES/components/VM/apps/vmFlightPlanner/CMakeLists.txt	2021-07-07 23:54:49.674370226 -0500
++++ ../HAMR_Simple_V4-patched/CAmkES/components/VM/apps/vmFlightPlanner/CMakeLists.txt	2021-07-07 14:30:55.402370226 -0500
+@@ -8,7 +8,10 @@
+ 
+ add_subdirectory(${SB_Type_Library_DIR} SB_Type_Library)
+ 
+-add_executable(vmFlightPlanner vmFlightPlanner.c)
++add_executable(vmFlightPlanner 
++               vmFlightPlanner.c
++               hardened_v4.c
++               hardened_v4.h)
+ 
+ target_link_libraries(vmFlightPlanner
+                       SB_Type_Library
+
