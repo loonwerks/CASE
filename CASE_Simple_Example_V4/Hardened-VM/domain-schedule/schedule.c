@@ -8,25 +8,25 @@
 #define OUTPUT 4
 
 const dschedule_t ksDomSchedule[] = { // 1 tick == 2ms
-  { .domain = 0, .length = 80 },  // 160ms  domain 0
-  { .domain = 1, .length = 5 },   //  10ms  pacer
-  { .domain = 0, .length = 20 },  //  40ms  domain 0
-  { .domain = 2, .length = 5 },   //  10ms  Attestation Tester
-  { .domain = 0, .length = 20 },  //  40ms  domain 0
-  { .domain = 3, .length = 20 },  //  40ms  Radio
-  { .domain = 0, .length = 20 },  //  40ms  domain 0
-  { .domain = 4, .length = 5 },   //  10ms  Attestation Manager
-  { .domain = 0, .length = 20 },  //  40ms  domain 0
-  { .domain = 5, .length = 5 },   //  10ms  Attestation Gate
-  { .domain = 0, .length = 20 },  //  40ms  domain 0
-  { .domain = 6, .length = 5 },   //  10ms  Filter
-  { .domain = 0, .length = 20 },  //  40ms  domain 0
-  { .domain = 7, .length = 190 }, // 380ms  Flight Planner
-  { .domain = 0, .length = 20 },  //  40ms  domain 0
-  { .domain = 8, .length = 5 },   //  10ms  Monitor
-  { .domain = 0, .length = 20 },  //  40ms  domain 0
-  { .domain = 9, .length = 20 }   //  40ms  Flight Controller
-  // Total                500 ticks:1000ms
+  { .domain = 0, .length = 200 },
+  { .domain = 1, .length = 60  },   // Pacer
+  { .domain = 0, .length = 40  },
+  { .domain = 2, .length = 100 },   //  Attestation Tester
+  { .domain = 0, .length = 40  },
+  { .domain = 3, .length = 100 },   //  Radio
+  { .domain = 0, .length = 40  },
+  { .domain = 4, .length = 100 },   // Attestation Manager
+  { .domain = 0, .length = 40  },
+  { .domain = 5, .length = 100 },   // Attestation Gate
+  { .domain = 0, .length = 40  },
+  { .domain = 6, .length = 100 },   // Filter
+  { .domain = 0, .length = 40  },
+  { .domain = 7, .length = 500 },   // Flight Planner
+  { .domain = 0, .length = 40  },
+  { .domain = 8, .length = 100 },   // Monitor
+  { .domain = 0, .length = 40  },
+  { .domain = 9, .length = 100 }    //  Flight Controller
+  // Total                1380 ticks:2760ms
 };
 
 const word_t ksDomScheduleLength = sizeof(ksDomSchedule) / sizeof(dschedule_t);
