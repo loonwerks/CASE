@@ -163,4 +163,16 @@ diff -Naur ./CAmkES/components/VM/apps/vmFlightPlanner/CMakeLists.txt ../HAMR_Si
  
  target_link_libraries(vmFlightPlanner
                        SB_Type_Library
-
+diff -Naur ./CAmkES/bin/run-camkes.sh ../HAMR_Simple_V4-patched/CAmkES/bin/run-camkes.sh 
+--- ./CAmkES/bin/run-camkes.sh	2021-07-08 01:41:09.366370226 -0500
++++ ../HAMR_Simple_V4-patched/CAmkES/bin/run-camkes.sh	2021-07-07 17:52:29.118370226 -0500
+@@ -135,6 +135,9 @@
+       -machine virt,virtualization=on,highmem=off,secure=off \
+       -cpu cortex-a53 \
+       -nographic \
++      -chardev stdio,id=char0,mux=on,logfile=serial.log,signal=off \
++      -serial chardev:char0 \
++      -mon chardev=char0 \
+       -m size=1024 \
+       -kernel images/capdl-loader-image-arm-qemu-arm-virt
+ fi
