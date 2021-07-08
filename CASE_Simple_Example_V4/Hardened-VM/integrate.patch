@@ -43,7 +43,7 @@ diff -Naur ./CAmkES/CMakeLists.txt ../HAMR_Simple_V4-patched/CAmkES/CMakeLists.t
 diff -Naur ./CAmkES/components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl_ffi.c ../HAMR_Simple_V4-patched/CAmkES/components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl_ffi.c
 --- ./CAmkES/components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl_ffi.c	2021-06-21 14:43:37.032029340 -0500
 +++ ../HAMR_Simple_V4-patched/CAmkES/components/AttestationGate_Impl_SW_AttestationGate_AttestationGate/src/sb_AttestationGate_Impl_ffi.c	2021-06-21 14:09:50.591252567 -0500
-@@ -158,18 +158,6 @@
+@@ -158,32 +158,6 @@
   * Required by the FFI framework
   */
  
@@ -59,13 +59,27 @@ diff -Naur ./CAmkES/components/AttestationGate_Impl_SW_AttestationGate_Attestati
 -  exit(arg);
 -}
 -
- // convert big-endian 32-bit float to little-endian 64 bit double
- void ffifloat2double(unsigned char *parameter, long parameterSizeBytes,
-                      unsigned char *output,    long outputSizeBytes) {
+-// convert big-endian 32-bit float to little-endian 64 bit double
+-void ffifloat2double(unsigned char *parameter, long parameterSizeBytes,
+-                     unsigned char *output,    long outputSizeBytes) {
+-  char bytes [4];
+-  assert (4 == parameterSizeBytes);
+-  bytes[3] = parameter[0];
+-  bytes[2] = parameter[1];
+-  bytes[1] = parameter[2];
+-  bytes[0] = parameter[3];
+-
+-  double result = *((float*)bytes);
+-  memcpy(output, (unsigned char*) &result, sizeof(double));
+-}
+-
+ void ffiraw_print_buffer(unsigned char *parameter, long parameterSizeBytes, unsigned char *output, long outputSizeBytes) {
+ 
+   int elideAfter = 20; // stop printing after this many consecutive 0's seen
 diff -Naur ./CAmkES/components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c ../HAMR_Simple_V4-patched/CAmkES/components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c
 --- ./CAmkES/components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c	2021-06-21 14:43:37.064029841 -0500
 +++ ../HAMR_Simple_V4-patched/CAmkES/components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_ffi.c	2021-06-21 14:09:50.591252567 -0500
-@@ -148,18 +148,6 @@
+@@ -148,32 +148,6 @@
   * Required by the FFI framework
   */
  
@@ -81,13 +95,27 @@ diff -Naur ./CAmkES/components/Filter_Impl_SW_Filter_Filter/src/sb_Filter_Impl_f
 -  exit(arg);
 -}
 -
- // convert big-endian 32-bit float to little-endian 64 bit double
- void ffifloat2double(unsigned char *parameter, long parameterSizeBytes,
-                      unsigned char *output,    long outputSizeBytes) {
+-// convert big-endian 32-bit float to little-endian 64 bit double
+-void ffifloat2double(unsigned char *parameter, long parameterSizeBytes,
+-                     unsigned char *output,    long outputSizeBytes) {
+-  char bytes [4];
+-  assert (4 == parameterSizeBytes);
+-  bytes[3] = parameter[0];
+-  bytes[2] = parameter[1];
+-  bytes[1] = parameter[2];
+-  bytes[0] = parameter[3];
+-
+-  double result = *((float*)bytes);
+-  memcpy(output, (unsigned char*) &result, sizeof(double));
+-}
+-
+ void ffiraw_print_buffer(unsigned char *parameter, long parameterSizeBytes, unsigned char *output, long outputSizeBytes) {
+ 
+   int elideAfter = 20; // stop printing after this many consecutive 0's seen
 diff -Naur ./CAmkES/components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl_ffi.c ../HAMR_Simple_V4-patched/CAmkES/components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl_ffi.c
 --- ./CAmkES/components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl_ffi.c	2021-06-21 14:43:37.064029841 -0500
 +++ ../HAMR_Simple_V4-patched/CAmkES/components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Impl_ffi.c	2021-06-21 14:09:50.591252567 -0500
-@@ -155,18 +155,6 @@
+@@ -155,32 +155,6 @@ 
   * Required by the FFI framework
   */
  
@@ -103,6 +131,20 @@ diff -Naur ./CAmkES/components/Monitor_Impl_SW_Monitor_Monitor/src/sb_Monitor_Im
 -  exit(arg);
 -}
 -
- // convert big-endian 32-bit float to little-endian 64 bit double
- void ffifloat2double(unsigned char *parameter, long parameterSizeBytes,
-                      unsigned char *output,    long outputSizeBytes) {
+-// convert big-endian 32-bit float to little-endian 64 bit double
+-void ffifloat2double(unsigned char *parameter, long parameterSizeBytes,
+-                     unsigned char *output,    long outputSizeBytes) {
+-  char bytes [4];
+-  assert (4 == parameterSizeBytes);
+-  bytes[3] = parameter[0];
+-  bytes[2] = parameter[1];
+-  bytes[1] = parameter[2];
+-  bytes[0] = parameter[3];
+-
+-  double result = *((float*)bytes);
+-  memcpy(output, (unsigned char*) &result, sizeof(double));
+-}
+-
+ void ffiraw_print_buffer(unsigned char *parameter, long parameterSizeBytes, unsigned char *output, long outputSizeBytes) {
+ 
+   int elideAfter = 20; // stop printing after this many consecutive 0's seen

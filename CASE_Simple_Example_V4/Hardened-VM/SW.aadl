@@ -264,18 +264,17 @@ public
 			CASE_Properties::Gating => 100;
 			CASE_Properties::Component_Spec => ("MissionCommand_Output");
 		annex agree {**
-			eq trusted_ids : Data_Types::AllowList.Impl = 
-						if event(TrustedIds) then 
-						TrustedIds 
-						else 
-						default_trustedid_list -> pre(trusted_ids);
+			eq trusted_ids : Data_Types::AllowList.Impl =
+				(if event(TrustedIds) then TrustedIds else default_trustedid_list)
+				->
+				(if event(TrustedIds) then TrustedIds else pre(trusted_ids));
 			fun IS_TRUSTED(command : Data_Types::RF_Msg.Impl, ids : Data_Types::AllowList.Impl) :
-						bool = exists i in ids.value, command.header.src = i;
+				bool = exists i in ids.value, command.header.src = i;
 			guarantee MissionCommand_Output "The gate shall output only data from trusted sources" :
-								if event(MissionCommand_in) and IS_TRUSTED(MissionCommand_in, trusted_ids) then
-									event(MissionCommand_out) and MissionCommand_out = MissionCommand_in
-								else
-									not event(MissionCommand_out);
+				if event(MissionCommand_in) and IS_TRUSTED(MissionCommand_in, trusted_ids) then
+					event(MissionCommand_out) and MissionCommand_out = MissionCommand_in
+				else
+					not event(MissionCommand_out);
 		**};
 
 	end AttestationGate;
@@ -286,8 +285,6 @@ public
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
 			Stack_Size => 1048576 Bytes;
-			Source_Text => ("Component_Source/SW_AttestationGate/AttestationGate.S");
-			CASE_Properties::Component_Language => CakeML;
 	end AttestationGate.Impl;
 
 	process AttestationGate_seL4
@@ -320,10 +317,10 @@ public
 			CASE_Properties::Component_Spec => ("Filter_Output");
 		annex agree {**
 			guarantee Filter_Output "The filter output shall be well-formed" :
-						if event(Input) and WELL_FORMED_MISSION_COMMAND(Input) then
-						event(Output) and Output = Input
-						else
-						not event(Output);
+				if event(Input) and WELL_FORMED_MISSION_COMMAND(Input) then
+					event(Output) and Output = Input
+				else
+					not event(Output);
 		**};
 	end Filter;
 
@@ -333,8 +330,6 @@ public
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("Component_Source/SW_Filter/Filter.S");
-			CASE_Properties::Component_Language => CakeML;
 	end Filter.Impl;
 
 	process Filter_seL4
@@ -370,9 +365,13 @@ public
 			CASE_Properties::Component_Spec => ("Monitor_Alert", "Monitor_FlightPlan_out");
 		annex agree {**
 			const is_latched : bool = false;
-			property alerted = (not WAYPOINTS_IN_ZONE(FlightPlan_in, keep_in_zone)) -> ((is_latched and pre(alerted)) or (event(FlightPlan_in) and not WAYPOINTS_IN_ZONE(FlightPlan_in, keep_in_zone)));
+			property alerted = (event(FlightPlan_in) and not WAYPOINTS_IN_ZONE(FlightPlan_in, keep_in_zone)) -> ((is_latched and pre(alerted)) or (event(FlightPlan_in) and not WAYPOINTS_IN_ZONE(FlightPlan_in, keep_in_zone)));
 			guarantee Monitor_Alert "A violation of the monitor policy shall trigger an alert" : event(Alert) <=> alerted;
-			guarantee Monitor_FlightPlan_out "A violation of the monitor policy shall prevent propagation of the observed input." : if alerted then not event(FlightPlan_out) else event(FlightPlan_out) and FlightPlan_out = FlightPlan_in;
+			guarantee Monitor_FlightPlan_out "A violation of the monitor policy shall prevent propagation of the Observed input." :
+				if event(FlightPlan_in) and not (alerted) then
+					event(FlightPlan_out) and FlightPlan_out = FlightPlan_in
+				else
+					not event(FlightPlan_out);
 		**};
 	end Monitor;
 
@@ -382,8 +381,6 @@ public
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("./Component_Source/SW_Monitor/Monitor.S");
-			CASE_Properties::Component_Language => CakeML;
 	end Monitor.Impl;
 
 	process Monitor_seL4
