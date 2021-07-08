@@ -50,13 +50,12 @@ if(NOT (${target_os_lower} STREQUAL "linux" OR ${target_os_lower} STREQUAL "maco
 endif()
 
 # Arch Config
-set(TARGET_ARCH "native" CACHE STRING "Options: \"native\", \"armv7\", or \"other\".")
+set(TARGET_ARCH "native" CACHE STRING "Options: \"native\", \"aarch64\", or \"other\".")
 string(TOLOWER ${TARGET_ARCH} target_arch_lower)
-if("${target_arch_lower}" STREQUAL "armv7")
-    set(CMAKE_C_FLAGS "-mfloat-abi=hard ${CMAKE_C_FLAGS}")
-    find_program (arm-hf-gcc arm-linux-gnueabihf-gcc)
+if("${target_arch_lower}" STREQUAL "aarch64")
+    find_program (arm-hf-gcc aarch64-linux-gnu-gcc)
     if("${arm-hf-gcc}" STREQUAL "arm-hf-gcc-NOTFOUND")
-        message(WARNING "Cross-compiling to the armv7 architecture requires hard-float support. Please ensure your C compiler supports this.")
+        message(WARNING "Cross-compiling to the aarch64 architecture requires hard-float support. Please ensure your C compiler supports this.")
     else()
         set(CMAKE_C_COMPILER ${arm-hf-gcc})
     endif()
