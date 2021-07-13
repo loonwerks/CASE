@@ -19,8 +19,7 @@ public
 			Period => 500ms;
 			Compute_Execution_Time => 10ms .. 50ms;
 			Stack_size => 1048576 Bytes;
-			Source_Text => ("Component_Source/Hardened/SW_AttestationTester/Pass/user_am.S",
-				"Component_Source/Hardened/SW_AttestationTester/Pass/libuser_am_c.a");
+			Source_Text => ("Component_Source/Hardened/SW_AttestationTester/Pass/user_am.S");
 			CASE_Properties::Component_Language => CakeML;
 	end AttestationTester.Impl;
 
