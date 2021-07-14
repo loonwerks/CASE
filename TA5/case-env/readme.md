@@ -1,5 +1,8 @@
 # CASE Environment Setup
 
+:information_source: | The CASE env setup scripts in this repository folder are "frozen" for the DARPA CASE 2021 Q2 platform and tool assessments.  Further updates are available at https://github.com/sireum/case-env with [continuous integration tests](https://github.com/sireum/case-env/actions) to help ensure that the Vagrant/VirtualBox VM build process after pushed commits that change the setup scripts.
+:---: | :---
+
 This folder contains scripts and Vagrantfile to setup environment for CASE tools, either:
 
 * [in a dedicated Linux machine](#setting-up-a-dedicated-linux-machine), or
