@@ -1,4 +1,5 @@
 @echo off
+setlocal EnableExtensions EnableDelayedExpansion
 
 set FMIDE_DIR=fmide
 set eclipseRelease=2020-06
@@ -15,13 +16,31 @@ set HAMR_FEATURE_ID=org.sireum.aadl.osate.hamr.feature.feature.group
 set METALS_UPDATE_SITE=https://download.eclipse.org/releases/%eclipseRelease%,http://scalameta.org/metals-eclipse/update
 set METALS_FEATURE_ID=lsp.scala.feature.feature.group
 
+if exist %FMIDE_DIR%\ echo Deleting previous fmide version
 rd /s /q %FMIDE_DIR%
 mkdir %FMIDE_DIR%
 pushd %FMIDE_DIR%
+echo Downloading OSATE
 curl %OSATE_URL% --output osate2-%OSATE_VERSION%-vfinal-win32.win32.x86_64.zip
+if not exist %cd%\osate2-%OSATE_VERSION%-vfinal-win32.win32.x86_64.zip (
+	echo Unable to download OSATE
+	exit /b
+)
+echo Extracting
 Call :UnZipFile "%cd%" "%cd%\osate2-%OSATE_VERSION%-vfinal-win32.win32.x86_64.zip"
 del /f /q osate2-%OSATE_VERSION%-vfinal-win32.win32.x86_64.zip
 
+set INI_FILE=%cd%\osate.ini
+set TMP_INI_FILE=%cd%\osate_tmp.ini
+for /f %%x in (%INI_FILE%) do (
+    echo %%x>>%TMP_INI_FILE%
+ 	if "%%x"=="-vmargs" (
+ 		echo -Dorg.eclipse.ecf.provider.filetransfer.excludeContributors=org.eclipse.ecf.provider.filetransfer.httpclient4>>%TMP_INI_FILE%
+ 	)
+)
+move %TMP_INI_FILE% %INI_FILE%
+
+echo Installing CASE tools
 osate.exe -nosplash -console -consoleLog -application org.eclipse.equinox.p2.director -repository %AGREE_UPDATE_SITE% -installIU %AGREE_FEATURE_ID%
 osate.exe -nosplash -console -consoleLog -application org.eclipse.equinox.p2.director -repository %RESOLUTE_UPDATE_SITE% -installIU %RESOLUTE_FEATURE_ID%
 osate.exe -nosplash -console -consoleLog -application org.eclipse.equinox.p2.director -repository %BRIEFCASE_UPDATE_SITE% -installIU %BRIEFCASE_FEATURE_ID%
@@ -29,6 +48,8 @@ osate.exe -nosplash -console -consoleLog -application org.eclipse.equinox.p2.dir
 osate.exe -nosplash -console -consoleLog -application org.eclipse.equinox.p2.director -repository %METALS_UPDATE_SITE% -installIU %METALS_FEATURE_ID%
 
 popd
+
+echo Setup complete
 
 exit /b
 
