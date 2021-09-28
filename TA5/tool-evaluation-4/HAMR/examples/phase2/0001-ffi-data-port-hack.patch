@@ -7,10 +7,10 @@ Subject: [PATCH] ffi data port hack
  .../src/sb_CASE_AttestationGate_thr_Impl_ffi.c                | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/TA5/tool-assessment-4/phase2/hamr/camkes/components/CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate/src/sb_CASE_AttestationGate_thr_Impl_ffi.c b/TA5/tool-assessment-4/phase2/hamr/camkes/components/CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate/src/sb_CASE_AttestationGate_thr_Impl_ffi.c
+diff --git a/TA5/tool-evaluation-4/HAMR/examples/phase2/hamr/camkes/components/CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate/src/sb_CASE_AttestationGate_thr_Impl_ffi.c b/TA5/tool-evaluation-4/HAMR/examples/phase2/hamr/camkes/components/CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate/src/sb_CASE_AttestationGate_thr_Impl_ffi.c
 index 07eb619..f76f28d 100644
---- a/TA5/tool-assessment-4/phase2/hamr/camkes/components/CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate/src/sb_CASE_AttestationGate_thr_Impl_ffi.c
-+++ b/TA5/tool-assessment-4/phase2/hamr/camkes/components/CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate/src/sb_CASE_AttestationGate_thr_Impl_ffi.c
+--- a/TA5/tool-evaluation-4/HAMR/examples/phase2/hamr/camkes/components/CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate/src/sb_CASE_AttestationGate_thr_Impl_ffi.c
++++ b/TA5/tool-evaluation-4/HAMR/examples/phase2/hamr/camkes/components/CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate/src/sb_CASE_AttestationGate_thr_Impl_ffi.c
 @@ -122,8 +122,8 @@ void ffiapi_get_trusted_ids(unsigned char *parameter, long parameterSizeBytes, u
  
    init(SF_LAST);

@@ -178,10 +178,19 @@ object ArtNix {
     println(msg)
   }
 
-  def run(): Unit = {
-  }
-
   def time(): Art.Time = {
     return Process.time()
   }
+
+  def run(): Unit = {}
+
+  def tearDownSystemState(): Unit = {}
+
+  def setUpSystemState(): Unit = {}
+
+  def initializePhase(): Unit = {}
+
+  def computePhase(): Unit = {}
+
+  def finalizePhase(): Unit = {}
 }

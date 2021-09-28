@@ -1,1 +1,0 @@
-../../../../../../aadl/c_libraries/CMASI/src/PayloadConfiguration.c

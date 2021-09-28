@@ -1,6 +1,20 @@
 #include <CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_api.h>
 #include <CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo.h>
 
+static bool apis_initialized = false;
+static struct hamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api initialization_api;
+static struct hamr_SW_CASE_Monitor_Geo_thr_Impl_Operational_Api operational_api;
+
+static void initialize_apis(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo.c", "", "initialize_apis", 0);
+
+  // Option_63CBE2 = Option[hamr.SW.CASE_Monitor_Geo_thr_Impl_Initialization_Api]
+  Option_63CBE2_get_(SF (hamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api) &initialization_api, hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge_c_initialization_api(SF_LAST));
+  // Option_8499A8 = Option[hamr.SW.CASE_Monitor_Geo_thr_Impl_Operational_Api]
+  Option_8499A8_get_(SF (hamr_SW_CASE_Monitor_Geo_thr_Impl_Operational_Api) &operational_api, hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge_c_operational_api(SF_LAST));
+  apis_initialized = true;
+}
+
 // This file was auto-generated.  Do not edit
 
 bool api_get_keep_in_zones__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo(
@@ -9,18 +23,16 @@ bool api_get_keep_in_zones__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_G
   uint8_t *byteArray){
   DeclNewStackFrame(caller, "CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_api.c", "", "api_get_keep_in_zones__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo", 0);
 
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
+
   // Option_30119F = Option[IS[Z, B]]
   // Some_8D03B1 = Some[IS[Z, B]]
   DeclNewOption_30119F(t_0);
 
-  // Option_8499A8 = Option[hamr.SW.CASE_Monitor_Geo_thr_Impl_Operational_Api]
-  DeclNewhamr_SW_CASE_Monitor_Geo_thr_Impl_Operational_Api(api);
-  Option_8499A8_get_(SF (hamr_SW_CASE_Monitor_Geo_thr_Impl_Operational_Api) &api, hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge_c_operational_api(SF_LAST));
-
   hamr_SW_CASE_Monitor_Geo_thr_Impl_Operational_Api_get_keep_in_zones_(
     SF
     (Option_30119F) &t_0,
-    &api);
+    &operational_api);
 
   if(t_0.type == TSome_8D03B1){
     *numBits = t_0.Some_8D03B1.value.size;
@@ -40,18 +52,16 @@ bool api_get_keep_out_zones__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_
   uint8_t *byteArray){
   DeclNewStackFrame(caller, "CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_api.c", "", "api_get_keep_out_zones__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo", 0);
 
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
+
   // Option_30119F = Option[IS[Z, B]]
   // Some_8D03B1 = Some[IS[Z, B]]
   DeclNewOption_30119F(t_0);
 
-  // Option_8499A8 = Option[hamr.SW.CASE_Monitor_Geo_thr_Impl_Operational_Api]
-  DeclNewhamr_SW_CASE_Monitor_Geo_thr_Impl_Operational_Api(api);
-  Option_8499A8_get_(SF (hamr_SW_CASE_Monitor_Geo_thr_Impl_Operational_Api) &api, hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge_c_operational_api(SF_LAST));
-
   hamr_SW_CASE_Monitor_Geo_thr_Impl_Operational_Api_get_keep_out_zones_(
     SF
     (Option_30119F) &t_0,
-    &api);
+    &operational_api);
 
   if(t_0.type == TSome_8D03B1){
     *numBits = t_0.Some_8D03B1.value.size;
@@ -71,18 +81,16 @@ bool api_get_observed__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CA
   uint8_t *byteArray){
   DeclNewStackFrame(caller, "CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_api.c", "", "api_get_observed__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo", 0);
 
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
+
   // Option_30119F = Option[IS[Z, B]]
   // Some_8D03B1 = Some[IS[Z, B]]
   DeclNewOption_30119F(t_0);
 
-  // Option_8499A8 = Option[hamr.SW.CASE_Monitor_Geo_thr_Impl_Operational_Api]
-  DeclNewhamr_SW_CASE_Monitor_Geo_thr_Impl_Operational_Api(api);
-  Option_8499A8_get_(SF (hamr_SW_CASE_Monitor_Geo_thr_Impl_Operational_Api) &api, hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge_c_operational_api(SF_LAST));
-
   hamr_SW_CASE_Monitor_Geo_thr_Impl_Operational_Api_get_observed_(
     SF
     (Option_30119F) &t_0,
-    &api);
+    &operational_api);
 
   if(t_0.type == TSome_8D03B1){
     *numBits = t_0.Some_8D03B1.value.size;
@@ -102,8 +110,10 @@ void api_put_output__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE
   uint8_t *byteArray) {
   DeclNewStackFrame(caller, "CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_api.c", "", "api_put_output__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo", 0);
 
-  sfAssert(SF (Z) numBits >= 0, "numBits must be non-negative for IS[Z, B].");
-  sfAssert(SF (Z) numBits <= MaxIS_C4F575, "numBits too large for IS[Z, B].");
+  sfAssert((Z) numBits >= 0, "numBits must be non-negative for IS[Z, B].")
+  sfAssert((Z) numBits <= MaxIS_C4F575, "numBits too large for IS[Z, B].")
+
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
 
   DeclNewIS_C4F575(t_0);
 
@@ -113,26 +123,20 @@ void api_put_output__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE
     memcpy(&t_0.value, byteArray, numBytes);
   }
 
-  // Option_63CBE2 = Option[hamr.SW.CASE_Monitor_Geo_thr_Impl_Initialization_Api]
-  DeclNewhamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api(api);
-  Option_63CBE2_get_(SF (hamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api) &api, hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge_c_initialization_api(SF_LAST));
-
   hamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api_put_output_(
     SF
-    &api,
+    &initialization_api,
     &t_0);
 }
 
 void api_put_alert__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo(STACK_FRAME_ONLY) {
   DeclNewStackFrame(caller, "CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_api.c", "", "api_put_alert__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo", 0);
 
-  // Option_63CBE2 = Option[hamr.SW.CASE_Monitor_Geo_thr_Impl_Initialization_Api]
-  DeclNewhamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api(api);
-  Option_63CBE2_get_(SF (hamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api) &api, hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge_c_initialization_api(SF_LAST));
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
 
   hamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api_put_alert_(
     SF
-    &api);
+    &initialization_api);
 }
 
 void api_logInfo__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo(
@@ -140,13 +144,11 @@ void api_logInfo__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Mo
   String str) {
   DeclNewStackFrame(caller, "CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_api.c", "", "api_logInfo__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo", 0);
 
-  // Option_63CBE2 = Option[hamr.SW.CASE_Monitor_Geo_thr_Impl_Initialization_Api]
-  DeclNewhamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api(api);
-  Option_63CBE2_get_(SF (hamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api) &api, hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge_c_initialization_api(SF_LAST));
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
 
   hamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api_logInfo_(
     SF
-    &api,
+    &initialization_api,
     str);
 }
 
@@ -155,13 +157,11 @@ void api_logDebug__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_M
   String str) {
   DeclNewStackFrame(caller, "CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_api.c", "", "api_logDebug__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo", 0);
 
-  // Option_63CBE2 = Option[hamr.SW.CASE_Monitor_Geo_thr_Impl_Initialization_Api]
-  DeclNewhamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api(api);
-  Option_63CBE2_get_(SF (hamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api) &api, hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge_c_initialization_api(SF_LAST));
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
 
   hamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api_logDebug_(
     SF
-    &api,
+    &initialization_api,
     str);
 }
 
@@ -170,13 +170,11 @@ void api_logError__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_M
   String str) {
   DeclNewStackFrame(caller, "CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_api.c", "", "api_logError__hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo", 0);
 
-  // Option_63CBE2 = Option[hamr.SW.CASE_Monitor_Geo_thr_Impl_Initialization_Api]
-  DeclNewhamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api(api);
-  Option_63CBE2_get_(SF (hamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api) &api, hamr_SW_CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge_c_initialization_api(SF_LAST));
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
 
   hamr_SW_CASE_Monitor_Geo_thr_Impl_Initialization_Api_logError_(
     SF
-    &api,
+    &initialization_api,
     str);
 }
 

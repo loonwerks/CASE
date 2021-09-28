@@ -1,6 +1,20 @@
 #include <CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_api.h>
 #include <CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req.h>
 
+static bool apis_initialized = false;
+static struct hamr_SW_CASE_Monitor_Req_thr_Impl_Initialization_Api initialization_api;
+static struct hamr_SW_CASE_Monitor_Req_thr_Impl_Operational_Api operational_api;
+
+static void initialize_apis(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req.c", "", "initialize_apis", 0);
+
+  // Option_6F37E4 = Option[hamr.SW.CASE_Monitor_Req_thr_Impl_Initialization_Api]
+  Option_6F37E4_get_(SF (hamr_SW_CASE_Monitor_Req_thr_Impl_Initialization_Api) &initialization_api, hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge_c_initialization_api(SF_LAST));
+  // Option_9382FA = Option[hamr.SW.CASE_Monitor_Req_thr_Impl_Operational_Api]
+  Option_9382FA_get_(SF (hamr_SW_CASE_Monitor_Req_thr_Impl_Operational_Api) &operational_api, hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge_c_operational_api(SF_LAST));
+  apis_initialized = true;
+}
+
 // This file was auto-generated.  Do not edit
 
 bool api_get_observed__hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req(
@@ -9,18 +23,16 @@ bool api_get_observed__hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CA
   uint8_t *byteArray){
   DeclNewStackFrame(caller, "CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_api.c", "", "api_get_observed__hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req", 0);
 
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
+
   // Option_30119F = Option[IS[Z, B]]
   // Some_8D03B1 = Some[IS[Z, B]]
   DeclNewOption_30119F(t_0);
 
-  // Option_9382FA = Option[hamr.SW.CASE_Monitor_Req_thr_Impl_Operational_Api]
-  DeclNewhamr_SW_CASE_Monitor_Req_thr_Impl_Operational_Api(api);
-  Option_9382FA_get_(SF (hamr_SW_CASE_Monitor_Req_thr_Impl_Operational_Api) &api, hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge_c_operational_api(SF_LAST));
-
   hamr_SW_CASE_Monitor_Req_thr_Impl_Operational_Api_get_observed_(
     SF
     (Option_30119F) &t_0,
-    &api);
+    &operational_api);
 
   if(t_0.type == TSome_8D03B1){
     *numBits = t_0.Some_8D03B1.value.size;
@@ -40,18 +52,16 @@ bool api_get_reference_1__hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ
   uint8_t *byteArray){
   DeclNewStackFrame(caller, "CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_api.c", "", "api_get_reference_1__hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req", 0);
 
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
+
   // Option_30119F = Option[IS[Z, B]]
   // Some_8D03B1 = Some[IS[Z, B]]
   DeclNewOption_30119F(t_0);
 
-  // Option_9382FA = Option[hamr.SW.CASE_Monitor_Req_thr_Impl_Operational_Api]
-  DeclNewhamr_SW_CASE_Monitor_Req_thr_Impl_Operational_Api(api);
-  Option_9382FA_get_(SF (hamr_SW_CASE_Monitor_Req_thr_Impl_Operational_Api) &api, hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge_c_operational_api(SF_LAST));
-
   hamr_SW_CASE_Monitor_Req_thr_Impl_Operational_Api_get_reference_1_(
     SF
     (Option_30119F) &t_0,
-    &api);
+    &operational_api);
 
   if(t_0.type == TSome_8D03B1){
     *numBits = t_0.Some_8D03B1.value.size;
@@ -70,13 +80,11 @@ void api_logInfo__hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Mo
   String str) {
   DeclNewStackFrame(caller, "CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_api.c", "", "api_logInfo__hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req", 0);
 
-  // Option_6F37E4 = Option[hamr.SW.CASE_Monitor_Req_thr_Impl_Initialization_Api]
-  DeclNewhamr_SW_CASE_Monitor_Req_thr_Impl_Initialization_Api(api);
-  Option_6F37E4_get_(SF (hamr_SW_CASE_Monitor_Req_thr_Impl_Initialization_Api) &api, hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge_c_initialization_api(SF_LAST));
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
 
   hamr_SW_CASE_Monitor_Req_thr_Impl_Initialization_Api_logInfo_(
     SF
-    &api,
+    &initialization_api,
     str);
 }
 
@@ -85,13 +93,11 @@ void api_logDebug__hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_M
   String str) {
   DeclNewStackFrame(caller, "CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_api.c", "", "api_logDebug__hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req", 0);
 
-  // Option_6F37E4 = Option[hamr.SW.CASE_Monitor_Req_thr_Impl_Initialization_Api]
-  DeclNewhamr_SW_CASE_Monitor_Req_thr_Impl_Initialization_Api(api);
-  Option_6F37E4_get_(SF (hamr_SW_CASE_Monitor_Req_thr_Impl_Initialization_Api) &api, hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge_c_initialization_api(SF_LAST));
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
 
   hamr_SW_CASE_Monitor_Req_thr_Impl_Initialization_Api_logDebug_(
     SF
-    &api,
+    &initialization_api,
     str);
 }
 
@@ -100,13 +106,11 @@ void api_logError__hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_M
   String str) {
   DeclNewStackFrame(caller, "CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_api.c", "", "api_logError__hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req", 0);
 
-  // Option_6F37E4 = Option[hamr.SW.CASE_Monitor_Req_thr_Impl_Initialization_Api]
-  DeclNewhamr_SW_CASE_Monitor_Req_thr_Impl_Initialization_Api(api);
-  Option_6F37E4_get_(SF (hamr_SW_CASE_Monitor_Req_thr_Impl_Initialization_Api) &api, hamr_SW_CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge_c_initialization_api(SF_LAST));
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
 
   hamr_SW_CASE_Monitor_Req_thr_Impl_Initialization_Api_logError_(
     SF
-    &api,
+    &initialization_api,
     str);
 }
 

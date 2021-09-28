@@ -108,11 +108,7 @@ object CASE_Monitor_Geo extends App {
   }
 
   def initialiseArchitecture(): Unit = {
-    val ad = ArchitectureDescription(
-      components = ISZ (CASE_Monitor_GeoBridge),
-      connections = ISZ ()
-    )
-    Art.run(ad)
+    // nothing to do - CAmkES is responsible for initialization
   }
 
   def initialiseEntryPoint(): Unit = { entryPoints.initialise() }
@@ -138,6 +134,10 @@ object CASE_Monitor_Geo extends App {
     if(F) {
       TranspilerToucher.touch()
 
+      // add types used in Platform.receive and Platform.receiveAsync
+      val mbox2Boolean_Payload: MBox2[Art.PortId, DataContent] = MBox2(0, Base_Types.Boolean_Payload(T))
+      val mbox2OptionDataContent: MBox2[Art.PortId, Option[DataContent]] = MBox2(0, None())
+
       // touch each payload/type in case some are only used as a field in a record
       def printDataContent(a: art.DataContent): Unit = { println(s"${a}") }
 
@@ -161,19 +161,19 @@ object CASE_Monitor_Geo extends App {
   }
 
   def logInfo(title: String, msg: String): Unit = {
-    print(title)
+    print(CASE_Monitor_GeoBridge.name)
     print(": ")
     println(msg)
   }
 
   def logError(title: String, msg: String): Unit = {
-    eprint(title)
+    eprint(CASE_Monitor_GeoBridge.name)
     eprint(": ")
     eprintln(msg)
   }
 
   def logDebug(title: String, msg: String): Unit = {
-    print(title)
+    print(CASE_Monitor_GeoBridge.name)
     print(": ")
     println(msg)
   }

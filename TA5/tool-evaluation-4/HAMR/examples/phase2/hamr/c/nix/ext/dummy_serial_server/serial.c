@@ -1,1 +1,0 @@
-../../../../../aadl/c_libraries/dummy_serial_server/serial.c

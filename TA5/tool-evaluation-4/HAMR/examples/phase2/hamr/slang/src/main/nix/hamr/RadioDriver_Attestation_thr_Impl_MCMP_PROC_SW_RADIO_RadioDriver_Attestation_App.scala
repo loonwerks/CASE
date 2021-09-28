@@ -4,6 +4,7 @@ package hamr
 
 import org.sireum._
 import art._
+import art.scheduling.nop.NopScheduler
 
 // This file was auto-generated.  Do not edit
 
@@ -19,7 +20,7 @@ object RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestati
     Platform.initialise(seed, appPortIdOpt)
     Platform.initialise(seed, recv_dataPortIdOpt)
 
-    Art.run(Arch.ad)
+    Art.run(Arch.ad, NopScheduler())
   }
 
   def initialise(): Unit = {
@@ -38,7 +39,7 @@ object RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestati
       }
     }
     entryPoints.compute()
-    Process.sleep(500)
+    hamr.Process.sleep(500)
   }
 
   def finalise(): Unit = {
@@ -86,6 +87,10 @@ object RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestati
   def touch(): Unit = {
     if(F) {
       TranspilerToucher.touch()
+
+      // add types used in Platform.receive and Platform.receiveAsync
+      val mbox2Boolean_Payload: MBox2[Art.PortId, DataContent] = MBox2(0, Base_Types.Boolean_Payload(T))
+      val mbox2OptionDataContent: MBox2[Art.PortId, Option[DataContent]] = MBox2(0, None())
 
       // touch each payload/type in case some are only used as a field in a record
       def printDataContent(a: art.DataContent): Unit = { println(s"${a}") }

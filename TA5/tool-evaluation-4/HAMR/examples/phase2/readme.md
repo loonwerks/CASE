@@ -162,7 +162,7 @@ refer to [aadl/bin/run-hamr-Linux.sh](aadl/bin/run-hamr-Linux.sh)
 <!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
      editor (e.g. vscode) in order to see the following image -->
 
-![dialog_cli](../doc/dialog_cli.jpg)
+![dialog_cli](dialog_cli.jpg)
 
 The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
 options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
@@ -197,10 +197,18 @@ The last two CLI options are set by the HAMR plugin.
 <!--how-to-buildrun-linux_start-->
 ```
 ./aadl/bin/run-hamr-Linux.sh
-./hamr/c/bin/compile-linux.sh
-./hamr/c/bin/run-linux.sh
+./hamr/c/bin/compile.cmd
+./hamr/c/bin/run.sh
 ./hamr/c/bin/stop.sh
 ```
+
+The ``./aadl/bin/run-hamr-Linux.sh`` will rerun HAMR codegen and transpile the generated Slang code.  Alternatively you can run 
+
+```
+./hamr/slang/bin/transpile.cmd
+```
+
+to transpile the pre-generated checked-in code.
 <!--how-to-buildrun-linux_end-->
 
 
@@ -215,7 +223,7 @@ refer to [aadl/bin/run-hamr-SeL4.sh](aadl/bin/run-hamr-SeL4.sh)
 <!-- due to security issues, you may need to have the parent folder (ie. '../') open in your
      editor (e.g. vscode) in order to see the following image -->
 
-![dialog_cli](../doc/dialog_cli.jpg)
+![dialog_cli](dialog_cli.jpg)
 
 The CLI options ``verbose`` and ``run-transpiler`` are set via ``Verbose output`` and ``Run Transpiler``
 options respectively that are located in __Preferences >> OSATE >> Sireum HAMR >> Code Generation__.
@@ -313,6 +321,14 @@ Now, run HAMR codegen
 ./aadl/bin/run-hamr-SeL4.sh
 ```
 
+that will regenerate the code and transpile the Slang code.  Alternatively you can run
+
+```
+./hamr/slang/bin/transpile-sel4.cmd
+```
+
+to just transpile the pre-generated checked-in code.
+
 **TODO: explain why the [CASE](aadl/CASE) directory needs to be deleted if running HAMR via FMIDE.  For now see this 
 [comment](aadl/CASE/README.md)**
 
@@ -323,7 +339,7 @@ the legacy CakeML code that was produced for the phase 2 deliverable.
 
 
 ```
-git apply-patch 0001-ffi-data-port-hack.patch
+git apply 0001-ffi-data-port-hack.patch
 ```
 
 Now build the image and simulate it via QEMU

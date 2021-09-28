@@ -182,6 +182,7 @@ object Arch {
   }
 
   val ad : ArchitectureDescription = {
+    TranspilerUtil.touch()
 
     ArchitectureDescription(
       components = ISZ (UAV_Impl_Instance_MCMP_PROC_SW_FC_UART_UARTDriver, UAV_Impl_Instance_MCMP_PROC_SW_RADIO_RadioDriver_Attestation, UAV_Impl_Instance_MCMP_PROC_SW_FlyZones_FlyZonesDatabase, UAV_Impl_Instance_MCMP_PROC_SW_UXAS_UxAS, UAV_Impl_Instance_MCMP_PROC_SW_WPM_WaypointPlanManagerService, UAV_Impl_Instance_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate, UAV_Impl_Instance_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST, UAV_Impl_Instance_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req, UAV_Impl_Instance_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo),
@@ -207,3 +208,167 @@ object Arch {
     )
   }
 }
+
+object TranspilerUtil {
+  def touch(): Unit = {
+    if(F) {
+      TranspilerToucher.touch()
+
+      // add types used in Platform.receive and Platform.receiveAsync
+      val mbox2Boolean_Payload: MBox2[Art.PortId, DataContent] = MBox2(0, Base_Types.Boolean_Payload(T))
+      val mbox2OptionDataContent: MBox2[Art.PortId, Option[DataContent]] = MBox2(0, None())
+
+      // touch process/thread timing properties
+      println(Schedulers.UAV_Impl_Instance_MCMP_PROC_HW_timingProperties)
+      println(Schedulers.UAV_Impl_Instance_MCMP_PROC_SW_FC_UART_UARTDriver_timingProperties)
+      println(Schedulers.UAV_Impl_Instance_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_timingProperties)
+      println(Schedulers.UAV_Impl_Instance_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_timingProperties)
+      println(Schedulers.UAV_Impl_Instance_MCMP_PROC_SW_UXAS_UxAS_timingProperties)
+      println(Schedulers.UAV_Impl_Instance_MCMP_PROC_SW_WPM_WaypointPlanManagerService_timingProperties)
+      println(Schedulers.UAV_Impl_Instance_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_timingProperties)
+      println(Schedulers.UAV_Impl_Instance_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_timingProperties)
+      println(Schedulers.UAV_Impl_Instance_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_timingProperties)
+      println(Schedulers.UAV_Impl_Instance_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_timingProperties)
+
+      // touch each payload/type in case some are only used as a field in a record
+      def printDataContent(a: art.DataContent): Unit = { println(s"${a}") }
+
+      printDataContent(Base_Types.Bits_Payload(Base_Types.Bits_example()))
+      printDataContent(art.Empty())
+
+      {
+        hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_initialization_api.get.logInfo("")
+        hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_initialization_api.get.logDebug("")
+        hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_initialization_api.get.logError("")
+        hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_operational_api.get.logInfo("")
+        hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_operational_api.get.logDebug("")
+        hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_operational_api.get.logError("")
+        val apiUsage_recv_data: Option[Base_Types.Bits] = hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_operational_api.get.get_recv_data()
+        val apiUsage_MissionCommand: Option[Base_Types.Bits] = hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_operational_api.get.get_MissionCommand()
+        hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_initialization_api.get.put_send_data(Base_Types.Bits_example())
+        hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_operational_api.get.put_send_data(Base_Types.Bits_example())
+        hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_initialization_api.get.put_AirVehicleState_WPM(Base_Types.Bits_example())
+        hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_operational_api.get.put_AirVehicleState_WPM(Base_Types.Bits_example())
+        hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_initialization_api.get.put_AirVehicleState_UXAS(Base_Types.Bits_example())
+        hamr.Drivers.UARTDriver_Impl_MCMP_PROC_SW_FC_UART_UARTDriver_Bridge.c_operational_api.get.put_AirVehicleState_UXAS(Base_Types.Bits_example())
+      }
+      {
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_initialization_api.get.logInfo("")
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_initialization_api.get.logDebug("")
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_initialization_api.get.logError("")
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_operational_api.get.logInfo("")
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_operational_api.get.logDebug("")
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_operational_api.get.logError("")
+        val apiUsage_recv_data: Option[Base_Types.Bits] = hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_operational_api.get.get_recv_data()
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_initialization_api.get.put_send_data(Base_Types.Bits_example())
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_operational_api.get.put_send_data(Base_Types.Bits_example())
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_initialization_api.get.put_trusted_ids(Base_Types.Bits_example())
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_operational_api.get.put_trusted_ids(Base_Types.Bits_example())
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_initialization_api.get.put_AutomationRequest(Base_Types.Bits_example())
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_operational_api.get.put_AutomationRequest(Base_Types.Bits_example())
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_initialization_api.get.put_OperatingRegion(Base_Types.Bits_example())
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_operational_api.get.put_OperatingRegion(Base_Types.Bits_example())
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_initialization_api.get.put_LineSearchTask(Base_Types.Bits_example())
+        hamr.SW.RadioDriver_Attestation_thr_Impl_MCMP_PROC_SW_RADIO_RadioDriver_Attestation_Bridge.c_operational_api.get.put_LineSearchTask(Base_Types.Bits_example())
+      }
+      {
+        hamr.SW.FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_Bridge.c_initialization_api.get.logInfo("")
+        hamr.SW.FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_Bridge.c_initialization_api.get.logDebug("")
+        hamr.SW.FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_Bridge.c_initialization_api.get.logError("")
+        hamr.SW.FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_Bridge.c_operational_api.get.logInfo("")
+        hamr.SW.FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_Bridge.c_operational_api.get.logDebug("")
+        hamr.SW.FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_Bridge.c_operational_api.get.logError("")
+        hamr.SW.FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_Bridge.c_initialization_api.get.put_keep_in_zones(Base_Types.Bits_example())
+        hamr.SW.FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_Bridge.c_operational_api.get.put_keep_in_zones(Base_Types.Bits_example())
+        hamr.SW.FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_Bridge.c_initialization_api.get.put_keep_out_zones(Base_Types.Bits_example())
+        hamr.SW.FlyZonesDatabase_thr_Impl_MCMP_PROC_SW_FlyZones_FlyZonesDatabase_Bridge.c_operational_api.get.put_keep_out_zones(Base_Types.Bits_example())
+      }
+      {
+        hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_initialization_api.get.logInfo("")
+        hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_initialization_api.get.logDebug("")
+        hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_initialization_api.get.logError("")
+        hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_operational_api.get.logInfo("")
+        hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_operational_api.get.logDebug("")
+        hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_operational_api.get.logError("")
+        val apiUsage_AutomationRequest: Option[Base_Types.Bits] = hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_operational_api.get.get_AutomationRequest()
+        val apiUsage_AirVehicleState: Option[Base_Types.Bits] = hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_operational_api.get.get_AirVehicleState()
+        val apiUsage_OperatingRegion: Option[Base_Types.Bits] = hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_operational_api.get.get_OperatingRegion()
+        val apiUsage_LineSearchTask: Option[Base_Types.Bits] = hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_operational_api.get.get_LineSearchTask()
+        hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_initialization_api.get.put_AutomationResponse_MON_GEO(Base_Types.Bits_example())
+        hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_operational_api.get.put_AutomationResponse_MON_GEO(Base_Types.Bits_example())
+        hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_initialization_api.get.put_AutomationResponse_MON_REQ(Base_Types.Bits_example())
+        hamr.SW.UxAS_thr_Impl_MCMP_PROC_SW_UXAS_UxAS_Bridge.c_operational_api.get.put_AutomationResponse_MON_REQ(Base_Types.Bits_example())
+      }
+      {
+        hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_Bridge.c_initialization_api.get.logInfo("")
+        hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_Bridge.c_initialization_api.get.logDebug("")
+        hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_Bridge.c_initialization_api.get.logError("")
+        hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_Bridge.c_operational_api.get.logInfo("")
+        hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_Bridge.c_operational_api.get.logDebug("")
+        hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_Bridge.c_operational_api.get.logError("")
+        val apiUsage_AutomationResponse: Option[Base_Types.Bits] = hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_Bridge.c_operational_api.get.get_AutomationResponse()
+        val apiUsage_AirVehicleState: Option[Base_Types.Bits] = hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_Bridge.c_operational_api.get.get_AirVehicleState()
+        hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_Bridge.c_initialization_api.get.put_MissionCommand(Base_Types.Bits_example())
+        hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_Bridge.c_operational_api.get.put_MissionCommand(Base_Types.Bits_example())
+        val apiUsage_ReturnHome: Option[art.Empty] = hamr.SW.WaypointPlanManagerService_thr_Impl_MCMP_PROC_SW_WPM_WaypointPlanManagerService_Bridge.c_operational_api.get.get_ReturnHome()
+      }
+      {
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_initialization_api.get.logInfo("")
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_initialization_api.get.logDebug("")
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_initialization_api.get.logError("")
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_operational_api.get.logInfo("")
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_operational_api.get.logDebug("")
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_operational_api.get.logError("")
+        val apiUsage_trusted_ids: Option[Base_Types.Bits] = hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_operational_api.get.get_trusted_ids()
+        val apiUsage_AutomationRequest_in: Option[Base_Types.Bits] = hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_operational_api.get.get_AutomationRequest_in()
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_initialization_api.get.put_AutomationRequest_out_UXAS(Base_Types.Bits_example())
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_operational_api.get.put_AutomationRequest_out_UXAS(Base_Types.Bits_example())
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_initialization_api.get.put_AutomationRequest_out_MON_REQ(Base_Types.Bits_example())
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_operational_api.get.put_AutomationRequest_out_MON_REQ(Base_Types.Bits_example())
+        val apiUsage_OperatingRegion_in: Option[Base_Types.Bits] = hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_operational_api.get.get_OperatingRegion_in()
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_initialization_api.get.put_OperatingRegion_out(Base_Types.Bits_example())
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_operational_api.get.put_OperatingRegion_out(Base_Types.Bits_example())
+        val apiUsage_LineSearchTask_in: Option[Base_Types.Bits] = hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_operational_api.get.get_LineSearchTask_in()
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_initialization_api.get.put_LineSearchTask_out(Base_Types.Bits_example())
+        hamr.SW.CASE_AttestationGate_thr_Impl_MCMP_PROC_SW_AM_Gate_CASE_AttestationGate_Bridge.c_operational_api.get.put_LineSearchTask_out(Base_Types.Bits_example())
+      }
+      {
+        hamr.SW.CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_Bridge.c_initialization_api.get.logInfo("")
+        hamr.SW.CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_Bridge.c_initialization_api.get.logDebug("")
+        hamr.SW.CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_Bridge.c_initialization_api.get.logError("")
+        hamr.SW.CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_Bridge.c_operational_api.get.logInfo("")
+        hamr.SW.CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_Bridge.c_operational_api.get.logDebug("")
+        hamr.SW.CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_Bridge.c_operational_api.get.logError("")
+        val apiUsage_filter_in: Option[Base_Types.Bits] = hamr.SW.CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_Bridge.c_operational_api.get.get_filter_in()
+        hamr.SW.CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_Bridge.c_initialization_api.get.put_filter_out(Base_Types.Bits_example())
+        hamr.SW.CASE_Filter_LST_thr_Impl_MCMP_PROC_SW_FLT_LST_CASE_Filter_LST_Bridge.c_operational_api.get.put_filter_out(Base_Types.Bits_example())
+      }
+      {
+        hamr.SW.CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge.c_initialization_api.get.logInfo("")
+        hamr.SW.CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge.c_initialization_api.get.logDebug("")
+        hamr.SW.CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge.c_initialization_api.get.logError("")
+        hamr.SW.CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge.c_operational_api.get.logInfo("")
+        hamr.SW.CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge.c_operational_api.get.logDebug("")
+        hamr.SW.CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge.c_operational_api.get.logError("")
+        val apiUsage_observed: Option[Base_Types.Bits] = hamr.SW.CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge.c_operational_api.get.get_observed()
+        val apiUsage_reference_1: Option[Base_Types.Bits] = hamr.SW.CASE_Monitor_Req_thr_Impl_MCMP_PROC_SW_MON_REQ_CASE_Monitor_Req_Bridge.c_operational_api.get.get_reference_1()
+      }
+      {
+        hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_initialization_api.get.logInfo("")
+        hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_initialization_api.get.logDebug("")
+        hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_initialization_api.get.logError("")
+        hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_operational_api.get.logInfo("")
+        hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_operational_api.get.logDebug("")
+        hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_operational_api.get.logError("")
+        val apiUsage_keep_in_zones: Option[Base_Types.Bits] = hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_operational_api.get.get_keep_in_zones()
+        val apiUsage_keep_out_zones: Option[Base_Types.Bits] = hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_operational_api.get.get_keep_out_zones()
+        val apiUsage_observed: Option[Base_Types.Bits] = hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_operational_api.get.get_observed()
+        hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_initialization_api.get.put_output(Base_Types.Bits_example())
+        hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_operational_api.get.put_output(Base_Types.Bits_example())
+        hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_initialization_api.get.put_alert()
+        hamr.SW.CASE_Monitor_Geo_thr_Impl_MCMP_PROC_SW_MON_GEO_CASE_Monitor_Geo_Bridge.c_operational_api.get.put_alert()
+      }
+    }
+  }
+}
+

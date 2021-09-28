@@ -28,11 +28,12 @@ eval "$OSIREUM hamr codegen \
   --output-dir $ROOT_DIR/hamr/slang \
   --output-c-dir $ROOT_DIR/hamr/c \
   --exclude-component-impl \
+  --no-proyek-ive \
   --bit-width 32 \
   --max-string-size 256 \
   --max-array-size 1 \
-  --aux-code-dirs $AADL_DIR/c_libraries/CMASI;$AADL_DIR/c_libraries/hexdump;$AADL_DIR/c_libraries/dummy_serial_server \
+  --aux-code-dirs $AADL_DIR/c_libraries/CMASI:$AADL_DIR/c_libraries/hexdump:$AADL_DIR/c_libraries/dummy_serial_server \
   --run-transpiler \
   --aadl-root-dir $AADL_DIR \
   --experimental-options \"GENERATE_DOT_GRAPHS\" \
-  $AADL_DIR/.project"
+  $AADL_DIR/.system_UAV"

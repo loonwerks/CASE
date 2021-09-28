@@ -1,6 +1,7 @@
 **/.aadlbin-gen/
 **/instances
-**/src/c/nix
+**/slang-build/
+**/nix/
 **/*-build/
 **/slang_libraries/
 **/sel4-build/

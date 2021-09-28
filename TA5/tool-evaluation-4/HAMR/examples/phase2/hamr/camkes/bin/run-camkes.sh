@@ -17,25 +17,26 @@ CAMKES_DIR=""
 SIMULATE=false
 CAMKES_OPTIONS=""
 
-OPTIONS=c:no:s
-LONGOPTS=camkes-dir:,non-interactive,camkes-options:,simulate
+OPTIONS=c:no:sh
+LONGOPTS=camkes-dir:,non-interactive,camkes-options:,simulate,help
 
 function usage {
   echo ""
   echo "Usage: <option>*"
   echo ""
   echo "Available Options:"
-  echo "  -c, --camkes-dir      Location of CAmkES project"
-  echo "  -n, --non-interactive Non-interactive mode.  Symlink in apps directory will be replaced"
-  echo "                        if present, CAmkES build directory will not be deleted"
-  echo "  -o, --camkes-options  CAmkES options (e.g -o \"-DWITH_LOC=ON -DCapDLLoaderMaxObjects=40000\")"
-  echo "  -s, --simulate        Simulate via QEMU"
-  exit 2
+  echo "-c, --camkes-dir       Location of CAmkES project"
+  echo "-n, --non-interactive  Non-interactive mode.  Symlink in apps directory will be replaced"
+  echo "                         if present, CAmkES build directory will not be deleted"
+  echo "-o, --camkes-options   CAmkES options (e.g -o \"-DWITH_LOC=ON -DCapDLLoaderMaxObjects=40000\")"
+  echo "-s, --simulate         Simulate via QEMU"
+  echo "-h, --help             Display this information"
 }
 
 ! PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@")
 if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
     usage
+    exit 2
 fi
 
 eval set -- "$PARSED"
@@ -46,6 +47,7 @@ while true; do
     -n|--non-interactive) NON_INTERACTIVE=true; shift ;;
     -o|--camkes-options) CAMKES_OPTIONS="$2"; shift 2 ;;
     -s|--simulate) SIMULATE=true; shift ;;
+    -h|--help) usage; exit 0 ;;
     --) shift; break ;;
   esac
 done
@@ -54,6 +56,7 @@ done
 if [[ $# -ne 0 ]]; then
   echo "$0: Unexpected non-option arguments"
   usage
+  exit 3
 fi
 
 # if CAMKES_DIR option not set then look in some common locations
