@@ -1,0 +1,120 @@
+// Copyright 2020, Adventium Labs
+//
+// Prototype of the Temporal Isolation CASE Scheduler (TICS). The Tics component
+// userland scheduler running on the seL4 mixed criticality system (MCS)
+// platform. It runs threads in a statc cyclic schedule with fixed duration
+// windows. The schedule is defined in Tics-Prototype-Schedule.c.
+
+import <std_connector.camkes>;
+import <TimeServer/TimeServer.camkes>;
+import <global-connectors.camkes>;
+
+component Tics {
+
+    include "sb_queue_int8_t_1.h";
+
+    control;
+    uses Timer timeout;
+
+    // Emulate same pattern used for period wait for VM tasks (vmRADIO and
+    // VMUXAS) in CASE phase2 tool evaluation 4. TICS signals at the beginning
+    // of each schedule window.
+    emits Period_VM period_to_vmTask1_notification;
+    emits Period_VM period_to_vmTask2_notification;
+    dataport sb_queue_int8_t_1_t period_to_vmTask1_queue;
+    dataport sb_queue_int8_t_1_t period_to_vmTask2_queue;
+}
+
+component Task {
+
+    include "sp_uintmax.h";
+    
+    control;
+
+    dataport sp_uintmax_t dataIn;
+    dataport sp_uintmax_t dataOut;
+}
+
+component VmTask {
+
+    include "sp_uintmax.h";
+    include "sb_queue_int8_t_1.h";
+
+    control;
+
+    dataport sp_uintmax_t dataIn;
+    dataport sp_uintmax_t dataOut;
+
+    // Emulate same pattern used for period wait for VM tasks (vmRADIO and
+    // VMUXAS) in CASE phase2 tool evaluation 4. TICS signals at the beginning
+    // of each schedule window.
+    consumes Period_VM tics_period_notification;
+    dataport sb_queue_int8_t_1_t tics_period_queue;
+}
+
+assembly {
+    composition {
+        component TimeServer time_server;
+        component Tics tics;
+        component Task task1;
+        component Task task2;
+        component VmTask vmTask1;
+        component VmTask vmTask2;
+
+        // Ping pong betwean task1 and task2
+        connection seL4SharedData ping(from task1.dataOut, to task2.dataIn);
+        connection seL4SharedData pong(from task2.dataOut, to task1.dataIn);
+
+        // Ping pong betwean vmTask1 and vmTask2
+        connection seL4SharedData vmping(from vmTask1.dataOut, to vmTask2.dataIn);
+        connection seL4SharedData vmpong(from vmTask2.dataOut, to vmTask1.dataIn);
+
+        // Tics timer connection
+        connection seL4TimeServer tics_timer(from tics.timeout, to time_server.the_timer);
+
+        // Emulate same pattern used for period wait for VM tasks (vmRADIO and
+        // VMUXAS) in CASE phase2 tool evaluation 4. TICS signals at the beginning
+        // of each schedule window.
+        connection seL4Notification vmTask1PeriodEvent(from tics.period_to_vmTask1_notification,
+                                                       to   vmTask1.tics_period_notification);
+        connection seL4SharedData vmTask1PeriodQueue(from tics.period_to_vmTask1_queue,
+                                                     to   vmTask1.tics_period_queue);
+        connection seL4Notification vmTask2PeriodEvent(from tics.period_to_vmTask1_notification,
+                                                       to   vmTask2.tics_period_notification);
+        connection seL4SharedData vmTask2PeriodQueue(from tics.period_to_vmTask2_queue,
+                                                     to   vmTask2.tics_period_queue);
+        }
+
+        configuration {
+
+            // Make tics a round robin thread (period=budget) with
+            // highest priorty so it has complete contol over when tasks
+            // run.
+            // TODO: Do this progamaticly?
+            // TODO: fault_handler threads have priority 255. Is that OK?
+            // Or do we want schedule higher thatn ALL threads?
+            tics._priority = 254;  // TODO: Change to 255?
+            tics._period = 1000000; // Round robin (period=budget)
+            tics._budget = 1000000; 
+            // [2021/09/22:JCC] This attribute is used in tcb.template.c
+            // to specify which cpu core the sched_control var corresponds
+            // to. TODO: generalize so we can access any CPU.
+            tics.sched_ctrl = 0; 
+
+            // Task priority MUST be lower than tics. We leave other
+            // thread attributes unspecifed because the tics will
+            // handle them (eg period and budget).
+            // TODO: Have tics ensure it has priority higher than
+            // all tasks programaticly?
+            task1._priority = 50; 
+            task2._priority = 50; 
+            vmTask1._priority = 50; 
+            vmTask2._priority = 50; 
+
+            // We only need one timer.
+            time_server.timers_per_client = 1;
+            // Time server must be highest priority
+            time_server._priority = 255; 
+
+        }
+}

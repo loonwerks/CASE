@@ -1,0 +1,28 @@
+diff --git a/camkes/runner/Context.py b/camkes/runner/Context.py
+index a483e25..5a4724d 100644
+--- a/camkes/runner/Context.py
++++ b/camkes/runner/Context.py
+@@ -87,6 +87,14 @@ def new_context(entity, assembly, render_state, state_key, outfile_name,
+                                      (entity.label(), name), type, label, **kwargs),
+                            **kwargs)),
+ 
++                # [2021/09/21:JCC] Varient of alloc to alloc for a diffenent entity.
++                'alloc_ent': None if cap_space is None else \
++                (lambda name, type, label=entity.label(), **kwargs:
++                 alloc_cap((label, cap_space), cap_space, name,
++                           alloc_obj((label, obj_space), obj_space, '%s_%s' %
++                                     (label, name), type, label, **kwargs),
++                           **kwargs)),
++                           
+                 # Functionality for templates to inform us that they've emitted a C
+                 # variable that's intended to map to a shared variable. It is
+                 # (deliberately) left to the template authors to ensure global names
+@@ -414,6 +422,8 @@ def alloc_obj(client, space, name, type, label=None, **kwargs):
+     '''Guarded allocation of an object. That is, if the object we're trying to
+     allocate already exists, just return it. Otherwise allocate and save the
+     object.'''
++    # [2021/09/21:JCC] Instrument this so I can tell what names CAmkES is using
++    #print('alloc_obj: client: %s  space: %s  name: %s  type: %s  label: %s  kwargs: %s' % (client, space, name, type, label, kwargs)) 
+     return guard(client, space.alloc, '%s_obj' % name, type=type, name=name,
+                  label=label, **kwargs)
+ 

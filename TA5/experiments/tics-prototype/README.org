@@ -1,0 +1,65 @@
+Copyright 2021, Adventium Labs
+
+* Overview
+
+This directory contains a prototype of Temporal Isolation CASE Scheduler
+(TICS). TICS is a userland scheduler running on the seL4 mixed criticality
+system (MCS) platform. 
+
+The prototype was created by starting with the seL4 mcs-scheduling
+tutorial. It now bares little resemblance to that code.
+
+A small change to the camkes-tool was required in order for the TICS to obtain
+thread control blocks (TCBs) and scheduling contexts (SCs) of other threads. A
+patch for this change is in camkes-tool.patch and it's installation is
+described below.
+
+* Setup
+
+The following instructions assume have setup an seL4 development environment
+using docker as described here:
+https://docs.sel4.systems/projects/buildsystem/host-dependencies.html
+
+These instructions assume the build environment directory is a direct sibling of the
+cloned CASE-trusted-build directory. If you do not follow this pattern the
+symbolic links specifed below will have to be adjusted. We will refer to the
+parent directory as ROOT.  
+
+If you have not yet cloned CASE-trusted-build, do so as follows:
+#+BEGIN_SRC shell    
+cd $ROOT
+clone git@cosmos.adventiumlabs.net:case/CASE-trusted-build.git
+#+END_SRC 
+
+To setup the build environment, execute these commands:
+#+BEGIN_SRC shell    
+cd $ROOT
+mkdir tics-prototype-build-env  
+cd tics-prototype-build-env  
+repo init -u https://github.com/seL4/camkes-manifest.git
+repo sync
+(cd projects/camkes/apps; ln -sf ../../../../CASE-trusted-build/tics-prototype tics-prototype) 
+# Apply required patch to camkes-tool
+(cd projects/camkes-tool; git apply --reject --whitespace=fix ../../../CASE-trusted-build/tics-prototype/camkes-tool.patch)
+#+END_SRC 
+
+* Build 
+
+The following assumes you created "sel4dev" as an alias to start your seL4 development
+docker image. You must run sel4dev at $ROOT for links to work correctly.  
+#+BEGIN_SRC shell 
+cd $ROOT
+sel4dev
+# You are now in the seL4 development docker image shell
+cd tics-prototype-build-env
+mkdir build
+cd build
+../init-build.sh -DPLATFORM=pc99 -DSIMULATION=1 -DCAMKES_APP=tics-prototype
+ninja
+# If desired, edit the simulate script and comment out the last line that
+# clears the screen when the simulation finishes
+./simulate
+# exit QEMU with Ctrl-a x
+#+END_SRC 
+
+If you make changes, just rerun ninja before running ./simulate again.
