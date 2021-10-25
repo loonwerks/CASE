@@ -1,6 +1,7 @@
 package art
 
 import org.sireum.{B, F, ISZ, String, T}
+import org.sireum.S64._
 import art.Art.{BridgeId, Time}
 
 import scala.collection.mutable.{Map => MMap}
@@ -34,14 +35,14 @@ object ArtTimer_Ext {
       return
     }
 
-    if(wait < 0) {
+    if(wait < s64"0") {
       art.Art.logError(bridgeId, s"Invalid wait time: ${wait}.  Value must be non-negative.")
       return
     }
 
     var b = new AtomicBoolean(true)
 
-    val bridge = Art.bridge(bridgeId)
+    val bridge = Art.bridges(bridgeId).get
     val eventOuts = bridge.ports.eventOuts.map(_.id)
     val dataOuts = bridge.ports.dataOuts.map(_.id)
 

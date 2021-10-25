@@ -1,6 +1,20 @@
 #include <emitter_t_impl_src_process_src_thread_api.h>
 #include <emitter_t_impl_src_process_src_thread.h>
 
+static bool apis_initialized = false;
+static struct receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api initialization_api;
+static struct receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Operational_Api operational_api;
+
+static void initialize_apis(STACK_FRAME_ONLY) {
+  DeclNewStackFrame(caller, "emitter_t_impl_src_process_src_thread.c", "", "initialize_apis", 0);
+
+  // Option_5E9E54 = Option[receiver_vm.test_event_data_port_periodic_domains.emitter_t_impl_Initialization_Api]
+  Option_5E9E54_get_(SF (receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api) &initialization_api, receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread_Bridge_c_initialization_api(SF_LAST));
+  // Option_DD8228 = Option[receiver_vm.test_event_data_port_periodic_domains.emitter_t_impl_Operational_Api]
+  Option_DD8228_get_(SF (receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Operational_Api) &operational_api, receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread_Bridge_c_operational_api(SF_LAST));
+  apis_initialized = true;
+}
+
 // This file was auto-generated.  Do not edit
 
 void api_put_write_port__receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread(
@@ -8,13 +22,11 @@ void api_put_write_port__receiver_vm_test_event_data_port_periodic_domains_emitt
   S8 value) {
   DeclNewStackFrame(caller, "emitter_t_impl_src_process_src_thread_api.c", "", "api_put_write_port__receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread", 0);
 
-  // Option_5E9E54 = Option[receiver_vm.test_event_data_port_periodic_domains.emitter_t_impl_Initialization_Api]
-  DeclNewreceiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api(api);
-  Option_5E9E54_get_(SF (receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api) &api, receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread_Bridge_c_initialization_api(SF_LAST));
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
 
   receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api_put_write_port_(
     SF
-    &api,
+    &initialization_api,
     value);
 }
 
@@ -23,13 +35,11 @@ void api_logInfo__receiver_vm_test_event_data_port_periodic_domains_emitter_t_im
   String str) {
   DeclNewStackFrame(caller, "emitter_t_impl_src_process_src_thread_api.c", "", "api_logInfo__receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread", 0);
 
-  // Option_5E9E54 = Option[receiver_vm.test_event_data_port_periodic_domains.emitter_t_impl_Initialization_Api]
-  DeclNewreceiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api(api);
-  Option_5E9E54_get_(SF (receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api) &api, receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread_Bridge_c_initialization_api(SF_LAST));
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
 
   receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api_logInfo_(
     SF
-    &api,
+    &initialization_api,
     str);
 }
 
@@ -38,13 +48,11 @@ void api_logDebug__receiver_vm_test_event_data_port_periodic_domains_emitter_t_i
   String str) {
   DeclNewStackFrame(caller, "emitter_t_impl_src_process_src_thread_api.c", "", "api_logDebug__receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread", 0);
 
-  // Option_5E9E54 = Option[receiver_vm.test_event_data_port_periodic_domains.emitter_t_impl_Initialization_Api]
-  DeclNewreceiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api(api);
-  Option_5E9E54_get_(SF (receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api) &api, receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread_Bridge_c_initialization_api(SF_LAST));
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
 
   receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api_logDebug_(
     SF
-    &api,
+    &initialization_api,
     str);
 }
 
@@ -53,13 +61,11 @@ void api_logError__receiver_vm_test_event_data_port_periodic_domains_emitter_t_i
   String str) {
   DeclNewStackFrame(caller, "emitter_t_impl_src_process_src_thread_api.c", "", "api_logError__receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread", 0);
 
-  // Option_5E9E54 = Option[receiver_vm.test_event_data_port_periodic_domains.emitter_t_impl_Initialization_Api]
-  DeclNewreceiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api(api);
-  Option_5E9E54_get_(SF (receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api) &api, receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_src_process_src_thread_Bridge_c_initialization_api(SF_LAST));
+  if(!apis_initialized) { initialize_apis(SF_LAST); }
 
   receiver_vm_test_event_data_port_periodic_domains_emitter_t_impl_Initialization_Api_logError_(
     SF
-    &api,
+    &initialization_api,
     str);
 }
 

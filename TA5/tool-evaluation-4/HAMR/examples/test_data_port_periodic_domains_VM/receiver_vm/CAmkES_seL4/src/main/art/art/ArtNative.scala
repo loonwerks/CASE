@@ -3,10 +3,14 @@
 package art
 
 import org.sireum._
+import art.scheduling.Scheduler
 
 @ext object ArtNative {
 
+  def shouldDispatch(bridgeId: Art.BridgeId): B = $
+
   def dispatchStatus(bridgeId: Art.BridgeId): DispatchStatus = $
+
 
   def receiveInput(eventPortIds: ISZ[Art.PortId], dataPortIds: ISZ[Art.PortId]): Unit = $
 
@@ -16,13 +20,26 @@ import org.sireum._
 
   def sendOutput(eventPortIds: ISZ[Art.PortId], dataPortIds: ISZ[Art.PortId]): Unit = $
 
+
   def logInfo(title: String, msg: String): Unit = $
 
   def logError(title: String, msg: String): Unit = $
 
   def logDebug(title: String, msg: String): Unit = $
 
-  def run(): Unit = $
+
+  def tearDownSystemState(): Unit = $
+
+  def setUpSystemState(): Unit = $
+
+  // JH: Refactor
+  def initializePhase(): Unit = $
+
+  // JH: Refactor
+  def computePhase(): Unit = $
+
+  // JH: Refactor
+  def finalizePhase(): Unit = $
 
   def time(): Art.Time = $
 
@@ -56,6 +73,16 @@ import org.sireum._
    */
   def finalizeTest(bridge: Bridge): Unit = $
 
+  // JH: Refactored
+  //   add system test capability
+  def initSystemTest(scheduler: Scheduler): Unit = $
+
+  //  def executeSystemTest(): Unit = $
+
+  // JH: Refactored
+  //   add system test capability
+  def finalizeSystemTest(): Unit = $
+
   /**
    * A method that replaces bridge.compute()'s calls to [[Art.sendOutput()]] in its equivalent testCompute() method.
    *
@@ -88,4 +115,15 @@ import org.sireum._
    */
   def observeOutPortValue(portId: Art.PortId): Option[DataContent] = $
 
+  // ** Manually added method by JH to support debugging interface
+
+  /**
+   * Returns the value of an in infrastructure port.
+   *
+   * @param portId the id of the INPUT infrastructure port to return a value from
+   * @return If the port is non-empty, a [[Some]] of [[DataContent]]. Otherwise [[None]].
+   */
+  def observeInPortValue(portId: Art.PortId): Option[DataContent] = $
+
+  def observeOutPortVariable(portId: Art.PortId): Option[DataContent] = $
 }

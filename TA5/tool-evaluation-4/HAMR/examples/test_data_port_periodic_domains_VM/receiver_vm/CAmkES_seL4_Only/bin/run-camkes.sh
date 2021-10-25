@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -o errexit -o pipefail -o noclobber -o nounset
+set -o errexit -o pipefail -o nounset
 
 export SCRIPT_HOME=$( cd "$( dirname "$0" )" &> /dev/null && pwd )
 export PROJECT_HOME=$( cd "$( dirname "$0" )/.." &> /dev/null && pwd )
@@ -17,25 +17,26 @@ CAMKES_DIR=""
 SIMULATE=false
 CAMKES_OPTIONS=""
 
-OPTIONS=c:no:s
-LONGOPTS=camkes-dir:,non-interactive,camkes-options:,simulate
+OPTIONS=c:no:sh
+LONGOPTS=camkes-dir:,non-interactive,camkes-options:,simulate,help
 
 function usage {
   echo ""
   echo "Usage: <option>*"
   echo ""
   echo "Available Options:"
-  echo "  -c, --camkes-dir      Location of CAmkES project"
-  echo "  -n, --non-interactive Non-interactive mode.  Symlink in apps directory will be replaced"
-  echo "                        if present, CAmkES build directory will not be deleted"
-  echo "  -o, --camkes-options  CAmkES options (e.g -o \"-DWITH_LOC=ON -DCapDLLoaderMaxObjects=40000\")"
-  echo "  -s, --simulate        Simulate via QEMU"
-  exit 2
+  echo "-c, --camkes-dir       Location of CAmkES project"
+  echo "-n, --non-interactive  Non-interactive mode.  Symlink in apps directory will be replaced"
+  echo "                         if present, CAmkES build directory will not be deleted"
+  echo "-o, --camkes-options   CAmkES options (e.g -o \"-DWITH_LOC=ON -DCapDLLoaderMaxObjects=40000\")"
+  echo "-s, --simulate         Simulate via QEMU"
+  echo "-h, --help             Display this information"
 }
 
 ! PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@")
 if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
     usage
+    exit 2
 fi
 
 eval set -- "$PARSED"
@@ -46,6 +47,7 @@ while true; do
     -n|--non-interactive) NON_INTERACTIVE=true; shift ;;
     -o|--camkes-options) CAMKES_OPTIONS="$2"; shift 2 ;;
     -s|--simulate) SIMULATE=true; shift ;;
+    -h|--help) usage; exit 0 ;;
     --) shift; break ;;
   esac
 done
@@ -54,6 +56,7 @@ done
 if [[ $# -ne 0 ]]; then
   echo "$0: Unexpected non-option arguments"
   usage
+  exit 3
 fi
 
 # if CAMKES_DIR option not set then look in some common locations
@@ -130,11 +133,28 @@ ninja
 # simulate via QEMU
 ########################
 
+cat >${BUILD_DIR}/sim << EOL
+#!/usr/bin/env bash
+
+export SCRIPT_HOME=\$( cd "\$( dirname "\$0" )" &> /dev/null && pwd )
+cd \${SCRIPT_HOME}
+
+# console output from simulation disappears when QEMU shuts down when run from
+# the CAmkES generated ./simulate script. Instead call QEMU directly using the
+# default values ./simulate would pass
+
+qemu-system-aarch64 \\
+    -machine virt,virtualization=on,highmem=off,secure=off \\
+    -cpu cortex-a53 \\
+    -nographic \\
+    -m size=1024 \\
+    -kernel images/capdl-loader-image-arm-qemu-arm-virt
+EOL
+
+chmod 700 ${BUILD_DIR}/sim
+echo "Wrote: ${BUILD_DIR}/sim"
+
 if [ "${SIMULATE}" = true ]; then
-  qemu-system-aarch64 \
-      -machine virt,virtualization=on,highmem=off,secure=off \
-      -cpu cortex-a53 \
-      -nographic \
-      -m size=1024 \
-      -kernel images/capdl-loader-image-arm-qemu-arm-virt
+  # ${BUILD_DIR}/simulate
+  ${BUILD_DIR}/sim
 fi

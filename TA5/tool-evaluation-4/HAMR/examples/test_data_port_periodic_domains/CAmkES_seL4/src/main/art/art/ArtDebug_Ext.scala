@@ -50,10 +50,12 @@ object ArtDebug_Ext {
     } else {
       ArtNative.logDebug(Art.logTitle, s"Injecting to port ${Art.ports(port).get.name}")
 
+      // right now, there is no difference between treatment of data and event ports, but keep the logic
+      // separate for further refactoring
       if(bridge.ports.dataIns.elements.map(_.id).contains(port)) {
-        ArtNative_Ext.dataPortVariables(port) = ArtMessage(data)
+        ArtNative_Ext.inInfrastructurePorts(port) = ArtMessage(data)
       } else {
-        ArtNative_Ext.eventPortVariables(port) = ArtMessage(data)
+        ArtNative_Ext.inInfrastructurePorts(port) = ArtMessage(data)
       }
     }
   }

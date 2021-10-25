@@ -66,16 +66,22 @@ import org.sireum._
   def mode: PortMode.Type
 }
 
+@datatype trait PortProto extends UPort
+
 @datatype class Port[T](val id: Art.PortId,
                         val name: String,
                         val mode: PortMode.Type)
-  extends UPort
+  extends PortProto
+
+@datatype trait UrgentPortProto extends UPort {
+  def urgency: Z
+}
 
 @datatype class UrgentPort[T](val id: Art.PortId,
                               val name: String,
                               val mode: PortMode.Type,
                               val urgency: Z)
-  extends UPort
+  extends UrgentPortProto
 
 @sig trait Bridge {
   def id: Art.BridgeId
@@ -108,6 +114,8 @@ object Bridge {
     def finalise(): Unit
 
     def testCompute(): Unit = { println("Default testCompute") }
+
+    def testInitialise(): Unit = { println("Default testInitialise") }
   }
 
   @datatype class Ports(all: ISZ[UPort],

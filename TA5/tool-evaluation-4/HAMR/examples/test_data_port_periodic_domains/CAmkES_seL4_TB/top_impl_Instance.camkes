@@ -29,6 +29,5 @@ assembly {
     time_server.timers_per_client = 1;
     dispatch_periodic_inst.timer_attributes = 1;
     dispatch_periodic_inst.priority = 201;
-
   }
 }

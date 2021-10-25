@@ -46,7 +46,6 @@ assembly {
     src_process_src_thread.sb_write_port_access = "W";
     vmdst_process.sb_read_port_access = "R";
     pacer._domain = 1;
-
     fserv.heap_size = 165536;
     vmdst_process.fs_shmem_size = 0x100000;
     vmdst_process.global_endpoint_base = 1 << 27;
