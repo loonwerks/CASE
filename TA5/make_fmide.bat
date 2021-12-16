@@ -3,13 +3,13 @@ setlocal EnableExtensions EnableDelayedExpansion
 
 set FMIDE_DIR=fmide
 set eclipseRelease=2020-06
-set OSATE_VERSION=2.9.2
+set OSATE_VERSION=2.10.0
 set OSATE_URL=https://osate-build.sei.cmu.edu/download/osate/stable/%OSATE_VERSION%/products/osate2-%OSATE_VERSION%-vfinal-win32.win32.x86_64.zip
-set AGREE_UPDATE_SITE=http://ca-trustedsystems-dev-us-east-1.s3-website-us-east-1.amazonaws.com/p2/snapshots/agree/
+set AGREE_UPDATE_SITE=https://raw.githubusercontent.com/loonwerks/AGREE-Updates/master/,http://ca-trustedsystems-dev-us-east-1.s3-website-us-east-1.amazonaws.com/p2/snapshots/agree/
 set AGREE_FEATURE_ID=com.rockwellcollins.atc.agree.feature.feature.group
-set RESOLUTE_UPDATE_SITE=http://ca-trustedsystems-dev-us-east-1.s3-website-us-east-1.amazonaws.com/p2/snapshots/resolute/
+set RESOLUTE_UPDATE_SITE=https://raw.githubusercontent.com/loonwerks/Resolute-Updates/master/,http://ca-trustedsystems-dev-us-east-1.s3-website-us-east-1.amazonaws.com/p2/snapshots/resolute/
 set RESOLUTE_FEATURE_ID=com.rockwellcollins.atc.resolute.feature.feature.group
-set BRIEFCASE_UPDATE_SITE=https://download.eclipse.org/releases/%eclipseRelease%,http://ca-trustedsystems-dev-us-east-1.s3-website-us-east-1.amazonaws.com/p2/snapshots/briefcase/
+set BRIEFCASE_UPDATE_SITE=https://download.eclipse.org/releases/%eclipseRelease%,https://raw.githubusercontent.com/loonwerks/BriefCASE-Updates/master/,http://ca-trustedsystems-dev-us-east-1.s3-website-us-east-1.amazonaws.com/p2/snapshots/briefcase/
 set BRIEFCASE_FEATURE_ID=com.collins.trustedsystems.briefcase.feature.feature.group
 set HAMR_UPDATE_SITE=https://raw.githubusercontent.com/sireum/hamr-plugin-update-site/master
 set HAMR_FEATURE_ID=org.sireum.aadl.osate.hamr.feature.feature.group
