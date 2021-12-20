@@ -3,61 +3,47 @@ Copyright 2021, Adventium Labs
 * Overview
 
 This directory contains a prototype of Temporal Isolation CASE Scheduler
-(TICS). TICS is a userland scheduler running on the seL4 Mixed Criticality
-System (MCS) platform. TICS runs specified threads using a static cyclic
-schedule. TICS is implemented using MCS mechanisms.
+(TICS). TICS is a userland scheduler running on the seL4 mixed criticality
+system (MCS) platform. 
 
-The prototype was created by starting with the seL4 mcs-scheduling
-tutorial. It now bares little resemblance to that code.
-
-In order for the TICS to obtain thread control blocks (TCBs) and scheduling
-contexts (SCs) of other threads, a CAmkES template was created and a small
-change was made to the camkes-tool. A patch for this change is in
-camkes-tool.patch and it's installation is described below.
+A small change to the camkes-tool was required in order for the TICS to obtain
+thread control blocks (TCBs) and scheduling contexts (SCs) of other threads. A
+patch for this change is in camkes-tool.patch and it's installation is
+described below.
 
 * Setup
 
-The following instructions assume have setup an seL4 development
-environment. Two environments have been tested:
-- Docker as described here:
+The following instructions assume have setup an seL4 development environment
+using docker as described here:
 https://docs.sel4.systems/projects/buildsystem/host-dependencies.html
-- CASE Env (Vagrant): https://github.com/sireum/case-env
 
-These instructions assume a very particular directory structure so that
-symbolic links work correctly in all environments including the native OS when
-using docker. If you deviate from this structure the symbolic links specified
-below will have to be adjusted. We will refer to the root of this directory
-structure as ROOT (within seL4 development environment). Recommendations:
+These instructions assume the build environment directory is a direct sibling of the
+cloned CASE-trusted-build directory. If you do not follow this pattern the
+symbolic links specifed below will have to be adjusted. We will refer to the
+parent directory as ROOT.  
 
-- Docker - Setup an alias as described in the seL4 docker instructions. cd to
-  where you want ROOT to appear in your host OS. Run the alias. Then use
-  ROOT=$HOME while in the seL4 docker development environment. You can use
-  an editor in your host OS to edit files.
-
-- CASE Env (Vagrant) - Use ROOT=$HOME/CASE. Do all work in the CASE Env
-  Vagrant VM.
-
-All of the following commands should be executed in your seL4 development
-environment.
-
-If you have not configured git in your seL4 development environment, do so now
-to avoid prompts or errors durring repo init.
+First, copy the tics-prototype directory to $ROOT if you have not done so already.
+Next, to setup the build environment, execute these commands:
 #+BEGIN_SRC shell    
-git config --global user.email "you@example.com"
-git config --global user.name "Your Name"
-#+END_SRC 
-
-Now setup and build tics-prototype:
-#+BEGIN_SRC shell     
 cd $ROOT
-git clone https://github.com/loonwerks/CASE.git loonwerks-CASE 
-mkdir tics-prototype-build-env
+mkdir tics-prototype-build-env  
 cd tics-prototype-build-env  
 repo init -u https://github.com/seL4/camkes-manifest.git
 repo sync
-(cd projects/camkes/apps; ln -sf ../../../../loonwerks-CASE/TA5/experiments/tics-prototype tics-prototype)
+(cd projects/camkes/apps; ln -sf ../../../../tics-prototype tics-prototype) 
 # Apply required patch to camkes-tool
-(cd projects/camkes-tool; git apply --reject --whitespace=fix ../../projects/camkes/apps/tics-prototype/camkes-tool.patch)
+(cd projects/camkes-tool; git apply --reject --whitespace=fix ../../../tics-prototype/camkes-tool.patch)
+#+END_SRC 
+
+* Build 
+
+The following assumes you created "sel4dev" as an alias to start your seL4 development
+docker image. You must run sel4dev at $ROOT for links to work correctly.  
+#+BEGIN_SRC shell 
+cd $ROOT
+sel4dev
+# You are now in the seL4 development docker image shell
+cd tics-prototype-build-env
 mkdir build
 cd build
 ../init-build.sh -DPLATFORM=pc99 -DSIMULATION=1 -DCAMKES_APP=tics-prototype
@@ -68,96 +54,4 @@ ninja
 # exit QEMU with Ctrl-a x
 #+END_SRC 
 
-The simulation output should look like this:
-#+BEGIN_SRC
-...
-Booting all finished, dropped to user space
-Dumping all tcbs!
-Name                                    	State          	IP                  	 Prio 	 Core	 InReleaseQueue
---------------------------------------------------------------------------------------
-vmTask2_vmTask2_tics_period_notification_0000_tcb	blocked on recv	0x4019a5	                 254	0	0
-     vmTask2_vmTask2_0_fault_handler_tcb	blocked on recv	0x4019a5	                 255	0	0
-           vmTask2_vmTask2_0_control_tcb	        restart	0x407688	                  50	0	0
-vmTask1_vmTask1_tics_period_notification_0000_tcb	blocked on recv	0x4019a5	                 254	0	0
-     vmTask1_vmTask1_0_fault_handler_tcb	blocked on recv	0x4019a5	                 255	0	0
-           vmTask1_vmTask1_0_control_tcb	        restart	0x407688	                  50	0	0
-                   time_server:the_timer	blocked on recv	0x4047a5	                 254	0	0
-                         time_server:irq	blocked on ntfn	0x407780	                 254	0	0
-               time_server:fault_handler	blocked on recv	0x402978	                 255	0	0
-                     time_server:control	blocked on recv	0x402978	                 255	0	0
-time_server.pit_time_server_pit_irq_0000_tcb	        restart	0	                 254	0	0
-time_server.pit_time_server_pit_command_0000_tcb	        restart	0	                 254	0	0
-time_server.pit_time_server_pit_channel0_0000_tcb	        restart	0	                 254	0	0
-time_server.pit_time_server_pit_0_fault_handler_tcb	        restart	0	                 254	0	0
-time_server.pit_time_server_pit_0_control_tcb	        restart	0	                 254	0	0
-                      tics:fault_handler	blocked on recv	0x402886	                 255	0	0
-                            tics:control	        running	0x40135a	                 254	0	0
-         task2_task2_0_fault_handler_tcb	blocked on recv	0x401720	                 255	0	0
-               task2_task2_0_control_tcb	        restart	0x40648b	                  50	0	0
-         task1_task1_0_fault_handler_tcb	blocked on recv	0x401720	                 255	0	0
-               task1_task1_0_control_tcb	        restart	0x40648b	                  50	0	0
-                             idle_thread	           idle	0	                   0	0	0
-                              rootserver	       inactive	0x4014c5	                 255	0	0
-runMode@Tics.c:132 >>>>>>>>>>>>>>>>>>>>>>> Running Init schedule for 2 cycles.
-run@Task.c:28     [task1] Started
-runMode@Tics.c:209 Init schedule window finished.  Cycle: 0  Win: 0  Duration: 500000000  ActualDuration: 656767281
-run@Task.c:28     [task2] Started
-runMode@Tics.c:209 Init schedule window finished.  Cycle: 0  Win: 1  Duration: 1000000000  ActualDuration: 1092946099
-run@VmTask.c:61     [vmTask1] Started
-run@VmTask.c:78     [vmTask1] Tick:     0  Period(cycles):      4649280  Data: 1
-runMode@Tics.c:209 Init schedule window finished.  Cycle: 0  Win: 2  Duration: 500000000  ActualDuration: 502033034
-run@VmTask.c:61     [vmTask2] Started
-run@VmTask.c:78     [vmTask2] Tick:     0  Period(cycles):      4586492  Data: 1
-runMode@Tics.c:209 Init schedule window finished.  Cycle: 0  Win: 3  Duration: 1500000000  ActualDuration: 1501219585
-run@Task.c:46     [task1] Tick:     0  Period(cycles):   8449911674  Data: 1
-runMode@Tics.c:209 Init schedule window finished.  Cycle: 1  Win: 0  Duration: 500000000  ActualDuration: 501784280
-run@Task.c:46     [task2] Tick:     0  Period(cycles):   8100770304  Data: 1
-runMode@Tics.c:209 Init schedule window finished.  Cycle: 1  Win: 1  Duration: 1000000000  ActualDuration: 1002083216
-run@VmTask.c:78     [vmTask1] Tick:     1  Period(cycles):   7888904422  Data: 2
-runMode@Tics.c:209 Init schedule window finished.  Cycle: 1  Win: 2  Duration: 500000000  ActualDuration: 502325335
-run@VmTask.c:78     [vmTask2] Tick:     1  Period(cycles):   7891180086  Data: 2
-runMode@Tics.c:209 Init schedule window finished.  Cycle: 1  Win: 3  Duration: 1500000000  ActualDuration: 1500935684
-runMode@Tics.c:220 <<<<<<<<<<<<<<<<<<<<<<< Exiting Init schedule.
-runMode@Tics.c:134 >>>>>>>>>>>>>>>>>>>>>>> Running Norm schedule indefinitly.
-run@Task.c:46     [task1] Tick:     1  Period(cycles):   7911709056  Data: 2
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 0  Win: 0  Duration: 500000000  ActualDuration: 502262301
-run@Task.c:46     [task2] Tick:     1  Period(cycles):   7920951040  Data: 2
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 0  Win: 1  Duration: 500000000  ActualDuration: 501881880
-runMode@Tics.c:181 Idle.
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 0  Win: 2  Duration: 1000000000  ActualDuration: 1022765092
-run@Task.c:46     [task1] Tick:     2  Period(cycles):   4583497918  Data: 3
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 0  Win: 3  Duration: 500000000  ActualDuration: 501942020
-run@Task.c:46     [task2] Tick:     2  Period(cycles):   4575035920  Data: 3
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 0  Win: 4  Duration: 500000000  ActualDuration: 505119142
-run@VmTask.c:78     [vmTask1] Tick:     2  Period(cycles):  11377505106  Data: 3
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 0  Win: 5  Duration: 500000000  ActualDuration: 502762630
-run@VmTask.c:78     [vmTask2] Tick:     2  Period(cycles):  11377216274  Data: 3
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 0  Win: 6  Duration: 500000000  ActualDuration: 509428625
-run@Task.c:46     [task1] Tick:     3  Period(cycles):   4562396610  Data: 4
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 1  Win: 0  Duration: 500000000  ActualDuration: 501257768
-run@Task.c:46     [task2] Tick:     3  Period(cycles):   4560175500  Data: 4
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 1  Win: 1  Duration: 500000000  ActualDuration: 517617426
-runMode@Tics.c:181 Idle.
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 1  Win: 2  Duration: 1000000000  ActualDuration: 1001097803
-run@Task.c:46     [task1] Tick:     4  Period(cycles):   4556708996  Data: 5
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 1  Win: 3  Duration: 500000000  ActualDuration: 501150259
-run@Task.c:46     [task2] Tick:     4  Period(cycles):   4555749346  Data: 5
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 1  Win: 4  Duration: 500000000  ActualDuration: 501165901
-run@VmTask.c:78     [vmTask1] Tick:     3  Period(cycles):   9108010686  Data: 4
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 1  Win: 5  Duration: 500000000  ActualDuration: 502508626
-run@VmTask.c:78     [vmTask2] Tick:     3  Period(cycles):   9109476574  Data: 4
-runMode@Tics.c:209 Norm schedule window finished.  Cycle: 1  Win: 6  Duration: 500000000  ActualDuration: 501331408
-run@Task.c:46     [task1] Tick:     5  Period(cycles):   4532726408  Data: 6
-...
-#+END_SRC 
-
-* Development
-
-To rebuild and run after making any changes:
-#+BEGIN_SRC shell 
-cd $ROOT/tics-prototype-build-env/build
-ninja
-./simulate
-# exit QEMU with Ctrl-a x
-#+END_SRC 
-
+If you make changes, just rerun ninja before running ./simulate again.
