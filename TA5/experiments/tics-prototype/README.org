@@ -30,7 +30,7 @@ mkdir tics-prototype-build-env
 cd tics-prototype-build-env  
 repo init -u https://github.com/seL4/camkes-manifest.git
 repo sync
-(cd projects/camkes/apps; ln -sf ../../../../tics-prototype tics-prototype) 
+(cd projects/camkes/apps; ln -sf ../../../tics-prototype tics-prototype) 
 # Apply required patch to camkes-tool
 (cd projects/camkes-tool; git apply --reject --whitespace=fix ../../../tics-prototype/camkes-tool.patch)
 #+END_SRC 
