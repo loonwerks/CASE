@@ -3,7 +3,7 @@
 set -Eeuxo pipefail
 
 : "${FMIDE_DIR:=fmide}"
-: "${eclipseRelease:=2020-06}"
+: "${eclipseRelease:=2021-03}"
 : "${OSATE_VERSION:=2.10.0}"
 : "${OSATE_URL:=https://osate-build.sei.cmu.edu/download/osate/stable/${OSATE_VERSION}/products/osate2-${OSATE_VERSION}-vfinal-linux.gtk.x86_64.tar.gz}"
 : "${FMW_UPDATE_SITE:=https://raw.githubusercontent.com/loonwerks/formal-methods-workbench-updates/master/}"
