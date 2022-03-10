@@ -3,7 +3,7 @@ setlocal EnableExtensions EnableDelayedExpansion
 
 set FMIDE_DIR=fmide
 set eclipseRelease=2021-03
-set OSATE_VERSION=2.10.0
+set OSATE_VERSION=2.10.2
 set OSATE_URL=https://osate-build.sei.cmu.edu/download/osate/stable/%OSATE_VERSION%/products/osate2-%OSATE_VERSION%-vfinal-win32.win32.x86_64.zip
 set AGREE_UPDATE_SITE=https://raw.githubusercontent.com/loonwerks/AGREE-Updates/master/,http://ca-trustedsystems-dev-us-east-1.s3-website-us-east-1.amazonaws.com/p2/snapshots/agree/
 set AGREE_FEATURE_ID=com.rockwellcollins.atc.agree.feature.feature.group
