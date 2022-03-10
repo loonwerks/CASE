@@ -4,7 +4,7 @@ set -Eeuxo pipefail
 
 : "${FMIDE_DIR:=fmide}"
 : "${eclipseRelease:=2021-03}"
-: "${OSATE_VERSION:=2.10.0}"
+: "${OSATE_VERSION:=2.10.2}"
 : "${OSATE_URL:=https://osate-build.sei.cmu.edu/download/osate/stable/${OSATE_VERSION}/products/osate2-${OSATE_VERSION}-vfinal-linux.gtk.x86_64.tar.gz}"
 : "${FMW_UPDATE_SITE:=https://raw.githubusercontent.com/loonwerks/formal-methods-workbench-updates/master/}"
 : "${AGREE_UPDATE_SITE:=https://raw.githubusercontent.com/loonwerks/AGREE-Updates/master/,http://ca-trustedsystems-dev-us-east-1.s3-website-us-east-1.amazonaws.com/p2/snapshots/agree/}"
